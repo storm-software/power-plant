@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@powerlines/tsconfig/recommended.json",
+  "display": "Storm Software - TypeScript Monorepo",
+  "compilerOptions": {
+    "incremental": true,
+    "composite": true,
+    "types": ["node"],
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true
+  }
+}
