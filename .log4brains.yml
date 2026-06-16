@@ -1,5 +1,5 @@
 project:
-  name: powerlines-monorepo-template
+  name: power-plant
   tz: America/New_York
   adrFolder: ./docs/adr
   packages: []

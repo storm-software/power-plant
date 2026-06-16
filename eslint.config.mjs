@@ -1,15 +1,15 @@
 /* -------------------------------------------------------------------
 
-            ⚡ Storm Software - Powerlines Monorepo Template
+            ⚡ Storm Software - Power Plant
 
- This code was released as part of the Powerlines Monorepo Template project. Powerlines Monorepo Template
+ This code was released as part of the Power Plant project. Power Plant
  is maintained by Storm Software under the Apache-2.0 license, and is
  free for commercial and private use. For more information, please visit
- our licensing page at https://stormsoftware.com/licenses/projects/powerlines-monorepo-template.
+ our licensing page at https://stormsoftware.com/licenses/projects/power-plant.
 
  Website:                  https://stormsoftware.com
- Repository:               https://github.com/storm-software/powerlines-monorepo-template
- Documentation:            https://docs.stormsoftware.com/projects/powerlines-monorepo-template
+ Repository:               https://github.com/storm-software/power-plant
+ Documentation:            https://docs.stormsoftware.com/projects/power-plant
  Contact:                  https://stormsoftware.com/contact
 
  SPDX-License-Identifier:  Apache-2.0
@@ -22,7 +22,7 @@ Error.stackTraceLimit = Number.POSITIVE_INFINITY;
 
 /** @type {import('eslint').Linter.Config[]} */
 export default getStormConfig({
-  name: "powerlines-monorepo-template",
+  name: "power-plant",
   tsdoc: {
     configFile: "@powerlines/tsdoc/recommended.json"
   }

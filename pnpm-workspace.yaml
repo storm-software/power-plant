@@ -48,9 +48,9 @@ catalog:
   vitest: ~4.1.8
   zx: ^8.8.5
 overrides:
-  "@powerlines-monorepo-template/tools-config": workspace:*
-  "@powerlines-monorepo-template/tools-scripts": workspace:*
-  "@powerlines-monorepo-template/tools-cspell": workspace:*
+  "@power-plant/tools-config": workspace:*
+  "@power-plant/tools-scripts": workspace:*
+  "@power-plant/tools-cspell": workspace:*
   cookie: ">=0.7.0"
   debug: ">=4.4.0"
   follow-redirects: ">=1.15.9"

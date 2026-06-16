@@ -1,11 +1,11 @@
 {
-  "name": "@powerlines-monorepo-template/monorepo",
+  "name": "@power-plant/monorepo",
   "version": "0.0.1",
   "type": "module",
-  "description": "⚡ A monorepo containing TypeScript utility packages with shared functionality common to many Storm Software applications.",
+  "description": "☢️ Generate anything from a spec",
   "repository": {
     "type": "github",
-    "url": "https://github.com/storm-software/powerlines-monorepo-template.git"
+    "url": "https://github.com/storm-software/power-plant.git"
   },
   "homepage": "https://stormsoftware.com",
   "bugs": {
@@ -108,7 +108,7 @@
     "defaultBranch": "main",
     "workspaceProtocol": "require"
   },
-  "namespace": "@powerlines-monorepo-template",
+  "namespace": "@power-plant",
   "nx": {
     "includedScripts": [
       "lint-knip",
