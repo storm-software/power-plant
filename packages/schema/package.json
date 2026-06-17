@@ -1,0 +1,260 @@
+{
+  "name": "@power-plant/schema",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A package containing a Power Plant package to help managing schemas.",
+  "keywords": [
+    "zod",
+    "valibot",
+    "untyped",
+    "standard-schema",
+    "ajv",
+    "json-schema",
+    "power-plant",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/schema"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "default": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./bundle": {
+      "require": {
+        "types": "./dist/bundle.d.cts",
+        "default": "./dist/bundle.cjs"
+      },
+      "import": {
+        "types": "./dist/bundle.d.mts",
+        "default": "./dist/bundle.mjs"
+      },
+      "default": {
+        "types": "./dist/bundle.d.mts",
+        "default": "./dist/bundle.mjs"
+      }
+    },
+    "./codegen": {
+      "require": {
+        "types": "./dist/codegen.d.cts",
+        "default": "./dist/codegen.cjs"
+      },
+      "import": {
+        "types": "./dist/codegen.d.mts",
+        "default": "./dist/codegen.mjs"
+      },
+      "default": {
+        "types": "./dist/codegen.d.mts",
+        "default": "./dist/codegen.mjs"
+      }
+    },
+    "./constants": {
+      "require": {
+        "types": "./dist/constants.d.cts",
+        "default": "./dist/constants.cjs"
+      },
+      "import": {
+        "types": "./dist/constants.d.mts",
+        "default": "./dist/constants.mjs"
+      },
+      "default": {
+        "types": "./dist/constants.d.mts",
+        "default": "./dist/constants.mjs"
+      }
+    },
+    "./extract": {
+      "require": {
+        "types": "./dist/extract.d.cts",
+        "default": "./dist/extract.cjs"
+      },
+      "import": {
+        "types": "./dist/extract.d.mts",
+        "default": "./dist/extract.mjs"
+      },
+      "default": {
+        "types": "./dist/extract.d.mts",
+        "default": "./dist/extract.mjs"
+      }
+    },
+    "./helpers": {
+      "require": {
+        "types": "./dist/helpers.d.cts",
+        "default": "./dist/helpers.cjs"
+      },
+      "import": {
+        "types": "./dist/helpers.d.mts",
+        "default": "./dist/helpers.mjs"
+      },
+      "default": {
+        "types": "./dist/helpers.d.mts",
+        "default": "./dist/helpers.mjs"
+      }
+    },
+    "./metadata": {
+      "require": {
+        "types": "./dist/metadata.d.cts",
+        "default": "./dist/metadata.cjs"
+      },
+      "import": {
+        "types": "./dist/metadata.d.mts",
+        "default": "./dist/metadata.mjs"
+      },
+      "default": {
+        "types": "./dist/metadata.d.mts",
+        "default": "./dist/metadata.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./persistence": {
+      "require": {
+        "types": "./dist/persistence.d.cts",
+        "default": "./dist/persistence.cjs"
+      },
+      "import": {
+        "types": "./dist/persistence.d.mts",
+        "default": "./dist/persistence.mjs"
+      },
+      "default": {
+        "types": "./dist/persistence.d.mts",
+        "default": "./dist/persistence.mjs"
+      }
+    },
+    "./resolve": {
+      "require": {
+        "types": "./dist/resolve.d.cts",
+        "default": "./dist/resolve.cjs"
+      },
+      "import": {
+        "types": "./dist/resolve.d.mts",
+        "default": "./dist/resolve.mjs"
+      },
+      "default": {
+        "types": "./dist/resolve.d.mts",
+        "default": "./dist/resolve.mjs"
+      }
+    },
+    "./type-checks": {
+      "require": {
+        "types": "./dist/type-checks.d.cts",
+        "default": "./dist/type-checks.cjs"
+      },
+      "import": {
+        "types": "./dist/type-checks.d.mts",
+        "default": "./dist/type-checks.mjs"
+      },
+      "default": {
+        "types": "./dist/type-checks.d.mts",
+        "default": "./dist/type-checks.mjs"
+      }
+    },
+    "./types": {
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      },
+      "default": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@msgpack/msgpack": "catalog:",
+    "@standard-schema/spec": "catalog:",
+    "@stryke/convert": "catalog:",
+    "@stryke/env": "catalog:",
+    "@stryke/hash": "catalog:",
+    "@stryke/helpers": "catalog:",
+    "@stryke/json": "catalog:",
+    "@stryke/path": "catalog:",
+    "@stryke/string-format": "catalog:",
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
+    "@stryke/zod": "catalog:",
+    "@valibot/to-json-schema": "catalog:",
+    "defu": "catalog:",
+    "esbuild": "catalog:",
+    "jiti": "catalog:",
+    "smol-toml": "catalog:",
+    "ts-json-schema-generator": "catalog:",
+    "typescript": "^6.0.3",
+    "untyped": "catalog:",
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@types/node": "catalog:",
+    "powerlines": "catalog:",
+    "valibot": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "valibot": "^1.4.0 || ^1.5.0",
+    "zod": "^3.25.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "valibot": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

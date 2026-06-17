@@ -18,16 +18,9 @@
 </div>
 <br />
 
-Storm Software's **Power Plant** monorepo containing TypeScript utility packages
-with shared functionality common to many Storm Software applications
+The **☢️ Power Plant** monorepo contains all of the code for the Power Plant framework, including the core functionality, as well as any applications, libraries, and tools contained within the ecosystem.
 
 <br />
-
-**Power Plant** is built using <a href="https://nx.dev/" target="_blank">Nx</a>, a
-set of extensible dev tools for monorepos, which helps you develop like Google,
-Facebook, and Microsoft. Building on top of Nx, the Open System provides a set
-of tools and patterns that help you scale your monorepo to many teams while
-keeping the codebase maintainable.
 
 <h3 align="center">💻 Visit <a href="https://stormsoftware.com" target="_blank">stormsoftware.com</a> to stay up to date with this developer</h3>
 <br />

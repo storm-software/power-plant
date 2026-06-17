@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@powerlines/tsconfig/recommended.json",
+  "extends": "@storm-software/tsconfig/recommended.json",
   "display": "Power Plant - TypeScript Monorepo",
   "compilerOptions": {
     "incremental": true,

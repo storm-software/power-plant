@@ -1,0 +1,156 @@
+{
+  "name": "@power-plant/core",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Core package for Power Plant",
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/core"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "default": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./config": {
+      "require": {
+        "types": "./dist/config.d.cts",
+        "default": "./dist/config.cjs"
+      },
+      "import": {
+        "types": "./dist/config.d.mts",
+        "default": "./dist/config.mjs"
+      },
+      "default": {
+        "types": "./dist/config.d.mts",
+        "default": "./dist/config.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "require": {
+        "types": "./dist/types/index.d.cts",
+        "default": "./dist/types/index.cjs"
+      },
+      "import": {
+        "types": "./dist/types/index.d.mts",
+        "default": "./dist/types/index.mjs"
+      },
+      "default": {
+        "types": "./dist/types/index.d.mts",
+        "default": "./dist/types/index.mjs"
+      }
+    },
+    "./types/config": {
+      "require": {
+        "types": "./dist/types/config.d.cts",
+        "default": "./dist/types/config.cjs"
+      },
+      "import": {
+        "types": "./dist/types/config.d.mts",
+        "default": "./dist/types/config.mjs"
+      },
+      "default": {
+        "types": "./dist/types/config.d.mts",
+        "default": "./dist/types/config.mjs"
+      }
+    },
+    "./types/generator": {
+      "require": {
+        "types": "./dist/types/generator.d.cts",
+        "default": "./dist/types/generator.cjs"
+      },
+      "import": {
+        "types": "./dist/types/generator.d.mts",
+        "default": "./dist/types/generator.mjs"
+      },
+      "default": {
+        "types": "./dist/types/generator.d.mts",
+        "default": "./dist/types/generator.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@alloy-js/core": "catalog:",
+    "@alloy-js/markdown": "catalog:",
+    "@alloy-js/typescript": "catalog:",
+    "@powerlines/core": "catalog:",
+    "@powerlines/engine": "catalog:",
+    "@powerlines/plugin-alloy": "catalog:",
+    "@powerlines/plugin-automd": "catalog:",
+    "@power-plant/schema": "workspace:*",
+    "@stryke/convert": "catalog:",
+    "@stryke/fs": "catalog:",
+    "@stryke/helpers": "catalog:",
+    "@stryke/json": "catalog:",
+    "@stryke/path": "catalog:",
+    "@stryke/string-format": "catalog:",
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
+    "automd": "catalog:",
+    "defu": "catalog:",
+    "powerlines": "catalog:",
+    "tsdown": "catalog:"
+  },
+  "devDependencies": {
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

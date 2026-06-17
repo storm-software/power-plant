@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./tools/config"
+    },
+    {
+      "path": "./packages/schema"
+    },
+    {
+      "path": "./packages/core"
     }
   ],
   "files": []

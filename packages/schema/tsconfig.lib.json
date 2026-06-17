@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "out-tsc/tsconfig.tsbuildinfo",
+    "outDir": "./out-tsc"
+  },
+  "references": [],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "powerlines.config.ts",
+    "powerlines.d.ts"
+  ],
+  "exclude": ["vitest.config.ts", "test/**/*.ts"]
+}

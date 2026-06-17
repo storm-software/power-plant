@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------
 
-            ⚡ Storm Software - Power Plant
+                  🗲 Storm Software - Power Plant
 
  This code was released as part of the Power Plant project. Power Plant
  is maintained by Storm Software under the Apache-2.0 license, and is
@@ -16,14 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-import { defineConfig } from "@storm-software/eslint";
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-Error.stackTraceLimit = Number.POSITIVE_INFINITY;
-
-/** @type {import('eslint').Linter.Config[]} */
-export default defineConfig({
-  name: "power-plant",
-  tsdoc: {
-    configFile: "@powerlines/tsdoc/recommended.json"
-  }
+const config: UserConfig = defineConfig({
+  input: ["src/*.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
+  },
+  plugins: [tsdown()]
 });
+
+export default config;
