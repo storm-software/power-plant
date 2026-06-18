@@ -15,3 +15,4 @@ inputs:
 imports:
   - storm-ops/devenv-modules/base
   - storm-ops/devenv-modules/core
+  - storm-ops/devenv-modules/claude
