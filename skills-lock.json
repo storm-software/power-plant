@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "json-schema-lookup": {
+      "source": "sammcj/agentic-coding",
+      "sourceType": "github",
+      "skillPath": "Skills/json-schema-lookup/SKILL.md",
+      "computedHash": "a291c4e1d941a9c4cc667945520b570a081b504769a912a090fd7c1b5763fbde"
+    },
+    "vitest": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vitest/SKILL.md",
+      "computedHash": "669c7275f7e1379b06b2bcfa593603aead4c983b951c7e8edbc09640aa38d0a1"
+    },
+    "writing-json-schemas": {
+      "source": "zaggino/z-schema",
+      "sourceType": "github",
+      "skillPath": "skills/writing-json-schemas/SKILL.md",
+      "computedHash": "9b3b90c7d96bc9ef8c643dd464b2097d2a22f87ffc7f6c85a2973f5de2636409"
+    }
+  }
+}
