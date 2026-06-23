@@ -1,0 +1,7 @@
+{
+  "name": "tools-readme-templates",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "tools/readme-templates",
+  "tags": ["type:tools", "platform:node"]
+}

@@ -13,14 +13,13 @@ permissions: {}
 jobs:
   greeting:
     runs-on: ubuntu-latest
-    if:
-      github.actor != 'stormie-bot' && github.actor != 'dependabot[bot]' &&
+    if: github.actor != 'stormie-bot' && github.actor != 'dependabot[bot]' &&
       github.actor != 'mend-bolt-for-github[bot]'
     permissions:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/first-interaction@v1
+      - uses: actions/first-interaction@34f15e814fe48ac9312ccf29db4e74fa767cbab7 # v1.3.0
         with:
           repo-token: ${{ github.token }}
           issue-message:

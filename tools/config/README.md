@@ -1,5 +1,12 @@
-# Power Plant - Shared Config Tools
+# Power Plant - Internal Shared Configuration Files
 
-A collection of tools for managing shared configuration files used in the Power Plant monorepo.
+An internal collection of shared configuration files used in the Power Plant monorepo.
 
-This library was generated with [Nx](https://nx.dev).
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+> [!IMPORTANT] 
+> This is an internal Power Plant tooling package, and should not be used outside of the Power Plant monorepo. It is not intended for public consumption, and may change or be removed at any time without notice. 
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->

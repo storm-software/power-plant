@@ -10,7 +10,7 @@ import {
   extractVariant
 } from "../src/extract";
 
-describe("devkit/schema/src/extract.ts", () => {
+describe("schema/src/extract.ts", () => {
   it("bundleReferences rewrites internal document references", () => {
     const bundled = bundleReferences({
       $id: "https://example.dev/root.json",
@@ -47,6 +47,12 @@ describe("devkit/schema/src/extract.ts", () => {
       "json-schema"
     );
     expect(extractVariant("./schema.ts#default")).toBe("file-reference");
+    expect(
+      extractVariant({
+        schema: "./schema.ts#default",
+        meta: { description: "context" }
+      } as any)
+    ).toBe("file-reference");
   });
 
   it("extractSource wraps schema with source metadata", () => {
@@ -76,16 +82,36 @@ describe("devkit/schema/src/extract.ts", () => {
       }
     } as any;
 
-    const withSource = await extractSchemaWithSource(context, {
-      type: "string"
-    } as any);
+    const withSource = await extractSchemaWithSource(
+      { type: "string" } as any,
+      {
+        skipCache: true
+      }
+    );
     expect(withSource.variant).toBe("json-schema");
     expect(withSource.schema).toEqual({ type: "string" });
     expect(withSource.source.variant).toBe("json-schema");
 
-    const extracted = await extract(context, { type: "string" } as any);
+    const extracted = await extract({ type: "string" } as any, {
+      skipCache: true
+    });
     expect(extracted.variant).toBe("json-schema");
     expect(extracted.schema).toEqual({ type: "string" });
     expect(extracted.hash.length).toBeGreaterThan(0);
+  });
+
+  it("extractSchemaWithSource and extract preserve optional input metadata", async () => {
+    const input = {
+      schema: { type: "string" },
+      meta: { description: "schema context" }
+    } as any;
+
+    const withSource = await extractSchemaWithSource(input, {
+      skipCache: true
+    });
+    expect(withSource.meta).toEqual({ description: "schema context" });
+
+    const extracted = await extract(input, { skipCache: true });
+    expect(extracted.meta).toEqual({ description: "schema context" });
   });
 });

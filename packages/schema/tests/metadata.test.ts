@@ -5,7 +5,7 @@ import {
   readSchemaTypes
 } from "../src/metadata";
 
-describe("devkit/schema/src/metadata.ts", () => {
+describe("schema/src/metadata.ts", () => {
   it("applyJsonSchemaMetadata copies known metadata fields", () => {
     const schema = { type: "string" } as const;
     const result = applyJsonSchemaMetadata(

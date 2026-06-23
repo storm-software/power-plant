@@ -1,4 +1,3 @@
-import { resolve as resolvePath } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const { evalModuleMock, readFileMock, createSchemaMock, createGeneratorMock } =
@@ -99,8 +98,7 @@ describe("packages/schema/src/resolve.ts", () => {
       path: "./module.ts",
       type: "schema",
       expose: "export",
-      jsDoc: "extended",
-      tsconfig: resolvePath(__dirname, "../../../tsconfig.json")
+      jsDoc: "extended"
     });
     expect(createSchemaMock).toHaveBeenCalledWith("schema");
   });

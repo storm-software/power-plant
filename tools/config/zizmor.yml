@@ -7,18 +7,25 @@ rules:
       - greetings.yml:3:1
   unpinned-uses:
     ignore:
-      - release.yml
-      - zizmor.yml
-      - sync-labels.yml
-      - lock.yml
-      - git-guardian.yml
-      - contributors.yml
-      - codeql.yml
-      - dependabot-approval.yml
-      - security.yml
-      - security-reusable.yml
-      - schedule-stale.yml
-      - greetings.yml
+      - release.yml:36:15
+      - release.yml:86:15
+      - release.yml:126:15
+      - release.yml:154:15
+      - release.yml:181:15
+      - dependabot-update.yml:29:15
+      - codeql.yml:67:15
+      - security.yml:21:11
+      - security.yml:33:11
+      - schedule-stale.yml:20:15
+      - schedule-stale.yml:36:15
+      - schedule-stale.yml:52:15
+      - schedule-stale.yml:68:15
+      - schedule-stale.yml:84:15
+      - schedule-stale.yml:100:15
+      - schedule-stale.yml:116:15
+      - schedule-stale.yml:132:15
+      - schedule-stale.yml:148:15
+      - schedule-stale.yml:164:15
   excessive-permissions:
     ignore:
       - release.yml

@@ -16,17 +16,18 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaInput } from "@power-plant/schema";
-import type { MaybePromise } from "@stryke/types/base";
+import type { SchemaInput, SchemaOf } from "@power-plant/schema";
+import type { Sink, SinkInput } from "../sink/types";
+import type { Source, SourceInput } from "../source/types";
 
 export interface GeneratorMeta<TSpec> {
   /**
-   * A string description (or a function that returns a string) of the type of output this generator produces.
+   * A string description (or a function that returns a string) outlining the purpose or behavior of the generator.
    */
-  outputs?: string | ((spec: TSpec) => string);
+  description?: string | ((spec: TSpec) => string);
 }
 
-export interface Generator<TSpec, TOptions = any> {
+export interface GeneratorInput<TSpec, TOptions = never> {
   /**
    * Optional metadata about the generator, such as a description of the output it produces.
    */
@@ -38,11 +39,42 @@ export interface Generator<TSpec, TOptions = any> {
   schema: SchemaInput<TSpec>;
 
   /**
-   * The function that generates output based on the provided specification and options. It can return a string or a promise that resolves to a string.
-   *
-   * @param spec - The specification object that conforms to the defined schema input.
-   * @param options - Additional options that may be needed for the generation process. The structure of this object can be defined by the user of the generator.
-   * @returns A promise that resolves to a string when the generation process is complete.
+   * The source input for the generator specification.
    */
-  generate: (spec: TSpec, options: TOptions) => MaybePromise<string>;
+  source: SourceInput<TSpec, TOptions>;
+
+  /**
+   * The sink input that consumes generated output.
+   */
+  sink: SinkInput<TSpec, TOptions>;
+}
+
+export interface Generator<TSpec, TOptions = never> {
+  /**
+   * Optional metadata about the generator, such as a description of the output it produces.
+   */
+  meta?: GeneratorMeta<TSpec>;
+
+  /**
+   * The schema input that defines the structure of the specification object for this generator.
+   */
+  schema: SchemaOf<TSpec>;
+
+  /**
+   * The source of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
+   */
+  source: Source<TSpec, TOptions>;
+
+  /**
+   * The sink of the generator, which can be used to specify where the generator sends its output data. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
+   */
+  sink: Sink<TSpec, TOptions>;
+
+  /**
+   * The generate function that executes the generator logic, taking in options and producing output based on the source and sink definitions.
+   *
+   * @param options - The options to be passed to the generator, which can be used to influence the generation process.
+   * @returns A promise that resolves when the generation process is complete.
+   */
+  generate: (options: TOptions) => Promise<void>;
 }

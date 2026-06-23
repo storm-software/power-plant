@@ -20,8 +20,10 @@ import { extractFileReference } from "@stryke/convert/extract-file-reference";
 import { findFileDotExtension, findFileExtensionSafe } from "@stryke/path/find";
 import { isSetString } from "@stryke/type-checks/is-set-string";
 import type { FileReferenceInput } from "@stryke/types/configuration";
+import { isValidURL } from "@stryke/url/helpers";
 import { createJiti } from "jiti";
 import { readFile } from "node:fs/promises";
+import { extname, resolve as resolvePath } from "node:path";
 import { parse as parseToml } from "smol-toml";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator.js";
 import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-generator/dist/src/Config.js";
@@ -32,6 +34,7 @@ import type { JsonSchema } from "./types";
 
 export interface ResolveOptions
   extends BundleOptions, Partial<TsJsonSchemaGeneratorConfig> {
+  cwd?: string;
   tsconfig?: string;
 }
 
@@ -44,7 +47,7 @@ export interface ResolveOptions
  */
 export async function resolveModule<TResult>(
   input: FileReferenceInput,
-  options: BundleOptions = {}
+  options: ResolveOptions = {}
 ): Promise<TResult> {
   const fileReference = extractFileReference(input);
   if (!fileReference) {
@@ -59,10 +62,20 @@ export async function resolveModule<TResult>(
 
   let resolved: any;
   try {
-    const jiti = createJiti(process.cwd());
+    const moduleFilename =
+      result.path === "<stdout>"
+        ? resolvePath(
+            process.cwd(),
+            `${fileReference.file}.bundled${
+              extname(fileReference.file) || ".mjs"
+            }`
+          )
+        : result.path;
+
+    const jiti = createJiti(options?.cwd ?? process.cwd());
     resolved = await jiti.evalModule(result.text, {
-      filename: result.path,
-      ext: findFileDotExtension(result.path)
+      filename: moduleFilename,
+      ext: findFileDotExtension(moduleFilename)
     });
   } catch (error) {
     throw new Error(
@@ -132,7 +145,26 @@ export async function resolveTSType(
 export async function resolve<TResult>(
   input: FileReferenceInput,
   options?: ResolveOptions
-): Promise<TResult | undefined> {
+): Promise<TResult> {
+  if (isSetString(input) && isValidURL(input) && !input.startsWith("file://")) {
+    try {
+      const response = await fetch(input);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch the JSON file from the URL "${input}". HTTP status: ${response.status} ${response.statusText}`
+        );
+      }
+
+      return (await response.json()) as TResult;
+    } catch (error) {
+      throw new Error(
+        `Failed to fetch or parse the JSON file from the URL "${input}". Error: ${
+          (error as Error).message
+        }`
+      );
+    }
+  }
+
   const fileReference = extractFileReference(input);
   if (!fileReference) {
     throw new Error(

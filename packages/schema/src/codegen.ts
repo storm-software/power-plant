@@ -825,18 +825,40 @@ export function generateParserCode(
 
   const parserFunctions = Object.entries(definitions).map(
     ([name, definition]) =>
-      `function ${toParserIdentifier(name)}(value, path, errors) {\nlet result;\n${generateStatements(
-        definition,
-        "value",
-        "path",
-        "result",
-        "errors"
-      ).join("\n")}\n\n  return result${
-        definition.name ? ` as ${stringifyType(definition)}` : ""
-      };\n}`
+      `function ${toParserIdentifier(name)}(inputValue, inputPath, errors) {
+let result;
+${generateStatements(definition, "inputValue", "inputPath", "result", "errors").join("\n")}
+
+  return result;
+}`
   );
 
-  return `${parserFunctions.join("\n\n")}
+  return `/**
+ * Parser error constructor function.
+ */
+function ParserError(path, failure) {
+  this.path = path;
+  this.failure = failure;
+  this.name = "ParserError";
+  this.message = path + ": " + failure;
+}
+ParserError.prototype = Object.create(Error.prototype);
+ParserError.prototype.constructor = ParserError;
+
+/**
+ * Represents a parser error with path and failure message.
+ */
+export class ParserError extends Error {
+  constructor(
+    public path: string,
+    public failure: string
+  ) {
+    super(\`\${path}: \${failure}\`);
+    this.name = "ParserError";
+  }
+}
+
+${parserFunctions.join("\n\n")}
 
 /**
  * Safely parses an input value into the type described by the JSON Schema, returning an array of validation errors when the value cannot be converted into a valid result.
@@ -847,43 +869,35 @@ export function generateParserCode(
  * @param value - The input value to parse.
  * @returns The parsed value conforming to the schema or an array of validation errors.
  */
-export function ${options.name || "parse"}Safe(value: Record<string, unknown>)${
-    schema.name ? `: ${stringifyType(schema)}` : ""
-  } | { path: string; failure: string }[] {
-  const errors: { path: string; failure: string }[] = [];
+export function parseSafe(inputValue) {
+  const errors = [];
 
   let result;
-  ${generateStatements(schema, "value", '"$"', "result", "errors").join("\n")}
+  ${generateStatements(schema, "inputValue", '"$"', "result", "errors").join("\n")}
 
   if (errors.length > 0) {
     return errors;
   }
 
-  return result${schema.name ? ` as ${stringifyType(schema)}` : ""};
+  return result;
 }
 
 /**
  * Parses an input value into the type described by the JSON Schema, throwing an error if the value cannot be converted into a valid result.
  *
  * @remarks
- * The parser applies default values for missing properties, coerces primitive values to the declared type, and throws a {@link Error} (containing a detailed list of validation errors) when the value cannot be converted into a valid result.
+ * The parser applies default values for missing properties, coerces primitive values to the declared type, and throws an error when the value cannot be converted into a valid result.
  *
  * @param value - The input value to parse.
  * @returns The parsed value conforming to the schema.
- * @throws {Error} When the input value cannot be parsed into a valid result according to the schema. The error contains a detailed list of validation errors with their respective paths and failure messages.
+ * @throws {Error} When the input value cannot be parsed into a valid result according to the schema.
  */
-export function ${options.name || "parse"}(value: Record<string, unknown>)${
-    schema.name ? `: ${stringifyType(schema)}` : ""
-  } {
-  const errors: { path: string; failure: string }[] = [];
-
-  const result = ${options.name || "parse"}Safe(value);
+export function parse(inputValue) {
+  const result = parseSafe(inputValue);
   if (Array.isArray(result) && result.length > 0 && result.every(error => "path" in error && typeof error.path === "string" && error.path && "failure" in error && typeof error.failure === "string" && error.failure)) {
-    throw new Error(\`The following validation errors occurred while parsing the ${
-      schema.name ? `${schema.name} input` : "input value"
-    }: \\n\${Object.entries(result.reduce((acc, error) => ((acc[error.path] ??= []).push(error.failure), acc), {} as Record<string, string[]>)).map(([path, failures]) => \`\${path.replace(/^\\$\\./, "") ? \`\${path.replace(/^\\$\\./, "")}: \\n\` : ""}\${failures.map(failure => \` - \${failure}\`).join("\\n")}\`).join("\\n")}\`);
+    throw new Error(\`The following validation errors occurred while parsing the input value: \\n\${Object.entries(result.reduce((acc, error) => ((acc[error.path] ??= []).push(error.failure), acc), {})).map(([path, failures]) => \`\${path.replace(/^\\$\\./, "") ? \`\${path.replace(/^\\$\\./, "")}: \\n\` : ""}\${failures.map(failure => \` - \${failure}\`).join("\\n")}\`).join("\\n")}\`);
   }
 
-  return result${schema.name ? ` as ${stringifyType(schema)}` : ""};
+  return result;
 }`;
 }

@@ -137,7 +137,7 @@ export function getProperty<TSchema extends JsonSchemaObject>(
   obj: Schema<TSchema> | TSchema,
   name: keyof TSchema["properties"] & string
 ): GetPropertyResult {
-  const schema = getJsonSchemaObject(obj);
+  const schema = getJsonSchemaObject(obj as Schema | JsonSchemaObject);
   if (!isSetObject(schema.properties)) {
     throw new TypeError(`The provided schema does not have any properties`);
   }

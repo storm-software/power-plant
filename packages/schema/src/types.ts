@@ -1450,6 +1450,168 @@ export type JsonSchemaOf<T> =
               ? JsonSchemaUndefined
               : JsonSchemaForNonNull<T>;
 
+type PrimitiveTypeToSpec<T extends JsonSchemaPrimitiveType> = T extends "string"
+  ? string
+  : T extends "number" | "integer"
+    ? number
+    : T extends "boolean"
+      ? boolean
+      : T extends "null"
+        ? null
+        : T extends "array"
+          ? unknown[]
+          : T extends "object"
+            ? Record<string, unknown>
+            : unknown;
+
+type TypeKeywordToSpec<T> = T extends readonly unknown[]
+  ? PrimitiveTypeToSpec<Extract<T[number], JsonSchemaPrimitiveType>>
+  : T extends JsonSchemaPrimitiveType
+    ? PrimitiveTypeToSpec<T>
+    : unknown;
+
+type RequiredPropertyKeys<T> = T extends readonly (infer K)[]
+  ? K & string
+  : never;
+
+type SpecFromPropertyMap<
+  TProperties extends Record<string, JsonSchema>,
+  TRequired
+> = {
+  [K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
+    ? K
+    : never]-?: SpecOf<TProperties[K]>;
+} & {
+  [K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
+    ? never
+    : K]?: SpecOf<TProperties[K]>;
+};
+
+type EmptyObject = Record<never, never>;
+
+type SpecFromObjectSchema<TSchema extends JsonSchemaObject | JsonSchemaRecord> =
+  (TSchema extends {
+    properties: infer TProperties extends Record<string, JsonSchema>;
+  }
+    ? SpecFromPropertyMap<
+        TProperties,
+        TSchema extends { required: infer TRequired } ? TRequired : never
+      >
+    : EmptyObject) &
+    (TSchema extends { additionalProperties: infer TAdditional }
+      ? TAdditional extends JsonSchema
+        ? Record<string, SpecOf<TAdditional>>
+        : TAdditional extends true
+          ? Record<string, unknown>
+          : EmptyObject
+      : EmptyObject);
+
+type SpecFromPrefixItems<T extends readonly JsonSchema[]> = {
+  [K in keyof T]: SpecOf<T[K]>;
+};
+
+type SpecFromTupleSchema<TSchema extends JsonSchemaTuple> = TSchema extends {
+  prefixItems: infer TPrefixItems extends readonly JsonSchema[];
+}
+  ? TSchema extends { items: infer TItems extends JsonSchema }
+    ? [...SpecFromPrefixItems<TPrefixItems>, ...Array<SpecOf<TItems>>]
+    : [...SpecFromPrefixItems<TPrefixItems>]
+  : unknown[];
+
+type UnionToIntersection<T> = (
+  T extends any ? (value: T) => void : never
+) extends (value: infer I) => void
+  ? I
+  : never;
+
+type SpecFromAllOf<T extends readonly JsonSchema[]> = UnionToIntersection<
+  SpecOf<T[number]>
+>;
+
+export type SpecOf<TJsonSchema extends JsonSchema> =
+  TJsonSchema extends JsonSchemaNever
+    ? never
+    : TJsonSchema extends JsonSchemaUnknown | JsonSchemaAny
+      ? unknown
+      : TJsonSchema extends JsonSchemaUndefined
+        ? undefined
+        : TJsonSchema extends JsonSchemaNull
+          ? null
+          : TJsonSchema extends JsonSchemaDate
+            ? Date
+            : TJsonSchema extends JsonSchemaBigint
+              ? bigint
+              : TJsonSchema extends { const: infer TConst }
+                ? TConst
+                : TJsonSchema extends {
+                      enum: infer TEnum extends readonly unknown[];
+                    }
+                  ? TEnum[number]
+                  : TJsonSchema extends {
+                        anyOf: readonly [
+                          infer TValue extends JsonSchema,
+                          JsonSchemaNull
+                        ];
+                      }
+                    ? SpecOf<TValue> | null
+                    : TJsonSchema extends JsonSchemaMap
+                      ? TJsonSchema["items"] extends {
+                          prefixItems: readonly [
+                            infer TKeySchema extends JsonSchema,
+                            infer TValueSchema extends JsonSchema
+                          ];
+                        }
+                        ? Map<SpecOf<TKeySchema>, SpecOf<TValueSchema>>
+                        : Map<unknown, unknown>
+                      : TJsonSchema extends JsonSchemaSet
+                        ? TJsonSchema extends {
+                            items: infer TItems extends JsonSchema;
+                          }
+                          ? Set<SpecOf<TItems>>
+                          : Set<unknown>
+                        : TJsonSchema extends JsonSchemaTuple
+                          ? SpecFromTupleSchema<TJsonSchema>
+                          : TJsonSchema extends JsonSchemaArray
+                            ? TJsonSchema extends {
+                                items: infer TItems extends JsonSchema;
+                              }
+                              ? Array<SpecOf<TItems>>
+                              : unknown[]
+                            : TJsonSchema extends
+                                  | JsonSchemaObject
+                                  | JsonSchemaRecord
+                              ? SpecFromObjectSchema<TJsonSchema>
+                              : TJsonSchema extends {
+                                    allOf: readonly JsonSchema[];
+                                  }
+                                ? SpecFromAllOf<
+                                    Extract<
+                                      TJsonSchema["allOf"],
+                                      readonly JsonSchema[]
+                                    >
+                                  >
+                                : TJsonSchema extends {
+                                      anyOf: readonly JsonSchema[];
+                                    }
+                                  ? SpecOf<
+                                      Extract<
+                                        TJsonSchema["anyOf"],
+                                        readonly JsonSchema[]
+                                      >[number]
+                                    >
+                                  : TJsonSchema extends {
+                                        oneOf: readonly JsonSchema[];
+                                      }
+                                    ? SpecOf<
+                                        Extract<
+                                          TJsonSchema["oneOf"],
+                                          readonly JsonSchema[]
+                                        >[number]
+                                      >
+                                    : TJsonSchema extends { type: infer TType }
+                                      ? TypeKeywordToSpec<TType>
+                                      : unknown;
+
 /**
  * Supported source variants from which a schema can be extracted.
  */
@@ -1468,21 +1630,36 @@ export type SchemaInputVariant = SchemaSourceVariant | "file-reference";
 /**
  * Raw schema source input union before normalization.
  */
-export type SchemaSourceInput<T = any> =
-  | StandardJSONSchemaV1<T>
-  | JsonSchemaOf<T>
-  | z3.ZodType<T, any, any>
+export type SchemaSourceInput<TSpec = any> =
+  | StandardJSONSchemaV1<TSpec>
+  | JsonSchemaOf<TSpec>
+  | z3.ZodType<TSpec, any, any>
   | UntypedInputObject
   | UntypedSchema
-  | ValibotSchema<T>;
+  | ValibotSchema<TSpec>;
 
 /**
  * Any accepted schema input, including normalized schemas and references.
  */
-export type SchemaInput<T = any> =
-  | SchemaSourceInput<T>
-  | Schema<JsonSchemaOf<T>>
-  | FileReferenceInput;
+export type SchemaInput<TSpec = any> =
+  | SchemaSourceInput<TSpec>
+  | Schema<JsonSchemaOf<TSpec>>
+  | FileReferenceInput
+  | SchemaInputWithMeta<TSpec>;
+
+/**
+ * Schema input wrapper that attaches optional contextual metadata.
+ */
+export interface SchemaInputWithMeta<TSpec = any> {
+  /** The underlying schema input payload. */
+  schema:
+    | SchemaSourceInput<TSpec>
+    | Schema<JsonSchemaOf<TSpec>>
+    | FileReferenceInput;
+
+  /** Optional contextual metadata associated with this schema input. */
+  meta?: SchemaMeta<TSpec>;
+}
 
 /**
  * A schema extracted from a source input, normalized to JSON Schema.
@@ -1496,21 +1673,31 @@ export interface Schema<TJsonSchema extends JsonSchema = JsonSchema> {
 
   /** The normalized schema definition. */
   schema: TJsonSchema;
+
+  /** Optional contextual metadata associated with the schema. */
+  meta?: SchemaMeta<SpecOf<TJsonSchema>>;
 }
 
 /**
  * A normalized JSON Schema extracted from a source input of type `T`. This type represents the result of the schema extraction process, where a raw schema input (which could be in various formats such as Zod, Untyped, Valibot, or as a type definition in TypeScript source code) is transformed into a standardized JSON Schema format. The `SchemaOf<T>` type captures the normalized JSON Schema along with metadata about the source variant and a content hash for caching or identification purposes.
  *
- * @template T - The original TypeScript type for which the schema is being extracted. This type parameter is used to derive the appropriate JSON Schema representation based on the structure and constraints of `T`.
+ * @template TSpec - The original TypeScript type for which the schema is being extracted. This type parameter is used to derive the appropriate JSON Schema representation based on the structure and constraints of `T`.
  *
  * @see {@link Schema}
  */
-export type SchemaOf<T> = Schema<JsonSchemaOf<T>>;
+export type SchemaOf<TSpec> = Schema<JsonSchemaOf<TSpec>>;
+
+export interface SchemaMeta<TSpec> {
+  /**
+   * A string description (or a function that returns a string) of the schema.
+   */
+  description?: string | ((spec: TSpec) => string);
+}
 
 /**
  * Base metadata captured for schema source inputs.
  */
-export interface BaseSchemaSource<T = any> {
+export interface BaseSchemaSource<TSpec = any> {
   /** A stable content hash for the original source schema. */
   hash: string;
 
@@ -1518,48 +1705,52 @@ export interface BaseSchemaSource<T = any> {
   variant: SchemaSourceVariant;
 
   /** The original schema input captured before normalization. */
-  schema: SchemaSourceInput<T>;
+  schema: SchemaSourceInput<TSpec>;
 }
 
 /**
  * Source descriptor for schemas that already use JSON Schema.
  */
-export interface JsonSchemaSchemaSource<T = any> extends BaseSchemaSource<T> {
+export interface JsonSchemaSchemaSource<
+  TSpec = any
+> extends BaseSchemaSource<TSpec> {
   /** Indicates the source input already uses JSON Schema syntax. */
   variant: "json-schema";
 
   /** The original JSON Schema document. */
-  schema: JsonSchemaOf<T>;
+  schema: JsonSchemaOf<TSpec>;
 }
 
 /**
  * Source descriptor for Standard Schema inputs.
  */
 export interface StandardSchemaSchemaSource<
-  T = any
-> extends BaseSchemaSource<T> {
+  TSpec = any
+> extends BaseSchemaSource<TSpec> {
   /** Indicates the source input follows the Standard Schema format. */
   variant: "standard-schema";
 
   /** The original Standard Schema document. */
-  schema: StandardJSONSchemaV1<T>;
+  schema: StandardJSONSchemaV1<TSpec>;
 }
 
 /**
  * Source descriptor for Zod v3 schema inputs.
  */
-export interface Zod3SchemaSource<T = any> extends BaseSchemaSource<T> {
+export interface Zod3SchemaSource<TSpec = any> extends BaseSchemaSource<TSpec> {
   /** Indicates the source input is a Zod v3 schema. */
   variant: "zod3";
 
   /** The original Zod v3 schema instance. */
-  schema: z3.ZodType<T, any, any>;
+  schema: z3.ZodType<TSpec, any, any>;
 }
 
 /**
  * Source descriptor for Untyped schema inputs.
  */
-export interface UntypedSchemaSource<T = any> extends BaseSchemaSource<T> {
+export interface UntypedSchemaSource<
+  TSpec = any
+> extends BaseSchemaSource<TSpec> {
   /** Indicates the source input comes from the Untyped schema model. */
   variant: "untyped";
 
@@ -1570,30 +1761,32 @@ export interface UntypedSchemaSource<T = any> extends BaseSchemaSource<T> {
 /**
  * Source descriptor for Valibot schema inputs.
  */
-export interface ValibotSchemaSource<T = any> extends BaseSchemaSource<T> {
+export interface ValibotSchemaSource<
+  TSpec = any
+> extends BaseSchemaSource<TSpec> {
   /** Indicates the source input comes from the Valibot schema model. */
   variant: "valibot";
 
   /** The original Valibot schema input. */
-  schema: ValibotSchema<T>;
+  schema: ValibotSchema<TSpec>;
 }
 
 /**
  * Union of all normalized schema source descriptor variants.
  */
-export type SchemaSource<T = any> =
-  | JsonSchemaSchemaSource<T>
-  | StandardSchemaSchemaSource<T>
-  | Zod3SchemaSource<T>
-  | UntypedSchemaSource<T>
-  | ValibotSchemaSource<T>;
+export type SchemaSource<TSpec = any> =
+  | JsonSchemaSchemaSource<TSpec>
+  | StandardSchemaSchemaSource<TSpec>
+  | Zod3SchemaSource<TSpec>
+  | UntypedSchemaSource<TSpec>
+  | ValibotSchemaSource<TSpec>;
 
 /**
  * A normalized schema plus metadata about the source that produced it.
  */
-export interface ExtractedSchema extends Schema {
+export interface ExtractedSchema<TSpec = any> extends SchemaOf<TSpec> {
   /**
    * The schema source that produced this normalized schema.
    */
-  source: SchemaSource;
+  source: SchemaSource<TSpec>;
 }

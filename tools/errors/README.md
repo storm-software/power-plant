@@ -1,4 +1,12 @@
-# Power Plant - Workspace Error Config Tools
+# Power Plant - Internal Workspace Error Codes
 
-A collection of tools for managing error message configuration files used in the
-Power Plant monorepo.
+An internal collection of error codes used in the Power Plant monorepo.
+
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+> [!IMPORTANT] 
+> This is an internal Power Plant tooling package, and should not be used outside of the Power Plant monorepo. It is not intended for public consumption, and may change or be removed at any time without notice. 
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->

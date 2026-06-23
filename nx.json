@@ -1,5 +1,4 @@
 {
-  "$schema": "https://cdn.jsdelivr.net/npm/nx/schemas/nx-schema.json",
   "extends": "@storm-software/workspace-tools/config/recommended.json",
   "release": {
     "groups": {

@@ -19,7 +19,7 @@ vi.mock("esbuild", () => ({
 import { build } from "esbuild";
 import { bundle } from "../src/bundle";
 
-describe("devkit/schema/src/bundle.ts", () => {
+describe("schema/src/bundle.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -31,6 +31,7 @@ describe("devkit/schema/src/bundle.ts", () => {
   });
 
   it("returns the first output file from esbuild", async () => {
+    const file = new URL("./fixtures/input.ts", import.meta.url).pathname;
     const output = {
       path: "/virtual/out.js",
       text: "export default 1;",
@@ -43,7 +44,7 @@ describe("devkit/schema/src/bundle.ts", () => {
       outputFiles: [output]
     } as any);
 
-    await expect(bundle("./input.ts")).resolves.toEqual(output);
+    await expect(bundle(file)).resolves.toEqual(output);
     expect(build).toHaveBeenCalledTimes(1);
   });
 });

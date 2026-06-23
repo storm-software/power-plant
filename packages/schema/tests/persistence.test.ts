@@ -7,7 +7,7 @@ import {
   writeSchema
 } from "../src/persistence";
 
-describe("devkit/schema/src/persistence.ts", () => {
+describe("schema/src/persistence.ts", () => {
   it("builds cache paths from the context cache path", () => {
     const context = { cachePath: "/tmp/cache" } as any;
 

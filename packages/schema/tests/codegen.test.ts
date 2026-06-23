@@ -6,7 +6,7 @@ import {
   stringifyValue
 } from "../src/codegen";
 
-describe("devkit/schema/src/codegen.ts", () => {
+describe("schema/src/codegen.ts", () => {
   it("stringifyValue serializes primitives and structured values", () => {
     expect(stringifyValue(undefined)).toBe("undefined");
     expect(stringifyValue(null)).toBe("null");
@@ -55,7 +55,26 @@ describe("devkit/schema/src/codegen.ts", () => {
   const compileParserSource = (
     source: string
   ): ((value: unknown) => unknown) => {
-    const executable = source.replace(/^export /gmu, "");
+    // Remove the TypeScript class definition and keep only the executable JavaScript
+    let executable = source;
+
+    // Remove "export " keyword prefix
+    executable = executable.replace(/^export\s+/gm, "");
+
+    // Find and remove the "class ParserError" TypeScript definition
+    // It starts with "export class ParserError" or "class ParserError" and continues until we see a function
+    const classStart = executable.indexOf("class ParserError");
+    if (classStart >= 0) {
+      const classEnd = executable.indexOf("function", classStart);
+      if (classEnd >= 0) {
+        executable =
+          executable.substring(0, classStart) + executable.substring(classEnd);
+      }
+    }
+
+    // Remove TypeScript "as" type assertions with their types (including generics)
+    // Matches: " as SomeType" or " as SomeType<...>"
+    executable = executable.replace(/\s+as\s+\w+(?:<[^>]+>)*/g, "");
 
     // eslint-disable-next-line no-new-func
     return new Function(`${executable}\nreturn parse;`)() as (

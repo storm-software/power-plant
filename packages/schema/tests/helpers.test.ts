@@ -11,7 +11,7 @@ import {
   merge
 } from "../src/helpers";
 
-describe("devkit/schema/src/helpers.ts", () => {
+describe("schema/src/helpers.ts", () => {
   it("getJsonSchema and getJsonSchemaObject unwrap schema containers", () => {
     const wrapped = {
       variant: "json-schema",
