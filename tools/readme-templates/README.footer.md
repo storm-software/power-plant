@@ -8,7 +8,6 @@ help you scale your monorepo to many teams while keeping the codebase
 maintainable.
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## Roadmap
 
@@ -22,7 +21,6 @@ a list of proposed features (and known issues).
 - [Newest Bugs](https://github.com/storm-software/power-plant/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## Support
 
@@ -33,7 +31,6 @@ Reach out to the maintainer at one of the following places:
 - <support@stormsoftware.com>
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## License
 
@@ -43,7 +40,6 @@ distribute this template as you like.
 See [LICENSE](LICENSE) for more information.
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## Changelog
 
@@ -53,7 +49,6 @@ with the migration instructions, is documented in the [CHANGELOG](CHANGELOG.md)
 file
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## Contributing
 
@@ -77,7 +72,6 @@ You can use
 to check for common markdown style inconsistency.
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
 
 ## Contributors
 

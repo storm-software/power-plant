@@ -12,13 +12,17 @@
 <b>
 <a href="https://stormsoftware.com" target="_blank">Website</a>  •
 <a href="https://github.com/storm-software/power-plant" target="_blank">GitHub</a>  •
-<a href="https://discord.gg/MQ6YVzakM5">Discord</a>  •  <a href="https://stormstack.github.io/stormstack/" target="_blank">Docs</a>  •  <a href="https://stormsoftware.com/contact" target="_blank">Contact</a>  •
-<a href="https://github.com/storm-software/stack/issues/new?assignees=&labels=bug&template=bug-report.yml&title=Bug Report%3A+">Report a Bug</a>
+<a href="https://discord.gg/MQ6YVzakM5">Discord</a>  •  <a href="https://stormsoftware.github.io/power-plant/" target="_blank">Docs</a>  •  <a href="https://stormsoftware.com/contact" target="_blank">Contact</a>  •
+<a href="https://github.com/storm-software/power-plant/issues/new?assignees=&labels=bug&template=bug-report.yml&title=Bug Report%3A+">Report a Bug</a>
 </b>
 </div>
 <br />
 
-The **☢️ Power Plant** monorepo contains all of the code for the Power Plant framework, including the core functionality, as well as any applications, libraries, and tools contained within the ecosystem.
+**☢️ Power Plant** is a collection of TypeScript packages and stand-alone developer tools that center on a single, simple concept: **generate anything from a specification**. The goal of Power Plant is to make it easy for developers to generate code, documentation, and other artifacts from a specification, without having to write any boilerplate code themselves.
+
+In the background, Power Plant will also gather metadata about the repository and provide it to LLMs and various other tools. **This allows our favorite AI models to understand more than just the source code, but also its context, the reason why it exists, and its intended usage.**
+
+The Power Plant monorepo is a collection of packages that are designed to work together, but in many cases can also be used independently.
 
 <br />
 
@@ -31,7 +35,7 @@ The **☢️ Power Plant** monorepo contains all of the code for the Power Plant
 <!-- markdownlint-disable -->
 
 > [!IMPORTANT] 
-> This repository, and the apps, libraries, and tools contained within, is still in it's initial development phase. As a result, bugs and issues are expected with it's usage. When the main development phase completes, a proper release will be performed, the packages will be available through NPM (and other distributions), and this message will be removed. However, in the meantime, please feel free to report any issues you may come across.
+> This repository, and the apps, libraries, and tools contained within, is still in its initial development phase. As a result, bugs and issues are expected with its usage. When the main development phase completes, a proper release will be performed, the packages will be available through NPM (and other distributions), and this message will be removed. However, in the meantime, please feel free to report any issues you may come across.
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

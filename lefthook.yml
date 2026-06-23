@@ -20,6 +20,10 @@ pre-commit:
       glob: "**/*"
       run: "pnpm nx sync"
       stage_fixed: true
+    readme:
+      glob: "**/{README.md,tools/readme-templates/README.*.md}"
+      run: pnpm exec storm-git readme --templates="tools/readme-templates"
+      stage_fixed: true
 
 pre-push:
   commands:

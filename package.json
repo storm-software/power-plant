@@ -2,7 +2,7 @@
   "name": "@power-plant/monorepo",
   "version": "0.0.1",
   "type": "module",
-  "description": "☢️ Generate anything from a spec",
+  "description": "☢️ Generate anything from a specification",
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git"
