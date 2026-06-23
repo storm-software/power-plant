@@ -1,6 +1,6 @@
 packages:
   - "tools/*"
-  - "packages/*"
+  - "packages/base/*"
   - "docs/*"
 catalog:
   "@alloy-js/core": "^0.23.1"

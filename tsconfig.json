@@ -4,10 +4,10 @@
   "extends": "./tsconfig.base.json",
   "references": [
     {
-      "path": "./packages/schema"
+      "path": "./packages/base/schema"
     },
     {
-      "path": "./packages/core"
+      "path": "./packages/base/core"
     }
   ],
   "files": []

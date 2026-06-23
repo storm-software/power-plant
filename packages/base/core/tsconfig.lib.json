@@ -2,10 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "tsBuildInfoFile": "out-tsc/tsconfig.tsbuildinfo",
-    "jsx": "preserve",
-    "jsxImportSource": "@alloy-js/core",
-    "outDir": "./out-tsc",
-    "verbatimModuleSyntax": false
+    "outDir": "./out-tsc"
   },
   "references": [{ "path": "../schema/tsconfig.lib.json" }],
   "include": [

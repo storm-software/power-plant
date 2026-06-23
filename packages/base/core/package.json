@@ -3,7 +3,11 @@
   "version": "0.0.2",
   "private": false,
   "description": "Core package for Power Plant",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -12,7 +16,7 @@
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/core"
+    "directory": "packages/base/core"
   },
   "funding": {
     "type": "github",
@@ -116,7 +120,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@alloy-js/core": "catalog:",
     "@alloy-js/markdown": "catalog:",

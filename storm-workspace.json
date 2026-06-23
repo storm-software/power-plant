@@ -6,5 +6,11 @@
   "repository": "https://github.com/storm-software/power-plant",
   "packageManager": "pnpm",
   "logLevel": "trace",
-  "docs": "https://docs.stormsoftware.com/projects/power-plant"
+  "docs": "https://docs.stormsoftware.com/projects/power-plant",
+  "release": {
+    "banner": {
+      "url": "https://public.storm-cdn.com/power-plant/media/banner-1280x320-dark.gif",
+      "alt": "Power Plant's logo banner"
+    }
+  }
 }

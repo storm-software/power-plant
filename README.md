@@ -25,7 +25,7 @@ The **☢️ Power Plant** monorepo contains all of the code for the Power Plant
 <h3 align="center">💻 Visit <a href="https://stormsoftware.com" target="_blank">stormsoftware.com</a> to stay up to date with this developer</h3>
 <br />
 
-[![github](https://img.shields.io/github/package-json/v/storm-software/power-plant?style=for-the-badge&color=1fb2a6)](https://github.com/storm-software/power-plant)&nbsp;[![Nx](https://img.shields.io/badge/Nx-17.0.2-lightgrey?style=for-the-badge&logo=nx&logoWidth=20&&color=1fb2a6)](http://nx.dev/)&nbsp;[![NextJs](https://img.shields.io/badge/Next.js-14.0.2-lightgrey?style=for-the-badge&logo=nextdotjs&logoWidth=20&color=1fb2a6)](https://nextjs.org/)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![documented with docusaurus](https://img.shields.io/badge/documented_with-docusaurus-success.svg?style=for-the-badge&logo=readthedocs&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/cr.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
+[![github](https://img.shields.io/github/package-json/v/storm-software/power-plant?style=for-the-badge&color=1fb2a6)](https://github.com/storm-software/power-plant/tree/main/packages/core)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
 
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -37,7 +37,9 @@ The **☢️ Power Plant** monorepo contains all of the code for the Power Plant
 <!-- prettier-ignore-end -->
 
 <div align="center">
+<a href="https://github.com/storm-software/power-plant" target="_blank">
 <b>Be sure to ⭐ this repository on GitHub so you can keep up to date on any daily progress!</b>
+</a>
 </div>
 
 <!-- START doctoc -->
@@ -46,22 +48,15 @@ The **☢️ Power Plant** monorepo contains all of the code for the Power Plant
 ## Table of Contents
 
 - [Quick Features](#quick-features)
-  - [Visual Studio Code Extension](#visual-studio-code-extension)
   - [Environment Configuration Help](#environment-configuration-help)
 - [Getting Started](#getting-started)
   - [Build](#build)
   - [Development Server](#development-server)
 - [Environment Configuration Help](#environment-configuration-help-1)
-  - [Plug-Ins](#plug-ins)
-  - [Generate an Application](#generate-an-application)
-  - [Generate a Library](#generate-a-library)
-  - [Code Scaffolding](#code-scaffolding)
 - [Testing](#testing)
   - [Running Unit Tests](#running-unit-tests)
   - [Running End-to-End Tests](#running-end-to-end-tests)
   - [Understand your workspace](#understand-your-workspace)
-- [☁ Nx Cloud](#-nx-cloud)
-  - [Distributed Computation Caching \& Distributed Task Execution](#distributed-computation-caching--distributed-task-execution)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
@@ -75,12 +70,6 @@ The **☢️ Power Plant** monorepo contains all of the code for the Power Plant
 # Quick Features
 
 This section contains a quick overview of the features and functionality of the repository.
-
-## Visual Studio Code Extension
-
-Acidic has it's own Visual Studio Code extension to support the language model
-in the IDE. The extension can be found in the
-[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=storm-software.acidic).
 
 ## Environment Configuration Help
 
@@ -124,59 +113,9 @@ information.
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
 <br />
 
-## Plug-Ins
-
-Some of the plug-ins used by this repository are:
-
-- [@nx/next](https://nx.dev/packages/next)
-- [@nx/react](https://nx.dev/packages/react)
-- [@nx/lint](https://nx.dev/linter/overview)
-- [@nx/js](https://nx.dev/js/overview)
-- [@nx/node](https://nodejs.org)
-- [@nx/web](https://nx.dev/web/overview)
-- [@nx/storybook](https://nx.dev/storybook/overview-react)
-- [@nx/cypress](https://nx.dev/packages/cypress)
-- [@nx/jest](https://nx.dev/packages/jest)
-- And more...
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
-## Generate an Application
-
-Run `nx g @storm-software/workspace:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same
-workspace.
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
-## Generate a Library
-
-Run `nx g @storm-software/workspace:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported
-from `@power-plant/my-lib`.
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
-## Code Scaffolding
-
-Run `nx g @nx/react:component my-component --project=power-plant` to generate a new
-component.
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
 # Testing
 
-Open System uses [Jest](https://jestjs.io/) for unit testing and
+Open System uses [Vitest](https://vitest.dev/) for unit testing and
 [Cypress](https://www.cypress.io/) for end-to-end testing.
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
@@ -184,7 +123,7 @@ Open System uses [Jest](https://jestjs.io/) for unit testing and
 
 ## Running Unit Tests
 
-Run `pnpm test` to execute the unit tests via [Jest](https://jestjs.io).
+Run `pnpm test` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 Run `pnpm affected:test` to execute the unit tests affected by a change.
 
@@ -205,35 +144,6 @@ Run `pnpm affected:e2e` to execute the end-to-end tests affected by a change.
 
 Run `pnpm graph` to see a diagram of the dependencies of the Open System
 projects.
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
-# ☁ Nx Cloud
-
-Nx caches the output of any previously run command such as testing and building,
-so it can replay the cached results instead of rerunning it. Nx Cloud allows you
-to share the computation cache across everyone in your team and CI.
-
-<div align="center">
-<img src="https://pub-4661138852db4e5da99a6660fbf9b633.r2.dev/Nx Cloud - Dashboard.png" width="100%" alt="Nx Cloud - Dashboard" />
-</div>
-
-<div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
-<br />
-
-## Distributed Computation Caching & Distributed Task Execution
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more
-rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx
-Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their
-preferred framework alongside Nx’s advanced code generation and project
-dependency graph, plus a unified experience for both frontend and backend
-developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
 <br />
@@ -294,10 +204,6 @@ distribute this template as you like. If you have any specific questions, please
 reach out to the Storm Software development team.
 
 See [LICENSE](LICENSE) for more information.
-
-<br />
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fstorm-software%2Fpower-plant.svg?type=large&issueType=license)](https://app.fossa.io/projects/git%2Bgithub.com%2Fstorm-software%2Fpower-plant?ref=badge_large&issueType=license)
 
 <div align="right">[ <a href="#table-of-contents">Back to top ▲</a> ]</div>
 <br />

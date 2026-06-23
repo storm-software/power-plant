@@ -1,8 +1,8 @@
 {
   "name": "schema",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "packages/schema/src",
+  "sourceRoot": "packages/base/schema/src",
   "targets": {
     "nx-release-publish": {
       "executor": "@storm-software/workspace-tools:npm-publish"
