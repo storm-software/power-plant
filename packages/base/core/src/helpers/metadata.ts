@@ -17,10 +17,10 @@
  ------------------------------------------------------------------- */
 
 import {
-  resolveMetaDisplayName,
   resolveMetaId,
   resolveMetaLinks,
   resolveMetaName,
+  resolveMetaTitle,
   resolveMetaVersion
 } from "@power-plant/schema/metadata";
 import type {
@@ -50,11 +50,7 @@ export function extractMeta<TSpec>(
     input?.version
   );
   meta.id = resolveMetaId(extractedSchema?.schema, meta);
-  meta.displayName = resolveMetaDisplayName(
-    extractedSchema?.schema,
-    meta,
-    input?.displayName
-  );
+  meta.title = resolveMetaTitle(extractedSchema?.schema, meta, input?.title);
   meta.links = resolveMetaLinks(extractedSchema?.schema, meta, input?.links);
 
   if (input?.deprecated) {

@@ -173,8 +173,8 @@ export function resolveMetaName<TSpec>(
     meta.name ??
     (isSetString(schema?.name)
       ? schema.name
-      : isSetString(schema?.displayName)
-        ? schema.displayName
+      : isSetString(schema?.title)
+        ? schema.title
         : schema.$id
           ? kebabCase(schema.$id)
           : stringifyType(schema))
@@ -217,12 +217,12 @@ export function resolveMetaId<TSpec>(
  * @param input - An explicit display name value to prioritize when provided.
  * @returns The resolved metadata display name.
  */
-export function resolveMetaDisplayName<TSpec>(
+export function resolveMetaTitle<TSpec>(
   schema: JsonSchema,
   meta: Partial<Meta<TSpec>>,
   input?: MetaValue<TSpec, string>
 ): MetaValue<TSpec, string> {
-  const value = input ?? meta.displayName ?? schema?.displayName;
+  const value = input ?? meta.title ?? schema?.title;
   if (value !== undefined) {
     return value;
   }
@@ -252,20 +252,16 @@ export function resolveMetaDescription<TSpec>(
   meta: Partial<Meta<TSpec>>,
   input?: MetaValue<TSpec, string>
 ): MetaValue<TSpec, string> {
-  meta.displayName ??= resolveMetaDisplayName(schema, meta);
+  meta.title ??= resolveMetaTitle(schema, meta);
 
-  const defaultDescription: Meta<TSpec>["description"] = isFunction(
-    meta.displayName
-  )
+  const defaultDescription: Meta<TSpec>["description"] = isFunction(meta.title)
     ? async (spec: TSpec) => {
         return template.replaceAll(
-          /\{\s*displayName\s*\}/g,
-          await Promise.resolve(
-            (meta.displayName as (spec: TSpec) => string)(spec)
-          )
+          /\{\s*title\s*\}/g,
+          await Promise.resolve((meta.title as (spec: TSpec) => string)(spec))
         );
       }
-    : template.replaceAll(/\{\s*displayName\s*\}/g, meta.displayName);
+    : template.replaceAll(/\{\s*title\s*\}/g, meta.title);
 
   let result = input ?? meta.description ?? schema?.description;
   if (isFunction(result)) {

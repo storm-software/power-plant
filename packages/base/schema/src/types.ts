@@ -181,7 +181,7 @@ export interface JsonSchemaMetadataKeywords {
   /**
    * A title for the schema, which can be used by documentation tools or other libraries that support this feature to provide a human-readable name or description for the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the schema when used in conjunction with compatible tools.
    */
-  displayName?: string;
+  title?: string;
 
   /**
    * A description for the schema, which can be used by documentation tools or other libraries that support this feature to provide a human-readable explanation or summary of the schema's purpose and usage. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the schema when used in conjunction with compatible tools.
@@ -1722,9 +1722,9 @@ export interface MetaInput<TSpec> {
    * A string that provides a human-readable name for the schema, which can be used in documentation, tooling, or other contexts to identify or reference the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    *
    * @remarks
-   * The `displayName` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
+   * The `title` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
-  displayName?: MetaValue<TSpec, string>;
+  title?: MetaValue<TSpec, string>;
 
   /**
    * A string that describes when the schema is used.
@@ -1789,9 +1789,9 @@ export interface Meta<TSpec> {
    * A string that provides a human-readable name for the schema, which can be used in documentation, tooling, or other contexts to identify or reference the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    *
    * @remarks
-   * The `displayName` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
+   * The `title` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
-  displayName: MetaValue<TSpec, string>;
+  title: MetaValue<TSpec, string>;
 
   /**
    * A string that describes when the schema is used.

@@ -38,8 +38,8 @@ export function extractSinkMeta<TSpec>(
 ): Meta<TSpec> {
   const meta = extractMeta(schema, input);
   meta.description = resolveMetaDescription(
-    `Accepts a ${schema?.meta?.displayName ? `${schema?.meta?.displayName} ` : ""}specification and processes it with a {displayName} sink.`,
-    schema?.schema ?? ({} as ExtractedSchema<TSpec>["schema"]),
+    `Accepts a ${schema?.meta?.title ? `${schema?.meta?.title} ` : ""}specification and processes it with a {title} sink.`,
+    schema?.schema ?? {},
     meta,
     input?.description
   );

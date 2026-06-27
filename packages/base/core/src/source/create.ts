@@ -43,8 +43,8 @@ export function extractSourceMeta<TSpec>(
 ): Meta<TSpec> {
   const meta = extractMeta(schema, input);
   meta.description = resolveMetaDescription(
-    `Determines the ${schema?.meta?.displayName ? `${schema?.meta?.displayName} ` : ""}specification from a {displayName} source.`,
-    schema?.schema ?? ({} as ExtractedSchema<TSpec>["schema"]),
+    `Determines the ${schema?.meta?.title ? `${schema?.meta?.title} ` : ""}specification from a {title} source.`,
+    schema?.schema ?? {},
     meta,
     input?.description
   );

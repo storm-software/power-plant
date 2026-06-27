@@ -54,7 +54,7 @@ export const JSON_SCHEMA_METADATA_KEYS = [
   "alias",
   "deprecated",
   "description",
-  "displayName",
+  "title",
   "docs",
   "examples",
   "hidden",

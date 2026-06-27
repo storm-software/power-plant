@@ -39,11 +39,11 @@ import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-gener
 import type * as z3 from "zod/v3";
 import {
   resolveMetaDescription,
-  resolveMetaDisplayName,
   resolveMetaExample,
   resolveMetaId,
   resolveMetaLinks,
   resolveMetaName,
+  resolveMetaTitle,
   resolveMetaVersion
 } from "./metadata";
 import {
@@ -741,13 +741,9 @@ export function extractSchemaMeta<TSpec = any>(
   meta.name = resolveMetaName(jsonSchema, meta, input?.name);
   meta.version = resolveMetaVersion(jsonSchema, meta, input?.version);
   meta.id = resolveMetaId(jsonSchema, meta);
-  meta.displayName = resolveMetaDisplayName(
-    jsonSchema,
-    meta,
-    input?.displayName
-  );
+  meta.title = resolveMetaTitle(jsonSchema, meta, input?.title);
   meta.description = resolveMetaDescription(
-    "A schema that describes the shape of the {displayName} specification.",
+    "A schema that describes the shape of the {title} specification.",
     schema.schema,
     meta,
     input?.description
