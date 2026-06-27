@@ -3,7 +3,13 @@
   "release": {
     "groups": {
       "packages": {
-        "projects": ["packages/*"],
+        "projects": [
+          "packages/base/*",
+          "packages/sources/*",
+          "packages/sinks/*",
+          "packages/generators/*",
+          "packages/devtools/*"
+        ],
         "projectsRelationship": "independent"
       }
     }

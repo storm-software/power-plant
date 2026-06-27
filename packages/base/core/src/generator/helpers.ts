@@ -16,13 +16,18 @@
 
  ------------------------------------------------------------------- */
 
-export const VALID_SINK_FILE_EXTENSIONS = [
-  "ts",
-  "cts",
-  "mts",
-  "tsx",
-  "js",
-  "cjs",
-  "mjs",
-  "jsx"
-] as const as string[];
+import { isSetObject } from "@stryke/type-checks/is-set-object";
+import type { GeneratorInputObject } from "../types";
+
+export function isGeneratorInputObject<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(input: unknown): input is GeneratorInputObject<TSpec, TOptions, TReturns> {
+  return (
+    isSetObject(input) &&
+    "schema" in input &&
+    "source" in input &&
+    "sink" in input
+  );
+}

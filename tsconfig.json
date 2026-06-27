@@ -8,6 +8,9 @@
     },
     {
       "path": "./packages/base/core"
+    },
+    {
+      "path": "./packages/sources/file-source"
     }
   ],
   "files": []

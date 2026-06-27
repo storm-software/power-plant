@@ -3,8 +3,7 @@ import {
   JSON_SCHEMA_METADATA_KEYS,
   JSON_SCHEMA_PRIMITIVE_TYPES,
   JSON_SCHEMA_TYPES,
-  JsonSchemaTypeNames,
-  VALID_SOURCE_FILE_EXTENSIONS
+  JsonSchemaTypeNames
 } from "../src/constants";
 
 describe("JsonSchemaTypeNames", () => {
@@ -64,24 +63,5 @@ describe("JSON_SCHEMA_METADATA_KEYS", () => {
     expect(JSON_SCHEMA_METADATA_KEYS).toContain("description");
     expect(JSON_SCHEMA_METADATA_KEYS).toContain("deprecated");
     expect(JSON_SCHEMA_METADATA_KEYS).toContain("examples");
-  });
-});
-
-describe("VALID_SOURCE_FILE_EXTENSIONS", () => {
-  it("is an array", () => {
-    expect(Array.isArray(VALID_SOURCE_FILE_EXTENSIONS)).toBe(true);
-  });
-
-  it("contains common TypeScript and JavaScript extensions", () => {
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("ts");
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("js");
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("tsx");
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("jsx");
-  });
-
-  it("contains config format extensions", () => {
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("json");
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("yaml");
-    expect(VALID_SOURCE_FILE_EXTENSIONS).toContain("toml");
   });
 });

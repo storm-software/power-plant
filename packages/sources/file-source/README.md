@@ -57,23 +57,23 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - Schema
+# Power Plant - File Source
 
-A Power Plant utility package to help managing schemas.
+A Power Plant source for reading the input specification from a file.
 
 ## Installing
 
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/schema
+pnpm add -D @power-plant/file-source
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/schema
+npm install -D @power-plant/file-source
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/schema
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/schema
+yarn add -D @power-plant/file-source
 ```
 
 </details>
 
 ## Building
 
-Run `nx build schema` to build the library.
+Run `nx build file-source` to build the library.
 
 ## Running unit tests
 
-Run `nx test schema` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test file-source` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

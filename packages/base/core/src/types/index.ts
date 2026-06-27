@@ -16,5 +16,6 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./config";
 export * from "./generator";
+export * from "./sink";
+export * from "./source";

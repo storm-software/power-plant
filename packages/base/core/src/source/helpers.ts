@@ -16,6 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-export async function sink(spec: { name: string }): Promise<void> {
-  spec.name = `${spec.name}-resolved`;
+import { isSetObject } from "@stryke/type-checks/is-set-object";
+import type { SourceInputObject } from "../types/source";
+
+/**
+ * Checks if the provided input is a {@link SourceInputObject}.
+ *
+ * @param input - The input to check.
+ * @returns True if the input is a {@link SourceInputObject}, false otherwise.
+ */
+export function isSourceInputObject<TSpec, TOptions extends object>(
+  input: unknown
+): input is SourceInputObject<TSpec, TOptions> {
+  return isSetObject(input) && "source" in input && input.source !== undefined;
 }

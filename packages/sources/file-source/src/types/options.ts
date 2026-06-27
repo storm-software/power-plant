@@ -16,5 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./create";
-export * from "./define";
+import type { LoadInput } from "@stryke/resolve/types";
+import type { FileSystemInterface } from "@stryke/types/fs";
+
+export interface Options {
+  path: LoadInput;
+  fs?: Partial<FileSystemInterface>;
+}

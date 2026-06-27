@@ -18,23 +18,6 @@
 
 import type { JsonSchemaMetadataKeywords } from "./types";
 
-export const VALID_SOURCE_FILE_EXTENSIONS = [
-  "ts",
-  "cts",
-  "mts",
-  "tsx",
-  "js",
-  "cjs",
-  "mjs",
-  "jsx",
-  "json",
-  "jsonc",
-  "json5",
-  "yaml",
-  "yml",
-  "toml"
-] as const as string[];
-
 export const JsonSchemaTypeNames = {
   STRING: "string",
   NUMBER: "number",
@@ -60,19 +43,29 @@ export const JSON_SCHEMA_TYPES = [
 ] as const;
 
 export const JSON_SCHEMA_METADATA_KEYS = [
-  "docs",
+  "$id",
+  "$schema",
+  "$vocabulary",
+  "$comment",
+  "$anchor",
+  "$defs",
+  "$dynamicRef",
+  "$dynamicAnchor",
+  "alias",
   "deprecated",
-  "title",
   "description",
+  "displayName",
+  "docs",
   "examples",
   "hidden",
   "ignore",
   "internal",
-  "runtime",
+  "name",
   "readOnly",
-  "writeOnly",
-  "alias",
-  "tags"
+  "runtime",
+  "tags",
+  "version",
+  "writeOnly"
 ] satisfies ReadonlyArray<keyof JsonSchemaMetadataKeywords>;
 
 /**

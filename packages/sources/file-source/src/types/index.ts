@@ -16,14 +16,4 @@
 
  ------------------------------------------------------------------- */
 
-import type { Generator } from "./generator";
-
-export interface UserConfig<TSpec extends object> {
-  spec: TSpec;
-  generate:
-    | Generator<TSpec>
-    | Generator<TSpec>[]
-    | {
-        [key in keyof TSpec]: Generator<TSpec[key]> | Generator<TSpec[key]>[];
-      };
-}
+export * from "./options";

@@ -39,13 +39,10 @@ declare module "zod" {
   }
 }
 
-export * from "./bundle";
 export * from "./codegen";
 export * from "./constants";
 export * from "./extract";
 export * from "./helpers";
 export * from "./metadata";
-export * from "./persistence";
-export * from "./resolve";
 export * from "./type-checks";
 export * from "./types";

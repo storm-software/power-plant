@@ -2,7 +2,7 @@
   "name": "@power-plant/schema",
   "version": "0.0.2",
   "private": false,
-  "description": "A package containing a Power Plant package to help managing schemas.",
+  "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
     "zod",
     "valibot",
@@ -61,20 +61,6 @@
       "default": {
         "types": "./dist/index.d.mts",
         "default": "./dist/index.mjs"
-      }
-    },
-    "./bundle": {
-      "require": {
-        "types": "./dist/bundle.d.cts",
-        "default": "./dist/bundle.cjs"
-      },
-      "import": {
-        "types": "./dist/bundle.d.mts",
-        "default": "./dist/bundle.mjs"
-      },
-      "default": {
-        "types": "./dist/bundle.d.mts",
-        "default": "./dist/bundle.mjs"
       }
     },
     "./codegen": {
@@ -148,34 +134,6 @@
       }
     },
     "./package.json": "./package.json",
-    "./persistence": {
-      "require": {
-        "types": "./dist/persistence.d.cts",
-        "default": "./dist/persistence.cjs"
-      },
-      "import": {
-        "types": "./dist/persistence.d.mts",
-        "default": "./dist/persistence.mjs"
-      },
-      "default": {
-        "types": "./dist/persistence.d.mts",
-        "default": "./dist/persistence.mjs"
-      }
-    },
-    "./resolve": {
-      "require": {
-        "types": "./dist/resolve.d.cts",
-        "default": "./dist/resolve.cjs"
-      },
-      "import": {
-        "types": "./dist/resolve.d.mts",
-        "default": "./dist/resolve.mjs"
-      },
-      "default": {
-        "types": "./dist/resolve.d.mts",
-        "default": "./dist/resolve.mjs"
-      }
-    },
     "./type-checks": {
       "require": {
         "types": "./dist/type-checks.d.cts",
@@ -213,28 +171,25 @@
     "dist"
   ],
   "dependencies": {
-    "@msgpack/msgpack": "catalog:",
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
-    "@stryke/env": "catalog:",
+    "@stryke/date": "catalog:",
     "@stryke/hash": "catalog:",
     "@stryke/helpers": "catalog:",
     "@stryke/json": "catalog:",
     "@stryke/path": "catalog:",
+    "@stryke/resolve": "catalog:",
     "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
+    "@stryke/unique-id": "catalog:",
     "@stryke/url": "catalog:",
     "@stryke/zod": "catalog:",
     "@valibot/to-json-schema": "catalog:",
     "defu": "catalog:",
-    "esbuild": "catalog:",
-    "jiti": "catalog:",
-    "smol-toml": "catalog:",
     "ts-json-schema-generator": "catalog:",
     "typescript": "^6.0.3",
-    "untyped": "catalog:",
-    "yaml": "catalog:"
+    "untyped": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",

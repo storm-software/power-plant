@@ -66,6 +66,7 @@ import type {
   JsonSchemaUnion,
   JsonSchemaUnknown,
   Schema,
+  SchemaOf,
   ExtractedSchema as SchemaWithSource
 } from "./types";
 
@@ -1402,6 +1403,16 @@ export function isSchema(input: unknown): input is Schema {
     "hash" in input &&
     isSetString(input.hash)
   );
+}
+
+/**
+ * Type guard for Powerlines Schema objects with a specific type specification.
+ *
+ * @param input - The value to check.
+ * @returns True if the input is a Powerlines Schema object with the specified type specification, false otherwise.
+ */
+export function isSchemaOf<TSpec>(input: unknown): input is SchemaOf<TSpec> {
+  return isSchema(input);
 }
 
 /**

@@ -1,0 +1,88 @@
+{
+  "name": "@power-plant/file-source",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A Power Plant source for reading the input specification from a file.",
+  "keywords": [
+    "power-plant-source",
+    "power-plant",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/sources/file-source"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "default": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@power-plant/core": "workspace:*",
+    "@power-plant/schema": "workspace:*",
+    "@stryke/resolve": "catalog:",
+    "@stryke/type-checks": "catalog:"
+  },
+  "devDependencies": {
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@stryke/types": "catalog:",
+    "@types/node": "catalog:",
+    "powerlines": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "inlinedDependencies": {
+    "@stryke/types": "0.12.20"
+  }
+}

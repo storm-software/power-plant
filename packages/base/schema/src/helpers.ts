@@ -18,19 +18,23 @@
 
 import { getUnique } from "@stryke/helpers/get-unique";
 import { findFileExtensionSafe } from "@stryke/path/find";
+import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { isSetObject } from "@stryke/type-checks";
+import defu from "defu";
 import {
+  JSON_SCHEMA_METADATA_KEYS,
   SCHEMA_ARRAY_CONCAT_KEYWORDS,
   SCHEMA_RECORD_KEYWORDS,
-  SCHEMA_SINGLE_KEYWORDS,
-  VALID_SOURCE_FILE_EXTENSIONS
+  SCHEMA_SINGLE_KEYWORDS
 } from "./constants";
 import { readSchemaTypes } from "./metadata";
 import { isJsonSchema, isJsonSchemaObject, isSchema } from "./type-checks";
 import type {
   JsonSchema,
   JsonSchemaLike,
+  JsonSchemaMetadataKeywords,
   JsonSchemaObject,
+  JsonSchemaOf,
   Schema
 } from "./types";
 
@@ -200,7 +204,7 @@ export function addProperty(
  * - `if`, `then`, `else`, `not`, `contains`, `items`,
  *   `additionalProperties`, `unevaluatedProperties`, `propertyNames`,
  *   `unevaluatedItems` — merged recursively when both sides are schemas.
- * - `required` — arrays are unioned and deduplicated.
+ * - `required` — arrays are union'ed and deduplicated.
  */
 function mergeTwo(base: JsonSchema, override: JsonSchema): JsonSchema {
   const baseObj = base as Record<string, unknown>;
@@ -271,7 +275,7 @@ function mergeTwo(base: JsonSchema, override: JsonSchema): JsonSchema {
  * - Composition arrays (`allOf`, `anyOf`, `oneOf`) are concatenated.
  * - Single-schema keywords (`if`, `then`, `else`, `not`, `items`, etc.)
  *   are merged recursively when both sides define them.
- * - `required` arrays are unioned and deduplicated.
+ * - `required` arrays are union'ed and deduplicated.
  *
  * @param schemas - An array of JSON Schemas or Schema wrappers to merge.
  * @returns A new JSON Schema that is the result of merging all input schemas.
@@ -293,6 +297,30 @@ export function merge(...schemas: (JsonSchema | Schema)[]): JsonSchema {
 
     return mergeTwo(acc, schema);
   });
+}
+
+/**
+ * Merges metadata into a JSON Schema fragment.
+ *
+ * @remarks
+ * This function takes a JSON Schema fragment and a metadata object, and merges the metadata into the schema. Only the keys defined in {@link JSON_SCHEMA_METADATA_KEYS} are considered for merging. The resulting schema will include the original schema properties along with the provided metadata.
+ *
+ * @param schema - The JSON Schema fragment to merge metadata into.
+ * @param metadata - The metadata to merge into the schema.
+ * @returns A new JSON Schema fragment that includes the merged metadata.
+ */
+export function mergeMetadata<TSpec>(
+  schema: JsonSchemaOf<TSpec>,
+  metadata: JsonSchemaMetadataKeywords
+): JsonSchemaOf<TSpec> {
+  return defu(
+    schema,
+    Object.fromEntries(
+      JSON_SCHEMA_METADATA_KEYS.filter(key => metadata[key] !== undefined).map(
+        key => [key, metadata[key]]
+      )
+    )
+  ) as JsonSchemaOf<TSpec>;
 }
 
 /**
@@ -346,5 +374,7 @@ export function isPropertyOptional(
  * @returns `true` if the file name has a valid schema input extension, otherwise `false`.
  */
 export function isValidSchemaInputFile(fileName: string): boolean {
-  return VALID_SOURCE_FILE_EXTENSIONS.includes(findFileExtensionSafe(fileName));
+  return VALID_OBJECT_SOURCE_EXTENSIONS.includes(
+    findFileExtensionSafe(fileName)
+  );
 }

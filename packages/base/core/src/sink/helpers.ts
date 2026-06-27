@@ -16,19 +16,19 @@
 
  ------------------------------------------------------------------- */
 
-export const VALID_SOURCE_FILE_EXTENSIONS = [
-  "ts",
-  "cts",
-  "mts",
-  "tsx",
-  "js",
-  "cjs",
-  "mjs",
-  "jsx",
-  "json",
-  "jsonc",
-  "json5",
-  "yaml",
-  "yml",
-  "toml"
-] as const as string[];
+import { isSetObject } from "@stryke/type-checks/is-set-object";
+import type { SinkInputObject } from "../types/sink";
+
+/**
+ * Checks if the provided input is a {@link SinkInputObject}.
+ *
+ * @param input - The input to check.
+ * @returns True if the input is a {@link SinkInputObject}, false otherwise.
+ */
+export function isSinkInputObject<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(input: unknown): input is SinkInputObject<TSpec, TOptions, TReturns> {
+  return isSetObject(input) && "sink" in input && input.sink !== undefined;
+}

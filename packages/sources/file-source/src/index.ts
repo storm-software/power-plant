@@ -16,5 +16,19 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./create";
-export * from "./define";
+import { defineSource } from "@power-plant/core";
+import { load } from "@stryke/resolve/load";
+import packageJson from "../package.json" with { type: "json" };
+import type { Options } from "./types";
+
+export default defineSource<any, Options>({
+  meta: {
+    name: "file",
+    version: packageJson.version
+  },
+  source: async (options: Options) => {
+    const { path, ...rest } = options;
+
+    return load(path, rest);
+  }
+});

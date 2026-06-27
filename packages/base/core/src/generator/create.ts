@@ -16,12 +16,18 @@
 
  ------------------------------------------------------------------- */
 
-import type { ExtractOptions } from "@power-plant/schema/extract";
 import { extract as extractSchema } from "@power-plant/schema/extract";
+import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
-import { extractSink } from "../sink/extract";
-import { extractSource } from "../source/extract";
-import type { Generator, GeneratorInput } from "../types/generator";
+import { createSink } from "../sink/create";
+import { createSource } from "../source/create";
+import type {
+  Generator,
+  GeneratorInput,
+  GeneratorInputObject,
+  InferCreateGeneratorOptions
+} from "../types/generator";
+import { isGeneratorInputObject } from "./helpers";
 
 /**
  * Creates a generator from raw schema/source/sink inputs and resolves all descriptors.
@@ -35,15 +41,28 @@ import type { Generator, GeneratorInput } from "../types/generator";
  * @param options - Optional extraction options for schema, source, and sink.
  * @returns A promise that resolves to a fully constructed generator.
  */
-export async function createGenerator<TSpec, TOptions = any>(
-  input: GeneratorInput<TSpec, TOptions>,
-  options?: ExtractOptions
-): Promise<Generator<TSpec, TOptions>> {
-  const schema = await extractSchema(input.schema, options);
+export async function createGenerator<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(
+  input: GeneratorInput<TSpec, TOptions, TReturns>,
+  options: InferCreateGeneratorOptions<typeof input> = {}
+): Promise<Generator<TSpec, TOptions, TReturns>> {
+  let inputObject!: GeneratorInputObject<TSpec, TOptions, TReturns>;
+  if (isGeneratorInputObject<TSpec, TOptions, TReturns>(input)) {
+    inputObject = input;
+  } else {
+    inputObject = await load<GeneratorInputObject<TSpec, TOptions, TReturns>>(
+      input,
+      options
+    );
+  }
 
+  const schema = await extractSchema<TSpec>(inputObject.schema, options);
   const [source, sink] = await Promise.all([
-    extractSource(schema, input.source, options),
-    extractSink(schema, input.sink, options)
+    createSource<TSpec, TOptions>(schema, inputObject.source, options),
+    createSink<TSpec, TOptions, TReturns>(schema, inputObject.sink, options)
   ]);
 
   const generate = async (options: TOptions) => {
@@ -56,20 +75,20 @@ export async function createGenerator<TSpec, TOptions = any>(
       : source.source;
 
     const description =
-      typeof input.meta?.description === "function"
-        ? input.meta.description(spec)
-        : input.meta?.description;
+      typeof inputObject.meta?.description === "function"
+        ? inputObject.meta.description(spec)
+        : inputObject.meta?.description;
 
     if (description) {
       // eslint-disable-next-line no-console
       console.log(`Generating ${description}...`);
     }
 
-    await sink.sink(spec, options);
+    return sink.sink(spec, options);
   };
 
   return {
-    meta: input.meta,
+    meta: inputObject.meta,
     schema,
     source,
     sink,
