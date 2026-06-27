@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/schema",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
@@ -167,9 +167,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
