@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.4](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.4) (06/28/2026)
+
+### Miscellaneous
+
+- **schema:** Rename `displayName` to `title` for consistency ([31ded5c](https://github.com/storm-software/power-plant/commit/31ded5c))
+
+### Features
+
+- **openapi-schema:** Added the OpenAPI schema package ([ed3fc82](https://github.com/storm-software/power-plant/commit/ed3fc82))
+- **core:** Move base meta and schema logic into the `core` package ([c0e8502](https://github.com/storm-software/power-plant/commit/c0e8502))
+
 ## [0.0.3](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.3) (06/27/2026)
 
 ### Miscellaneous
