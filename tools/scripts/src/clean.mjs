@@ -85,21 +85,7 @@ try {
     );
   }
 
-  proc =
-    $`rm -rf ./packages/sources/*/dist ./packages/sources/*/out-tsc`.timeout(
-      `${5 * 60}s`
-    );
-  proc.stdout.on("data", data => {
-    echo`${data}`;
-  });
-  result = await proc;
-  if (result.exitCode !== 0) {
-    throw new Error(
-      `An error occurred while removing build directories from the source packages: \n\n${result.message}\n`
-    );
-  }
-
-  proc = $`rm -rf ./packages/sinks/*/dist ./packages/sinks/*/out-tsc`.timeout(
+  proc = $`rm -rf ./packages/inputs/*/dist ./packages/inputs/*/out-tsc`.timeout(
     `${5 * 60}s`
   );
   proc.stdout.on("data", data => {
@@ -108,7 +94,21 @@ try {
   result = await proc;
   if (result.exitCode !== 0) {
     throw new Error(
-      `An error occurred while removing build directories from the sink packages: \n\n${result.message}\n`
+      `An error occurred while removing build directories from the input packages: \n\n${result.message}\n`
+    );
+  }
+
+  proc =
+    $`rm -rf ./packages/outputs/*/dist ./packages/outputs/*/out-tsc`.timeout(
+      `${5 * 60}s`
+    );
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the output packages: \n\n${result.message}\n`
     );
   }
 

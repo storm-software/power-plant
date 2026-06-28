@@ -26,8 +26,8 @@ import {
 } from "@stryke/type-checks";
 import type { FileReference } from "@stryke/types/configuration";
 import type {
+  InputObject as UntypedConfigObject,
   FunctionArg as UntypedFunctionArg,
-  InputObject as UntypedInputObject,
   Schema as UntypedSchema,
   TypeDescriptor as UntypedTypeDescriptor
 } from "untyped";
@@ -1342,7 +1342,7 @@ export function isUntypedSchemaStrict(input: unknown): input is UntypedSchema {
  * @param input - The value to check.
  * @returns True if the input is an untyped input object, false otherwise.
  */
-export function isUntypedInput(input: unknown): input is UntypedInputObject {
+export function isUntypedConfig(input: unknown): input is UntypedConfigObject {
   if (!isSetObject(input)) {
     return false;
   }
@@ -1368,10 +1368,10 @@ export function isUntypedInput(input: unknown): input is UntypedInputObject {
  * @param input - The value to check.
  * @returns True if the input is an untyped input object and not JSON Schema.
  */
-export function isUntypedInputStrict(
+export function isUntypedConfigStrict(
   input: unknown
-): input is UntypedInputObject {
-  if (!isUntypedInput(input) || isJsonSchema(input)) {
+): input is UntypedConfigObject {
+  if (!isUntypedConfig(input) || isJsonSchema(input)) {
     return false;
   }
 

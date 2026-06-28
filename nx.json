@@ -5,8 +5,8 @@
       "packages": {
         "projects": [
           "packages/base/*",
-          "packages/sources/*",
-          "packages/sinks/*",
+          "packages/inputs/*",
+          "packages/outputs/*",
           "packages/generators/*",
           "packages/devtools/*"
         ],

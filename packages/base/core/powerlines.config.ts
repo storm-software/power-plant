@@ -25,7 +25,7 @@ const config: UserConfig = defineConfig({
     "src/*.ts",
     "src/schema/*.ts",
     "src/source/*.ts",
-    "src/sink/*.ts",
+    "src/output/*.ts",
     "src/generator/*.ts"
   ],
   platform: "node",

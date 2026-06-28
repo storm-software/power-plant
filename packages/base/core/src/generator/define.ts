@@ -16,28 +16,25 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
-} from "@power-plant/schema/types";
-import type { SchemaConfigObject } from "../types/schema";
-import { isSchemaConfigObject } from "./helpers";
+import type { GeneratorConfigObject } from "../types/generator";
+import { isGeneratorConfigObject } from "./helpers";
 
 /**
  * Defines a schema configuration object. If the provided schema is already a schema configuration object, it will be returned as-is. Otherwise, it will be wrapped in an object with a `schema` property.
  *
- * @param schema - The schema configuration to define. This can be either a schema source configuration, a schema envelope, or a schema configuration object.
+ * @param generator - The schema configuration to define. This can be either a schema source configuration, a schema envelope, or a schema configuration object.
  * @returns A schema configuration object that contains the provided schema. If the input was already a schema configuration object, it will be returned unchanged.
  */
-export function defineSchema<TSpec, TOptions extends object>(
-  schema:
-    | SchemaSourceConfig<TSpec>
-    | SchemaEnvelopeOf<TSpec>
-    | SchemaConfigObject<TSpec, TOptions>
-): SchemaConfigObject<TSpec, TOptions> {
-  if (isSchemaConfigObject<TSpec, TOptions>(schema)) {
-    return schema;
+export function defineGenerator<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(
+  generator: GeneratorConfigObject<TSpec, TOptions, TReturns>
+): GeneratorConfigObject<TSpec, TOptions, TReturns> {
+  if (!isGeneratorConfigObject<TSpec, TOptions, TReturns>(generator)) {
+    throw new TypeError("Invalid generator configuration provided.");
   }
 
-  return { schema };
+  return generator;
 }

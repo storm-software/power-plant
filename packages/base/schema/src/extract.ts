@@ -37,7 +37,6 @@ import { toJsonSchema } from "@valibot/to-json-schema";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
 import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-generator/dist/src/Config.js";
 import type * as z3 from "zod/v3";
-
 import {
   isFileReference,
   isJsonSchema,
@@ -45,8 +44,8 @@ import {
   isSchema,
   isSchemaOf,
   isSchemaWithSource,
-  isUntypedInput,
-  isUntypedInputStrict,
+  isUntypedConfig,
+  isUntypedConfigStrict,
   isUntypedSchema,
   isUntypedSchemaStrict,
   isValibotSchema
@@ -55,22 +54,22 @@ import type {
   ExtractedSchemaEnvelope,
   InferExtractOptions,
   JsonSchema,
+  SchemaConfig,
+  SchemaConfigVariant,
   SchemaEnvelopeOf,
-  SchemaInput,
-  SchemaInputVariant,
   SchemaSource,
-  SchemaSourceInput,
+  SchemaSourceConfig,
   SchemaSourceVariant,
-  UntypedInputObject,
+  UntypedConfigObject,
   UntypedSchema,
   ValibotSchema
 } from "./types";
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
 
-function isWrappedSchemaInput<TSpec = any>(
-  input: SchemaInput<TSpec>
-): input is { schema: SchemaInput<TSpec> } {
+function isWrappedSchemaConfig<TSpec = any>(
+  input: SchemaConfig<TSpec>
+): input is { schema: SchemaConfig<TSpec> } {
   if (!isSetObject(input) || !("schema" in input)) {
     return false;
   }
@@ -82,11 +81,11 @@ function isWrappedSchemaInput<TSpec = any>(
   return true;
 }
 
-function unwrapSchemaInput<TSpec = any>(
-  input: SchemaInput<TSpec>
-): SchemaInput<TSpec> {
-  if (isWrappedSchemaInput(input)) {
-    return input.schema as SchemaInput<TSpec>;
+function unwrapSchemaConfig<TSpec = any>(
+  input: SchemaConfig<TSpec>
+): SchemaConfig<TSpec> {
+  if (isWrappedSchemaConfig(input)) {
+    return input.schema as SchemaConfig<TSpec>;
   }
 
   return input;
@@ -295,8 +294,8 @@ function convertNestedUntypedSchema(value: unknown): unknown {
   }
 
   if (isSetObject(value)) {
-    if (isUntypedInput(value)) {
-      return convertUntypedInputToJsonSchema(value);
+    if (isUntypedConfig(value)) {
+      return convertUntypedConfigToJsonSchema(value);
     }
 
     const nested = value as Record<string, unknown>;
@@ -391,8 +390,8 @@ function convertUntypedSchemaToJsonSchema(
   return jsonSchema;
 }
 
-function convertUntypedInputToJsonSchema(
-  input: UntypedInputObject
+function convertUntypedConfigToJsonSchema(
+  input: UntypedConfigObject
 ): JsonSchema {
   const inputObject = input as Record<string, unknown>;
   const base = isUntypedSchema(inputObject.$schema)
@@ -409,8 +408,8 @@ function convertUntypedInputToJsonSchema(
       continue;
     }
 
-    if (isUntypedInput(value)) {
-      properties[key] = convertUntypedInputToJsonSchema(value);
+    if (isUntypedConfig(value)) {
+      properties[key] = convertUntypedConfigToJsonSchema(value);
       continue;
     }
 
@@ -450,40 +449,40 @@ function convertUntypedInputToJsonSchema(
  * Creates a hash string for a given schema definition input.
  */
 export function extractHash(
-  variant: SchemaInputVariant,
-  input: SchemaInput
+  variant: SchemaConfigVariant,
+  input: SchemaConfig
 ): string {
-  const unwrappedInput = unwrapSchemaInput(input);
+  const unwrappedConfig = unwrapSchemaConfig(input);
 
-  if (isSchemaWithSource(unwrappedInput) || isSchema(unwrappedInput)) {
-    return murmurhash({ variant, input: unwrappedInput.schema });
+  if (isSchemaWithSource(unwrappedConfig) || isSchema(unwrappedConfig)) {
+    return murmurhash({ variant, input: unwrappedConfig.schema });
   }
 
-  if (isSetString(unwrappedInput)) {
-    return murmurhash({ variant, input: unwrappedInput });
-  } else if (typeof unwrappedInput === "boolean") {
-    return murmurhash({ variant, input: unwrappedInput });
-  } else if (isSetObject(unwrappedInput)) {
-    if (isZod3Type(unwrappedInput)) {
-      return murmurhash({ variant, input: unwrappedInput._def });
-    } else if (isStandardJsonSchema(unwrappedInput)) {
-      return murmurhash({ variant, input: unwrappedInput["~standard"] });
-    } else if (isJsonSchema(unwrappedInput)) {
-      return murmurhash({ variant, input: unwrappedInput });
-    } else if (isValibotSchema(unwrappedInput)) {
+  if (isSetString(unwrappedConfig)) {
+    return murmurhash({ variant, input: unwrappedConfig });
+  } else if (typeof unwrappedConfig === "boolean") {
+    return murmurhash({ variant, input: unwrappedConfig });
+  } else if (isSetObject(unwrappedConfig)) {
+    if (isZod3Type(unwrappedConfig)) {
+      return murmurhash({ variant, input: unwrappedConfig._def });
+    } else if (isStandardJsonSchema(unwrappedConfig)) {
+      return murmurhash({ variant, input: unwrappedConfig["~standard"] });
+    } else if (isJsonSchema(unwrappedConfig)) {
+      return murmurhash({ variant, input: unwrappedConfig });
+    } else if (isValibotSchema(unwrappedConfig)) {
       return murmurhash({
         variant,
-        input: convertValibotSchemaToJsonSchema(unwrappedInput)
+        input: convertValibotSchemaToJsonSchema(unwrappedConfig)
       });
-    } else if (isUntypedInput(unwrappedInput)) {
+    } else if (isUntypedConfig(unwrappedConfig)) {
       return murmurhash({
         variant,
-        input: convertUntypedInputToJsonSchema(unwrappedInput)
+        input: convertUntypedConfigToJsonSchema(unwrappedConfig)
       });
-    } else if (isUntypedSchema(unwrappedInput)) {
+    } else if (isUntypedSchema(unwrappedConfig)) {
       return murmurhash({
         variant,
-        input: convertUntypedSchemaToJsonSchema(unwrappedInput)
+        input: convertUntypedSchemaToJsonSchema(unwrappedConfig)
       });
     }
   }
@@ -506,8 +505,8 @@ export function extractJsonSchema(schema: unknown): JsonSchema | undefined {
         target: "draft-2020-12"
       }) as JsonSchema;
     }
-    if (isUntypedInputStrict(schema)) {
-      return convertUntypedInputToJsonSchema(schema);
+    if (isUntypedConfigStrict(schema)) {
+      return convertUntypedConfigToJsonSchema(schema);
     }
     if (isUntypedSchemaStrict(schema)) {
       return convertUntypedSchemaToJsonSchema(schema);
@@ -536,12 +535,12 @@ export function extractJsonSchema(schema: unknown): JsonSchema | undefined {
  * @throws Will throw an error when the input cannot be mapped to a supported source variant.
  */
 export function extractResolvedVariant(
-  input: SchemaSourceInput
+  input: SchemaSourceConfig
 ): SchemaSourceVariant {
   if (isSetObject(input)) {
     if (isZod3Type(input)) {
       return "zod3";
-    } else if (isUntypedInputStrict(input) || isUntypedSchemaStrict(input)) {
+    } else if (isUntypedConfigStrict(input) || isUntypedSchemaStrict(input)) {
       return "untyped";
     } else if (isStandardJsonSchema(input)) {
       return "standard-schema";
@@ -563,18 +562,18 @@ export function extractResolvedVariant(
  * @param input - The schema input to classify.
  * @returns The resolved schema input variant.
  */
-export function extractVariant(input: SchemaInput): SchemaInputVariant {
-  const unwrappedInput = unwrapSchemaInput(input);
+export function extractVariant(input: SchemaConfig): SchemaConfigVariant {
+  const unwrappedConfig = unwrapSchemaConfig(input);
 
-  if (isSchemaWithSource(unwrappedInput) || isSchema(unwrappedInput)) {
-    return unwrappedInput.variant;
+  if (isSchemaWithSource(unwrappedConfig) || isSchema(unwrappedConfig)) {
+    return unwrappedConfig.variant;
   }
 
-  if (isSetString(unwrappedInput) || isFileReference(unwrappedInput)) {
+  if (isSetString(unwrappedConfig) || isFileReference(unwrappedConfig)) {
     return "file-reference";
   }
 
-  return extractResolvedVariant(unwrappedInput as SchemaSourceInput);
+  return extractResolvedVariant(unwrappedConfig as SchemaSourceConfig);
 }
 
 /**
@@ -586,8 +585,8 @@ export function extractVariant(input: SchemaInput): SchemaInputVariant {
  * @throws Will throw an error if no valid JSON Schema can be extracted from the input.
  */
 export async function extractSchema(
-  input: SchemaSourceInput,
-  variant?: SchemaInputVariant
+  input: SchemaSourceConfig,
+  variant?: SchemaConfigVariant
 ): Promise<JsonSchema> {
   if (isSchemaWithSource(input)) {
     return input.schema;
@@ -625,7 +624,7 @@ export async function extractSchema(
  */
 export function extractSource(
   variant: SchemaSourceVariant,
-  input: SchemaSourceInput
+  input: SchemaSourceConfig
 ): SchemaSource {
   if (variant === "zod3") {
     return {
@@ -637,7 +636,7 @@ export function extractSource(
     return {
       hash: extractHash(variant, input),
       variant: "untyped",
-      schema: input as UntypedInputObject | UntypedSchema
+      schema: input as UntypedConfigObject | UntypedSchema
     };
   } else if (variant === "standard-schema") {
     return {
@@ -737,39 +736,39 @@ export async function extractTSType(
  * @throws Will throw an error if the input is not a valid schema definition or if the extraction process fails to produce a valid schema.
  */
 export async function extractSchemaWithSource<TSpec = any>(
-  input: SchemaInput,
+  input: SchemaConfig,
   options: InferExtractOptions<typeof input> = {}
 ): Promise<ExtractedSchemaEnvelope<TSpec>> {
-  const unwrappedInput = unwrapSchemaInput(input);
+  const unwrappedConfig = unwrapSchemaConfig(input);
 
-  if (isSchemaWithSource(unwrappedInput)) {
-    return unwrappedInput as ExtractedSchemaEnvelope<TSpec>;
+  if (isSchemaWithSource(unwrappedConfig)) {
+    return unwrappedConfig as ExtractedSchemaEnvelope<TSpec>;
   }
 
-  if (isSchema(unwrappedInput)) {
+  if (isSchema(unwrappedConfig)) {
     return {
-      ...unwrappedInput,
+      ...unwrappedConfig,
       source: {
-        hash: extractHash("json-schema", unwrappedInput.schema),
+        hash: extractHash("json-schema", unwrappedConfig.schema),
         variant: "json-schema",
-        schema: unwrappedInput.schema
+        schema: unwrappedConfig.schema
       }
     } as ExtractedSchemaEnvelope<TSpec>;
   }
 
   let source: SchemaSource;
 
-  const variant = extractVariant(unwrappedInput);
-  const hash = extractHash(variant, unwrappedInput);
+  const variant = extractVariant(unwrappedConfig);
+  const hash = extractHash(variant, unwrappedConfig);
 
   if (variant === "file-reference") {
     const fileReference = extractFileReference(
-      unwrappedInput as FileReferenceInput
+      unwrappedConfig as FileReferenceInput
     );
     if (!fileReference) {
       throw new Error(
         `Failed to extract a valid file reference from the provided input "${JSON.stringify(
-          unwrappedInput
+          unwrappedConfig
         )}". Please ensure that the input is correctly formatted as a file reference (e.g. "./schema.ts#MySchema") and that the file exists at the specified path.`
       );
     }
@@ -788,29 +787,29 @@ export async function extractSchemaWithSource<TSpec = any>(
       );
     }
 
-    let resolved = await loadSafe<SchemaInput>(
-      unwrappedInput as FileReferenceInput,
+    let resolved = await loadSafe<SchemaConfig>(
+      unwrappedConfig as FileReferenceInput,
       options
     );
     resolved ??= await extractTSType(
-      unwrappedInput as FileReferenceInput,
+      unwrappedConfig as FileReferenceInput,
       options
     );
 
-    const resolvedInput = unwrapSchemaInput(resolved);
+    const resolvedConfig = unwrapSchemaConfig(resolved);
 
-    if (isSchemaWithSource(resolvedInput)) {
-      source = resolvedInput.source;
-    } else if (isSchema(resolvedInput)) {
+    if (isSchemaWithSource(resolvedConfig)) {
+      source = resolvedConfig.source;
+    } else if (isSchema(resolvedConfig)) {
       source = {
-        hash: extractHash("json-schema", resolvedInput.schema),
+        hash: extractHash("json-schema", resolvedConfig.schema),
         variant: "json-schema",
-        schema: resolvedInput.schema
+        schema: resolvedConfig.schema
       };
     } else {
       source = extractSource(
-        extractResolvedVariant(resolvedInput as SchemaSourceInput),
-        resolvedInput as SchemaSourceInput
+        extractResolvedVariant(resolvedConfig as SchemaSourceConfig),
+        resolvedConfig as SchemaSourceConfig
       );
     }
   } else if (
@@ -823,7 +822,7 @@ export async function extractSchemaWithSource<TSpec = any>(
       "reflection"
     ].includes(variant)
   ) {
-    source = extractSource(variant, unwrappedInput as SchemaSourceInput);
+    source = extractSource(variant, unwrappedConfig as SchemaSourceConfig);
   } else {
     throw new Error(
       `Invalid schema definition input "${
@@ -874,15 +873,18 @@ export async function extractSchemaWithSource<TSpec = any>(
  * @throws Will throw an error if the input is not a valid schema definition or if the extraction process fails to produce a valid schema.
  */
 export async function extract<TSpec = any>(
-  input: SchemaInput<TSpec>,
+  input: SchemaConfig<TSpec>,
   options: InferExtractOptions<typeof input> = {}
 ): Promise<SchemaEnvelopeOf<TSpec>> {
-  const unwrappedInput = unwrapSchemaInput<TSpec>(
+  const unwrappedConfig = unwrapSchemaConfig<TSpec>(
     input
   ) as SchemaEnvelopeOf<TSpec>;
 
-  if (isSchemaWithSource(unwrappedInput) || isSchemaOf<TSpec>(unwrappedInput)) {
-    return unwrappedInput;
+  if (
+    isSchemaWithSource(unwrappedConfig) ||
+    isSchemaOf<TSpec>(unwrappedConfig)
+  ) {
+    return unwrappedConfig;
   }
 
   const result = await extractSchemaWithSource<TSpec>(input, options);

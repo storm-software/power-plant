@@ -16,11 +16,11 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaInput } from "@power-plant/schema";
-import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
+import type { SchemaConfig } from "@power-plant/schema";
+import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import type { Input, InputConfig } from "./input";
+import type { Output, OutputConfig } from "./output";
 import type { SchemaOf } from "./schema";
-import type { Sink, SinkInput } from "./sink";
-import type { Source, SourceInput } from "./source";
 
 // eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
 export interface GeneratorMeta<TSpec, TOptions extends object> {
@@ -30,7 +30,7 @@ export interface GeneratorMeta<TSpec, TOptions extends object> {
   description?: string | ((spec: TSpec) => string);
 }
 
-export interface GeneratorInputObject<
+export interface GeneratorConfigObject<
   TSpec,
   TOptions extends object,
   TReturns = void
@@ -41,28 +41,27 @@ export interface GeneratorInputObject<
   meta?: GeneratorMeta<TSpec, TOptions>;
 
   /**
-   * The schema input that defines the structure of the specification object for this generator.
+   * The schema config that defines the structure of the specification object for this generator.
    */
-  schema: SchemaInput<TSpec>;
+  schema: SchemaConfig<TSpec>;
 
   /**
-   * The source input for the generator specification.
+   * The input config for the generator specification.
    */
-  source: SourceInput<TSpec, TOptions>;
+  input: InputConfig<TSpec, TOptions>;
 
   /**
-   * The sink input that consumes generated output.
+   * The output config that consumes generated output.
    */
-  sink: SinkInput<TSpec, TOptions, TReturns>;
+  output: OutputConfig<TSpec, TOptions, TReturns>;
 }
 
-export type GeneratorInput<TSpec, TOptions extends object, TReturns = void> =
-  | LoadInput
-  | GeneratorInputObject<TSpec, TOptions, TReturns>;
+export type GeneratorConfig<TSpec, TOptions extends object, TReturns = void> =
+  LoadReference | GeneratorConfigObject<TSpec, TOptions, TReturns>;
 
 export type InferCreateGeneratorOptions<
-  T extends GeneratorInput<any, any, any>
-> = T extends LoadInput
+  T extends GeneratorConfig<any, any, any>
+> = T extends LoadReference
   ? InferLoadOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
     {};
@@ -74,22 +73,22 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   meta?: GeneratorMeta<TSpec, TOptions>;
 
   /**
-   * The schema input that defines the structure of the specification object for this generator.
+   * The schema config that defines the structure of the specification object for this generator.
    */
   schema: SchemaOf<TSpec, TOptions>;
 
   /**
-   * The source of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
+   * The input of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
    */
-  source: Source<TSpec, TOptions>;
+  input: Input<TSpec, TOptions>;
 
   /**
-   * The sink of the generator, which can be used to specify where the generator sends its output data. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
+   * The output of the generator, which can be used to specify where the generator sends its output data. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
    */
-  sink: Sink<TSpec, TOptions, TReturns>;
+  output: Output<TSpec, TOptions, TReturns>;
 
   /**
-   * The generate function that executes the generator logic, taking in options and producing output based on the source and sink definitions.
+   * The generate function that executes the generator logic, taking in options and producing output based on the input and output definitions.
    *
    * @param options - The options to be passed to the generator, which can be used to influence the generation process.
    * @returns A promise that resolves when the generation process is complete.

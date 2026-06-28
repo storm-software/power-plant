@@ -19,17 +19,14 @@
 import type { MaybePromise } from "@stryke/types/base";
 
 export type MetaValue<TSpec, TOptions extends object, TValue = any> =
-  | TValue
-  | ((spec: TSpec, options: TOptions) => MaybePromise<TValue>);
+  TValue | ((spec: TSpec, options: TOptions) => MaybePromise<TValue>);
 
 export type MetaDeprecated =
-  | true
-  | string
-  | { message?: string; since?: string; alternative?: string };
+  true | string | { message?: string; since?: string; alternative?: string };
 
 export type MetaLink = string | { href: string; description?: string };
 
-export interface MetaInput<TSpec, TOptions extends object> {
+export interface MetaConfig<TSpec, TOptions extends object> {
   /**
    * A name for the schema, which can be used to identify or reference the schema in documentation, tooling, or other contexts. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    *

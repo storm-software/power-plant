@@ -20,7 +20,7 @@ import { extractSchemaWithSource } from "@power-plant/schema/extract";
 import type {
   ExtractedSchemaEnvelope,
   SchemaEnvelopeOf,
-  SchemaSourceInput
+  SchemaSourceConfig
 } from "@power-plant/schema/types";
 import { isFunction } from "@stryke/type-checks/is-function";
 import {
@@ -30,15 +30,15 @@ import {
 } from "../meta/extract";
 import type {
   InferCreateSchemaOptions,
-  SchemaInputObject,
+  SchemaConfigObject,
   SchemaMeta,
-  SchemaMetaInput,
+  SchemaMetaConfig,
   SchemaOf
 } from "../types/schema";
-import { isSchemaInputObject } from "./helpers";
+import { isSchemaConfigObject } from "./helpers";
 
 /**
- * Extracts and normalizes {@link SchemaMeta | schema metadata} from a given {@link SchemaMetaInput}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ * Extracts and normalizes {@link SchemaMeta | schema metadata} from a given {@link SchemaMetaConfig}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
  *
  * @param schema - The schema from which to extract metadata.
  * @param input - The schema metadata input to extract and normalize.
@@ -46,7 +46,7 @@ import { isSchemaInputObject } from "./helpers";
  */
 export function extractSchemaMeta<TSpec, TOptions extends object>(
   schema: ExtractedSchemaEnvelope<TSpec>,
-  input?: SchemaMetaInput<TSpec, TOptions>
+  input?: SchemaMetaConfig<TSpec, TOptions>
 ): SchemaMeta<TSpec, TOptions> {
   const jsonSchema = schema?.schema ?? {};
   const meta = extractMeta<TSpec, TOptions>(schema, input) as SchemaMeta<
@@ -85,12 +85,12 @@ export function extractSchemaMeta<TSpec, TOptions extends object>(
  */
 export async function createSchema<TSpec, TOptions extends object>(
   input:
-    | SchemaSourceInput<TSpec>
+    | SchemaSourceConfig<TSpec>
     | SchemaEnvelopeOf<TSpec>
-    | SchemaInputObject<TSpec, TOptions>,
+    | SchemaConfigObject<TSpec, TOptions>,
   options: InferCreateSchemaOptions<typeof input> = {}
 ): Promise<SchemaOf<TSpec, TOptions>> {
-  const { meta, schema } = isSchemaInputObject<TSpec, TOptions>(input)
+  const { meta, schema } = isSchemaConfigObject<TSpec, TOptions>(input)
     ? input
     : { schema: input, meta: {} };
 

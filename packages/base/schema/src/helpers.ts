@@ -373,7 +373,7 @@ export function isPropertyOptional(
  * @param fileName - The file name to check for a valid schema input extension.
  * @returns `true` if the file name has a valid schema input extension, otherwise `false`.
  */
-export function isValidSchemaInputFile(fileName: string): boolean {
+export function isValidSchemaConfigFile(fileName: string): boolean {
   return VALID_OBJECT_SOURCE_EXTENSIONS.includes(
     findFileExtensionSafe(fileName)
   );

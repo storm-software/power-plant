@@ -17,16 +17,18 @@
  ------------------------------------------------------------------- */
 
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type { SchemaInputObject } from "../types/schema";
+import type { SchemaConfigObject } from "../types/schema";
 
 /**
- * Checks if the provided input is a {@link SchemaInputObject}.
+ * Checks if the provided configuration is a {@link SchemaConfigObject}.
  *
- * @param input - The input to check.
- * @returns True if the input is a {@link SchemaInputObject}, false otherwise.
+ * @param config - The configuration to check.
+ * @returns True if the configuration is a {@link SchemaConfigObject}, false otherwise.
  */
-export function isSchemaInputObject<TSpec, TOptions extends object>(
-  input: unknown
-): input is SchemaInputObject<TSpec, TOptions> {
-  return isSetObject(input) && "schema" in input && input.schema !== undefined;
+export function isSchemaConfigObject<TSpec, TOptions extends object>(
+  config: unknown
+): config is SchemaConfigObject<TSpec, TOptions> {
+  return (
+    isSetObject(config) && "schema" in config && config.schema !== undefined
+  );
 }

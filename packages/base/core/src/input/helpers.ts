@@ -17,18 +17,16 @@
  ------------------------------------------------------------------- */
 
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type { SinkInputObject } from "../types/sink";
+import type { InputConfigObject } from "../types/input";
 
 /**
- * Checks if the provided input is a {@link SinkInputObject}.
+ * Checks if the provided input is a {@link InputConfigObject}.
  *
  * @param input - The input to check.
- * @returns True if the input is a {@link SinkInputObject}, false otherwise.
+ * @returns True if the input is a {@link InputConfigObject}, false otherwise.
  */
-export function isSinkInputObject<
-  TSpec,
-  TOptions extends object,
-  TReturns = void
->(input: unknown): input is SinkInputObject<TSpec, TOptions, TReturns> {
-  return isSetObject(input) && "sink" in input && input.sink !== undefined;
+export function isInputConfigObject<TSpec, TOptions extends object>(
+  input: unknown
+): input is InputConfigObject<TSpec, TOptions> {
+  return isSetObject(input) && "input" in input && input.input !== undefined;
 }

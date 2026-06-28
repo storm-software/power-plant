@@ -17,3 +17,5 @@
  ------------------------------------------------------------------- */
 
 export * from "./create";
+export * from "./define";
+export * from "./helpers";

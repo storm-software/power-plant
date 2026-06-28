@@ -16,30 +16,34 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaSourceInput } from "@power-plant/schema/types";
+import type {
+  SchemaEnvelopeOf,
+  SchemaSourceConfig
+} from "@power-plant/schema/types";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
+import { createInput } from "../input/create";
+import { createOutput } from "../output/create";
 import { createSchema } from "../schema/create";
-import { createSink } from "../sink/create";
-import { createSource } from "../source/create";
 import type {
   Generator,
-  GeneratorInput,
-  GeneratorInputObject,
+  GeneratorConfig,
+  GeneratorConfigObject,
   InferCreateGeneratorOptions
 } from "../types/generator";
-import { isGeneratorInputObject } from "./helpers";
+import type { SchemaConfigObject } from "../types/schema";
+import { isGeneratorConfigObject } from "./helpers";
 
 /**
- * Creates a generator from raw schema/source/sink inputs and resolves all descriptors.
+ * Creates a generator from raw schema/input/output configurations and resolves all descriptors.
  *
  * @remarks
- * This function is used to create a generator from raw schema, source, and sink inputs. It resolves all descriptors and returns a fully constructed generator that can be used to generate output based on the provided schema and options.
+ * This function is used to create a generator from raw schema, input, and output configurations. It resolves all descriptors and returns a fully constructed generator that can be used to generate output based on the provided schema and options.
  *
  * @template TSpec - The type of the specification that the generator will produce.
  * @template TOptions - The type of the options that will be passed to the generator during generation.
- * @param input - The generator input containing schema, source, sink, and optional meta information.
- * @param options - Optional extraction options for schema, source, and sink.
+ * @param config - The generator configuration containing schema, input, output, and optional meta information.
+ * @param options - Optional extraction options for schema, input, and output.
  * @returns A promise that resolves to a fully constructed generator.
  */
 export async function createGenerator<
@@ -47,55 +51,62 @@ export async function createGenerator<
   TOptions extends object,
   TReturns = void
 >(
-  input: GeneratorInput<TSpec, TOptions, TReturns>,
-  options: InferCreateGeneratorOptions<typeof input> = {}
+  config: GeneratorConfig<TSpec, TOptions, TReturns>,
+  options: InferCreateGeneratorOptions<typeof config> = {}
 ): Promise<Generator<TSpec, TOptions, TReturns>> {
-  let inputObject!: GeneratorInputObject<TSpec, TOptions, TReturns>;
-  if (isGeneratorInputObject<TSpec, TOptions, TReturns>(input)) {
-    inputObject = input;
+  let configObject!: GeneratorConfigObject<TSpec, TOptions, TReturns>;
+  if (isGeneratorConfigObject<TSpec, TOptions, TReturns>(config)) {
+    configObject = config;
   } else {
-    inputObject = await load<GeneratorInputObject<TSpec, TOptions, TReturns>>(
-      input,
+    configObject = await load<GeneratorConfigObject<TSpec, TOptions, TReturns>>(
+      config,
       options
     );
   }
 
   const schema = await createSchema<TSpec, TOptions>(
-    inputObject.schema as SchemaSourceInput<TSpec>,
+    configObject.schema as
+      | SchemaSourceConfig<TSpec>
+      | SchemaEnvelopeOf<TSpec>
+      | SchemaConfigObject<TSpec, TOptions>,
     options
   );
-  const [source, sink] = await Promise.all([
-    createSource<TSpec, TOptions>(schema, inputObject.source, options),
-    createSink<TSpec, TOptions, TReturns>(schema, inputObject.sink, options)
+  const [input, output] = await Promise.all([
+    createInput<TSpec, TOptions>(schema, configObject.input, options),
+    createOutput<TSpec, TOptions, TReturns>(
+      schema,
+      configObject.output,
+      options
+    )
   ]);
 
   const generate = async (options: TOptions) => {
-    const spec = isFunction(source.source)
+    const spec = isFunction(input.input)
       ? await (
-          source.source as unknown as (
+          input.input as unknown as (
             options: TOptions
           ) => TSpec | Promise<TSpec>
         )(options)
-      : source.source;
+      : input.input;
 
     const description =
-      typeof inputObject.meta?.description === "function"
-        ? inputObject.meta.description(spec)
-        : inputObject.meta?.description;
+      typeof configObject.meta?.description === "function"
+        ? configObject.meta.description(spec)
+        : configObject.meta?.description;
 
     if (description) {
       // eslint-disable-next-line no-console
       console.log(`Generating ${description}...`);
     }
 
-    return sink.sink(spec, options);
+    return output.output(spec, options);
   };
 
   return {
-    meta: inputObject.meta,
+    meta: configObject.meta,
     schema,
-    source,
-    sink,
+    input,
+    output,
     generate
   };
 }

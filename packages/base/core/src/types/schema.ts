@@ -19,18 +19,17 @@
 import type {
   InferExtractOptions,
   SchemaEnvelopeOf,
-  SchemaSourceInput
+  SchemaSourceConfig
 } from "@power-plant/schema";
-import type { Meta, MetaInput, MetaValue } from "./meta";
+import type { Meta, MetaConfig, MetaValue } from "./meta";
 
 export type SchemaMetaExample<TSpec> =
-  | TSpec
-  | { name?: string; description?: string; value: TSpec };
+  TSpec | { name?: string; description?: string; value: TSpec };
 
-export interface SchemaMetaInput<
+export interface SchemaMetaConfig<
   TSpec,
   TOptions extends object = any
-> extends MetaInput<TSpec, TOptions> {
+> extends MetaConfig<TSpec, TOptions> {
   /**
    * Examples of valid data for the schema. This can be a single example or an array of examples.
    */
@@ -57,24 +56,24 @@ export interface SchemaMeta<TSpec, TOptions extends object = any> extends Meta<
 /**
  * Schema input wrapper that attaches optional contextual metadata.
  */
-export interface SchemaInputObject<TSpec, TOptions extends object = any> {
+export interface SchemaConfigObject<TSpec, TOptions extends object = any> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema: SchemaSourceInput<TSpec> | SchemaEnvelopeOf<TSpec>;
+  schema: SchemaSourceConfig<TSpec> | SchemaEnvelopeOf<TSpec>;
 
   /**
    * Optional metadata that provides contextual information for the schema.
    */
-  meta?: SchemaMetaInput<TSpec, TOptions>;
+  meta?: SchemaMetaConfig<TSpec, TOptions>;
 }
 
 export type InferCreateSchemaOptions<
   T extends
-    | SchemaSourceInput<any>
+    | SchemaSourceConfig<any>
     | SchemaEnvelopeOf<any>
-    | SchemaInputObject<any, any>
-> = T extends SchemaSourceInput<any> | SchemaEnvelopeOf<any>
+    | SchemaConfigObject<any, any>
+> = T extends SchemaSourceConfig<any> | SchemaEnvelopeOf<any>
   ? InferExtractOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
     {};

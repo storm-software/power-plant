@@ -10,10 +10,13 @@
       "path": "./packages/base/core"
     },
     {
-      "path": "./packages/sources/file-source"
+      "path": "./packages/schemas/openapi-schema"
     },
     {
-      "path": "./packages/schemas/openapi-schema"
+      "path": "./packages/outputs/hey-api-output"
+    },
+    {
+      "path": "./packages/inputs/file-input"
     }
   ],
   "files": []

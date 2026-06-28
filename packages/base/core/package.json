@@ -3,7 +3,11 @@
   "version": "0.0.4",
   "private": false,
   "description": "Core package for Power Plant",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -82,6 +86,20 @@
         "default": "./dist/generator/create.mjs"
       }
     },
+    "./generator/define": {
+      "require": {
+        "types": "./dist/generator/define.d.cts",
+        "default": "./dist/generator/define.cjs"
+      },
+      "import": {
+        "types": "./dist/generator/define.d.mts",
+        "default": "./dist/generator/define.mjs"
+      },
+      "default": {
+        "types": "./dist/generator/define.d.mts",
+        "default": "./dist/generator/define.mjs"
+      }
+    },
     "./generator/helpers": {
       "require": {
         "types": "./dist/generator/helpers.d.cts",
@@ -94,6 +112,62 @@
       "default": {
         "types": "./dist/generator/helpers.d.mts",
         "default": "./dist/generator/helpers.mjs"
+      }
+    },
+    "./output": {
+      "require": {
+        "types": "./dist/output/index.d.cts",
+        "default": "./dist/output/index.cjs"
+      },
+      "import": {
+        "types": "./dist/output/index.d.mts",
+        "default": "./dist/output/index.mjs"
+      },
+      "default": {
+        "types": "./dist/output/index.d.mts",
+        "default": "./dist/output/index.mjs"
+      }
+    },
+    "./output/create": {
+      "require": {
+        "types": "./dist/output/create.d.cts",
+        "default": "./dist/output/create.cjs"
+      },
+      "import": {
+        "types": "./dist/output/create.d.mts",
+        "default": "./dist/output/create.mjs"
+      },
+      "default": {
+        "types": "./dist/output/create.d.mts",
+        "default": "./dist/output/create.mjs"
+      }
+    },
+    "./output/define": {
+      "require": {
+        "types": "./dist/output/define.d.cts",
+        "default": "./dist/output/define.cjs"
+      },
+      "import": {
+        "types": "./dist/output/define.d.mts",
+        "default": "./dist/output/define.mjs"
+      },
+      "default": {
+        "types": "./dist/output/define.d.mts",
+        "default": "./dist/output/define.mjs"
+      }
+    },
+    "./output/helpers": {
+      "require": {
+        "types": "./dist/output/helpers.d.cts",
+        "default": "./dist/output/helpers.cjs"
+      },
+      "import": {
+        "types": "./dist/output/helpers.d.mts",
+        "default": "./dist/output/helpers.mjs"
+      },
+      "default": {
+        "types": "./dist/output/helpers.d.mts",
+        "default": "./dist/output/helpers.mjs"
       }
     },
     "./package.json": "./package.json",
@@ -152,125 +226,15 @@
         "types": "./dist/schema/helpers.d.mts",
         "default": "./dist/schema/helpers.mjs"
       }
-    },
-    "./sink": {
-      "require": {
-        "types": "./dist/sink/index.d.cts",
-        "default": "./dist/sink/index.cjs"
-      },
-      "import": {
-        "types": "./dist/sink/index.d.mts",
-        "default": "./dist/sink/index.mjs"
-      },
-      "default": {
-        "types": "./dist/sink/index.d.mts",
-        "default": "./dist/sink/index.mjs"
-      }
-    },
-    "./sink/create": {
-      "require": {
-        "types": "./dist/sink/create.d.cts",
-        "default": "./dist/sink/create.cjs"
-      },
-      "import": {
-        "types": "./dist/sink/create.d.mts",
-        "default": "./dist/sink/create.mjs"
-      },
-      "default": {
-        "types": "./dist/sink/create.d.mts",
-        "default": "./dist/sink/create.mjs"
-      }
-    },
-    "./sink/define": {
-      "require": {
-        "types": "./dist/sink/define.d.cts",
-        "default": "./dist/sink/define.cjs"
-      },
-      "import": {
-        "types": "./dist/sink/define.d.mts",
-        "default": "./dist/sink/define.mjs"
-      },
-      "default": {
-        "types": "./dist/sink/define.d.mts",
-        "default": "./dist/sink/define.mjs"
-      }
-    },
-    "./sink/helpers": {
-      "require": {
-        "types": "./dist/sink/helpers.d.cts",
-        "default": "./dist/sink/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/sink/helpers.d.mts",
-        "default": "./dist/sink/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/sink/helpers.d.mts",
-        "default": "./dist/sink/helpers.mjs"
-      }
-    },
-    "./source": {
-      "require": {
-        "types": "./dist/source/index.d.cts",
-        "default": "./dist/source/index.cjs"
-      },
-      "import": {
-        "types": "./dist/source/index.d.mts",
-        "default": "./dist/source/index.mjs"
-      },
-      "default": {
-        "types": "./dist/source/index.d.mts",
-        "default": "./dist/source/index.mjs"
-      }
-    },
-    "./source/create": {
-      "require": {
-        "types": "./dist/source/create.d.cts",
-        "default": "./dist/source/create.cjs"
-      },
-      "import": {
-        "types": "./dist/source/create.d.mts",
-        "default": "./dist/source/create.mjs"
-      },
-      "default": {
-        "types": "./dist/source/create.d.mts",
-        "default": "./dist/source/create.mjs"
-      }
-    },
-    "./source/define": {
-      "require": {
-        "types": "./dist/source/define.d.cts",
-        "default": "./dist/source/define.cjs"
-      },
-      "import": {
-        "types": "./dist/source/define.d.mts",
-        "default": "./dist/source/define.mjs"
-      },
-      "default": {
-        "types": "./dist/source/define.d.mts",
-        "default": "./dist/source/define.mjs"
-      }
-    },
-    "./source/helpers": {
-      "require": {
-        "types": "./dist/source/helpers.d.cts",
-        "default": "./dist/source/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/source/helpers.d.mts",
-        "default": "./dist/source/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/source/helpers.d.mts",
-        "default": "./dist/source/helpers.mjs"
-      }
     }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@alloy-js/core": "catalog:",
     "@alloy-js/markdown": "catalog:",
@@ -304,8 +268,8 @@
     "access": "public"
   },
   "inlinedDependencies": {
-    "@stryke/date": "0.0.5",
-    "@stryke/types": "0.12.21",
-    "@stryke/unique-id": "0.3.105"
+    "@stryke/date": "0.0.6",
+    "@stryke/types": "0.12.22",
+    "@stryke/unique-id": "0.3.106"
   }
 }

@@ -16,5 +16,19 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./create";
-export * from "./define";
+import { defineInput } from "@power-plant/core";
+import { load } from "@stryke/resolve/load";
+import packageJson from "../package.json" with { type: "json" };
+import type { Options } from "./types";
+
+export default defineInput<any, Options>({
+  meta: {
+    name: "file",
+    version: packageJson.version
+  },
+  input: async (options: Options) => {
+    const { path, ...rest } = options;
+
+    return load(path, rest);
+  }
+});

@@ -17,17 +17,26 @@
  ------------------------------------------------------------------- */
 
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type { GeneratorInputObject } from "../types";
+import type { GeneratorConfigObject } from "../types/generator";
 
-export function isGeneratorInputObject<
+/**
+ * Checks if the provided configuration is a {@link GeneratorConfigObject}.
+ *
+ * @param config - The configuration to check.
+ * @returns True if the configuration is a {@link GeneratorConfigObject}, false otherwise.
+ */
+export function isGeneratorConfigObject<
   TSpec,
   TOptions extends object,
   TReturns = void
->(input: unknown): input is GeneratorInputObject<TSpec, TOptions, TReturns> {
+>(config: unknown): config is GeneratorConfigObject<TSpec, TOptions, TReturns> {
   return (
-    isSetObject(input) &&
-    "schema" in input &&
-    "source" in input &&
-    "sink" in input
+    isSetObject(config) &&
+    "schema" in config &&
+    "input" in config &&
+    "output" in config &&
+    config.schema !== undefined &&
+    config.input !== undefined &&
+    config.output !== undefined
   );
 }

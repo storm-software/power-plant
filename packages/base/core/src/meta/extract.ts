@@ -34,7 +34,7 @@ import { isNumber } from "@stryke/type-checks/is-number";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import { isSetString } from "@stryke/type-checks/is-set-string";
 import { nanoid } from "@stryke/unique-id/nanoid";
-import type { Meta, MetaInput, MetaLink, MetaValue } from "../types/meta";
+import type { Meta, MetaConfig, MetaLink, MetaValue } from "../types/meta";
 import type { SchemaMeta, SchemaMetaExample, SchemaOf } from "../types/schema";
 
 export function formatMetaVersion(value: string | number | Date): string {
@@ -295,39 +295,39 @@ export function resolveMetaLinks<TSpec, TOptions extends object>(
 }
 
 /**
- * Extracts and normalizes metadata for a source based on the provided schema and optional input.
+ * Extracts and normalizes metadata for a specification based on the provided schema and optional configuration.
  *
- * @param schema - The schema that the source is expected to conform to.
- * @param input - Optional metadata input to extract and normalize.
- * @returns The normalized source metadata.
+ * @param schema - The schema that the specification is expected to conform to.
+ * @param config - Optional metadata configuration to extract and normalize.
+ * @returns The normalized specification metadata.
  */
 export function extractMeta<TSpec, TOptions extends object>(
   schema?: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
-  input?: MetaInput<TSpec, TOptions>
+  config?: MetaConfig<TSpec, TOptions>
 ): Meta<TSpec, TOptions> {
   const extractedSchema = isSchemaOf<TSpec>(schema)
     ? schema
     : (schema ?? ({ schema: {} } as ExtractedSchemaEnvelope<TSpec>));
   const meta = {} as Meta<TSpec, TOptions>;
 
-  meta.name = resolveMetaName(extractedSchema?.schema, meta, input?.name);
+  meta.name = resolveMetaName(extractedSchema?.schema, meta, config?.name);
   meta.version = resolveMetaVersion(
     extractedSchema?.schema,
     meta,
-    input?.version
+    config?.version
   );
   meta.id = resolveMetaId(extractedSchema?.schema, meta);
-  meta.title = resolveMetaTitle(extractedSchema?.schema, meta, input?.title);
-  meta.links = resolveMetaLinks(extractedSchema?.schema, meta, input?.links);
+  meta.title = resolveMetaTitle(extractedSchema?.schema, meta, config?.title);
+  meta.links = resolveMetaLinks(extractedSchema?.schema, meta, config?.links);
 
-  if (input?.deprecated) {
-    meta.deprecated = input?.deprecated;
+  if (config?.deprecated) {
+    meta.deprecated = config?.deprecated;
   }
-  if (input?.usage) {
-    meta.usage = input?.usage;
+  if (config?.usage) {
+    meta.usage = config?.usage;
   }
-  if (input?.tags) {
-    meta.tags = input?.tags;
+  if (config?.tags) {
+    meta.tags = config?.tags;
   }
 
   return meta;

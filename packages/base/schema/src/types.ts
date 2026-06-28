@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
-import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
+import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { InputObject, Schema as UntypedBaseSchema } from "untyped";
 import type { BaseIssue, BaseSchema } from "valibot";
 import type * as z3 from "zod/v3";
@@ -65,8 +65,7 @@ export type JsonSchemaDecimalFormat = "float" | "double";
  * Semantic format names for JSON Schema numeric types, including both integer and decimal formats.
  */
 export type JsonSchemaNumberFormat =
-  | JsonSchemaDecimalFormat
-  | JsonSchemaIntegerFormat;
+  JsonSchemaDecimalFormat | JsonSchemaIntegerFormat;
 
 /**
  * Semantic format names for JSON Schema string types.
@@ -196,8 +195,7 @@ export interface JsonSchemaMetadataKeywords {
    * An array of example values that conform to the schema. This property can be used to provide sample data for documentation purposes or to assist developers in understanding the expected structure and content of the data that the schema represents. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
   examples?: (
-    | unknown
-    | { name?: string; description?: string; value: unknown }
+    unknown | { name?: string; description?: string; value: unknown }
   )[];
 
   /**
@@ -549,11 +547,7 @@ export type JsonSchemaDate = JsonSchemaKeywords &
  */
 export interface JsonSchemaEnum<
   T extends string | number | bigint | boolean | null =
-    | string
-    | number
-    | bigint
-    | boolean
-    | null
+    string | number | bigint | boolean | null
 > extends JsonSchemaKeywords {
   /**
    * Primitive type of the enum values.
@@ -1467,13 +1461,17 @@ type SpecFromPropertyMap<
   TProperties extends Record<string, JsonSchema>,
   TRequired
 > = {
-  [K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
-    ? K
-    : never]-?: SpecOf<TProperties[K]>;
+  [
+    K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
+      ? K
+      : never
+  ]-?: SpecOf<TProperties[K]>;
 } & {
-  [K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
-    ? never
-    : K]?: SpecOf<TProperties[K]>;
+  [
+    K in keyof TProperties as K extends RequiredPropertyKeys<TRequired>
+      ? never
+      : K
+  ]?: SpecOf<TProperties[K]>;
 };
 
 type EmptyObject = Record<never, never>;
@@ -1567,8 +1565,7 @@ export type SpecOf<TJsonSchema extends JsonSchema> =
                               ? Array<SpecOf<TItems>>
                               : unknown[]
                             : TJsonSchema extends
-                                  | JsonSchemaObject
-                                  | JsonSchemaRecord
+                                  JsonSchemaObject | JsonSchemaRecord
                               ? SpecFromObjectSchema<TJsonSchema>
                               : TJsonSchema extends {
                                     allOf: readonly JsonSchema[];
@@ -1605,21 +1602,17 @@ export type SpecOf<TJsonSchema extends JsonSchema> =
  * Supported source variants from which a schema can be extracted.
  */
 export type SchemaSourceVariant =
-  | "standard-schema"
-  | "json-schema"
-  | "zod3"
-  | "untyped"
-  | "valibot";
+  "standard-schema" | "json-schema" | "zod3" | "untyped" | "valibot";
 
 /**
  * Accepted schema input variants, including raw type definitions.
  */
-export type SchemaInputVariant = SchemaSourceVariant | "file-reference";
+export type SchemaConfigVariant = SchemaSourceVariant | "file-reference";
 
 /**
  * Alias for the Untyped object-input schema shape.
  */
-export type UntypedInputObject = InputObject;
+export type UntypedConfigObject = InputObject;
 
 /**
  * Alias for the Untyped schema document shape.
@@ -1629,7 +1622,7 @@ export type UntypedSchema = UntypedBaseSchema;
 /**
  * A Valibot schema instance.
  *
- * @template TInput - The raw input type accepted by the schema.
+ * @template TConfig - The raw input type accepted by the schema.
  * @template TOutput - The parsed output type produced by the schema.
  * @template TIssue - The issue type emitted for validation errors.
  */
@@ -1642,11 +1635,11 @@ export type ValibotSchema<
 /**
  * Raw schema source input union before normalization.
  */
-export type SchemaSourceInput<TSpec = any> =
+export type SchemaSourceConfig<TSpec = any> =
   | StandardJSONSchemaV1<TSpec>
   | JsonSchemaOf<TSpec>
   | z3.ZodType<TSpec, any, any>
-  | UntypedInputObject
+  | UntypedConfigObject
   | UntypedSchema
   | ValibotSchema<TSpec>;
 
@@ -1654,7 +1647,7 @@ export type SchemaSourceInput<TSpec = any> =
  * Any accepted schema input, including normalized schemas and references.
  *
  * @remarks
- * The `SchemaInput` type can be one of the following variants:
+ * The `SchemaConfig` type can be one of the following variants:
  * - A file path string (for example: `"./src/types.ts"`).
  * - A URL string (for example: `"https://example.com/config.json"`).
  * - A {@link GitHubReference | GitHub repository reference string}, starting with either `"github:"` or `"gh:"`, an optional branch or tag, and optionally including a specific file path within the repository (for example: `"github:main:storm-software/stryke/packages/resolve/src/types.ts"`). It is also valid to provide the branch or tag after the file path (for example: `"github:storm-software/stryke/packages/resolve/src/types.ts@main"`).
@@ -1663,23 +1656,24 @@ export type SchemaSourceInput<TSpec = any> =
  * - A file reference string (this value can include both a path to the TypeScript module and the name of the module export separated by a ":", "#", or ";" character - for example: `"./src/types.ts#ExampleExport"`).
  * - A {@link FileReference} object, which contains information about a file reference.
  * - A {@link URL} object, which represents a URL to fetch the file from.
- * - A {@link SchemaSourceInput} object, which represents a raw schema input in one of the supported formats (Standard Schema, JSON Schema, Zod v3, Untyped, or Valibot).
+ * - A {@link SchemaSourceConfig} object, which represents a raw schema input in one of the supported formats (Standard Schema, JSON Schema, Zod v3, Untyped, or Valibot).
  *
  * @template TSpec - The original TypeScript type for which the schema is being extracted. This type parameter is used to derive the appropriate JSON Schema representation based on the structure and constraints of `T`.
  *
- * @see {@link SchemaSourceInput}
+ * @see {@link SchemaSourceConfig}
  * @see {@link SchemaEnvelope}
- * @see {@link SchemaInputWithMeta}
+ * @see {@link SchemaConfigWithMeta}
  */
-export type SchemaInput<TSpec = any> =
-  | LoadInput
-  | SchemaSourceInput<TSpec>
+export type SchemaConfig<TSpec = any> =
+  | LoadReference
+  | SchemaSourceConfig<TSpec>
   | SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
-export type InferExtractOptions<T extends SchemaInput> = T extends LoadInput
-  ? InferLoadOptions<T>
-  : // eslint-disable-next-line ts/no-empty-object-type
-    {};
+export type InferExtractOptions<T extends SchemaConfig> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : // eslint-disable-next-line ts/no-empty-object-type
+      {};
 
 /**
  * A schema envelope that contains the normalized schema and its source variant.
@@ -1693,7 +1687,7 @@ export interface SchemaEnvelope<TJsonSchema extends JsonSchema = JsonSchema> {
   /**
    * The source variant used to derive the normalized {@link JsonSchema}.
    */
-  variant: SchemaInputVariant;
+  variant: SchemaConfigVariant;
 
   /**
    * The normalized schema definition.
@@ -1721,7 +1715,7 @@ export interface BaseSchemaSource<TSpec = any> {
   variant: SchemaSourceVariant;
 
   /** The original schema input captured before normalization. */
-  schema: SchemaSourceInput<TSpec>;
+  schema: SchemaSourceConfig<TSpec>;
 }
 
 /**
@@ -1771,7 +1765,7 @@ export interface UntypedSchemaSource<
   variant: "untyped";
 
   /** The original Untyped schema input. */
-  schema: UntypedInputObject | UntypedSchema;
+  schema: UntypedConfigObject | UntypedSchema;
 }
 
 /**

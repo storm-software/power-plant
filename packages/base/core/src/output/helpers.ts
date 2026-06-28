@@ -17,16 +17,20 @@
  ------------------------------------------------------------------- */
 
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type { SourceInputObject } from "../types/source";
+import type { OutputConfigObject } from "../types/output";
 
 /**
- * Checks if the provided input is a {@link SourceInputObject}.
+ * Checks if the provided input is a {@link OutputConfigObject}.
  *
- * @param input - The input to check.
- * @returns True if the input is a {@link SourceInputObject}, false otherwise.
+ * @param config - The input to check.
+ * @returns True if the input is a {@link OutputConfigObject}, false otherwise.
  */
-export function isSourceInputObject<TSpec, TOptions extends object>(
-  input: unknown
-): input is SourceInputObject<TSpec, TOptions> {
-  return isSetObject(input) && "source" in input && input.source !== undefined;
+export function isOutputConfigObject<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(config: unknown): config is OutputConfigObject<TSpec, TOptions, TReturns> {
+  return (
+    isSetObject(config) && "output" in config && config.output !== undefined
+  );
 }
