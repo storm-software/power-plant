@@ -16,10 +16,8 @@
 
  ------------------------------------------------------------------- */
 
+import { jsonSchema, refOr, referenceSchema } from "@power-plant/schema/zod";
 import * as z from "zod/mini";
-
-import { jsonSchema } from "./json-schema";
-import { refOr, referenceSchema } from "./reference";
 import { exampleSchema } from "./shared";
 
 export const parameterLocationSchema = z.enum([
@@ -113,7 +111,3 @@ export const responsesSchema = z
       "At least one response must be defined for an operation"
     )
   );
-
-export type Parameter = z.infer<typeof parameterSchema>;
-export type RequestBody = z.infer<typeof requestBodySchema>;
-export type Response = z.infer<typeof responseSchema>;

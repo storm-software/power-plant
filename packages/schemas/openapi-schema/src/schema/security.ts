@@ -59,6 +59,3 @@ export const securityRequirementSchema = z.record(
   z.string(),
   z.array(z.string())
 );
-
-export type SecurityScheme = z.infer<typeof securitySchemeSchema>;
-export type SecurityRequirement = z.infer<typeof securityRequirementSchema>;

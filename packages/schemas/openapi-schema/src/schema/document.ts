@@ -17,8 +17,6 @@
  ------------------------------------------------------------------- */
 
 import * as z from "zod/mini";
-
-import type { OpenAPIDocument } from "../types/openapi";
 import { componentsSchema, pathItemSchema } from "./operation";
 import { securityRequirementSchema } from "./security";
 import {
@@ -37,7 +35,7 @@ const openapiVersionSchema = z
     )
   );
 
-export const openapiSchema: z.ZodMiniType<OpenAPIDocument> = z
+export const openapiSchema = z
   .object({
     openapi: openapiVersionSchema,
     info: infoSchema,
@@ -80,5 +78,3 @@ export const openapiSchema: z.ZodMiniType<OpenAPIDocument> = z
       }
     })
   );
-
-export type { OpenAPIDocument } from "../types/openapi";

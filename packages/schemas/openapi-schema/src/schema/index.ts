@@ -16,14 +16,22 @@
 
  ------------------------------------------------------------------- */
 
-import * as z from "zod/mini";
-
-export const referenceSchema = z.object({
-  $ref: z.string().check(z.minLength(1, "Reference must be a non-empty URI"))
-});
-
-export type Reference = z.infer<typeof referenceSchema>;
-
-export function refOr<T extends z.ZodMiniType>(schema: T) {
-  return z.union([referenceSchema, schema]);
-}
+export {
+  headerSchema,
+  mediaTypeSchema,
+  parameterSchema,
+  requestBodySchema,
+  responseSchema,
+  responsesSchema
+} from "./content";
+export { openapiSchema } from "./document";
+export { componentsSchema, operationSchema, pathItemSchema } from "./operation";
+export { securityRequirementSchema, securitySchemeSchema } from "./security";
+export {
+  contactSchema,
+  exampleSchema,
+  infoSchema,
+  licenseSchema,
+  serverSchema,
+  tagSchema
+} from "./shared";

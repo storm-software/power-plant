@@ -59,21 +59,7 @@
         "default": "./dist/index.mjs"
       }
     },
-    "./package.json": "./package.json",
-    "./schema": {
-      "require": {
-        "types": "./dist/schema.d.cts",
-        "default": "./dist/schema.cjs"
-      },
-      "import": {
-        "types": "./dist/schema.d.mts",
-        "default": "./dist/schema.mjs"
-      },
-      "default": {
-        "types": "./dist/schema.d.mts",
-        "default": "./dist/schema.mjs"
-      }
-    }
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

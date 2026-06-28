@@ -16,26 +16,18 @@
 
  ------------------------------------------------------------------- */
 
+import { jsonSchema, refOr } from "@power-plant/schema/zod";
 import * as z from "zod/mini";
-
-import type {
-  OpenAPIComponents,
-  OpenAPIOperation,
-  OpenAPIPathItem
-} from "../types/openapi";
-
 import {
   headerSchema,
   parameterSchema,
   requestBodySchema,
   responseSchema
 } from "./content";
-import { jsonSchema } from "./json-schema";
-import { refOr } from "./reference";
 import { securityRequirementSchema, securitySchemeSchema } from "./security";
 import { exampleSchema, externalDocsSchema, serverSchema } from "./shared";
 
-export const operationSchema: z.ZodMiniType<OpenAPIOperation> = z.object({
+export const operationSchema = z.object({
   tags: z.optional(z.array(z.string())),
   summary: z.optional(z.string()),
   description: z.optional(z.string()),
@@ -59,7 +51,7 @@ export const operationSchema: z.ZodMiniType<OpenAPIOperation> = z.object({
 
 const httpMethodSchema = z.optional(operationSchema);
 
-export const pathItemSchema: z.ZodMiniType<OpenAPIPathItem> = z
+export const pathItemSchema = z
   .object({
     $ref: z.optional(z.string()),
     summary: z.optional(z.string()),
@@ -93,7 +85,7 @@ export const pathItemSchema: z.ZodMiniType<OpenAPIPathItem> = z
     )
   );
 
-export const componentsSchema: z.ZodMiniType<OpenAPIComponents> = z.object({
+export const componentsSchema = z.object({
   schemas: z.optional(z.record(z.string(), jsonSchema)),
   responses: z.optional(z.record(z.string(), refOr(responseSchema))),
   parameters: z.optional(z.record(z.string(), refOr(parameterSchema))),
@@ -105,7 +97,3 @@ export const componentsSchema: z.ZodMiniType<OpenAPIComponents> = z.object({
   callbacks: z.optional(z.record(z.string(), z.unknown())),
   pathItems: z.optional(z.record(z.string(), refOr(pathItemSchema)))
 });
-
-export type Operation = OpenAPIOperation;
-export type PathItem = OpenAPIPathItem;
-export type Components = OpenAPIComponents;

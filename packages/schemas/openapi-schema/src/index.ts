@@ -16,14 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaInputObject } from "@power-plant/core";
+import type { SchemaConfigObject } from "@power-plant/core";
 import { defineSchema } from "@power-plant/core/schema/define";
+import type * as z from "zod/mini";
 import packageJson from "../package.json" with { type: "json" };
-import type { OpenAPIDocument } from "./schema";
 import { openapiSchema } from "./schema";
 
-const schema: SchemaInputObject<OpenAPIDocument, any> = defineSchema<
-  OpenAPIDocument,
+export * from "./schema";
+export type OpenAPISchema = z.infer<typeof openapiSchema>;
+
+const schema: SchemaConfigObject<OpenAPISchema, any> = defineSchema<
+  OpenAPISchema,
   any
 >({
   meta: {
@@ -32,7 +35,7 @@ const schema: SchemaInputObject<OpenAPIDocument, any> = defineSchema<
     version: packageJson.version,
     description:
       "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
-    spec: (spec: OpenAPIDocument) =>
+    spec: (spec: OpenAPISchema) =>
       spec.info.title
         ? `The ${
             spec.info.version ? `${spec.info.version} version of the ` : ""
@@ -48,8 +51,8 @@ const schema: SchemaInputObject<OpenAPIDocument, any> = defineSchema<
           : spec.info.summary
             ? ` ${spec.info.summary}`
             : "",
-    tags: (spec: OpenAPIDocument) => spec.tags?.map(tag => tag.name) ?? [],
-    links: (spec: OpenAPIDocument) =>
+    tags: (spec: OpenAPISchema) => spec.tags?.map(tag => tag.name) ?? [],
+    links: (spec: OpenAPISchema) =>
       spec.externalDocs
         ? [
             {
