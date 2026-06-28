@@ -19,9 +19,11 @@
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
+import { callAsyncContext, createContext } from "../helpers/context";
 import { createInput } from "../input/create";
 import { createOutput } from "../output/create";
 import { createSchema } from "../schema/create";
+import type { UserConfig } from "../types/config";
 import type {
   Generator,
   GeneratorConfig,
@@ -77,26 +79,29 @@ export async function createGenerator<
     )
   ]);
 
-  const generate = async (options: TOptions) => {
-    const spec = isFunction(input.input)
-      ? await (
-          input.input as unknown as (
-            options: TOptions
-          ) => TSpec | Promise<TSpec>
-        )(options)
-      : input.input;
+  const generate = async (options: TOptions & UserConfig) => {
+    const context = createContext(options);
 
-    const description =
-      typeof configObject.meta?.description === "function"
-        ? configObject.meta.description(spec)
-        : configObject.meta?.description;
+    return callAsyncContext(context, async () => {
+      const spec = isFunction(input.input)
+        ? await (
+            input.input as unknown as (
+              options: TOptions
+            ) => TSpec | Promise<TSpec>
+          )(options)
+        : input.input;
 
-    if (description) {
-      // eslint-disable-next-line no-console
-      console.log(`Generating ${description}...`);
-    }
+      const description =
+        typeof configObject.meta?.description === "function"
+          ? configObject.meta.description(spec)
+          : configObject.meta?.description;
 
-    return output.output(spec, options);
+      if (description) {
+        context.logger.info(`Generating ${description}...`);
+      }
+
+      return output.output(spec, options);
+    });
   };
 
   return {

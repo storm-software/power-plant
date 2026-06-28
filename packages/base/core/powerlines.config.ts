@@ -22,11 +22,11 @@ import { defineConfig } from "powerlines/config";
 
 const config: UserConfig = defineConfig({
   input: [
-    "src/*.ts",
-    "src/schema/*.ts",
-    "src/source/*.ts",
-    "src/output/*.ts",
-    "src/generator/*.ts"
+    "src/index.ts",
+    "src/schema/index.ts",
+    "src/input/index.ts",
+    "src/output/index.ts",
+    "src/generator/index.ts"
   ],
   platform: "node",
   output: {

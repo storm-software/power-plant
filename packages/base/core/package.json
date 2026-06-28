@@ -72,46 +72,18 @@
         "default": "./dist/generator/index.mjs"
       }
     },
-    "./generator/create": {
+    "./input": {
       "require": {
-        "types": "./dist/generator/create.d.cts",
-        "default": "./dist/generator/create.cjs"
+        "types": "./dist/input/index.d.cts",
+        "default": "./dist/input/index.cjs"
       },
       "import": {
-        "types": "./dist/generator/create.d.mts",
-        "default": "./dist/generator/create.mjs"
+        "types": "./dist/input/index.d.mts",
+        "default": "./dist/input/index.mjs"
       },
       "default": {
-        "types": "./dist/generator/create.d.mts",
-        "default": "./dist/generator/create.mjs"
-      }
-    },
-    "./generator/define": {
-      "require": {
-        "types": "./dist/generator/define.d.cts",
-        "default": "./dist/generator/define.cjs"
-      },
-      "import": {
-        "types": "./dist/generator/define.d.mts",
-        "default": "./dist/generator/define.mjs"
-      },
-      "default": {
-        "types": "./dist/generator/define.d.mts",
-        "default": "./dist/generator/define.mjs"
-      }
-    },
-    "./generator/helpers": {
-      "require": {
-        "types": "./dist/generator/helpers.d.cts",
-        "default": "./dist/generator/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/generator/helpers.d.mts",
-        "default": "./dist/generator/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/generator/helpers.d.mts",
-        "default": "./dist/generator/helpers.mjs"
+        "types": "./dist/input/index.d.mts",
+        "default": "./dist/input/index.mjs"
       }
     },
     "./output": {
@@ -128,48 +100,6 @@
         "default": "./dist/output/index.mjs"
       }
     },
-    "./output/create": {
-      "require": {
-        "types": "./dist/output/create.d.cts",
-        "default": "./dist/output/create.cjs"
-      },
-      "import": {
-        "types": "./dist/output/create.d.mts",
-        "default": "./dist/output/create.mjs"
-      },
-      "default": {
-        "types": "./dist/output/create.d.mts",
-        "default": "./dist/output/create.mjs"
-      }
-    },
-    "./output/define": {
-      "require": {
-        "types": "./dist/output/define.d.cts",
-        "default": "./dist/output/define.cjs"
-      },
-      "import": {
-        "types": "./dist/output/define.d.mts",
-        "default": "./dist/output/define.mjs"
-      },
-      "default": {
-        "types": "./dist/output/define.d.mts",
-        "default": "./dist/output/define.mjs"
-      }
-    },
-    "./output/helpers": {
-      "require": {
-        "types": "./dist/output/helpers.d.cts",
-        "default": "./dist/output/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/output/helpers.d.mts",
-        "default": "./dist/output/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/output/helpers.d.mts",
-        "default": "./dist/output/helpers.mjs"
-      }
-    },
     "./package.json": "./package.json",
     "./schema": {
       "require": {
@@ -184,48 +114,6 @@
         "types": "./dist/schema/index.d.mts",
         "default": "./dist/schema/index.mjs"
       }
-    },
-    "./schema/create": {
-      "require": {
-        "types": "./dist/schema/create.d.cts",
-        "default": "./dist/schema/create.cjs"
-      },
-      "import": {
-        "types": "./dist/schema/create.d.mts",
-        "default": "./dist/schema/create.mjs"
-      },
-      "default": {
-        "types": "./dist/schema/create.d.mts",
-        "default": "./dist/schema/create.mjs"
-      }
-    },
-    "./schema/define": {
-      "require": {
-        "types": "./dist/schema/define.d.cts",
-        "default": "./dist/schema/define.cjs"
-      },
-      "import": {
-        "types": "./dist/schema/define.d.mts",
-        "default": "./dist/schema/define.mjs"
-      },
-      "default": {
-        "types": "./dist/schema/define.d.mts",
-        "default": "./dist/schema/define.mjs"
-      }
-    },
-    "./schema/helpers": {
-      "require": {
-        "types": "./dist/schema/helpers.d.cts",
-        "default": "./dist/schema/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/schema/helpers.d.mts",
-        "default": "./dist/schema/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/schema/helpers.d.mts",
-        "default": "./dist/schema/helpers.mjs"
-      }
     }
   },
   "main": "./dist/index.cjs",
@@ -236,15 +124,13 @@
     "dist"
   ],
   "dependencies": {
-    "@alloy-js/core": "catalog:",
-    "@alloy-js/markdown": "catalog:",
-    "@alloy-js/typescript": "catalog:",
     "@power-plant/schema": "workspace:*",
     "@powerlines/core": "catalog:",
     "@powerlines/engine": "catalog:",
     "@powerlines/plugin-alloy": "catalog:",
     "@powerlines/plugin-automd": "catalog:",
     "@stryke/convert": "catalog:",
+    "@stryke/date": "catalog:",
     "@stryke/fs": "catalog:",
     "@stryke/helpers": "catalog:",
     "@stryke/json": "catalog:",
@@ -252,6 +138,8 @@
     "@stryke/resolve": "catalog:",
     "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
+    "@stryke/unique-id": "catalog:",
     "automd": "catalog:",
     "defu": "catalog:",
     "jiti": "catalog:",
@@ -260,16 +148,10 @@
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",
-    "@stryke/types": "catalog:",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "inlinedDependencies": {
-    "@stryke/date": "0.0.6",
-    "@stryke/types": "0.12.22",
-    "@stryke/unique-id": "0.3.106"
   }
 }

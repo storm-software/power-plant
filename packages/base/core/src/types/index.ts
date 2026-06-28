@@ -16,6 +16,7 @@
 
  ------------------------------------------------------------------- */
 
+export * from "./context";
 export * from "./generator";
 export * from "./input";
 export * from "./meta";

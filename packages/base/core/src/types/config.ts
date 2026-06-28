@@ -16,18 +16,16 @@
 
  ------------------------------------------------------------------- */
 
-import type { FrameworkOptions } from "powerlines";
-import packageJson from "../../package.json" with { type: "json" };
+import type { FileSystemInterface } from "@stryke/types/fs";
 
-/**
- * Retrieves the framework information for Power Plant.
- *
- * @returns An object containing the name, version, and organization ID of the Power Plant framework.
- */
-export function getFramework(): FrameworkOptions {
-  return {
-    name: "power-plant",
-    version: packageJson.version,
-    orgId: "storm-software"
-  };
+export interface Logger {
+  debug: (message: string) => void;
+  info: (message: string) => void;
+  warn: (message: string) => void;
+  error: (message: string) => void;
+}
+
+export interface UserConfig {
+  fs?: Partial<FileSystemInterface>;
+  logger?: Partial<Logger>;
 }

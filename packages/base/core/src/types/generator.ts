@@ -18,6 +18,7 @@
 
 import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import type { UserConfig } from "./config";
 import type { Input, InputConfig } from "./input";
 import type { Output, OutputConfig } from "./output";
 import type { SchemaOf } from "./schema";
@@ -93,5 +94,5 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
    * @param options - The options to be passed to the generator, which can be used to influence the generation process.
    * @returns A promise that resolves when the generation process is complete.
    */
-  generate: (options: TOptions) => Promise<TReturns>;
+  generate: (options: TOptions & UserConfig) => Promise<TReturns>;
 }

@@ -21,7 +21,7 @@ import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
 import { isFunction } from "@stryke/type-checks/is-function";
-import { extractMeta, resolveMetaDescription } from "../meta/extract";
+import { extractMeta, resolveMetaDescription } from "../helpers/meta";
 import { createSchema } from "../schema/create";
 import type { OutputConfigObject, OutputFunction } from "../types";
 import type {

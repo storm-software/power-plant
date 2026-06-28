@@ -16,4 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./options";
+import type { FileSystemInterface } from "@stryke/types/fs";
+import type { Logger } from "./config";
+
+export interface Context {
+  fs: FileSystemInterface;
+  logger: Logger;
+}

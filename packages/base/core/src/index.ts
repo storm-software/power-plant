@@ -16,8 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./generator";
-export * from "./input";
-export * from "./output";
-export * from "./schema";
+export * from "./generator/define";
+export * from "./helpers";
+export * from "./input/define";
+export * from "./output/define";
+export * from "./schema/define";
 export type * from "./types";

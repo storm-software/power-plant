@@ -27,7 +27,7 @@ import {
   extractMeta,
   resolveMetaDescription,
   resolveMetaExample
-} from "../meta/extract";
+} from "../helpers/meta";
 import type {
   InferCreateSchemaOptions,
   SchemaConfigObject,
