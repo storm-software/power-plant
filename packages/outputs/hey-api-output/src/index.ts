@@ -18,15 +18,14 @@
 
 import type { UserConfig } from "@hey-api/openapi-ts";
 import { createClient } from "@hey-api/openapi-ts";
-import { useContext } from "@power-plant/core";
-import { defineOutput } from "@power-plant/core/output/define";
+import { defineOutput, useContext } from "@power-plant/core";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import openapiSchema from "@power-plant/openapi-schema";
 import { toArray } from "@stryke/convert/to-array";
 import type { Arrayable } from "@stryke/types/array";
 import packageJson from "../package.json" with { type: "json" };
 
-const output = defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
+export default defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
   meta: {
     name: "hey-api",
     title: "Hey API",
@@ -72,5 +71,3 @@ const output = defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
     );
   }
 });
-
-export default output;

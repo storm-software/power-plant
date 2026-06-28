@@ -16,8 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaConfigObject } from "@power-plant/core";
-import { defineSchema } from "@power-plant/core/schema/define";
+import { defineSchema } from "@power-plant/core";
 import type * as z from "zod/mini";
 import packageJson from "../package.json" with { type: "json" };
 import { openapiSchema } from "./schema";
@@ -25,10 +24,7 @@ import { openapiSchema } from "./schema";
 export * from "./schema";
 export type OpenAPISchema = z.infer<typeof openapiSchema>;
 
-const schema: SchemaConfigObject<OpenAPISchema, any> = defineSchema<
-  OpenAPISchema,
-  any
->({
+export default defineSchema<OpenAPISchema, any>({
   meta: {
     name: "openapi",
     title: "OpenAPI",
@@ -64,5 +60,3 @@ const schema: SchemaConfigObject<OpenAPISchema, any> = defineSchema<
   },
   schema: openapiSchema
 });
-
-export default schema;
