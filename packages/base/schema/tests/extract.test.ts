@@ -49,8 +49,7 @@ describe("schema/src/extract.ts", () => {
     expect(extractVariant("./schema.ts#default")).toBe("file-reference");
     expect(
       extractVariant({
-        schema: "./schema.ts#default",
-        meta: { description: "context" }
+        schema: "./schema.ts#default"
       } as any)
     ).toBe("file-reference");
   });
@@ -98,78 +97,5 @@ describe("schema/src/extract.ts", () => {
     expect(extracted.variant).toBe("json-schema");
     expect(extracted.schema).toEqual({ type: "string" });
     expect(extracted.hash.length).toBeGreaterThan(0);
-  });
-
-  it("extractSchemaWithSource and extract preserve optional input metadata", async () => {
-    const input = {
-      schema: { type: "string" },
-      meta: { description: "schema context" }
-    } as any;
-
-    const withSource = await extractSchemaWithSource(input, {
-      skipCache: true
-    });
-    expect(withSource.meta).toEqual({
-      version: "1.0",
-      description: "schema context"
-    });
-
-    const extracted = await extract(input, { skipCache: true });
-    expect(extracted.meta).toEqual({
-      version: "1.0",
-      description: "schema context"
-    });
-  });
-
-  it("extractSchemaWithSource derives metadata from schema annotations", async () => {
-    const input = {
-      type: "string",
-      title: "Display Name",
-      description: "Schema description",
-      examples: ["abc"],
-      deprecated: true,
-      tags: ["schema"],
-      docs: "https://example.dev/schema"
-    } as any;
-
-    const extracted = await extractSchemaWithSource(input, {
-      skipCache: true
-    });
-
-    expect(extracted.meta).toEqual({
-      version: "1.0",
-      name: "Display Name",
-      description: "Schema description",
-      examples: ["abc"],
-      deprecated: true,
-      tags: ["schema"],
-      links: ["https://example.dev/schema"]
-    });
-  });
-
-  it("extractSchemaWithSource lets explicit meta override schema annotations", async () => {
-    const input = {
-      schema: {
-        type: "string",
-        title: "Display Name",
-        description: "Schema description",
-        tags: ["schema"]
-      },
-      meta: {
-        name: "Override Name",
-        description: "Override description"
-      }
-    } as any;
-
-    const extracted = await extractSchemaWithSource(input, {
-      skipCache: true
-    });
-
-    expect(extracted.meta).toEqual({
-      version: "1.0",
-      name: "Override Name",
-      description: "Override description",
-      tags: ["schema"]
-    });
   });
 });

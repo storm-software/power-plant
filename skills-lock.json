@@ -1,11 +1,29 @@
 {
   "version": 1,
   "skills": {
+    "graphql-schema": {
+      "source": "apollographql/skills",
+      "sourceType": "github",
+      "skillPath": "skills/graphql-schema/SKILL.md",
+      "computedHash": "95f5384cc907635fc31121648dffffed0bb6f773ee594cbfe9be9e5e4a0e6aba"
+    },
     "json-schema-lookup": {
       "source": "sammcj/agentic-coding",
       "sourceType": "github",
       "skillPath": "Skills/json-schema-lookup/SKILL.md",
       "computedHash": "a291c4e1d941a9c4cc667945520b570a081b504769a912a090fd7c1b5763fbde"
+    },
+    "openapi-spec-generation": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/documentation-generation/skills/openapi-spec-generation/SKILL.md",
+      "computedHash": "d062c891d58ef7e38c56360d4c325aff70247d1b5880b8b299098d7e51e38294"
+    },
+    "valibot": {
+      "source": "open-circle/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/valibot/SKILL.md",
+      "computedHash": "6798b923c1bbe9b07cb8c40470ada09c377d666045caefda90d95577e16e8744"
     },
     "vitest": {
       "source": "antfu/skills",
@@ -18,6 +36,12 @@
       "sourceType": "github",
       "skillPath": "skills/writing-json-schemas/SKILL.md",
       "computedHash": "9b3b90c7d96bc9ef8c643dd464b2097d2a22f87ffc7f6c85a2973f5de2636409"
+    },
+    "zod": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/zod/SKILL.md",
+      "computedHash": "c69b5133b65643317236707f2cd3e521b4fc6e5ee5fd6c6c00cf62a37dfd0144"
     }
   }
 }

@@ -16,8 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./generator";
-export * from "./meta";
-export * from "./schema";
-export * from "./sink";
-export * from "./source";
+import { isSetObject } from "@stryke/type-checks/is-set-object";
+import type { SchemaInputObject } from "../types/schema";
+
+/**
+ * Checks if the provided input is a {@link SchemaInputObject}.
+ *
+ * @param input - The input to check.
+ * @returns True if the input is a {@link SchemaInputObject}, false otherwise.
+ */
+export function isSchemaInputObject<TSpec, TOptions extends object>(
+  input: unknown
+): input is SchemaInputObject<TSpec, TOptions> {
+  return isSetObject(input) && "schema" in input && input.schema !== undefined;
+}

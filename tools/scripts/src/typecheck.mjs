@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 /* -------------------------------------------------------------------
 
-            ⚡ Storm Software - Power Plant
+                  🗲 Storm Software - Power Plant
 
  This code was released as part of the Power Plant project. Power Plant
  is maintained by Storm Software under the Apache-2.0 license, and is

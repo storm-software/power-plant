@@ -3,7 +3,11 @@
   "version": "0.0.2",
   "private": false,
   "description": "A Power Plant source for reading the input specification from a file.",
-  "keywords": ["power-plant-source", "power-plant", "storm-software"],
+  "keywords": [
+    "power-plant-source",
+    "power-plant",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -60,23 +64,22 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",
     "@stryke/resolve": "catalog:",
-    "@stryke/type-checks": "catalog:"
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",
-    "@stryke/types": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "inlinedDependencies": {
-    "@stryke/types": "0.12.20"
   }
 }

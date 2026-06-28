@@ -16,9 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-import { extract as extractSchema } from "@power-plant/schema/extract";
+import type { SchemaSourceInput } from "@power-plant/schema/types";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
+import { createSchema } from "../schema/create";
 import { createSink } from "../sink/create";
 import { createSource } from "../source/create";
 import type {
@@ -59,7 +60,10 @@ export async function createGenerator<
     );
   }
 
-  const schema = await extractSchema<TSpec>(inputObject.schema, options);
+  const schema = await createSchema<TSpec, TOptions>(
+    inputObject.schema as SchemaSourceInput<TSpec>,
+    options
+  );
   const [source, sink] = await Promise.all([
     createSource<TSpec, TOptions>(schema, inputObject.source, options),
     createSink<TSpec, TOptions, TReturns>(schema, inputObject.sink, options)

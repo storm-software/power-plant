@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 export * from "./generator";
+export * from "./schema";
 export * from "./sink";
 export * from "./source";
 export type * from "./types";

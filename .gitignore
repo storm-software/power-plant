@@ -15,6 +15,7 @@ powerlines.d.ts
 
 # dependencies
 node_modules
+.pnpm-store
 
 # IDEs and editors
 /.idea

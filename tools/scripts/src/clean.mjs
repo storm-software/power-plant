@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 /* -------------------------------------------------------------------
 
-            ⚡ Storm Software - Power Plant
+                  🗲 Storm Software - Power Plant
 
  This code was released as part of the Power Plant project. Power Plant
  is maintained by Storm Software under the Apache-2.0 license, and is
@@ -47,8 +47,32 @@ try {
     );
   }
 
+  proc = $`rm -rf ./tools/*/dist ./tools/*/out-tsc`.timeout(`${5 * 60}s`);
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the internal tools packages: \n\n${result.message}\n`
+    );
+  }
+
+  proc = $`rm -rf ./packages/base/*/dist ./packages/base/*/out-tsc`.timeout(
+    `${5 * 60}s`
+  );
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the base packages: \n\n${result.message}\n`
+    );
+  }
+
   proc =
-    $`rm -rf ./playground/*/dist ./playground/*/playground ./playground/*/out-tsc ./playground/*/.powerlines ./playground/*/powerlines.d.ts ./playground/*/.shell-shock ./playground/*/shell-shock.d.ts ./packages/*/dist ./packages/*/packages ./packages/*/out-tsc ./tools/*/dist ./tools/*/out-tsc`.timeout(
+    $`rm -rf ./packages/schemas/*/dist ./packages/schemas/*/out-tsc`.timeout(
       `${5 * 60}s`
     );
   proc.stdout.on("data", data => {
@@ -57,7 +81,48 @@ try {
   result = await proc;
   if (result.exitCode !== 0) {
     throw new Error(
-      `An error occurred while removing build directories from the monorepo's projects: \n\n${result.message}\n`
+      `An error occurred while removing build directories from the schema packages: \n\n${result.message}\n`
+    );
+  }
+
+  proc =
+    $`rm -rf ./packages/sources/*/dist ./packages/sources/*/out-tsc`.timeout(
+      `${5 * 60}s`
+    );
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the source packages: \n\n${result.message}\n`
+    );
+  }
+
+  proc = $`rm -rf ./packages/sinks/*/dist ./packages/sinks/*/out-tsc`.timeout(
+    `${5 * 60}s`
+  );
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the sink packages: \n\n${result.message}\n`
+    );
+  }
+
+  proc =
+    $`rm -rf ./packages/generators/*/dist ./packages/generators/*/out-tsc`.timeout(
+      `${5 * 60}s`
+    );
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while removing build directories from the generator packages: \n\n${result.message}\n`
     );
   }
 

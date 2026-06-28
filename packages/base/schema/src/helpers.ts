@@ -35,7 +35,7 @@ import type {
   JsonSchemaMetadataKeywords,
   JsonSchemaObject,
   JsonSchemaOf,
-  Schema
+  SchemaEnvelope
 } from "./types";
 
 export type GetPropertyResult = JsonSchema & {
@@ -54,7 +54,7 @@ export type GetPropertyResult = JsonSchema & {
  * @returns The JSON Schema object.
  * @throws Will throw a TypeError if the input is neither a valid Schema wrapper nor a valid JSON Schema object.
  */
-export function getJsonSchema(input: Schema | JsonSchema): JsonSchema {
+export function getJsonSchema(input: SchemaEnvelope | JsonSchema): JsonSchema {
   const schema = isSchema(input) ? input.schema : input;
   if (!isJsonSchema(schema)) {
     throw new TypeError(`The provided input is not a valid JSON Schema`);
@@ -74,7 +74,7 @@ export function getJsonSchema(input: Schema | JsonSchema): JsonSchema {
  * @throws Will throw a TypeError if the input is neither a valid Schema wrapper nor a valid JSON Schema object.
  */
 export function getJsonSchemaObject(
-  input: Schema | JsonSchema
+  input: SchemaEnvelope | JsonSchema
 ): JsonSchemaObject {
   const schema = getJsonSchema(input);
   if (!isJsonSchemaObject(schema)) {
@@ -94,7 +94,7 @@ export function getJsonSchemaObject(
  * @returns An object mapping property names to their corresponding JSON Schema fragments, including metadata.
  */
 export function getProperties(
-  obj: Schema | JsonSchemaObject
+  obj: SchemaEnvelope | JsonSchemaObject
 ): Record<string, GetPropertyResult> {
   const schema = getJsonSchemaObject(obj);
   if (!isSetObject(schema.properties)) {
@@ -124,7 +124,7 @@ export function getProperties(
  * @param obj - The JSON Schema object form or a Schema wrapper to extract properties from.
  * @returns An array of JSON Schema fragments representing the properties, each including metadata.
  */
-export function getPropertiesList(obj: Schema | JsonSchemaObject) {
+export function getPropertiesList(obj: SchemaEnvelope | JsonSchemaObject) {
   return Object.values(getProperties(obj));
 }
 
@@ -138,10 +138,10 @@ export function getPropertiesList(obj: Schema | JsonSchemaObject) {
  * @returns An object mapping property names to their corresponding JSON Schema fragments, including metadata.
  */
 export function getProperty<TSchema extends JsonSchemaObject>(
-  obj: Schema<TSchema> | TSchema,
+  obj: SchemaEnvelope<TSchema> | TSchema,
   name: keyof TSchema["properties"] & string
 ): GetPropertyResult {
-  const schema = getJsonSchemaObject(obj as Schema | JsonSchemaObject);
+  const schema = getJsonSchemaObject(obj);
   if (!isSetObject(schema.properties)) {
     throw new TypeError(`The provided schema does not have any properties`);
   }
@@ -173,7 +173,7 @@ export function getProperty<TSchema extends JsonSchemaObject>(
  * @throws Will throw an error if the provided schema is not an object form.
  */
 export function addProperty(
-  obj: Schema | JsonSchemaObject,
+  obj: SchemaEnvelope | JsonSchemaObject,
   name: string,
   property: JsonSchema
 ): void {
@@ -280,7 +280,7 @@ function mergeTwo(base: JsonSchema, override: JsonSchema): JsonSchema {
  * @param schemas - An array of JSON Schemas or Schema wrappers to merge.
  * @returns A new JSON Schema that is the result of merging all input schemas.
  */
-export function merge(...schemas: (JsonSchema | Schema)[]): JsonSchema {
+export function merge(...schemas: (JsonSchema | SchemaEnvelope)[]): JsonSchema {
   const jsonSchemas = schemas.map(s => getJsonSchema(s));
   if (jsonSchemas.length === 0) {
     return {};

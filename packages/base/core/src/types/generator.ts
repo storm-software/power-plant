@@ -16,8 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaInput, SchemaOf } from "@power-plant/schema";
+import type { SchemaInput } from "@power-plant/schema";
 import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
+import type { SchemaOf } from "./schema";
 import type { Sink, SinkInput } from "./sink";
 import type { Source, SourceInput } from "./source";
 
@@ -75,7 +76,7 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   /**
    * The schema input that defines the structure of the specification object for this generator.
    */
-  schema: SchemaOf<TSpec>;
+  schema: SchemaOf<TSpec, TOptions>;
 
   /**
    * The source of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.

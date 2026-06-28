@@ -3,7 +3,11 @@
   "version": "0.0.3",
   "private": false,
   "description": "Core package for Power Plant",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -97,6 +101,62 @@
       }
     },
     "./package.json": "./package.json",
+    "./schema": {
+      "require": {
+        "types": "./dist/schema/index.d.cts",
+        "default": "./dist/schema/index.cjs"
+      },
+      "import": {
+        "types": "./dist/schema/index.d.mts",
+        "default": "./dist/schema/index.mjs"
+      },
+      "default": {
+        "types": "./dist/schema/index.d.mts",
+        "default": "./dist/schema/index.mjs"
+      }
+    },
+    "./schema/create": {
+      "require": {
+        "types": "./dist/schema/create.d.cts",
+        "default": "./dist/schema/create.cjs"
+      },
+      "import": {
+        "types": "./dist/schema/create.d.mts",
+        "default": "./dist/schema/create.mjs"
+      },
+      "default": {
+        "types": "./dist/schema/create.d.mts",
+        "default": "./dist/schema/create.mjs"
+      }
+    },
+    "./schema/define": {
+      "require": {
+        "types": "./dist/schema/define.d.cts",
+        "default": "./dist/schema/define.cjs"
+      },
+      "import": {
+        "types": "./dist/schema/define.d.mts",
+        "default": "./dist/schema/define.mjs"
+      },
+      "default": {
+        "types": "./dist/schema/define.d.mts",
+        "default": "./dist/schema/define.mjs"
+      }
+    },
+    "./schema/helpers": {
+      "require": {
+        "types": "./dist/schema/helpers.d.cts",
+        "default": "./dist/schema/helpers.cjs"
+      },
+      "import": {
+        "types": "./dist/schema/helpers.d.mts",
+        "default": "./dist/schema/helpers.mjs"
+      },
+      "default": {
+        "types": "./dist/schema/helpers.d.mts",
+        "default": "./dist/schema/helpers.mjs"
+      }
+    },
     "./sink": {
       "require": {
         "types": "./dist/sink/index.d.cts",
@@ -214,7 +274,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@alloy-js/core": "catalog:",
     "@alloy-js/markdown": "catalog:",
@@ -248,6 +310,8 @@
     "access": "public"
   },
   "inlinedDependencies": {
-    "@stryke/types": "0.12.20"
+    "@stryke/date": "0.0.5",
+    "@stryke/types": "0.12.21",
+    "@stryke/unique-id": "0.3.105"
   }
 }

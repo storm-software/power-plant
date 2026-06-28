@@ -16,35 +16,55 @@
 
  ------------------------------------------------------------------- */
 
-import { extract } from "@power-plant/schema/extract";
 import { mergeMetadata } from "@power-plant/schema/helpers";
-import { resolveMetaDescription } from "@power-plant/schema/metadata";
-import type {
-  ExtractedSchema,
-  Meta,
-  MetaInput,
-  SchemaOf
-} from "@power-plant/schema/types";
+import type { ExtractedSchemaEnvelope } from "@power-plant/schema/types";
 import { load } from "@stryke/resolve/load";
 import { isLoadInput } from "@stryke/resolve/type-checks";
-import { extractMeta } from "../helpers/metadata";
+import { isFunction } from "@stryke/type-checks/is-function";
+import { extractMeta, resolveMetaDescription } from "../meta/extract";
+import { createSchema } from "../schema/create";
+import type { SourceFunction, SourceInputObject } from "../types";
+import type { SchemaOf } from "../types/schema";
 import type {
   InferCreateSourceOptions,
   Source,
-  SourceFunction,
   SourceInput,
-  SourceInputObject
+  SourceMeta,
+  SourceMetaInput
 } from "../types/source";
 import { isSourceInputObject } from "./helpers";
 
-export function extractSourceMeta<TSpec>(
-  schema: ExtractedSchema<TSpec>,
-  input?: MetaInput<TSpec>
-): Meta<TSpec> {
-  const meta = extractMeta(schema, input);
+/**
+ * Extracts and normalizes {@link SourceMeta | source metadata} from a given {@link SourceMetaInput}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ *
+ * @param schema - The schema that the source input is expected to conform to.
+ * @param input - The source metadata input to extract and normalize.
+ * @returns The normalized source metadata.
+ */
+export function extractSourceMeta<TSpec, TOptions extends object>(
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
+  input?: SourceMetaInput<TSpec, TOptions>
+): SourceMeta<TSpec, TOptions> {
+  const jsonSchema = schema?.schema ?? {};
+  const meta = extractMeta<TSpec, TOptions>(schema, input) as SourceMeta<
+    TSpec,
+    TOptions
+  >;
+
   meta.description = resolveMetaDescription(
-    `Determines the ${schema?.meta?.title ? `${schema?.meta?.title} ` : ""}specification from a {title} source.`,
-    schema?.schema ?? {},
+    isFunction(meta.title)
+      ? async (spec: TSpec, options: TOptions) => {
+          const title = await Promise.resolve(
+            (meta.title as (spec: TSpec, options: TOptions) => string)(
+              spec,
+              options
+            )
+          );
+
+          return `Determines the ${title ?? ""} specification from a {title} source.`;
+        }
+      : `Determines the ${meta.title ?? ""} specification from a {title} source.`,
+    jsonSchema,
     meta,
     input?.description
   );
@@ -61,7 +81,7 @@ export function extractSourceMeta<TSpec>(
  * @returns A promise that resolves to a normalized source descriptor.
  */
 export async function createSource<TSpec, TOptions extends object>(
-  schema: SchemaOf<TSpec>,
+  schema: SchemaOf<TSpec, TOptions>,
   input: SourceInput<TSpec, TOptions>,
   options: InferCreateSourceOptions<typeof input> = {}
 ): Promise<Source<TSpec, TOptions>> {
@@ -73,9 +93,9 @@ export async function createSource<TSpec, TOptions extends object>(
     ? input
     : { source: input, meta: {} };
 
-  let resolvedSchema: SchemaOf<TSpec> = schema;
+  let resolvedSchema: SchemaOf<TSpec, TOptions> = schema;
   if (inputSchema) {
-    resolvedSchema = await extract<TSpec>(inputSchema, options);
+    resolvedSchema = await createSchema<TSpec, TOptions>(inputSchema, options);
     resolvedSchema.schema = mergeMetadata<TSpec>(
       resolvedSchema.schema,
       schema.schema
@@ -112,9 +132,6 @@ export async function createSource<TSpec, TOptions extends object>(
   return {
     schema: resolvedSchema,
     source: resolvedSource,
-    meta: extractSourceMeta<TSpec>(
-      resolvedSchema as ExtractedSchema<TSpec>,
-      meta
-    )
+    meta: extractSourceMeta<TSpec, TOptions>(resolvedSchema, meta)
   };
 }

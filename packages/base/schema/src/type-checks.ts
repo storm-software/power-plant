@@ -65,9 +65,9 @@ import type {
   JsonSchemaUndefined,
   JsonSchemaUnion,
   JsonSchemaUnknown,
-  Schema,
-  SchemaOf,
-  ExtractedSchema as SchemaWithSource
+  SchemaEnvelope,
+  SchemaEnvelopeOf,
+  ExtractedSchemaEnvelope as SchemaWithSource
 } from "./types";
 
 /**
@@ -1393,7 +1393,7 @@ export function isUntypedInputStrict(
  * @param input - The value to check.
  * @returns True if the input is a Powerlines Schema object, false otherwise.
  */
-export function isSchema(input: unknown): input is Schema {
+export function isSchema(input: unknown): input is SchemaEnvelope {
   return (
     isSetObject(input) &&
     "schema" in input &&
@@ -1411,7 +1411,9 @@ export function isSchema(input: unknown): input is Schema {
  * @param input - The value to check.
  * @returns True if the input is a Powerlines Schema object with the specified type specification, false otherwise.
  */
-export function isSchemaOf<TSpec>(input: unknown): input is SchemaOf<TSpec> {
+export function isSchemaOf<TSpec>(
+  input: unknown
+): input is SchemaEnvelopeOf<TSpec> {
   return isSchema(input);
 }
 
@@ -1440,6 +1442,6 @@ export function isSchemaWithSource(input: unknown): input is SchemaWithSource {
  */
 export function isSchemaObject(
   input: unknown
-): input is Schema<JsonSchemaObject> {
+): input is SchemaEnvelope<JsonSchemaObject> {
   return isSchema(input) && isJsonSchemaObject(input.schema);
 }

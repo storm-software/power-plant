@@ -17,13 +17,13 @@
  ------------------------------------------------------------------- */
 
 import type {
-  Meta,
-  MetaInput,
-  SchemaInput,
-  SchemaOf
+  SchemaEnvelopeOf,
+  SchemaSourceInput
 } from "@power-plant/schema/types";
 import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
+import type { Meta, MetaInput } from "./meta";
+import type { SchemaInputObject, SchemaOf } from "./schema";
 
 export type SourceFunction<TSpec, TOptions extends object> = (
   options: TOptions
@@ -31,20 +31,18 @@ export type SourceFunction<TSpec, TOptions extends object> = (
 
 export interface SourceMetaInput<
   TSpec,
-  // eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
   TOptions extends object
-> extends MetaInput<TSpec> {
+> extends MetaInput<TSpec, TOptions> {
   /**
    * A string that describes how the specification will be extracted/generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
   input?: string;
 }
 
-export interface SourceMeta<
+export interface SourceMeta<TSpec, TOptions extends object> extends Meta<
   TSpec,
-  // eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
-  TOptions extends object
-> extends Meta<TSpec> {
+  TOptions
+> {
   /**
    * A string that describes how the specification will be extracted/generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
@@ -55,7 +53,10 @@ export interface SourceInputObject<TSpec, TOptions extends object> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?: SchemaInput<TSpec>;
+  schema?:
+    | SchemaSourceInput<TSpec>
+    | SchemaEnvelopeOf<TSpec>
+    | SchemaInputObject<TSpec, TOptions>;
 
   /**
    * The source implementation, either as a callable function, a static value, or a file reference.
@@ -84,7 +85,7 @@ export interface Source<TSpec, TOptions extends object> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema: SchemaOf<TSpec>;
+  schema: SchemaOf<TSpec, TOptions>;
 
   /**
    * Optional metadata that provides contextual information for the source.

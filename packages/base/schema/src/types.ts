@@ -18,7 +18,6 @@
 
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
-import type { MaybePromise } from "@stryke/types/base";
 import type { InputObject, Schema as UntypedBaseSchema } from "untyped";
 import type { BaseIssue, BaseSchema } from "valibot";
 import type * as z3 from "zod/v3";
@@ -1669,196 +1668,23 @@ export type SchemaSourceInput<TSpec = any> =
  * @template TSpec - The original TypeScript type for which the schema is being extracted. This type parameter is used to derive the appropriate JSON Schema representation based on the structure and constraints of `T`.
  *
  * @see {@link SchemaSourceInput}
- * @see {@link Schema}
+ * @see {@link SchemaEnvelope}
  * @see {@link SchemaInputWithMeta}
  */
 export type SchemaInput<TSpec = any> =
   | LoadInput
   | SchemaSourceInput<TSpec>
-  | Schema<JsonSchemaOf<TSpec>>
-  | SchemaInputWithMeta<TSpec>;
+  | SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
 export type InferExtractOptions<T extends SchemaInput> = T extends LoadInput
   ? InferLoadOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
     {};
 
-export type MetaValue<TSpec, TValue = any> =
-  | TValue
-  | ((spec: TSpec) => MaybePromise<TValue>);
-
-export type MetaDeprecated =
-  | true
-  | string
-  | { message?: string; since?: string; alternative?: string };
-
-export type MetaLink = string | { href: string; description?: string };
-
-export interface MetaInput<TSpec> {
-  /**
-   * A name for the schema, which can be used to identify or reference the schema in documentation, tooling, or other contexts. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `name` property is a string that can be used to give the schema a human-readable identifier. It can be used in documentation, error messages, or other contexts where it is helpful to have a name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  name?: MetaValue<TSpec, string>;
-
-  /**
-   * A version string that indicates the version of the schema. This property can be used to track changes or updates to the schema over time, allowing consumers of the schema to determine which version they are working with. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `version` property is a string that can follow any versioning scheme, such as semantic versioning (e.g., "1.0.0", "2.1.3"), date-based versioning (e.g., "2023-06-15"), or any other format that conveys the version of the schema. It is recommended to use a consistent versioning scheme across all schemas to facilitate easier tracking and management of schema versions.
-   *
-   * @defaultValue "1.0"
-   */
-  version?: MetaValue<TSpec, string | Date | number>;
-
-  /**
-   * A string that describes the schema in some way.
-   */
-  description?: MetaValue<TSpec, string>;
-
-  /**
-   * A string that provides a human-readable name for the schema, which can be used in documentation, tooling, or other contexts to identify or reference the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `title` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  title?: MetaValue<TSpec, string>;
-
-  /**
-   * A string that describes when the schema is used.
-   */
-  usage?: MetaValue<TSpec, string>;
-
-  /**
-   * Indicates whether the schema is deprecated, and optionally provides additional information about the deprecation, such as a message, the version since which it is deprecated, and an alternative schema to use instead.
-   *
-   * @remarks
-   * The `deprecated` property can be a boolean value, where `true` indicates that the schema is deprecated and `false` indicates that it is not. It can also be a string that provides a message explaining the deprecation, or an object that includes additional details such as a message, the version since which it is deprecated, and an alternative schema to use instead. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  deprecated?: MetaValue<TSpec, MetaDeprecated>;
-
-  /**
-   * An array of tags associated with the schema. Tags can be used to categorize or label schemas for organizational purposes, making it easier to search, filter, or group related schemas together. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * Each tag in the array should be a string that represents a meaningful label or category for the schema. It is recommended to use consistent and descriptive tags across schemas to facilitate easier management and discovery of related schemas.
-   */
-  tags?: MetaValue<TSpec, string[]>;
-
-  /**
-   * An array of links associated with the schema. Each link can be a string representing a URL or an object containing a `href` property and an optional `description` property.
-   */
-  links?: MetaValue<TSpec, MetaLink[]>;
-}
-
-export interface Meta<TSpec> {
-  /**
-   * A unique identifier for the schema, which can be used to reference or identify the schema in documentation, tooling, or other contexts. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `id` property is a string that can be used to give the schema a unique identifier. It can be used in documentation, error messages, or other contexts where it is helpful to have an identifier associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  id: MetaValue<TSpec, string>;
-
-  /**
-   * A name for the schema, which can be used to identify or reference the schema in documentation, tooling, or other contexts. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `name` property is a string that can be used to give the schema a human-readable identifier. It can be used in documentation, error messages, or other contexts where it is helpful to have a name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  name: MetaValue<TSpec, string>;
-
-  /**
-   * A version string that indicates the version of the schema. This property can be used to track changes or updates to the schema over time, allowing consumers of the schema to determine which version they are working with. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `version` property is a string that can follow any versioning scheme, such as semantic versioning (e.g., "1.0.0", "2.1.3"), date-based versioning (e.g., "2023-06-15"), or any other format that conveys the version of the schema. It is recommended to use a consistent versioning scheme across all schemas to facilitate easier tracking and management of schema versions.
-   *
-   * @defaultValue "1.0"
-   */
-  version: MetaValue<TSpec, string | Date | number>;
-
-  /**
-   * A string that describes the schema in some way.
-   */
-  description: MetaValue<TSpec, string>;
-
-  /**
-   * A string that provides a human-readable name for the schema, which can be used in documentation, tooling, or other contexts to identify or reference the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * The `title` property is a string that can be used to give the schema a more user-friendly or descriptive name. It can be used in documentation, error messages, or other contexts where it is helpful to have a display name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  title: MetaValue<TSpec, string>;
-
-  /**
-   * A string that describes when the schema is used.
-   */
-  usage?: MetaValue<TSpec, string>;
-
-  /**
-   * Indicates whether the schema is deprecated, and optionally provides additional information about the deprecation, such as a message, the version since which it is deprecated, and an alternative schema to use instead.
-   *
-   * @remarks
-   * The `deprecated` property can be a boolean value, where `true` indicates that the schema is deprecated and `false` indicates that it is not. It can also be a string that provides a message explaining the deprecation, or an object that includes additional details such as a message, the version since which it is deprecated, and an alternative schema to use instead. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  deprecated?: MetaValue<TSpec, MetaDeprecated>;
-
-  /**
-   * An array of tags associated with the schema. Tags can be used to categorize or label schemas for organizational purposes, making it easier to search, filter, or group related schemas together. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   *
-   * @remarks
-   * Each tag in the array should be a string that represents a meaningful label or category for the schema. It is recommended to use consistent and descriptive tags across schemas to facilitate easier management and discovery of related schemas.
-   */
-  tags?: MetaValue<TSpec, string[]>;
-
-  /**
-   * An array of links associated with the schema. Each link can be a string representing a URL or an object containing a `href` property and an optional `description` property.
-   */
-  links: MetaValue<TSpec, MetaLink[]>;
-}
-
-export type SchemaMetaExample<TSpec> =
-  | TSpec
-  | { description?: string; value: TSpec };
-
-export interface SchemaMetaInput<TSpec> extends MetaInput<TSpec> {
-  /**
-   * Examples of valid data for the schema. This can be a single example or an array of examples.
-   */
-  examples?:
-    | SchemaMetaExample<TSpec>
-    | MetaValue<TSpec, SchemaMetaExample<TSpec>[]>;
-}
-
-export interface SchemaMeta<TSpec> extends Meta<TSpec> {
-  /**
-   * Examples of valid data for the schema.
-   */
-  examples: MetaValue<TSpec, SchemaMetaExample<TSpec>[]>;
-}
-
 /**
- * Schema input wrapper that attaches optional contextual metadata.
+ * A schema envelope that contains the normalized schema and its source variant.
  */
-export interface SchemaInputWithMeta<TSpec = any> {
-  /**
-   *  The underlying schema input payload.
-   */
-  schema: SchemaSourceInput<TSpec> | Schema<JsonSchemaOf<TSpec>> | LoadInput;
-
-  /**
-   * Optional contextual metadata associated with this schema input.
-   */
-  meta?: SchemaMetaInput<TSpec> | string;
-}
-
-/**
- * A schema extracted from a source input, normalized to JSON Schema.
- */
-export interface Schema<TJsonSchema extends JsonSchema = JsonSchema> {
+export interface SchemaEnvelope<TJsonSchema extends JsonSchema = JsonSchema> {
   /**
    * A stable content hash for the normalized schema.
    */
@@ -1873,11 +1699,6 @@ export interface Schema<TJsonSchema extends JsonSchema = JsonSchema> {
    * The normalized schema definition.
    */
   schema: TJsonSchema;
-
-  /**
-   * Optional contextual metadata associated with the schema.
-   */
-  meta: SchemaMeta<SpecOf<TJsonSchema>>;
 }
 
 /**
@@ -1885,9 +1706,9 @@ export interface Schema<TJsonSchema extends JsonSchema = JsonSchema> {
  *
  * @template TSpec - The original TypeScript type for which the schema is being extracted. This type parameter is used to derive the appropriate JSON Schema representation based on the structure and constraints of `T`.
  *
- * @see {@link Schema}
+ * @see {@link SchemaEnvelope}
  */
-export type SchemaOf<TSpec> = Schema<JsonSchemaOf<TSpec>>;
+export type SchemaEnvelopeOf<TSpec> = SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
 /**
  * Base metadata captured for schema source inputs.
@@ -1979,7 +1800,9 @@ export type SchemaSource<TSpec = any> =
 /**
  * A normalized schema plus metadata about the source that produced it.
  */
-export interface ExtractedSchema<TSpec = any> extends SchemaOf<TSpec> {
+export interface ExtractedSchemaEnvelope<
+  TSpec = any
+> extends SchemaEnvelopeOf<TSpec> {
   /**
    * The schema source that produced this normalized schema.
    */

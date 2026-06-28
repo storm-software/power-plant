@@ -17,13 +17,13 @@
  ------------------------------------------------------------------- */
 
 import type {
-  Meta,
-  MetaInput,
-  SchemaInput,
-  SchemaOf
+  SchemaEnvelopeOf,
+  SchemaSourceInput
 } from "@power-plant/schema/types";
 import type { InferLoadOptions, LoadInput } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
+import type { Meta, MetaInput } from "./meta";
+import type { SchemaInputObject, SchemaOf } from "./schema";
 
 export type SinkFunction<TSpec, TOptions extends object, TReturns = void> = (
   spec: TSpec,
@@ -32,17 +32,18 @@ export type SinkFunction<TSpec, TOptions extends object, TReturns = void> = (
 
 export interface SinkMetaInput<
   TSpec,
-  // eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
   TOptions extends object
-> extends MetaInput<TSpec> {
+> extends MetaInput<TSpec, TOptions> {
   /**
    * A string that describes how the specification will be extracted or generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
   produces?: string;
 }
 
-// eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
-export interface SinkMeta<TSpec, TOptions extends object> extends Meta<TSpec> {
+export interface SinkMeta<TSpec, TOptions extends object> extends Meta<
+  TSpec,
+  TOptions
+> {
   /**
    * A string that describes how the specification will be extracted or generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
@@ -57,7 +58,10 @@ export interface SinkInputObject<
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?: SchemaInput<TSpec>;
+  schema?:
+    | SchemaSourceInput<TSpec>
+    | SchemaEnvelopeOf<TSpec>
+    | SchemaInputObject<TSpec, TOptions>;
 
   /**
    * Optional metadata that provides contextual information for the sink.
@@ -85,7 +89,7 @@ export interface Sink<TSpec, TOptions extends object, TReturns = void> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema: SchemaOf<TSpec>;
+  schema: SchemaOf<TSpec, TOptions>;
 
   /**
    * Optional metadata that provides contextual information for the sink.

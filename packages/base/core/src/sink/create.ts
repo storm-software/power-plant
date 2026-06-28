@@ -16,30 +16,55 @@
 
  ------------------------------------------------------------------- */
 
-import { extract } from "@power-plant/schema/extract";
 import { mergeMetadata } from "@power-plant/schema/helpers";
-import { resolveMetaDescription } from "@power-plant/schema/metadata";
-import type {
-  ExtractedSchema,
-  Meta,
-  MetaInput,
-  SchemaOf
-} from "@power-plant/schema/types";
+import type { ExtractedSchemaEnvelope } from "@power-plant/schema/types";
 import { load } from "@stryke/resolve/load";
 import { isLoadInput } from "@stryke/resolve/type-checks";
-import { extractMeta } from "../helpers/metadata";
+import { isFunction } from "@stryke/type-checks/is-function";
+import { extractMeta, resolveMetaDescription } from "../meta/extract";
+import { createSchema } from "../schema/create";
 import type { SinkFunction, SinkInputObject } from "../types";
-import type { InferCreateSinkOptions, Sink, SinkInput } from "../types/sink";
+import type { SchemaOf } from "../types/schema";
+import type {
+  InferCreateSinkOptions,
+  Sink,
+  SinkInput,
+  SinkMeta,
+  SinkMetaInput
+} from "../types/sink";
 import { isSinkInputObject } from "./helpers";
 
-export function extractSinkMeta<TSpec>(
-  schema: ExtractedSchema<TSpec>,
-  input?: MetaInput<TSpec>
-): Meta<TSpec> {
-  const meta = extractMeta(schema, input);
+/**
+ * Extracts and normalizes {@link SinkMeta | sink metadata} from a given {@link SinkMetaInput}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ *
+ * @param schema - The schema that the sink input is expected to conform to.
+ * @param input - The sink metadata input to extract and normalize.
+ * @returns The normalized sink metadata.
+ */
+export function extractSinkMeta<TSpec, TOptions extends object>(
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
+  input?: SinkMetaInput<TSpec, TOptions>
+): SinkMeta<TSpec, TOptions> {
+  const jsonSchema = schema?.schema ?? {};
+  const meta = extractMeta<TSpec, TOptions>(schema, input) as SinkMeta<
+    TSpec,
+    TOptions
+  >;
+
   meta.description = resolveMetaDescription(
-    `Accepts a ${schema?.meta?.title ? `${schema?.meta?.title} ` : ""}specification and processes it with a {title} sink.`,
-    schema?.schema ?? {},
+    isFunction(meta.title)
+      ? async (spec: TSpec, options: TOptions) => {
+          const title = await Promise.resolve(
+            (meta.title as (spec: TSpec, options: TOptions) => string)(
+              spec,
+              options
+            )
+          );
+
+          return `Accepts a ${title ?? ""} specification and processes it with a {title} sink.`;
+        }
+      : `Accepts a ${meta.title ?? ""} specification and processes it with a {title} sink.`,
+    jsonSchema,
     meta,
     input?.description
   );
@@ -60,7 +85,7 @@ export async function createSink<
   TOptions extends object,
   TReturns = void
 >(
-  schema: SchemaOf<TSpec>,
+  schema: SchemaOf<TSpec, TOptions>,
   input: SinkInput<TSpec, TOptions, TReturns>,
   options: InferCreateSinkOptions<typeof input> = {}
 ): Promise<Sink<TSpec, TOptions, TReturns>> {
@@ -72,9 +97,9 @@ export async function createSink<
     ? input
     : { sink: input, meta: {} };
 
-  let resolvedSchema: SchemaOf<TSpec> = schema;
+  let resolvedSchema: SchemaOf<TSpec, TOptions> = schema;
   if (inputSchema) {
-    resolvedSchema = await extract<TSpec>(inputSchema, options);
+    resolvedSchema = await createSchema<TSpec, TOptions>(inputSchema, options);
     resolvedSchema.schema = mergeMetadata<TSpec>(
       resolvedSchema.schema,
       schema.schema
@@ -110,6 +135,6 @@ export async function createSink<
   return {
     schema: resolvedSchema,
     sink: resolvedSink,
-    meta: extractSinkMeta<TSpec>(resolvedSchema as ExtractedSchema<TSpec>, meta)
+    meta: extractSinkMeta<TSpec, TOptions>(resolvedSchema, meta)
   };
 }

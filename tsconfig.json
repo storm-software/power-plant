@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/sources/file-source"
+    },
+    {
+      "path": "./packages/schemas/openapi-schema"
     }
   ],
   "files": []

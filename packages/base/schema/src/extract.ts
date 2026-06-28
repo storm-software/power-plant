@@ -37,15 +37,7 @@ import { toJsonSchema } from "@valibot/to-json-schema";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
 import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-generator/dist/src/Config.js";
 import type * as z3 from "zod/v3";
-import {
-  resolveMetaDescription,
-  resolveMetaExample,
-  resolveMetaId,
-  resolveMetaLinks,
-  resolveMetaName,
-  resolveMetaTitle,
-  resolveMetaVersion
-} from "./metadata";
+
 import {
   isFileReference,
   isJsonSchema,
@@ -60,15 +52,12 @@ import {
   isValibotSchema
 } from "./type-checks";
 import type {
-  ExtractedSchema,
+  ExtractedSchemaEnvelope,
   InferExtractOptions,
   JsonSchema,
+  SchemaEnvelopeOf,
   SchemaInput,
   SchemaInputVariant,
-  SchemaInputWithMeta,
-  SchemaMeta,
-  SchemaMetaInput,
-  SchemaOf,
   SchemaSource,
   SchemaSourceInput,
   SchemaSourceVariant,
@@ -79,14 +68,9 @@ import type {
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
 
-interface UnwrappedSchemaInput<TSpec = any> {
-  input: SchemaInput<TSpec>;
-  meta?: SchemaMetaInput<TSpec>;
-}
-
-function isSchemaInputWithMeta<TSpec = any>(
+function isWrappedSchemaInput<TSpec = any>(
   input: SchemaInput<TSpec>
-): input is SchemaInputWithMeta<TSpec> {
+): input is { schema: SchemaInput<TSpec> } {
   if (!isSetObject(input) || !("schema" in input)) {
     return false;
   }
@@ -95,22 +79,17 @@ function isSchemaInputWithMeta<TSpec = any>(
     return false;
   }
 
-  return Object.keys(input).every(key => key === "schema" || key === "meta");
+  return true;
 }
 
 function unwrapSchemaInput<TSpec = any>(
   input: SchemaInput<TSpec>
-): UnwrappedSchemaInput<TSpec> {
-  if (isSchemaInputWithMeta(input)) {
-    return {
-      input: input.schema as SchemaInput<TSpec>,
-      meta: isSetString(input.meta) ? { description: input.meta } : input.meta
-    };
+): SchemaInput<TSpec> {
+  if (isWrappedSchemaInput(input)) {
+    return input.schema as SchemaInput<TSpec>;
   }
 
-  return {
-    input
-  };
+  return input;
 }
 
 function normalizeUri(uri: string): string {
@@ -474,7 +453,7 @@ export function extractHash(
   variant: SchemaInputVariant,
   input: SchemaInput
 ): string {
-  const { input: unwrappedInput } = unwrapSchemaInput(input);
+  const unwrappedInput = unwrapSchemaInput(input);
 
   if (isSchemaWithSource(unwrappedInput) || isSchema(unwrappedInput)) {
     return murmurhash({ variant, input: unwrappedInput.schema });
@@ -585,7 +564,7 @@ export function extractResolvedVariant(
  * @returns The resolved schema input variant.
  */
 export function extractVariant(input: SchemaInput): SchemaInputVariant {
-  const { input: unwrappedInput } = unwrapSchemaInput(input);
+  const unwrappedInput = unwrapSchemaInput(input);
 
   if (isSchemaWithSource(unwrappedInput) || isSchema(unwrappedInput)) {
     return unwrappedInput.variant;
@@ -725,46 +704,6 @@ export async function extractTSType(
 }
 
 /**
- * Extracts and normalizes {@link SchemaMeta | schema metadata} from a given {@link SchemaMetaInput}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
- *
- * @param schema - The schema from which to extract metadata.
- * @param input - The schema metadata input to extract and normalize.
- * @returns The normalized schema metadata.
- */
-export function extractSchemaMeta<TSpec = any>(
-  schema: SchemaOf<TSpec>,
-  input?: SchemaMetaInput<TSpec>
-): SchemaMeta<TSpec> {
-  const jsonSchema = schema.schema;
-  const meta = (schema.meta ?? {}) as SchemaMeta<TSpec>;
-
-  meta.name = resolveMetaName(jsonSchema, meta, input?.name);
-  meta.version = resolveMetaVersion(jsonSchema, meta, input?.version);
-  meta.id = resolveMetaId(jsonSchema, meta);
-  meta.title = resolveMetaTitle(jsonSchema, meta, input?.title);
-  meta.description = resolveMetaDescription(
-    "A schema that describes the shape of the {title} specification.",
-    schema.schema,
-    meta,
-    input?.description
-  );
-  meta.examples = resolveMetaExample(schema.schema, meta, input?.examples);
-  meta.links = resolveMetaLinks(schema.schema, meta, input?.links);
-
-  if (input?.deprecated) {
-    meta.deprecated = input?.deprecated;
-  }
-  if (input?.usage) {
-    meta.usage = input?.usage;
-  }
-  if (input?.tags) {
-    meta.tags = input?.tags;
-  }
-
-  return meta;
-}
-
-/**
  * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](esbuild.github.io) using [ts-json-schema-generator](https://github.com/vega/ts-json-schema-generator) to obtain the actual schema definition before extraction.
  *
  * @example
@@ -800,30 +739,25 @@ export function extractSchemaMeta<TSpec = any>(
 export async function extractSchemaWithSource<TSpec = any>(
   input: SchemaInput,
   options: InferExtractOptions<typeof input> = {}
-): Promise<ExtractedSchema<TSpec>> {
-  const { input: unwrappedInput, meta } = unwrapSchemaInput(input);
+): Promise<ExtractedSchemaEnvelope<TSpec>> {
+  const unwrappedInput = unwrapSchemaInput(input);
 
   if (isSchemaWithSource(unwrappedInput)) {
-    return {
-      ...unwrappedInput,
-      meta: extractSchemaMeta(unwrappedInput, meta)
-    } as ExtractedSchema<TSpec>;
+    return unwrappedInput as ExtractedSchemaEnvelope<TSpec>;
   }
 
   if (isSchema(unwrappedInput)) {
     return {
       ...unwrappedInput,
-      meta: extractSchemaMeta(unwrappedInput, meta),
       source: {
         hash: extractHash("json-schema", unwrappedInput.schema),
         variant: "json-schema",
         schema: unwrappedInput.schema
       }
-    } as ExtractedSchema<TSpec>;
+    } as ExtractedSchemaEnvelope<TSpec>;
   }
 
   let source: SchemaSource;
-  let resolvedMeta: SchemaMetaInput<TSpec> | undefined = meta;
 
   const variant = extractVariant(unwrappedInput);
   const hash = extractHash(variant, unwrappedInput);
@@ -863,16 +797,7 @@ export async function extractSchemaWithSource<TSpec = any>(
       options
     );
 
-    const { input: resolvedInput, meta: resolvedInputMeta } =
-      unwrapSchemaInput(resolved);
-    if (!resolvedMeta) {
-      resolvedMeta = resolvedInputMeta;
-    } else if (resolvedInputMeta) {
-      resolvedMeta = {
-        ...resolvedInputMeta,
-        ...resolvedMeta
-      };
-    }
+    const resolvedInput = unwrapSchemaInput(resolved);
 
     if (isSchemaWithSource(resolvedInput)) {
       source = resolvedInput.source;
@@ -907,16 +832,12 @@ export async function extractSchemaWithSource<TSpec = any>(
     );
   }
 
-  const extracted = {
+  return {
     variant,
     source,
     schema: await extractSchema(source.schema, source.variant),
-    hash,
-    meta: {}
-  } as ExtractedSchema<TSpec>;
-  extracted.meta = extractSchemaMeta(extracted as SchemaOf<any>, resolvedMeta);
-
-  return extracted;
+    hash
+  } as ExtractedSchemaEnvelope<TSpec>;
 }
 
 /**
@@ -955,19 +876,16 @@ export async function extractSchemaWithSource<TSpec = any>(
 export async function extract<TSpec = any>(
   input: SchemaInput<TSpec>,
   options: InferExtractOptions<typeof input> = {}
-): Promise<SchemaOf<TSpec>> {
-  const unwrapped = unwrapSchemaInput<TSpec>(input);
-  const unwrappedInput = unwrapped.input as SchemaOf<TSpec>;
+): Promise<SchemaEnvelopeOf<TSpec>> {
+  const unwrappedInput = unwrapSchemaInput<TSpec>(
+    input
+  ) as SchemaEnvelopeOf<TSpec>;
 
   if (isSchemaWithSource(unwrappedInput) || isSchemaOf<TSpec>(unwrappedInput)) {
-    return {
-      ...unwrappedInput,
-      meta: extractSchemaMeta<TSpec>(unwrappedInput, unwrapped.meta)
-    } as SchemaOf<TSpec>;
+    return unwrappedInput;
   }
 
   const result = await extractSchemaWithSource<TSpec>(input, options);
-  result.meta = extractSchemaMeta(result as SchemaOf<any>, unwrapped.meta);
 
   if (!result?.schema) {
     throw new Error(
