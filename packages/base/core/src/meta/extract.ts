@@ -16,12 +16,9 @@
 
  ------------------------------------------------------------------- */
 
+import type { ExtractedSchemaEnvelope, JsonSchema } from "@power-plant/schema";
+import { isSchemaOf } from "@power-plant/schema";
 import { stringifyType } from "@power-plant/schema/codegen";
-import { isSchemaOf } from "@power-plant/schema/type-checks";
-import type {
-  ExtractedSchemaEnvelope,
-  JsonSchema
-} from "@power-plant/schema/types";
 import { toArray } from "@stryke/convert/to-array";
 import { formatYYYYMMDD } from "@stryke/date/format";
 import { isValidTimestamp } from "@stryke/date/validate";
@@ -302,7 +299,7 @@ export function resolveMetaLinks<TSpec, TOptions extends object>(
  * @returns The normalized specification metadata.
  */
 export function extractMeta<TSpec, TOptions extends object>(
-  schema?: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
   config?: MetaConfig<TSpec, TOptions>
 ): Meta<TSpec, TOptions> {
   const extractedSchema = isSchemaOf<TSpec>(schema)
@@ -310,7 +307,7 @@ export function extractMeta<TSpec, TOptions extends object>(
     : (schema ?? ({ schema: {} } as ExtractedSchemaEnvelope<TSpec>));
   const meta = {} as Meta<TSpec, TOptions>;
 
-  meta.name = resolveMetaName(extractedSchema?.schema, meta, config?.name);
+  meta.name = resolveMetaName(extractedSchema.schema, meta, config?.name);
   meta.version = resolveMetaVersion(
     extractedSchema?.schema,
     meta,

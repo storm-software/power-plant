@@ -16,10 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
-} from "@power-plant/schema/types";
+import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
 import type { Meta, MetaConfig } from "./meta";

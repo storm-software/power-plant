@@ -77,89 +77,33 @@
         "default": "./dist/codegen.mjs"
       }
     },
-    "./constants": {
-      "require": {
-        "types": "./dist/constants.d.cts",
-        "default": "./dist/constants.cjs"
-      },
-      "import": {
-        "types": "./dist/constants.d.mts",
-        "default": "./dist/constants.mjs"
-      },
-      "default": {
-        "types": "./dist/constants.d.mts",
-        "default": "./dist/constants.mjs"
-      }
-    },
-    "./extract": {
-      "require": {
-        "types": "./dist/extract.d.cts",
-        "default": "./dist/extract.cjs"
-      },
-      "import": {
-        "types": "./dist/extract.d.mts",
-        "default": "./dist/extract.mjs"
-      },
-      "default": {
-        "types": "./dist/extract.d.mts",
-        "default": "./dist/extract.mjs"
-      }
-    },
-    "./helpers": {
-      "require": {
-        "types": "./dist/helpers.d.cts",
-        "default": "./dist/helpers.cjs"
-      },
-      "import": {
-        "types": "./dist/helpers.d.mts",
-        "default": "./dist/helpers.mjs"
-      },
-      "default": {
-        "types": "./dist/helpers.d.mts",
-        "default": "./dist/helpers.mjs"
-      }
-    },
-    "./metadata": {
-      "require": {
-        "types": "./dist/metadata.d.cts",
-        "default": "./dist/metadata.cjs"
-      },
-      "import": {
-        "types": "./dist/metadata.d.mts",
-        "default": "./dist/metadata.mjs"
-      },
-      "default": {
-        "types": "./dist/metadata.d.mts",
-        "default": "./dist/metadata.mjs"
-      }
-    },
     "./package.json": "./package.json",
-    "./type-checks": {
+    "./valibot": {
       "require": {
-        "types": "./dist/type-checks.d.cts",
-        "default": "./dist/type-checks.cjs"
+        "types": "./dist/valibot.d.cts",
+        "default": "./dist/valibot.cjs"
       },
       "import": {
-        "types": "./dist/type-checks.d.mts",
-        "default": "./dist/type-checks.mjs"
+        "types": "./dist/valibot.d.mts",
+        "default": "./dist/valibot.mjs"
       },
       "default": {
-        "types": "./dist/type-checks.d.mts",
-        "default": "./dist/type-checks.mjs"
+        "types": "./dist/valibot.d.mts",
+        "default": "./dist/valibot.mjs"
       }
     },
-    "./types": {
+    "./zod": {
       "require": {
-        "types": "./dist/types.d.cts",
-        "default": "./dist/types.cjs"
+        "types": "./dist/zod.d.cts",
+        "default": "./dist/zod.cjs"
       },
       "import": {
-        "types": "./dist/types.d.mts",
-        "default": "./dist/types.mjs"
+        "types": "./dist/zod.d.mts",
+        "default": "./dist/zod.mjs"
       },
       "default": {
-        "types": "./dist/types.d.mts",
-        "default": "./dist/types.mjs"
+        "types": "./dist/zod.d.mts",
+        "default": "./dist/zod.mjs"
       }
     }
   },
@@ -167,7 +111,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",

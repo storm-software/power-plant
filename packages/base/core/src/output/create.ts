@@ -16,8 +16,8 @@
 
  ------------------------------------------------------------------- */
 
-import { mergeMetadata } from "@power-plant/schema/helpers";
-import type { ExtractedSchemaEnvelope } from "@power-plant/schema/types";
+import type { ExtractedSchemaEnvelope } from "@power-plant/schema";
+import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
 import { isFunction } from "@stryke/type-checks/is-function";
@@ -29,14 +29,13 @@ import type {
   Output,
   OutputConfig,
   OutputMeta,
-  OutputMetaConfig,
-  OutputMetaInput
+  OutputMetaConfig
 } from "../types/output";
 import type { SchemaOf } from "../types/schema";
 import { isOutputConfigObject } from "./helpers";
 
 /**
- * Extracts and normalizes {@link OutputMeta | output metadata} from a given {@link OutputMetaInput}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ * Extracts and normalizes {@link OutputMeta | output metadata} from a given {@link OutputMetaConfig}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
  *
  * @param schema - The schema that the specification is expected to conform to.
  * @param config - The output metadata config to extract and normalize.

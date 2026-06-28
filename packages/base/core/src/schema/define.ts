@@ -16,10 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
-} from "@power-plant/schema/types";
+import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import type { SchemaConfigObject } from "../types/schema";
 import { isSchemaConfigObject } from "./helpers";
 

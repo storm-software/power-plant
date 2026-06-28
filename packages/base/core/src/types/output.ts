@@ -16,10 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
-} from "@power-plant/schema/types";
+import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
 import type { Meta, MetaConfig } from "./meta";
@@ -66,7 +63,7 @@ export interface OutputConfigObject<
   /**
    * Optional metadata that provides contextual information for the output.
    */
-  meta?: OutputMeta<TSpec, TOptions>;
+  meta?: OutputMetaConfig<TSpec, TOptions>;
 
   /**
    * The output implementation, either as a callable function or a file reference.

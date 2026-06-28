@@ -16,10 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
-} from "@power-plant/schema/types";
+import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { createInput } from "../input/create";

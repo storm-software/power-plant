@@ -16,8 +16,8 @@
 
  ------------------------------------------------------------------- */
 
-import { mergeMetadata } from "@power-plant/schema/helpers";
-import type { ExtractedSchemaEnvelope } from "@power-plant/schema/types";
+import type { ExtractedSchemaEnvelope } from "@power-plant/schema";
+import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
 import { isFunction } from "@stryke/type-checks/is-function";

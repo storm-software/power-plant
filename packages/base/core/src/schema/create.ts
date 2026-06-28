@@ -16,12 +16,12 @@
 
  ------------------------------------------------------------------- */
 
-import { extractSchemaWithSource } from "@power-plant/schema/extract";
 import type {
   ExtractedSchemaEnvelope,
   SchemaEnvelopeOf,
   SchemaSourceConfig
-} from "@power-plant/schema/types";
+} from "@power-plant/schema";
+import { extractSchemaWithSource } from "@power-plant/schema";
 import { isFunction } from "@stryke/type-checks/is-function";
 import {
   extractMeta,

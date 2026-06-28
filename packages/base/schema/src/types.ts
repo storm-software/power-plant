@@ -1802,3 +1802,27 @@ export interface ExtractedSchemaEnvelope<
    */
   source: SchemaSource<TSpec>;
 }
+
+declare module "zod" {
+  interface GlobalMeta {
+    id?: string;
+    title?: string;
+    description?: string;
+    docs?: string;
+    alias?: string[];
+    tags?: string[];
+    deprecated?: boolean;
+    hidden?: boolean;
+    ignore?: boolean;
+    internal?: boolean;
+    runtime?: boolean;
+    examples?:
+      unknown | { name?: string; description?: string; value: unknown }[];
+    readOnly?: boolean;
+    writeOnly?: boolean;
+    contentEncoding?: string;
+    contentMediaType?: string;
+    contentSchema?: string;
+    [keyword: string]: unknown;
+  }
+}
