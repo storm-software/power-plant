@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/hey-api-output",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "A Power Plant output for writing the Hey API generated code to a directory.",
   "keywords": [
@@ -65,9 +65,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@hey-api/openapi-ts": "catalog:",
     "@power-plant/core": "workspace:*",

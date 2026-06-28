@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.5) (06/28/2026)
+
+### Features
+
+- **schema:** Added `zod` and `valibot` schemas and updated package exports ([6440150](https://github.com/storm-software/power-plant/commit/6440150))
+- **core:** Rename `source` to `input` and `sink` to `output` ([1a3235f](https://github.com/storm-software/power-plant/commit/1a3235f))
+
 ## [0.0.4](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.4) (06/28/2026)
 
 ### Miscellaneous
