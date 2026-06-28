@@ -25,11 +25,11 @@ import type { Meta, MetaInput, MetaValue } from "./meta";
 
 export type SchemaMetaExample<TSpec> =
   | TSpec
-  | { description?: string; value: TSpec };
+  | { name?: string; description?: string; value: TSpec };
 
 export interface SchemaMetaInput<
   TSpec,
-  TOptions extends object
+  TOptions extends object = any
 > extends MetaInput<TSpec, TOptions> {
   /**
    * Examples of valid data for the schema. This can be a single example or an array of examples.
@@ -37,9 +37,14 @@ export interface SchemaMetaInput<
   examples?:
     | SchemaMetaExample<TSpec>
     | MetaValue<TSpec, TOptions, SchemaMetaExample<TSpec>[]>;
+
+  /**
+   * A description of the specification that is described by this schema.
+   */
+  spec?: MetaValue<TSpec, TOptions, string>;
 }
 
-export interface SchemaMeta<TSpec, TOptions extends object> extends Meta<
+export interface SchemaMeta<TSpec, TOptions extends object = any> extends Meta<
   TSpec,
   TOptions
 > {
@@ -52,7 +57,7 @@ export interface SchemaMeta<TSpec, TOptions extends object> extends Meta<
 /**
  * Schema input wrapper that attaches optional contextual metadata.
  */
-export interface SchemaInputObject<TSpec, TOptions extends object> {
+export interface SchemaInputObject<TSpec, TOptions extends object = any> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
@@ -79,7 +84,7 @@ export type InferCreateSchemaOptions<
  */
 export interface Schema<
   TSpec,
-  TOptions extends object
+  TOptions extends object = any
 > extends SchemaEnvelopeOf<TSpec> {
   /**
    * Optional contextual metadata associated with the schema.
@@ -94,4 +99,7 @@ export interface Schema<
  *
  * @see {@link Schema}
  */
-export type SchemaOf<TSpec, TOptions extends object> = Schema<TSpec, TOptions>;
+export type SchemaOf<TSpec, TOptions extends object = any> = Schema<
+  TSpec,
+  TOptions
+>;

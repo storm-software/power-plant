@@ -22,15 +22,42 @@ import packageJson from "../package.json" with { type: "json" };
 import type { OpenAPIDocument } from "./schema";
 import { openapiSchema } from "./schema";
 
-const schema: SchemaInputObject<OpenAPIDocument, object> = defineSchema<
+const schema: SchemaInputObject<OpenAPIDocument, any> = defineSchema<
   OpenAPIDocument,
-  object
+  any
 >({
   meta: {
     name: "openapi",
+    title: "OpenAPI",
     version: packageJson.version,
     description:
-      "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs."
+      "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
+    spec: (spec: OpenAPIDocument) =>
+      spec.info.title
+        ? `The ${
+            spec.info.version ? `${spec.info.version} version of the ` : ""
+          }${spec.info.title} HTTP API.${
+            spec.info.description
+              ? ` ${spec.info.description}`
+              : spec.info.summary
+                ? ` ${spec.info.summary}`
+                : ""
+          }`
+        : spec.info.description
+          ? ` ${spec.info.description}`
+          : spec.info.summary
+            ? ` ${spec.info.summary}`
+            : "",
+    tags: (spec: OpenAPIDocument) => spec.tags?.map(tag => tag.name) ?? [],
+    links: (spec: OpenAPIDocument) =>
+      spec.externalDocs
+        ? [
+            {
+              href: spec.externalDocs.url,
+              description: spec.externalDocs.description
+            }
+          ]
+        : []
   },
   schema: openapiSchema
 });
