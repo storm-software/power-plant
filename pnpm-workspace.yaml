@@ -8,12 +8,8 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@alloy-js/core": ^0.23.1
-  "@alloy-js/markdown": ^0.23.0
-  "@alloy-js/typescript": ^0.23.0
   "@hey-api/openapi-ts": ^0.99.0
   "@ls-lint/ls-lint": ^2.3.1
-  "@msgpack/msgpack": ^3.1.3
   "@nx/devkit": 23.0.1
   "@nx/eslint-plugin": 23.0.1
   "@nx/js": 23.0.1
@@ -26,15 +22,9 @@ catalog:
   "@powerlines/nx": ^0.13.178
   "@powerlines/plugin-alloy": ^0.26.232
   "@powerlines/plugin-automd": ^0.1.600
-  "@powerlines/plugin-nodejs": ^0.1.544
-  "@powerlines/plugin-plugin": ^0.12.551
-  "@powerlines/plugin-style-dictionary": ^0.3.508
   "@powerlines/plugin-tsdown": ^0.1.540
-  "@powerlines/plugin-untyped": ^0.2.554
-  "@powerlines/schema": ^0.11.121
   "@powerlines/tsconfig": ^0.4.187
   "@powerlines/tsdoc": ^0.2.135
-  "@specui/core": ^0.2.5
   "@standard-schema/spec": ^1.1.0
   "@storm-software/config": ^1.138.17
   "@storm-software/config-tools": ^1.190.80
@@ -49,16 +39,8 @@ catalog:
   "@storm-software/tsconfig": ^0.48.147
   "@storm-software/untyped": ^0.24.222
   "@storm-software/workspace-tools": ^1.296.60
-  "@stryke/c": ^0.0.0
-  "@stryke/cli": ^0.13.67
-  "@stryke/co": ^0.0.0
-  "@stryke/con": ^0.0.0
-  "@stryke/conv": ^0.0.0
-  "@stryke/conve": ^0.0.0
-  "@stryke/conver": ^0.0.0
   "@stryke/convert": ^0.7.25
   "@stryke/date": ^0.0.6
-  "@stryke/env": ^0.20.112
   "@stryke/fs": ^0.33.95
   "@stryke/hash": ^0.13.48
   "@stryke/helpers": ^0.10.34
@@ -71,17 +53,12 @@ catalog:
   "@stryke/unique-id": ^0.3.106
   "@stryke/url": ^0.4.45
   "@stryke/zod": ^0.3.40
-  "@swc-node/register": ^1.11.1
-  "@swc/core": ^1.15.41
-  "@swc/helpers": ^0.5.23
-  "@taplo/cli": ^0.7.0
   "@types/node": ^25.9.4
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
   automd: ^0.4.3
   copyfiles: ^2.4.1
   defu: ^6.1.7
-  esbuild: ^0.27.7
   eslint: ^10.6.0
   jiti: ^2.7.0
   lefthook: ^1.13.6
@@ -90,18 +67,13 @@ catalog:
   powerlines: 0.47.139
   prettier: ^3.9.0
   rimraf: ^6.1.3
-  sherif: ^1.0.0
-  smol-toml: ^1.7.0
   ts-json-schema-generator: ^2.9.0
   tsdown: ^0.22.3
-  typescript: ^6.0.3
-  unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.1
   verdaccio: 6.0.5
   vite: ^8.1.0
   vitest: ~4.1.9
-  yaml: ^2.9.0
   zod: ^4.4.3
   zx: ^8.8.5
 overrides:
@@ -136,6 +108,15 @@ engineStrict: true
 fetchTimeout: 450000
 dedupeDirectDeps: true
 dedupePeerDependents: true
+linkWorkspacePackages: true
+catalogMode: prefer
+cleanupUnusedCatalogs: true
+minimumReleaseAge: 2160
+minimumReleaseAgeExclude:
+  - "@storm-software/*"
+  - "conventional-changelog-storm-software"
+  - "@stryke/*"
+  - "@powerlines/*"
 allowBuilds:
   "@parcel/watcher": true
   "@swc/core": true

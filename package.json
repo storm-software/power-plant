@@ -2,7 +2,7 @@
   "name": "@power-plant/monorepo",
   "version": "0.0.1",
   "type": "module",
-  "description": "☢️ Generate anything from a specification",
+  "description": "☢️ Text generation that gives your AI superpowers",
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git"
@@ -23,16 +23,12 @@
   },
   "license": "Apache-2.0",
   "private": true,
-  "packageManager": "pnpm@11.1.2",
+  "packageManager": "pnpm@11.9.0",
   "engines": {
-    "node": ">=26.3.0",
-    "pnpm": ">=11.1.2"
+    "node": ">=24.16.0",
+    "pnpm": ">=11.9.0"
   },
-  "keywords": [
-    "power-plant",
-    "storm-software",
-    "monorepo"
-  ],
+  "keywords": ["power-plant", "storm-software", "monorepo"],
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",

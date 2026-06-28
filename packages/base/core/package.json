@@ -2,8 +2,12 @@
   "name": "@power-plant/core",
   "version": "0.0.5",
   "private": false,
-  "description": "Core package for Power Plant",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "description": "☢️ Text generation that gives your AI superpowers",
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -116,7 +120,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
     "@powerlines/core": "catalog:",
