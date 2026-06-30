@@ -25,5 +25,12 @@ export default defineConfig({
   name: "power-plant",
   tsdoc: {
     configFile: "@powerlines/tsdoc/recommended.json"
-  }
+  },
+  ignores: [
+    "packages/base/engine/src/bindings.*",
+    "packages/base/engine/src/power-plant-bindings.*",
+    "packages/base/engine/src/wasi-worker-browser.mjs",
+    "packages/base/engine/src/wasi-worker.mjs",
+    "packages/base/engine/src/webcontainer-fallback.cjs"
+  ]
 });

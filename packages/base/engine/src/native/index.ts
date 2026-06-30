@@ -16,13 +16,13 @@
 
  ------------------------------------------------------------------- */
 
+import type { Context } from "@power-plant/core";
 import type { BindingError, BindingRecallOutput } from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
   startAsyncRuntime
 } from "../bindings.cjs";
-import type { Context } from "../types/context";
 import type { Execution } from "../types/execution";
 import { fromBindingRecallOutput } from "./from-binding-recall-output";
 import { toBindingStoreInput } from "./to-binding-store-input";
