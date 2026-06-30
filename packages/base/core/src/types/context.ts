@@ -20,11 +20,18 @@ import type { FileSystemInterface } from "@stryke/types/fs";
 import type { Logger, Settings } from "./settings";
 
 export interface Session {
+  /**
+   * A unique identifier for the session.
+   */
   sessionId: string;
-  timestamp: number;
 
   /**
-   * The system ID to use for the application.
+   * The timestamp when the session was started.
+   */
+  startedAt: Date;
+
+  /**
+   * A unique identifier for the system that started the session.
    */
   systemId: string;
 }

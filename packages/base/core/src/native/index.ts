@@ -16,11 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  BindingError,
-  BindingOptions,
-  BindingRecallOutput
-} from "../bindings.cjs";
+import type { BindingError, BindingRecallOutput } from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
@@ -46,14 +42,24 @@ export class NativeBindingEngine {
   protected static asyncRuntimeShutdown = false;
 
   /**
-   * Create a new instance of the PowerPlant build engine, which is responsible for managing the build process, including scanning for route and layout modules, handling plugin hooks, and coordinating with the underlying binding engine. The constructor initializes the engine with the provided build context, sets up the binding engine with the appropriate configuration and plugin API, and prepares it for use in the build process.
+   * Create a new instance of the Power Plant native storage engine, which is responsible for managing the generation process, including storing the execution metadata and coordinating with the underlying storage engine. The constructor initializes the engine with the provided context, sets up the storage engine with the appropriate configuration and plugin API, and prepares it for use in the generation process.
    *
-   * @param context - The build context containing configuration and utilities for the engine.
+   * @param context - The context containing configuration and utilities for the engine.
    */
-  public constructor(context: any) {
+  public constructor(context: Context) {
     this.#context = context;
 
-    this.#binding = new BindingEngine({} as BindingOptions);
+    this.#binding = new BindingEngine({
+      logLevel: context.settings.logLevel,
+      disableTracing: context.settings.skipTracing,
+      cwd: context.cwd,
+      cachePath: context.settings.paths.cache,
+      dataPath: context.settings.paths.data,
+      logPath: context.settings.paths.log,
+      tempPath: context.settings.paths.temp,
+      configPath: context.settings.paths.config,
+      outputPath: context.cwd
+    });
   }
 
   /**

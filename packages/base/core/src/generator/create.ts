@@ -34,6 +34,7 @@ import { existsSync } from "node:fs";
 import os from "node:os";
 import { callAsyncContext } from "../context";
 import { isGeneratorConfigObject } from "../helpers/type-checks";
+import { NativeBindingEngine } from "../native";
 import type { UserConfig, UserConfigExport } from "../types/config";
 import type { Context } from "../types/context";
 import type {
@@ -214,7 +215,7 @@ async function createContext(userConfig: UserConfig = {}): Promise<Context> {
       cwd,
       session: {
         sessionId: uuid(),
-        timestamp: Date.now(),
+        startedAt: new Date(),
         systemId: uuid()
       }
     },
@@ -280,6 +281,7 @@ export async function createGenerator<
 
   const generate = async (options: TOptions & UserConfig) => {
     const context = await createContext(options);
+    const engine = new NativeBindingEngine(context);
 
     return callAsyncContext(context, async () => {
       const spec = isFunction(input.input)
@@ -292,14 +294,28 @@ export async function createGenerator<
 
       const description =
         typeof configObject.meta?.description === "function"
-          ? configObject.meta.description(spec)
-          : configObject.meta?.description;
+          ? configObject.meta.description(spec, options)
+          : await Promise.resolve(configObject.meta?.description);
 
       if (description) {
-        context.logger.info(`Generating ${description}...`);
+        context.logger.info(
+          `Generating ${await Promise.resolve(description)}...`
+        );
       }
 
-      return output.output(spec, options);
+      const result = await output.output(spec, options);
+      if (!context.settings.skipStorage) {
+        await engine.store({
+          documents: [],
+          meta: {
+            id: uuid(),
+            executedAt: new Date(),
+            executedBy: context.settings.userId
+          }
+        });
+      }
+
+      return result;
     });
   };
 

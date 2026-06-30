@@ -27,6 +27,13 @@ export interface Settings {
   mode: "development" | "production" | "test";
 
   /**
+   * The log level to use for the application.
+   *
+   * @defaultValue "warn"
+   */
+  logLevel: "debug" | "info" | "warn" | "error" | "silent";
+
+  /**
    * The paths to use for the application.
    */
   paths: EnvPaths;
@@ -40,6 +47,20 @@ export interface Settings {
    * The tenant ID to use for the application.
    */
   tenantId: string;
+
+  /**
+   * Whether to skip {@link Execution | execution metadata} storage after completing generation.
+   *
+   * @defaultValue false
+   */
+  skipStorage: boolean;
+
+  /**
+   * Whether to skip tracing.
+   *
+   * @defaultValue false
+   */
+  skipTracing: boolean;
 }
 
 export interface Logger {
