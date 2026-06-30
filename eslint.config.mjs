@@ -27,10 +27,10 @@ export default defineConfig({
     configFile: "@powerlines/tsdoc/recommended.json"
   },
   ignores: [
-    "packages/base/engine/src/bindings.*",
-    "packages/base/engine/src/power-plant-bindings.*",
-    "packages/base/engine/src/wasi-worker-browser.mjs",
-    "packages/base/engine/src/wasi-worker.mjs",
-    "packages/base/engine/src/webcontainer-fallback.cjs"
+    "packages/base/bindings/src/bindings.*",
+    "packages/base/bindings/src/power-plant-bindings.*",
+    "packages/base/bindings/src/wasi-worker-browser.mjs",
+    "packages/base/bindings/src/wasi-worker.mjs",
+    "packages/base/bindings/src/webcontainer-fallback.cjs"
   ]
 });

@@ -171,16 +171,16 @@ xxhash-rust        = "0.8.15"
 
 # oxc crates with the same version
 oxc = { version = "0.97.0", features = [
-  "ast_visit",
-  "transformer",
-  "minifier",
-  "mangler",
-  "semantic",
-  "codegen",
-  "serialize",
-  "isolated_declarations",
-  "regular_expression",
-  "cfg"
+    "ast_visit",
+    "transformer",
+    "minifier",
+    "mangler",
+    "semantic",
+    "codegen",
+    "serialize",
+    "isolated_declarations",
+    "regular_expression",
+    "cfg"
 ] }
 oxc_allocator = { version = "0.97.0", features = ["pool"] }
 oxc_ecmascript = { version = "0.97.0" }
@@ -199,14 +199,14 @@ oxc_sourcemap     = { version = "6.0.1" }
 
 # napi
 napi = { version = "3.0.0", features = [
-  "async",
-  "anyhow",
-  "napi4",
-  "tokio_rt"
+    "async",
+    "anyhow",
+    "napi4",
+    "tokio_rt"
 ] }
 napi-build = { version = "2.2.2" }
 napi-derive = { version = "3.0.0", default-features = false, features = [
-  "type-def"
+    "type-def"
 ] }
 
 # [patch.crates-io]
