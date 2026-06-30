@@ -37,9 +37,33 @@ export interface Session {
 }
 
 export interface Context {
+  /**
+   * The unique identifier for the execution.
+   */
+  executionId: string;
+
+  /**
+   * The current working directory.
+   */
   cwd: string;
+
+  /**
+   * The settings for the context.
+   */
   settings: Settings;
+
+  /**
+   * The file system for the context.
+   */
   fs: FileSystemInterface;
+
+  /**
+   * The logger for the context.
+   */
   logger: Logger;
+
+  /**
+   * The session for the context.
+   */
   session: Session;
 }

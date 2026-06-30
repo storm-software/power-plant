@@ -1,0 +1,42 @@
+{
+  "name": "@power-plant/bindings-linux-arm64-musl",
+  "version": "0.0.1",
+  "cpu": [
+    "arm64"
+  ],
+  "main": "power-plant-bindings.linux-arm64-musl.node",
+  "files": [
+    "power-plant-bindings.linux-arm64-musl.node"
+  ],
+  "description": "☢️ Text generation that gives your AI superpowers",
+  "keywords": [
+    "power-plant",
+    "powerlines",
+    "storm-software"
+  ],
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "homepage": "https://stormsoftware.com",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/base/engine"
+  },
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "os": [
+    "linux"
+  ],
+  "libc": [
+    "musl"
+  ]
+}

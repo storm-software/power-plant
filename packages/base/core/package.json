@@ -58,21 +58,63 @@
         "default": "./dist/index.mjs"
       }
     },
-    "./generator": {
+    "./config": {
       "require": {
-        "types": "./dist/generator/index.d.cts",
-        "default": "./dist/generator/index.cjs"
+        "types": "./dist/config.d.cts",
+        "default": "./dist/config.cjs"
       },
       "import": {
-        "types": "./dist/generator/index.d.mts",
-        "default": "./dist/generator/index.mjs"
+        "types": "./dist/config.d.mts",
+        "default": "./dist/config.mjs"
       },
       "default": {
-        "types": "./dist/generator/index.d.mts",
-        "default": "./dist/generator/index.mjs"
+        "types": "./dist/config.d.mts",
+        "default": "./dist/config.mjs"
       }
     },
-    "./package.json": "./package.json"
+    "./context": {
+      "require": {
+        "types": "./dist/context.d.cts",
+        "default": "./dist/context.cjs"
+      },
+      "import": {
+        "types": "./dist/context.d.mts",
+        "default": "./dist/context.mjs"
+      },
+      "default": {
+        "types": "./dist/context.d.mts",
+        "default": "./dist/context.mjs"
+      }
+    },
+    "./define": {
+      "require": {
+        "types": "./dist/define.d.cts",
+        "default": "./dist/define.cjs"
+      },
+      "import": {
+        "types": "./dist/define.d.mts",
+        "default": "./dist/define.mjs"
+      },
+      "default": {
+        "types": "./dist/define.d.mts",
+        "default": "./dist/define.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./type-checks": {
+      "require": {
+        "types": "./dist/type-checks.d.cts",
+        "default": "./dist/type-checks.cjs"
+      },
+      "import": {
+        "types": "./dist/type-checks.d.mts",
+        "default": "./dist/type-checks.mjs"
+      },
+      "default": {
+        "types": "./dist/type-checks.d.mts",
+        "default": "./dist/type-checks.mjs"
+      }
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -82,64 +124,17 @@
     "dist"
   ],
   "dependencies": {
-    "@emnapi/core": "catalog:",
-    "@emnapi/runtime": "catalog:",
-    "@napi-rs/wasm-runtime": "catalog:",
     "@power-plant/schema": "workspace:*",
-    "@powerlines/core": "catalog:",
-    "@powerlines/engine": "catalog:",
-    "@powerlines/plugin-alloy": "catalog:",
-    "@powerlines/plugin-automd": "catalog:",
-    "@stryke/convert": "catalog:",
-    "@stryke/date": "catalog:",
-    "@stryke/env": "catalog:",
-    "@stryke/fs": "catalog:",
-    "@stryke/helpers": "catalog:",
-    "@stryke/json": "catalog:",
-    "@stryke/path": "catalog:",
-    "@stryke/resolve": "catalog:",
-    "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
-    "@stryke/unique-id": "catalog:",
-    "automd": "catalog:",
-    "c12": "catalog:",
-    "defu": "catalog:",
-    "jiti": "catalog:",
-    "powerlines": "catalog:",
-    "signal-exit": "catalog:",
-    "tsdown": "catalog:"
+    "defu": "catalog:"
   },
   "devDependencies": {
-    "@napi-rs/cli": "catalog:",
-    "@powerlines/plugin-napi-rs": "catalog:",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "napi": {
-    "binaryName": "power-plant-bindings",
-    "packageName": "@power-plant/bindings",
-    "targets": [
-      "x86_64-apple-darwin",
-      "x86_64-pc-windows-msvc",
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl",
-      "x86_64-unknown-freebsd",
-      "armv7-unknown-linux-gnueabihf",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-apple-darwin",
-      "aarch64-unknown-linux-musl",
-      "aarch64-unknown-linux-ohos",
-      "aarch64-pc-windows-msvc",
-      "aarch64-linux-android",
-      "wasm32-wasip1-threads",
-      "s390x-unknown-linux-gnu",
-      "powerpc64le-unknown-linux-gnu"
-    ],
-    "dtsHeader": "export type MaybePromise<T> = T | Promise<T>\nexport type Nullable<T> = T | null | undefined\ntype VoidNullable<T = void> = T | null | undefined | void\nexport type BindingStringOrRegex = string | RegExp\ntype BindingResult<T> = { errors: BindingError[], isBindingErrors: boolean } | T\n\n"
   }
 }

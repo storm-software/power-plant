@@ -21,11 +21,7 @@ catalog:
   "@nx/vite": 23.0.1
   "@nx/vitest": 23.0.1
   "@nx/workspace": 23.0.1
-  "@powerlines/core": ^0.48.60
-  "@powerlines/engine": ^0.49.62
   "@powerlines/nx": ^0.13.178
-  "@powerlines/plugin-alloy": ^0.26.232
-  "@powerlines/plugin-automd": ^0.1.600
   "@powerlines/plugin-napi-rs": ^0.2.192
   "@powerlines/plugin-tsdown": ^0.1.540
   "@powerlines/tsconfig": ^0.4.187
@@ -87,6 +83,7 @@ catalog:
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
+  "@power-plant/engine": workspace:*
   "@power-plant/file-input": workspace:*
   "@power-plant/openapi-schema": workspace:*
   "@power-plant/hey-api-output": workspace:*
