@@ -20,52 +20,41 @@
 import { $, argv, chalk, echo } from "zx";
 
 try {
-  let configuration = argv.configuration;
-  if (!configuration) {
-    if (argv.prod) {
-      configuration = "production";
-    } else if (argv.dev) {
-      configuration = "development";
-    } else {
-      configuration = "production";
-    }
+  let target = argv.target;
+  if (!target) {
+    target = process.env.NATIVE_TARGET;
+  }
+  let buildFlags = argv.buildFlags;
+  if (!buildFlags) {
+    buildFlags = process.env.NATIVE_BUILD_FLAGS;
   }
 
   echo`${chalk.whiteBright(
-    ` 🏗️  Building the Power Plant native artifacts in ${configuration} mode...`
+    ` 🏗️  Building the Power Plant native ${target} artifacts${
+      buildFlags ? ` with build flags: "${buildFlags}"` : ""
+    }...`
   )}`;
 
-  let proc = $`pnpm bootstrap`.timeout(`${1 * 60}s`);
+  $.cwd = "packages/base/bindings";
+
+  const proc =
+    $`pnpm exec napi build --release --cwd ./src --manifest-path ../../../crates/bindings/Cargo.toml --package-json-path ../package.json --target ${target} ${buildFlags}`.timeout(
+      `${15 * 60}s`
+    );
   proc.stdout.on("data", data => {
     echo`${data}`;
   });
-  let result = await proc;
+  const result = await proc;
   if (result.exitCode !== 0) {
     throw new Error(
-      `An error occurred while bootstrapping the monorepo: \n\n${
+      `An error occurred while building the Power Plant native ${target} artifacts: \n\n${
         result.message
       }\n`
     );
   }
 
-  proc =
-    $`pnpm nx run-many --target=build --projects=\"native-*\" --exclude=monorepo --configuration=${
-      configuration
-    } --outputStyle=dynamic-legacy --parallel=5`.timeout(`${45 * 60}s`);
-  proc.stdout.on("data", data => {
-    echo`${data}`;
-  });
-  result = await proc;
-  if (result.exitCode !== 0) {
-    throw new Error(
-      `An error occurred while building the Power Plant native artifacts in ${
-        configuration
-      } mode: \n\n${result.message}\n`
-    );
-  }
-
   echo`${chalk.green(
-    ` ✔ Successfully built the Power Plant native artifacts in ${configuration} mode!`
+    ` ✔ Successfully built the Power Plant native ${target} artifacts!`
   )}\n`;
 } catch (error) {
   echo`${chalk.red(error?.message ? error.message : "A failure occurred while building the Power Plant native artifacts")}`;

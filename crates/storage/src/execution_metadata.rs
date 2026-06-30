@@ -24,10 +24,7 @@ pub(crate) fn extract_execution_metadata(execution: &Execution) -> ExecutionMeta
   let mut generator_ids = Vec::new();
   let mut generator_names = Vec::new();
   let mut tags = Vec::new();
-  let mut text_parts = vec![
-    execution.meta.id.clone(),
-    execution.meta.executed_by.clone(),
-  ];
+  let mut text_parts = vec![execution.meta.id.clone(), execution.meta.executed_by.clone()];
 
   for document in &execution.documents {
     text_parts.push(document.name.clone());
@@ -35,9 +32,27 @@ pub(crate) fn extract_execution_metadata(execution: &Execution) -> ExecutionMeta
 
     for source in &document.source {
       text_parts.push(source.language.clone());
-      push_meta(&source.meta.schema.meta, &mut schema_ids, &mut schema_names, &mut tags, &mut text_parts);
-      push_meta(&source.meta.input.meta, &mut schema_ids, &mut schema_names, &mut tags, &mut text_parts);
-      push_meta(&source.meta.output.meta, &mut schema_ids, &mut schema_names, &mut tags, &mut text_parts);
+      push_meta(
+        &source.meta.schema.meta,
+        &mut schema_ids,
+        &mut schema_names,
+        &mut tags,
+        &mut text_parts,
+      );
+      push_meta(
+        &source.meta.input.meta,
+        &mut schema_ids,
+        &mut schema_names,
+        &mut tags,
+        &mut text_parts,
+      );
+      push_meta(
+        &source.meta.output.meta,
+        &mut schema_ids,
+        &mut schema_names,
+        &mut tags,
+        &mut text_parts,
+      );
 
       let generator_name = source.meta.generator.description.clone().unwrap_or_default();
       if !generator_name.is_empty() {
@@ -66,7 +81,10 @@ pub(crate) fn extract_execution_metadata(execution: &Execution) -> ExecutionMeta
 }
 
 /// Score an execution against a search input for filesystem and in-memory backends.
-pub(crate) fn score_execution_metadata(metadata: &ExecutionMetadataIndex, input: &SearchInput) -> Option<f64> {
+pub(crate) fn score_execution_metadata(
+  metadata: &ExecutionMetadataIndex,
+  input: &SearchInput,
+) -> Option<f64> {
   if let Some(executed_by) = &input.executed_by
     && metadata.executed_by != *executed_by
   {
@@ -171,8 +189,8 @@ mod tests {
   use super::*;
   use chrono::Utc;
   use power_plant_models::{
-    Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
-    InputMeta, Meta, OutputMeta, SchemaMeta,
+    Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta,
+    GeneratorMeta, InputMeta, Meta, OutputMeta, SchemaMeta,
   };
 
   fn sample_execution() -> Execution {

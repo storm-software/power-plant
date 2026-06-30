@@ -1,4 +1,6 @@
-use crate::types::{binding_input::BindingExecution, binding_log::BindingLog, binding_log_level::BindingLogLevel};
+use crate::types::{
+  binding_input::BindingExecution, binding_log::BindingLog, binding_log_level::BindingLogLevel,
+};
 use derive_more::Debug;
 use power_plant_common::{RecallOutput, SearchOutput, StoreOutput};
 use power_plant_error::Severity;

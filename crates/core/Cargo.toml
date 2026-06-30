@@ -55,9 +55,9 @@ serde = ["dep:serde"]
 testing = []
 
 [dev-dependencies]
-power-plant-storage = { workspace = true, features = ["testing"] }
-power-plant-models = { workspace = true }
 chrono = { workspace = true, features = ["serde"] }
+power-plant-models = { workspace = true }
+power-plant-storage = { workspace = true, features = ["testing"] }
 serde_json = { workspace = true }
 
 [package.metadata.cargo-shear]

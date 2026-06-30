@@ -6,8 +6,8 @@ use power_plant_common::{ExecutionSearchHit, SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::{
-  execution_metadata::{extract_execution_metadata, score_execution_metadata},
   ExecutionStore, StorageError,
+  execution_metadata::{extract_execution_metadata, score_execution_metadata},
 };
 
 /// Filesystem-backed execution store.
@@ -39,14 +39,12 @@ impl ExecutionStore for FsExecutionStore {
     self.ensure_base_path()?;
 
     let path = self.execution_path(&execution.meta.id);
-    let json = serde_json::to_vec_pretty(execution).map_err(|err| {
-      StorageError::InvalidData(format!("failed to serialize execution: {err}"))
-    })?;
+    let json = serde_json::to_vec_pretty(execution)
+      .map_err(|err| StorageError::InvalidData(format!("failed to serialize execution: {err}")))?;
 
     if let Some(parent) = path.parent() {
-      fs::create_dir_all(parent).map_err(|err| {
-        StorageError::Io(format!("failed to create '{}': {err}", parent))
-      })?;
+      fs::create_dir_all(parent)
+        .map_err(|err| StorageError::Io(format!("failed to create '{}': {err}", parent)))?;
     }
 
     fs::write(&path, json)
@@ -63,9 +61,8 @@ impl ExecutionStore for FsExecutionStore {
       }
     })?;
 
-    serde_json::from_slice(&bytes).map_err(|err| {
-      StorageError::InvalidData(format!("failed to deserialize '{}': {err}", path))
-    })
+    serde_json::from_slice(&bytes)
+      .map_err(|err| StorageError::InvalidData(format!("failed to deserialize '{}': {err}", path)))
   }
 
   fn search(&self, input: &SearchInput) -> Result<SearchOutput, StorageError> {
@@ -94,16 +91,16 @@ impl ExecutionStore for FsExecutionStore {
         hits.push(ExecutionSearchHit {
           execution_id: metadata.execution_id,
           score: Some(score),
-          snippet: input.query.clone().or_else(|| Some(metadata.search_text.chars().take(160).collect())),
+          snippet: input
+            .query
+            .clone()
+            .or_else(|| Some(metadata.search_text.chars().take(160).collect())),
         });
       }
     }
 
     hits.sort_by(|left, right| {
-      right
-        .score
-        .partial_cmp(&left.score)
-        .unwrap_or(std::cmp::Ordering::Equal)
+      right.score.partial_cmp(&left.score).unwrap_or(std::cmp::Ordering::Equal)
     });
     hits.truncate(limit);
 
@@ -127,8 +124,8 @@ mod tests {
   use super::*;
   use chrono::Utc;
   use power_plant_models::{
-    ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta, InputMeta, Meta,
-    OutputMeta, SchemaMeta,
+    ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
+    InputMeta, Meta, OutputMeta, SchemaMeta,
   };
 
   fn sample_execution(id: &str) -> Execution {
@@ -162,11 +159,7 @@ mod tests {
           },
         }],
       }],
-      meta: ExecutionMeta {
-        id: id.into(),
-        executed_at: Utc::now(),
-        executed_by: "tester".into(),
-      },
+      meta: ExecutionMeta { id: id.into(), executed_at: Utc::now(), executed_by: "tester".into() },
     }
   }
 
@@ -197,7 +190,8 @@ mod tests {
 
   #[test]
   fn search_finds_matching_execution() {
-    let temp_dir = std::env::temp_dir().join(format!("power-plant-storage-search-{}", std::process::id()));
+    let temp_dir =
+      std::env::temp_dir().join(format!("power-plant-storage-search-{}", std::process::id()));
     let store = FsExecutionStore::new(Utf8PathBuf::from_path_buf(temp_dir.clone()).unwrap());
     let execution = sample_execution("exec-search");
 

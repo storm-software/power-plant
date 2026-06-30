@@ -1,21 +1,3 @@
-/* -------------------------------------------------------------------
-
-                  🗲 Storm Software - Power Plant
-
- This code was released as part of the Power Plant project. Power Plant
- is maintained by Storm Software under the Apache-2.0 license, and is
- free for commercial and private use. For more information, please visit
- our licensing page at https://stormsoftware.com/licenses/projects/power-plant.
-
- Website:                  https://stormsoftware.com
- Repository:               https://github.com/storm-software/power-plant
- Documentation:            https://docs.stormsoftware.com/projects/power-plant
- Contact:                  https://stormsoftware.com/contact
-
- SPDX-License-Identifier:  Apache-2.0
-
- ------------------------------------------------------------------- */
-
 export type MaybePromise<T> = T | Promise<T>;
 export type Nullable<T> = T | null | undefined;
 type VoidNullable<T = void> = T | null | undefined | void;
@@ -51,11 +33,8 @@ export declare const enum Severity {
 }
 export declare class ParseResult {
   get program(): import("@oxc-project/types").Program;
-
   get module(): EcmaScriptModule;
-
   get comments(): Array<Comment>;
-
   get errors(): Array<OxcError>;
 }
 
@@ -315,39 +294,31 @@ export interface ValueSpan {
 }
 export declare class ResolverFactory {
   constructor(options?: NapiResolveOptions | undefined | null);
-
   static default(): ResolverFactory;
-
   /** Clone the resolver using the same underlying cache. */
   cloneWithOptions(options: NapiResolveOptions): ResolverFactory;
-
   /**
    * Clear the underlying cache.
    *
    * Warning: The caller must ensure that there're no ongoing resolution operations when calling this method. Otherwise, it may cause those operations to return an incorrect result.
    */
   clearCache(): void;
-
   /** Synchronously resolve `specifier` at an absolute path to a `directory`. */
   sync(directory: string, request: string): ResolveResult;
-
   /** Asynchronously resolve `specifier` at an absolute path to a `directory`. */
   async(directory: string, request: string): Promise<ResolveResult>;
-
   /**
    * Synchronously resolve `specifier` at an absolute path to a `file`.
    *
    * This method automatically discovers tsconfig.json by traversing parent directories.
    */
   resolveFileSync(file: string, request: string): ResolveResult;
-
   /**
    * Asynchronously resolve `specifier` at an absolute path to a `file`.
    *
    * This method automatically discovers tsconfig.json by traversing parent directories.
    */
   resolveFileAsync(file: string, request: string): Promise<ResolveResult>;
-
   /**
    * Synchronously resolve `specifier` for TypeScript declaration files.
    *
@@ -355,7 +326,6 @@ export declare class ResolverFactory {
    * Uses TypeScript's `moduleResolution: "bundler"` algorithm.
    */
   resolveDtsSync(file: string, request: string): ResolveResult;
-
   /**
    * Asynchronously resolve `specifier` for TypeScript declaration files.
    *
@@ -1256,19 +1226,14 @@ export interface TypeScriptOptions {
 }
 export declare class BindingEngine {
   constructor(options: BindingOptions);
-
   store(input: BindingStoreInput): Promise<BindingResult<BindingStoreOutput>>;
-
   recall(
     input: BindingRecallInput
   ): Promise<BindingResult<BindingRecallOutput>>;
-
   search(
     input: BindingSearchInput
   ): Promise<BindingResult<BindingSearchOutput>>;
-
   close(): Promise<undefined>;
-
   get isClosed(): boolean;
 }
 

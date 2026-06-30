@@ -378,7 +378,9 @@ impl From<BindingSearchInput> for SearchInput {
       schema: value.schema,
       generator: value.generator,
       tags: value.tags,
-      embedding: value.embedding.map(|values| values.into_iter().map(|value| value as f32).collect()),
+      embedding: value
+        .embedding
+        .map(|values| values.into_iter().map(|value| value as f32).collect()),
       limit: value.limit,
     }
   }
@@ -390,18 +392,20 @@ impl From<GeneratorMeta> for BindingGeneratorMeta {
   }
 }
 
-fn meta_to_binding_fields(meta: Meta) -> (String, String, serde_json::Value, String, String, Option<String>, Option<serde_json::Value>, Option<Vec<String>>, Vec<serde_json::Value>) {
-  let Meta {
-    id,
-    name,
-    version,
-    description,
-    title,
-    usage,
-    deprecated,
-    tags,
-    links,
-  } = meta;
+fn meta_to_binding_fields(
+  meta: Meta,
+) -> (
+  String,
+  String,
+  serde_json::Value,
+  String,
+  String,
+  Option<String>,
+  Option<serde_json::Value>,
+  Option<Vec<String>>,
+  Vec<serde_json::Value>,
+) {
+  let Meta { id, name, version, description, title, usage, deprecated, tags, links } = meta;
 
   (
     id,
@@ -412,7 +416,10 @@ fn meta_to_binding_fields(meta: Meta) -> (String, String, serde_json::Value, Str
     usage,
     deprecated.map(|value| serde_json::to_value(value).unwrap_or(serde_json::Value::Null)),
     tags,
-    links.into_iter().map(|link| serde_json::to_value(link).unwrap_or(serde_json::Value::Null)).collect(),
+    links
+      .into_iter()
+      .map(|link| serde_json::to_value(link).unwrap_or(serde_json::Value::Null))
+      .collect(),
   )
 }
 
@@ -458,7 +465,18 @@ impl From<InputMeta> for BindingInputMeta {
     let (id, name, version, description, title, usage, deprecated, tags, links) =
       meta_to_binding_fields(value.meta);
 
-    Self { id, name, version, description, title, usage, deprecated, tags, links, input: value.input }
+    Self {
+      id,
+      name,
+      version,
+      description,
+      title,
+      usage,
+      deprecated,
+      tags,
+      links,
+      input: value.input,
+    }
   }
 }
 

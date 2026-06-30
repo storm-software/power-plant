@@ -7,8 +7,8 @@ use power_plant_models::Execution;
 use serde_json::Value;
 
 use crate::{
-  execution_metadata::{EMBEDDING_DIMENSIONS, extract_execution_metadata, hash_embedding},
   StorageError,
+  execution_metadata::{EMBEDDING_DIMENSIONS, extract_execution_metadata, hash_embedding},
 };
 
 const DEFAULT_MAX_DB_SIZE: u64 = 1024 * 1024 * 1024;
@@ -129,9 +129,7 @@ impl LadybugExecutionIndex {
 
     self.remove_execution_components(&conn, &metadata.execution_id)?;
 
-    for (component_id, component_name, component_type, tags) in
-      collect_components(&metadata)
-    {
+    for (component_id, component_name, component_type, tags) in collect_components(&metadata) {
       let component_id = escape_cypher_string(&component_id);
       let component_name = escape_cypher_string(&component_name);
       let component_type = escape_cypher_string(&component_type);
@@ -168,7 +166,10 @@ impl LadybugExecutionIndex {
     self.search_by_metadata(input)
   }
 
-  fn search_by_metadata(&self, input: &SearchInput) -> Result<Vec<ExecutionSearchHit>, StorageError> {
+  fn search_by_metadata(
+    &self,
+    input: &SearchInput,
+  ) -> Result<Vec<ExecutionSearchHit>, StorageError> {
     let limit = input.limit.unwrap_or(50);
     let mut where_clauses = Vec::new();
 
@@ -181,7 +182,7 @@ impl LadybugExecutionIndex {
       where_clauses.push(format!("e.executed_by = '{}'", escape_cypher_string(executed_by)));
     }
 
-  if let Some(schema) = &input.schema {
+    if let Some(schema) = &input.schema {
       let escaped = escape_cypher_string(schema);
       where_clauses.push(format!(
         "EXISTS {{
@@ -221,23 +222,20 @@ impl LadybugExecutionIndex {
       format!(" WHERE {}", where_clauses.join(" AND "))
     };
 
-    let query = format!(
-      "MATCH (e:Execution){where_clause} RETURN e.id, e.search_text LIMIT {limit}"
-    );
+    let query =
+      format!("MATCH (e:Execution){where_clause} RETURN e.id, e.search_text LIMIT {limit}");
 
     let rows = self.execute_query(&query)?;
-    Ok(rows
-      .into_iter()
-      .filter_map(|row| {
-        let execution_id = row.first()?.as_str()?.to_string();
-        let snippet = row.get(1).and_then(Value::as_str).map(str::to_string);
-        Some(ExecutionSearchHit {
-          execution_id,
-          score: Some(1.0),
-          snippet,
+    Ok(
+      rows
+        .into_iter()
+        .filter_map(|row| {
+          let execution_id = row.first()?.as_str()?.to_string();
+          let snippet = row.get(1).and_then(Value::as_str).map(str::to_string);
+          Some(ExecutionSearchHit { execution_id, score: Some(1.0), snippet })
         })
-      })
-      .collect())
+        .collect(),
+    )
   }
 
   fn search_by_embedding(
@@ -260,19 +258,17 @@ impl LadybugExecutionIndex {
     );
 
     let rows = self.execute_query(&query)?;
-    Ok(rows
-      .into_iter()
-      .filter_map(|row| {
-        let execution_id = row.first()?.as_str()?.to_string();
-        let distance = row.get(1).and_then(Value::as_f64);
-        let score = distance.map(|value| 1.0 / (1.0 + value));
-        Some(ExecutionSearchHit {
-          execution_id,
-          score,
-          snippet: None,
+    Ok(
+      rows
+        .into_iter()
+        .filter_map(|row| {
+          let execution_id = row.first()?.as_str()?.to_string();
+          let distance = row.get(1).and_then(Value::as_f64);
+          let score = distance.map(|value| 1.0 / (1.0 + value));
+          Some(ExecutionSearchHit { execution_id, score, snippet: None })
         })
-      })
-      .collect())
+        .collect(),
+    )
   }
 
   fn remove_execution_components(
@@ -296,13 +292,10 @@ impl LadybugExecutionIndex {
 
   fn execute_query(&self, query: &str) -> Result<Vec<Vec<Value>>, StorageError> {
     let conn = self.connection()?;
-    let result = conn
-      .query(query)
-      .map_err(|err| StorageError::Query(format!("query failed: {err}")))?;
+    let result =
+      conn.query(query).map_err(|err| StorageError::Query(format!("query failed: {err}")))?;
 
-    Ok(result
-      .map(|row| row.into_iter().map(lbug_value_to_json).collect())
-      .collect())
+    Ok(result.map(|row| row.into_iter().map(lbug_value_to_json).collect()).collect())
   }
 }
 
@@ -322,11 +315,8 @@ fn collect_components(
   }
 
   for (index, generator_name) in metadata.generator_names.iter().enumerate() {
-  let generator_id = metadata
-      .generator_ids
-      .get(index)
-      .cloned()
-      .unwrap_or_else(|| generator_name.clone());
+    let generator_id =
+      metadata.generator_ids.get(index).cloned().unwrap_or_else(|| generator_name.clone());
     components.push((
       format!("generator:{generator_id}"),
       generator_name.clone(),
@@ -354,11 +344,7 @@ fn escape_cypher_string(value: &str) -> String {
 }
 
 fn format_embedding_literal(embedding: &[f32]) -> String {
-  let values = embedding
-    .iter()
-    .map(|value| value.to_string())
-    .collect::<Vec<_>>()
-    .join(", ");
+  let values = embedding.iter().map(|value| value.to_string()).collect::<Vec<_>>().join(", ");
   format!("[{values}]")
 }
 

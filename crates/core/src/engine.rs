@@ -1,13 +1,13 @@
+use derive_more::Debug;
 use power_plant_common::{
   NormalizedOptions, Options, RecallInput, RecallOutput, SearchInput, SearchOutput, StoreInput,
   StoreOutput,
 };
 use power_plant_error::PowerPlantResult;
-use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
 #[cfg(feature = "ladybug")]
 use power_plant_storage::IndexedExecutionStore;
-use power_plant_tracing::{actions::StoreEnd, actions::StoreStart, trace_action, Session};
-use derive_more::Debug;
+use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
+use power_plant_tracing::{Session, actions::StoreEnd, actions::StoreStart, trace_action};
 use std::future::{Future, ready};
 use std::sync::Arc;
 
@@ -116,11 +116,11 @@ fn create_execution_store(
 )]
 mod tests {
   use super::*;
-  use power_plant_common::SearchInput;
   use chrono::Utc;
+  use power_plant_common::SearchInput;
   use power_plant_models::{
-    Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
-    InputMeta, Meta, OutputMeta, SchemaMeta,
+    Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta,
+    GeneratorMeta, InputMeta, Meta, OutputMeta, SchemaMeta,
   };
   use power_plant_storage::InMemoryExecutionStore;
 
@@ -155,11 +155,7 @@ mod tests {
           },
         }],
       }],
-      meta: ExecutionMeta {
-        id: id.into(),
-        executed_at: Utc::now(),
-        executed_by: "tester".into(),
-      },
+      meta: ExecutionMeta { id: id.into(), executed_at: Utc::now(), executed_by: "tester".into() },
     }
   }
 

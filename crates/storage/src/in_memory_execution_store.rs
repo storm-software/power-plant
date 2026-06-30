@@ -5,8 +5,8 @@ use power_plant_common::{ExecutionSearchHit, SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::{
-  execution_metadata::{extract_execution_metadata, score_execution_metadata},
   ExecutionStore, StorageError,
+  execution_metadata::{extract_execution_metadata, score_execution_metadata},
 };
 
 /// In-memory execution store for tests.
@@ -49,16 +49,16 @@ impl ExecutionStore for InMemoryExecutionStore {
         score_execution_metadata(&metadata, input).map(|score| ExecutionSearchHit {
           execution_id: metadata.execution_id,
           score: Some(score),
-          snippet: input.query.clone().or_else(|| Some(metadata.search_text.chars().take(160).collect())),
+          snippet: input
+            .query
+            .clone()
+            .or_else(|| Some(metadata.search_text.chars().take(160).collect())),
         })
       })
       .collect::<Vec<_>>();
 
     hits.sort_by(|left, right| {
-      right
-        .score
-        .partial_cmp(&left.score)
-        .unwrap_or(std::cmp::Ordering::Equal)
+      right.score.partial_cmp(&left.score).unwrap_or(std::cmp::Ordering::Equal)
     });
     hits.truncate(limit);
 

@@ -7,11 +7,12 @@ rules:
       - greetings.yml:3:1
   unpinned-uses:
     ignore:
-      - release.yml:36:15
-      - release.yml:86:15
-      - release.yml:126:15
-      - release.yml:154:15
-      - release.yml:181:15
+      - release.yml:39:15
+      - release.yml:137:15
+      - release.yml:253:15
+      - release.yml:304:15
+      - release.yml:332:15
+      - release.yml:359:15
       - dependabot-update.yml:29:15
       - codeql.yml:67:15
       - security.yml:21:11

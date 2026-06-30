@@ -11,12 +11,17 @@
 
   packages = with pkgs; [
     sccache
+    cargo-zigbuild
   ];
 
-  languages.rust = {
-    targets = [
-      "x86_64-unknown-linux-gnu"
-      "wasm32-wasip1-threads"
-    ];
+  scripts = {
+    build-native.exec = "pnpm build-native --target=$1 --buildFlags=$2";
+  };
+
+  languages = {
+    zig = {
+      enable = true;
+      lsp.enable = false;
+    };
   };
 }

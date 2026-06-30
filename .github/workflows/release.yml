@@ -14,15 +14,18 @@ on:
 
 env:
   CI: true
+  DEBUG: napi:*
+  MACOSX_DEPLOYMENT_TARGET: "10.13"
   STORM_REPOSITORY: ${{ github.repositoryUrl }}
   STORM_WORKSPACE_ROOT: ${{ github.workspace }}
   GITHUB_ACTOR: ${{ github.actor }}
+  GITHUB_REPOSITORY: ${{ github.repository }}
   GITHUB_TOKEN: ${{ github.token }}
   NPM_TOKEN: ${{ secrets.STORM_BOT_NPM_TOKEN }}
 
 jobs:
   start:
-    name: "Send in process notification"
+    name: "Send in progress notification"
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -39,7 +42,7 @@ jobs:
           subtitle: "Deployment for ${{ github.repository }} has started - #${{
             github.run_number }}"
           description:
-            "Deployment for ${{ github.repository }} is currently in process -
+            "Deployment for ${{ github.repository }} is currently in progress -
             #${{ github.run_number }}. Click here to view the changes associated
             with this deployment: ${{ github.event.pull_request.html_url ||
             github.event.head_commit.url }} "
@@ -50,7 +53,169 @@ jobs:
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
           discord-webhook: ${{ secrets.STORM_BOT_DISCORD_WEBHOOK}}
 
-  process:
+  build-bindings:
+    name: Build bindings - ${{ matrix.target }}
+    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
+      github.event.pull_request.draft == false
+    runs-on: ${{ matrix.host }}
+    environment: production
+    permissions:
+      contents: write
+      id-token: write
+    needs:
+      - start
+      - build-bindings
+      - build-bindings-freebsd
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: macos-latest
+            target: x86_64-apple-darwin
+            build_flags: ""
+          - host: macos-latest
+            target: aarch64-apple-darwin
+            build_flags: ""
+          - host: windows-latest
+            target: x86_64-pc-windows-msvc
+            build_flags: ""
+          - host: windows-latest
+            target: aarch64-pc-windows-msvc
+            build_flags: ""
+          - host: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            build_flags: --use-napi-cross
+          - host: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            build_flags: --use-napi-cross
+          - host: ubuntu-latest
+            target: armv7-unknown-linux-gnueabihf
+            build_flags: --use-napi-cross
+          - host: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            build_flags: -x
+          - host: ubuntu-latest
+            target: aarch64-unknown-linux-musl
+            build_flags: -x
+          - host: ubuntu-latest
+            target: aarch64-linux-android
+            build_flags: ""
+          - host: ubuntu-latest
+            target: aarch64-unknown-linux-ohos
+            build_flags: --use-napi-cross
+          - host: ubuntu-latest
+            target: wasm32-wasip1-threads
+            build_flags: ""
+          - host: ubuntu-latest
+            target: s390x-unknown-linux-gnu
+            build_flags: --use-napi-cross
+          - host: ubuntu-latest
+            target: powerpc64le-unknown-linux-gnu
+            build_flags: --use-napi-cross
+    steps:
+      - name: Checkout [Pull Request]
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          # By default, PRs will be checked-out based on the Merge Commit, but we want the actual branch HEAD.
+          ref: ${{ github.event.pull_request.head.sha }}
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+          token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout `main` branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+          token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Setup workspace
+        uses: storm-software/action-devenv-setup@main
+        with:
+          gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
+          gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
+          gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
+          storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+
+      - name: Build native binding
+        run: devenv --profile production --no-tui shell build-native ${{ matrix.target }} ${{ matrix.build_flags }}
+        env:
+          NATIVE_TARGET: ${{ matrix.target }}
+          NATIVE_BUILD_FLAGS: ${{ matrix.build_flags }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa11 # v4.6.2
+        with:
+          name: bindings-${{ matrix.target }}
+          path: packages/base/bindings/src/power-plant-bindings.*
+          if-no-files-found: error
+
+  build-bindings-freebsd:
+    name: Build bindings - x86_64-unknown-freebsd
+    if: github.repository == 'storm-software/power-plant' && (github.ref ==
+      'refs/heads/main' || github.ref == 'refs/heads/next' || github.ref ==
+      'refs/heads/experimental')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout [Pull Request]
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          # By default, PRs will be checked-out based on the Merge Commit, but we want the actual branch HEAD.
+          ref: ${{ github.event.pull_request.head.sha }}
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+          token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout `main` branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
+          token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Build on FreeBSD
+        uses: cross-platform-actions/action@5ea7e8e4677bd726033a10b094ba1c5762b15dee # v1.3.0
+        env:
+          DEBUG: napi:*
+          RUSTUP_IO_THREADS: 1
+        with:
+          operating_system: freebsd
+          version: "15.0"
+          memory: 8G
+          cpu_count: 3
+          environment_variables: DEBUG RUSTUP_IO_THREADS
+          shell: bash
+          run: |
+            sudo pkg install -y -f curl node libnghttp2 npm
+            sudo npm install -g corepack
+            curl https://sh.rustup.rs -sSf --output rustup.sh
+            sh rustup.sh -y --profile minimal --default-toolchain stable
+            sudo corepack enable
+            source "$HOME/.cargo/env"
+            pnpm install --frozen-lockfile
+            cd packages/base/bindings
+            pnpm exec napi build --release \
+              --cwd ./src \
+              --manifest-path ../../../crates/bindings/Cargo.toml \
+              --package-json-path ../package.json \
+              --target x86_64-unknown-freebsd
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa11 # v4.6.2
+        with:
+          name: bindings-x86_64-unknown-freebsd
+          path: packages/base/bindings/src/power-plant-bindings.*
+          if-no-files-found: error
+
+  release:
     name: "Release"
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
       github.event.pull_request.draft == false
@@ -61,6 +226,8 @@ jobs:
       id-token: write
     needs:
       - start
+      - build-bindings
+      - build-bindings-freebsd
     steps:
       - name: Checkout [Pull Request]
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -99,6 +266,16 @@ jobs:
           set-environment-variables-for-job: true
           error-on-no-successful-workflow: false
 
+      - name: Download binding artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b4d8f34e9478ee7ad3464f1c # v4.3.0
+        with:
+          path: packages/base/bindings/artifacts
+          pattern: bindings-*
+          merge-multiple: true
+
+      - name: Deploy binding artifacts to npm dirs
+        run: pnpm nx run bindings:deploy-artifacts
+
       - name: Release repository updates
         run: devenv --profile production --no-tui shell release ${{
           steps.setSHAs.outputs.base }} ${{ steps.setSHAs.outputs.head }}
@@ -106,6 +283,7 @@ jobs:
           NX_BASE: ${{ steps.setSHAs.outputs.base }}
           NX_HEAD: ${{ steps.setSHAs.outputs.head }}
           GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_TOKEN: ${{ github.token }}
           STORM_BOT_GITHUB_TOKEN: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
           STORM_WORKSPACE_ROOT: ${{ github.workspace }}
@@ -116,7 +294,7 @@ jobs:
 
   success:
     needs:
-      - process
+      - release
     if: ${{ success() }}
     name: Send success notification
     runs-on: ubuntu-latest
@@ -144,7 +322,7 @@ jobs:
 
   failure:
     needs:
-      - process
+      - release
     if: ${{ failure() }}
     name: Send failure notification
     runs-on: ubuntu-latest
@@ -171,7 +349,7 @@ jobs:
 
   cancelled:
     needs:
-      - process
+      - release
     if: ${{ cancelled() }}
     name: Send cancelled notification
     runs-on: ubuntu-latest

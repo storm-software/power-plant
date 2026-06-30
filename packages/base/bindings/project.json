@@ -13,14 +13,21 @@
     },
     "deploy-artifacts": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
       "options": {
         "command": "napi artifacts --cwd ./src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
         "cwd": "{projectRoot}"
       }
     },
+    "napi-prepublish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "napi prepublish -t npm",
+        "cwd": "{projectRoot}"
+      }
+    },
     "nx-release-publish": {
-      "executor": "@storm-software/workspace-tools:npm-publish"
+      "executor": "@storm-software/workspace-tools:npm-publish",
+      "dependsOn": ["napi-prepublish"]
     }
   },
   "tags": ["platform:node"]

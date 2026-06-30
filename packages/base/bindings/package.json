@@ -193,6 +193,10 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "artifacts": "napi artifacts --cwd ./src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
+    "version": "napi version"
+  },
   "dependencies": {
     "@emnapi/core": "catalog:",
     "@emnapi/runtime": "catalog:",
