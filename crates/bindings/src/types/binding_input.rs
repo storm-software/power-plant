@@ -1,5 +1,5 @@
 use derive_more::Debug;
-use power_plant_common::{RecallInput, StoreInput};
+use power_plant_common::{RecallInput, SearchInput, StoreInput};
 use power_plant_models::{
   Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
   InputMeta, Meta, OutputMeta, SchemaMeta, SchemaMetaExample,
@@ -160,6 +160,25 @@ pub struct BindingStoreInput {
 pub struct BindingRecallInput {
   /// The id of the execution to recall.
   pub execution_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+#[napi_derive::napi(object)]
+pub struct BindingSearchInput {
+  /// Free-text query matched against indexed execution metadata.
+  pub query: Option<String>,
+  /// Filter by the user who performed the execution.
+  pub executed_by: Option<String>,
+  /// Filter by schema name or id.
+  pub schema: Option<String>,
+  /// Filter by generator name or id.
+  pub generator: Option<String>,
+  /// Filter by tags; an execution matches when any tag is present.
+  pub tags: Option<Vec<String>>,
+  /// Optional embedding vector for semantic similarity search.
+  pub embedding: Option<Vec<f64>>,
+  /// Maximum number of results to return.
+  pub limit: Option<u32>,
 }
 
 impl BindingStoreInput {
@@ -348,6 +367,20 @@ impl From<BindingStoreInput> for StoreInput {
 impl From<BindingRecallInput> for RecallInput {
   fn from(value: BindingRecallInput) -> Self {
     Self { execution_id: value.execution_id }
+  }
+}
+
+impl From<BindingSearchInput> for SearchInput {
+  fn from(value: BindingSearchInput) -> Self {
+    Self {
+      query: value.query,
+      executed_by: value.executed_by,
+      schema: value.schema,
+      generator: value.generator,
+      tags: value.tags,
+      embedding: value.embedding.map(|values| values.into_iter().map(|value| value as f32).collect()),
+      limit: value.limit,
+    }
   }
 }
 

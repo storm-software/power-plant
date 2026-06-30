@@ -2,9 +2,13 @@ use std::fs;
 use std::path::PathBuf;
 
 use camino::Utf8PathBuf;
+use power_plant_common::{ExecutionSearchHit, SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
-use crate::{ExecutionStore, StorageError};
+use crate::{
+  execution_metadata::{extract_execution_metadata, score_execution_metadata},
+  ExecutionStore, StorageError,
+};
 
 /// Filesystem-backed execution store.
 ///
@@ -63,6 +67,48 @@ impl ExecutionStore for FsExecutionStore {
       StorageError::InvalidData(format!("failed to deserialize '{}': {err}", path))
     })
   }
+
+  fn search(&self, input: &SearchInput) -> Result<SearchOutput, StorageError> {
+    self.ensure_base_path()?;
+
+    let limit = input.limit.unwrap_or(50) as usize;
+    let mut hits = Vec::new();
+
+    let entries = fs::read_dir(&self.base_path)
+      .map_err(|err| StorageError::Io(format!("failed to read '{}': {err}", self.base_path)))?;
+
+    for entry in entries {
+      let entry = entry.map_err(|err| StorageError::Io(err.to_string()))?;
+      let path = entry.path();
+      if path.extension().and_then(|ext| ext.to_str()) != Some("json") {
+        continue;
+      }
+
+      let bytes = fs::read(&path).map_err(|err| StorageError::Io(err.to_string()))?;
+      let execution: Execution = serde_json::from_slice(&bytes).map_err(|err| {
+        StorageError::InvalidData(format!("failed to deserialize '{}': {err}", path.display()))
+      })?;
+
+      let metadata = extract_execution_metadata(&execution);
+      if let Some(score) = score_execution_metadata(&metadata, input) {
+        hits.push(ExecutionSearchHit {
+          execution_id: metadata.execution_id,
+          score: Some(score),
+          snippet: input.query.clone().or_else(|| Some(metadata.search_text.chars().take(160).collect())),
+        });
+      }
+    }
+
+    hits.sort_by(|left, right| {
+      right
+        .score
+        .partial_cmp(&left.score)
+        .unwrap_or(std::cmp::Ordering::Equal)
+    });
+    hits.truncate(limit);
+
+    Ok(SearchOutput { hits })
+  }
 }
 
 impl From<FsExecutionStore> for PathBuf {
@@ -80,7 +126,10 @@ impl From<FsExecutionStore> for PathBuf {
 mod tests {
   use super::*;
   use chrono::Utc;
-  use power_plant_models::{ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta, InputMeta, Meta, OutputMeta, SchemaMeta};
+  use power_plant_models::{
+    ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta, InputMeta, Meta,
+    OutputMeta, SchemaMeta,
+  };
 
   fn sample_execution(id: &str) -> Execution {
     let meta = Meta {
@@ -142,6 +191,31 @@ mod tests {
 
     let err = store.recall("missing").unwrap_err();
     assert_eq!(err, StorageError::NotFound("missing".into()));
+
+    let _ = fs::remove_dir_all(temp_dir);
+  }
+
+  #[test]
+  fn search_finds_matching_execution() {
+    let temp_dir = std::env::temp_dir().join(format!("power-plant-storage-search-{}", std::process::id()));
+    let store = FsExecutionStore::new(Utf8PathBuf::from_path_buf(temp_dir.clone()).unwrap());
+    let execution = sample_execution("exec-search");
+
+    store.store(&execution).unwrap();
+    let output = store
+      .search(&SearchInput {
+        query: Some("doc".into()),
+        executed_by: Some("tester".into()),
+        schema: None,
+        generator: None,
+        tags: None,
+        embedding: None,
+        limit: Some(10),
+      })
+      .unwrap();
+
+    assert_eq!(output.hits.len(), 1);
+    assert_eq!(output.hits[0].execution_id, "exec-search");
 
     let _ = fs::remove_dir_all(temp_dir);
   }

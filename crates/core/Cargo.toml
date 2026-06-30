@@ -50,6 +50,7 @@ tracing-subscriber = { workspace = true }
 [features]
 default = ["serde"]
 experimental = []
+ladybug = ["power-plant-storage/ladybug"]
 serde = ["dep:serde"]
 testing = []
 

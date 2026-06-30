@@ -1,6 +1,11 @@
-use power_plant_common::{NormalizedOptions, Options, RecallInput, RecallOutput, StoreInput, StoreOutput};
+use power_plant_common::{
+  NormalizedOptions, Options, RecallInput, RecallOutput, SearchInput, SearchOutput, StoreInput,
+  StoreOutput,
+};
 use power_plant_error::PowerPlantResult;
 use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
+#[cfg(feature = "ladybug")]
+use power_plant_storage::IndexedExecutionStore;
 use power_plant_tracing::{actions::StoreEnd, actions::StoreStart, trace_action, Session};
 use derive_more::Debug;
 use std::future::{Future, ready};
@@ -19,8 +24,7 @@ impl Engine {
   pub fn new(options: Options) -> PowerPlantResult<Self> {
     let normalized_options = NormalizedOptions::from(options);
     let executions_path = normalized_options.paths.data_path.join("executions");
-    let execution_store =
-      Arc::new(FsExecutionStore::new(executions_path)) as Arc<dyn ExecutionStore>;
+    let execution_store = create_execution_store(executions_path)?;
 
     Ok(Self {
       options: normalized_options,
@@ -55,6 +59,14 @@ impl Engine {
     Ok(RecallOutput { execution })
   }
 
+  pub fn search(&mut self, input: SearchInput) -> PowerPlantResult<SearchOutput> {
+    self.create_error_if_closed()?;
+
+    let output = self.execution_store.search(&input).map_err(storage_error)?;
+
+    Ok(output)
+  }
+
   #[must_use = "Future must be awaited to do the actual cleanup work"]
   pub fn close(&mut self) -> impl Future<Output = anyhow::Result<()>> + Send + 'static {
     self.is_closed = true;
@@ -74,6 +86,28 @@ fn storage_error(error: StorageError) -> power_plant_error::BatchedPowerPlantDia
   anyhow::anyhow!(error.to_string()).into()
 }
 
+fn create_execution_store(
+  executions_path: camino::Utf8PathBuf,
+) -> PowerPlantResult<Arc<dyn ExecutionStore>> {
+  let fs_store = FsExecutionStore::new(executions_path.clone());
+
+  #[cfg(feature = "ladybug")]
+  {
+    let index_path = executions_path
+      .parent()
+      .map(|path| path.join("execution-index"))
+      .unwrap_or_else(|| executions_path.join("index"));
+
+    let store = IndexedExecutionStore::new(fs_store, index_path.as_str()).map_err(storage_error)?;
+    return Ok(Arc::new(store));
+  }
+
+  #[cfg(not(feature = "ladybug"))]
+  {
+    Ok(Arc::new(fs_store))
+  }
+}
+
 #[cfg(test)]
 #[allow(
   clippy::unwrap_used,
@@ -82,6 +116,7 @@ fn storage_error(error: StorageError) -> power_plant_error::BatchedPowerPlantDia
 )]
 mod tests {
   use super::*;
+  use power_plant_common::SearchInput;
   use chrono::Utc;
   use power_plant_models::{
     Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
@@ -138,7 +173,7 @@ mod tests {
   }
 
   #[test]
-  fn store_and_recall_execution() {
+  fn store_recall_and_search_execution() {
     let store = Arc::new(InMemoryExecutionStore::default());
     let mut engine = engine_with_store(store);
     let execution = sample_execution("exec-1");
@@ -148,5 +183,19 @@ mod tests {
 
     let recall_output = engine.recall(RecallInput { execution_id: "exec-1".into() }).unwrap();
     assert_eq!(recall_output.execution, execution);
+
+    let search_output = engine
+      .search(SearchInput {
+        query: Some("doc".into()),
+        executed_by: Some("tester".into()),
+        schema: None,
+        generator: None,
+        tags: None,
+        embedding: None,
+        limit: Some(10),
+      })
+      .unwrap();
+    assert_eq!(search_output.hits.len(), 1);
+    assert_eq!(search_output.hits[0].execution_id, "exec-1");
   }
 }

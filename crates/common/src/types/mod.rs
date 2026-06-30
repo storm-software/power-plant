@@ -19,3 +19,9 @@ pub use recall_input::*;
 /// Module containing the RecallOutput type.
 pub mod recall_output;
 pub use recall_output::*;
+/// Module containing the SearchInput type.
+pub mod search_input;
+pub use search_input::*;
+/// Module containing the SearchOutput type.
+pub mod search_output;
+pub use search_output::*;

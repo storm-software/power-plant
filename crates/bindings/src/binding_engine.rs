@@ -1,9 +1,9 @@
 use crate::{
   types::{
     binding_error::{BindingError, BindingErrors, BindingResult},
-    binding_input::{BindingRecallInput, BindingStoreInput},
+    binding_input::{BindingRecallInput, BindingSearchInput, BindingStoreInput},
     binding_options::BindingOptions,
-    binding_output::{BindingRecallOutput, BindingStoreOutput},
+    binding_output::{BindingRecallOutput, BindingSearchOutput, BindingStoreOutput},
   },
   utils::{handle_result, to_binding_error},
 };
@@ -86,6 +86,32 @@ impl BindingEngine {
       };
 
       Ok(napi::Either::B(BindingRecallOutput::from(recall_output)))
+    };
+
+    env.spawn_future(fut)
+  }
+
+  #[napi]
+  pub fn search<'env>(
+    &mut self,
+    env: &'env Env,
+    input: BindingSearchInput,
+  ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingSearchOutput>>> {
+    let result = self.inner.search(input.into());
+    let fut = async move {
+      let search_output = match result {
+        Ok(output) => output,
+        Err(errs) => {
+          let errors: Vec<BindingError> = errs
+            .into_vec()
+            .iter()
+            .map(|diagnostic| to_binding_error(diagnostic, "search".into()))
+            .collect();
+          return Ok(napi::Either::A(BindingErrors::new(errors)));
+        }
+      };
+
+      Ok(napi::Either::B(BindingSearchOutput::from(search_output)))
     };
 
     env.spawn_future(fut)

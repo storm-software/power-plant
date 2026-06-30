@@ -1,3 +1,4 @@
+use power_plant_common::{SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::StorageError;
@@ -9,4 +10,7 @@ pub trait ExecutionStore: Send + Sync {
 
   /// Load a previously stored execution by id.
   fn recall(&self, execution_id: &str) -> Result<Execution, StorageError>;
+
+  /// Search stored execution metadata.
+  fn search(&self, input: &SearchInput) -> Result<SearchOutput, StorageError>;
 }

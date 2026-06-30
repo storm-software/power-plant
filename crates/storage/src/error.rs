@@ -14,4 +14,12 @@ pub enum StorageError {
   /// Stored data could not be deserialized.
   #[error("invalid execution data: {0}")]
   InvalidData(String),
+
+  /// A graph or vector query failed.
+  #[error("query error: {0}")]
+  Query(String),
+
+  /// Indexing execution metadata failed.
+  #[error("index error: {0}")]
+  Index(String),
 }

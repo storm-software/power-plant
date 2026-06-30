@@ -20,15 +20,20 @@ doctest = false
 workspace = true
 
 [dependencies]
+power-plant-common = { workspace = true }
 power-plant-models = { workspace = true }
 
+blake3 = { workspace = true }
 camino = { workspace = true }
+chrono = { workspace = true, features = ["serde"], optional = true }
+lbug = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 thiserror = "2.0.12"
 
 [features]
 default = []
+ladybug = ["dep:chrono", "dep:lbug"]
 testing = []
 
 [dev-dependencies]

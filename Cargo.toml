@@ -102,6 +102,12 @@ rustdoc-args = ["--cfg", "docsrs"]
 # Declare dependencies used across workspace packages requires single version bump.
 # ref: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#inheriting-a-dependency-from-a-workspace
 [workspace.dependencies]
+# Pin time to last known-good version for lbug compatibility.
+time = "=0.3.46"
+
+# Ladybug embedded graph + vector database
+lbug = "0.14.1"
+
 # Power Plant
 power-plant-bindings = { path = "./crates/bindings" }
 power-plant-common   = { path = "./crates/common" }
