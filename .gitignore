@@ -17,6 +17,18 @@ powerlines.d.ts
 node_modules
 .pnpm-store
 
+# NAPI-RS generated files
+packages/base/core/src/*.node
+packages/base/core/src/*.wasm
+packages/base/core/src/*.wasi.*
+packages/base/core/src/*.wasi-browser.js
+packages/base/core/src/browser.js
+packages/base/core/src/wasi-worker-browser.mjs
+packages/base/core/src/wasi-worker.mjs
+packages/base/core/src/webcontainer-fallback.cjs
+packages/base/core/src/bindings.cjs
+packages/base/core/src/bindings.d.cts
+
 # IDEs and editors
 /.idea
 .project

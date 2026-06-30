@@ -230,7 +230,7 @@
   },
   "[nix]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "brettm12345.nixfmt-vscode"
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
   "commitizen.capitalizeWindowsDriveLetter": true,
   "commitizen.autoSync": false,
@@ -248,5 +248,6 @@
     "markdown": true,
     "scminput": false
   },
-  "chat.permissions.default": "autopilot"
+  "chat.permissions.default": "autopilot",
+  "nixEnvSelector.suggestion": false
 }

@@ -16,16 +16,64 @@
 
  ------------------------------------------------------------------- */
 
+import type { DeepPartial } from "@stryke/types/base";
 import type { FileSystemInterface } from "@stryke/types/fs";
-
-export interface Logger {
-  debug: (message: string) => void;
-  info: (message: string) => void;
-  warn: (message: string) => void;
-  error: (message: string) => void;
-}
+import type { Logger, Settings } from "./settings";
 
 export interface UserConfig {
+  /**
+   * The current working directory.
+   *
+   * @defaultValue process.cwd()
+   */
+  cwd?: string;
+
+  /**
+   * Whether to enable debug mode.
+   */
+  debug?: true;
+
+  /**
+   * The path to the configuration file that will be used to load the settings.
+   *
+   * @defaultValue "power-plant.config.ts"
+   */
+  configFile?: string;
+
+  /**
+   * The settings to use for the application.
+   */
+  settings?: DeepPartial<Settings>;
+
+  /**
+   * The file system to use for the application.
+   */
   fs?: Partial<FileSystemInterface>;
+
+  /**
+   * The logger to use for the application.
+   */
   logger?: Partial<Logger>;
 }
+
+export interface UserConfigParams {
+  cwd: string;
+  mode: string;
+}
+
+export type UserConfigFnObject = (
+  params: UserConfigParams
+) => UserConfig | UserConfig[];
+export type UserConfigFnPromise = (
+  params: UserConfigParams
+) => Promise<UserConfig | UserConfig[]>;
+export type UserConfigFn = (
+  params: UserConfigParams
+) => UserConfig | UserConfig[] | Promise<UserConfig | UserConfig[]>;
+export type UserConfigExport =
+  | UserConfig
+  | UserConfig[]
+  | Promise<UserConfig | UserConfig[]>
+  | UserConfigFnObject
+  | UserConfigFnPromise
+  | UserConfigFn;

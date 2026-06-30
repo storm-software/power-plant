@@ -1,0 +1,7 @@
+# Add Rust/Cargo specific phrases here
+armv
+gnueabihf
+ohos
+wasip
+emnapi
+sccache

@@ -1,0 +1,74 @@
+#!/usr/bin/env zx
+/* -------------------------------------------------------------------
+
+                  🗲 Storm Software - Power Plant
+
+ This code was released as part of the Power Plant project. Power Plant
+ is maintained by Storm Software under the Apache-2.0 license, and is
+ free for commercial and private use. For more information, please visit
+ our licensing page at https://stormsoftware.com/licenses/projects/power-plant.
+
+ Website:                  https://stormsoftware.com
+ Repository:               https://github.com/storm-software/power-plant
+ Documentation:            https://docs.stormsoftware.com/projects/power-plant
+ Contact:                  https://stormsoftware.com/contact
+
+ SPDX-License-Identifier:  Apache-2.0
+
+ ------------------------------------------------------------------- */
+
+import { $, argv, chalk, echo } from "zx";
+
+try {
+  let configuration = argv.configuration;
+  if (!configuration) {
+    if (argv.prod) {
+      configuration = "production";
+    } else if (argv.dev) {
+      configuration = "development";
+    } else {
+      configuration = "production";
+    }
+  }
+
+  echo`${chalk.whiteBright(
+    ` 🏗️  Building the Power Plant native artifacts in ${configuration} mode...`
+  )}`;
+
+  let proc = $`pnpm bootstrap`.timeout(`${1 * 60}s`);
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  let result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while bootstrapping the monorepo: \n\n${
+        result.message
+      }\n`
+    );
+  }
+
+  proc =
+    $`pnpm nx run-many --target=build --projects=\"native-*\" --exclude=monorepo --configuration=${
+      configuration
+    } --outputStyle=dynamic-legacy --parallel=5`.timeout(`${45 * 60}s`);
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while building the Power Plant native artifacts in ${
+        configuration
+      } mode: \n\n${result.message}\n`
+    );
+  }
+
+  echo`${chalk.green(
+    ` ✔ Successfully built the Power Plant native artifacts in ${configuration} mode!`
+  )}\n`;
+} catch (error) {
+  echo`${chalk.red(error?.message ? error.message : "A failure occurred while building the Power Plant native artifacts")}`;
+
+  process.exit(1);
+}

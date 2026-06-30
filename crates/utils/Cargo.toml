@@ -1,0 +1,46 @@
+[package]
+authors = { workspace = true }
+categories = { workspace = true }
+description = "☢️ Utility types and functions used across the Power Plant runtime."
+documentation = "https://docs.rs/power-plant"
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = "power-plant-utils"
+publish = false
+readme = "./README.md"
+repository = { workspace = true }
+version = "0.1.0"
+
+[lib]
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+base-encode = { workspace = true }
+base64-simd = { workspace = true }
+cow-utils = { workspace = true }
+dashmap = { workspace = true }
+fast-glob = { workspace = true }
+form_urlencoded = { workspace = true }
+futures = { workspace = true }
+infer = { workspace = true }
+memchr = { workspace = true }
+mime = { workspace = true }
+nom = { workspace = true }
+regex = { workspace = true }
+regress = { workspace = true }
+rustc-hash = { workspace = true }
+simdutf8 = { workspace = true }
+sugar_path = { workspace = true }
+tokio = { workspace = true, features = ["sync"] }
+uuid = { workspace = true, features = ["v4"] }
+xxhash-rust = { workspace = true, features = ["xxh3"] }
+
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+async-scoped = { workspace = true, features = ["use-tokio"] }
+rayon = { workspace = true }

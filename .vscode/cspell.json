@@ -3,10 +3,15 @@
   "import": ["@storm-software/cspell/cspell-recommended.json"],
   "dictionaryDefinitions": [
     {
-      "name": "misc",
-      "path": "../tools/cspell/misc.txt",
+      "name": "misc-phrases",
+      "path": "../tools/cspell/misc-phrases.txt",
+      "addWords": true
+    },
+    {
+      "name": "rust-phrases",
+      "path": "../tools/cspell/rust-phrases.txt",
       "addWords": true
     }
   ],
-  "dictionaries": ["misc"]
+  "dictionaries": ["misc-phrases", "rust-phrases"]
 }

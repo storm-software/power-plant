@@ -1,0 +1,28 @@
+[book]
+authors = ["Storm Software"]
+description = "The Power Plant development book, outlining the architecture and usage of the Power Plant monorepo."
+language = "en"
+src = "src"
+title = "Power Plant Book"
+
+# [preprocessor.admonish]
+# assets_version = "3.0.2"           # do not edit: managed by `mdbook-admonish install`
+# command        = "mdbook-admonish"
+
+[output.html]
+additional-css = ["./mdbook-admonish.css"]
+default-theme = "coal"
+git-repository-url = "https://github.com/storm-software/power-plant"
+mathjax-support = true
+no-section-label = true
+theme = "src/theme"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[build]
+build-dir = "../../dist/docs/book"
+
+[rust]
+edition = "2024"

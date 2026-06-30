@@ -16,23 +16,59 @@
 
  ------------------------------------------------------------------- */
 
+import napi from "@powerlines/plugin-napi-rs";
 import tsdown from "@powerlines/plugin-tsdown";
 import type { UserConfig } from "powerlines";
 import { defineConfig } from "powerlines/config";
 
 const config: UserConfig = defineConfig({
-  input: [
-    "src/index.ts",
-    "src/schema/index.ts",
-    "src/input/index.ts",
-    "src/output/index.ts",
-    "src/generator/index.ts"
-  ],
+  input: ["src/index.ts", "src/generator/index.ts"],
   platform: "node",
   output: {
     format: ["cjs", "esm"]
   },
-  plugins: [tsdown()]
+  resolve: {
+    external: ["@power-plant/bindings-*", "power-plant-bindings.*"],
+    skipNodeModulesBundle: true
+  },
+  plugins: [
+    tsdown(),
+    napi({
+      binaryName: "power-plant-bindings",
+      packageName: "@power-plant/bindings",
+      targets: [
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "x86_64-unknown-linux-gnu",
+        "x86_64-unknown-linux-musl",
+        "x86_64-unknown-freebsd",
+        "armv7-unknown-linux-gnueabihf",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-apple-darwin",
+        "aarch64-unknown-linux-musl",
+        "aarch64-unknown-linux-ohos",
+        "aarch64-pc-windows-msvc",
+        "aarch64-linux-android",
+        "wasm32-wasip1-threads",
+        "s390x-unknown-linux-gnu",
+        "powerpc64le-unknown-linux-gnu"
+      ],
+      wasm: {
+        initialMemory: 16384,
+        browser: {
+          fs: true,
+          asyncInit: true
+        }
+      },
+      jsBinding: "bindings.cjs",
+      dts: "bindings.d.cts",
+      dtsHeader:
+        "export type MaybePromise<T> = T | Promise<T>\nexport type Nullable<T> = T | null | undefined\ntype VoidNullable<T = void> = T | null | undefined | void\nexport type BindingStringOrRegex = string | RegExp\ntype BindingResult<T> = { errors: BindingError[], isBindingErrors: boolean } | T\n\n",
+      npmDir: "npm",
+      outputDir: "src",
+      manifestPath: "crates/bindings/Cargo.toml"
+    })
+  ]
 });
 
 export default config;

@@ -1,0 +1,49 @@
+[package]
+authors = { workspace = true }
+categories = { workspace = true }
+description = "☢️ Tracing utilities for the Power Plant runtime."
+documentation = "https://docs.rs/power-plant"
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = "power-plant-tracing"
+publish = false
+readme = "./README.md"
+repository = { workspace = true }
+version = "0.1.0"
+
+[lib]
+doctest = false
+
+[lints]
+workspace = true
+
+[features]
+default = ["serde"]
+experimental = []
+serde = ["dep:serde", "oxc_index/serde"]
+testing = []
+
+[dependencies]
+anyhow = { workspace = true }
+arcstr = { workspace = true }
+ariadne = { workspace = true }
+bitflags = { workspace = true }
+blake3 = { workspace = true }
+dashmap = { workspace = true }
+rustc-hash = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true }
+sugar_path = { workspace = true }
+tracing = { workspace = true }
+tracing-chrome = { workspace = true }
+tracing-subscriber = { workspace = true }
+ts-rs = { workspace = true }
+
+# Oxc
+oxc = { workspace = true }
+oxc_allocator = { workspace = true }
+oxc_ecmascript = { workspace = true }
+oxc_index = { workspace = true }
+oxc_traverse = { workspace = true }

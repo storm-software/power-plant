@@ -3,7 +3,11 @@
   "version": "0.0.4",
   "private": false,
   "description": "A Power Plant input for reading the source specification from a file.",
-  "keywords": ["power-plant-input", "power-plant", "storm-software"],
+  "keywords": [
+    "power-plant-input",
+    "power-plant",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -60,7 +64,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",

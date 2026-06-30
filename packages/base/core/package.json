@@ -72,49 +72,7 @@
         "default": "./dist/generator/index.mjs"
       }
     },
-    "./input": {
-      "require": {
-        "types": "./dist/input/index.d.cts",
-        "default": "./dist/input/index.cjs"
-      },
-      "import": {
-        "types": "./dist/input/index.d.mts",
-        "default": "./dist/input/index.mjs"
-      },
-      "default": {
-        "types": "./dist/input/index.d.mts",
-        "default": "./dist/input/index.mjs"
-      }
-    },
-    "./output": {
-      "require": {
-        "types": "./dist/output/index.d.cts",
-        "default": "./dist/output/index.cjs"
-      },
-      "import": {
-        "types": "./dist/output/index.d.mts",
-        "default": "./dist/output/index.mjs"
-      },
-      "default": {
-        "types": "./dist/output/index.d.mts",
-        "default": "./dist/output/index.mjs"
-      }
-    },
-    "./package.json": "./package.json",
-    "./schema": {
-      "require": {
-        "types": "./dist/schema/index.d.cts",
-        "default": "./dist/schema/index.cjs"
-      },
-      "import": {
-        "types": "./dist/schema/index.d.mts",
-        "default": "./dist/schema/index.mjs"
-      },
-      "default": {
-        "types": "./dist/schema/index.d.mts",
-        "default": "./dist/schema/index.mjs"
-      }
-    }
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -124,6 +82,9 @@
     "dist"
   ],
   "dependencies": {
+    "@emnapi/core": "catalog:",
+    "@emnapi/runtime": "catalog:",
+    "@napi-rs/wasm-runtime": "catalog:",
     "@power-plant/schema": "workspace:*",
     "@powerlines/core": "catalog:",
     "@powerlines/engine": "catalog:",
@@ -131,6 +92,7 @@
     "@powerlines/plugin-automd": "catalog:",
     "@stryke/convert": "catalog:",
     "@stryke/date": "catalog:",
+    "@stryke/env": "catalog:",
     "@stryke/fs": "catalog:",
     "@stryke/helpers": "catalog:",
     "@stryke/json": "catalog:",
@@ -141,17 +103,43 @@
     "@stryke/types": "catalog:",
     "@stryke/unique-id": "catalog:",
     "automd": "catalog:",
+    "c12": "catalog:",
     "defu": "catalog:",
     "jiti": "catalog:",
     "powerlines": "catalog:",
+    "signal-exit": "catalog:",
     "tsdown": "catalog:"
   },
   "devDependencies": {
+    "@napi-rs/cli": "catalog:",
+    "@powerlines/plugin-napi-rs": "catalog:",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "napi": {
+    "binaryName": "power-plant-bindings",
+    "packageName": "@power-plant/bindings",
+    "targets": [
+      "x86_64-apple-darwin",
+      "x86_64-pc-windows-msvc",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-linux-musl",
+      "x86_64-unknown-freebsd",
+      "armv7-unknown-linux-gnueabihf",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-apple-darwin",
+      "aarch64-unknown-linux-musl",
+      "aarch64-unknown-linux-ohos",
+      "aarch64-pc-windows-msvc",
+      "aarch64-linux-android",
+      "wasm32-wasip1-threads",
+      "s390x-unknown-linux-gnu",
+      "powerpc64le-unknown-linux-gnu"
+    ],
+    "dtsHeader": "export type MaybePromise<T> = T | Promise<T>\nexport type Nullable<T> = T | null | undefined\ntype VoidNullable<T = void> = T | null | undefined | void\nexport type BindingStringOrRegex = string | RegExp\ntype BindingResult<T> = { errors: BindingError[], isBindingErrors: boolean } | T\n\n"
   }
 }

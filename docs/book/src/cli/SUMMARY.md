@@ -1,0 +1,2 @@
+- [`power-plant`](./power-plant.md)
+  - [`power-plant run`](./power-plant/run.md)

@@ -1,0 +1,49 @@
+[package]
+authors = { workspace = true }
+categories = { workspace = true }
+description = "☢️ Error types and utilities used across the Power Plant monorepo."
+documentation = "https://docs.rs/power-plant"
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = "power-plant-error"
+publish = false
+readme = "./README.md"
+repository = { workspace = true }
+version = "0.1.0"
+
+[lib]
+doctest = false
+
+[lints]
+workspace = true
+
+[features]
+default = []
+napi = ["dep:napi", "dep:napi-derive"]
+
+[dependencies]
+anyhow = { workspace = true }
+arcstr = { workspace = true }
+ariadne = { workspace = true }
+bitflags = { workspace = true }
+camino = { workspace = true }
+derive_more = { workspace = true }
+ropey = { workspace = true }
+rustc-hash = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sugar_path = { workspace = true }
+ts-rs = { workspace = true }
+
+# N-API
+napi = { workspace = true, optional = true }
+napi-derive = { workspace = true, optional = true }
+
+# Oxc
+oxc = { workspace = true }
+oxc_allocator = { workspace = true }
+oxc_ecmascript = { workspace = true }
+oxc_index = { workspace = true }
+oxc_traverse = { workspace = true }

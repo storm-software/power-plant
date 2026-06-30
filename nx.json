@@ -11,6 +11,23 @@
           "packages/devtools/*"
         ],
         "projectsRelationship": "independent"
+      },
+      "native": {
+        "projects": ["crates/*"],
+        "projectsRelationship": "fixed",
+        "changelog": {
+          "createRelease": "github",
+          "entryWhenNoChanges": false
+        },
+        "version": {
+          "currentVersionResolver": "git-tag",
+          "specifierSource": "conventional-commits",
+          "groupPreVersionCommand": "pnpm build-native",
+          "versionActions": "@storm-software/workspace-tools/release/rust-version-actions"
+        },
+        "releaseTag": {
+          "pattern": "power-plant-rs@{version}"
+        }
       }
     }
   },
@@ -25,6 +42,7 @@
       }
     },
     "@storm-software/workspace-tools/plugins/typescript",
+    "@storm-software/workspace-tools/plugins/rust",
     "@storm-software/workspace-tools/plugins/typescript/untyped",
     "@storm-software/workspace-tools/plugins/typescript/tsdown",
     "@powerlines/nx/plugin"

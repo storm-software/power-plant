@@ -17,13 +17,25 @@
  ------------------------------------------------------------------- */
 
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
+import { toArray } from "@stryke/convert/to-array";
+import { toMode } from "@stryke/env/environment-checks";
+import { getEnvPaths } from "@stryke/env/get-env-paths";
+import { readFileIfExisting } from "@stryke/fs/read-file";
+import { joinPaths } from "@stryke/path/join";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
-import { callAsyncContext, createContext } from "../helpers/context";
-import { createInput } from "../input/create";
-import { createOutput } from "../output/create";
-import { createSchema } from "../schema/create";
-import type { UserConfig } from "../types/config";
+import { isSetObject } from "@stryke/type-checks/is-set-object";
+import { uuid } from "@stryke/unique-id/uuid";
+import { loadConfig } from "c12";
+import defu from "defu";
+import { createJiti } from "jiti";
+import * as fs from "node:fs";
+import { existsSync } from "node:fs";
+import os from "node:os";
+import { callAsyncContext } from "../context";
+import { isGeneratorConfigObject } from "../helpers/type-checks";
+import type { UserConfig, UserConfigExport } from "../types/config";
+import type { Context } from "../types/context";
 import type {
   Generator,
   GeneratorConfig,
@@ -31,7 +43,194 @@ import type {
   InferCreateGeneratorOptions
 } from "../types/generator";
 import type { SchemaConfigObject } from "../types/schema";
-import { isGeneratorConfigObject } from "./helpers";
+import type { Logger } from "../types/settings";
+import { createInput } from "./input";
+import { createOutput } from "./output";
+import { createSchema } from "./schema";
+
+const homeDir = os.homedir();
+
+const logger: Logger = {
+  // eslint-disable-next-line no-console
+  debug: console.debug,
+  // eslint-disable-next-line no-console
+  info: console.info,
+  // eslint-disable-next-line no-console
+  warn: console.warn,
+  // eslint-disable-next-line no-console
+  error: console.error
+};
+
+const paths = getEnvPaths({
+  appId: "power-plant",
+  orgId: "storm-software"
+});
+
+const jiti = createJiti(process.cwd(), {
+  fsCache: joinPaths(paths.cache, "jiti")
+});
+
+async function createContext(userConfig: UserConfig = {}): Promise<Context> {
+  const cwd = userConfig.cwd || process.cwd();
+  const mode = toMode(
+    userConfig.debug === true
+      ? "development"
+      : userConfig.settings?.mode ||
+          process.env.STORM_MODE ||
+          process.env.NEXT_PUBLIC_VERCEL_ENV ||
+          process.env.NODE_ENV ||
+          "production"
+  );
+
+  const configFile =
+    userConfig.configFile ||
+    existsSync(joinPaths(cwd, `power-plant.${mode}.config.ts`))
+      ? joinPaths(cwd, `power-plant.${mode}.config.ts`)
+      : existsSync(joinPaths(cwd, `power-plant.${mode}.config.tsx`))
+        ? joinPaths(cwd, `power-plant.${mode}.config.tsx`)
+        : existsSync(joinPaths(cwd, `power-plant.config.mts`))
+          ? joinPaths(cwd, `power-plant.config.mts`)
+          : existsSync(joinPaths(cwd, `power-plant.config.cts`))
+            ? joinPaths(cwd, `power-plant.config.cts`)
+            : existsSync(joinPaths(cwd, `power-plant.config.mjs`))
+              ? joinPaths(cwd, `power-plant.config.mjs`)
+              : existsSync(joinPaths(cwd, `power-plant.config.cjs`))
+                ? joinPaths(cwd, `power-plant.config.cjs`)
+                : existsSync(joinPaths(cwd, `power-plant.config.js`))
+                  ? joinPaths(cwd, `power-plant.config.js`)
+                  : existsSync(joinPaths(cwd, `power-plant.config.jsx`))
+                    ? joinPaths(cwd, `power-plant.config.jsx`)
+                    : undefined;
+
+  let projectConfig: UserConfig[] = [];
+  if (configFile) {
+    const resolved = await jiti.import<{ default: UserConfigExport }>(
+      jiti.esmResolve(configFile)
+    );
+    if (resolved?.default) {
+      let config:
+        UserConfig | UserConfig[] | Promise<UserConfig | UserConfig[]> = {};
+      if (isFunction(resolved.default)) {
+        config = await Promise.resolve(resolved.default({ cwd, mode }));
+      } else if (
+        isSetObject(resolved.default) ||
+        Array.isArray(resolved.default)
+      ) {
+        config = resolved.default;
+      }
+
+      if (isSetObject(config) || Array.isArray(config)) {
+        projectConfig = toArray(await Promise.resolve(config));
+      }
+    }
+  }
+
+  const settings = defu(
+    userConfig.settings ?? {},
+    JSON.parse(
+      (await readFileIfExisting(
+        joinPaths(
+          userConfig.settings?.paths?.config ?? paths.config,
+          "settings.json"
+        )
+      )) || "{}"
+    ),
+    {
+      paths,
+      mode
+    }
+  );
+
+  const [
+    { config: config1 },
+    { config: config2 },
+    { config: config3 },
+    { config: config4 },
+    { config: config5 },
+    { config: config6 },
+    { config: config7 },
+    { config: config8 }
+  ] = await Promise.all([
+    loadConfig<UserConfig>({
+      name: "power-plant",
+      cwd: process.cwd(),
+      dotenv: true,
+      globalRc: true,
+      packageJson: "power-plant",
+      envName: settings.mode
+    }),
+    loadConfig<UserConfig>({
+      name: "powerplant",
+      cwd: process.cwd(),
+      dotenv: true,
+      globalRc: true,
+      packageJson: "powerplant",
+      envName: settings.mode
+    }),
+    loadConfig<UserConfig>({
+      name: "power-plant",
+      cwd: process.cwd(),
+      dotenv: true,
+      globalRc: true,
+      packageJson: "power-plant"
+    }),
+    loadConfig<UserConfig>({
+      name: "powerplant",
+      cwd: process.cwd(),
+      dotenv: true,
+      globalRc: true,
+      packageJson: "powerplant"
+    }),
+    loadConfig<UserConfig>({
+      name: "power-plant",
+      cwd: homeDir,
+      dotenv: true,
+      globalRc: true,
+      envName: settings.mode
+    }),
+    loadConfig<UserConfig>({
+      name: "powerplant",
+      cwd: homeDir,
+      dotenv: true,
+      globalRc: true,
+      envName: settings.mode
+    }),
+    loadConfig<UserConfig>({
+      name: "power-plant",
+      cwd: homeDir,
+      dotenv: true,
+      globalRc: true
+    }),
+    loadConfig<UserConfig>({
+      name: "powerplant",
+      cwd: homeDir,
+      dotenv: true,
+      globalRc: true
+    })
+  ]);
+
+  return defu(
+    {
+      cwd,
+      session: {
+        sessionId: uuid(),
+        timestamp: Date.now(),
+        systemId: uuid()
+      }
+    },
+    userConfig,
+    ...projectConfig,
+    { settings, fs, logger },
+    config1,
+    config2,
+    config3,
+    config4,
+    config5,
+    config6,
+    config7,
+    config8
+  ) as Context;
+}
 
 /**
  * Creates a generator from raw schema/input/output configurations and resolves all descriptors.
@@ -80,7 +279,7 @@ export async function createGenerator<
   ]);
 
   const generate = async (options: TOptions & UserConfig) => {
-    const context = createContext(options);
+    const context = await createContext(options);
 
     return callAsyncContext(context, async () => {
       const spec = isFunction(input.input)

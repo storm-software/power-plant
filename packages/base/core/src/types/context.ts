@@ -17,9 +17,22 @@
  ------------------------------------------------------------------- */
 
 import type { FileSystemInterface } from "@stryke/types/fs";
-import type { Logger } from "./config";
+import type { Logger, Settings } from "./settings";
+
+export interface Session {
+  sessionId: string;
+  timestamp: number;
+
+  /**
+   * The system ID to use for the application.
+   */
+  systemId: string;
+}
 
 export interface Context {
+  cwd: string;
+  settings: Settings;
   fs: FileSystemInterface;
   logger: Logger;
+  session: Session;
 }

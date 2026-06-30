@@ -1,0 +1,85 @@
+[package]
+authors = { workspace = true }
+categories = { workspace = true }
+description = "☢️ Node.js Bindings for the Power Plant runtime."
+documentation = "https://docs.rs/power-plant"
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = "power-plant-bindings"
+publish = false
+readme = "./README.md"
+repository = { workspace = true }
+version = "0.1.0"
+
+[lints]
+workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+doctest = false
+
+[dependencies]
+
+# Power Plant
+power-plant-common = { workspace = true }
+power-plant-core = { workspace = true }
+power-plant-error = { workspace = true, features = ["napi"] }
+power-plant-models = { workspace = true }
+power-plant-tracing = { workspace = true }
+power-plant-utils = { workspace = true }
+
+anyhow = { workspace = true }
+arcstr = { workspace = true }
+async-channel = { workspace = true }
+camino = { workspace = true }
+dashmap = { workspace = true }
+derive_more = { workspace = true }
+flate2 = { workspace = true }
+futures = { workspace = true }
+itertools = { workspace = true }
+napi = { workspace = true, features = ["async", "anyhow", "napi6", "tokio_rt"] }
+napi-derive = { workspace = true }
+num_cpus = { workspace = true }
+oxc_parser_napi = { workspace = true }
+oxc_resolver = { workspace = true }
+oxc_resolver_napi = { workspace = true }
+oxc_sourcemap = { workspace = true }
+oxc_transform_napi = { workspace = true }
+rustc-hash = { workspace = true }
+
+# [target.'cfg(all(target_arch = "wasm32", not(target_os = "emscripten"), not(target_os = "unknown"), not(target_os = "wasi")))'.dependencies]
+# oxc_resolver = { version = "11.13.2", features = ["yarn_pnp"] }
+# oxc_resolver_napi = { version = "11.13.2", default-features = false, features = [
+#     "yarn_pnp",
+# ] }
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["fileapi", "psapi"] }
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
+
+[target.'cfg(all(not(target_os = "linux"), not(target_os = "freebsd"), not(target_family = "wasm")))'.dependencies]
+mimalloc-safe = { workspace = true, features = ["skip_collect_on_exit"] }
+
+[target.'cfg(all(any(target_os = "linux", target_os = "freebsd"), not(target_arch = "aarch64"), not(target_env = "ohos")))'.dependencies]
+mimalloc-safe = { workspace = true, features = [
+  "skip_collect_on_exit",
+  "local_dynamic_tls"
+] }
+
+[target.'cfg(all(target_os = "linux", target_arch = "aarch64"))'.dependencies]
+mimalloc-safe = { workspace = true, features = [
+  "skip_collect_on_exit",
+  "no_opt_arch",
+  "local_dynamic_tls"
+] }
+
+[build-dependencies]
+napi-build = { workspace = true }
+static_vcruntime = { version = "3.0" }
+
+[features]
+default_global_allocator = []

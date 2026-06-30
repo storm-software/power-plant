@@ -16,9 +16,11 @@
 
  ------------------------------------------------------------------- */
 
+export * from "./config";
 export * from "./context";
 export * from "./generator";
 export * from "./input";
 export * from "./meta";
 export * from "./output";
 export * from "./schema";
+export * from "./settings";

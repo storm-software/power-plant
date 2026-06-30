@@ -3,7 +3,11 @@ version: 2
 
 triggerPaths:
   - "tools/*/package.json"
-  - "packages/*/package.json"
+  - "packages/base/*/package.json"
+  - "packages/inputs/*/package.json"
+  - "packages/outputs/*/package.json"
+  - "packages/generators/*/package.json"
+  - "packages/devtools/*/package.json"
   - "package.json"
   - "pnpm-lock.yaml"
   - "pnpm-workspace.yaml"
