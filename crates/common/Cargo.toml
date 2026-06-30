@@ -23,6 +23,7 @@ workspace = true
 
 # Power Plant
 power-plant-error = { workspace = true }
+power-plant-models = { workspace = true }
 power-plant-utils = { workspace = true }
 
 anyhow = { workspace = true }

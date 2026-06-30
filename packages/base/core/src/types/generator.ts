@@ -20,15 +20,15 @@ import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { UserConfig } from "./config";
 import type { Input, InputConfig } from "./input";
+import type { MetaValue } from "./meta";
 import type { Output, OutputConfig } from "./output";
 import type { SchemaOf } from "./schema";
 
-// eslint-disable-next-line unused-imports/no-unused-vars, ts/no-unused-vars
 export interface GeneratorMeta<TSpec, TOptions extends object> {
   /**
    * A string description (or a function that returns a string) outlining the purpose or behavior of the generator.
    */
-  description?: string | ((spec: TSpec) => string);
+  description?: MetaValue<TSpec, TOptions, string>;
 }
 
 export interface GeneratorConfigObject<

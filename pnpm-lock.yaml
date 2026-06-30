@@ -206,10 +206,10 @@ settings:
 catalogs:
   default:
     '@emnapi/core':
-      specifier: ^1.11.1
+      specifier: 1.11.1
       version: 1.11.1
     '@emnapi/runtime':
-      specifier: ^1.11.1
+      specifier: 1.11.1
       version: 1.11.1
     '@hey-api/openapi-ts':
       specifier: ^0.99.0

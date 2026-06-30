@@ -23,6 +23,8 @@ import {
   startAsyncRuntime
 } from "../bindings.cjs";
 import type { Context } from "../types/context";
+import type { Execution } from "../types/execution";
+import { toBindingStoreInput } from "./to-binding-store-input";
 
 // @ts-expect-error TS2540: the polyfill of `asyncDispose`.
 Symbol.asyncDispose ??= Symbol("Symbol.asyncDispose");
@@ -59,16 +61,19 @@ export class NativeBindingEngine {
   }
 
   /**
-   * Scan the project for route and layout modules, and return the scan output which includes the paths of the discovered modules and any associated metadata. This method is typically used during the prepare phase of the build process to gather information about the project's structure and dependencies.
+   * Collect the project's source code and metadata, and store it in the backend storage for later use.
    *
    * @remarks
-   * This method will also handle the lifecycle of the asynchronous runtime used for scanning, ensuring that it is started if it has been shut down and that any worker processes are stopped before starting a new scan.
+   * In this context, backend storage does not necessarily mean a database or external service. It can be a file system, a cloud storage, or any other storage that is accessible to the backend.
    *
-   * @returns The output of the scan operation, including paths to discovered modules and metadata.
-   * @throws An error if the scan operation fails due to binding errors or other issues.
+   * @param execution - The execution to store.
+   * @returns The output of the store operation, including the success status and any warnings.
+   * @throws An error if the store operation fails due to binding errors or other issues.
    */
-  public async commit(): Promise<any> {
-    this.#context.logger.debug("Power Plant - Scan started.");
+  public async store<TSpec, TOptions extends object>(
+    execution: Execution<TSpec, TOptions>
+  ): Promise<any> {
+    this.#context.logger.debug("Power Plant - Store started.");
 
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
@@ -76,19 +81,7 @@ export class NativeBindingEngine {
     }
 
     const result: Awaited<ReturnType<BindingEngine["store"]>> =
-      await this.#binding.store({
-        executionId: "123",
-        documents: [
-          {
-            name: "test",
-            path: "test.txt",
-            extension: "txt",
-            sourceCode: [],
-            metadata: undefined
-          }
-        ],
-        metadata: undefined
-      });
+      await this.#binding.store(toBindingStoreInput(execution));
     if (
       (result as { errors: BindingError[]; isBindingErrors: boolean })
         ?.isBindingErrors

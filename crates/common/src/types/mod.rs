@@ -10,3 +10,6 @@ pub use options::*;
 /// Module containing the Output type.
 pub mod output;
 pub use output::*;
+/// Module containing the Input type.
+pub mod input;
+pub use input::*;

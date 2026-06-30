@@ -39,7 +39,15 @@ derive_more = { workspace = true }
 flate2 = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }
-napi = { workspace = true, features = ["async", "anyhow", "napi6", "tokio_rt"] }
+chrono = { workspace = true, features = ["serde"] }
+napi = { workspace = true, features = [
+  "async",
+  "anyhow",
+  "napi6",
+  "serde",
+  "tokio_rt"
+] }
+serde_json = { workspace = true }
 napi-derive = { workspace = true }
 num_cpus = { workspace = true }
 oxc_parser_napi = { workspace = true }

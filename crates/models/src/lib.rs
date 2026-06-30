@@ -13,6 +13,14 @@ pub use document::*;
 pub mod source_code;
 pub use source_code::*;
 
+/// Module containing metadata types used by execution models.
+pub mod meta;
+pub use meta::*;
+
+/// Module containing execution types.
+pub mod execution;
+pub use execution::*;
+
 #[cfg(test)]
 mod tests {
   #[test]

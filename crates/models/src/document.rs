@@ -1,4 +1,3 @@
-use crate::data_point::DataPoint;
 use crate::source_code::SourceCode;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -11,9 +10,6 @@ use std::path::PathBuf;
 /// set to the class name (e.g. "TextDocument", "PdfDocument").
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Document {
-  /// DataPoint base — carries id, timestamps, metadata, data_type discriminator.
-  #[serde(flatten)]
-  pub base: DataPoint,
   /// The name of the document.
   pub name: String,
   /// The path to the document.
@@ -25,19 +21,18 @@ pub struct Document {
   /// The external metadata of the document.
   pub metadata: Option<String>,
   /// The source code of the document.
-  pub source_code: Vec<SourceCode>,
+  pub source: Vec<SourceCode>,
 }
 
 impl Document {
   /// Create a new document.
   pub fn new(
-    base: DataPoint,
     extension: String,
     name: String,
     path: PathBuf,
     data_id: String,
     metadata: Option<String>,
   ) -> Self {
-    Self { base, extension, name, path, data_id, metadata, source_code: vec![] }
+    Self { extension, name, path, data_id, metadata, source: vec![] }
   }
 }

@@ -43,7 +43,8 @@ impl BindingEngine {
     env: &'env Env,
     input: BindingStoreInput,
   ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingStoreOutput>>> {
-    let result = self.inner.store();
+    let execution_id = input.execution.meta.id.clone();
+    let result = self.inner.store(input.into());
     let fut = async move {
       let store_output = match result {
         Ok(output) => output,
@@ -51,7 +52,7 @@ impl BindingEngine {
           let errors: Vec<BindingError> = errs
             .into_vec()
             .iter()
-            .map(|diagnostic| to_binding_error(diagnostic, input.execution_id.clone().into()))
+            .map(|diagnostic| to_binding_error(diagnostic, execution_id.clone().into()))
             .collect();
           return Ok(napi::Either::A(BindingErrors::new(errors)));
         }

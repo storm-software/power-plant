@@ -1,4 +1,4 @@
-use power_plant_common::{NormalizedOptions, Options, StoreOutput};
+use power_plant_common::{NormalizedOptions, Options, StoreInput, StoreOutput};
 use power_plant_error::PowerPlantResult;
 use power_plant_tracing::Session;
 use std::future::{Future, ready};
@@ -21,7 +21,7 @@ impl Engine {
     self.is_closed
   }
 
-  pub fn store<'a>(&mut self) -> PowerPlantResult<StoreOutput> {
+  pub fn store<'a>(&mut self, input: StoreInput) -> PowerPlantResult<StoreOutput> {
     self.create_error_if_closed()?;
 
     // let ret: Result<StoreOutput, _> = self.session.store();
