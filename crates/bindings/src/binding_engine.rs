@@ -1,9 +1,9 @@
 use crate::{
   types::{
     binding_error::{BindingError, BindingErrors, BindingResult},
-    binding_input::BindingStoreInput,
+    binding_input::{BindingRecallInput, BindingStoreInput},
     binding_options::BindingOptions,
-    binding_output::BindingStoreOutput,
+    binding_output::{BindingRecallOutput, BindingStoreOutput},
   },
   utils::{handle_result, to_binding_error},
 };
@@ -59,6 +59,33 @@ impl BindingEngine {
       };
 
       Ok(napi::Either::B(BindingStoreOutput::from(store_output)))
+    };
+
+    env.spawn_future(fut)
+  }
+
+  #[napi]
+  pub fn recall<'env>(
+    &mut self,
+    env: &'env Env,
+    input: BindingRecallInput,
+  ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingRecallOutput>>> {
+    let execution_id = input.execution_id.clone();
+    let result = self.inner.recall(input.into());
+    let fut = async move {
+      let recall_output = match result {
+        Ok(output) => output,
+        Err(errs) => {
+          let errors: Vec<BindingError> = errs
+            .into_vec()
+            .iter()
+            .map(|diagnostic| to_binding_error(diagnostic, execution_id.clone().into()))
+            .collect();
+          return Ok(napi::Either::A(BindingErrors::new(errors)));
+        }
+      };
+
+      Ok(napi::Either::B(BindingRecallOutput::from(recall_output)))
     };
 
     env.spawn_future(fut)

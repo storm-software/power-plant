@@ -13,3 +13,9 @@ pub use output::*;
 /// Module containing the Input type.
 pub mod input;
 pub use input::*;
+/// Module containing the RecallInput type.
+pub mod recall_input;
+pub use recall_input::*;
+/// Module containing the RecallOutput type.
+pub mod recall_output;
+pub use recall_output::*;

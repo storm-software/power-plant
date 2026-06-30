@@ -1,19 +1,19 @@
 use derive_more::Debug;
-use power_plant_common::StoreInput;
+use power_plant_common::{RecallInput, StoreInput};
 use power_plant_models::{
   Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
   InputMeta, Meta, OutputMeta, SchemaMeta, SchemaMetaExample,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingGeneratorMeta {
   /// A description of the generator's purpose or behavior.
   pub description: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingSchemaMeta {
   /// A unique identifier for the component.
   pub id: String,
@@ -38,7 +38,7 @@ pub struct BindingSchemaMeta {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingInputMeta {
   /// A unique identifier for the component.
   pub id: String,
@@ -63,7 +63,7 @@ pub struct BindingInputMeta {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingOutputMeta {
   /// A unique identifier for the component.
   pub id: String,
@@ -88,7 +88,7 @@ pub struct BindingOutputMeta {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingExecutionSourceMeta {
   /// The options used to generate the source code during the execution.
   pub options: serde_json::Value,
@@ -105,7 +105,7 @@ pub struct BindingExecutionSourceMeta {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingExecutionSource {
   /// The language of the generated source code.
   pub language: String,
@@ -116,7 +116,7 @@ pub struct BindingExecutionSource {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingExecutionDocument {
   /// The name of the document.
   pub name: String,
@@ -129,7 +129,7 @@ pub struct BindingExecutionDocument {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingExecutionMeta {
   /// The id of the execution.
   pub id: String,
@@ -140,7 +140,7 @@ pub struct BindingExecutionMeta {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-#[napi_derive::napi(object, object_to_js = false)]
+#[napi_derive::napi(object)]
 pub struct BindingExecution {
   /// The documents of the execution.
   pub documents: Vec<BindingExecutionDocument>,
@@ -153,6 +153,13 @@ pub struct BindingExecution {
 pub struct BindingStoreInput {
   /// The execution that produced the input.
   pub execution: BindingExecution,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[napi_derive::napi(object, object_to_js = false)]
+pub struct BindingRecallInput {
+  /// The id of the execution to recall.
+  pub execution_id: String,
 }
 
 impl BindingStoreInput {
@@ -335,5 +342,158 @@ impl From<BindingExecution> for Execution {
 impl From<BindingStoreInput> for StoreInput {
   fn from(value: BindingStoreInput) -> Self {
     Self { execution: value.execution.into() }
+  }
+}
+
+impl From<BindingRecallInput> for RecallInput {
+  fn from(value: BindingRecallInput) -> Self {
+    Self { execution_id: value.execution_id }
+  }
+}
+
+impl From<GeneratorMeta> for BindingGeneratorMeta {
+  fn from(value: GeneratorMeta) -> Self {
+    Self { description: value.description }
+  }
+}
+
+fn meta_to_binding_fields(meta: Meta) -> (String, String, serde_json::Value, String, String, Option<String>, Option<serde_json::Value>, Option<Vec<String>>, Vec<serde_json::Value>) {
+  let Meta {
+    id,
+    name,
+    version,
+    description,
+    title,
+    usage,
+    deprecated,
+    tags,
+    links,
+  } = meta;
+
+  (
+    id,
+    name,
+    version,
+    description,
+    title,
+    usage,
+    deprecated.map(|value| serde_json::to_value(value).unwrap_or(serde_json::Value::Null)),
+    tags,
+    links.into_iter().map(|link| serde_json::to_value(link).unwrap_or(serde_json::Value::Null)).collect(),
+  )
+}
+
+impl From<SchemaMeta> for BindingSchemaMeta {
+  fn from(value: SchemaMeta) -> Self {
+    let (id, name, version, description, title, usage, deprecated, tags, links) =
+      meta_to_binding_fields(value.meta);
+
+    Self {
+      id,
+      name,
+      version,
+      description,
+      title,
+      usage,
+      deprecated,
+      tags,
+      links,
+      examples: value
+        .examples
+        .into_iter()
+        .map(|example| match example {
+          SchemaMetaExample::Value(value) => value,
+          SchemaMetaExample::Named { name, description, value } => {
+            let mut object = serde_json::Map::new();
+            if let Some(name) = name {
+              object.insert("name".into(), name.into());
+            }
+            if let Some(description) = description {
+              object.insert("description".into(), description.into());
+            }
+            object.insert("value".into(), value);
+            serde_json::Value::Object(object)
+          }
+        })
+        .collect(),
+    }
+  }
+}
+
+impl From<InputMeta> for BindingInputMeta {
+  fn from(value: InputMeta) -> Self {
+    let (id, name, version, description, title, usage, deprecated, tags, links) =
+      meta_to_binding_fields(value.meta);
+
+    Self { id, name, version, description, title, usage, deprecated, tags, links, input: value.input }
+  }
+}
+
+impl From<OutputMeta> for BindingOutputMeta {
+  fn from(value: OutputMeta) -> Self {
+    let (id, name, version, description, title, usage, deprecated, tags, links) =
+      meta_to_binding_fields(value.meta);
+
+    Self {
+      id,
+      name,
+      version,
+      description,
+      title,
+      usage,
+      deprecated,
+      tags,
+      links,
+      produces: value.produces,
+    }
+  }
+}
+
+impl From<ExecutionSourceMeta> for BindingExecutionSourceMeta {
+  fn from(value: ExecutionSourceMeta) -> Self {
+    Self {
+      options: value.options,
+      spec: value.spec,
+      generator: value.generator.into(),
+      schema: value.schema.into(),
+      input: value.input.into(),
+      output: value.output.into(),
+    }
+  }
+}
+
+impl From<ExecutionSource> for BindingExecutionSource {
+  fn from(value: ExecutionSource) -> Self {
+    Self { language: value.language, content: value.content, meta: value.meta.into() }
+  }
+}
+
+impl From<ExecutionDocument> for BindingExecutionDocument {
+  fn from(value: ExecutionDocument) -> Self {
+    Self {
+      name: value.name,
+      path: value.path,
+      extension: value.extension,
+      source: value.source.into_iter().map(Into::into).collect(),
+    }
+  }
+}
+
+impl From<ExecutionMeta> for BindingExecutionMeta {
+  fn from(value: ExecutionMeta) -> Self {
+    Self {
+      id: value.id,
+      executed_at: value.executed_at.to_rfc3339(),
+      executed_by: value.executed_by,
+    }
+  }
+}
+
+impl From<Execution> for BindingExecution {
+  fn from(value: Execution) -> Self {
+    Self {
+      documents: value.documents.into_iter().map(Into::into).collect(),
+      meta: value.meta.into(),
+    }
   }
 }

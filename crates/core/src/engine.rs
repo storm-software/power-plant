@@ -1,35 +1,58 @@
-use power_plant_common::{NormalizedOptions, Options, StoreInput, StoreOutput};
+use power_plant_common::{NormalizedOptions, Options, RecallInput, RecallOutput, StoreInput, StoreOutput};
 use power_plant_error::PowerPlantResult;
-use power_plant_tracing::Session;
+use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
+use power_plant_tracing::{actions::StoreEnd, actions::StoreStart, trace_action, Session};
+use derive_more::Debug;
 use std::future::{Future, ready};
+use std::sync::Arc;
 
 #[derive(Debug)]
 pub struct Engine {
   pub(super) session: Session,
   pub(super) options: NormalizedOptions,
+  #[debug(skip)]
+  pub(super) execution_store: Arc<dyn ExecutionStore>,
   pub(super) is_closed: bool,
 }
 
 impl Engine {
   pub fn new(options: Options) -> PowerPlantResult<Self> {
     let normalized_options = NormalizedOptions::from(options);
+    let executions_path = normalized_options.paths.data_path.join("executions");
+    let execution_store =
+      Arc::new(FsExecutionStore::new(executions_path)) as Arc<dyn ExecutionStore>;
 
-    Ok(Self { options: normalized_options, is_closed: false, session: Session::dummy() })
+    Ok(Self {
+      options: normalized_options,
+      is_closed: false,
+      session: Session::dummy(),
+      execution_store,
+    })
   }
 
   pub fn is_closed(&self) -> bool {
     self.is_closed
   }
 
-  pub fn store<'a>(&mut self, input: StoreInput) -> PowerPlantResult<StoreOutput> {
+  pub fn store(&mut self, input: StoreInput) -> PowerPlantResult<StoreOutput> {
     self.create_error_if_closed()?;
 
-    // let ret: Result<StoreOutput, _> = self.session.store();
-    // if let Ok(ret) = ret {
-    //   return Ok(ret);
-    // }
+    let execution_id = input.execution.meta.id.clone();
+    trace_action!(StoreStart { action: "StoreStart", execution_id: execution_id.clone() });
 
-    Ok(StoreOutput { success: false, warnings: vec![] })
+    self.execution_store.store(&input.execution).map_err(storage_error)?;
+
+    trace_action!(StoreEnd { action: "StoreEnd", execution_id });
+
+    Ok(StoreOutput { success: true, warnings: vec![] })
+  }
+
+  pub fn recall(&mut self, input: RecallInput) -> PowerPlantResult<RecallOutput> {
+    self.create_error_if_closed()?;
+
+    let execution = self.execution_store.recall(&input.execution_id).map_err(storage_error)?;
+
+    Ok(RecallOutput { execution })
   }
 
   #[must_use = "Future must be awaited to do the actual cleanup work"]
@@ -44,5 +67,86 @@ impl Engine {
     }
 
     Ok(())
+  }
+}
+
+fn storage_error(error: StorageError) -> power_plant_error::BatchedPowerPlantDiagnostic {
+  anyhow::anyhow!(error.to_string()).into()
+}
+
+#[cfg(test)]
+#[allow(
+  clippy::unwrap_used,
+  clippy::expect_used,
+  reason = "test code — panics are acceptable failures"
+)]
+mod tests {
+  use super::*;
+  use chrono::Utc;
+  use power_plant_models::{
+    Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
+    InputMeta, Meta, OutputMeta, SchemaMeta,
+  };
+  use power_plant_storage::InMemoryExecutionStore;
+
+  fn sample_execution(id: &str) -> Execution {
+    let meta = Meta {
+      id: "schema".into(),
+      name: "schema".into(),
+      version: serde_json::json!("1.0.0"),
+      description: "desc".into(),
+      title: "title".into(),
+      usage: None,
+      deprecated: None,
+      tags: None,
+      links: vec![],
+    };
+
+    Execution {
+      documents: vec![ExecutionDocument {
+        name: "doc".into(),
+        path: "src/doc.ts".into(),
+        extension: "ts".into(),
+        source: vec![ExecutionSource {
+          language: "typescript".into(),
+          content: "export {}".into(),
+          meta: ExecutionSourceMeta {
+            options: serde_json::json!({}),
+            spec: serde_json::json!({}),
+            generator: GeneratorMeta { description: None },
+            schema: SchemaMeta { meta: meta.clone(), examples: vec![] },
+            input: InputMeta { meta: meta.clone(), input: None },
+            output: OutputMeta { meta, produces: None },
+          },
+        }],
+      }],
+      meta: ExecutionMeta {
+        id: id.into(),
+        executed_at: Utc::now(),
+        executed_by: "tester".into(),
+      },
+    }
+  }
+
+  fn engine_with_store(store: Arc<dyn ExecutionStore>) -> Engine {
+    Engine {
+      session: Session::dummy(),
+      options: NormalizedOptions::default(),
+      execution_store: store,
+      is_closed: false,
+    }
+  }
+
+  #[test]
+  fn store_and_recall_execution() {
+    let store = Arc::new(InMemoryExecutionStore::default());
+    let mut engine = engine_with_store(store);
+    let execution = sample_execution("exec-1");
+
+    let store_output = engine.store(StoreInput { execution: execution.clone() }).unwrap();
+    assert!(store_output.success);
+
+    let recall_output = engine.recall(RecallInput { execution_id: "exec-1".into() }).unwrap();
+    assert_eq!(recall_output.execution, execution);
   }
 }

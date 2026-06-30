@@ -16,7 +16,11 @@
 
  ------------------------------------------------------------------- */
 
-import type { BindingError, BindingOptions } from "../bindings.cjs";
+import type {
+  BindingError,
+  BindingOptions,
+  BindingRecallOutput
+} from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
@@ -24,6 +28,7 @@ import {
 } from "../bindings.cjs";
 import type { Context } from "../types/context";
 import type { Execution } from "../types/execution";
+import { fromBindingRecallOutput } from "./from-binding-recall-output";
 import { toBindingStoreInput } from "./to-binding-store-input";
 
 // @ts-expect-error TS2540: the polyfill of `asyncDispose`.
@@ -98,6 +103,39 @@ export class NativeBindingEngine {
     this.#context.logger.debug("Power Plant - Scan completed.");
 
     return {};
+  }
+
+  /**
+   * Recall a previously stored execution from backend storage.
+   *
+   * @param executionId - The id of the execution to recall.
+   * @returns The recalled execution.
+   * @throws An error if the recall operation fails due to binding errors or other issues.
+   */
+  public async recall<TSpec, TOptions extends object>(
+    executionId: string
+  ): Promise<Execution<TSpec, TOptions>> {
+    this.#context.logger.debug("Power Plant - Recall started.");
+
+    await this.#stopWorkers?.();
+    if (NativeBindingEngine.asyncRuntimeShutdown) {
+      startAsyncRuntime();
+    }
+
+    const result = await this.#binding.recall({ executionId });
+    if ("isBindingErrors" in result && result.isBindingErrors) {
+      throw new Error(
+        `Power Plant - Recall failed with errors: ${result.errors
+          .map(e => e.field0.message)
+          .join("\n")}`
+      );
+    }
+
+    this.#context.logger.debug("Power Plant - Recall completed.");
+
+    const recallOutput = result as BindingRecallOutput;
+
+    return fromBindingRecallOutput<TSpec, TOptions>(recallOutput);
   }
 
   /**

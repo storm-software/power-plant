@@ -2104,9 +2104,12 @@ dependencies = [
  "arcstr",
  "blake3",
  "camino",
+ "chrono",
  "derive_more",
  "power-plant-common",
  "power-plant-error",
+ "power-plant-models",
+ "power-plant-storage",
  "power-plant-tracing",
  "power-plant-utils",
  "rayon",
@@ -2160,6 +2163,18 @@ dependencies = [
  "serde",
  "serde_json",
  "uuid",
+]
+
+[[package]]
+name = "power-plant-storage"
+version = "0.1.0"
+dependencies = [
+ "camino",
+ "chrono",
+ "power-plant-models",
+ "serde",
+ "serde_json",
+ "thiserror",
 ]
 
 [[package]]

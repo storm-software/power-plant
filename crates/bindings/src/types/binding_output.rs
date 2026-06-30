@@ -1,7 +1,14 @@
-use crate::types::{binding_log::BindingLog, binding_log_level::BindingLogLevel};
+use crate::types::{binding_input::BindingExecution, binding_log::BindingLog, binding_log_level::BindingLogLevel};
 use derive_more::Debug;
-use power_plant_common::StoreOutput;
+use power_plant_common::{RecallOutput, StoreOutput};
 use power_plant_error::Severity;
+
+#[derive(Debug, Clone, PartialEq)]
+#[napi_derive::napi(object, object_from_js = false)]
+pub struct BindingRecallOutput {
+  /// The recalled execution.
+  pub execution: BindingExecution,
+}
 
 #[derive(Default, Debug)]
 #[napi_derive::napi(object, object_from_js = false)]
@@ -31,5 +38,11 @@ impl From<StoreOutput> for BindingStoreOutput {
         })
         .collect(),
     }
+  }
+}
+
+impl From<RecallOutput> for BindingRecallOutput {
+  fn from(value: RecallOutput) -> Self {
+    Self { execution: value.execution.into() }
   }
 }

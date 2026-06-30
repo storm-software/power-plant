@@ -108,6 +108,7 @@ power-plant-common   = { path = "./crates/common" }
 power-plant-core     = { path = "./crates/core" }
 power-plant-error    = { path = "./crates/error" }
 power-plant-models   = { path = "./crates/models" }
+power-plant-storage  = { path = "./crates/storage" }
 power-plant-tracing  = { path = "./crates/tracing" }
 power-plant-utils    = { path = "./crates/utils" }
 

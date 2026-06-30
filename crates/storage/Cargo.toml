@@ -1,0 +1,37 @@
+[package]
+authors = { workspace = true }
+categories = { workspace = true }
+description = "Execution persistence for the Power Plant runtime."
+documentation = "https://docs.rs/power-plant"
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = "power-plant-storage"
+publish = false
+readme = "./README.md"
+repository = { workspace = true }
+version = "0.1.0"
+
+[lib]
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+power-plant-models = { workspace = true }
+
+camino = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+thiserror = "2.0.12"
+
+[features]
+default = []
+testing = []
+
+[dev-dependencies]
+chrono = { workspace = true, features = ["serde"] }
+power-plant-models = { workspace = true }
+serde_json = { workspace = true }
