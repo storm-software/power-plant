@@ -63,6 +63,7 @@ catalog:
   defu: ^6.1.7
   emnapi: 1.11.1
   eslint: ^10.6.0
+  graphql: ^17.0.1
   jiti: ^2.7.0
   lefthook: ^1.13.6
   log4brains: ^1.1.0

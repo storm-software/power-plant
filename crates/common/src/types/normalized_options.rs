@@ -1,4 +1,4 @@
-use crate::{Logger, Options, log::LogLevel};
+use crate::{LogLevel, Logger, Options};
 use camino::Utf8PathBuf;
 use derive_more::Debug;
 use std::sync::Arc;

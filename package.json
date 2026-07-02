@@ -28,11 +28,7 @@
     "node": ">=24.16.0",
     "pnpm": ">=11.9.0"
   },
-  "keywords": [
-    "power-plant",
-    "storm-software",
-    "monorepo"
-  ],
+  "keywords": ["power-plant", "storm-software", "monorepo"],
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",
@@ -60,7 +56,6 @@
     "view-config": "pnpm exec storm-config"
   },
   "devDependencies": {
-    "@ls-lint/ls-lint": "catalog:",
     "@nx/devkit": "catalog:",
     "@nx/eslint-plugin": "catalog:",
     "@nx/js": "catalog:",
@@ -98,6 +93,9 @@
     "vite": "catalog:",
     "vitest": "catalog:",
     "zx": "catalog:"
+  },
+  "optionalDependencies": {
+    "@ls-lint/ls-lint": "catalog:"
   },
   "manypkg": {
     "defaultBranch": "main",

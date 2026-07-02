@@ -1,4 +1,4 @@
-use crate::{Logger, log::LogLevel};
+use crate::{LogLevel, Logger};
 
 #[derive(Debug, Clone)]
 /// Configuration options for the Power Plant.

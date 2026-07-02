@@ -37,10 +37,11 @@ try {
 
   $.cwd = "packages/base/bindings";
 
-  const proc =
-    $`pnpm exec napi build --release --cwd="./src" --manifest-path="../../../../crates/bindings/Cargo.toml" --package-json-path="../package.json" --target="${target}"${buildFlags ? ` ${buildFlags}` : ""}`.timeout(
-      `${15 * 60}s`
-    );
+  const proc = $`pnpm exec napi build --release ${
+    buildFlags ? ` ${buildFlags}` : ""
+  } --cwd="./src" --manifest-path="../../../../crates/bindings/Cargo.toml" --package-json-path="../package.json" --target="${
+    target
+  }"`.timeout(`${15 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });
