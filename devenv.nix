@@ -74,6 +74,7 @@
       module = {
         languages.rust = {
           lld.enable = true;
+          wild.enable = false;
         };
       };
     };
