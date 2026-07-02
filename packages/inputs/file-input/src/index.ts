@@ -18,13 +18,14 @@
 
 import { defineInput, useContext } from "@power-plant/core";
 import { load } from "@stryke/resolve/load";
+import { isFileReference } from "@stryke/resolve/type-checks";
 import type { LoadReference } from "@stryke/resolve/types";
 import { isString } from "@stryke/type-checks/is-string";
 import { isURL } from "@stryke/type-checks/is-url";
 import packageJson from "../package.json" with { type: "json" };
 
 export interface Options {
-  path: LoadReference;
+  file: LoadReference;
 }
 
 export default defineInput<any, Options>({
@@ -33,17 +34,19 @@ export default defineInput<any, Options>({
     version: packageJson.version,
     description: (_: any, options: Options) =>
       `Reads the specification from the file "${
-        isString(options.path)
-          ? options.path
-          : isURL(options.path)
-            ? options.path.toString()
-            : options.path.file
+        isString(options.file)
+          ? options.file
+          : isURL(options.file)
+            ? options.file.toString()
+            : isFileReference(options.file)
+              ? options.file.file
+              : "Unknown Type"
       }"`
   },
   input: async (options: Options) => {
-    const { path, ...rest } = options;
+    const { file, ...rest } = options;
     const { fs } = useContext();
 
-    return load(path, { ...rest, fs });
+    return load(file, { ...rest, fs });
   }
 });

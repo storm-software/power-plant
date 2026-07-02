@@ -1,10 +1,9 @@
 {
-  "name": "@power-plant/hey-api-output",
-  "version": "0.0.2",
+  "name": "@power-plant/local-output",
+  "version": "0.0.1",
   "private": false,
-  "description": "A Power Plant output for writing the Hey API generated code to a directory.",
+  "description": "A Power Plant output for writing generated code to the local file system.",
   "keywords": [
-    "hey-api",
     "power-plant-output",
     "power-plant",
     "storm-software"
@@ -17,7 +16,7 @@
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/outputs/hey-api-output"
+    "directory": "packages/outputs/local-output"
   },
   "funding": {
     "type": "github",
@@ -69,11 +68,10 @@
     "dist"
   ],
   "dependencies": {
-    "@hey-api/openapi-ts": "catalog:",
     "@power-plant/core": "workspace:*",
-    "@power-plant/openapi-schema": "workspace:*",
     "@power-plant/schema": "workspace:*",
     "@stryke/convert": "catalog:",
+    "@stryke/path": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:"
   },

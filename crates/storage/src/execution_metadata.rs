@@ -210,7 +210,7 @@ mod tests {
       documents: vec![ExecutionDocument {
         name: "user.ts".into(),
         path: "src/user.ts".into(),
-        extension: "ts".into(),
+        extension: Some("ts".into()),
         source: vec![ExecutionSource {
           language: "typescript".into(),
           content: "export {}".into(),

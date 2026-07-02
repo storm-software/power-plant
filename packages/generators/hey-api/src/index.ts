@@ -18,19 +18,20 @@
 
 import type { UserConfig } from "@hey-api/openapi-ts";
 import { createClient } from "@hey-api/openapi-ts";
-import { defineOutput, useContext } from "@power-plant/core";
+import type { GeneratedDocument } from "@power-plant/core";
+import { defineGenerator, useContext } from "@power-plant/core";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
-import openapiSchema from "@power-plant/openapi-schema";
+import schema from "@power-plant/openapi-schema";
 import { toArray } from "@stryke/convert/to-array";
 import type { Arrayable } from "@stryke/types/array";
 import packageJson from "../package.json" with { type: "json" };
 
-export default defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
+export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
   meta: {
     name: "hey-api",
     title: "Hey API",
     description:
-      "A output that uses the OpenAPI specification to generate source code using Hey API.",
+      "A generator that uses the OpenAPI specification to generate source code using Hey API.",
     version: packageJson.version,
     tags: ["openapi"],
     links: [
@@ -44,8 +45,11 @@ export default defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
       }
     ]
   },
-  schema: openapiSchema,
-  output: async (spec, options) => {
+  schema,
+  generator: async (
+    spec,
+    options
+  ): Promise<GeneratedDocument<OpenAPISchema, Arrayable<UserConfig>>[]> => {
     const { fs } = useContext();
 
     const context = await createClient(
@@ -69,5 +73,7 @@ export default defineOutput<OpenAPISchema, Arrayable<UserConfig>>({
         )
       )
     );
+
+    return [];
   }
 });

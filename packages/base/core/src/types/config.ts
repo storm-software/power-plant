@@ -18,9 +18,15 @@
 
 import type { DeepPartial } from "@stryke/types/base";
 import type { FileSystemInterface } from "@stryke/types/fs";
+import type { InputConfig } from "./input";
+import type { OutputConfig } from "./output";
 import type { Logger, Settings } from "./settings";
 
-export interface UserConfig {
+export interface UserConfig<
+  TSpec = any,
+  TOptions extends object = any,
+  TReturns = any
+> {
   /**
    * The current working directory.
    *
@@ -54,6 +60,16 @@ export interface UserConfig {
    * The logger to use for the application.
    */
   logger?: Partial<Logger>;
+
+  /**
+   * The input config that will override the generator's input.
+   */
+  input?: InputConfig<TSpec, TOptions>;
+
+  /**
+   * The output config that will override the generator's output.
+   */
+  output?: OutputConfig<TSpec, TOptions, TReturns>;
 }
 
 export interface UserConfigParams {
@@ -61,19 +77,47 @@ export interface UserConfigParams {
   mode: string;
 }
 
-export type UserConfigFnObject = (
+export type UserConfigFnObject<
+  TSpec = any,
+  TOptions extends object = any,
+  TReturns = any
+> = (
+  config: UserConfig<TSpec, TOptions, TReturns>
+) => UserConfig<TSpec, TOptions, TReturns>;
+export type UserConfigFnPromise<
+  TSpec = any,
+  TOptions extends object = any,
+  TReturns = any
+> = (
   params: UserConfigParams
-) => UserConfig | UserConfig[];
-export type UserConfigFnPromise = (
+) => Promise<
+  | UserConfig<TSpec, TOptions, TReturns>
+  | UserConfig<TSpec, TOptions, TReturns>[]
+>;
+export type UserConfigFn<
+  TSpec = any,
+  TOptions extends object = any,
+  TReturns = any
+> = (
   params: UserConfigParams
-) => Promise<UserConfig | UserConfig[]>;
-export type UserConfigFn = (
-  params: UserConfigParams
-) => UserConfig | UserConfig[] | Promise<UserConfig | UserConfig[]>;
-export type UserConfigExport =
-  | UserConfig
-  | UserConfig[]
-  | Promise<UserConfig | UserConfig[]>
-  | UserConfigFnObject
-  | UserConfigFnPromise
-  | UserConfigFn;
+) =>
+  | UserConfig<TSpec, TOptions, TReturns>
+  | UserConfig<TSpec, TOptions, TReturns>[]
+  | Promise<
+      | UserConfig<TSpec, TOptions, TReturns>
+      | UserConfig<TSpec, TOptions, TReturns>[]
+    >;
+export type UserConfigExport<
+  TSpec = any,
+  TOptions extends object = any,
+  TReturns = any
+> =
+  | UserConfig<TSpec, TOptions, TReturns>
+  | UserConfig<TSpec, TOptions, TReturns>[]
+  | Promise<
+      | UserConfig<TSpec, TOptions, TReturns>
+      | UserConfig<TSpec, TOptions, TReturns>[]
+    >
+  | UserConfigFnObject<TSpec, TOptions, TReturns>
+  | UserConfigFnPromise<TSpec, TOptions, TReturns>
+  | UserConfigFn<TSpec, TOptions, TReturns>;

@@ -17,8 +17,12 @@
  ------------------------------------------------------------------- */
 
 import type {
-  Context,
+  ExecutionContext,
+  Input,
   Logger,
+  Output,
+  SchemaOf,
+  SessionContext,
   UserConfig,
   UserConfigExport
 } from "@power-plant/core";
@@ -26,6 +30,7 @@ import { toArray } from "@stryke/convert/to-array";
 import { toMode } from "@stryke/env/environment-checks";
 import { getEnvPaths } from "@stryke/env/get-env-paths";
 import { readFileIfExisting } from "@stryke/fs/read-file";
+import { writeFile } from "@stryke/fs/write-file";
 import { joinPaths } from "@stryke/path/join";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
@@ -65,9 +70,9 @@ const jiti = createJiti(process.cwd(), {
  * @param userConfig - The user configuration.
  * @returns A promise that resolves to a context.
  */
-export async function createContext(
+export async function createSessionContext(
   userConfig: UserConfig = {}
-): Promise<Context> {
+): Promise<SessionContext> {
   const cwd = userConfig.cwd || process.cwd();
   const mode = toMode(
     userConfig.debug === true
@@ -206,18 +211,23 @@ export async function createContext(
     })
   ]);
 
-  return defu(
+  const context = defu(
     {
       cwd,
-      session: {
-        sessionId: uuid(),
-        startedAt: new Date(),
-        systemId: uuid()
-      }
+      executions: [] as any[],
+      sessionId: uuid(),
+      startedAt: new Date(),
+      deviceId: null as string | null,
+      userId: null as string | null,
+      tenantId: null as string | null
     },
     userConfig,
     ...projectConfig,
-    { settings, fs, logger },
+    {
+      settings,
+      fs,
+      logger
+    },
     config1,
     config2,
     config3,
@@ -226,5 +236,64 @@ export async function createContext(
     config6,
     config7,
     config8
-  ) as Context;
+  ) as SessionContext;
+
+  const ids = JSON.parse(
+    (await readFileIfExisting(joinPaths(cwd, ".id-store.json"))) || "{}"
+  ) as { deviceId?: string; userId?: string; tenantId?: string };
+
+  context.deviceId = ids.deviceId || uuid();
+  context.userId = context.settings.userId || ids.userId || uuid();
+  context.tenantId = context.settings.tenantId || ids.tenantId || uuid();
+
+  if (!ids.deviceId || !ids.userId || !ids.tenantId) {
+    await writeFile(
+      joinPaths(cwd, ".id-store.json"),
+      JSON.stringify(
+        {
+          deviceId: ids.deviceId || context.deviceId,
+          userId: ids.userId || context.userId,
+          tenantId: ids.tenantId || context.tenantId
+        },
+        null,
+        2
+      )
+    );
+  }
+
+  return context;
+}
+
+export async function createExecutionContext<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(
+  executionId: string,
+  context: SessionContext,
+  options: TOptions,
+  schema: SchemaOf<TSpec, TOptions>,
+  input: Input<TSpec, TOptions>,
+  output: Output<TSpec, TOptions, TReturns>
+): Promise<ExecutionContext<TSpec, TOptions, TReturns>> {
+  const executionContext = {
+    meta: {
+      id: executionId,
+      executedAt: new Date(),
+      executedBy: context.userId
+    },
+    documents: [],
+    ...context,
+    options,
+    schema,
+    input,
+    output
+  };
+
+  context.executions.push({
+    documents: executionContext.documents,
+    meta: executionContext.meta
+  });
+
+  return executionContext;
 }

@@ -16,21 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-import type { Execution } from "@power-plant/core";
-import type { BindingRecallOutput } from "../bindings.cjs";
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-/**
- * Convert a native recall result into the TypeScript execution shape.
- */
-export function fromBindingRecallOutput<TSpec, TOptions extends object>(
-  output: BindingRecallOutput
-): Execution<TSpec, TOptions> {
-  return {
-    documents: output.execution.documents,
-    meta: {
-      id: output.execution.meta.id,
-      executedAt: new Date(output.execution.meta.executedAt),
-      executedBy: output.execution.meta.executedBy
-    }
-  };
-}
+const config: UserConfig = defineConfig({
+  input: ["src/*.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
+  },
+  plugins: [tsdown()]
+});
+
+export default config;

@@ -17,8 +17,9 @@
  ------------------------------------------------------------------- */
 
 import type { GeneratorConfig, UserConfig } from "@power-plant/core";
+import { callAsyncSessionContext } from "@power-plant/core";
 import { uuid } from "@stryke/unique-id/uuid";
-import { createContext } from "./lib/context";
+import { createSessionContext } from "./lib/context";
 import { createGenerator } from "./lib/generator";
 import { NativeBindingEngine } from "./native";
 import type { Engine, InferEngineOptions } from "./types/engine";
@@ -38,36 +39,37 @@ import type { Engine, InferEngineOptions } from "./types/engine";
 export async function createEngine(
   userConfig: UserConfig = {}
 ): Promise<Engine> {
-  const context = await createContext(userConfig);
+  const context = await createSessionContext(userConfig);
   const bindings = new NativeBindingEngine(context);
 
   const execute = async <TSpec, TOptions extends object, TReturns = void>(
     config: GeneratorConfig<TSpec, TOptions, TReturns>,
     options: InferEngineOptions<typeof config> &
       TOptions = {} as InferEngineOptions<typeof config> & TOptions
-  ): Promise<TReturns> => {
-    context.executionId = uuid();
+  ): Promise<TReturns> =>
+    callAsyncSessionContext<TReturns>(context, async () => {
+      const executionId = uuid();
+      const { generator } = await createGenerator<TSpec, TOptions, TReturns>(
+        executionId,
+        context,
+        config,
+        options
+      );
 
-    const generator = await createGenerator<TSpec, TOptions, TReturns>(
-      context,
-      config,
-      options
-    );
+      const { documents, returns } = await generator(options);
+      if (!context.settings.skipStorage) {
+        await bindings.store({
+          executionId,
+          documents,
+          meta: {
+            executedAt: new Date(),
+            executedBy: context.settings.userId
+          }
+        } as any);
+      }
 
-    const result = await generator.generate(options);
-    if (!context.settings.skipStorage) {
-      await bindings.store({
-        documents: [],
-        meta: {
-          id: context.executionId,
-          executedAt: new Date(),
-          executedBy: context.settings.userId
-        }
-      });
-    }
-
-    return result;
-  };
+      return returns;
+    });
 
   return {
     execute

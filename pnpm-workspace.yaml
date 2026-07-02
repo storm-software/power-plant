@@ -27,19 +27,19 @@ catalog:
   "@powerlines/tsconfig": ^0.4.187
   "@powerlines/tsdoc": ^0.2.135
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.18
-  "@storm-software/config-tools": ^1.190.81
-  "@storm-software/cspell": ^0.46.149
-  "@storm-software/eslint": ^0.170.114
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.44
-  "@storm-software/git-tools": ^2.131.89
-  "@storm-software/linting-tools": ^1.134.11
-  "@storm-software/markdownlint": ^0.30.237
-  "@storm-software/pnpm-tools": ^0.7.92
-  "@storm-software/prettier": ^0.59.134
-  "@storm-software/tsconfig": ^0.48.148
-  "@storm-software/untyped": ^0.24.223
-  "@storm-software/workspace-tools": ^1.296.61
+  "@storm-software/config": ^1.138.19
+  "@storm-software/config-tools": ^1.190.82
+  "@storm-software/cspell": ^0.46.150
+  "@storm-software/eslint": ^0.170.115
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.45
+  "@storm-software/git-tools": ^2.131.90
+  "@storm-software/linting-tools": ^1.134.12
+  "@storm-software/markdownlint": ^0.30.238
+  "@storm-software/pnpm-tools": ^0.7.93
+  "@storm-software/prettier": ^0.59.135
+  "@storm-software/tsconfig": ^0.48.149
+  "@storm-software/untyped": ^0.24.224
+  "@storm-software/workspace-tools": ^1.296.62
   "@stryke/convert": ^0.7.25
   "@stryke/date": ^0.0.6
   "@stryke/env": ^0.20.112
@@ -76,7 +76,7 @@ catalog:
   untyped: ^1.5.2
   valibot: ^1.4.2
   verdaccio: 6.0.5
-  vite: ^8.1.0
+  vite: ^8.1.2
   vitest: ~4.1.9
   zod: ^4.4.3
   zx: ^8.8.5
@@ -86,7 +86,8 @@ overrides:
   "@power-plant/bindings": workspace:*
   "@power-plant/file-input": workspace:*
   "@power-plant/openapi-schema": workspace:*
-  "@power-plant/hey-api-output": workspace:*
+  "@power-plant/local-output": workspace:*
+  "@power-plant/hey-api": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*
   "@power-plant/tools-readme-templates": workspace:*
@@ -123,6 +124,16 @@ minimumReleaseAgeExclude:
   - "@stryke/*"
   - "@powerlines/*"
   - prettier
+  - "@typescript-eslint/eslint-plugin@8.62.1"
+  - "@typescript-eslint/parser@8.62.1"
+  - "@typescript-eslint/project-service@8.62.1"
+  - "@typescript-eslint/scope-manager@8.62.1"
+  - "@typescript-eslint/tsconfig-utils@8.62.1"
+  - "@typescript-eslint/type-utils@8.62.1"
+  - "@typescript-eslint/types@8.62.1"
+  - "@typescript-eslint/typescript-estree@8.62.1"
+  - "@typescript-eslint/utils@8.62.1"
+  - "@typescript-eslint/visitor-keys@8.62.1"
 allowBuilds:
   "@parcel/watcher": true
   "@swc/core": true

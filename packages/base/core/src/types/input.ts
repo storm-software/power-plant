@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
+import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
 import type { Meta, MetaConfig } from "./meta";
@@ -50,10 +50,7 @@ export interface InputConfigObject<TSpec, TOptions extends object> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?:
-    | SchemaSourceConfig<TSpec>
-    | SchemaEnvelopeOf<TSpec>
-    | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
 
   /**
    * The input implementation, either as a callable function, a static value, or a file reference.

@@ -16,15 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
+import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
+import type { GeneratedDocument } from "./generator";
 import type { Meta, MetaConfig } from "./meta";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
 export type OutputFunction<TSpec, TOptions extends object, TReturns = void> = (
   spec: TSpec,
-  context: TOptions
+  options: TOptions,
+  documents: GeneratedDocument<TSpec, TOptions>[]
 ) => MaybePromise<TReturns>;
 
 export interface OutputMetaConfig<
@@ -53,12 +55,9 @@ export interface OutputConfigObject<
   TReturns = void
 > {
   /**
-   * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
+   * The schema that defines the structure of the specification output for the generator. This schema is used to validate the output specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?:
-    | SchemaSourceConfig<TSpec>
-    | SchemaEnvelopeOf<TSpec>
-    | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
 
   /**
    * Optional metadata that provides contextual information for the output.
@@ -84,7 +83,7 @@ export type InferCreateOutputOptions<T extends OutputConfig<any, any, any>> =
 
 export interface Output<TSpec, TOptions extends object, TReturns = void> {
   /**
-   * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
+   * The schema that defines the structure of the specification output for the generator. This schema is used to validate the output specification and ensure that it conforms to the expected format before being processed by the generator.
    */
   schema: SchemaOf<TSpec, TOptions>;
 
@@ -99,9 +98,10 @@ export interface Output<TSpec, TOptions extends object, TReturns = void> {
    * @remarks
    * The `output` property is defined as a function that takes the specification object and any additional parameters, and returns a value or a promise that resolves to a value. This allows for flexibility in how the generator sends its output data, enabling both synchronous and asynchronous data handling based on the specification.
    *
-   * @param spec - The specification object that conforms to the defined schema input.
-   * @param params - Additional parameters that may be needed for the output function to process the output data.
-   * @returns A value or a promise that resolves to a value, which will be used as the output data for the generator.
+   * @param spec - The specification object that conforms to the defined schema output.
+   * @param options - Additional parameters that may be needed for the output function to process the output data.
+   * @param documents - An array of generated documents that are produced by the generator. This can be used to provide context or additional information to the output function when processing the output data.
+   * @returns A promise that resolves when the output function is complete.
    */
   output: OutputFunction<TSpec, TOptions, TReturns>;
 }

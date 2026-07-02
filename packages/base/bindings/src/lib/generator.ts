@@ -17,19 +17,21 @@
  ------------------------------------------------------------------- */
 
 import type {
-  Context,
   Generator,
   GeneratorConfig,
   GeneratorConfigObject,
+  GeneratorFunction,
   InferCreateGeneratorOptions,
   SchemaConfigObject,
+  SessionContext,
   UserConfig
 } from "@power-plant/core";
-import { callAsyncContext } from "@power-plant/core";
+import { callAsyncExecutionContext } from "@power-plant/core";
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { isGeneratorConfigObject } from "../helpers/type-checks";
+import { createExecutionContext } from "./context";
 import { createInput } from "./input";
 import { createOutput } from "./output";
 import { createSchema } from "./schema";
@@ -51,7 +53,8 @@ export async function createGenerator<
   TOptions extends object,
   TReturns = void
 >(
-  context: Context,
+  executionId: string,
+  sessionContext: SessionContext,
   config: GeneratorConfig<TSpec, TOptions, TReturns>,
   options: InferCreateGeneratorOptions<typeof config> = {}
 ): Promise<Generator<TSpec, TOptions, TReturns>> {
@@ -72,30 +75,65 @@ export async function createGenerator<
       | SchemaConfigObject<TSpec, TOptions>,
     options
   );
+
+  let inputConfig = configObject.input;
+  if (!inputConfig) {
+    if ((options as { file: any }).file) {
+      inputConfig = "@power-plant/file-input";
+    } else {
+      throw new Error(
+        "No input configuration provided. Please provide an input configuration, a valid specification, or a `file` option that points to a valid input file."
+      );
+    }
+  }
+
+  let outputConfig = configObject.output;
+  if (!outputConfig) {
+    outputConfig = "@power-plant/local-output";
+  }
+
   const [input, output] = await Promise.all([
-    createInput<TSpec, TOptions>(schema, configObject.input, options),
-    createOutput<TSpec, TOptions, TReturns>(
-      schema,
-      configObject.output,
-      options
-    )
+    createInput<TSpec, TOptions>(schema, inputConfig, options),
+    createOutput<TSpec, TOptions, TReturns>(schema, outputConfig, options)
   ]);
 
-  const generate = async (options: TOptions & UserConfig) => {
-    return callAsyncContext(
-      { ...context, settings: { ...context.settings, ...options } },
-      async () => {
-        const spec = isFunction(input.input)
-          ? await (
-              input.input as unknown as (
-                options: TOptions
-              ) => TSpec | Promise<TSpec>
-            )(options)
-          : input.input;
-
-        return output.output(spec, options);
-      }
+  const generator = async (options: TOptions & UserConfig) => {
+    const context = await createExecutionContext(
+      executionId,
+      sessionContext,
+      options,
+      schema,
+      input,
+      output
     );
+
+    return callAsyncExecutionContext(context, async () => {
+      const spec = isFunction(input.input)
+        ? await (
+            input.input as unknown as (
+              options: TOptions
+            ) => TSpec | Promise<TSpec>
+          )(options)
+        : input.input;
+
+      let generatorFn!: GeneratorFunction<TSpec, TOptions>;
+      if (isFunction(configObject.generator)) {
+        generatorFn = configObject.generator;
+      } else {
+        generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
+          configObject.generator,
+          options
+        );
+      }
+
+      const documents = await generatorFn(spec, options);
+      const returns = await output.output(spec, options, documents);
+
+      return {
+        documents,
+        returns
+      };
+    });
   };
 
   return {
@@ -103,6 +141,6 @@ export async function createGenerator<
     schema,
     input,
     output,
-    generate
+    generator
   };
 }

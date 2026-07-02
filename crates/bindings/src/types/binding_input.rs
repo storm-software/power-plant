@@ -123,7 +123,7 @@ pub struct BindingExecutionDocument {
   /// The path of the document.
   pub path: String,
   /// The extension of the document.
-  pub extension: String,
+  pub extension: Option<String>,
   /// The sources of the document.
   pub source: Vec<BindingExecutionSource>,
 }

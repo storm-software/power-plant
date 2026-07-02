@@ -17,31 +17,13 @@
  ------------------------------------------------------------------- */
 
 import type { FileSystemInterface } from "@stryke/types/fs";
+import type { Execution } from "./execution";
+import type { Input } from "./input";
+import type { Output } from "./output";
+import type { SchemaOf } from "./schema";
 import type { Logger, Settings } from "./settings";
 
-export interface Session {
-  /**
-   * A unique identifier for the session.
-   */
-  sessionId: string;
-
-  /**
-   * The timestamp when the session was started.
-   */
-  startedAt: Date;
-
-  /**
-   * A unique identifier for the system that started the session.
-   */
-  systemId: string;
-}
-
 export interface Context {
-  /**
-   * The unique identifier for the execution.
-   */
-  executionId: string;
-
   /**
    * The current working directory.
    */
@@ -61,9 +43,58 @@ export interface Context {
    * The logger for the context.
    */
   logger: Logger;
+}
+
+export interface SessionContext extends Context {
+  /**
+   * A unique identifier for the session.
+   */
+  sessionId: string;
 
   /**
-   * The session for the context.
+   * A unique identifier for the device the session started on.
    */
-  session: Session;
+  deviceId: string;
+
+  /**
+   * The user ID of the user who started the session.
+   */
+  userId: string;
+
+  /**
+   * The tenant ID of the user who started the session.
+   */
+  tenantId: string;
+
+  /**
+   * The timestamp when the session was started.
+   */
+  startedAt: Date;
+
+  /**
+   * The executions of the session.
+   */
+  executions: Execution<any, any>[];
+}
+
+export interface ExecutionContext<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>
+  extends SessionContext, Execution<TSpec, TOptions> {
+  /**
+   * The schema for the execution.
+   */
+  schema: SchemaOf<TSpec, TOptions>;
+
+  /**
+   * The input for the execution.
+   */
+  input: Input<TSpec, TOptions>;
+
+  /**
+   * The output for the execution.
+   */
+  output: Output<TSpec, TOptions, TReturns>;
 }

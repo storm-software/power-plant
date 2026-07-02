@@ -4,17 +4,17 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: "../../../node_modules/.vite/packages/outputs/hey-api-output",
+  cacheDir: "../../../node_modules/.vite/packages/generators/hey-api",
   plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(["*.md"])],
   test: {
-    name: "hey-api-output",
+    name: "hey-api",
     watch: false,
     globals: true,
     environment: "node",
     include: ["{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     reporters: ["default"],
     coverage: {
-      reportsDirectory: "../../../coverage/packages/outputs/hey-api-output",
+      reportsDirectory: "../../../coverage/packages/generators/hey-api",
       provider: "v8" as const
     }
   }

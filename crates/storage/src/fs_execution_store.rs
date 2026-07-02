@@ -145,7 +145,7 @@ mod tests {
       documents: vec![ExecutionDocument {
         name: "doc".into(),
         path: "src/doc.ts".into(),
-        extension: "ts".into(),
+        extension: Some("ts".into()),
         source: vec![ExecutionSource {
           language: "typescript".into(),
           content: "export {}".into(),

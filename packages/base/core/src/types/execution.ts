@@ -16,12 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  GeneratorMeta,
-  InputMeta,
-  OutputMeta,
-  SchemaMeta
-} from "@power-plant/core";
+import type { GeneratedDocument, GeneratorMeta } from "./generator";
+import type { InputMeta } from "./input";
+import type { OutputMeta } from "./output";
+import type { SchemaMeta } from "./schema";
 
 export interface ExecutionSourceMeta<TSpec, TOptions extends object> {
   /**
@@ -35,7 +33,7 @@ export interface ExecutionSourceMeta<TSpec, TOptions extends object> {
   spec: TSpec;
 
   /**
-   * The metadata of the generator used to generate the source code during the execution.
+   * The metadata of the generator used to execute the source code during the execution.
    */
   generator: GeneratorMeta<TSpec, TOptions>;
 
@@ -56,7 +54,7 @@ export interface ExecutionSourceMeta<TSpec, TOptions extends object> {
 }
 
 export interface ExecutionSource<TSpec, TOptions extends object> {
-  language: string;
+  language?: string;
   content: string;
   meta: ExecutionSourceMeta<TSpec, TOptions>;
 }
@@ -75,17 +73,20 @@ export interface ExecutionDocument<TSpec, TOptions extends object> {
   /**
    * The extension of the document.
    */
-  extension: string;
+  extension?: string;
 
   /**
-   * The sources of the document.
+   * The source of the document.
    */
   source: ExecutionSource<TSpec, TOptions>[];
 }
 
 export interface ExecutionMeta {
   /**
-   * The id of the execution.
+   * A unique identifier for the execution, typically used by the backend systems.
+   *
+   * @remarks
+   * This value will be in the UUID format, which is a 128-bit number represented as a string of hexadecimal digits. It is used to uniquely identify the execution in the backend systems and can be used for tracking and auditing purposes.
    */
   id: string;
 
@@ -111,3 +112,14 @@ export interface Execution<TSpec, TOptions extends object> {
    */
   meta: ExecutionMeta;
 }
+
+export type ExecutionResult<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+> = GeneratedDocument<TSpec, TOptions> & {
+  /**
+   * The returned value of the generator function.
+   */
+  returns?: TReturns;
+};

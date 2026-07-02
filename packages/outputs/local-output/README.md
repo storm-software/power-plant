@@ -57,23 +57,23 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - Hey API Output
+# Power Plant - Local Output
 
-A Power Plant sink for writing the Hey API output to a file.
+A Power Plant sink for writing the generated code to the local file system.
 
 ## Installing
 
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/hey-api-output
+pnpm add -D @power-plant/local-output
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/hey-api-output
+npm install -D @power-plant/local-output
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/hey-api-output
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/hey-api-output
+yarn add -D @power-plant/local-output
 ```
 
 </details>
 
 ## Building
 
-Run `nx build hey-api-output` to build the library.
+Run `nx build local-output` to build the library.
 
 ## Running unit tests
 
-Run `nx test hey-api-output` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test local-output` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

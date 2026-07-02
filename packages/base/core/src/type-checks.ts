@@ -38,11 +38,9 @@ export function isGeneratorConfigObject<
   return (
     isSetObject(config) &&
     "schema" in config &&
-    "input" in config &&
-    "output" in config &&
+    "generator" in config &&
     config.schema !== undefined &&
-    config.input !== undefined &&
-    config.output !== undefined
+    config.generator !== undefined
   );
 }
 

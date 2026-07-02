@@ -125,6 +125,7 @@
   ],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
+    "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
     "defu": "catalog:"

@@ -16,10 +16,13 @@
       "path": "./packages/schemas/openapi-schema"
     },
     {
-      "path": "./packages/outputs/hey-api-output"
+      "path": "./packages/outputs/local-output"
     },
     {
       "path": "./packages/inputs/file-input"
+    },
+    {
+      "path": "./packages/generators/hey-api"
     }
   ],
   "files": []

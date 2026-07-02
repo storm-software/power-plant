@@ -17,6 +17,8 @@
  ------------------------------------------------------------------- */
 
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
+import { isFunction } from "@stryke/type-checks/is-function";
+import { isSetObject } from "@stryke/type-checks/is-set-object";
 import {
   isGeneratorConfigObject,
   isInputConfigObject,
@@ -77,7 +79,7 @@ export function defineInput<TSpec, TOptions extends object>(
  * import { defineOutput } from "@power-plant/core";
  *
  * // Define a output from a output function
- * export default defineOutput((spec, options) => {
+ * export default defineOutput((result, spec, options) => {
  *   // Your output logic here
  * });
  *
@@ -88,10 +90,7 @@ export function defineInput<TSpec, TOptions extends object>(
  *     version: "1.0.0",
  *     description: "A output that does something.",
  *   },
- *   schema: z.object({
- *     // Your schema definition here
- *   }),
- *   output: (spec, options) => {
+ *   output: (result, spec, options) => {
  *     // Your output logic here
  *   },
  * });
@@ -143,7 +142,23 @@ export function defineGenerator<
   generator: GeneratorConfigObject<TSpec, TOptions, TReturns>
 ): GeneratorConfigObject<TSpec, TOptions, TReturns> {
   if (!isGeneratorConfigObject<TSpec, TOptions, TReturns>(generator)) {
-    throw new TypeError("Invalid generator configuration provided.");
+    if (
+      isFunction(generator) ||
+      (isSetObject(generator) &&
+        "generator" in generator &&
+        isFunction(
+          (generator as GeneratorConfigObject<TSpec, TOptions, TReturns>)
+            .generator
+        ))
+    ) {
+      throw new TypeError(
+        "A generator function was supplied, but a schema must also be provided when defining a generator."
+      );
+    }
+
+    throw new TypeError(
+      "An invalid generator configuration was provided - at minimum, both a schema and a generator function are required."
+    );
   }
 
   return generator;

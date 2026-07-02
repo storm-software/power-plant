@@ -16,8 +16,8 @@
 
  ------------------------------------------------------------------- */
 
+import type { Execution } from "@power-plant/core";
 import type { BindingStoreInput } from "../bindings.cjs";
-import type { Execution } from "../types/execution";
 
 /**
  * Convert a generator execution into the shape expected by the native binding.

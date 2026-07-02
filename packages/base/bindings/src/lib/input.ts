@@ -24,9 +24,14 @@ import type {
   InputFunction,
   InputMeta,
   InputMetaConfig,
+  SchemaConfigObject,
   SchemaOf
 } from "@power-plant/core";
-import type { ExtractedSchemaEnvelope } from "@power-plant/schema";
+import type {
+  ExtractedSchemaEnvelope,
+  SchemaEnvelopeOf,
+  SchemaSourceConfig
+} from "@power-plant/schema";
 import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
@@ -96,11 +101,36 @@ export async function createInput<TSpec, TOptions extends object>(
 
   let resolvedSchema: SchemaOf<TSpec, TOptions> = schema;
   if (inputSchema) {
-    resolvedSchema = await createSchema<TSpec, TOptions>(inputSchema, options);
-    resolvedSchema.schema = mergeMetadata<TSpec>(
-      resolvedSchema.schema,
-      schema.schema
-    );
+    let resolvedInputSchema:
+      | SchemaSourceConfig<TSpec>
+      | SchemaEnvelopeOf<TSpec>
+      | SchemaConfigObject<TSpec, TOptions>
+      | undefined;
+
+    if (isLoadReference(inputSchema)) {
+      try {
+        resolvedInputSchema = await load<
+          | SchemaSourceConfig<TSpec>
+          | SchemaEnvelopeOf<TSpec>
+          | SchemaConfigObject<TSpec, TOptions>
+        >(inputSchema, options);
+      } catch {
+        // Do nothing
+      }
+    } else {
+      resolvedInputSchema = inputSchema;
+    }
+
+    if (resolvedInputSchema) {
+      resolvedSchema = await createSchema<TSpec, TOptions>(
+        resolvedInputSchema,
+        options
+      );
+      resolvedSchema.schema = mergeMetadata<TSpec>(
+        resolvedSchema.schema,
+        schema.schema
+      );
+    }
   }
 
   let resolvedInput!: InputFunction<TSpec, TOptions> | TSpec;
