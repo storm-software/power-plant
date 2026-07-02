@@ -8,7 +8,7 @@ rules:
   unpinned-uses:
     ignore:
       - release.yml:39:15
-      - release.yml:137:15
+      - release.yml:135:15
       - release.yml:253:15
       - release.yml:304:15
       - release.yml:332:15
