@@ -1,9 +1,10 @@
 {
-  "name": "@power-plant/file-input",
+  "name": "@power-plant/unstorage-input",
   "version": "0.0.4",
   "private": false,
-  "description": "A Power Plant input for reading the source specification from a file.",
+  "description": "A Power Plant input for reading the source specification from an Unstorage driver.",
   "keywords": [
+    "unstorage",
     "power-plant-input",
     "power-plant",
     "storm-software"
@@ -16,7 +17,7 @@
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/inputs/file-input"
+    "directory": "packages/inputs/unstorage-input"
   },
   "funding": {
     "type": "github",
@@ -72,7 +73,8 @@
     "@power-plant/schema": "workspace:*",
     "@stryke/resolve": "catalog:",
     "@stryke/type-checks": "catalog:",
-    "@stryke/types": "catalog:"
+    "@stryke/types": "catalog:",
+    "unstorage": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",

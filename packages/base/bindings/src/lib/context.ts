@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type {
+  Context,
   ExecutionContext,
   Input,
   Logger,
@@ -38,9 +39,10 @@ import { uuid } from "@stryke/unique-id/uuid";
 import { loadConfig } from "c12";
 import defu from "defu";
 import { createJiti } from "jiti";
-import * as fs from "node:fs";
 import { existsSync } from "node:fs";
 import os from "node:os";
+import { createStorage } from "unstorage";
+import fsLite from "unstorage/drivers/fs-lite";
 
 const homeDir = os.homedir();
 
@@ -70,9 +72,9 @@ const jiti = createJiti(process.cwd(), {
  * @param userConfig - The user configuration.
  * @returns A promise that resolves to a context.
  */
-export async function createSessionContext(
+export async function createContext(
   userConfig: UserConfig = {}
-): Promise<SessionContext> {
+): Promise<Context> {
   const cwd = userConfig.cwd || process.cwd();
   const mode = toMode(
     userConfig.debug === true
@@ -211,21 +213,20 @@ export async function createSessionContext(
     })
   ]);
 
-  const context = defu(
+  const storage = createStorage({
+    driver: fsLite({
+      base: cwd
+    })
+  });
+
+  return defu(
     {
-      cwd,
-      executions: [] as any[],
-      sessionId: uuid(),
-      startedAt: new Date(),
-      deviceId: null as string | null,
-      userId: null as string | null,
-      tenantId: null as string | null
+      cwd
     },
     userConfig,
     ...projectConfig,
     {
       settings,
-      fs,
       logger
     },
     config1,
@@ -235,11 +236,30 @@ export async function createSessionContext(
     config5,
     config6,
     config7,
-    config8
-  ) as SessionContext;
+    config8,
+    {
+      storage
+    }
+  ) as Context;
+}
+
+/**
+ * Create a context for the engine.
+ *
+ * @param userConfig - The user configuration.
+ * @returns A promise that resolves to a context.
+ */
+export async function createSessionContext(
+  userConfig: UserConfig = {}
+): Promise<SessionContext> {
+  const context = (await createContext(userConfig)) as SessionContext;
+
+  context.executions = [];
+  context.sessionId = uuid();
+  context.startedAt = new Date();
 
   const ids = JSON.parse(
-    (await readFileIfExisting(joinPaths(cwd, ".id-store.json"))) || "{}"
+    (await readFileIfExisting(joinPaths(context.cwd, ".id-store.json"))) || "{}"
   ) as { deviceId?: string; userId?: string; tenantId?: string };
 
   context.deviceId = ids.deviceId || uuid();
@@ -248,7 +268,7 @@ export async function createSessionContext(
 
   if (!ids.deviceId || !ids.userId || !ids.tenantId) {
     await writeFile(
-      joinPaths(cwd, ".id-store.json"),
+      joinPaths(context.cwd, ".id-store.json"),
       JSON.stringify(
         {
           deviceId: ids.deviceId || context.deviceId,
@@ -270,30 +290,32 @@ export async function createExecutionContext<
   TReturns = void
 >(
   executionId: string,
-  context: SessionContext,
-  options: TOptions,
+  sessionContext: SessionContext,
+  options: TOptions & UserConfig,
   schema: SchemaOf<TSpec, TOptions>,
   input: Input<TSpec, TOptions>,
   output: Output<TSpec, TOptions, TReturns>
 ): Promise<ExecutionContext<TSpec, TOptions, TReturns>> {
-  const executionContext = {
-    meta: {
-      id: executionId,
-      executedAt: new Date(),
-      executedBy: context.userId
-    },
-    documents: [],
-    ...context,
-    options,
-    schema,
-    input,
-    output
+  const context = (await createContext(options)) as ExecutionContext<
+    TSpec,
+    TOptions,
+    TReturns
+  >;
+
+  context.meta = {
+    id: executionId,
+    executedAt: new Date(),
+    executedBy: sessionContext.userId
   };
 
-  context.executions.push({
-    documents: executionContext.documents,
-    meta: executionContext.meta
+  context.schema = schema;
+  context.input = input;
+  context.output = output;
+
+  sessionContext.executions.push({
+    documents: context.documents,
+    meta: context.meta
   });
 
-  return executionContext;
+  return { ...sessionContext, ...context };
 }

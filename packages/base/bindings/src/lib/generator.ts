@@ -28,6 +28,7 @@ import type {
 } from "@power-plant/core";
 import { callAsyncExecutionContext } from "@power-plant/core";
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
+import { mapStorageToFileSystem } from "@power-plant/schema/storage";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { isGeneratorConfigObject } from "../helpers/type-checks";
@@ -64,7 +65,10 @@ export async function createGenerator<
   } else {
     configObject = await load<GeneratorConfigObject<TSpec, TOptions, TReturns>>(
       config,
-      options
+      {
+        fs: mapStorageToFileSystem(sessionContext.storage),
+        ...options
+      }
     );
   }
 
@@ -73,16 +77,16 @@ export async function createGenerator<
       | SchemaSourceConfig<TSpec>
       | SchemaEnvelopeOf<TSpec>
       | SchemaConfigObject<TSpec, TOptions>,
-    options
+    { storage: sessionContext.storage, ...options }
   );
 
   let inputConfig = configObject.input;
   if (!inputConfig) {
-    if ((options as { file: any }).file) {
-      inputConfig = "@power-plant/file-input";
+    if ((options as { inputPath: any }).inputPath) {
+      inputConfig = "@power-plant/unstorage-input";
     } else {
       throw new Error(
-        "No input configuration provided. Please provide an input configuration, a valid specification, or a `file` option that points to a valid input file."
+        "No input configuration provided. Please provide an input configuration, a valid specification, or a `inputPath` option that points to a valid input file."
       );
     }
   }
@@ -93,8 +97,14 @@ export async function createGenerator<
   }
 
   const [input, output] = await Promise.all([
-    createInput<TSpec, TOptions>(schema, inputConfig, options),
-    createOutput<TSpec, TOptions, TReturns>(schema, outputConfig, options)
+    createInput<TSpec, TOptions>(schema, inputConfig, {
+      storage: sessionContext.storage,
+      ...options
+    }),
+    createOutput<TSpec, TOptions, TReturns>(schema, outputConfig, {
+      storage: sessionContext.storage,
+      ...options
+    })
   ]);
 
   const generator = async (options: TOptions & UserConfig) => {
@@ -113,7 +123,7 @@ export async function createGenerator<
             input.input as unknown as (
               options: TOptions
             ) => TSpec | Promise<TSpec>
-          )(options)
+          )({ storage: context.storage, ...options })
         : input.input;
 
       let generatorFn!: GeneratorFunction<TSpec, TOptions>;
@@ -122,7 +132,7 @@ export async function createGenerator<
       } else {
         generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
           configObject.generator,
-          options
+          { storage: context.storage, ...options }
         );
       }
 

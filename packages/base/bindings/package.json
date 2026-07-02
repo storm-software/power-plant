@@ -220,7 +220,8 @@
     "jiti": "catalog:",
     "powerlines": "catalog:",
     "signal-exit": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "unstorage": "catalog:"
   },
   "devDependencies": {
     "@napi-rs/cli": "catalog:",

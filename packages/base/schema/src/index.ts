@@ -20,5 +20,6 @@ export * from "./constants";
 export * from "./extract";
 export * from "./helpers";
 export * from "./metadata";
+export * from "./storage";
 export * from "./type-checks";
 export type * from "./types";

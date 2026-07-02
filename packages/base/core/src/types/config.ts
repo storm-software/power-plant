@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type { DeepPartial } from "@stryke/types/base";
-import type { FileSystemInterface } from "@stryke/types/fs";
+import type { Storage } from "unstorage";
 import type { InputConfig } from "./input";
 import type { OutputConfig } from "./output";
 import type { Logger, Settings } from "./settings";
@@ -52,9 +52,12 @@ export interface UserConfig<
   settings?: DeepPartial<Settings>;
 
   /**
-   * The file system to use for the application.
+   * The default [Unstorage](https://unstorage.unjs.io) storage instance to use for the application.
+   *
+   * @remarks
+   * If not provided, a default storage instance will be created. If provided, it will be used for all input and output operations. This allows for a single storage instance to be used across the entire application. If you want to use different storage instances for different inputs and outputs, you can provide them in the input and output configurations instead of here.
    */
-  fs?: Partial<FileSystemInterface>;
+  storage?: Storage;
 
   /**
    * The logger to use for the application.

@@ -28,7 +28,7 @@ import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
 import { isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type { FileReferenceInput } from "@stryke/types";
+import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
   extractJsonSchema as extractJsonSchemaZod,
   isZod3Type
@@ -37,6 +37,7 @@ import { toJsonSchema } from "@valibot/to-json-schema";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
 import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-generator/dist/src/Config.js";
 import type * as z3 from "zod/v3";
+import { mapStorageToFileSystem } from "./storage";
 import {
   isFileReference,
   isJsonSchema,
@@ -787,14 +788,19 @@ export async function extractSchemaWithSource<TSpec = any>(
       );
     }
 
+    let fs: FileSystemInterface | undefined;
+    if (options.storage) {
+      fs = mapStorageToFileSystem(options.storage);
+    }
+
     let resolved = await loadSafe<SchemaConfig>(
       unwrappedConfig as FileReferenceInput,
-      options
+      { ...options, fs }
     );
-    resolved ??= await extractTSType(
-      unwrappedConfig as FileReferenceInput,
-      options
-    );
+    resolved ??= await extractTSType(unwrappedConfig as FileReferenceInput, {
+      ...options,
+      fs
+    });
 
     const resolvedConfig = unwrapSchemaConfig(resolved);
 

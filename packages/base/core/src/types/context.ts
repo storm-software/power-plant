@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { FileSystemInterface } from "@stryke/types/fs";
+import type { Storage } from "unstorage";
 import type { Execution } from "./execution";
 import type { Input } from "./input";
 import type { Output } from "./output";
@@ -35,9 +35,12 @@ export interface Context {
   settings: Settings;
 
   /**
-   * The file system for the context.
+   * The Unstorage storage for the context.
+   *
+   * @remarks
+   * This storage can be used to store the input and output of the execution.
    */
-  fs: FileSystemInterface;
+  storage: Storage;
 
   /**
    * The logger for the context.

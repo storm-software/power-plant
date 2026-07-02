@@ -16,10 +16,10 @@
       "path": "./packages/schemas/openapi-schema"
     },
     {
-      "path": "./packages/outputs/unstorage-output"
+      "path": "./packages/inputs/unstorage-input"
     },
     {
-      "path": "./packages/inputs/file-input"
+      "path": "./packages/outputs/unstorage-output"
     },
     {
       "path": "./packages/generators/hey-api"

@@ -50,26 +50,22 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
     spec,
     options
   ): Promise<GeneratedDocument<OpenAPISchema, Arrayable<UserConfig>>[]> => {
-    const { fs } = useContext();
+    const { storage, cwd } = useContext();
 
     const context = await createClient(
       toArray(options).map(option => ({
         ...option,
-        input: spec,
-        output: {
-          path: "src/api"
-        }
+        output: option.output ?? {
+          path: cwd
+        },
+        input: spec
       }))
     );
 
     await Promise.all(
       context.map(async c =>
         Promise.all(
-          c.gen
-            .render()
-            .map(async r =>
-              fs.promises.writeFile(r.path, r.content, { encoding: "utf8" })
-            )
+          c.gen.render().map(async r => storage.setItem(r.path, r.content))
         )
       )
     );

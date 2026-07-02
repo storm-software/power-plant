@@ -57,23 +57,23 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - File Input
+# Power Plant - Unstorage Input
 
-A Power Plant input for reading the source specification from a file.
+A Power Plant input extension for reading the source specification from an [Unstorage](https://unstorage.unjs.io) driver.
 
 ## Installing
 
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/file-input
+pnpm add -D @power-plant/unstorage-input
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/file-input
+npm install -D @power-plant/unstorage-input
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/file-input
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/file-input
+yarn add -D @power-plant/unstorage-input
 ```
 
 </details>
 
 ## Building
 
-Run `nx build file-input` to build the library.
+Run `nx build unstorage-input` to build the library.
 
 ## Running unit tests
 
-Run `nx test file-input` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test unstorage-input` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

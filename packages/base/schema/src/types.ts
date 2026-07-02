@@ -18,6 +18,7 @@
 
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import type { Storage } from "unstorage";
 import type { InputObject, Schema as UntypedBaseSchema } from "untyped";
 import type { BaseIssue, BaseSchema } from "valibot";
 import type * as z3 from "zod/v3";
@@ -1670,10 +1671,15 @@ export type SchemaConfig<TSpec = any> =
   | SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
 export type InferExtractOptions<T extends SchemaConfig> =
-  T extends LoadReference
-    ? InferLoadOptions<T>
+  (T extends LoadReference
+    ? Omit<InferLoadOptions<T>, "fs">
     : // eslint-disable-next-line ts/no-empty-object-type
-      {};
+      {}) & {
+    /**
+     * An optional storage instance to use for caching schema extraction results. If provided, the storage instance will be used to store and retrieve cached schema extraction results, which can improve performance by avoiding redundant schema extraction operations. If not provided, the default storage mechanism will be used.
+     */
+    storage?: Storage;
+  };
 
 /**
  * A schema envelope that contains the normalized schema and its source variant.

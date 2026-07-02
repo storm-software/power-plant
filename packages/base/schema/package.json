@@ -78,6 +78,20 @@
       }
     },
     "./package.json": "./package.json",
+    "./storage": {
+      "require": {
+        "types": "./dist/storage/index.d.cts",
+        "default": "./dist/storage/index.cjs"
+      },
+      "import": {
+        "types": "./dist/storage/index.d.mts",
+        "default": "./dist/storage/index.mjs"
+      },
+      "default": {
+        "types": "./dist/storage/index.d.mts",
+        "default": "./dist/storage/index.mjs"
+      }
+    },
     "./valibot": {
       "require": {
         "types": "./dist/valibot.d.cts",
@@ -133,6 +147,7 @@
     "defu": "catalog:",
     "ts-json-schema-generator": "catalog:",
     "typescript": "^6.0.3",
+    "unstorage": "catalog:",
     "untyped": "catalog:"
   },
   "devDependencies": {

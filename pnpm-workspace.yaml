@@ -85,9 +85,9 @@ overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
   "@power-plant/bindings": workspace:*
-  "@power-plant/file-input": workspace:*
-  "@power-plant/openapi-schema": workspace:*
+  "@power-plant/unstorage-input": workspace:*
   "@power-plant/unstorage-output": workspace:*
+  "@power-plant/openapi-schema": workspace:*
   "@power-plant/hey-api": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

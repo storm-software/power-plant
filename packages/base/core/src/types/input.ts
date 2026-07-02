@@ -19,7 +19,7 @@
 import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
-import type { Meta, MetaConfig } from "./meta";
+import type { Meta, MetaConfig, MetaValue } from "./meta";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
 export type InputFunction<TSpec, TOptions extends object> = (
@@ -31,9 +31,9 @@ export interface InputMetaConfig<
   TOptions extends object
 > extends MetaConfig<TSpec, TOptions> {
   /**
-   * A string that describes how the specification will be extracted/generated. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
+   * A string that describes how the specification will be read/extracted. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
-  input?: string;
+  readFrom?: MetaValue<TSpec, TOptions, string>;
 }
 
 export interface InputMeta<TSpec, TOptions extends object> extends Meta<
@@ -41,9 +41,9 @@ export interface InputMeta<TSpec, TOptions extends object> extends Meta<
   TOptions
 > {
   /**
-   * A string that describes how the specification will be extracted/generated. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
+   * A string that describes how the specification will be read/extracted. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
-  input?: string;
+  readFrom?: string;
 }
 
 export interface InputConfigObject<TSpec, TOptions extends object> {

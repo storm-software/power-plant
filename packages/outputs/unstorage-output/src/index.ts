@@ -41,34 +41,47 @@ export default defineOutput<any, Options>({
     tags: ["unstorage", "output"],
     links: [
       {
-        href: "https://unstorage.dev",
-        description: "Unstorage Documentation"
+        href: "https://unstorage.unjs.io",
+        description: "Unstorage documentation"
+      },
+      {
+        href: "https://unstorage.unjs.io/drivers",
+        description: "Unstorage Drivers documentation"
       },
       {
         href: "https://github.com/unjs/unstorage",
-        description: "Unstorage GitHub Repository"
+        description: "Unstorage GitHub repository"
       }
     ]
   },
   output: async (spec, options, documents) => {
-    const { cwd } = useContext();
+    const { cwd, storage } = useContext();
 
-    const outputStorage =
-      (
-        options as {
-          outputStorage?: Storage;
-        }
-      ).outputStorage ??
-      createStorage({
-        driver: fsLite({
-          base:
-            (
-              options as {
-                outputPath?: string;
-              }
-            ).outputPath || cwd
-        })
-      });
+    const outputStorage = (
+      options as {
+        outputStorage?: Storage;
+      }
+    ).outputStorage
+      ? (
+          options as {
+            outputStorage: Storage;
+          }
+        ).outputStorage
+      : (
+            options as {
+              outputPath?: string;
+            }
+          ).outputPath
+        ? createStorage({
+            driver: fsLite({
+              base: (
+                options as {
+                  outputPath: string;
+                }
+              ).outputPath
+            })
+          })
+        : storage;
 
     await Promise.all(
       documents.map(async document => {

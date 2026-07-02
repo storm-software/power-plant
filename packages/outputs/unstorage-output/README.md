@@ -59,7 +59,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 # Power Plant - Unstorage Output
 
-A Power Plant output extension for writing the generated code to an [Unstorage](https://unstorage.dev) driver.
+A Power Plant output extension for writing the generated code to an [Unstorage](https://unstorage.unjs.io) driver.
 
 ## Installing
 
