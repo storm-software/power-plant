@@ -61,7 +61,6 @@
             components = [
               "rustc"
               "cargo"
-              "cargo-zigbuild"
             ];
           };
         };
