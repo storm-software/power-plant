@@ -11,17 +11,66 @@
 
   packages = with pkgs; [
     sccache
-    cargo-zigbuild
   ];
 
   scripts = {
     build-native.exec = "pnpm build-native --target=$1 --buildFlags=$2";
   };
 
-  languages = {
-    zig = {
-      enable = true;
-      lsp.enable = false;
+  profiles = {
+    native.module = {
+      languages.rust = {
+        enable = true;
+        channel = "nightly";
+        components = [
+          "rustc"
+          "cargo"
+        ];
+      };
+    };
+
+    native-linux.module = {
+      extends = [
+        "native"
+      ];
+
+      languages.rust = {
+        cranelift.enable = true;
+        wild.enable = true;
+      };
+    };
+
+    native-linux-musl.module = {
+      extends = [
+        "native-linux"
+      ];
+
+      packages = with pkgs; [
+        cargo-zigbuild
+      ];
+
+      languages = {
+        zig = {
+          enable = true;
+          lsp.enable = false;
+        };
+        rust = {
+          components = [
+            "rustc"
+            "cargo"
+            "cargo-zigbuild"
+          ];
+        };
+      };
+    };
+
+    native-darwin.module = {
+      extends = [
+        "native"
+      ];
+      languages.rust = {
+        lld.enable = true;
+      };
     };
   };
 }

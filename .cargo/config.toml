@@ -22,8 +22,8 @@ ck = "check --workspace --all-features --all-targets --locked"
 ls-lint = "run --bin ls-lint"
 run-fixture = "run --bin run-fixture"
 
-# [target.'cfg(target_os = "linux")']
-# rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+[target.'cfg(target_os = "linux")']
+rustflags = ["-C", "link-arg=-fuse-ld=mold", "-Z", "unstable-options"]
 
 [target.x86_64-pc-windows-msvc]
 rustflags = ["-C", "target-feature=+crt-static"]

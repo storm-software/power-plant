@@ -16,6 +16,9 @@
       "path": "./packages/schemas/openapi-schema"
     },
     {
+      "path": "./packages/schemas/graphql-schema"
+    },
+    {
       "path": "./packages/inputs/unstorage-input"
     },
     {

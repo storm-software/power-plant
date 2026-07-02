@@ -16,6 +16,7 @@ env:
   CI: true
   DEBUG: napi:*
   MACOSX_DEPLOYMENT_TARGET: "10.13"
+  CARGO_INCREMENTAL: "1"
   STORM_REPOSITORY: ${{ github.repositoryUrl }}
   STORM_WORKSPACE_ROOT: ${{ github.workspace }}
   GITHUB_ACTOR: ${{ github.actor }}
@@ -53,7 +54,7 @@ jobs:
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
           discord-webhook: ${{ secrets.STORM_BOT_DISCORD_WEBHOOK}}
 
-  build-bindings:
+  build-bindings-unix:
     name: Build bindings - ${{ matrix.target }}
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
       github.event.pull_request.draft == false
@@ -70,46 +71,52 @@ jobs:
         include:
           - host: macos-latest
             target: x86_64-apple-darwin
-            build_flags: ""
+            build-flags: ""
+            profile: native-darwin
           - host: macos-latest
             target: aarch64-apple-darwin
-            build_flags: ""
-          - host: windows-latest
-            target: x86_64-pc-windows-msvc
-            build_flags: ""
-          - host: windows-latest
-            target: aarch64-pc-windows-msvc
-            build_flags: ""
+            build-flags: ""
+            profile: native-darwin
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            build_flags: -x
+            build-flags: -x
+            profile: native-linux-musl
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
-            build_flags: -x
+            build-flags: -x
+            profile: native-linux-musl
           - host: ubuntu-latest
             target: aarch64-linux-android
-            build_flags: ""
+            build-flags: ""
+            profile: native-linux
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
-            build_flags: ""
+            build-flags: ""
+            profile: native-linux
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
-            build_flags: --use-napi-cross
+            build-flags: --use-napi-cross
+            profile: native-linux
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -121,10 +128,10 @@ jobs:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build native binding
-        run: devenv --profile production --no-tui shell build-native ${{ matrix.target }} ${{ matrix.build_flags }}
+        run: devenv --profile production --profile ${{ matrix.profile }} --no-tui shell build-native ${{ matrix.target }} ${{ matrix.build-flags }}
         env:
           NATIVE_TARGET: ${{ matrix.target }}
-          NATIVE_BUILD_FLAGS: ${{ matrix.build_flags }}
+          NATIVE_BUILD_FLAGS: ${{ matrix.build-flags }}
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Upload artifact
@@ -134,23 +141,112 @@ jobs:
           path: packages/base/bindings/src/power-plant-bindings.*
           if-no-files-found: error
 
-  build-bindings-freebsd:
-    name: Build bindings - x86_64-unknown-freebsd
-    if: github.repository == 'storm-software/power-plant' && (github.ref ==
-      'refs/heads/main' || github.ref == 'refs/heads/next' || github.ref ==
-      'refs/heads/experimental')
-    runs-on: ubuntu-latest
+      - name: Upload artifact - Unix
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
+        if: matrix.target != 'wasm32-wasip1-threads'
+        with:
+          name: bindings-${{ matrix.target }}
+          path: packages/base/bindings/src/*.node
+          if-no-files-found: error
+
+      - name: Upload artifact - WASM
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
+        if: matrix.target == 'wasm32-wasip1-threads'
+        with:
+          name: bindings-${{ matrix.target }}
+          path: packages/base/bindings/src/*.wasm
+          if-no-files-found: error
+
+  build-bindings-windows:
+    name: Build bindings - ${{ matrix.target }}
+    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
+      github.event.pull_request.draft == false
+    runs-on: ${{ matrix.host }}
+    environment: production
+    permissions:
+      contents: write
+      id-token: write
     needs:
       - start
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: windows-latest
+            target: x86_64-pc-windows-msvc
+          - host: windows-latest
+            target: aarch64-pc-windows-msvc
+          - host: windows-latest
+            target: i686-pc-windows-msvc
     steps:
       - name: Setup workspace
-        uses: storm-software/action-devenv-setup@main
+        uses: storm-software/action-setup@main
         with:
           gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
           gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
           storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Install
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          targets: ${{ matrix.target }}
+
+      - name: Cache cargo
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ~/.napi-rs
+            .cargo-cache
+            target/
+          key: ${{ matrix.target }}-cargo-${{ matrix.host }}
+
+      - name: Setup toolchain
+        run: ${{ matrix.setup }}
+        if: ${{ matrix.setup }}
+        shell: bash
+
+      - name: Setup node x86
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        if: matrix.target == 'i686-pc-windows-msvc'
+        with:
+          cache: pnpm
+          architecture: x86
+
+      - name: Build
+        run: pnpm build-native --target ${{ matrix.target }}
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
+        with:
+          name: bindings-${{ matrix.target }}
+          path: packages/base/bindings/src/*.node
+          if-no-files-found: error
+
+  build-bindings-freebsd:
+    name: Build bindings - x86_64-unknown-freebsd
+    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: write
+      id-token: write
+    needs:
+      - start
+    steps:
+      - name: Setup workspace
+        uses: storm-software/action-setup@main
+        with:
+          gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
+          gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
+          gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
+          storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
 
       - name: Build on FreeBSD
         uses: cross-platform-actions/action@5ea7e8e4677bd726033a10b094ba1c5762b15dee # v1.3.0
@@ -175,7 +271,7 @@ jobs:
             cd packages/base/bindings
             pnpm exec napi build --release \
               --cwd ./src \
-              --manifest-path ../../../crates/bindings/Cargo.toml \
+              --manifest-path ../../../../crates/bindings/Cargo.toml \
               --package-json-path ../package.json \
               --target x86_64-unknown-freebsd
 
@@ -183,7 +279,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
         with:
           name: bindings-x86_64-unknown-freebsd
-          path: packages/base/bindings/src/power-plant-bindings.*
+          path: packages/base/bindings/src/*.node
           if-no-files-found: error
 
   release:
@@ -197,7 +293,8 @@ jobs:
       id-token: write
     needs:
       - start
-      - build-bindings
+      - build-bindings-unix
+      - build-bindings-windows
       - build-bindings-freebsd
     steps:
       - name: Setup workspace

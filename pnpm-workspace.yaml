@@ -88,6 +88,7 @@ overrides:
   "@power-plant/unstorage-input": workspace:*
   "@power-plant/unstorage-output": workspace:*
   "@power-plant/openapi-schema": workspace:*
+  "@power-plant/graphql-schema": workspace:*
   "@power-plant/hey-api": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

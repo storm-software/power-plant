@@ -22,6 +22,7 @@ rules:
       - schedule-stale.yml:132:15
       - schedule-stale.yml:148:15
       - schedule-stale.yml:164:15
+      - all-contributors.yml:18:15
   excessive-permissions:
     ignore:
       - release.yml
