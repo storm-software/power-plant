@@ -29,47 +29,53 @@
       };
     };
 
-    native-linux.module = {
+    native-linux = {
       extends = [
         "native"
       ];
+      module = {
 
-      languages.rust = {
-        cranelift.enable = true;
-        wild.enable = true;
+        languages.rust = {
+          cranelift.enable = true;
+          wild.enable = true;
+        };
       };
     };
 
-    native-linux-musl.module = {
+    native-linux-musl = {
       extends = [
         "native-linux"
       ];
+      module = {
 
-      packages = with pkgs; [
-        cargo-zigbuild
-      ];
+        packages = with pkgs; [
+          cargo-zigbuild
+        ];
 
-      languages = {
-        zig = {
-          enable = true;
-          lsp.enable = false;
-        };
-        rust = {
-          components = [
-            "rustc"
-            "cargo"
-            "cargo-zigbuild"
-          ];
+        languages = {
+          zig = {
+            enable = true;
+            lsp.enable = false;
+          };
+          rust = {
+            components = [
+              "rustc"
+              "cargo"
+              "cargo-zigbuild"
+            ];
+          };
         };
       };
     };
 
-    native-darwin.module = {
+    native-darwin = {
       extends = [
         "native"
       ];
-      languages.rust = {
-        lld.enable = true;
+      module = {
+        languages.rust = {
+          lld.enable = true;
+        };
       };
     };
   };
