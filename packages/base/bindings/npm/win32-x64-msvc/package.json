@@ -1,19 +1,11 @@
 {
   "name": "@power-plant/bindings-win32-x64-msvc",
   "version": "0.0.1",
-  "cpu": [
-    "x64"
-  ],
+  "cpu": ["x64"],
   "main": "power-plant-bindings.win32-x64-msvc.node",
-  "files": [
-    "power-plant-bindings.win32-x64-msvc.node"
-  ],
+  "files": ["power-plant-bindings.win32-x64-msvc.node"],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "powerlines",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "powerlines", "storm-software"],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -33,7 +25,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": [
-    "win32"
-  ]
+  "os": ["win32"]
 }

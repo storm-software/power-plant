@@ -73,6 +73,7 @@ catalog:
   signal-exit: ^4.1.0
   ts-json-schema-generator: ^2.9.0
   tsdown: ^0.22.3
+  unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.2
   verdaccio: 6.0.5
@@ -86,7 +87,7 @@ overrides:
   "@power-plant/bindings": workspace:*
   "@power-plant/file-input": workspace:*
   "@power-plant/openapi-schema": workspace:*
-  "@power-plant/local-output": workspace:*
+  "@power-plant/unstorage-output": workspace:*
   "@power-plant/hey-api": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

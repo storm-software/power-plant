@@ -4,17 +4,17 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: "../../../node_modules/.vite/packages/outputs/local-output",
+  cacheDir: "../../../node_modules/.vite/packages/outputs/unstorage-output",
   plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(["*.md"])],
   test: {
-    name: "local-output",
+    name: "unstorage-output",
     watch: false,
     globals: true,
     environment: "node",
     include: ["{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     reporters: ["default"],
     coverage: {
-      reportsDirectory: "../../../coverage/packages/outputs/local-output",
+      reportsDirectory: "../../../coverage/packages/outputs/unstorage-output",
       provider: "v8" as const
     }
   }

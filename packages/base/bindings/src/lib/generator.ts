@@ -89,7 +89,7 @@ export async function createGenerator<
 
   let outputConfig = configObject.output;
   if (!outputConfig) {
-    outputConfig = "@power-plant/local-output";
+    outputConfig = "@power-plant/unstorage-output";
   }
 
   const [input, output] = await Promise.all([

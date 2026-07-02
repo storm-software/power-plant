@@ -1,19 +1,11 @@
 {
   "name": "@power-plant/bindings-linux-s390x-gnu",
   "version": "0.0.1",
-  "cpu": [
-    "s390x"
-  ],
+  "cpu": ["s390x"],
   "main": "power-plant-bindings.linux-s390x-gnu.node",
-  "files": [
-    "power-plant-bindings.linux-s390x-gnu.node"
-  ],
+  "files": ["power-plant-bindings.linux-s390x-gnu.node"],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "powerlines",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "powerlines", "storm-software"],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -33,10 +25,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": [
-    "linux"
-  ],
-  "libc": [
-    "glibc"
-  ]
+  "os": ["linux"],
+  "libc": ["glibc"]
 }

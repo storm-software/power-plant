@@ -1,19 +1,11 @@
 {
   "name": "@power-plant/bindings-android-arm64",
   "version": "0.0.1",
-  "cpu": [
-    "arm64"
-  ],
+  "cpu": ["arm64"],
   "main": "power-plant-bindings.android-arm64.node",
-  "files": [
-    "power-plant-bindings.android-arm64.node"
-  ],
+  "files": ["power-plant-bindings.android-arm64.node"],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "powerlines",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "powerlines", "storm-software"],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -33,7 +25,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": [
-    "android"
-  ]
+  "os": ["android"]
 }

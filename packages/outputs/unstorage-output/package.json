@@ -1,9 +1,10 @@
 {
-  "name": "@power-plant/local-output",
+  "name": "@power-plant/unstorage-output",
   "version": "0.0.1",
   "private": false,
-  "description": "A Power Plant output for writing generated code to the local file system.",
+  "description": "A Power Plant output for writing generated code to an Unstorage driver.",
   "keywords": [
+    "unstorage",
     "power-plant-output",
     "power-plant",
     "storm-software"
@@ -16,7 +17,7 @@
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/outputs/local-output"
+    "directory": "packages/outputs/unstorage-output"
   },
   "funding": {
     "type": "github",
@@ -73,7 +74,8 @@
     "@stryke/convert": "catalog:",
     "@stryke/path": "catalog:",
     "@stryke/type-checks": "catalog:",
-    "@stryke/types": "catalog:"
+    "@stryke/types": "catalog:",
+    "unstorage": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",

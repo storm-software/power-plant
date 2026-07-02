@@ -16,7 +16,7 @@
       "path": "./packages/schemas/openapi-schema"
     },
     {
-      "path": "./packages/outputs/local-output"
+      "path": "./packages/outputs/unstorage-output"
     },
     {
       "path": "./packages/inputs/file-input"

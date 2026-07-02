@@ -57,23 +57,23 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - Local Output
+# Power Plant - Unstorage Output
 
-A Power Plant sink for writing the generated code to the local file system.
+A Power Plant output extension for writing the generated code to an [Unstorage](https://unstorage.dev) driver.
 
 ## Installing
 
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/local-output
+pnpm add -D @power-plant/unstorage-output
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/local-output
+npm install -D @power-plant/unstorage-output
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/local-output
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/local-output
+yarn add -D @power-plant/unstorage-output
 ```
 
 </details>
 
 ## Building
 
-Run `nx build local-output` to build the library.
+Run `nx build unstorage-output` to build the library.
 
 ## Running unit tests
 
-Run `nx test local-output` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test unstorage-output` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

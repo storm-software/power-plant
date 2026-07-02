@@ -1,19 +1,11 @@
 {
   "name": "@power-plant/bindings-linux-arm-gnueabihf",
   "version": "0.0.1",
-  "cpu": [
-    "arm"
-  ],
+  "cpu": ["arm"],
   "main": "power-plant-bindings.linux-arm-gnueabihf.node",
-  "files": [
-    "power-plant-bindings.linux-arm-gnueabihf.node"
-  ],
+  "files": ["power-plant-bindings.linux-arm-gnueabihf.node"],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "powerlines",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "powerlines", "storm-software"],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -33,7 +25,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": [
-    "linux"
-  ]
+  "os": ["linux"]
 }
