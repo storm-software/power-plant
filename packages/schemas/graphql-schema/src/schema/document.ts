@@ -16,338 +16,40 @@
 
  ------------------------------------------------------------------- */
 
+import type { GraphQLSchema } from "graphql";
+import { isSchema } from "graphql";
 import * as z from "zod/mini";
-import {
-  directiveDefinitionSchema,
-  schemaDefinitionSchema,
-  typeDefinitionSchema
-} from "./definition";
-import { externalDocsSchema, infoSchema, tagSchema } from "./shared";
-import type { TypeReference } from "./value";
-import { collectNamedTypeReferences } from "./value";
 
-const graphqlVersionSchema = z
-  .string()
-  .check(z.regex(/^1\.\d+$/, "GraphQL document version must be 1.x"));
-
-const BUILTIN_SCALARS = new Set(["String", "Int", "Float", "Boolean", "ID"]);
-
-const BUILTIN_DIRECTIVES = new Set([
-  "skip",
-  "include",
-  "deprecated",
-  "specifiedBy",
-  "oneOf"
-]);
-
-function isKnownType(name: string, definedTypes: Set<string>): boolean {
-  return BUILTIN_SCALARS.has(name) || definedTypes.has(name);
+function hasRootOperationType(schema: GraphQLSchema): boolean {
+  return (
+    schema.getQueryType() != null ||
+    schema.getMutationType() != null ||
+    schema.getSubscriptionType() != null
+  );
 }
 
-function validateTypeReference(
-  typeReference: TypeReference,
-  definedTypes: Set<string>,
-  context: z.core.$RefinementCtx<unknown>,
-  path: (string | number)[]
-) {
-  for (const typeName of collectNamedTypeReferences(typeReference)) {
-    if (!isKnownType(typeName, definedTypes)) {
-      context.addIssue({
-        code: "custom",
-        message: `Type "${typeName}" is referenced but not defined`,
-        path
-      });
-    }
-  }
-}
-
-function validateDirectiveApplications(
-  directives: Array<{ name: string }> | undefined,
-  definedDirectives: Set<string>,
-  context: z.core.$RefinementCtx<unknown>,
-  path: (string | number)[]
-) {
-  if (!directives?.length) {
-    return;
-  }
-
-  for (const [index, directive] of directives.entries()) {
-    if (
-      !BUILTIN_DIRECTIVES.has(directive.name) &&
-      !definedDirectives.has(directive.name)
-    ) {
-      context.addIssue({
-        code: "custom",
-        message: `Directive "@${directive.name}" is referenced but not defined`,
-        path: [...path, index, "name"]
-      });
-    }
-  }
-}
-
+/**
+ * Validates a {@link GraphQLSchema} instance from the `graphql` package.
+ *
+ * The schema must define at least one root operation type (query, mutation, or
+ * subscription).
+ */
 export const graphqlSchema = z
-  .object({
-    graphql: graphqlVersionSchema,
-    info: infoSchema,
-    schema: z.optional(schemaDefinitionSchema),
-    types: z
-      .array(typeDefinitionSchema)
-      .check(
-        z.refine(
-          value => value.length > 0,
-          "At least one type definition must be provided"
-        )
-      ),
-    directives: z.optional(z.array(directiveDefinitionSchema)),
-    tags: z.optional(z.array(tagSchema)),
-    externalDocs: z.optional(externalDocsSchema),
-    extensions: z.optional(z.record(z.string(), z.unknown()))
-  })
+  .custom<GraphQLSchema>(
+    value => isSchema(value) && hasRootOperationType(value),
+    "Expected a GraphQLSchema instance with at least one root operation type"
+  )
   .check(
-    z.superRefine((document, context) => {
-      const definedTypes = new Set(document.types.map(type => type.name));
-      const definedDirectives = new Set(
-        document.directives?.map(directive => directive.name) ?? []
-      );
+    z.superRefine((schema, context) => {
+      const typeMap = schema.getTypeMap();
 
-      const duplicateTypeNames = document.types
-        .map(type => type.name)
-        .filter((name, index, names) => names.indexOf(name) !== index);
-
-      for (const duplicateName of new Set(duplicateTypeNames)) {
-        context.addIssue({
-          code: "custom",
-          message: `Duplicate type definition "${duplicateName}"`,
-          path: ["types"]
-        });
-      }
-
-      const duplicateDirectiveNames =
-        document.directives
-          ?.map(directive => directive.name)
-          .filter((name, index, names) => names.indexOf(name) !== index) ?? [];
-
-      for (const duplicateName of new Set(duplicateDirectiveNames)) {
-        context.addIssue({
-          code: "custom",
-          message: `Duplicate directive definition "@${duplicateName}"`,
-          path: ["directives"]
-        });
-      }
-
-      const rootOperations = [
-        document.schema?.query,
-        document.schema?.mutation,
-        document.schema?.subscription
-      ].filter((operation): operation is string => Boolean(operation));
-
-      if (!rootOperations.length && !definedTypes.has("Query")) {
-        context.addIssue({
-          code: "custom",
-          message:
-            "Schema must define a query root type or include a Query type definition",
-          path: ["schema"]
-        });
-      }
-
-      validateDirectiveApplications(
-        document.schema?.directives,
-        definedDirectives,
-        context,
-        ["schema", "directives"]
-      );
-
-      for (const rootType of rootOperations) {
-        const rootTypeDefinition = document.types.find(
-          type => type.name === rootType
-        );
-
-        if (!rootTypeDefinition) {
+      for (const [typeName, namedType] of Object.entries(typeMap)) {
+        if (namedType.name !== typeName) {
           context.addIssue({
             code: "custom",
-            message: `Root operation type "${rootType}" is not defined in types`,
-            path: ["schema"]
+            message: `Type map entry "${typeName}" does not match type name "${namedType.name}"`,
+            path: ["types", typeName]
           });
-          continue;
-        }
-
-        if (rootTypeDefinition.kind !== "OBJECT") {
-          context.addIssue({
-            code: "custom",
-            message: `Root operation type "${rootType}" must be an object type`,
-            path: ["schema"]
-          });
-        }
-      }
-
-      for (const [typeIndex, typeDefinition] of document.types.entries()) {
-        validateDirectiveApplications(
-          typeDefinition.directives,
-          definedDirectives,
-          context,
-          ["types", typeIndex, "directives"]
-        );
-
-        if (
-          typeDefinition.kind === "OBJECT" ||
-          typeDefinition.kind === "INTERFACE"
-        ) {
-          for (const interfaceName of typeDefinition.interfaces ?? []) {
-            const interfaceType = document.types.find(
-              type => type.name === interfaceName
-            );
-
-            if (!interfaceType) {
-              context.addIssue({
-                code: "custom",
-                message: `Interface "${interfaceName}" is referenced but not defined`,
-                path: ["types", typeIndex, "interfaces"]
-              });
-              continue;
-            }
-
-            if (interfaceType.kind !== "INTERFACE") {
-              context.addIssue({
-                code: "custom",
-                message: `"${interfaceName}" must be an interface type`,
-                path: ["types", typeIndex, "interfaces"]
-              });
-            }
-          }
-
-          for (const [fieldIndex, field] of typeDefinition.fields.entries()) {
-            validateTypeReference(field.type, definedTypes, context, [
-              "types",
-              typeIndex,
-              "fields",
-              fieldIndex,
-              "type"
-            ]);
-
-            validateDirectiveApplications(
-              field.directives,
-              definedDirectives,
-              context,
-              ["types", typeIndex, "fields", fieldIndex, "directives"]
-            );
-
-            for (const [argIndex, arg] of (field.args ?? []).entries()) {
-              validateTypeReference(arg.type, definedTypes, context, [
-                "types",
-                typeIndex,
-                "fields",
-                fieldIndex,
-                "args",
-                argIndex,
-                "type"
-              ]);
-
-              validateDirectiveApplications(
-                arg.directives,
-                definedDirectives,
-                context,
-                [
-                  "types",
-                  typeIndex,
-                  "fields",
-                  fieldIndex,
-                  "args",
-                  argIndex,
-                  "directives"
-                ]
-              );
-            }
-          }
-        }
-
-        if (typeDefinition.kind === "UNION") {
-          for (const [
-            memberIndex,
-            memberType
-          ] of typeDefinition.types.entries()) {
-            if (!definedTypes.has(memberType)) {
-              context.addIssue({
-                code: "custom",
-                message: `Union member type "${memberType}" is not defined`,
-                path: ["types", typeIndex, "types", memberIndex]
-              });
-              continue;
-            }
-
-            const memberDefinition = document.types.find(
-              type => type.name === memberType
-            );
-
-            if (
-              memberDefinition &&
-              memberDefinition.kind !== "OBJECT" &&
-              memberDefinition.kind !== "INTERFACE"
-            ) {
-              context.addIssue({
-                code: "custom",
-                message: `Union member type "${memberType}" must be an object or interface type`,
-                path: ["types", typeIndex, "types", memberIndex]
-              });
-            }
-          }
-        }
-
-        if (typeDefinition.kind === "INPUT_OBJECT") {
-          for (const [fieldIndex, field] of typeDefinition.fields.entries()) {
-            validateTypeReference(field.type, definedTypes, context, [
-              "types",
-              typeIndex,
-              "fields",
-              fieldIndex,
-              "type"
-            ]);
-
-            validateDirectiveApplications(
-              field.directives,
-              definedDirectives,
-              context,
-              ["types", typeIndex, "fields", fieldIndex, "directives"]
-            );
-          }
-        }
-
-        if (typeDefinition.kind === "ENUM") {
-          for (const [valueIndex, value] of typeDefinition.values.entries()) {
-            validateDirectiveApplications(
-              value.directives,
-              definedDirectives,
-              context,
-              ["types", typeIndex, "values", valueIndex, "directives"]
-            );
-          }
-        }
-      }
-
-      for (const [directiveIndex, directive] of (
-        document.directives ?? []
-      ).entries()) {
-        validateDirectiveApplications(
-          directive.directives,
-          definedDirectives,
-          context,
-          ["directives", directiveIndex, "directives"]
-        );
-
-        for (const [argIndex, arg] of (directive.args ?? []).entries()) {
-          validateTypeReference(arg.type, definedTypes, context, [
-            "directives",
-            directiveIndex,
-            "args",
-            argIndex,
-            "type"
-          ]);
-
-          validateDirectiveApplications(
-            arg.directives,
-            definedDirectives,
-            context,
-            ["directives", directiveIndex, "args", argIndex, "directives"]
-          );
         }
       }
     })

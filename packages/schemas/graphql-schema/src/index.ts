@@ -17,45 +17,55 @@
  ------------------------------------------------------------------- */
 
 import { defineSchema } from "@power-plant/core";
+import { isScalarType } from "graphql";
 import type * as z from "zod/mini";
 import packageJson from "../package.json" with { type: "json" };
 import { graphqlSchema } from "./schema";
 
 export * from "./schema";
-export type GraphQLSchema = z.infer<typeof graphqlSchema>;
+export type GraphQLSchemaDocument = z.infer<typeof graphqlSchema>;
 
-export default defineSchema<GraphQLSchema, any>({
+export default defineSchema<GraphQLSchemaDocument, any>({
   meta: {
     name: "graphql",
     title: "GraphQL",
     version: packageJson.version,
     description: "A GraphQL schema document used to describe a GraphQL API.",
-    spec: (spec: GraphQLSchema) =>
-      spec.info.title
-        ? `The ${
-            spec.info.version ? `${spec.info.version} version of the ` : ""
-          }${spec.info.title} GraphQL API.${
-            spec.info.description
-              ? ` ${spec.info.description}`
-              : spec.info.summary
-                ? ` ${spec.info.summary}`
-                : ""
-          }`
-        : spec.info.description
-          ? ` ${spec.info.description}`
-          : spec.info.summary
-            ? ` ${spec.info.summary}`
-            : "",
-    tags: (spec: GraphQLSchema) => spec.tags?.map(tag => tag.name) ?? [],
-    links: (spec: GraphQLSchema) =>
-      spec.externalDocs
-        ? [
-            {
-              href: spec.externalDocs.url,
-              description: spec.externalDocs.description
-            }
-          ]
-        : []
+    spec: (spec: GraphQLSchemaDocument) => {
+      if (spec.description) {
+        return spec.description;
+      }
+
+      const rootTypes = [
+        spec.getQueryType()?.name,
+        spec.getMutationType()?.name,
+        spec.getSubscriptionType()?.name
+      ].filter((name): name is string => name != null);
+
+      if (rootTypes.length > 0) {
+        return `A GraphQL API schema with ${rootTypes.join(", ")} root operation type${
+          rootTypes.length === 1 ? "" : "s"
+        }.`;
+      }
+
+      return "A GraphQL API schema.";
+    },
+    tags: (spec: GraphQLSchemaDocument) =>
+      Object.keys(spec.getTypeMap()).filter(name => !name.startsWith("__")),
+    links: (spec: GraphQLSchemaDocument) => {
+      const links: Array<{ href: string; description?: string }> = [];
+
+      for (const type of Object.values(spec.getTypeMap())) {
+        if (isScalarType(type) && type.specifiedByURL) {
+          links.push({
+            href: type.specifiedByURL,
+            description: type.description ?? `${type.name} scalar specification`
+          });
+        }
+      }
+
+      return links;
+    }
   },
   schema: graphqlSchema
 });

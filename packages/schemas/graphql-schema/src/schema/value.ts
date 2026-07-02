@@ -16,72 +16,31 @@
 
  ------------------------------------------------------------------- */
 
+import type {
+  GraphQLDirective,
+  GraphQLNamedType,
+  GraphQLObjectType,
+  GraphQLType
+} from "graphql";
+import { isDirective, isNamedType, isObjectType, isType } from "graphql";
 import * as z from "zod/mini";
-import { typeNameSchema } from "./shared";
 
-export const deprecatedSchema = z.boolean();
-
-export const directiveApplicationSchema = z.object({
-  name: z.string().check(z.minLength(1, "Directive name is required")),
-  args: z.optional(z.record(z.string(), z.unknown()))
-});
-
-export const typeReferenceSchema: z.ZodMiniType<TypeReference> = z.lazy(() =>
-  z.discriminatedUnion("kind", [
-    z.object({
-      kind: z.literal("NAMED"),
-      name: typeNameSchema
-    }),
-    z.object({
-      kind: z.literal("LIST"),
-      ofType: typeReferenceSchema
-    }),
-    z.object({
-      kind: z.literal("NON_NULL"),
-      ofType: typeReferenceSchema
-    })
-  ])
+export const graphQLTypeSchema = z.custom<GraphQLType>(
+  value => isType(value),
+  "Expected a GraphQL type"
 );
 
-export const inputValueDefinitionSchema = z.object({
-  name: z.string().check(z.minLength(1, "Argument name is required")),
-  description: z.optional(z.string()),
-  type: typeReferenceSchema,
-  defaultValue: z.optional(z.string()),
-  deprecated: z.optional(deprecatedSchema),
-  deprecationReason: z.optional(z.string()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
+export const graphQLNamedTypeSchema = z.custom<GraphQLNamedType>(
+  value => isNamedType(value),
+  "Expected a GraphQL named type"
+);
 
-export const fieldDefinitionSchema = z.object({
-  name: z.string().check(z.minLength(1, "Field name is required")),
-  description: z.optional(z.string()),
-  type: typeReferenceSchema,
-  args: z.optional(z.array(inputValueDefinitionSchema)),
-  deprecated: z.optional(deprecatedSchema),
-  deprecationReason: z.optional(z.string()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
+export const graphQLObjectTypeSchema = z.custom<GraphQLObjectType>(
+  value => isObjectType(value),
+  "Expected a GraphQL object type"
+);
 
-export const enumValueDefinitionSchema = z.object({
-  name: z.string().check(z.minLength(1, "Enum value name is required")),
-  description: z.optional(z.string()),
-  deprecated: z.optional(deprecatedSchema),
-  deprecationReason: z.optional(z.string()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
-
-export type TypeReference =
-  | { kind: "NAMED"; name: string }
-  | { kind: "LIST"; ofType: TypeReference }
-  | { kind: "NON_NULL"; ofType: TypeReference };
-
-export function collectNamedTypeReferences(
-  typeReference: TypeReference
-): string[] {
-  if (typeReference.kind === "NAMED") {
-    return [typeReference.name];
-  }
-
-  return collectNamedTypeReferences(typeReference.ofType);
-}
+export const graphQLDirectiveSchema = z.custom<GraphQLDirective>(
+  value => isDirective(value),
+  "Expected a GraphQL directive"
+);

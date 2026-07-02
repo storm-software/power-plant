@@ -71,6 +71,7 @@
   "dependencies": {
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",
+    "graphql": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

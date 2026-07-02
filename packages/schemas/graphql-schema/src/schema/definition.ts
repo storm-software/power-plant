@@ -16,143 +16,54 @@
 
  ------------------------------------------------------------------- */
 
+import type { GraphQLSchemaConfig, SchemaExtensionNode } from "graphql";
+import { Kind } from "graphql";
 import * as z from "zod/mini";
-import { typeNameSchema } from "./shared";
 import {
-  directiveApplicationSchema,
-  enumValueDefinitionSchema,
-  fieldDefinitionSchema,
-  inputValueDefinitionSchema
+  astNodeSchema,
+  descriptionSchema,
+  extensionAstNodesSchema,
+  extensionsSchema
+} from "./shared";
+import {
+  graphQLDirectiveSchema,
+  graphQLNamedTypeSchema,
+  graphQLObjectTypeSchema
 } from "./value";
 
-export const schemaDefinitionSchema = z.object({
-  query: z.optional(typeNameSchema),
-  mutation: z.optional(typeNameSchema),
-  subscription: z.optional(typeNameSchema),
+/** Configuration used to construct a {@link GraphQLSchema}. */
+export const graphqlSchemaConfigSchema = z.object({
+  assumeValid: z.optional(z.boolean()),
+  description: descriptionSchema,
+  query: z.optional(graphQLObjectTypeSchema),
+  mutation: z.optional(graphQLObjectTypeSchema),
+  subscription: z.optional(graphQLObjectTypeSchema),
+  types: z.optional(z.array(graphQLNamedTypeSchema)),
+  directives: z.optional(z.array(graphQLDirectiveSchema)),
+  extensions: z.optional(extensionsSchema),
+  astNode: astNodeSchema,
+  extensionASTNodes: extensionAstNodesSchema
+}) satisfies z.ZodMiniType<GraphQLSchemaConfig>;
+
+/** Normalized configuration returned by {@link GraphQLSchema.toConfig}. */
+export const graphqlSchemaNormalizedConfigSchema = z.object({
+  assumeValid: z.boolean(),
   description: z.optional(z.string()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
-
-export const directiveLocationSchema = z.enum([
-  "QUERY",
-  "MUTATION",
-  "SUBSCRIPTION",
-  "FIELD",
-  "FRAGMENT_DEFINITION",
-  "FRAGMENT_SPREAD",
-  "INLINE_FRAGMENT",
-  "SCHEMA",
-  "SCALAR",
-  "OBJECT",
-  "FIELD_DEFINITION",
-  "ARGUMENT_DEFINITION",
-  "INTERFACE",
-  "UNION",
-  "ENUM",
-  "ENUM_VALUE",
-  "INPUT_OBJECT",
-  "INPUT_FIELD_DEFINITION"
-]);
-
-export const directiveDefinitionSchema = z.object({
-  name: z.string().check(z.minLength(1, "Directive name is required")),
-  description: z.optional(z.string()),
-  locations: z
-    .array(directiveLocationSchema)
-    .check(
-      z.refine(
-        value => value.length > 0,
-        "At least one directive location must be defined"
-      )
-    ),
-  args: z.optional(z.array(inputValueDefinitionSchema)),
-  isRepeatable: z.optional(z.boolean()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
-
-const typeDefinitionBaseSchema = z.object({
-  name: typeNameSchema,
-  description: z.optional(z.string()),
-  directives: z.optional(z.array(directiveApplicationSchema))
-});
-
-export const scalarTypeDefinitionSchema = z.extend(typeDefinitionBaseSchema, {
-  kind: z.literal("SCALAR")
-});
-
-export const objectTypeDefinitionSchema = z.extend(typeDefinitionBaseSchema, {
-  kind: z.literal("OBJECT"),
-  interfaces: z.optional(z.array(typeNameSchema)),
-  fields: z
-    .array(fieldDefinitionSchema)
-    .check(
-      z.refine(
-        value => value.length > 0,
-        "Object types must define at least one field"
-      )
+  query: z.optional(graphQLObjectTypeSchema),
+  mutation: z.optional(graphQLObjectTypeSchema),
+  subscription: z.optional(graphQLObjectTypeSchema),
+  types: z.array(graphQLNamedTypeSchema),
+  directives: z.array(graphQLDirectiveSchema),
+  extensions: extensionsSchema,
+  astNode: astNodeSchema,
+  extensionASTNodes: z.array(
+    z.custom<SchemaExtensionNode>(
+      value =>
+        value != null &&
+        typeof value === "object" &&
+        "kind" in value &&
+        value.kind === Kind.SCHEMA_EXTENSION,
+      "Expected a SchemaExtensionNode"
     )
+  )
 });
-
-export const interfaceTypeDefinitionSchema = z.extend(
-  typeDefinitionBaseSchema,
-  {
-    kind: z.literal("INTERFACE"),
-    interfaces: z.optional(z.array(typeNameSchema)),
-    fields: z
-      .array(fieldDefinitionSchema)
-      .check(
-        z.refine(
-          value => value.length > 0,
-          "Interface types must define at least one field"
-        )
-      )
-  }
-);
-
-export const unionTypeDefinitionSchema = z.extend(typeDefinitionBaseSchema, {
-  kind: z.literal("UNION"),
-  types: z
-    .array(typeNameSchema)
-    .check(
-      z.refine(
-        value => value.length > 0,
-        "Union types must include at least one member type"
-      )
-    )
-});
-
-export const enumTypeDefinitionSchema = z.extend(typeDefinitionBaseSchema, {
-  kind: z.literal("ENUM"),
-  values: z
-    .array(enumValueDefinitionSchema)
-    .check(
-      z.refine(
-        value => value.length > 0,
-        "Enum types must define at least one value"
-      )
-    )
-});
-
-export const inputObjectTypeDefinitionSchema = z.extend(
-  typeDefinitionBaseSchema,
-  {
-    kind: z.literal("INPUT_OBJECT"),
-    fields: z
-      .array(inputValueDefinitionSchema)
-      .check(
-        z.refine(
-          value => value.length > 0,
-          "Input object types must define at least one field"
-        )
-      )
-  }
-);
-
-export const typeDefinitionSchema = z.discriminatedUnion("kind", [
-  scalarTypeDefinitionSchema,
-  objectTypeDefinitionSchema,
-  interfaceTypeDefinitionSchema,
-  unionTypeDefinitionSchema,
-  enumTypeDefinitionSchema,
-  inputObjectTypeDefinitionSchema
-]);

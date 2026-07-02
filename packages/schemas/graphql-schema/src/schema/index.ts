@@ -16,34 +16,33 @@
 
  ------------------------------------------------------------------- */
 
+import type * as z from "zod/mini";
+import type {
+  graphqlSchemaConfigSchema,
+  graphqlSchemaNormalizedConfigSchema
+} from "./definition";
+
 export {
-  directiveDefinitionSchema,
-  directiveLocationSchema,
-  enumTypeDefinitionSchema,
-  inputObjectTypeDefinitionSchema,
-  interfaceTypeDefinitionSchema,
-  objectTypeDefinitionSchema,
-  scalarTypeDefinitionSchema,
-  schemaDefinitionSchema,
-  typeDefinitionSchema,
-  unionTypeDefinitionSchema
+  graphqlSchemaConfigSchema,
+  graphqlSchemaNormalizedConfigSchema
 } from "./definition";
 export { graphqlSchema } from "./document";
 export {
-  contactSchema,
-  externalDocsSchema,
-  infoSchema,
-  licenseSchema,
-  tagSchema,
-  typeNameSchema
+  astNodeSchema,
+  descriptionSchema,
+  extensionAstNodesSchema,
+  extensionsSchema
 } from "./shared";
 export {
-  collectNamedTypeReferences,
-  deprecatedSchema,
-  directiveApplicationSchema,
-  enumValueDefinitionSchema,
-  fieldDefinitionSchema,
-  inputValueDefinitionSchema,
-  typeReferenceSchema
+  graphQLDirectiveSchema,
+  graphQLNamedTypeSchema,
+  graphQLObjectTypeSchema,
+  graphQLTypeSchema
 } from "./value";
-export type { TypeReference } from "./value";
+
+export type GraphQLSchemaConfigDocument = z.infer<
+  typeof graphqlSchemaConfigSchema
+>;
+export type GraphQLSchemaNormalizedConfigDocument = z.infer<
+  typeof graphqlSchemaNormalizedConfigSchema
+>;

@@ -16,49 +16,48 @@
 
  ------------------------------------------------------------------- */
 
+import type { SchemaDefinitionNode, SchemaExtensionNode } from "graphql";
+import { Kind } from "graphql";
 import * as z from "zod/mini";
 
-export const contactSchema = z.object({
-  name: z.optional(z.string()),
-  url: z.optional(z.url()),
-  email: z.optional(z.email())
-});
+/** Human-readable description for a schema element. */
+export const descriptionSchema = z.optional(z.string());
 
-export const licenseSchema = z.object({
-  name: z.string().check(z.minLength(1, "License name is required")),
-  url: z.optional(z.url()),
-  identifier: z.optional(z.string())
-});
+/** Custom extension fields reserved for users. */
+export const extensionsSchema = z.record(z.string(), z.unknown());
 
-export const infoSchema = z.object({
-  title: z.string().check(z.minLength(1, "API title is required")),
-  version: z.string().check(z.minLength(1, "API version is required")),
-  description: z.optional(z.string()),
-  termsOfService: z.optional(z.url()),
-  contact: z.optional(contactSchema),
-  license: z.optional(licenseSchema),
-  summary: z.optional(z.string())
-});
-
-export const tagSchema = z.object({
-  name: z.string().check(z.minLength(1, "Tag name is required")),
-  description: z.optional(z.string()),
-  externalDocs: z.optional(
-    z.object({
-      description: z.optional(z.string()),
-      url: z.url()
-    })
-  )
-});
-
-export const externalDocsSchema = z.object({
-  description: z.optional(z.string()),
-  url: z.url()
-});
-
-export const typeNameSchema = z
-  .string()
-  .check(
-    z.minLength(1, "Type name is required"),
-    z.regex(/^[A-Z_]\w*$/i, "Type name must start with a letter or underscore")
+function isSchemaDefinitionNode(value: unknown): value is SchemaDefinitionNode {
+  return (
+    value != null &&
+    typeof value === "object" &&
+    "kind" in value &&
+    value.kind === Kind.SCHEMA_DEFINITION
   );
+}
+
+function isSchemaExtensionNode(value: unknown): value is SchemaExtensionNode {
+  return (
+    value != null &&
+    typeof value === "object" &&
+    "kind" in value &&
+    value.kind === Kind.SCHEMA_EXTENSION
+  );
+}
+
+/** AST node from which a schema element was built. */
+export const astNodeSchema = z.optional(
+  z.custom<SchemaDefinitionNode>(
+    value => value == null || isSchemaDefinitionNode(value),
+    "Expected a SchemaDefinitionNode"
+  )
+);
+
+/** AST extension nodes applied to a schema element. */
+export const extensionAstNodesSchema = z.optional(
+  z.array(
+    z.custom<SchemaExtensionNode>(
+      value => isSchemaExtensionNode(value),
+      "Expected a SchemaExtensionNode"
+    )
+  )
+);
