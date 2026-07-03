@@ -28,18 +28,14 @@
     "node": ">=24.16.0",
     "pnpm": ">=11.9.0"
   },
-  "keywords": [
-    "power-plant",
-    "storm-software",
-    "monorepo"
-  ],
+  "keywords": ["power-plant", "storm-software", "monorepo"],
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",
     "bootstrap": "pnpm exec zx tools/scripts/src/bootstrap.mjs",
     "build": "pnpm exec zx tools/scripts/src/build.mjs --prod",
     "build-dev": "pnpm exec zx tools/scripts/src/build.mjs --dev",
-    "build-native": "pnpm exec zx tools/scripts/src/build-native.mjs",
+    "build-native": "bash tools/scripts/src/build-native.sh",
     "clean": "pnpm exec zx tools/scripts/src/clean.mjs",
     "commit": "pnpm exec storm-git commit",
     "dep-graph": "nx dep-graph",
@@ -92,6 +88,7 @@
     "nx": "catalog:",
     "prettier": "catalog:",
     "rimraf": "catalog:",
+    "tslib": "catalog:",
     "typescript": "^6.0.3",
     "verdaccio": "catalog:",
     "vite": "catalog:",

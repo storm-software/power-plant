@@ -74,6 +74,7 @@ catalog:
   signal-exit: ^4.1.0
   ts-json-schema-generator: ^2.9.0
   tsdown: ^0.22.3
+  tslib: ^2.8.1
   unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.2
