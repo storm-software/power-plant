@@ -26,6 +26,9 @@
     },
     {
       "path": "./packages/generators/hey-api"
+    },
+    {
+      "path": "./packages/inputs/graphql-input"
     }
   ],
   "files": []

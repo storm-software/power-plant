@@ -1,10 +1,11 @@
 {
-  "name": "@power-plant/unstorage-input",
-  "version": "0.0.4",
+  "name": "@power-plant/graphql-input",
+  "version": "0.0.1",
   "private": false,
-  "description": "A Power Plant input for reading the source specification from an Unstorage driver.",
+  "description": "A Power Plant input for reading the source specification from a GraphQL schema document.",
   "keywords": [
-    "unstorage",
+    "graphql",
+    "graphql-schema",
     "power-plant-input",
     "power-plant",
     "storm-software"
@@ -17,7 +18,7 @@
   "repository": {
     "type": "github",
     "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/inputs/unstorage-input"
+    "directory": "packages/inputs/graphql-input"
   },
   "funding": {
     "type": "github",
@@ -73,6 +74,20 @@
         "default": "./dist/input.mjs"
       }
     },
+    "./loaders": {
+      "require": {
+        "types": "./dist/loaders.d.cts",
+        "default": "./dist/loaders.cjs"
+      },
+      "import": {
+        "types": "./dist/loaders.d.mts",
+        "default": "./dist/loaders.mjs"
+      },
+      "default": {
+        "types": "./dist/loaders.d.mts",
+        "default": "./dist/loaders.mjs"
+      }
+    },
     "./package.json": "./package.json",
     "./types": {
       "require": {
@@ -87,6 +102,20 @@
         "types": "./dist/types.d.mts",
         "default": "./dist/types.mjs"
       }
+    },
+    "./utilities": {
+      "require": {
+        "types": "./dist/utilities.d.cts",
+        "default": "./dist/utilities.cjs"
+      },
+      "import": {
+        "types": "./dist/utilities.d.mts",
+        "default": "./dist/utilities.mjs"
+      },
+      "default": {
+        "types": "./dist/utilities.d.mts",
+        "default": "./dist/utilities.mjs"
+      }
     }
   },
   "main": "./dist/index.cjs",
@@ -97,13 +126,23 @@
     "dist"
   ],
   "dependencies": {
+    "@graphql-tools/apollo-engine-loader": "catalog:",
+    "@graphql-tools/code-file-loader": "catalog:",
+    "@graphql-tools/git-loader": "catalog:",
+    "@graphql-tools/github-loader": "catalog:",
+    "@graphql-tools/graphql-file-loader": "catalog:",
+    "@graphql-tools/json-file-loader": "catalog:",
+    "@graphql-tools/load": "catalog:",
+    "@graphql-tools/url-loader": "catalog:",
+    "@graphql-tools/utils": "catalog:",
+    "@graphql-typed-document-node/core": "catalog:",
     "@power-plant/core": "workspace:*",
+    "@power-plant/graphql-schema": "workspace:*",
     "@power-plant/schema": "workspace:*",
-    "@stryke/path": "catalog:",
     "@stryke/resolve": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
-    "unstorage": "catalog:"
+    "graphql": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",

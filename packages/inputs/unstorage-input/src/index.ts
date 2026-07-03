@@ -16,22 +16,13 @@
 
  ------------------------------------------------------------------- */
 
-import { defineInput, useContext } from "@power-plant/core";
-import { mapStorageToFileSystem } from "@power-plant/schema/storage";
-import { load } from "@stryke/resolve/load";
+import { defineInput } from "@power-plant/core";
 import { isFileReference } from "@stryke/resolve/type-checks";
-import type { LoadReference } from "@stryke/resolve/types";
 import { isString } from "@stryke/type-checks/is-string";
 import { isURL } from "@stryke/type-checks/is-url";
-import type { Storage } from "unstorage";
-import { createStorage } from "unstorage";
-import fsLite from "unstorage/drivers/fs-lite";
 import packageJson from "../package.json" with { type: "json" };
-
-export interface Options {
-  inputStorage?: Storage;
-  inputPath: LoadReference;
-}
+import { input } from "./input";
+import type { Options } from "./types";
 
 export default defineInput<any, Options>({
   meta: {
@@ -92,39 +83,5 @@ export default defineInput<any, Options>({
       }
     ]
   },
-  input: async (options: Options) => {
-    const { inputPath, ...rest } = options;
-    const { storage } = useContext();
-
-    const inputStorage = (
-      options as {
-        inputStorage?: Storage;
-      }
-    ).inputStorage
-      ? (
-          options as {
-            inputStorage: Storage;
-          }
-        ).inputStorage
-      : (
-            options as {
-              inputPath?: string;
-            }
-          ).inputPath
-        ? createStorage({
-            driver: fsLite({
-              base: (
-                options as {
-                  inputPath: string;
-                }
-              ).inputPath
-            })
-          })
-        : storage;
-
-    return load(inputPath, {
-      ...rest,
-      fs: mapStorageToFileSystem(inputStorage)
-    });
-  }
+  input
 });

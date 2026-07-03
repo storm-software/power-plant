@@ -59,6 +59,20 @@
         "default": "./dist/index.mjs"
       }
     },
+    "./codegen": {
+      "require": {
+        "types": "./dist/codegen.d.cts",
+        "default": "./dist/codegen.cjs"
+      },
+      "import": {
+        "types": "./dist/codegen.d.mts",
+        "default": "./dist/codegen.mjs"
+      },
+      "default": {
+        "types": "./dist/codegen.d.mts",
+        "default": "./dist/codegen.mjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
@@ -69,6 +83,8 @@
     "dist"
   ],
   "dependencies": {
+    "@graphql-tools/load": "catalog:",
+    "@graphql-tools/utils": "catalog:",
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",
     "graphql": "catalog:",

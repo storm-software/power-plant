@@ -23,6 +23,13 @@ import type {
 } from "./definition";
 
 export {
+  defaultDocumentsLoadOptions,
+  defaultSchemaLoadOptions,
+  getSchemaSources,
+  schemaToCodegenDocument
+} from "./codegen";
+export type { GraphQLSourceDocument, Source } from "./codegen";
+export {
   graphqlSchemaConfigSchema,
   graphqlSchemaNormalizedConfigSchema
 } from "./definition";

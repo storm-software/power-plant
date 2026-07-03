@@ -27,10 +27,11 @@ export type GraphQLSchemaDocument = z.infer<typeof graphqlSchema>;
 
 export default defineSchema<GraphQLSchemaDocument, any>({
   meta: {
-    name: "graphql",
-    title: "GraphQL",
+    name: "graphql-schema",
+    title: "GraphQL Schema",
     version: packageJson.version,
-    description: "A GraphQL schema document used to describe a GraphQL API.",
+    description:
+      "A GraphQL schema document used to describe a GraphQL API. This schema is compatible with the GraphQL specification and can be used to validate and generate code from the schema. Some examples of tools that can be used to generate client and/or server libraries, documentation, and other tools are: GraphQL Code Generator, GraphQL Yoga, Apollo Server, and many more.",
     spec: (spec: GraphQLSchemaDocument) => {
       if (spec.description) {
         return spec.description;

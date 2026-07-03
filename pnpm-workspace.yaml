@@ -89,7 +89,6 @@ catalog:
   unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.2
-  "@power-plant/graphql-input": workspace:*
   verdaccio: 6.0.5
   vite: ^8.1.3
   vitest: ~4.1.9
@@ -100,6 +99,7 @@ overrides:
   "@power-plant/core": workspace:*
   "@power-plant/bindings": workspace:*
   "@power-plant/unstorage-input": workspace:*
+  "@power-plant/graphql-input": workspace:*
   "@power-plant/unstorage-output": workspace:*
   "@power-plant/openapi-schema": workspace:*
   "@power-plant/graphql-schema": workspace:*

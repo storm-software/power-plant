@@ -5,3 +5,4 @@ ohos
 wasip
 emnapi
 sccache
+lbug
