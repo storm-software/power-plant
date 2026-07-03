@@ -72,7 +72,7 @@ jobs:
           - host: macos-latest
             target: x86_64-apple-darwin
             build-flags: ""
-            profile: release-native-darwin
+            profile: release-native-darwin-x86_64
           - host: macos-latest
             target: aarch64-apple-darwin
             build-flags: ""
@@ -88,15 +88,15 @@ jobs:
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             build-flags: --use-napi-cross
-            profile: release-native
+            profile: release-native-linux-gnueabihf-armv7
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
             build-flags: -x
-            profile: release-native-musl
+            profile: release-native-linux-musl-x86_64
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             build-flags: -x
-            profile: release-native-musl
+            profile: release-native-linux-musl-aarch64
           - host: ubuntu-latest
             target: aarch64-linux-android
             build-flags: ""
@@ -116,7 +116,7 @@ jobs:
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-native
+            profile: release-native-linux-powerpc64le
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -255,7 +255,7 @@ jobs:
           environment_variables: DEBUG RUSTUP_IO_THREADS
           shell: bash
           run: |
-            sudo pkg install -y -f curl node libnghttp2 npm
+            sudo pkg install -y -f curl node libnghttp2 npm cmake
             sudo npm install -g corepack
             curl https://sh.rustup.rs -sSf --output rustup.sh
             sh rustup.sh -y --profile minimal --default-toolchain stable
