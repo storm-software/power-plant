@@ -654,7 +654,7 @@ importers:
         version: 2.7.0
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       signal-exit:
         specifier: 'catalog:'
         version: 4.1.0
@@ -670,10 +670,10 @@ importers:
         version: 3.7.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.4)(node-addon-api@7.1.1)
       '@powerlines/plugin-napi-rs':
         specifier: 'catalog:'
-        version: 0.2.192(8a7ca1c862e068dd37246598b458031d)
+        version: 0.2.192(c47338a3ec793bc502172d7a98e5b616)
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
@@ -704,7 +704,7 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
@@ -777,13 +777,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       valibot:
         specifier: 'catalog:'
         version: 1.4.2(typescript@6.0.3)
@@ -817,13 +817,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
 
   packages/inputs/unstorage-input:
     dependencies:
@@ -848,13 +848,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
 
   packages/outputs/unstorage-output:
     dependencies:
@@ -882,13 +882,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
 
   packages/schemas/graphql-schema:
     dependencies:
@@ -907,13 +907,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
 
   packages/schemas/openapi-schema:
     dependencies:
@@ -929,13 +929,13 @@ importers:
     devDependencies:
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
-        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
       powerlines:
         specifier: 'catalog:'
-        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+        version: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
 
   tools/config:
     dependencies:
@@ -4044,8 +4044,8 @@ packages:
   '@oxc-project/types@0.126.0':
     resolution: {integrity: sha512-oGfVtjAgwQVVpfBrbtk4e1XDyWHRFta6BS3GWVzrF8xYBT2VGQAk39yJS/wFSMrZqoiCU4oghT3Ch0HaHGIHcQ==}
 
-  '@oxc-project/types@0.137.0':
-    resolution: {integrity: sha512-WT+Gb24i8hmvo85AIv2oEYouEXkRlKAlT9WaCa3TfLgNCN+GhrJOGZuIlMouAh38Qe4QOx26eUOVsq70qXrywA==}
+  '@oxc-project/types@0.138.0':
+    resolution: {integrity: sha512-1a7ZKmrRTCoN1XMZ4L0PyyqrMnrNlLyPuOkdSX2MZg7IiIGRUyurNhAm73ptDOraoBcIordsIGKNPKUzy3ZmfA==}
 
   '@oxc-project/types@0.99.0':
     resolution: {integrity: sha512-LLDEhXB7g1m5J+woRSgfKsFPS3LhR9xRhTeIoEBm5WrkwMxn6eZ0Ld0c0K5eHB57ChZX6I3uSmmLjZ8pcjlRcw==}
@@ -4400,97 +4400,97 @@ packages:
   '@quansync/fs@1.0.0':
     resolution: {integrity: sha512-4TJ3DFtlf1L5LDMaM6CanJ/0lckGNtJcMjQ1NAV6zDmA0tEHKZtxNKin8EgPaVX1YzljbxckyT2tJrpQKAtngQ==}
 
-  '@rolldown/binding-android-arm64@1.1.3':
-    resolution: {integrity: sha512-DT6Z3PhvioeHMvxo+xHc3KtqggrI7CCTXCmC2h/5zUlp5jVitv7XEy+9q5/7v8IolhlioawpMo8Kg0EEBy7J0g==}
+  '@rolldown/binding-android-arm64@1.1.4':
+    resolution: {integrity: sha512-EZLpf/8y7GXkkra90ML47kzik/GMP3EMcE9bPyHmRfxLC6z9+aW5A8poCsoxjrT5GfEcNAAvWwUHjvP1pUQkfw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [android]
 
-  '@rolldown/binding-darwin-arm64@1.1.3':
-    resolution: {integrity: sha512-0NwgwsjM7LrsuVnXMK3koTpagBNOhloc/BNjKqZjv4V5zI5r13qx69uVhRx+o5Z0yy4Hzq+lpy7TAgUG/ocvrw==}
+  '@rolldown/binding-darwin-arm64@1.1.4':
+    resolution: {integrity: sha512-aUi+HBvmYb7j8krl1+qJgkG8C17fO79gk3c+jPw4S8glRFc1DTija9S3EyaTSQUm5GJXYKDAsugBEhFHH2vYiQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
 
-  '@rolldown/binding-darwin-x64@1.1.3':
-    resolution: {integrity: sha512-YtiBp4disu6V560loT6PjMdiRaWmVvDNrUunAalbiFx2ggeJwxdAsgZMcoGP17uyAsTwAj5V1niksxlHnVQ1Sw==}
+  '@rolldown/binding-darwin-x64@1.1.4':
+    resolution: {integrity: sha512-F7hHC3gwY11+vByKPRWqwGbeXWVgKmL+pTGCinaEhdihzBV2aQ0fvZOch9cXYUOKuKKq429HeYXOqQLc7wFCEg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [darwin]
 
-  '@rolldown/binding-freebsd-x64@1.1.3':
-    resolution: {integrity: sha512-yD3EkEdXk2LypPxnf/kSZHirarsI8gcPzc62SukhR9VJTyvV+F9Q/GxWNuCojc7sXyuVC4DxRGhdDK4X8VSsbw==}
+  '@rolldown/binding-freebsd-x64@1.1.4':
+    resolution: {integrity: sha512-sI5yw+7s92SK6odiEhD5lKCBlWcpjHS5qyqpVQbZAJ0fIzEUXrmbl3DH2ybR3PZogulNJF+COLtmA8hUfvkCCQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
 
-  '@rolldown/binding-linux-arm-gnueabihf@1.1.3':
-    resolution: {integrity: sha512-c+8vieQbsD7HNAHKIA34w0GJ9FedFFuJGD+7E6vz7Q3uqAIugL5p45fhlsj4UaAsHpcmlqugBWMhA0/j7o0sIg==}
+  '@rolldown/binding-linux-arm-gnueabihf@1.1.4':
+    resolution: {integrity: sha512-mCi0OKgEieFircrtVYmQAFGszRtMnZ6fpZAXrxanXAu7lqZcsK1E1RAaZNG0uKAnxox3B1f4EyQNnoyMfN1vAA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
 
-  '@rolldown/binding-linux-arm64-gnu@1.1.3':
-    resolution: {integrity: sha512-50jD0uUwLvur7Zz9LHz17kaAdTPjn5wN93hEgjvmYFRZwiR7ZJYovTd5ipyWJDAnXKvZ+wgc+/Ika6dwSF5OcA==}
+  '@rolldown/binding-linux-arm64-gnu@1.1.4':
+    resolution: {integrity: sha512-B9Ial3Kv5sh0SHnB1g/QWcUQCEvCF6QKGAl4zXypYj65mVI+B4AhFBwPtSN7pDrJeIx8Z7zdy4ntx+wQABom7w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-arm64-musl@1.1.3':
-    resolution: {integrity: sha512-BO9+oPL8K9poZJBfYPsXNtYjPE5uM3qeehT3aFcW4LITOl+iSqhp0abzjR2nWBUNjIZeKXjAEWBZ64WjNoHd6w==}
+  '@rolldown/binding-linux-arm64-musl@1.1.4':
+    resolution: {integrity: sha512-lZVym0PuHE1KZ22gmFTC15lAkrg9iTszR617oYRB/iPY1A56ywoJzVKOJBKaot5RiikCObmur6pogpse3gRcng==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@rolldown/binding-linux-ppc64-gnu@1.1.3':
-    resolution: {integrity: sha512-f3VpLB1vQ0Eo6ecr/6cekLnvYMFF4YBFoVGkfkvPLq1bAkbAwHYQPZKoAmG6OJyTcxxoC+AvezGx/S1obNC0Mw==}
+  '@rolldown/binding-linux-ppc64-gnu@1.1.4':
+    resolution: {integrity: sha512-t2DNiLJWNTbnEHyUzTumldML6ET4/g16467LZoDDJ3tSxGvguL5/NyC2lCsNKuyRycg9XeDQF5SSv+TNOhQEXg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-s390x-gnu@1.1.3':
-    resolution: {integrity: sha512-AmurZ26Pqx/RI9N1gzEOCklkKXl927yjfXWUUS0O7Puh8ARM/Ob8qfrD3qnWksScdw6cSrW5PSHE9DyLu7+PtA==}
+  '@rolldown/binding-linux-s390x-gnu@1.1.4':
+    resolution: {integrity: sha512-0WIRnL1Uw4BvTZRLQt+PVgo6ZKTJadlC2btP+/EOXv2f/DWbY0rEgl+y834mIVwP1FkTlWVTrGGJXf12lru7EQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-x64-gnu@1.1.3':
-    resolution: {integrity: sha512-JJpqs8bRGITDOdbkNKnlojzBabbOHrqjSvDr0IVsZObE1lBcPjxItUEY9eWIDbxaJ3cGrXPWGfGkIxFijg/URg==}
+  '@rolldown/binding-linux-x64-gnu@1.1.4':
+    resolution: {integrity: sha512-JWtGshGfX+oENAKonoNkqEJX+7hC8yfhi9GUyPX1VX4mdh1y5r+ZiJLR5XzAB0aoP6s/PcILsGjKq8O0mm24bw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-x64-musl@1.1.3':
-    resolution: {integrity: sha512-rSJcdjPxzA/by/6/rYs+v+bXU7UjvnbUWz8MJb6kh6+knqB1dCrtHg0uu7C/4haqJvqdkYHQ5IGn+tCH9GLW/g==}
+  '@rolldown/binding-linux-x64-musl@1.1.4':
+    resolution: {integrity: sha512-rT6yQcxUuXs4CnbofqwHRRV0iem349rLMYpTjkgQGLjrY4ado/eDzwPZPTCgTOlF6Nkp8NEv70yLMTn6qkWxsQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@rolldown/binding-openharmony-arm64@1.1.3':
-    resolution: {integrity: sha512-hQ3/PYkDJICgevvyNcVrihVeqq7k1Pp3VZ9lY+dauAYUJKO+auqApvANhvR1An9BhmqYKvW2Mu1F9u4DXSMLxQ==}
+  '@rolldown/binding-openharmony-arm64@1.1.4':
+    resolution: {integrity: sha512-KXMGoboq5cyaCQjDA4GLuRiOwBQ0EyFnJoVViLeZ45/3rFItRODEr+NdsBcVpll40hhNArlm/speWGRvj08LzA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
 
-  '@rolldown/binding-wasm32-wasi@1.1.3':
-    resolution: {integrity: sha512-Elcv/BtML9lXrV6JuKITc/grN2kYV9gjsQpW8Jfw4ioK0TOkjBjye0nnyqQNy9STNaI20lXNaQBRrD5gSgR0Yg==}
+  '@rolldown/binding-wasm32-wasi@1.1.4':
+    resolution: {integrity: sha512-5K83rb36oJiY7BCyE9zLZtGcPV4g5wvq+xwdO0XPIwDVZI8cyB/AUjkNXGb92/rnmezEkjMOpgY61rtwjQtFwg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [wasm32]
 
-  '@rolldown/binding-win32-arm64-msvc@1.1.3':
-    resolution: {integrity: sha512-2DrEfhluH9yhiaFApmsjsjwrSYbNcY1oFTzYSP1a535jDbV98zCFanA/96TBUd0iDFcxGmw9QRExwGCXz3U+/g==}
+  '@rolldown/binding-win32-arm64-msvc@1.1.4':
+    resolution: {integrity: sha512-PnWBtw3TV5KOg69HQQDR0mnQuyCmSGR2pAB4DC1rPF808fgKeTUMj2EOEyKATpgiuxuR5APQmiDO7PDgEjTFSA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [win32]
 
-  '@rolldown/binding-win32-x64-msvc@1.1.3':
-    resolution: {integrity: sha512-OL4OMk7UPXOeVGGd3qo5zJyPIljf4AFgk5QAkPPS+OoLuOOozhuaQGC18MxVTnw/06q93gShAJzlwnSCY9YtqA==}
+  '@rolldown/binding-win32-x64-msvc@1.1.4':
+    resolution: {integrity: sha512-M1lpniBePobTfsa7Ks9a199e1akxsXn+GYBUKsEzv3YFzOm1HJAMNwKI3qr0Zq+mxwx9gOZoTdP1yXRYsZUocQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
@@ -5201,8 +5201,8 @@ packages:
   '@types/node@25.9.4':
     resolution: {integrity: sha512-dszCsrKb5U7ZsVZBWiHFklTloVl0mSEnWH/iZXfZUlI4rzCUnsvGmgqfuVRHL54ugE7/wRuxEIXRa2iMZ+BG6g==}
 
-  '@types/node@26.0.1':
-    resolution: {integrity: sha512-fc3KiUoBt6kie0N9bIW3E47vZsuaMf0PM2AaUpLCLT0s/LvX1nxAim6Fc049cNxODPpGm6qRAuUOB86SkRuPQw==}
+  '@types/node@26.1.0':
+    resolution: {integrity: sha512-O0A1G3xPGy4w7AgQdAQYUlQ+BKk2Oovw8eRpofyp5KdBZULnbe+WqaOVNrm705SHphCiG4XHsACrSmPu1f+Kgw==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -7048,8 +7048,8 @@ packages:
     engines: {node: '>=0.12.18'}
     hasBin: true
 
-  electron-to-chromium@1.5.383:
-    resolution: {integrity: sha512-I2484/KkAvl8lm9VyjH2JnbOIV0d/UCqT7gbzs6l+o6Vmn9wgB66uVcKX+Vk6HrXtY6fbWTOEXuv8waDTuFNCw==}
+  electron-to-chromium@1.5.384:
+    resolution: {integrity: sha512-g6KAKY1vkYsADvSPWvdJsuYT0ixdcu6lUtD9P/wJKGBEDlZVXh2AX42j1mPqqaQPDluWjara9ziQ7xqAeXCt5A==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -7150,8 +7150,8 @@ packages:
     resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
     engines: {node: '>= 0.4'}
 
-  es-module-lexer@2.2.0:
-    resolution: {integrity: sha512-3lGxdTXCLfe1MYfTz1y2ksAAUM4NAOP6rPEjxGJVKO7TZ5+tvHCaQWGpC4Y3IXvW3ece0Cz1cIP4FWBxOnGCTQ==}
+  es-module-lexer@2.3.0:
+    resolution: {integrity: sha512-KLdwQm2NvGLDkQDCGvmiQrhkd0JbMzXthwQAUgWjQuQdBLFa3eiBP5arXZyA+f8x+x7OXgud6bq2rxjGtHV2tw==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -9046,8 +9046,8 @@ packages:
     resolution: {integrity: sha512-wM1+Z03eypVAVUCE7QdSqpVIvelbOakn1M0bPDoA4SGWPx3sNDVUiMo3L6To6WWGClB7VyXnhQ4Sn7gxiJbE6A==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  linkify-it@5.0.1:
-    resolution: {integrity: sha512-wVoTjP4Q6R0NW5hiZkVJaFZPWgtXfoGF+6LucL3/FtiNjmcHhYjEr5f1Kqjirc1nBW07J/ZuRFumqr2oqccEWg==}
+  linkify-it@5.0.2:
+    resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
 
   list-item@1.1.1:
     resolution: {integrity: sha512-S3D0WZ4J6hyM8o5SNKWaMYB1ALSacPZ2nHGEuCjmHZ+dc03gFeNZoNDcqfcnO4vDhTZmNrqrpYZCdXsRh22bzw==}
@@ -9203,8 +9203,8 @@ packages:
   markdown-it-source-map@0.1.1:
     resolution: {integrity: sha512-q4+ij82K/0C6O8rw/NnWogcgp3AeQykZZ5954yyxY8pcX8Rago8uAS7e+4Ogd6rERf/tDAen73KwT+Sb7dP/6w==}
 
-  markdown-it@14.2.0:
-    resolution: {integrity: sha512-1TGiQiJVRQ3NPmZH6sx5Cfnmg6GQm9jvC1ch4TK511NjSJvjzKLzn5pPfZRNZkRPZP0HqCioSndqH8v2nRaWVQ==}
+  markdown-it@14.3.0:
+    resolution: {integrity: sha512-RCEsPjR+sr0x+AuYp601tKTkgFG4YEPLCzHST3cQ/fhlJkqAkz1L2/Qbp1j9qw5SBwQHFBoW8+hoN5xssOF0Tw==}
     hasBin: true
 
   markdown-link@0.1.1:
@@ -10561,8 +10561,8 @@ packages:
       vue-tsc:
         optional: true
 
-  rolldown@1.1.3:
-    resolution: {integrity: sha512-1F1eEtUBtFvcGm1HQ9TiUIUHPQG7mSAODrhIzjxoUEFuo8OcbrGLiVLkevNgj84TE4lnHvnumwFjhJO5Eu135g==}
+  rolldown@1.1.4:
+    resolution: {integrity: sha512-IjZYiLxZwpnhwhdBH2ugdTGVSdhCQUmLxLoqyjiL0JxYjyRst+5a0P3xfrTxJ5F638j4Mvvw5FAX5XE6eHpXbA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -14125,7 +14125,7 @@ snapshots:
   '@jest/console@30.0.5':
     dependencies:
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       jest-message-util: 30.0.5
       jest-util: 30.0.5
@@ -14134,7 +14134,7 @@ snapshots:
   '@jest/console@30.4.1':
     dependencies:
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       jest-message-util: 30.4.1
       jest-util: 30.4.1
@@ -14148,14 +14148,14 @@ snapshots:
       '@jest/test-result': 30.0.5
       '@jest/transform': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 4.4.0
       exit-x: 0.2.2
       graceful-fs: 4.2.11
       jest-changed-files: 30.0.5
-      jest-config: 30.0.5(@types/node@26.0.1)(babel-plugin-macros@3.1.0)
+      jest-config: 30.0.5(@types/node@26.1.0)(babel-plugin-macros@3.1.0)
       jest-haste-map: 30.0.5
       jest-message-util: 30.0.5
       jest-regex-util: 30.0.1
@@ -14184,14 +14184,14 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-mock: 30.0.5
 
   '@jest/environment@30.4.1':
     dependencies:
       '@jest/fake-timers': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-mock: 30.4.1
 
   '@jest/expect-utils@30.0.5':
@@ -14220,7 +14220,7 @@ snapshots:
     dependencies:
       '@jest/types': 30.0.5
       '@sinonjs/fake-timers': 13.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-message-util: 30.0.5
       jest-mock: 30.0.5
       jest-util: 30.0.5
@@ -14229,7 +14229,7 @@ snapshots:
     dependencies:
       '@jest/types': 30.4.1
       '@sinonjs/fake-timers': 15.4.0
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-message-util: 30.4.1
       jest-mock: 30.4.1
       jest-util: 30.4.1
@@ -14258,12 +14258,12 @@ snapshots:
 
   '@jest/pattern@30.0.1':
     dependencies:
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-regex-util: 30.0.1
 
   '@jest/pattern@30.4.0':
     dependencies:
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-regex-util: 30.4.0
 
   '@jest/reporters@30.0.5':
@@ -14274,7 +14274,7 @@ snapshots:
       '@jest/transform': 30.0.5
       '@jest/types': 30.0.5
       '@jridgewell/trace-mapping': 0.3.31
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       collect-v8-coverage: 1.0.3
       exit-x: 0.2.2
@@ -14302,7 +14302,7 @@ snapshots:
       '@jest/transform': 30.4.1
       '@jest/types': 30.4.1
       '@jridgewell/trace-mapping': 0.3.31
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       collect-v8-coverage: 1.0.3
       exit-x: 0.2.2
@@ -14423,7 +14423,7 @@ snapshots:
       '@jest/schemas': 30.0.5
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
@@ -14433,7 +14433,7 @@ snapshots:
       '@jest/schemas': 30.4.1
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
@@ -14505,7 +14505,7 @@ snapshots:
       joi: 17.13.4
       launch-editor: 2.14.1
       lodash: 4.18.1
-      markdown-it: 14.2.0
+      markdown-it: 14.3.0
       markdown-it-source-map: 0.1.1
       moment: 2.30.1
       moment-timezone: 0.5.48
@@ -15485,7 +15485,7 @@ snapshots:
 
   '@oxc-project/types@0.126.0': {}
 
-  '@oxc-project/types@0.137.0': {}
+  '@oxc-project/types@0.138.0': {}
 
   '@oxc-project/types@0.99.0': {}
 
@@ -15623,7 +15623,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@powerlines/core@0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/core@0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@cacheable/memory': 2.2.0
       '@donedeal0/superdiff': 3.2.0
@@ -15650,7 +15650,7 @@ snapshots:
       compatx: 0.2.0
       date-fns: 4.4.0
       defu: 6.1.7
-      devframe: 0.1.22(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      devframe: 0.1.22(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       diff-match-patch: 1.0.5
       flat-cache: 6.1.23
       jiti: 2.7.0
@@ -15662,8 +15662,8 @@ snapshots:
       prettier: 3.9.4
       ts-morph: 27.0.2
       undici: 7.28.0
-      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
-      unplugin-combine: 2.4.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin-combine: 2.4.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -15694,7 +15694,7 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/core@0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/core@0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@cacheable/memory': 2.2.0
       '@donedeal0/superdiff': 3.2.0
@@ -15721,7 +15721,7 @@ snapshots:
       compatx: 0.2.0
       date-fns: 4.4.0
       defu: 6.1.7
-      devframe: 0.1.22(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      devframe: 0.1.22(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       diff-match-patch: 1.0.5
       flat-cache: 6.1.23
       jiti: 2.7.0
@@ -15733,8 +15733,8 @@ snapshots:
       prettier: 3.9.4
       ts-morph: 27.0.2
       undici: 7.28.0
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
-      unplugin-combine: 2.4.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin-combine: 2.4.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -15765,9 +15765,9 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/deepkit@0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/deepkit@0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/capnp': 0.12.121(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(typescript@6.0.3)(zod@4.4.3)
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
@@ -15781,7 +15781,7 @@ snapshots:
       typescript: 6.0.3
     optionalDependencies:
       esbuild: 0.27.7
-      rolldown: 1.1.3
+      rolldown: 1.1.4
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -15809,9 +15809,9 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/deepkit@0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/deepkit@0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/capnp': 0.12.121(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(typescript@6.0.3)(zod@4.4.3)
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
@@ -15825,7 +15825,7 @@ snapshots:
       typescript: 6.0.3
     optionalDependencies:
       esbuild: 0.28.1
-      rolldown: 1.1.3
+      rolldown: 1.1.4
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -15853,9 +15853,9 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/engine@0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/engine@0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config': 1.138.19(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/async': 0.1.22
@@ -15872,7 +15872,7 @@ snapshots:
       '@stryke/url': 0.4.45(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       birpc: 4.0.0
       defu: 6.1.7
-      devframe: 0.1.22(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      devframe: 0.1.22(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       get-port-please: 3.2.0
       h3: 1.15.11
       handlebars: 4.7.9
@@ -15883,7 +15883,7 @@ snapshots:
       tinypool: 2.1.0
       ua-parser-modern: 0.1.1
       unimport: 5.7.0
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -15990,7 +15990,7 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-alloy@0.26.232(38ab44d4b634a8a446a70f740cdbe0eb)':
+  '@powerlines/plugin-alloy@0.26.232(8d7292d0e46193d89338c2b3497b248d)':
     dependencies:
       '@alloy-js/babel-preset': 0.3.0(@babel/core@8.0.0-rc.6)
       '@alloy-js/core': 0.23.1
@@ -15998,9 +15998,9 @@ snapshots:
       '@alloy-js/markdown': 0.23.0
       '@alloy-js/typescript': 0.23.0
       '@babel/preset-typescript': 8.0.0-rc.6(@babel/core@8.0.0-rc.6)
-      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/plugin-babel': 0.13.135(4b3fd7a93b6100559812ea64ef4ae9e4)
-      '@powerlines/schema': 0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/plugin-babel': 0.13.135(eed2f9df25be2ab87a7bd532a0e257fa)
+      '@powerlines/schema': 0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/capnp': 0.12.121(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(typescript@6.0.3)(zod@4.4.3)
       '@stryke/convert': 0.7.25
@@ -16013,7 +16013,7 @@ snapshots:
       '@stryke/types': 0.12.22
       '@stryke/unique-id': 0.3.106(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       defu: 6.1.7
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       prettier: 3.9.4
       unctx: 2.5.0
     transitivePeerDependencies:
@@ -16063,9 +16063,9 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-automd@0.1.600(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/plugin-automd@0.1.600(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@stryke/convert': 0.7.25
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       '@stryke/path': 0.29.21(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))
@@ -16074,7 +16074,7 @@ snapshots:
       c12: 3.3.4
       defu: 6.1.7
       markdown-toc: 1.2.0
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -16118,7 +16118,7 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-babel@0.13.135(4b3fd7a93b6100559812ea64ef4ae9e4)':
+  '@powerlines/plugin-babel@0.13.135(eed2f9df25be2ab87a7bd532a0e257fa)':
     dependencies:
       '@babel/core': 8.0.0-rc.6
       '@babel/generator': 8.0.0-rc.6
@@ -16126,7 +16126,7 @@ snapshots:
       '@babel/parser': 8.0.0-rc.6
       '@babel/plugin-transform-json-modules': 8.0.0-rc.6(@babel/core@8.0.0-rc.6)
       '@babel/types': 8.0.0-rc.6
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       '@stryke/path': 0.29.21(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))
@@ -16135,7 +16135,7 @@ snapshots:
       chalk: 5.6.2
       defu: 6.1.7
       jiti: 2.7.0
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
     optionalDependencies:
       '@babel/plugin-syntax-typescript': 8.0.3(@babel/core@8.0.0-rc.6)
     transitivePeerDependencies:
@@ -16181,16 +16181,16 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-napi-rs@0.2.192(8a7ca1c862e068dd37246598b458031d)':
+  '@powerlines/plugin-napi-rs@0.2.192(c47338a3ec793bc502172d7a98e5b616)':
     dependencies:
       '@alloy-js/core': 0.23.1
       '@alloy-js/json': 0.23.0
       '@alloy-js/markdown': 0.23.0
       '@alloy-js/typescript': 0.23.0
       '@napi-rs/cli': 3.7.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.4)(node-addon-api@7.1.1)
-      '@powerlines/plugin-alloy': 0.26.232(38ab44d4b634a8a446a70f740cdbe0eb)
-      '@powerlines/plugin-automd': 0.1.600(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/plugin-plugin': 0.12.551(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/plugin-alloy': 0.26.232(8d7292d0e46193d89338c2b3497b248d)
+      '@powerlines/plugin-automd': 0.1.600(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/plugin-plugin': 0.12.551(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@stryke/convert': 0.7.25
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       '@stryke/path': 0.29.21(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))
@@ -16199,7 +16199,7 @@ snapshots:
       '@stryke/types': 0.12.22
       automd: 0.4.3
       defu: 6.1.7
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
     optionalDependencies:
       '@napi-rs/wasm-runtime': 1.1.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)
     transitivePeerDependencies:
@@ -16264,12 +16264,12 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-plugin@0.12.551(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/plugin-plugin@0.12.551(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/plugin-tsdown': 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/plugin-tsdown': 0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@stryke/path': 0.29.21(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))
       '@stryke/types': 0.12.22
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
       - '@emnapi/core'
@@ -16315,16 +16315,16 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/plugin-tsdown@0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/plugin-tsdown@0.1.540(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@stryke/convert': 0.7.25
       '@stryke/helpers': 0.10.34
       defu: 6.1.7
-      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      powerlines: 0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       tsdown: 0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3)
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -16367,12 +16367,12 @@ snapshots:
       - webpack
       - zod
 
-  '@powerlines/schema@0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/schema@0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@msgpack/msgpack': 3.1.3
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@standard-schema/spec': 1.1.0
       '@stryke/convert': 0.7.25
       '@stryke/hash': 0.13.48(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
@@ -16437,9 +16437,9 @@ snapshots:
   '@powerlines/schema@0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@msgpack/msgpack': 3.1.3
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/deepkit': 0.9.92(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@standard-schema/spec': 1.1.0
       '@stryke/convert': 0.7.25
       '@stryke/hash': 0.13.48(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
@@ -16508,10 +16508,10 @@ snapshots:
     dependencies:
       '@storm-software/tsdoc': 0.13.221(@microsoft/api-extractor@7.58.9(@types/node@25.9.4))(@microsoft/tsdoc-config@0.18.1)(@microsoft/tsdoc@0.16.0)
 
-  '@powerlines/unplugin@0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/unplugin@0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@farmfe/cli': 1.0.5
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.27.7)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@rollup/plugin-alias': 6.0.0(rollup@4.62.2)
       '@rollup/plugin-inject': 5.0.5(rollup@4.62.2)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.62.2)
@@ -16528,11 +16528,11 @@ snapshots:
       defu: 6.1.7
       glob: 13.0.6
       jiti: 2.7.0
-      rolldown-plugin-dts: 0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.3)(typescript@6.0.3)
+      rolldown-plugin-dts: 0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.4)(typescript@6.0.3)
       rollup-plugin-typescript2: 0.36.0(rollup@4.62.2)(typescript@6.0.3)
     optionalDependencies:
       esbuild: 0.27.7
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
       tsdown: 0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3)
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
@@ -16563,10 +16563,10 @@ snapshots:
       - vue-tsc
       - zod
 
-  '@powerlines/unplugin@0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
+  '@powerlines/unplugin@0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)':
     dependencies:
       '@farmfe/cli': 1.0.5
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@rollup/plugin-alias': 6.0.0(rollup@4.62.2)
       '@rollup/plugin-inject': 5.0.5(rollup@4.62.2)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.62.2)
@@ -16583,11 +16583,11 @@ snapshots:
       defu: 6.1.7
       glob: 13.0.6
       jiti: 2.7.0
-      rolldown-plugin-dts: 0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.3)(typescript@6.0.3)
+      rolldown-plugin-dts: 0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.4)(typescript@6.0.3)
       rollup-plugin-typescript2: 0.36.0(rollup@4.62.2)(typescript@6.0.3)
     optionalDependencies:
       esbuild: 0.28.1
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
       tsdown: 0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3)
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
@@ -16627,53 +16627,53 @@ snapshots:
     dependencies:
       quansync: 1.0.0
 
-  '@rolldown/binding-android-arm64@1.1.3':
+  '@rolldown/binding-android-arm64@1.1.4':
     optional: true
 
-  '@rolldown/binding-darwin-arm64@1.1.3':
+  '@rolldown/binding-darwin-arm64@1.1.4':
     optional: true
 
-  '@rolldown/binding-darwin-x64@1.1.3':
+  '@rolldown/binding-darwin-x64@1.1.4':
     optional: true
 
-  '@rolldown/binding-freebsd-x64@1.1.3':
+  '@rolldown/binding-freebsd-x64@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-arm-gnueabihf@1.1.3':
+  '@rolldown/binding-linux-arm-gnueabihf@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-arm64-gnu@1.1.3':
+  '@rolldown/binding-linux-arm64-gnu@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-arm64-musl@1.1.3':
+  '@rolldown/binding-linux-arm64-musl@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-ppc64-gnu@1.1.3':
+  '@rolldown/binding-linux-ppc64-gnu@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-s390x-gnu@1.1.3':
+  '@rolldown/binding-linux-s390x-gnu@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-x64-gnu@1.1.3':
+  '@rolldown/binding-linux-x64-gnu@1.1.4':
     optional: true
 
-  '@rolldown/binding-linux-x64-musl@1.1.3':
+  '@rolldown/binding-linux-x64-musl@1.1.4':
     optional: true
 
-  '@rolldown/binding-openharmony-arm64@1.1.3':
+  '@rolldown/binding-openharmony-arm64@1.1.4':
     optional: true
 
-  '@rolldown/binding-wasm32-wasi@1.1.3':
+  '@rolldown/binding-wasm32-wasi@1.1.4':
     dependencies:
       '@emnapi/core': 1.11.1
       '@emnapi/runtime': 1.11.1
       '@napi-rs/wasm-runtime': 1.1.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)
     optional: true
 
-  '@rolldown/binding-win32-arm64-msvc@1.1.3':
+  '@rolldown/binding-win32-arm64-msvc@1.1.4':
     optional: true
 
-  '@rolldown/binding-win32-x64-msvc@1.1.3':
+  '@rolldown/binding-win32-x64-msvc@1.1.4':
     optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
@@ -17558,7 +17558,7 @@ snapshots:
     dependencies:
       undici-types: 7.24.6
 
-  '@types/node@26.0.1':
+  '@types/node@26.1.0':
     dependencies:
       undici-types: 8.3.0
 
@@ -18645,7 +18645,7 @@ snapshots:
     dependencies:
       caniuse-lite: 1.0.30001800
       colorette: 1.4.0
-      electron-to-chromium: 1.5.383
+      electron-to-chromium: 1.5.384
       escalade: 3.2.0
       node-releases: 1.1.77
 
@@ -18653,7 +18653,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.10.40
       caniuse-lite: 1.0.30001800
-      electron-to-chromium: 1.5.383
+      electron-to-chromium: 1.5.384
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
@@ -19497,13 +19497,13 @@ snapshots:
 
   devalue@5.8.1: {}
 
-  devframe@0.1.22(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  devframe@0.1.22(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@valibot/to-json-schema': 1.7.1(valibot@1.4.2(typescript@6.0.3))
       birpc: 4.0.0
       cac: 7.0.0
       h3: 1.15.11
-      logs-sdk: 0.0.6(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      logs-sdk: 0.0.6(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       mrmime: 2.0.1
       pathe: 2.0.3
       valibot: 1.4.2(typescript@6.0.3)
@@ -19522,13 +19522,13 @@ snapshots:
       - vite
       - webpack
 
-  devframe@0.1.22(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  devframe@0.1.22(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@valibot/to-json-schema': 1.7.1(valibot@1.4.2(typescript@6.0.3))
       birpc: 4.0.0
       cac: 7.0.0
       h3: 1.15.11
-      logs-sdk: 0.0.6(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      logs-sdk: 0.0.6(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       mrmime: 2.0.1
       pathe: 2.0.3
       valibot: 1.4.2(typescript@6.0.3)
@@ -19676,7 +19676,7 @@ snapshots:
 
   ejs@5.0.1: {}
 
-  electron-to-chromium@1.5.383: {}
+  electron-to-chromium@1.5.384: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -19844,7 +19844,7 @@ snapshots:
 
   es-errors@1.3.0: {}
 
-  es-module-lexer@2.2.0: {}
+  es-module-lexer@2.3.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -21423,7 +21423,7 @@ snapshots:
       '@jest/expect': 30.0.5
       '@jest/test-result': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.7.2(babel-plugin-macros@3.1.0)
@@ -21449,7 +21449,7 @@ snapshots:
       '@jest/expect': 30.4.1
       '@jest/test-result': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.7.2(babel-plugin-macros@3.1.0)
@@ -21520,7 +21520,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-config@30.0.5(@types/node@26.0.1)(babel-plugin-macros@3.1.0):
+  jest-config@30.0.5(@types/node@26.1.0)(babel-plugin-macros@3.1.0):
     dependencies:
       '@babel/core': 7.29.7
       '@jest/get-type': 30.0.1
@@ -21547,7 +21547,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -21626,7 +21626,7 @@ snapshots:
       '@jest/environment': 30.0.5
       '@jest/fake-timers': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-mock: 30.0.5
       jest-util: 30.0.5
       jest-validate: 30.0.5
@@ -21636,7 +21636,7 @@ snapshots:
       '@jest/environment': 30.4.1
       '@jest/fake-timers': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-mock: 30.4.1
       jest-util: 30.4.1
       jest-validate: 30.4.1
@@ -21644,7 +21644,7 @@ snapshots:
   jest-haste-map@30.0.5:
     dependencies:
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -21659,7 +21659,7 @@ snapshots:
   jest-haste-map@30.4.1:
     dependencies:
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -21723,13 +21723,13 @@ snapshots:
   jest-mock@30.0.5:
     dependencies:
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-util: 30.0.5
 
   jest-mock@30.4.1:
     dependencies:
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       jest-util: 30.4.1
 
   jest-pnp-resolver@1.2.3(jest-resolve@30.0.5):
@@ -21780,7 +21780,7 @@ snapshots:
       '@jest/test-result': 30.0.5
       '@jest/transform': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       emittery: 0.13.1
       exit-x: 0.2.2
@@ -21807,7 +21807,7 @@ snapshots:
       '@jest/test-result': 30.4.1
       '@jest/transform': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       emittery: 0.13.1
       exit-x: 0.2.2
@@ -21836,7 +21836,7 @@ snapshots:
       '@jest/test-result': 30.0.5
       '@jest/transform': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       cjs-module-lexer: 2.2.0
       collect-v8-coverage: 1.0.3
@@ -21863,7 +21863,7 @@ snapshots:
       '@jest/test-result': 30.4.1
       '@jest/transform': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       cjs-module-lexer: 2.2.0
       collect-v8-coverage: 1.0.3
@@ -21936,7 +21936,7 @@ snapshots:
   jest-util@30.0.5:
     dependencies:
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       ci-info: 4.4.0
       graceful-fs: 4.2.11
@@ -21945,7 +21945,7 @@ snapshots:
   jest-util@30.4.1:
     dependencies:
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       chalk: 4.1.2
       ci-info: 4.4.0
       graceful-fs: 4.2.11
@@ -21973,7 +21973,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 30.0.5
       '@jest/types': 30.0.5
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -21984,7 +21984,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 30.4.1
       '@jest/types': 30.4.1
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -21999,7 +21999,7 @@ snapshots:
 
   jest-worker@30.0.5:
     dependencies:
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       '@ungap/structured-clone': 1.3.2
       jest-util: 30.0.5
       merge-stream: 2.0.0
@@ -22007,7 +22007,7 @@ snapshots:
 
   jest-worker@30.4.1:
     dependencies:
-      '@types/node': 26.0.1
+      '@types/node': 26.1.0
       '@ungap/structured-clone': 1.3.2
       jest-util: 30.4.1
       merge-stream: 2.0.0
@@ -22338,7 +22338,7 @@ snapshots:
 
   lines-and-columns@2.0.4: {}
 
-  linkify-it@5.0.1:
+  linkify-it@5.0.2:
     dependencies:
       uc.micro: 2.1.0
 
@@ -22441,11 +22441,11 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  logs-sdk@0.0.6(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  logs-sdk@0.0.6(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       magic-string: 0.30.21
       oxc-parser: 0.126.0
-      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@farmfe/core'
       - '@rspack/core'
@@ -22457,11 +22457,11 @@ snapshots:
       - vite
       - webpack
 
-  logs-sdk@0.0.6(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  logs-sdk@0.0.6(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       magic-string: 0.30.21
       oxc-parser: 0.126.0
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@farmfe/core'
       - '@rspack/core'
@@ -22523,11 +22523,11 @@ snapshots:
 
   markdown-it-source-map@0.1.1: {}
 
-  markdown-it@14.2.0:
+  markdown-it@14.3.0:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
-      linkify-it: 5.0.1
+      linkify-it: 5.0.2
       mdurl: 2.0.0
       punycode.js: 2.3.1
       uc.micro: 2.1.0
@@ -22578,12 +22578,12 @@ snapshots:
 
   markdownlint@0.34.0:
     dependencies:
-      markdown-it: 14.2.0
+      markdown-it: 14.3.0
       markdownlint-micromark: 0.1.9
 
   markdownlint@0.37.4:
     dependencies:
-      markdown-it: 14.2.0
+      markdown-it: 14.3.0
       micromark: 4.0.1
       micromark-core-commonmark: 2.0.2
       micromark-extension-directive: 3.0.2
@@ -22824,7 +22824,7 @@ snapshots:
       micromark-util-resolve-all: 2.0.1
       micromark-util-subtokenize: 2.1.0
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-core-commonmark@2.0.3:
     dependencies:
@@ -22852,7 +22852,7 @@ snapshots:
       micromark-factory-whitespace: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
       parse-entities: 4.0.2
 
   micromark-extension-footnote@0.3.2:
@@ -22883,18 +22883,18 @@ snapshots:
       micromark-util-character: 2.1.1
       micromark-util-sanitize-uri: 2.0.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-extension-gfm-footnote@2.1.0:
     dependencies:
       devlop: 1.1.0
-      micromark-core-commonmark: 2.0.3
+      micromark-core-commonmark: 2.0.2
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-normalize-identifier: 2.0.1
       micromark-util-sanitize-uri: 2.0.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-extension-gfm-strikethrough@0.6.5:
     dependencies:
@@ -22923,7 +22923,7 @@ snapshots:
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-extension-gfm-table@2.1.1:
     dependencies:
@@ -22983,39 +22983,39 @@ snapshots:
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-factory-destination@2.0.1:
     dependencies:
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-factory-label@2.0.1:
     dependencies:
       devlop: 1.1.0
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-factory-space@2.0.1:
     dependencies:
       micromark-util-character: 2.1.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-factory-title@2.0.1:
     dependencies:
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-factory-whitespace@2.0.1:
     dependencies:
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-util-character@2.1.1:
     dependencies:
@@ -23030,7 +23030,7 @@ snapshots:
     dependencies:
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-util-combine-extensions@2.0.1:
     dependencies:
@@ -23058,7 +23058,7 @@ snapshots:
 
   micromark-util-resolve-all@2.0.1:
     dependencies:
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-util-sanitize-uri@2.0.1:
     dependencies:
@@ -23071,7 +23071,7 @@ snapshots:
       devlop: 1.1.0
       micromark-util-chunked: 2.0.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
 
   micromark-util-symbol@2.0.1: {}
 
@@ -23092,7 +23092,7 @@ snapshots:
       debug: 4.4.3
       decode-named-character-reference: 1.3.0
       devlop: 1.1.0
-      micromark-core-commonmark: 2.0.3
+      micromark-core-commonmark: 2.0.2
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-chunked: 2.0.1
@@ -23104,7 +23104,7 @@ snapshots:
       micromark-util-sanitize-uri: 2.0.1
       micromark-util-subtokenize: 2.1.0
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.2
+      micromark-util-types: 2.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -23981,20 +23981,20 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  powerlines@0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3):
+  powerlines@0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3):
     dependencies:
       '@babel/types': 8.0.0-rc.6
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/engine': 0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/schema': 0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/engine': 0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/schema': 0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(valibot@1.4.2(typescript@6.0.3))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config': 1.138.19(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/convert': 0.7.25
       '@stryke/env': 0.20.112(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       defu: 6.1.7
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -24041,17 +24041,17 @@ snapshots:
   powerlines@0.47.139(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3):
     dependencies:
       '@babel/types': 8.0.0-rc.6
-      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/engine': 0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/core': 0.48.60(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/engine': 0.49.62(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@powerlines/schema': 0.11.121(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
-      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.3)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
+      '@powerlines/unplugin': 0.0.108(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@farmfe/cli@1.0.5)(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(@typescript/native-preview@7.0.0-dev.20251218.3)(esbuild@0.28.1)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(oxc-resolver@11.22.0)(prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@6.0.3))(prettier-plugin-packagejson@3.0.2(prettier@3.9.4))(prettier-plugin-sh@0.15.0(prettier@3.9.4))(prettier-plugin-toml@2.0.4(prettier@3.9.4))(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.3(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(typescript@6.0.3))(typescript@6.0.3)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(zod@4.4.3)
       '@storm-software/config': 1.138.19(zod@4.4.3)
       '@storm-software/config-tools': 1.190.82(zod@4.4.3)
       '@stryke/convert': 0.7.25
       '@stryke/env': 0.20.112(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       '@stryke/fs': 0.33.95(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.4)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(nx@23.0.1)(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.4)(babel-plugin-macros@3.1.0))(zod@4.4.3)
       defu: 6.1.7
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -24523,7 +24523,7 @@ snapshots:
       hash-base: 3.1.2
       inherits: 2.0.4
 
-  rolldown-plugin-dts@0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.3)(typescript@6.0.3):
+  rolldown-plugin-dts@0.25.2(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.4)(typescript@6.0.3):
     dependencies:
       '@babel/generator': 8.0.0-rc.6
       '@babel/helper-validator-identifier': 8.0.0-rc.6
@@ -24533,14 +24533,14 @@ snapshots:
       dts-resolver: 3.0.0(oxc-resolver@11.22.0)
       get-tsconfig: 5.0.0-beta.5
       obug: 2.1.3
-      rolldown: 1.1.3
+      rolldown: 1.1.4
     optionalDependencies:
       '@typescript/native-preview': 7.0.0-dev.20251218.3
       typescript: 6.0.3
     transitivePeerDependencies:
       - oxc-resolver
 
-  rolldown-plugin-dts@0.26.0(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.3)(typescript@6.0.3):
+  rolldown-plugin-dts@0.26.0(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.4)(typescript@6.0.3):
     dependencies:
       '@babel/generator': 8.0.0
       '@babel/helper-validator-identifier': 8.0.2
@@ -24550,33 +24550,33 @@ snapshots:
       dts-resolver: 3.0.0(oxc-resolver@11.22.0)
       get-tsconfig: 5.0.0-beta.5
       obug: 2.1.3
-      rolldown: 1.1.3
+      rolldown: 1.1.4
     optionalDependencies:
       '@typescript/native-preview': 7.0.0-dev.20251218.3
       typescript: 6.0.3
     transitivePeerDependencies:
       - oxc-resolver
 
-  rolldown@1.1.3:
+  rolldown@1.1.4:
     dependencies:
-      '@oxc-project/types': 0.137.0
+      '@oxc-project/types': 0.138.0
       '@rolldown/pluginutils': 1.0.1
     optionalDependencies:
-      '@rolldown/binding-android-arm64': 1.1.3
-      '@rolldown/binding-darwin-arm64': 1.1.3
-      '@rolldown/binding-darwin-x64': 1.1.3
-      '@rolldown/binding-freebsd-x64': 1.1.3
-      '@rolldown/binding-linux-arm-gnueabihf': 1.1.3
-      '@rolldown/binding-linux-arm64-gnu': 1.1.3
-      '@rolldown/binding-linux-arm64-musl': 1.1.3
-      '@rolldown/binding-linux-ppc64-gnu': 1.1.3
-      '@rolldown/binding-linux-s390x-gnu': 1.1.3
-      '@rolldown/binding-linux-x64-gnu': 1.1.3
-      '@rolldown/binding-linux-x64-musl': 1.1.3
-      '@rolldown/binding-openharmony-arm64': 1.1.3
-      '@rolldown/binding-wasm32-wasi': 1.1.3
-      '@rolldown/binding-win32-arm64-msvc': 1.1.3
-      '@rolldown/binding-win32-x64-msvc': 1.1.3
+      '@rolldown/binding-android-arm64': 1.1.4
+      '@rolldown/binding-darwin-arm64': 1.1.4
+      '@rolldown/binding-darwin-x64': 1.1.4
+      '@rolldown/binding-freebsd-x64': 1.1.4
+      '@rolldown/binding-linux-arm-gnueabihf': 1.1.4
+      '@rolldown/binding-linux-arm64-gnu': 1.1.4
+      '@rolldown/binding-linux-arm64-musl': 1.1.4
+      '@rolldown/binding-linux-ppc64-gnu': 1.1.4
+      '@rolldown/binding-linux-s390x-gnu': 1.1.4
+      '@rolldown/binding-linux-x64-gnu': 1.1.4
+      '@rolldown/binding-linux-x64-musl': 1.1.4
+      '@rolldown/binding-openharmony-arm64': 1.1.4
+      '@rolldown/binding-wasm32-wasi': 1.1.4
+      '@rolldown/binding-win32-arm64-msvc': 1.1.4
+      '@rolldown/binding-win32-x64-msvc': 1.1.4
 
   rollup-plugin-typescript2@0.36.0(rollup@4.62.2)(typescript@6.0.3):
     dependencies:
@@ -25366,8 +25366,8 @@ snapshots:
       import-without-cache: 0.4.0
       obug: 2.1.3
       picomatch: 4.0.4
-      rolldown: 1.1.3
-      rolldown-plugin-dts: 0.26.0(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.3)(typescript@6.0.3)
+      rolldown: 1.1.4
+      rolldown-plugin-dts: 0.26.0(@typescript/native-preview@7.0.0-dev.20251218.3)(oxc-resolver@11.22.0)(rolldown@1.1.4)(typescript@6.0.3)
       semver: 7.8.5
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
@@ -25587,20 +25587,20 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  unplugin-combine@2.4.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  unplugin-combine@2.4.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     optionalDependencies:
       esbuild: 0.27.7
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
-      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
 
-  unplugin-combine@2.4.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  unplugin-combine@2.4.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     optionalDependencies:
       esbuild: 0.28.1
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
 
   unplugin-utils@0.3.2:
@@ -25615,25 +25615,25 @@ snapshots:
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
 
-  unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
     optionalDependencies:
       esbuild: 0.27.7
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
 
-  unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
+  unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.4)(rollup@4.62.2)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
     optionalDependencies:
       esbuild: 0.28.1
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       rollup: 4.62.2
       vite: 8.1.2(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
 
@@ -25856,7 +25856,7 @@ snapshots:
       lightningcss: 1.32.0
       picomatch: 4.0.4
       postcss: 8.5.16
-      rolldown: 1.1.3
+      rolldown: 1.1.4
       tinyglobby: 0.2.17
     optionalDependencies:
       '@types/node': 25.9.4
@@ -25874,7 +25874,7 @@ snapshots:
       '@vitest/snapshot': 4.1.9
       '@vitest/spy': 4.1.9
       '@vitest/utils': 4.1.9
-      es-module-lexer: 2.2.0
+      es-module-lexer: 2.3.0
       expect-type: 1.4.0
       magic-string: 0.30.21
       obug: 2.1.3

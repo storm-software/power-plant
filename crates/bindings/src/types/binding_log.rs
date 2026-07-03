@@ -1,4 +1,4 @@
-use power_plant_common::log::Log;
+use power_plant_common::{Log, LogMessage};
 
 use crate::types::binding_log_level::BindingLogLevel;
 use derive_more::Debug;
@@ -33,7 +33,7 @@ impl From<Log> for BindingLog {
 
 impl From<BindingLog> for Log {
   fn from(value: BindingLog) -> Self {
-    let message = power_plant_common::log::LogMessage {
+    let message = LogMessage {
       message: value.message,
       code: value.code,
       details: value.details,
