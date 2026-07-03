@@ -102,12 +102,6 @@ rustdoc-args = ["--cfg", "docsrs"]
 # Declare dependencies used across workspace packages requires single version bump.
 # ref: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#inheriting-a-dependency-from-a-workspace
 [workspace.dependencies]
-# Pin time to last known-good version for lbug compatibility.
-time = "=0.3.46"
-
-# Ladybug embedded graph + vector database
-lbug = "0.14.1"
-
 # Power Plant
 power-plant-bindings = { path = "./crates/bindings" }
 power-plant-common   = { path = "./crates/common" }
@@ -120,6 +114,12 @@ power-plant-utils    = { path = "./crates/utils" }
 
 # Storm Software
 storm-config = "0.27.4"
+
+# Pin time to last known-good version for lbug compatibility.
+time = "=0.3.46"
+
+# Ladybug embedded graph + vector database
+lbug = "0.14.1"
 
 anyhow             = "1.0.98"
 arcstr             = { version = "1.2.0", default-features = false }
@@ -171,16 +171,16 @@ xxhash-rust        = "0.8.15"
 
 # oxc crates with the same version
 oxc = { version = "0.97.0", features = [
-  "ast_visit",
-  "transformer",
-  "minifier",
-  "mangler",
-  "semantic",
-  "codegen",
-  "serialize",
-  "isolated_declarations",
-  "regular_expression",
-  "cfg"
+    "ast_visit",
+    "transformer",
+    "minifier",
+    "mangler",
+    "semantic",
+    "codegen",
+    "serialize",
+    "isolated_declarations",
+    "regular_expression",
+    "cfg"
 ] }
 oxc_allocator = { version = "0.97.0", features = ["pool"] }
 oxc_ecmascript = { version = "0.97.0" }
@@ -199,14 +199,14 @@ oxc_sourcemap     = { version = "6.0.1" }
 
 # napi
 napi = { version = "3.0.0", features = [
-  "async",
-  "anyhow",
-  "napi4",
-  "tokio_rt"
+    "async",
+    "anyhow",
+    "napi4",
+    "tokio_rt"
 ] }
 napi-build = { version = "2.2.2" }
 napi-derive = { version = "3.0.0", default-features = false, features = [
-  "type-def"
+    "type-def"
 ] }
 
 # [patch.crates-io]
@@ -246,8 +246,5 @@ opt-level = "s"
 debug = "full"
 strip = "none"
 
-# [profile.prod]
-# codegen-units = 1
-# incremental = false
-# inherits = "release"
-# lto = "fat"
+[target.'cfg(target_os = "linux")']
+rustflags = ["-C", "link-arg=-fuse-ld=mold", "-Z", "unstable-options"]

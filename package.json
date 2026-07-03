@@ -28,11 +28,7 @@
     "node": ">=24.16.0",
     "pnpm": ">=11.9.0"
   },
-  "keywords": [
-    "power-plant",
-    "storm-software",
-    "monorepo"
-  ],
+  "keywords": ["power-plant", "storm-software", "monorepo"],
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",
@@ -51,7 +47,6 @@
     "local-registry": "nx local-registry monorepo",
     "nuke": "pnpm exec zx tools/scripts/src/nuke.mjs",
     "nx": "nx",
-    "postinstall": "pnpm bootstrap",
     "push": "git push origin main:main",
     "release": "pnpm exec zx tools/scripts/src/release.mjs",
     "start": "nx serve",

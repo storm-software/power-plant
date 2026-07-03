@@ -18,23 +18,11 @@
   };
 
   profiles = {
-    native.module = {
-      languages.rust = {
-        enable = true;
-        channel = "nightly";
-        components = [
-          "rustc"
-          "cargo"
-        ];
-      };
-    };
-
-    native-linux = {
+    debug = {
       extends = [
-        "native"
+        "development"
       ];
       module = {
-
         languages.rust = {
           cranelift.enable = true;
           wild.enable = true;
@@ -42,9 +30,48 @@
       };
     };
 
-    native-linux-musl = {
+    release = {
       extends = [
-        "native-linux"
+        "production"
+      ];
+      module = {
+        languages.rust = {
+          cranelift.enable = false;
+        };
+      };
+    };
+
+    release-native = {
+      extends = [
+        "release"
+      ];
+      module = {
+        languages.rust = {
+          enable = true;
+          channel = "nightly";
+          components = [
+            "rustc"
+            "cargo"
+          ];
+        };
+      };
+    };
+
+    release-native-linux = {
+      extends = [
+        "release-native"
+      ];
+      module = {
+
+        languages.rust = {
+          wild.enable = true;
+        };
+      };
+    };
+
+    release-native-linux-musl = {
+      extends = [
+        "release-native-linux"
       ];
       module = {
 
@@ -67,9 +94,9 @@
       };
     };
 
-    native-darwin = {
+    release-native-darwin = {
       extends = [
-        "native"
+        "release-native"
       ];
       module = {
         languages.rust = {

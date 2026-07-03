@@ -72,51 +72,51 @@ jobs:
           - host: macos-latest
             target: x86_64-apple-darwin
             build-flags: ""
-            profile: native-darwin
+            profile: release-native-darwin
           - host: macos-latest
             target: aarch64-apple-darwin
             build-flags: ""
-            profile: native-darwin
+            profile: release-native-darwin
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
             build-flags: -x
-            profile: native-linux-musl
+            profile: release-native-linux-musl
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             build-flags: -x
-            profile: native-linux-musl
+            profile: release-native-linux-musl
           - host: ubuntu-latest
             target: aarch64-linux-android
             build-flags: ""
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             build-flags: ""
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: native-linux
+            profile: release-native-linux
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -128,7 +128,7 @@ jobs:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build native binding
-        run: devenv --profile production --profile ${{ matrix.profile }} --no-tui shell build-native ${{ matrix.target }} ${{ matrix.build-flags }}
+        run: devenv --profile ${{ matrix.profile }} --no-tui shell build-native ${{ matrix.target }} ${{ matrix.build-flags }}
         env:
           NATIVE_TARGET: ${{ matrix.target }}
           NATIVE_BUILD_FLAGS: ${{ matrix.build-flags }}
@@ -246,6 +246,7 @@ jobs:
         env:
           DEBUG: napi:*
           RUSTUP_IO_THREADS: 1
+          COREPACK_DEFAULT_TO_LATEST: 0
         with:
           operating_system: freebsd
           version: "15.0"
@@ -321,7 +322,7 @@ jobs:
         run: pnpm nx run bindings:deploy-artifacts
 
       - name: Release repository updates
-        run: devenv --profile production --no-tui shell release ${{
+        run: devenv --profile release --no-tui shell release ${{
           steps.setSHAs.outputs.base }} ${{ steps.setSHAs.outputs.head }}
         env:
           NX_BASE: ${{ steps.setSHAs.outputs.base }}
