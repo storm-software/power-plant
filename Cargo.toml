@@ -241,10 +241,6 @@ strip    = false
 [profile.release-wasi]
 inherits  = "release"
 opt-level = "s"
-# napi-rs generates *-debug.*.wasm files with these information
-# it will strip these information for non-debug files
+# napi-rs generates *-debug.*.wasm files with these information it will strip these information for non-debug files
 debug = "full"
 strip = "none"
-
-[target.'cfg(target_os = "linux")']
-rustflags = ["-C", "link-arg=-fuse-ld=mold", "-Z", "unstable-options"]
