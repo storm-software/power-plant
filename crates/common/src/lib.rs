@@ -3,10 +3,10 @@
 
 /// Common logging utilities and helper functions.
 pub mod log;
-pub use log::*;
+pub use crate::log::*;
 /// Common types used across Power Plant crates.
 pub mod types;
-pub use types::*;
+pub use crate::types::*;
 
 #[cfg(test)]
 mod tests {
