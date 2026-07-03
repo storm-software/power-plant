@@ -28,7 +28,11 @@
     "node": ">=24.16.0",
     "pnpm": ">=11.9.0"
   },
-  "keywords": ["power-plant", "storm-software", "monorepo"],
+  "keywords": [
+    "power-plant",
+    "storm-software",
+    "monorepo"
+  ],
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",
@@ -88,6 +92,7 @@
     "nx": "catalog:",
     "prettier": "catalog:",
     "rimraf": "catalog:",
+    "ts-node": "catalog:",
     "tslib": "catalog:",
     "typescript": "^6.0.3",
     "verdaccio": "catalog:",
