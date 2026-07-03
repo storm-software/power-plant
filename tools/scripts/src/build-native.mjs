@@ -29,19 +29,18 @@ try {
     buildFlags = process.env.NATIVE_BUILD_FLAGS;
   }
 
+  const command = `pnpm exec napi build --release ${
+    buildFlags ? ` ${buildFlags}` : ""
+  } --cwd="./src" --manifest-path="../../../../crates/bindings/Cargo.toml" --package-json-path="../package.json" --target="${
+    target
+  }"`;
   echo`${chalk.whiteBright(
-    ` 🏗️  Building the Power Plant native ${target} artifacts${
-      buildFlags ? ` with build flags: "${buildFlags}"` : ""
-    }...`
+    ` 🏗️  Building the Power Plant native ${target} artifacts - running command: "${command}"`
   )}`;
 
   $.cwd = "packages/base/bindings";
 
-  const proc = $`pnpm exec napi build --release ${
-    buildFlags ? ` ${buildFlags}` : ""
-  } --cwd="./src" --manifest-path="../../../../crates/bindings/Cargo.toml" --package-json-path="../package.json" --target="${
-    target
-  }"`.timeout(`${15 * 60}s`);
+  const proc = $`${command}`.timeout(`${15 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });
