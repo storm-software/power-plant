@@ -36,6 +36,13 @@
       ];
       module = {
         languages.rust = {
+          enable = true;
+          channel = "stable";
+          components = [
+            "rustc"
+            "cargo"
+            "rust-std"
+          ];
           lld.enable = false;
           cranelift.enable = false;
           wild.enable = false;
@@ -43,31 +50,14 @@
       };
     };
 
-    release-native = {
+    release-std = {
       extends = [
         "release"
       ];
       module = {
         languages.rust = {
           enable = true;
-          channel = "nightly";
-          components = [
-            "rustc"
-            "cargo"
-            "rust-std"
-          ];
-        };
-      };
-    };
-
-    release-native-std = {
-      extends = [
-        "release-native"
-      ];
-      module = {
-        languages.rust = {
-          enable = true;
-          channel = "nightly";
+          channel = "stable";
           components = [
             "rustc"
             "cargo"
@@ -78,9 +68,9 @@
       };
     };
 
-    release-native-musl = {
+    release-musl = {
       extends = [
-        "release-native"
+        "release"
       ];
       module = {
 
@@ -97,9 +87,9 @@
       };
     };
 
-    release-native-darwin = {
+    release-darwin = {
       extends = [
-        "release-native"
+        "release"
       ];
       module = {
         languages.rust = {
@@ -108,48 +98,48 @@
       };
     };
 
-    release-native-darwin-x86_64 = {
+    release-darwin-x86_64 = {
       extends = [
-        "release-native-darwin"
-        "release-native-std"
+        "release-darwin"
+        "release-std"
       ];
       module = {
         languages.rust.targets = [ "x86_64-apple-darwin" ];
       };
     };
 
-    release-native-linux-musl-x86_64 = {
+    release-linux-musl-x86_64 = {
       extends = [
-        "release-native-musl"
-        "release-native-std"
+        "release-musl"
+        "release-std"
       ];
       module = {
         languages.rust.targets = [ "x86_64-unknown-linux-musl" ];
       };
     };
 
-    release-native-linux-musl-aarch64 = {
+    release-linux-musl-aarch64 = {
       extends = [
-        "release-native-musl"
-        "release-native-std"
+        "release-musl"
+        "release-std"
       ];
       module = {
         languages.rust.targets = [ "aarch64-unknown-linux-musl" ];
       };
     };
 
-    release-native-linux-powerpc64le = {
+    release-linux-powerpc64le = {
       extends = [
-        "release-native-std"
+        "release-std"
       ];
       module = {
         languages.rust.targets = [ "powerpc64le-unknown-linux-gnu" ];
       };
     };
 
-    release-native-linux-gnueabihf-armv7 = {
+    release-linux-gnueabihf-armv7 = {
       extends = [
-        "release-native-std"
+        "release-std"
       ];
       module = {
         languages.rust.targets = [ "armv7-unknown-linux-gnueabihf" ];

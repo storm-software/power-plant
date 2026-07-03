@@ -56,6 +56,14 @@ fi
 
 command="pnpm exec napi build --release${build_flags_arg} --cwd=\"./src\" --manifest-path=\"../../../../crates/bindings/Cargo.toml\" --package-json-path=\"../package.json\" --target=\"${target}\""
 
+printf '\033[1;37m ⚙️  Bootstrapping the monorepo before building native %s artifacts...\033[0m\n' "$target"
+
+cd "$REPO_ROOT"
+if ! pnpm bootstrap; then
+  printf '\033[31mAn error occurred while bootstrapping the monorepo\033[0m\n' >&2
+  exit 1
+fi
+
 printf '\033[1;37m 🏗️  Building the Power Plant native %s artifacts - running command: \n%s\n\033[0m\n' "$target" "$command"
 
 cd "$REPO_ROOT/packages/base/bindings"
