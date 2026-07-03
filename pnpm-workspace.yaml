@@ -10,6 +10,8 @@ packages:
 catalog:
   "@emnapi/core": 1.11.1
   "@emnapi/runtime": 1.11.1
+  "@graphql-codegen/core": ^6.1.0
+  "@graphql-codegen/plugin-helpers": ^7.0.1
   "@graphql-tools/apollo-engine-loader": ^8.0.31
   "@graphql-tools/code-file-loader": ^8.1.33
   "@graphql-tools/git-loader": ^8.0.37
@@ -37,19 +39,19 @@ catalog:
   "@powerlines/tsconfig": ^0.4.187
   "@powerlines/tsdoc": ^0.2.135
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.19
-  "@storm-software/config-tools": ^1.190.82
-  "@storm-software/cspell": ^0.46.150
-  "@storm-software/eslint": ^0.170.115
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.45
-  "@storm-software/git-tools": ^2.131.90
-  "@storm-software/linting-tools": ^1.134.12
-  "@storm-software/markdownlint": ^0.30.238
-  "@storm-software/pnpm-tools": ^0.7.93
-  "@storm-software/prettier": ^0.59.135
-  "@storm-software/tsconfig": ^0.48.149
-  "@storm-software/untyped": ^0.24.224
-  "@storm-software/workspace-tools": ^1.296.62
+  "@storm-software/config": ^1.138.20
+  "@storm-software/config-tools": ^1.190.83
+  "@storm-software/cspell": ^0.46.151
+  "@storm-software/eslint": ^0.170.116
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.46
+  "@storm-software/git-tools": ^2.131.91
+  "@storm-software/linting-tools": ^1.134.13
+  "@storm-software/markdownlint": ^0.30.239
+  "@storm-software/pnpm-tools": ^0.7.94
+  "@storm-software/prettier": ^0.59.136
+  "@storm-software/tsconfig": ^0.48.150
+  "@storm-software/untyped": ^0.24.225
+  "@storm-software/workspace-tools": ^1.296.63
   "@stryke/convert": ^0.7.25
   "@stryke/date": ^0.0.6
   "@stryke/env": ^0.20.112
@@ -104,6 +106,7 @@ overrides:
   "@power-plant/openapi-schema": workspace:*
   "@power-plant/graphql-schema": workspace:*
   "@power-plant/hey-api": workspace:*
+  "@power-plant/graphql-codegen": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*
   "@power-plant/tools-readme-templates": workspace:*
@@ -140,16 +143,7 @@ minimumReleaseAgeExclude:
   - "@stryke/*"
   - "@powerlines/*"
   - prettier
-  - "@typescript-eslint/eslint-plugin@8.62.1"
-  - "@typescript-eslint/parser@8.62.1"
-  - "@typescript-eslint/project-service@8.62.1"
-  - "@typescript-eslint/scope-manager@8.62.1"
-  - "@typescript-eslint/tsconfig-utils@8.62.1"
-  - "@typescript-eslint/type-utils@8.62.1"
-  - "@typescript-eslint/types@8.62.1"
-  - "@typescript-eslint/typescript-estree@8.62.1"
-  - "@typescript-eslint/utils@8.62.1"
-  - "@typescript-eslint/visitor-keys@8.62.1"
+  - "picomatch@4.0.5"
 allowBuilds:
   "@parcel/watcher": true
   "@swc/core": false

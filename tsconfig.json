@@ -22,13 +22,16 @@
       "path": "./packages/inputs/unstorage-input"
     },
     {
+      "path": "./packages/inputs/graphql-input"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
       "path": "./packages/generators/hey-api"
     },
     {
-      "path": "./packages/inputs/graphql-input"
+      "path": "./packages/generators/graphql-codegen"
     }
   ],
   "files": []

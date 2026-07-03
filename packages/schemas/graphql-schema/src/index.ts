@@ -23,16 +23,16 @@ import packageJson from "../package.json" with { type: "json" };
 import { graphqlSchema } from "./schema";
 
 export * from "./schema";
-export type GraphQLSchemaDocument = z.infer<typeof graphqlSchema>;
+export type GraphQLSchema = z.infer<typeof graphqlSchema>;
 
-export default defineSchema<GraphQLSchemaDocument, any>({
+export default defineSchema<GraphQLSchema, any>({
   meta: {
     name: "graphql-schema",
     title: "GraphQL Schema",
     version: packageJson.version,
     description:
       "A GraphQL schema document used to describe a GraphQL API. This schema is compatible with the GraphQL specification and can be used to validate and generate code from the schema. Some examples of tools that can be used to generate client and/or server libraries, documentation, and other tools are: GraphQL Code Generator, GraphQL Yoga, Apollo Server, and many more.",
-    spec: (spec: GraphQLSchemaDocument) => {
+    spec: (spec: GraphQLSchema) => {
       if (spec.description) {
         return spec.description;
       }
@@ -51,9 +51,9 @@ export default defineSchema<GraphQLSchemaDocument, any>({
 
       return "A GraphQL API schema.";
     },
-    tags: (spec: GraphQLSchemaDocument) =>
+    tags: (spec: GraphQLSchema) =>
       Object.keys(spec.getTypeMap()).filter(name => !name.startsWith("__")),
-    links: (spec: GraphQLSchemaDocument) => {
+    links: (spec: GraphQLSchema) => {
       const links: Array<{ href: string; description?: string }> = [];
 
       for (const type of Object.values(spec.getTypeMap())) {

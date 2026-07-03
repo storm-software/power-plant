@@ -1,0 +1,11 @@
+{
+  "name": "graphql-codegen",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/generators/graphql-codegen/src",
+  "targets": {
+    "nx-release-publish": {
+      "executor": "@storm-software/workspace-tools:npm-publish"
+    }
+  }
+}
