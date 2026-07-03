@@ -80,11 +80,11 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             build-flags: --use-napi-cross
@@ -100,19 +100,19 @@ jobs:
           - host: ubuntu-latest
             target: aarch64-linux-android
             build-flags: ""
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
             build-flags: --use-napi-cross
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             build-flags: ""
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release
+            profile: release-std
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
             build-flags: --use-napi-cross
