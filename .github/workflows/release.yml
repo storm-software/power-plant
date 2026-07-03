@@ -1,4 +1,4 @@
-name: "Release"
+name: Release
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ env:
 
 jobs:
   start:
-    name: "Send in progress notification"
+    name: Send in progress notification
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -48,7 +48,7 @@ jobs:
             with this deployment: ${{ github.event.pull_request.html_url ||
             github.event.head_commit.url }} "
           color: 2077350
-          status: "In Progress"
+          status: In Progress
           slack-token: ${{ secrets.STORM_BOT_SLACK_TOKEN }}
           telegram-token: ${{ secrets.STORM_BOT_TELEGRAM_TOKEN }}
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
@@ -80,43 +80,43 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
             build-flags: -x
-            profile: release-native-linux-musl
+            profile: release-native-musl
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             build-flags: -x
-            profile: release-native-linux-musl
+            profile: release-native-musl
           - host: ubuntu-latest
             target: aarch64-linux-android
             build-flags: ""
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             build-flags: ""
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-native-linux
+            profile: release-native
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -279,7 +279,7 @@ jobs:
           if-no-files-found: error
 
   release:
-    name: "Release"
+    name: Release
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
@@ -360,7 +360,7 @@ jobs:
             github.event.pull_request.html_url || github.event.head_commit.url
             }} "
           color: 556891
-          status: "Success"
+          status: Success
           slack-token: ${{ secrets.STORM_BOT_SLACK_TOKEN }}
           telegram-token: ${{ secrets.STORM_BOT_TELEGRAM_TOKEN }}
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
@@ -387,7 +387,7 @@ jobs:
             with this deployment: ${{ github.event.pull_request.html_url ||
             github.event.head_commit.url }} "
           color: 10027008
-          status: "Failure"
+          status: Failure
           slack-token: ${{ secrets.STORM_BOT_SLACK_TOKEN }}
           telegram-token: ${{ secrets.STORM_BOT_TELEGRAM_TOKEN }}
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
@@ -415,7 +415,7 @@ jobs:
             github.event.pull_request.html_url || github.event.head_commit.url
             }}."
           color: 16565273
-          status: "Cancelled"
+          status: Cancelled
           slack-token: ${{ secrets.STORM_BOT_SLACK_TOKEN }}
           telegram-token: ${{ secrets.STORM_BOT_TELEGRAM_TOKEN }}
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}

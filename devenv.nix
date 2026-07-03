@@ -36,7 +36,9 @@
       ];
       module = {
         languages.rust = {
+          lld.enable = false;
           cranelift.enable = false;
+          wild.enable = false;
         };
       };
     };
@@ -52,26 +54,15 @@
           components = [
             "rustc"
             "cargo"
+            "rust-std"
           ];
         };
       };
     };
 
-    release-native-linux = {
+    release-native-musl = {
       extends = [
         "release-native"
-      ];
-      module = {
-
-        languages.rust = {
-          wild.enable = true;
-        };
-      };
-    };
-
-    release-native-linux-musl = {
-      extends = [
-        "release-native-linux"
       ];
       module = {
 
@@ -84,12 +75,6 @@
             enable = true;
             lsp.enable = false;
           };
-          rust = {
-            components = [
-              "rustc"
-              "cargo"
-            ];
-          };
         };
       };
     };
@@ -101,7 +86,6 @@
       module = {
         languages.rust = {
           lld.enable = true;
-          wild.enable = false;
         };
       };
     };

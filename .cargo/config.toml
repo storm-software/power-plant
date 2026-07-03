@@ -42,34 +42,5 @@ rustflags = [
   "link-args=/DEFAULTLIB:ucrt.lib"
 ]
 
-# LLD linker is currently broken for us, opt out.
-# https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/#what-s-in-1-90-0-stable
-# [target.x86_64-unknown-linux-gnu]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.armv7-unknown-linux-gnueabihf]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.aarch64-unknown-linux-gnu]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.x86_64-unknown-linux-musl]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.aarch64-unknown-linux-musl]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.aarch64-linux-android]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.aarch64-unknown-linux-ohos]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.s390x-unknown-linux-gnu]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
-# [target.powerpc64le-unknown-linux-gnu]
-# rustflags = ["-C", "linker-features=-lld", "-Z", "unstable-options"]
-
 [target.wasm32-wasip1-threads]
 rustflags = ["-C", "target-feature=+simd128", "--cfg", "tokio_unstable"]
