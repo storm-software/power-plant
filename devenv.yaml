@@ -24,7 +24,6 @@ inputs:
         follows: nixpkgs
   treefmt-nix:
     url: github:numtide/treefmt-nix
-    follows: nixpkgs
 
 imports:
   - storm-ops/devenv-modules/base
