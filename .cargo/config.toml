@@ -42,5 +42,8 @@ rustflags = [
   "link-args=/DEFAULTLIB:ucrt.lib"
 ]
 
+[target.armv7-unknown-linux-gnueabihf]
+rustflags = ["-C", "linker=arm-linux-gnueabihf-gcc"]
+
 [target.wasm32-wasip1-threads]
 rustflags = ["-C", "target-feature=+simd128", "--cfg", "tokio_unstable"]

@@ -67,7 +67,6 @@
             "rustc"
             "cargo"
             "rust-std"
-            "rust-src"
           ];
         };
       };
