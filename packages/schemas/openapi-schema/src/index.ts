@@ -26,8 +26,8 @@ export type OpenAPISchema = z.infer<typeof openapiSchema>;
 
 export default defineSchema<OpenAPISchema, any>({
   meta: {
-    name: "openapi",
-    title: "OpenAPI",
+    name: "openapi-schema",
+    title: "OpenAPI Schema",
     version: packageJson.version,
     description:
       "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",

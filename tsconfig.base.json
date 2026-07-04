@@ -5,6 +5,7 @@
   "compilerOptions": {
     "incremental": true,
     "composite": true,
+    "module": "esnext",
     "types": ["node"],
     "declaration": true,
     "declarationMap": true,

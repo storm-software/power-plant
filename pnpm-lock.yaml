@@ -206,7 +206,7 @@ settings:
 catalogs:
   default:
     '@alloy-js/babel-preset':
-      specifier: '>=0.3.0'
+      specifier: ^0.3.0
       version: 0.3.0
     '@alloy-js/core':
       specifier: ^0.24.1

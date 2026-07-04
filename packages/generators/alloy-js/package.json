@@ -1,0 +1,346 @@
+{
+  "name": "@power-plant/alloy-js",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A Power Plant generator for using Alloy JS to generate source code.",
+  "keywords": [
+    "alloy-js",
+    "power-plant-generator",
+    "power-plant",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/generators/alloy-js"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "default": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./core": {
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      },
+      "import": {
+        "types": "./dist/core/index.d.mts",
+        "default": "./dist/core/index.mjs"
+      },
+      "default": {
+        "types": "./dist/core/index.d.mts",
+        "default": "./dist/core/index.mjs"
+      }
+    },
+    "./core/components": {
+      "require": {
+        "types": "./dist/core/components/index.d.cts",
+        "default": "./dist/core/components/index.cjs"
+      },
+      "import": {
+        "types": "./dist/core/components/index.d.mts",
+        "default": "./dist/core/components/index.mjs"
+      },
+      "default": {
+        "types": "./dist/core/components/index.d.mts",
+        "default": "./dist/core/components/index.mjs"
+      }
+    },
+    "./core/components/output": {
+      "require": {
+        "types": "./dist/core/components/output.d.cts",
+        "default": "./dist/core/components/output.cjs"
+      },
+      "import": {
+        "types": "./dist/core/components/output.d.mts",
+        "default": "./dist/core/components/output.mjs"
+      },
+      "default": {
+        "types": "./dist/core/components/output.d.mts",
+        "default": "./dist/core/components/output.mjs"
+      }
+    },
+    "./core/components/single-line-comment": {
+      "require": {
+        "types": "./dist/core/components/single-line-comment.d.cts",
+        "default": "./dist/core/components/single-line-comment.cjs"
+      },
+      "import": {
+        "types": "./dist/core/components/single-line-comment.d.mts",
+        "default": "./dist/core/components/single-line-comment.mjs"
+      },
+      "default": {
+        "types": "./dist/core/components/single-line-comment.d.mts",
+        "default": "./dist/core/components/single-line-comment.mjs"
+      }
+    },
+    "./core/components/source-file": {
+      "require": {
+        "types": "./dist/core/components/source-file.d.cts",
+        "default": "./dist/core/components/source-file.cjs"
+      },
+      "import": {
+        "types": "./dist/core/components/source-file.d.mts",
+        "default": "./dist/core/components/source-file.mjs"
+      },
+      "default": {
+        "types": "./dist/core/components/source-file.d.mts",
+        "default": "./dist/core/components/source-file.mjs"
+      }
+    },
+    "./core/components/spacing": {
+      "require": {
+        "types": "./dist/core/components/spacing.d.cts",
+        "default": "./dist/core/components/spacing.cjs"
+      },
+      "import": {
+        "types": "./dist/core/components/spacing.d.mts",
+        "default": "./dist/core/components/spacing.mjs"
+      },
+      "default": {
+        "types": "./dist/core/components/spacing.d.mts",
+        "default": "./dist/core/components/spacing.mjs"
+      }
+    },
+    "./core/contexts": {
+      "require": {
+        "types": "./dist/core/contexts/index.d.cts",
+        "default": "./dist/core/contexts/index.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/index.d.mts",
+        "default": "./dist/core/contexts/index.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/index.d.mts",
+        "default": "./dist/core/contexts/index.mjs"
+      }
+    },
+    "./core/contexts/execution": {
+      "require": {
+        "types": "./dist/core/contexts/execution.d.cts",
+        "default": "./dist/core/contexts/execution.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/execution.d.mts",
+        "default": "./dist/core/contexts/execution.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/execution.d.mts",
+        "default": "./dist/core/contexts/execution.mjs"
+      }
+    },
+    "./core/contexts/meta": {
+      "require": {
+        "types": "./dist/core/contexts/meta.d.cts",
+        "default": "./dist/core/contexts/meta.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/meta.d.mts",
+        "default": "./dist/core/contexts/meta.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/meta.d.mts",
+        "default": "./dist/core/contexts/meta.mjs"
+      }
+    },
+    "./core/contexts/schema": {
+      "require": {
+        "types": "./dist/core/contexts/schema.d.cts",
+        "default": "./dist/core/contexts/schema.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/schema.d.mts",
+        "default": "./dist/core/contexts/schema.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/schema.d.mts",
+        "default": "./dist/core/contexts/schema.mjs"
+      }
+    },
+    "./core/contexts/session": {
+      "require": {
+        "types": "./dist/core/contexts/session.d.cts",
+        "default": "./dist/core/contexts/session.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/session.d.mts",
+        "default": "./dist/core/contexts/session.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/session.d.mts",
+        "default": "./dist/core/contexts/session.mjs"
+      }
+    },
+    "./core/contexts/spec": {
+      "require": {
+        "types": "./dist/core/contexts/spec.d.cts",
+        "default": "./dist/core/contexts/spec.cjs"
+      },
+      "import": {
+        "types": "./dist/core/contexts/spec.d.mts",
+        "default": "./dist/core/contexts/spec.mjs"
+      },
+      "default": {
+        "types": "./dist/core/contexts/spec.d.mts",
+        "default": "./dist/core/contexts/spec.mjs"
+      }
+    },
+    "./core/helpers": {
+      "require": {
+        "types": "./dist/core/helpers/index.d.cts",
+        "default": "./dist/core/helpers/index.cjs"
+      },
+      "import": {
+        "types": "./dist/core/helpers/index.d.mts",
+        "default": "./dist/core/helpers/index.mjs"
+      },
+      "default": {
+        "types": "./dist/core/helpers/index.d.mts",
+        "default": "./dist/core/helpers/index.mjs"
+      }
+    },
+    "./core/helpers/code": {
+      "require": {
+        "types": "./dist/core/helpers/code.d.cts",
+        "default": "./dist/core/helpers/code.cjs"
+      },
+      "import": {
+        "types": "./dist/core/helpers/code.d.mts",
+        "default": "./dist/core/helpers/code.mjs"
+      },
+      "default": {
+        "types": "./dist/core/helpers/code.d.mts",
+        "default": "./dist/core/helpers/code.mjs"
+      }
+    },
+    "./core/types": {
+      "require": {
+        "types": "./dist/core/types/index.d.cts",
+        "default": "./dist/core/types/index.cjs"
+      },
+      "import": {
+        "types": "./dist/core/types/index.d.mts",
+        "default": "./dist/core/types/index.mjs"
+      },
+      "default": {
+        "types": "./dist/core/types/index.d.mts",
+        "default": "./dist/core/types/index.mjs"
+      }
+    },
+    "./core/types/components": {
+      "require": {
+        "types": "./dist/core/types/components.d.cts",
+        "default": "./dist/core/types/components.cjs"
+      },
+      "import": {
+        "types": "./dist/core/types/components.d.mts",
+        "default": "./dist/core/types/components.mjs"
+      },
+      "default": {
+        "types": "./dist/core/types/components.d.mts",
+        "default": "./dist/core/types/components.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./render": {
+      "require": {
+        "types": "./dist/render.d.cts",
+        "default": "./dist/render.cjs"
+      },
+      "import": {
+        "types": "./dist/render.d.mts",
+        "default": "./dist/render.mjs"
+      },
+      "default": {
+        "types": "./dist/render.d.mts",
+        "default": "./dist/render.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@alloy-js/core": "catalog:",
+    "@alloy-js/typescript": "catalog:",
+    "@power-plant/core": "workspace:*",
+    "@power-plant/schema": "workspace:*",
+    "@stryke/convert": "catalog:",
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
+    "defu": "catalog:"
+  },
+  "devDependencies": {
+    "@alloy-js/babel-preset": "catalog:",
+    "@babel/core": "catalog:",
+    "@babel/preset-typescript": "catalog:",
+    "@powerlines/plugin-babel": "catalog:",
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@types/node": "catalog:",
+    "powerlines": "catalog:"
+  },
+  "peerDependencies": {
+    "@alloy-js/babel-preset": ">=0.3.0"
+  },
+  "peerDependenciesMeta": {
+    "@alloy-js/babel-preset": {
+      "optional": false
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "inlinedDependencies": {
+    "@stryke/helpers": "0.10.34",
+    "@stryke/path": "0.29.21",
+    "@stryke/string-format": "0.17.36",
+    "graphql": "17.0.1",
+    "zod": "4.4.3"
+  }
+}
