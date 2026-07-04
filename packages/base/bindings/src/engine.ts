@@ -64,7 +64,7 @@ export async function createEngine(
           meta: {
             id: executionId,
             executedAt: new Date(),
-            executedBy: context.settings.userId
+            executedBy: context.user.id
           }
         } as any);
       }

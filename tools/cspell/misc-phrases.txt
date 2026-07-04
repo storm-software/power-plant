@@ -1,3 +1,9 @@
 # Add Miscellaneous specific phrases here
 smol
 libc
+
+# File Extensions
+haml
+adoc
+avsc
+avdl

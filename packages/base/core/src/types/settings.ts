@@ -39,16 +39,6 @@ export interface Settings {
   paths: EnvPaths;
 
   /**
-   * The user ID to use for the application.
-   */
-  userId: string;
-
-  /**
-   * The tenant ID to use for the application.
-   */
-  tenantId: string;
-
-  /**
    * Whether to skip {@link Execution | execution metadata} storage after completing generation.
    *
    * @defaultValue false

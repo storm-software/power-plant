@@ -26,6 +26,31 @@ export type MetaDeprecated =
 
 export type MetaLink = string | { href: string; description?: string };
 
+/**
+ * A metadata primitive value.
+ */
+export type MetaDataPrimitive = string | number | boolean | null | undefined;
+
+/**
+ * A record of metadata primitive values.
+ */
+export type MetaDataRecord<TSpec, TOptions extends object> = Record<
+  string,
+  MetaValue<TSpec, TOptions, MetaDataPrimitive>
+>;
+
+/**
+ * A record of metadata values.
+ */
+export type MetaData<TSpec, TOptions extends object> = Record<
+  string,
+  MetaValue<
+    TSpec,
+    TOptions,
+    MetaDataPrimitive | MetaDataRecord<TSpec, TOptions>
+  >
+>;
+
 export interface MetaConfig<TSpec, TOptions extends object> {
   /**
    * A name for the schema, which can be used to identify or reference the schema in documentation, tooling, or other contexts. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
@@ -83,6 +108,11 @@ export interface MetaConfig<TSpec, TOptions extends object> {
    * An array of links associated with the schema. Each link can be a string representing a URL or an object containing a `href` property and an optional `description` property.
    */
   links?: MetaValue<TSpec, TOptions, MetaLink[]>;
+
+  /**
+   * Additional data associated with an object.
+   */
+  data?: MetaValue<TSpec, TOptions, MetaData<TSpec, TOptions>>;
 }
 
 export interface Meta<TSpec, TOptions extends object> {
@@ -150,4 +180,9 @@ export interface Meta<TSpec, TOptions extends object> {
    * An array of links associated with the schema. Each link can be a string representing a URL or an object containing a `href` property and an optional `description` property.
    */
   links: MetaValue<TSpec, TOptions, MetaLink[]>;
+
+  /**
+   * Additional data associated with an object.
+   */
+  data?: MetaValue<TSpec, TOptions, MetaData<TSpec, TOptions>>;
 }

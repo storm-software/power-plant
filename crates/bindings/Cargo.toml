@@ -22,7 +22,7 @@ doctest = false
 
 [dependencies]
 
-# Power Plant
+# Power Pla          nt
 power-plant-core = { workspace = true }
 power-plant-engine = { workspace = true }
 power-plant-models = { workspace = true }

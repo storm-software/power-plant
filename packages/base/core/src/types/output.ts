@@ -26,7 +26,7 @@ import type { SchemaConfigObject, SchemaOf } from "./schema";
 export type OutputFunction<TSpec, TOptions extends object, TReturns = void> = (
   spec: TSpec,
   options: TOptions,
-  documents: GeneratedDocument<TSpec, TOptions>[]
+  documents: Record<string, GeneratedDocument<TSpec, TOptions>>
 ) => MaybePromise<TReturns>;
 
 export interface OutputMetaConfig<

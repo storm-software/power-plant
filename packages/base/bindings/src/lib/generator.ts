@@ -108,7 +108,7 @@ export async function createGenerator<
   ]);
 
   const generator = async (options: TOptions & UserConfig) => {
-    const context = await createExecutionContext(
+    const context = await createExecutionContext<TSpec, TOptions, TReturns>(
       executionId,
       sessionContext,
       options,
@@ -125,6 +125,8 @@ export async function createGenerator<
             ) => TSpec | Promise<TSpec>
           )({ storage: context.storage, ...options })
         : input.input;
+
+      context["~spec"] = spec;
 
       let generatorFn!: GeneratorFunction<TSpec, TOptions>;
       if (isFunction(configObject.generator)) {

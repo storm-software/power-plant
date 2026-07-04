@@ -18,15 +18,19 @@
 
 import type {
   Context,
-  ExecutionContext,
+  Device,
+  ExecutionDocument,
   Input,
   Logger,
   Output,
   SchemaOf,
   SessionContext,
+  Tenant,
+  User,
   UserConfig,
   UserConfigExport
 } from "@power-plant/core";
+import type { Unstable_ExecutionContext } from "@power-plant/core/types/__internal";
 import { toArray } from "@stryke/convert/to-array";
 import { toMode } from "@stryke/env/environment-checks";
 import { getEnvPaths } from "@stryke/env/get-env-paths";
@@ -35,6 +39,7 @@ import { writeFile } from "@stryke/fs/write-file";
 import { joinPaths } from "@stryke/path/join";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
+import { isSetString } from "@stryke/type-checks/is-set-string";
 import { uuid } from "@stryke/unique-id/uuid";
 import { loadConfig } from "c12";
 import defu from "defu";
@@ -43,6 +48,7 @@ import { existsSync } from "node:fs";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
+import type { LocalStore } from "../types/local-store";
 
 const homeDir = os.homedir();
 
@@ -65,6 +71,48 @@ const paths = getEnvPaths({
 const jiti = createJiti(process.cwd(), {
   fsCache: joinPaths(paths.cache, "jiti")
 });
+
+function createDevice(now: Date): Device {
+  return {
+    id: uuid(),
+    createdAt: now,
+    updatedAt: now,
+    name: os.hostname(),
+    arch: os.arch(),
+    platform: os.platform(),
+    os: {
+      type: os.type(),
+      release: os.release()
+    }
+  };
+}
+
+function createUser(now: Date, tenant: Tenant): User {
+  return {
+    id: uuid(),
+    createdAt: now,
+    updatedAt: now,
+    username: os.userInfo().username,
+    role: "user",
+    tenant
+  };
+}
+
+function createTenant(now: Date): Tenant {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const currency = Intl.NumberFormat().resolvedOptions().currency;
+  const language = Intl.NumberFormat().resolvedOptions().locale;
+
+  return {
+    id: uuid(),
+    createdAt: now,
+    updatedAt: now,
+    name: "Default Tenant",
+    timezone: timezone ?? "UTC",
+    currency: currency ?? "USD",
+    language: language ?? "en-US"
+  };
+}
 
 /**
  * Create a context for the engine.
@@ -252,28 +300,42 @@ export async function createContext(
 export async function createSessionContext(
   userConfig: UserConfig = {}
 ): Promise<SessionContext> {
-  const context = (await createContext(userConfig)) as SessionContext;
+  const baseContext = await createContext(userConfig);
+  const now = new Date();
 
-  context.executions = [];
-  context.sessionId = uuid();
-  context.startedAt = new Date();
+  const store = JSON.parse(
+    (await readFileIfExisting(
+      joinPaths(baseContext.cwd, ".local-store.json")
+    )) || "{}"
+  ) as LocalStore;
 
-  const ids = JSON.parse(
-    (await readFileIfExisting(joinPaths(context.cwd, ".id-store.json"))) || "{}"
-  ) as { deviceId?: string; userId?: string; tenantId?: string };
+  const device = store.device ?? createDevice(now);
+  const tenant = store.tenant ?? createTenant(now);
+  const user = store.user ?? createUser(now, tenant);
 
-  context.deviceId = ids.deviceId || uuid();
-  context.userId = context.settings.userId || ids.userId || uuid();
-  context.tenantId = context.settings.tenantId || ids.tenantId || uuid();
+  if (!store.tenant) {
+    tenant.name = user.username;
+  }
 
-  if (!ids.deviceId || !ids.userId || !ids.tenantId) {
+  const sessionContext = {
+    ...baseContext,
+    id: uuid(),
+    createdAt: now,
+    updatedAt: now,
+    device,
+    user,
+    tenant,
+    executions: []
+  } satisfies SessionContext;
+
+  if (!store.device || !store.user || !store.tenant) {
     await writeFile(
-      joinPaths(context.cwd, ".id-store.json"),
+      joinPaths(baseContext.cwd, ".store.json"),
       JSON.stringify(
         {
-          deviceId: ids.deviceId || context.deviceId,
-          userId: ids.userId || context.userId,
-          tenantId: ids.tenantId || context.tenantId
+          device,
+          user,
+          tenant
         },
         null,
         2
@@ -281,9 +343,20 @@ export async function createSessionContext(
     );
   }
 
-  return context;
+  return sessionContext;
 }
 
+/**
+ * Create an execution context for the engine.
+ *
+ * @param executionId - The ID of the execution.
+ * @param sessionContext - The session context.
+ * @param options - The options.
+ * @param schema - The schema.
+ * @param input - The input.
+ * @param output - The output.
+ * @returns A promise that resolves to an execution context.
+ */
 export async function createExecutionContext<
   TSpec,
   TOptions extends object,
@@ -291,31 +364,60 @@ export async function createExecutionContext<
 >(
   executionId: string,
   sessionContext: SessionContext,
-  options: TOptions & UserConfig,
+  options: TOptions,
   schema: SchemaOf<TSpec, TOptions>,
   input: Input<TSpec, TOptions>,
   output: Output<TSpec, TOptions, TReturns>
-): Promise<ExecutionContext<TSpec, TOptions, TReturns>> {
-  const context = (await createContext(options)) as ExecutionContext<
-    TSpec,
-    TOptions,
-    TReturns
-  >;
-
-  context.meta = {
-    id: executionId,
-    executedAt: new Date(),
-    executedBy: sessionContext.userId
+): Promise<Unstable_ExecutionContext<TSpec, TOptions, TReturns>> {
+  const documents: Record<string, ExecutionDocument<TSpec, TOptions>> = {};
+  const addDocument = (
+    pathOrDocument: string | ExecutionDocument<TSpec, TOptions>,
+    document?: Omit<ExecutionDocument<TSpec, TOptions>, "path">
+  ) => {
+    if (isSetString(pathOrDocument)) {
+      documents[pathOrDocument] = defu(
+        {
+          path: pathOrDocument
+        },
+        document,
+        {
+          source: [],
+          language: "other"
+        }
+      ) as ExecutionDocument<TSpec, TOptions>;
+    } else {
+      documents[pathOrDocument.path] = defu(pathOrDocument, document);
+    }
   };
 
-  context.schema = schema;
-  context.input = input;
-  context.output = output;
+  const context = {
+    ...sessionContext,
+    id: executionId,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    options,
+    schema,
+    input,
+    output,
+    documents,
+    spec() {
+      if (!this["~spec"]) {
+        throw new Error(
+          "The specification was accessed prior to the input processing."
+        );
+      }
 
-  sessionContext.executions.push({
-    documents: context.documents,
-    meta: context.meta
-  });
+      return this["~spec"] as TSpec;
+    },
+    addDocument,
+    meta: {
+      id: executionId,
+      executedAt: new Date(),
+      executedBy: sessionContext.user.id
+    }
+  } as Unstable_ExecutionContext<TSpec, TOptions, TReturns>;
 
-  return { ...sessionContext, ...context };
+  sessionContext.executions.push(context);
+
+  return context;
 }

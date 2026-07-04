@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import { jsonSchema, refOr, referenceSchema } from "@power-plant/schema/zod";
+import { jsonSchema, referenceSchema, refOr } from "@power-plant/schema/zod";
 import * as z from "zod/mini";
 import { exampleSchema } from "./shared";
 

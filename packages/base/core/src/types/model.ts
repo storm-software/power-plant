@@ -16,5 +16,24 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+export interface Model {
+  /**
+   * A unique identifier for the model.
+   */
+  id: string;
+
+  /**
+   * The timestamp when the model was created.
+   */
+  createdAt: Date;
+
+  /**
+   * The timestamp when the model was last updated.
+   */
+  updatedAt: Date;
+
+  /**
+   * The description of the model.
+   */
+  description?: string;
+}

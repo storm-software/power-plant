@@ -16,5 +16,4 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+export * from "./language";

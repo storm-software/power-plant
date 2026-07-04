@@ -16,5 +16,36 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+import type { Model } from "./model";
+import type { Tenant } from "./tenant";
+
+export type UserRole = "user" | "admin" | "superadmin";
+
+export interface User extends Model {
+  /**
+   * The username of the user.
+   */
+  username: string;
+
+  /**
+   * The email of the user.
+   */
+  email?: string;
+
+  /**
+   * The avatar of the user.
+   */
+  avatar?: string;
+
+  /**
+   * The role of the user.
+   *
+   * @default "user"
+   */
+  role: UserRole;
+
+  /**
+   * The tenant the user belongs to.
+   */
+  tenant: Tenant;
+}

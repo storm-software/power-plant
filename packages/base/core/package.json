@@ -113,6 +113,34 @@
         "types": "./dist/type-checks.d.mts",
         "default": "./dist/type-checks.mjs"
       }
+    },
+    "./types/__internal": {
+      "require": {
+        "types": "./dist/types/__internal.d.cts",
+        "default": "./dist/types/__internal.cjs"
+      },
+      "import": {
+        "types": "./dist/types/__internal.d.mts",
+        "default": "./dist/types/__internal.mjs"
+      },
+      "default": {
+        "types": "./dist/types/__internal.d.mts",
+        "default": "./dist/types/__internal.mjs"
+      }
+    },
+    "./utils": {
+      "require": {
+        "types": "./dist/utils/index.d.cts",
+        "default": "./dist/utils/index.cjs"
+      },
+      "import": {
+        "types": "./dist/utils/index.d.mts",
+        "default": "./dist/utils/index.mjs"
+      },
+      "default": {
+        "types": "./dist/utils/index.d.mts",
+        "default": "./dist/utils/index.mjs"
+      }
     }
   },
   "main": "./dist/index.cjs",

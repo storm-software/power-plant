@@ -27,6 +27,7 @@ export default defineConfig({
     configFile: "@powerlines/tsdoc/recommended.json"
   },
   ignores: [
+    "crates/**/*",
     "packages/base/bindings/src/bindings.*",
     "packages/base/bindings/src/power-plant-bindings.*",
     "packages/base/bindings/src/wasi-worker-browser.mjs",

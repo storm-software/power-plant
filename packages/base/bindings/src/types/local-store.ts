@@ -16,5 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+import type { Device, Tenant, User } from "@power-plant/core";
+
+export interface LocalStore {
+  device?: Device;
+  user?: User;
+  tenant?: Tenant;
+}

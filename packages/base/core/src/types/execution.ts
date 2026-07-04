@@ -18,6 +18,7 @@
 
 import type { GeneratedDocument, GeneratorMeta } from "./generator";
 import type { InputMeta } from "./input";
+import type { MetaData, MetaValue } from "./meta";
 import type { OutputMeta } from "./output";
 import type { SchemaMeta } from "./schema";
 
@@ -51,24 +52,89 @@ export interface ExecutionSourceMeta<TSpec, TOptions extends object> {
    * The metadata of the output used to generate the source code during the execution.
    */
   output: OutputMeta<TSpec, TOptions>;
+
+  /**
+   * Additional data associated with the execution source.
+   */
+  data?: MetaValue<TSpec, TOptions, MetaData<TSpec, TOptions>>;
 }
 
+export type Language =
+  | "typescript"
+  | "javascript"
+  | "python"
+  | "java"
+  | "c#"
+  | "c++"
+  | "c"
+  | "rust"
+  | "go"
+  | "php"
+  | "ruby"
+  | "swift"
+  | "kotlin"
+  | "scala"
+  | "haskell"
+  | "elm"
+  | "elixir"
+  | "erlang"
+  | "ocaml"
+  | "f#"
+  | "groovy"
+  | "groovy-server-pages"
+  | "html"
+  | "css"
+  | "scss"
+  | "less"
+  | "sass"
+  | "stylus"
+  | "pug"
+  | "haml"
+  | "slim"
+  | "markdown"
+  | "rst"
+  | "asciidoc"
+  | "org"
+  | "textile"
+  | "creole"
+  | "mediawiki"
+  | "yaml"
+  | "json"
+  | "toml"
+  | "xml"
+  | "csv"
+  | "tsv"
+  | "sql"
+  | "graphql"
+  | "protobuf"
+  | "thrift"
+  | "capnp"
+  | "avro"
+  | "avro-json"
+  | "other";
+
 export interface ExecutionSource<TSpec, TOptions extends object> {
-  language?: string;
+  /**
+   * The content of the source code.
+   */
   content: string;
+
+  /**
+   * The metadata of the source code.
+   */
   meta: ExecutionSourceMeta<TSpec, TOptions>;
 }
 
 export interface ExecutionDocument<TSpec, TOptions extends object> {
   /**
-   * The name of the document.
-   */
-  name: string;
-
-  /**
    * The path of the document.
    */
   path: string;
+
+  /**
+   * The language of the document.
+   */
+  language: Language;
 
   /**
    * The extension of the document.
@@ -81,7 +147,7 @@ export interface ExecutionDocument<TSpec, TOptions extends object> {
   source: ExecutionSource<TSpec, TOptions>[];
 }
 
-export interface ExecutionMeta {
+export interface ExecutionMeta<TSpec, TOptions extends object> {
   /**
    * A unique identifier for the execution, typically used by the backend systems.
    *
@@ -99,18 +165,23 @@ export interface ExecutionMeta {
    * The user who performed the execution.
    */
   executedBy: string;
+
+  /**
+   * Additional data associated with the execution.
+   */
+  data?: MetaValue<TSpec, TOptions, MetaData<TSpec, TOptions>>;
 }
 
 export interface Execution<TSpec, TOptions extends object> {
   /**
-   * The documents of the execution.
+   * The documents of the execution, indexed by the document path.
    */
-  documents: ExecutionDocument<TSpec, TOptions>[];
+  documents: Record<string, ExecutionDocument<TSpec, TOptions>>;
 
   /**
    * The metadata of the execution.
    */
-  meta: ExecutionMeta;
+  meta: ExecutionMeta<TSpec, TOptions>;
 }
 
 export type ExecutionResult<

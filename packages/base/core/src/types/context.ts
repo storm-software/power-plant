@@ -17,10 +17,11 @@
  ------------------------------------------------------------------- */
 
 import type { Storage } from "unstorage";
-import type { Execution } from "./execution";
+import type { Execution, ExecutionDocument } from "./execution";
 import type { Input } from "./input";
 import type { Output } from "./output";
 import type { SchemaOf } from "./schema";
+import type { Session } from "./session";
 import type { Logger, Settings } from "./settings";
 
 export interface Context {
@@ -48,37 +49,7 @@ export interface Context {
   logger: Logger;
 }
 
-export interface SessionContext extends Context {
-  /**
-   * A unique identifier for the session.
-   */
-  sessionId: string;
-
-  /**
-   * A unique identifier for the device the session started on.
-   */
-  deviceId: string;
-
-  /**
-   * The user ID of the user who started the session.
-   */
-  userId: string;
-
-  /**
-   * The tenant ID of the user who started the session.
-   */
-  tenantId: string;
-
-  /**
-   * The timestamp when the session was started.
-   */
-  startedAt: Date;
-
-  /**
-   * The executions of the session.
-   */
-  executions: Execution<any, any>[];
-}
+export type SessionContext = Context & Session;
 
 export interface ExecutionContext<
   TSpec,
@@ -87,17 +58,43 @@ export interface ExecutionContext<
 >
   extends SessionContext, Execution<TSpec, TOptions> {
   /**
+   * The options for the execution.
+   */
+  options: TOptions;
+
+  /**
+   * The specification for the execution.
+   */
+  get spec(): TSpec;
+
+  /**
    * The schema for the execution.
    */
-  schema: SchemaOf<TSpec, TOptions>;
+  get schema(): SchemaOf<TSpec, TOptions>;
 
   /**
    * The input for the execution.
    */
-  input: Input<TSpec, TOptions>;
+  get input(): Input<TSpec, TOptions>;
 
   /**
    * The output for the execution.
    */
-  output: Output<TSpec, TOptions, TReturns>;
+  get output(): Output<TSpec, TOptions, TReturns>;
+
+  /**
+   * The documents that are currently being processed, indexed by the document path.
+   */
+  get documents(): Record<string, ExecutionDocument<TSpec, TOptions>>;
+
+  /**
+   * Adds a document to the currently processing documents.
+   *
+   * @param pathOrDocument - A string representing the path of the document to add, or the document to add.
+   * @param document - The document to add (without the path), if {@link pathOrDocument} is a string representing the document path.
+   */
+  addDocument: (
+    pathOrDocument: string | ExecutionDocument<TSpec, TOptions>,
+    document?: Omit<ExecutionDocument<TSpec, TOptions>, "path">
+  ) => void;
 }

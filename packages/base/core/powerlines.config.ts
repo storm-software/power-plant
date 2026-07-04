@@ -21,7 +21,7 @@ import type { UserConfig } from "powerlines";
 import { defineConfig } from "powerlines/config";
 
 const config: UserConfig = defineConfig({
-  input: ["src/*.ts"],
+  input: ["src/*.ts", "src/utils/index.ts", "src/types/__internal.ts"],
   platform: "node",
   output: {
     format: ["cjs", "esm"]

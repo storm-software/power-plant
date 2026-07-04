@@ -16,5 +16,21 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+import type { ExecutionContext } from "./context";
+import type { ExecutionDocument } from "./execution";
+import type { Input } from "./input";
+import type { Output } from "./output";
+import type { SchemaOf } from "./schema";
+
+// eslint-disable-next-line ts/naming-convention
+export interface Unstable_ExecutionContext<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+> extends ExecutionContext<TSpec, TOptions, TReturns> {
+  "~spec": TSpec;
+  schema: SchemaOf<TSpec, TOptions>;
+  input: Input<TSpec, TOptions>;
+  output: Output<TSpec, TOptions, TReturns>;
+  documents: Record<string, ExecutionDocument<TSpec, TOptions>>;
+}

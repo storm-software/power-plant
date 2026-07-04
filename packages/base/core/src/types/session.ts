@@ -16,5 +16,30 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./engine";
-export * from "./local-store";
+import type { Device } from "./device";
+import type { Execution } from "./execution";
+import type { Model } from "./model";
+import type { Tenant } from "./tenant";
+import type { User } from "./user";
+
+export interface Session extends Model {
+  /**
+   * The device that started the session.
+   */
+  device: Device;
+
+  /**
+   * The user who started the session.
+   */
+  user: User;
+
+  /**
+   * The tenant that started the session.
+   */
+  tenant: Tenant;
+
+  /**
+   * The executions of the session.
+   */
+  executions: Execution<any, any>[];
+}

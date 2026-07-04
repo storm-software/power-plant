@@ -16,22 +16,31 @@
       "path": "./packages/schemas/openapi-schema"
     },
     {
+      "path": "./packages/schemas/asyncapi-schema"
+    },
+    {
       "path": "./packages/schemas/graphql-schema"
+    },
+    {
+      "path": "./packages/generators/hey-api"
+    },
+    {
+      "path": "./packages/generators/asyncapi"
+    },
+    {
+      "path": "./packages/generators/graphql-codegen"
+    },
+    {
+      "path": "./packages/generators/alloy-js"
+    },
+    {
+      "path": "./packages/outputs/unstorage-output"
     },
     {
       "path": "./packages/inputs/unstorage-input"
     },
     {
       "path": "./packages/inputs/graphql-input"
-    },
-    {
-      "path": "./packages/outputs/unstorage-output"
-    },
-    {
-      "path": "./packages/generators/hey-api"
-    },
-    {
-      "path": "./packages/generators/graphql-codegen"
     }
   ],
   "files": []
