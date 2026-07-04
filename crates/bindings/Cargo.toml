@@ -23,9 +23,8 @@ doctest = false
 [dependencies]
 
 # Power Plant
-power-plant-common = { workspace = true }
 power-plant-core = { workspace = true }
-power-plant-error = { workspace = true, features = ["napi"] }
+power-plant-engine = { workspace = true }
 power-plant-models = { workspace = true }
 power-plant-tracing = { workspace = true }
 power-plant-utils = { workspace = true }

@@ -1,9 +1,6 @@
-use crate::types::{
-  binding_input::BindingExecution, binding_log::BindingLog, binding_log_level::BindingLogLevel,
-};
+use crate::types::binding_input::BindingExecution;
 use derive_more::Debug;
-use power_plant_common::{RecallOutput, SearchOutput, StoreOutput};
-use power_plant_error::Severity;
+use power_plant_core::{RecallOutput, SearchOutput, StoreOutput};
 
 #[derive(Debug, Clone, PartialEq)]
 #[napi_derive::napi(object, object_from_js = false)]
@@ -36,27 +33,14 @@ pub struct BindingStoreOutput {
   /// Whether the store operation was successful.
   pub success: bool,
   /// Any warnings encountered during the store operation.
-  pub warnings: Vec<BindingLog>,
+  pub errors: Vec<String>,
 }
 
 impl From<StoreOutput> for BindingStoreOutput {
   fn from(value: StoreOutput) -> Self {
     Self {
       success: value.success,
-      warnings: value
-        .warnings
-        .into_iter()
-        .map(|diagnostic| BindingLog {
-          message: diagnostic.to_string(),
-          code: diagnostic.id(),
-          details: None,
-          level: match diagnostic.severity() {
-            Severity::Error => BindingLogLevel::Error,
-            Severity::Warning => BindingLogLevel::Warn,
-          },
-          plugin: diagnostic.exporter(),
-        })
-        .collect(),
+      errors: value.errors.into_iter().map(|error| error.to_string()).collect(),
     }
   }
 }

@@ -20,7 +20,7 @@ doctest = false
 workspace = true
 
 [dependencies]
-power-plant-common = { workspace = true }
+power-plant-core = { workspace = true }
 power-plant-models = { workspace = true }
 
 blake3 = { workspace = true }

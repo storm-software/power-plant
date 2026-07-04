@@ -2,7 +2,7 @@ use derive_more::Debug;
 use std::sync::Arc;
 use std::{future::Future, pin::Pin};
 
-use crate::{LogLevel, LogMessage};
+use crate::{LogLevel, LogMessage, PowerPlantResult};
 
 /// Log structure representing a log message.
 #[derive(Debug, Default)]
@@ -23,7 +23,7 @@ impl Log {
 
 /// Type alias for the asynchronous log handling function.
 pub type LoggerFn =
-  dyn Fn(Log) -> Pin<Box<dyn Future<Output = anyhow::Result<()>> + Send + 'static>> + Send + Sync;
+  dyn Fn(Log) -> Pin<Box<dyn Future<Output = PowerPlantResult<()>> + Send + 'static>> + Send + Sync;
 
 /// Wrapper around the LoggerFn type alias.
 #[derive(Clone, Debug)]
@@ -37,7 +37,7 @@ impl Logger {
   }
 
   /// Call the log handling function with the given log level and log.
-  pub async fn call(&self, log: Log) -> anyhow::Result<()> {
+  pub async fn call(&self, log: Log) -> PowerPlantResult<()> {
     self.0(log).await
   }
 
@@ -46,7 +46,7 @@ impl Logger {
     &self,
     message: LogMessage,
     level: Option<LogLevel>,
-  ) -> anyhow::Result<()> {
+  ) -> PowerPlantResult<()> {
     let log = match level {
       Some(level) => Log { level, message },
       None => Log { level: LogLevel::Info, message },

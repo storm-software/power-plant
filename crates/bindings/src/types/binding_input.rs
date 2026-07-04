@@ -1,5 +1,5 @@
 use derive_more::Debug;
-use power_plant_common::{RecallInput, SearchInput, StoreInput};
+use power_plant_core::{RecallInput, SearchInput, StoreInput};
 use power_plant_models::{
   Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
   InputMeta, Meta, OutputMeta, SchemaMeta, SchemaMetaExample,

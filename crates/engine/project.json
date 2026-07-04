@@ -1,8 +1,8 @@
 {
-  "name": "native-common",
+  "name": "native-engine",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "crates/common/src",
+  "sourceRoot": "crates/engine/src",
   "targets": {},
   "tags": []
 }

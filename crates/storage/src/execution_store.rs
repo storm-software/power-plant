@@ -1,4 +1,4 @@
-use power_plant_common::{SearchInput, SearchOutput};
+use power_plant_core::{SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::StorageError;

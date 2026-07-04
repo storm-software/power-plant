@@ -4,9 +4,11 @@ use crate::types::js_callback::JsCallbackExt;
 use crate::types::{
   binding_log::BindingLog, binding_log_level::BindingLogLevel, js_callback::JsCallback,
 };
+use crate::utils::to_power_plant_error;
 use derive_more::Debug;
 use napi::bindgen_prelude::Promise;
-use power_plant_common::{Logger, Options};
+use power_plant_core::{Logger, Options};
+
 pub type BindingLogger = Option<JsCallback<BindingLog, Promise<()>>>;
 
 #[napi_derive::napi(object, object_to_js = false)]
@@ -69,7 +71,10 @@ impl Into<Options> for BindingOptions {
           Logger::new(Arc::new(move |log| {
             let ts_fn = Arc::clone(&ts_fn);
             Box::pin(async move {
-              ts_fn.invoke_async(log.into()).await?.await.map_err(anyhow::Error::from)
+              match ts_fn.invoke_async(log.into()).await {
+                Ok(promise) => promise.await.map_err(to_power_plant_error),
+                Err(err) => Err(to_power_plant_error(err)),
+              }
             })
           }))
         })

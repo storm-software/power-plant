@@ -22,7 +22,6 @@ workspace = true
 [dependencies]
 
 # Power Plant
-power-plant-error = { workspace = true }
 power-plant-utils = { workspace = true }
 
 blake3 = { workspace = true }

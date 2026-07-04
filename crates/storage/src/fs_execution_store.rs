@@ -2,7 +2,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use camino::Utf8PathBuf;
-use power_plant_common::{ExecutionSearchHit, SearchInput, SearchOutput};
+use power_plant_core::{ExecutionSearchHit, SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::{

@@ -1,4 +1,4 @@
-use power_plant_common::SearchInput;
+use power_plant_core::SearchInput;
 use power_plant_models::Execution;
 
 /// Fixed embedding dimension used by the Ladybug vector index.

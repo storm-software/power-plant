@@ -2,7 +2,7 @@ use std::sync::{Arc, Mutex};
 
 use chrono::{DateTime, Utc};
 use lbug::{Connection, Database, SystemConfig, Value as LbugValue};
-use power_plant_common::{ExecutionSearchHit, SearchInput};
+use power_plant_core::{ExecutionSearchHit, SearchInput};
 use power_plant_models::Execution;
 use serde_json::Value;
 

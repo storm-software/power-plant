@@ -39,7 +39,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 <!-- markdownlint-disable -->
 
 > [!IMPORTANT] 
-> This crate is largely considered internal to the Power Plant monorepo, and is not intended for public consumption. It is subject to change at any time without notice. If you are looking for a way to use Power Plant, please see the [Power Plant website](https://stormsoftware.com/projects/power-plant) for more information.
+> This repository, and the apps, libraries, and tools contained within, is still in it's initial development phase. As a result, bugs and issues are expected with it's usage. When the main development phase completes, a proper release will be performed, the packages will be available through NPM (and other distributions), and this message will be removed. However, in the meantime, please feel free to report any issues you may come across.
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
@@ -57,25 +57,25 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - Error Crate
+# Power Plant - Engine Crate
 
-The **Power Plant - Error** crate provides the error system for the Power Plant runtime. It allows you to handle errors in the Power Plant runtime, and provides a way to display errors in a variety of ways.
+The **Power Plant - Engine** crate is the engine of the Power Plant native runtime.
 
 ## Installing
 
 Using [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html):
 
 ```bash
-cargo add power-plant-error
+cargo add power-plant-engine
 ```
 
 ## Building
 
-Run `nx build native-error` to build the library.
+Run `nx build native-engine` to build the library.
 
 ## Running unit tests
 
-Run `nx test power-plant-error` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test native-engine` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

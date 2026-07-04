@@ -1,9 +1,8 @@
 use derive_more::Debug;
-use power_plant_common::{
+use power_plant_core::{
   NormalizedOptions, Options, RecallInput, RecallOutput, SearchInput, SearchOutput, StoreInput,
   StoreOutput,
 };
-use power_plant_error::PowerPlantResult;
 #[cfg(feature = "ladybug")]
 use power_plant_storage::IndexedExecutionStore;
 use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
@@ -11,7 +10,9 @@ use power_plant_tracing::{Session, actions::StoreEnd, actions::StoreStart, trace
 use std::future::{Future, ready};
 use std::sync::Arc;
 
-#[derive(Debug)]
+use crate::{PowerPlantEngineError, PowerPlantEngineResult};
+
+#[derive(Debug, Clone)]
 pub struct Engine {
   pub(super) session: Session,
   pub(super) options: NormalizedOptions,
@@ -21,7 +22,7 @@ pub struct Engine {
 }
 
 impl Engine {
-  pub fn new(options: Options) -> PowerPlantResult<Self> {
+  pub fn new(options: Options) -> PowerPlantEngineResult<Self> {
     let normalized_options = NormalizedOptions::from(options);
     let executions_path = normalized_options.paths.data_path.join("executions");
     let execution_store = create_execution_store(executions_path)?;
@@ -38,7 +39,7 @@ impl Engine {
     self.is_closed
   }
 
-  pub fn store(&mut self, input: StoreInput) -> PowerPlantResult<StoreOutput> {
+  pub fn store(&mut self, input: StoreInput) -> PowerPlantEngineResult<StoreOutput> {
     self.create_error_if_closed()?;
 
     let execution_id = input.execution.meta.id.clone();
@@ -48,10 +49,10 @@ impl Engine {
 
     trace_action!(StoreEnd { action: "StoreEnd", execution_id });
 
-    Ok(StoreOutput { success: true, warnings: vec![] })
+    Ok(StoreOutput { success: true, errors: vec![] })
   }
 
-  pub fn recall(&mut self, input: RecallInput) -> PowerPlantResult<RecallOutput> {
+  pub fn recall(&mut self, input: RecallInput) -> PowerPlantEngineResult<RecallOutput> {
     self.create_error_if_closed()?;
 
     let execution = self.execution_store.recall(&input.execution_id).map_err(storage_error)?;
@@ -59,7 +60,7 @@ impl Engine {
     Ok(RecallOutput { execution })
   }
 
-  pub fn search(&mut self, input: SearchInput) -> PowerPlantResult<SearchOutput> {
+  pub fn search(&mut self, input: SearchInput) -> PowerPlantEngineResult<SearchOutput> {
     self.create_error_if_closed()?;
 
     let output = self.execution_store.search(&input).map_err(storage_error)?;
@@ -68,27 +69,27 @@ impl Engine {
   }
 
   #[must_use = "Future must be awaited to do the actual cleanup work"]
-  pub fn close(&mut self) -> impl Future<Output = anyhow::Result<()>> + Send + 'static {
+  pub fn close(&mut self) -> impl Future<Output = PowerPlantEngineResult<()>> + Send + 'static {
     self.is_closed = true;
     ready(Ok(()))
   }
 
-  pub(super) fn create_error_if_closed(&self) -> PowerPlantResult<()> {
+  pub(super) fn create_error_if_closed(&self) -> PowerPlantEngineResult<()> {
     if self.is_closed {
-      Err(anyhow::anyhow!("Engine is closed"))?;
+      Err(PowerPlantEngineError::EngineClosed)?;
     }
 
     Ok(())
   }
 }
 
-fn storage_error(error: StorageError) -> power_plant_error::BatchedPowerPlantDiagnostic {
-  anyhow::anyhow!(error.to_string()).into()
+fn storage_error(error: StorageError) -> PowerPlantEngineError {
+  PowerPlantEngineError::StorageError(error.to_string())
 }
 
 fn create_execution_store(
   executions_path: camino::Utf8PathBuf,
-) -> PowerPlantResult<Arc<dyn ExecutionStore>> {
+) -> PowerPlantEngineResult<Arc<dyn ExecutionStore>> {
   let fs_store = FsExecutionStore::new(executions_path.clone());
 
   #[cfg(feature = "ladybug")]
@@ -117,7 +118,7 @@ fn create_execution_store(
 mod tests {
   use super::*;
   use chrono::Utc;
-  use power_plant_common::SearchInput;
+  use power_plant_core::SearchInput;
   use power_plant_models::{
     Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta,
     GeneratorMeta, InputMeta, Meta, OutputMeta, SchemaMeta,

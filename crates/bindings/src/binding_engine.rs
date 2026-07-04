@@ -1,15 +1,15 @@
 use crate::{
   types::{
-    binding_error::{BindingError, BindingErrors, BindingResult},
+    binding_error::{BindingErrors, BindingResult},
     binding_input::{BindingRecallInput, BindingSearchInput, BindingStoreInput},
     binding_options::BindingOptions,
     binding_output::{BindingRecallOutput, BindingSearchOutput, BindingStoreOutput},
   },
-  utils::{handle_result, to_binding_error},
+  utils::to_binding_error,
 };
-use napi::{Env, bindgen_prelude::PromiseRaw};
+use napi::{Either, Env, bindgen_prelude::PromiseRaw};
 use napi_derive::napi;
-use power_plant_core::Engine;
+use power_plant_engine::Engine;
 
 #[napi]
 #[derive(Debug)]
@@ -23,15 +23,7 @@ impl BindingEngine {
   pub fn new(options: BindingOptions) -> napi::Result<Self> {
     let inner = Engine::new(options.into());
     if inner.is_err() {
-      return Err(napi::Error::from_reason(
-        inner
-          .err()
-          .unwrap()
-          .iter()
-          .map(|e| e.to_diagnostic().to_string())
-          .collect::<Vec<_>>()
-          .join("\n"),
-      ));
+      return Err(napi::Error::from_reason(inner.err().unwrap().to_string()));
     }
 
     Ok(Self { inner: inner.expect("Unable to create Power Plant engine") })
@@ -43,22 +35,12 @@ impl BindingEngine {
     env: &'env Env,
     input: BindingStoreInput,
   ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingStoreOutput>>> {
-    let execution_id = input.execution.meta.id.clone();
     let result = self.inner.store(input.into());
     let fut = async move {
-      let store_output = match result {
-        Ok(output) => output,
-        Err(errs) => {
-          let errors: Vec<BindingError> = errs
-            .into_vec()
-            .iter()
-            .map(|diagnostic| to_binding_error(diagnostic, execution_id.clone().into()))
-            .collect();
-          return Ok(napi::Either::A(BindingErrors::new(errors)));
-        }
-      };
-
-      Ok(napi::Either::B(BindingStoreOutput::from(store_output)))
+      match result {
+        Ok(output) => Ok(Either::B(BindingStoreOutput::from(output))),
+        Err(err) => Ok(Either::A(BindingErrors::new(vec![to_binding_error(&err)]))),
+      }
     };
 
     env.spawn_future(fut)
@@ -70,22 +52,12 @@ impl BindingEngine {
     env: &'env Env,
     input: BindingRecallInput,
   ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingRecallOutput>>> {
-    let execution_id = input.execution_id.clone();
     let result = self.inner.recall(input.into());
     let fut = async move {
-      let recall_output = match result {
-        Ok(output) => output,
-        Err(errs) => {
-          let errors: Vec<BindingError> = errs
-            .into_vec()
-            .iter()
-            .map(|diagnostic| to_binding_error(diagnostic, execution_id.clone().into()))
-            .collect();
-          return Ok(napi::Either::A(BindingErrors::new(errors)));
-        }
-      };
-
-      Ok(napi::Either::B(BindingRecallOutput::from(recall_output)))
+      match result {
+        Ok(output) => Ok(Either::B(BindingRecallOutput::from(output))),
+        Err(err) => Ok(Either::A(BindingErrors::new(vec![to_binding_error(&err)]))),
+      }
     };
 
     env.spawn_future(fut)
@@ -99,19 +71,10 @@ impl BindingEngine {
   ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingSearchOutput>>> {
     let result = self.inner.search(input.into());
     let fut = async move {
-      let search_output = match result {
-        Ok(output) => output,
-        Err(errs) => {
-          let errors: Vec<BindingError> = errs
-            .into_vec()
-            .iter()
-            .map(|diagnostic| to_binding_error(diagnostic, "search".into()))
-            .collect();
-          return Ok(napi::Either::A(BindingErrors::new(errors)));
-        }
-      };
-
-      Ok(napi::Either::B(BindingSearchOutput::from(search_output)))
+      match result {
+        Ok(output) => Ok(Either::B(BindingSearchOutput::from(output))),
+        Err(err) => Ok(Either::A(BindingErrors::new(vec![to_binding_error(&err)]))),
+      }
     };
 
     env.spawn_future(fut)
@@ -127,7 +90,9 @@ impl BindingEngine {
     let cleanup_fut = self.inner.close();
     env.spawn_future(async move {
       let res = cleanup_fut.await;
-      handle_result(res)?;
+      if res.is_err() {
+        return Err(napi::Error::from_reason(res.err().unwrap().to_string()));
+      }
       Ok(())
     })
   }

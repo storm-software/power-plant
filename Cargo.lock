@@ -2196,9 +2196,8 @@ dependencies = [
  "oxc_resolver_napi",
  "oxc_sourcemap",
  "oxc_transform_napi",
- "power-plant-common",
  "power-plant-core",
- "power-plant-error",
+ "power-plant-engine",
  "power-plant-models",
  "power-plant-tracing",
  "power-plant-utils",
@@ -2210,16 +2209,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "power-plant-common"
+name = "power-plant-core"
 version = "0.1.0"
 dependencies = [
- "anyhow",
  "arcstr",
  "blake3",
  "camino",
  "derive_more",
  "oxc_index",
- "power-plant-error",
  "power-plant-models",
  "power-plant-utils",
  "regex",
@@ -2230,21 +2227,20 @@ dependencies = [
  "serde_json",
  "storm-config",
  "sugar_path",
+ "thiserror",
  "url",
 ]
 
 [[package]]
-name = "power-plant-core"
+name = "power-plant-engine"
 version = "0.1.0"
 dependencies = [
- "anyhow",
  "arcstr",
  "blake3",
  "camino",
  "chrono",
  "derive_more",
- "power-plant-common",
- "power-plant-error",
+ "power-plant-core",
  "power-plant-models",
  "power-plant-storage",
  "power-plant-tracing",
@@ -2257,34 +2253,10 @@ dependencies = [
  "serde",
  "serde_json",
  "storm-config",
+ "thiserror",
  "tokio",
  "tracing",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "power-plant-error"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "arcstr",
- "bitflags",
- "camino",
- "derive_more",
- "napi",
- "napi-derive",
- "oxc",
- "oxc_allocator",
- "oxc_ecmascript",
- "oxc_index",
- "oxc_traverse",
- "rolldown-ariadne",
- "ropey",
- "rustc-hash",
- "serde",
- "serde_json",
- "sugar_path",
- "ts-rs",
 ]
 
 [[package]]
@@ -2294,7 +2266,6 @@ dependencies = [
  "blake3",
  "chrono",
  "oxc_index",
- "power-plant-error",
  "power-plant-utils",
  "schemars",
  "serde",
@@ -2310,7 +2281,7 @@ dependencies = [
  "camino",
  "chrono",
  "lbug",
- "power-plant-common",
+ "power-plant-core",
  "power-plant-models",
  "serde",
  "serde_json",

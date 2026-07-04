@@ -39,7 +39,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 <!-- markdownlint-disable -->
 
 > [!IMPORTANT] 
-> This repository, and the apps, libraries, and tools contained within, is still in it's initial development phase. As a result, bugs and issues are expected with it's usage. When the main development phase completes, a proper release will be performed, the packages will be available through NPM (and other distributions), and this message will be removed. However, in the meantime, please feel free to report any issues you may come across.
+> This crate is largely considered internal to the Power Plant monorepo, and is not intended for public consumption. It is subject to change at any time without notice. If you are looking for a way to use Power Plant, please see the [Power Plant website](https://stormsoftware.com/projects/power-plant) for more information.
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
@@ -59,7 +59,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 # Power Plant - Core Crate
 
-The **Power Plant - Core** crate is the core of the Power Plant native runtime. It provides the main functionality for Power Plant, including the engine, the route, and the plugin system.
+The **Power Plant - Core** crate provides shared functionality and type definitions used across the Power Plant runtime.
 
 ## Installing
 
@@ -75,7 +75,7 @@ Run `nx build native-core` to build the library.
 
 ## Running unit tests
 
-Run `nx test power-plant-core` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test native-core` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
-use power_plant_common::{ExecutionSearchHit, SearchInput, SearchOutput};
+use power_plant_core::{ExecutionSearchHit, SearchInput, SearchOutput};
 use power_plant_models::Execution;
 
 use crate::{
