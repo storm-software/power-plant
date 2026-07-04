@@ -18,15 +18,52 @@
 
 import type {
   GeneratorOptions,
-  GeneratorParseOptions
+  TemplateRenderResult
 } from "@asyncapi/generator";
 import { Generator } from "@asyncapi/generator";
 import type { AsyncAPIDocumentInterface } from "@asyncapi/parser";
 import { isAsyncAPIDocument } from "@asyncapi/parser/esm/document";
 import schema from "@power-plant/asyncapi-schema";
-import type { SchemaConfigObject } from "@power-plant/core";
+import type {
+  GeneratorFunctionResult,
+  SchemaConfigObject
+} from "@power-plant/core";
 import { defineGenerator, useContext } from "@power-plant/core";
 import packageJson from "../package.json" with { type: "json" };
+
+function toGeneratedDocuments(
+  filePath: string,
+  rendered: string | TemplateRenderResult | TemplateRenderResult[] | undefined
+): GeneratorFunctionResult<AsyncAPIDocumentInterface, Options> {
+  if (rendered === undefined) {
+    return {};
+  }
+
+  if (typeof rendered === "string") {
+    return {
+      [filePath]: {
+        path: filePath,
+        source: [{ content: rendered }]
+      }
+    };
+  }
+
+  const results = Array.isArray(rendered) ? rendered : [rendered];
+
+  return results.reduce(
+    (documents, result) => {
+      const path = result.metadata?.fileName ?? filePath;
+
+      documents[path] = {
+        path,
+        source: [{ content: result.content }]
+      };
+
+      return documents;
+    },
+    {} as GeneratorFunctionResult<AsyncAPIDocumentInterface, Options>
+  );
+}
 
 export interface Options extends GeneratorOptions {
   templateName: string;
@@ -53,16 +90,20 @@ export default defineGenerator<AsyncAPIDocumentInterface, Options, void>({
     ]
   },
   schema: schema as SchemaConfigObject<AsyncAPIDocumentInterface>,
-  generator: async (spec, options) => {
-    const { templateName, outputPath, ...rest } = options;
+  generator: async (
+    spec,
+    options
+  ): Promise<GeneratorFunctionResult<AsyncAPIDocumentInterface, Options>> => {
+    const { templateName, outputPath, entrypoint, ...rest } = options;
     const { cwd } = useContext();
 
     if (!isAsyncAPIDocument(spec)) {
       throw new Error("Invalid AsyncAPI schema");
     }
 
-    const generatorOptions: GeneratorParseOptions = {
+    const generatorOptions: GeneratorOptions = {
       ...rest,
+      entrypoint,
       output: "string"
     };
     const generator = new Generator(
@@ -76,10 +117,9 @@ export default defineGenerator<AsyncAPIDocumentInterface, Options, void>({
     generator.setLogLevel();
 
     await generator.installAndSetupTemplate();
-    await generator.configureTemplateWorkflow(generatorOptions);
-    await generator.handleEntrypoint();
-    await generator.executeAfterHook();
+    await generator.configureTemplateWorkflow(rest);
+    const rendered = await generator.handleEntrypoint();
 
-    return {};
+    return toGeneratedDocuments(entrypoint ?? "output", rendered);
   }
 });

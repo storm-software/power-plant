@@ -1,33 +1,33 @@
 [package]
-authors = { workspace = true }
-categories = { workspace = true }
-description = "☢️ Node.js Bindings for the Power Plant runtime."
+authors       = { workspace = true }
+categories    = { workspace = true }
+description   = "☢️ Node.js Bindings for the Power Plant runtime."
 documentation = "https://docs.rs/power-plant"
-edition = { workspace = true }
-homepage = { workspace = true }
-keywords = { workspace = true }
-license = { workspace = true }
-name = "power-plant-bindings"
-publish = false
-readme = "./README.md"
-repository = { workspace = true }
-version = "0.1.0"
+edition       = { workspace = true }
+homepage      = { workspace = true }
+keywords      = { workspace = true }
+license       = { workspace = true }
+name          = "power-plant-bindings"
+publish       = false
+readme        = "./README.md"
+repository    = { workspace = true }
+version       = "0.1.0"
 
 [lints]
 workspace = true
 
 [lib]
 crate-type = ["cdylib"]
-doctest = false
+doctest    = false
 
 [dependencies]
 
 # Power Pla          nt
-power-plant-core = { workspace = true }
-power-plant-engine = { workspace = true }
-power-plant-models = { workspace = true }
+power-plant-core    = { workspace = true }
+power-plant-engine  = { workspace = true }
+power-plant-models  = { workspace = true }
 power-plant-tracing = { workspace = true }
-power-plant-utils = { workspace = true }
+power-plant-utils   = { workspace = true }
 
 anyhow = { workspace = true }
 arcstr = { workspace = true }
@@ -78,7 +78,7 @@ mimalloc-safe = { workspace = true, features = [
 ] }
 
 [build-dependencies]
-napi-build = { workspace = true }
+napi-build       = { workspace = true }
 static_vcruntime = { version = "3.0" }
 
 [features]

@@ -131,15 +131,6 @@
       };
     };
 
-    release-linux-powerpc64le = {
-      extends = [
-        "release-unix"
-      ];
-      module = {
-        languages.rust.targets = [ "powerpc64le-unknown-linux-gnu" ];
-      };
-    };
-
     release-linux-gnueabihf-armv7 = {
       extends = [
         "release-unix"
@@ -158,21 +149,12 @@
       };
     };
 
-    release-linux-ohos-aarch64 = {
+    release-linux-android-armv7 = {
       extends = [
         "release-unix"
       ];
       module = {
-        languages.rust.targets = [ "aarch64-unknown-linux-ohos" ];
-      };
-    };
-
-    release-linux-gnu-s390x = {
-      extends = [
-        "release-unix"
-      ];
-      module = {
-        languages.rust.targets = [ "s390x-unknown-linux-gnu" ];
+        languages.rust.targets = [ "armv7-linux-androideabi" ];
       };
     };
   };

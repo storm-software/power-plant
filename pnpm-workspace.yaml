@@ -8,7 +8,7 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@alloy-js/babel-preset": "^0.3.0"
+  "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/typescript": ^0.24.0
   "@asyncapi/generator": ^3.3.0
@@ -48,19 +48,19 @@ catalog:
   "@powerlines/tsconfig": ^0.4.188
   "@powerlines/tsdoc": ^0.2.136
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.20
-  "@storm-software/config-tools": ^1.190.83
-  "@storm-software/cspell": ^0.46.151
+  "@storm-software/config": ^1.138.21
+  "@storm-software/config-tools": ^1.190.84
+  "@storm-software/cspell": ^0.46.152
   "@storm-software/eslint": ^0.170.116
   "@storm-software/eslint-plugin-tsdoc": ^0.0.46
-  "@storm-software/git-tools": ^2.131.91
-  "@storm-software/linting-tools": ^1.134.13
-  "@storm-software/markdownlint": ^0.30.239
-  "@storm-software/pnpm-tools": ^0.7.94
-  "@storm-software/prettier": ^0.59.136
-  "@storm-software/tsconfig": ^0.48.150
-  "@storm-software/untyped": ^0.24.225
-  "@storm-software/workspace-tools": ^1.296.63
+  "@storm-software/git-tools": ^2.131.92
+  "@storm-software/linting-tools": ^1.134.14
+  "@storm-software/markdownlint": ^0.30.240
+  "@storm-software/pnpm-tools": ^0.7.95
+  "@storm-software/prettier": ^0.59.137
+  "@storm-software/tsconfig": ^0.48.151
+  "@storm-software/untyped": ^0.24.226
+  "@storm-software/workspace-tools": ^1.296.64
   "@stryke/convert": ^0.7.25
   "@stryke/date": ^0.0.6
   "@stryke/env": ^0.20.112

@@ -1,7 +1,7 @@
 # reference: https://github.com/rust-lang/cargo/issues/3946
 [env]
 CARGO_WORKSPACE_DIR = { value = "", relative = true }
-WORKSPACE_DIR = { value = "", relative = true }
+WORKSPACE_DIR       = { value = "", relative = true }
 
 [build]
 # rustc-wrapper = "/nix/store/s65clklw6q6kjhkgcpgva0r8big3z7rh-sccache-0.14.0/bin/sccache"
@@ -18,8 +18,8 @@ target-dir = "dist/target"
 browser = "chromium"
 
 [alias]
-ck = "check --workspace --all-features --all-targets --locked"
-ls-lint = "run --bin ls-lint"
+ck          = "check --workspace --all-features --all-targets --locked"
+ls-lint     = "run --bin ls-lint"
 run-fixture = "run --bin run-fixture"
 
 [target.x86_64-pc-windows-msvc]
