@@ -100,11 +100,11 @@ jobs:
           - host: ubuntu-latest
             target: aarch64-linux-android
             build-flags: ""
-            profile: release-std
+            profile: release-linux-android-aarch64
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
             build-flags: --use-napi-cross
-            profile: release-std
+            profile: release-linux-ohos-aarch64
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             build-flags: ""
@@ -112,7 +112,7 @@ jobs:
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
             build-flags: --use-napi-cross
-            profile: release-std
+            profile: release-linux-gnu-s390x
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
             build-flags: --use-napi-cross

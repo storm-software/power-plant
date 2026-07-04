@@ -55,6 +55,10 @@
         "release"
       ];
       module = {
+        packages = with pkgs; [
+          gcc
+          glibc
+        ];
         languages.rust = {
           enable = true;
           channel = "stable";
@@ -73,11 +77,9 @@
         "release"
       ];
       module = {
-
         packages = with pkgs; [
           cargo-zigbuild
         ];
-
         languages = {
           zig = {
             enable = true;
@@ -143,6 +145,33 @@
       ];
       module = {
         languages.rust.targets = [ "armv7-unknown-linux-gnueabihf" ];
+      };
+    };
+
+    release-linux-android-aarch64 = {
+      extends = [
+        "release-std"
+      ];
+      module = {
+        languages.rust.targets = [ "aarch64-linux-android" ];
+      };
+    };
+
+    release-linux-ohos-aarch64 = {
+      extends = [
+        "release-std"
+      ];
+      module = {
+        languages.rust.targets = [ "aarch64-unknown-linux-ohos" ];
+      };
+    };
+
+    release-linux-gnu-s390x = {
+      extends = [
+        "release-std"
+      ];
+      module = {
+        languages.rust.targets = [ "s390x-unknown-linux-gnu" ];
       };
     };
   };
