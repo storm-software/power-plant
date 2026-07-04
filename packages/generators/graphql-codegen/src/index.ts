@@ -18,7 +18,7 @@
 
 import { codegen } from "@graphql-codegen/core";
 import type { Types } from "@graphql-codegen/plugin-helpers";
-import type { GeneratedDocument } from "@power-plant/core";
+import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator } from "@power-plant/core";
 import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import schema from "@power-plant/graphql-schema";
@@ -38,13 +38,13 @@ export default defineGenerator<GraphQLSchema, Options, void>({
   generator: async (
     spec,
     options
-  ): Promise<GeneratedDocument<GraphQLSchema, Options>[]> => {
+  ): Promise<GeneratorFunctionResult<GraphQLSchema, Options>> => {
     const output = await codegen({
       ...options
     });
 
-    return [
-      {
+    return {
+      [options.filename]: {
         path: options.filename,
         source: [
           {
@@ -52,6 +52,6 @@ export default defineGenerator<GraphQLSchema, Options, void>({
           }
         ]
       }
-    ];
+    };
   }
 });

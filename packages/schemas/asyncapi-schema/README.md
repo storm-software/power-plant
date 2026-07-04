@@ -33,7 +33,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <h3 align="center">💻 Visit <a href="https://stormsoftware.com" target="_blank">stormsoftware.com</a> to stay up to date with this developer</h3><br />
 
-[![Version](https://img.shields.io/badge/version-0.0.5-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
+[![Version](https://img.shields.io/badge/version-0.0.1-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
 
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -57,23 +57,23 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <!-- END header -->
 
-# Power Plant - Schema
+# Power Plant - AsyncAPI Schema
 
-A Power Plant utility package to help managing schemas.
+A Power Plant source for reading the input specification from an [AsyncAPI schema](https://www.asyncapi.com/docs/specifications/v3.1.0).
 
 ## Installing
 
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/schema
+pnpm add -D @power-plant/asyncapi-schema
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/schema
+npm install -D @power-plant/asyncapi-schema
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/schema
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/schema
+yarn add -D @power-plant/asyncapi-schema
 ```
 
 </details>
 
 ## Building
 
-Run `nx build schema` to build the library.
+Run `nx build asyncapi-schema` to build the library.
 
 ## Running unit tests
 
-Run `nx test schema` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test asyncapi-schema` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->

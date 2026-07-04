@@ -18,7 +18,7 @@
 
 import type { UserConfig } from "@hey-api/openapi-ts";
 import { createClient } from "@hey-api/openapi-ts";
-import type { GeneratedDocument } from "@power-plant/core";
+import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator, useContext } from "@power-plant/core";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import schema from "@power-plant/openapi-schema";
@@ -49,8 +49,8 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
   generator: async (
     spec,
     options
-  ): Promise<GeneratedDocument<OpenAPISchema, Arrayable<UserConfig>>[]> => {
-    const { storage, cwd } = useContext();
+  ): Promise<GeneratorFunctionResult<OpenAPISchema, Arrayable<UserConfig>>> => {
+    const { cwd } = useContext();
 
     const context = await createClient(
       toArray(options).map(option => ({
@@ -62,14 +62,22 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
       }))
     );
 
-    await Promise.all(
-      context.map(async c =>
-        Promise.all(
-          c.gen.render().map(async r => storage.setItem(r.path, r.content))
-        )
-      )
-    );
+    return context.reduce(
+      (ret, c) => {
+        c.gen.render().forEach(r => {
+          ret[r.path] = {
+            path: r.path,
+            source: [
+              {
+                content: r.content
+              }
+            ]
+          };
+        });
 
-    return [];
+        return ret;
+      },
+      {} as GeneratorFunctionResult<OpenAPISchema, Arrayable<UserConfig>>
+    );
   }
 });
