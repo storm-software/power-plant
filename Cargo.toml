@@ -192,11 +192,10 @@ oxc_traverse = { version = "0.97.0" }
 
 # oxc crates in their own repos
 # Versions must be relaxed for usage in oxc.
-# Please update with `cargo update oxc_resolver oxc_resolver_napi oxc_sourcemap oxc_index oxc-browserslist`
+# Please update with `cargo update oxc_resolver oxc_resolver_napi oxc_index oxc-browserslist`
 oxc_index         = { version = "4", features = ["rayon", "serde"] }
 oxc_resolver      = { version = "11.13.2" }
 oxc_resolver_napi = { version = "11.13.2" }
-oxc_sourcemap     = { version = "6.0.1" }
 
 # napi
 napi = { version = "3.0.0", features = [

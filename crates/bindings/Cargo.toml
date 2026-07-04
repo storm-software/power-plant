@@ -51,16 +51,9 @@ num_cpus = { workspace = true }
 oxc_parser_napi = { workspace = true }
 oxc_resolver = { workspace = true }
 oxc_resolver_napi = { workspace = true }
-oxc_sourcemap = { workspace = true }
 oxc_transform_napi = { workspace = true }
 rustc-hash = { workspace = true }
 serde_json = { workspace = true }
-
-# [target.'cfg(all(target_arch = "wasm32", not(target_os = "emscripten"), not(target_os = "unknown"), not(target_os = "wasi")))'.dependencies]
-# oxc_resolver = { version = "11.13.2", features = ["yarn_pnp"] }
-# oxc_resolver_napi = { version = "11.13.2", default-features = false, features = [
-#     "yarn_pnp",
-# ] }
 
 [target.'cfg(windows)'.dependencies]
 winapi = { version = "0.3", features = ["fileapi", "psapi"] }

@@ -50,7 +50,7 @@
       };
     };
 
-    release-std = {
+    release-unix = {
       extends = [
         "release"
       ];
@@ -58,6 +58,7 @@
         packages = with pkgs; [
           gcc
           glibc
+          cmake
         ];
         languages.rust = {
           enable = true;
@@ -103,7 +104,7 @@
     release-darwin-x86_64 = {
       extends = [
         "release-darwin"
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "x86_64-apple-darwin" ];
@@ -113,7 +114,7 @@
     release-linux-musl-x86_64 = {
       extends = [
         "release-musl"
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "x86_64-unknown-linux-musl" ];
@@ -123,7 +124,7 @@
     release-linux-musl-aarch64 = {
       extends = [
         "release-musl"
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "aarch64-unknown-linux-musl" ];
@@ -132,7 +133,7 @@
 
     release-linux-powerpc64le = {
       extends = [
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "powerpc64le-unknown-linux-gnu" ];
@@ -141,7 +142,7 @@
 
     release-linux-gnueabihf-armv7 = {
       extends = [
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "armv7-unknown-linux-gnueabihf" ];
@@ -150,7 +151,7 @@
 
     release-linux-android-aarch64 = {
       extends = [
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "aarch64-linux-android" ];
@@ -159,7 +160,7 @@
 
     release-linux-ohos-aarch64 = {
       extends = [
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "aarch64-unknown-linux-ohos" ];
@@ -168,7 +169,7 @@
 
     release-linux-gnu-s390x = {
       extends = [
-        "release-std"
+        "release-unix"
       ];
       module = {
         languages.rust.targets = [ "s390x-unknown-linux-gnu" ];
