@@ -19,7 +19,6 @@
 import { schemas } from "@asyncapi/specs";
 import { defineSchema } from "@power-plant/core";
 import { z } from "zod";
-import packageJson from "../package.json" with { type: "json" };
 
 const asyncapiSchema = z.fromJSONSchema(
   schemas["3.1.0"] as z.core.JSONSchema.JSONSchema,
@@ -31,7 +30,7 @@ export default defineSchema<AsyncAPISchema, any>({
   meta: {
     name: "asyncapi-schema",
     title: "AsyncAPI Schema",
-    version: packageJson.version,
+    version: "1.0",
     description:
       "An AsyncAPI specification document used to describe event-driven APIs.",
     tags: ["asyncapi"],

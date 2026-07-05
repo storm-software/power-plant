@@ -17,11 +17,10 @@
  ------------------------------------------------------------------- */
 
 import { defineInput } from "@power-plant/core";
-import type { GraphQLSchemaDocument } from "@power-plant/graphql-schema";
+import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import { isFileReference } from "@stryke/resolve/type-checks";
 import { isString } from "@stryke/type-checks/is-string";
 import { isURL } from "@stryke/type-checks/is-url";
-import packageJson from "../package.json" with { type: "json" };
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -29,12 +28,12 @@ export { createSchemaLoaders } from "./loaders";
 export type { Options } from "./types";
 export { toSchemaPointer } from "./utilities";
 
-export default defineInput<GraphQLSchemaDocument, Options>({
+export default defineInput<GraphQLSchema, Options>({
   meta: {
     name: "graphql-input",
     description:
       "An input extension that reads the specification from a GraphQL schema document using loaders defined in GraphQL-Tools packages.",
-    readFrom: (_spec: GraphQLSchemaDocument, options: Options) =>
+    readFrom: (_spec: GraphQLSchema, options: Options) =>
       `Reads the GraphQL schema from ${
         isString(options.inputPath)
           ? `"${options.inputPath}"`
@@ -44,7 +43,7 @@ export default defineInput<GraphQLSchemaDocument, Options>({
               ? `the file at "${options.inputPath.file}"`
               : "a specified schema source"
       }.`,
-    version: packageJson.version,
+    version: "1.0",
     tags: ["graphql"],
     links: [
       {

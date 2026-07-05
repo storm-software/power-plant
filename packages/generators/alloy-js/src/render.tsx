@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { OutputFile as AlloyOutputFile, Children } from "@alloy-js/core";
+import type { Children, OutputFile as AlloyOutputFile } from "@alloy-js/core";
 import { renderAsync, traverseOutput } from "@alloy-js/core";
 import type {
   ExecutionContext,

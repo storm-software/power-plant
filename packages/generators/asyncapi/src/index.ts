@@ -29,7 +29,6 @@ import type {
   SchemaConfigObject
 } from "@power-plant/core";
 import { defineGenerator, useContext } from "@power-plant/core";
-import packageJson from "../package.json" with { type: "json" };
 
 function toGeneratedDocuments(
   filePath: string,
@@ -76,7 +75,7 @@ export default defineGenerator<AsyncAPIDocumentInterface, Options, void>({
     title: "AsyncAPI",
     description:
       "A generator that uses the AsyncAPI specification to generate event-driven client SDKs and servers using @asyncapi/generator.",
-    version: packageJson.version,
+    version: "1.0",
     tags: ["asyncapi"],
     links: [
       {

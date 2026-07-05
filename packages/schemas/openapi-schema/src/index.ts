@@ -18,7 +18,6 @@
 
 import { defineSchema } from "@power-plant/core";
 import type * as z from "zod/mini";
-import packageJson from "../package.json" with { type: "json" };
 import { openapiSchema } from "./schema";
 
 export * from "./schema";
@@ -28,7 +27,7 @@ export default defineSchema<OpenAPISchema, any>({
   meta: {
     name: "openapi-schema",
     title: "OpenAPI Schema",
-    version: packageJson.version,
+    version: "1.0",
     description:
       "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
     spec: (spec: OpenAPISchema) =>

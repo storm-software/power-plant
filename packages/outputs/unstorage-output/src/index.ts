@@ -22,7 +22,6 @@ import { isSetString } from "@stryke/type-checks/is-set-string";
 import type { Storage } from "unstorage";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
-import packageJson from "../package.json" with { type: "json" };
 
 export type Options =
   | {
@@ -37,8 +36,8 @@ export default defineOutput<any, Options>({
     name: "unstorage-output",
     description:
       "An output that writes generated documents to an Unstorage driver.",
-    version: packageJson.version,
-    tags: ["unstorage", "output"],
+    version: "1.0",
+    tags: ["unstorage"],
     links: [
       {
         href: "https://unstorage.unjs.io",
@@ -84,7 +83,7 @@ export default defineOutput<any, Options>({
         : storage;
 
     await Promise.all(
-      documents.map(async document => {
+      Object.values(documents).map(async document => {
         return Promise.all(
           document.source
             ?.filter(source => isSetString(source?.content))

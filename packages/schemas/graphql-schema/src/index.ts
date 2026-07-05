@@ -19,7 +19,6 @@
 import { defineSchema } from "@power-plant/core";
 import { isScalarType } from "graphql";
 import type * as z from "zod/mini";
-import packageJson from "../package.json" with { type: "json" };
 import { graphqlSchema } from "./schema";
 
 export * from "./schema";
@@ -29,7 +28,7 @@ export default defineSchema<GraphQLSchema, any>({
   meta: {
     name: "graphql-schema",
     title: "GraphQL Schema",
-    version: packageJson.version,
+    version: "1.0",
     description:
       "A GraphQL schema document used to describe a GraphQL API. This schema is compatible with the GraphQL specification and can be used to validate and generate code from the schema. Some examples of tools that can be used to generate client and/or server libraries, documentation, and other tools are: GraphQL Code Generator, GraphQL Yoga, Apollo Server, and many more.",
     spec: (spec: GraphQLSchema) => {

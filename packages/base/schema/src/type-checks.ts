@@ -26,14 +26,15 @@ import {
 } from "@stryke/type-checks";
 import type { FileReference } from "@stryke/types/configuration";
 import type {
-  InputObject as UntypedConfigObject,
   FunctionArg as UntypedFunctionArg,
+  InputObject as UntypedConfigObject,
   Schema as UntypedSchema,
   TypeDescriptor as UntypedTypeDescriptor
 } from "untyped";
 import type { BaseSchema } from "valibot";
 import { JSON_SCHEMA_PRIMITIVE_TYPES, JSON_SCHEMA_TYPES } from "./constants";
 import type {
+  ExtractedSchemaEnvelope as SchemaWithSource,
   JsonSchema,
   JsonSchemaAllOf,
   JsonSchemaAny,
@@ -66,8 +67,7 @@ import type {
   JsonSchemaUnion,
   JsonSchemaUnknown,
   SchemaEnvelope,
-  SchemaEnvelopeOf,
-  ExtractedSchemaEnvelope as SchemaWithSource
+  SchemaEnvelopeOf
 } from "./types";
 
 /**

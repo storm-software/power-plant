@@ -22,7 +22,6 @@ import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator } from "@power-plant/core";
 import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import schema from "@power-plant/graphql-schema";
-import packageJson from "../package.json" with { type: "json" };
 
 export type Options = Types.GenerateOptions;
 
@@ -31,7 +30,7 @@ export default defineGenerator<GraphQLSchema, Options, void>({
     name: "graphql-codegen",
     description:
       "A generator that uses GraphQL Codegen to generate source code from a GraphQL schema.",
-    version: packageJson.version,
+    version: "1.0",
     tags: ["graphql", "graphql-codegen"]
   },
   schema,

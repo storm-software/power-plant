@@ -18,8 +18,8 @@
 
 import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator, useExecutionContext } from "@power-plant/core";
-import packageJson from "../package.json" with { type: "json" };
 import { appendPath } from "@stryke/path/append";
+import type { RuntimeOptions } from "handlebars";
 import Handlebars from "handlebars";
 
 export interface Options extends RuntimeOptions {
@@ -41,7 +41,7 @@ export default defineGenerator<any, Options, void>({
     name: "handlebars",
     description:
       "A generator that uses Handlebars to generate source code from a specification.",
-    version: packageJson.version,
+    version: "1.0",
     tags: ["handlebars"],
     links: [
       {
