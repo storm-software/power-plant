@@ -85,6 +85,7 @@ catalog:
   emnapi: 1.11.1
   eslint: ^10.6.0
   graphql: ^17.0.2
+  handlebars: ^4.7.9
   jiti: ^2.7.0
   lefthook: ^1.13.6
   log4brains: ^1.1.0
@@ -119,6 +120,7 @@ overrides:
   "@power-plant/asyncapi": workspace:*
   "@power-plant/graphql-codegen": workspace:*
   "@power-plant/alloy-js": workspace:*
+  "@power-plant/handlebars": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*
   "@power-plant/tools-readme-templates": workspace:*

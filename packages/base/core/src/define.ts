@@ -17,8 +17,6 @@
  ------------------------------------------------------------------- */
 
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
-import { isFunction } from "@stryke/type-checks/is-function";
-import { isSetObject } from "@stryke/type-checks/is-set-object";
 import {
   isGeneratorConfigObject,
   isInputConfigObject,
@@ -142,22 +140,8 @@ export function defineGenerator<
   generator: GeneratorConfigObject<TSpec, TOptions, TReturns>
 ): GeneratorConfigObject<TSpec, TOptions, TReturns> {
   if (!isGeneratorConfigObject<TSpec, TOptions, TReturns>(generator)) {
-    if (
-      isFunction(generator) ||
-      (isSetObject(generator) &&
-        "generator" in generator &&
-        isFunction(
-          (generator as GeneratorConfigObject<TSpec, TOptions, TReturns>)
-            .generator
-        ))
-    ) {
-      throw new TypeError(
-        "A generator function was supplied, but a schema must also be provided when defining a generator."
-      );
-    }
-
     throw new TypeError(
-      "An invalid generator configuration was provided - at minimum, both a schema and a generator function are required."
+      "An invalid generator configuration was provided - at minimum, a generator function is required."
     );
   }
 

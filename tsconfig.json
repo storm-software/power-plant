@@ -34,6 +34,9 @@
       "path": "./packages/generators/alloy-js"
     },
     {
+      "path": "./packages/generators/handlebars"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {

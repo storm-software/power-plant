@@ -84,7 +84,7 @@ export interface GeneratorConfigObject<
   /**
    * The schema config that defines the structure of the specification object for this generator.
    */
-  schema: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
 
   /**
    * The input config for the generator specification.

@@ -37,9 +37,7 @@ export function isGeneratorConfigObject<
 >(config: unknown): config is GeneratorConfigObject<TSpec, TOptions, TReturns> {
   return (
     isSetObject(config) &&
-    "schema" in config &&
     "generator" in config &&
-    config.schema !== undefined &&
     config.generator !== undefined
   );
 }

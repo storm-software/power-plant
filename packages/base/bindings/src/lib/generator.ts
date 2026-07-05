@@ -72,6 +72,10 @@ export async function createGenerator<
     );
   }
 
+  if (!configObject.schema) {
+    configObject.schema = { type: "any" };
+  }
+
   const schema = await createSchema<TSpec, TOptions>(
     configObject.schema as
       | SchemaSourceConfig<TSpec>
