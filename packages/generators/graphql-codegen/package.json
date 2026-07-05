@@ -88,6 +88,6 @@
     "access": "public"
   },
   "inlinedDependencies": {
-    "graphql": "17.0.1"
+    "graphql": "17.0.2"
   }
 }

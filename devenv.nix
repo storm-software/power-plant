@@ -58,6 +58,7 @@
         packages = with pkgs; [
           gcc
           glibc
+          gnumake
           cmake
         ];
       };
