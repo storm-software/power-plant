@@ -64,7 +64,7 @@
       };
     };
 
-    release-musl = {
+    release-cross = {
       extends = [
         "release"
       ];
@@ -98,13 +98,16 @@
         "release-unix"
       ];
       module = {
+        env = {
+          NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM = "1";
+        };
         languages.rust.targets = [ "x86_64-apple-darwin" ];
       };
     };
 
     release-linux-musl-x86_64 = {
       extends = [
-        "release-musl"
+        "release-cross"
         "release-unix"
       ];
       module = {
@@ -112,9 +115,27 @@
       };
     };
 
+    release-linux-gnu-x86_64 = {
+      extends = [
+        "release-unix"
+      ];
+      module = {
+        languages.rust.targets = [ "x86_64-unknown-linux-gnu" ];
+      };
+    };
+
+    release-linux-gnu-aarch64 = {
+      extends = [
+        "release-unix"
+      ];
+      module = {
+        languages.rust.targets = [ "aarch64-unknown-linux-gnu" ];
+      };
+    };
+
     release-linux-musl-aarch64 = {
       extends = [
-        "release-musl"
+        "release-cross"
         "release-unix"
       ];
       module = {
@@ -124,6 +145,7 @@
 
     release-linux-gnueabihf-armv7 = {
       extends = [
+        "release-cross"
         "release-unix"
       ];
       module = {
