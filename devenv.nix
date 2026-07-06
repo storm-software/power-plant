@@ -126,6 +126,7 @@
 
     release-linux-gnu-aarch64 = {
       extends = [
+        "release-cross"
         "release-unix"
       ];
       module = {

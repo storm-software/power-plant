@@ -4,6 +4,13 @@
   "projectType": "library",
   "sourceRoot": "packages/base/bindings/src",
   "targets": {
+    "version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "napi version",
+        "cwd": "{projectRoot}"
+      }
+    },
     "typecheck-base": {
       "executor": "nx:run-commands",
       "options": {
@@ -11,10 +18,10 @@
         "cwd": "{projectRoot}"
       }
     },
-    "deploy-artifacts": {
+    "artifacts": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "napi artifacts --cwd {projectRoot}/src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
+        "command": "napi artifacts --cwd=\"{projectRoot}/src\" --package-json-path ../ -o=../artifacts --npm-dir ../npm",
         "cwd": "{projectRoot}"
       }
     },

@@ -54,7 +54,7 @@ if [[ -n "$build_flags" ]]; then
   build_flags_arg=" $build_flags"
 fi
 
-command="pnpm exec napi build --release${build_flags_arg} --cwd=\"./src\" --manifest-path=\"../../../../crates/bindings/Cargo.toml\" --package-json-path=\"../package.json\" --target=\"${target}\""
+command="pnpm exec napi build --release${build_flags_arg} --cwd=\"$REPO_ROOT/packages/base/bindings/src\" --manifest-path=\"$REPO_ROOT/crates/bindings/Cargo.toml\" --package-json-path=\"$REPO_ROOT/packages/base/bindings/package.json\" --target=\"${target}\""
 
 printf '\033[1;37m ⚙️  Bootstrapping the monorepo before building native %s artifacts...\033[0m\n' "$target"
 
@@ -72,7 +72,7 @@ set +e
 if command -v timeout > /dev/null 2>&1; then
   # shellcheck disable=SC2086
   timeout 15m pnpm exec napi build --release${build_flags_arg} \
-    --cwd="./src" \
+    --cwd="$REPO_ROOT/packages/base/bindings/src" \
     --manifest-path="../../../../crates/bindings/Cargo.toml" \
     --package-json-path="../package.json" \
     --target="$target"
@@ -80,7 +80,7 @@ if command -v timeout > /dev/null 2>&1; then
 else
   # shellcheck disable=SC2086
   pnpm exec napi build --release${build_flags_arg} \
-    --cwd="./src" \
+    --cwd="$REPO_ROOT/packages/base/bindings/src" \
     --manifest-path="../../../../crates/bindings/Cargo.toml" \
     --package-json-path="../package.json" \
     --target="$target"

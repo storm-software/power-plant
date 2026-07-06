@@ -192,10 +192,6 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "artifacts": "napi artifacts --cwd ./src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
-    "version": "napi version"
-  },
   "dependencies": {
     "@emnapi/core": "catalog:",
     "@emnapi/runtime": "catalog:",
@@ -236,10 +232,6 @@
   "napi": {
     "binaryName": "power-plant-bindings",
     "packageName": "@power-plant/bindings",
-    "wasm": {
-      "initialMemory": 1024,
-      "maximumMemory": 32768
-    },
     "targets": [
       "x86_64-apple-darwin",
       "aarch64-apple-darwin",
