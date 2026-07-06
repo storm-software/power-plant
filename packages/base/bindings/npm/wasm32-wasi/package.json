@@ -1,7 +1,9 @@
 {
   "name": "@power-plant/bindings-wasm32-wasi",
   "version": "0.0.1",
-  "cpu": ["wasm32"],
+  "cpu": [
+    "wasm32"
+  ],
   "main": "power-plant-bindings.wasi.cjs",
   "files": [
     "power-plant-bindings.wasm32-wasi.wasm",
@@ -11,7 +13,10 @@
     "wasi-worker-browser.mjs"
   ],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "keywords": [
+    "power-plant",
+    "storm-software"
+  ],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -36,8 +41,8 @@
   },
   "browser": "power-plant-bindings.wasi-browser.js",
   "dependencies": {
-    "@napi-rs/wasm-runtime": "catalog:",
-    "@emnapi/core": "catalog:",
-    "@emnapi/runtime": "catalog:"
+    "@napi-rs/wasm-runtime": "^1.1.6",
+    "@emnapi/core": "1.11.2",
+    "@emnapi/runtime": "1.11.2"
   }
 }

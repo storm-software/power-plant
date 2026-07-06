@@ -1,11 +1,18 @@
 {
   "name": "@power-plant/bindings-linux-x64-musl",
   "version": "0.0.1",
-  "cpu": ["x64"],
+  "cpu": [
+    "x64"
+  ],
   "main": "power-plant-bindings.linux-x64-musl.node",
-  "files": ["power-plant-bindings.linux-x64-musl.node"],
+  "files": [
+    "power-plant-bindings.linux-x64-musl.node"
+  ],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": ["power-plant", "powerlines", "storm-software"],
+  "keywords": [
+    "power-plant",
+    "storm-software"
+  ],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -25,6 +32,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": ["linux"],
-  "libc": ["musl"]
+  "os": [
+    "linux"
+  ],
+  "libc": [
+    "musl"
+  ]
 }

@@ -17,8 +17,8 @@ catalog:
   "@asyncapi/specs": ^6.11.1
   "@babel/core": ^8.0.1
   "@babel/preset-typescript": ^8.0.1
-  "@emnapi/core": 1.11.1
-  "@emnapi/runtime": 1.11.1
+  "@emnapi/core": 1.11.2
+  "@emnapi/runtime": 1.11.2
   "@graphql-codegen/core": ^6.1.0
   "@graphql-codegen/plugin-helpers": ^7.0.1
   "@graphql-tools/apollo-engine-loader": ^8.0.31
@@ -84,7 +84,7 @@ catalog:
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
-  emnapi: 1.11.1
+  emnapi: 1.11.2
   eslint: ^10.6.0
   graphql: ^17.0.2
   handlebars: ^4.7.9

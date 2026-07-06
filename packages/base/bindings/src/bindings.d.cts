@@ -1263,7 +1263,7 @@ export interface BindingExecutionDocument {
   /** The path of the document. */
   path: string;
   /** The extension of the document. */
-  extension: string;
+  extension?: string;
   /** The sources of the document. */
   source: Array<BindingExecutionSource>;
 }
@@ -1473,7 +1473,7 @@ export interface BindingStoreOutput {
   /** Whether the store operation was successful. */
   success: boolean;
   /** Any warnings encountered during the store operation. */
-  warnings: Array<BindingLog>;
+  errors: Array<string>;
 }
 
 export declare function createTokioRuntime(
