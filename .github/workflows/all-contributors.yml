@@ -13,6 +13,9 @@ jobs:
     permissions:
       contents: write
       id-token: write
+    if: github.repository == 'storm-software/power-plant' && (github.ref ==
+      'refs/heads/main' || github.ref == 'refs/heads/next' || github.ref ==
+      'refs/heads/experimental') && github.event.pull_request.draft == false
     steps:
       - name: Setup workspace
         uses: storm-software/action-setup@main
@@ -24,3 +27,5 @@ jobs:
 
       - name: Run all-contributors-auto-action
         uses: JoshuaKGoldberg/all-contributors-auto-action@587a3a5844b0104abb911a69a1a84ec645292f5e # v0.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
