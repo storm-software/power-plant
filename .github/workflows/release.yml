@@ -119,7 +119,7 @@ jobs:
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             build-flags: ""
-            profile: release-unix
+            profile: release-wasm32-wasip1
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main

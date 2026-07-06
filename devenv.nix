@@ -13,6 +13,8 @@
     sccache
   ];
 
+  languages.c.enable = true;
+
   scripts = {
     build-native.exec = "pnpm build-native --target=$1 --buildFlags=$2";
   };
@@ -23,6 +25,9 @@
         "development"
       ];
       module = {
+        packages = with pkgs; [
+          cargo-valgrind
+        ];
         languages.rust = {
           cranelift.enable = true;
           wild.enable = true;
@@ -170,5 +175,15 @@
         languages.rust.targets = [ "armv7-linux-androideabi" ];
       };
     };
+
+    release-wasm32-wasip1 = {
+      extends = [
+        "release-unix"
+      ];
+      module = {
+        languages.rust.targets = [ "wasm32-wasip1-threads" ];
+      };
+    };
+
   };
 }
