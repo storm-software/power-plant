@@ -92,7 +92,7 @@ jobs:
           # Linux (aarch64)
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            build-flags: --use-napi-cross
+            build-flags: -x
             profile: release-linux-gnu-aarch64
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
@@ -135,6 +135,7 @@ jobs:
         env:
           NATIVE_TARGET: ${{ matrix.target }}
           NATIVE_BUILD_FLAGS: ${{ matrix.build-flags }}
+          NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM: 1
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Upload artifact - Unix

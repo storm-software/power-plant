@@ -14,7 +14,7 @@
     "deploy-artifacts": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "napi artifacts --cwd ./src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
+        "command": "napi artifacts --cwd {projectRoot}/src --package-json-path ../ -o=../artifacts --npm-dir ../npm",
         "cwd": "{projectRoot}"
       }
     },
