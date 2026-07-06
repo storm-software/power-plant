@@ -44,6 +44,12 @@
     },
     {
       "path": "./packages/inputs/graphql-input"
+    },
+    {
+      "path": "./packages/inputs/ai-input"
+    },
+    {
+      "path": "./packages/devtools/ai-sdk"
     }
   ],
   "files": []

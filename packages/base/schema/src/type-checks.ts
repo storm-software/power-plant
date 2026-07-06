@@ -425,7 +425,13 @@ export function isJsonSchemaAny(input: unknown): input is JsonSchemaAny {
 
   const schema = input as Record<string, unknown>;
 
-  return hasValidJsonSchemaKeywords(schema) && isOptionalString(schema.$ref);
+  return (
+    hasValidJsonSchemaKeywords(schema) &&
+    isOptionalString(schema.$ref) &&
+    (!schema.type ||
+      (Array.isArray(schema.type) &&
+        schema.type.every(t => JSON_SCHEMA_PRIMITIVE_TYPES.includes(t))))
+  );
 }
 
 /**

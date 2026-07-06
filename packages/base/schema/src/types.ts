@@ -115,7 +115,10 @@ export interface JsonSchemaMetadataKeywords {
    * @see https://json-schema.org/draft/2020-12/json-schema-core#section-8.1.1
    * @see https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-8.2.2
    */
-  $schema?: string;
+  $schema?:
+    | "https://json-schema.org/draft/2020-12/schema"
+    | "http://json-schema.org/draft-07/schema#"
+    | "http://json-schema.org/draft-04/schema#";
 
   /**
    * A keyword that is used in meta-schemas to identify the vocabularies available for use in schemas described by that meta-schema.
@@ -346,14 +349,23 @@ export type JsonSchemaKeywords = JsonSchemaMetadataKeywords &
 /**
  * A schema that can point to another schema via `$ref`.
  */
-export interface JsonSchemaAny extends JsonSchemaKeywords {
-  /**
-   * A URI reference to another schema.
-   *
-   * @see https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1
-   */
-  $ref?: string;
-}
+export type JsonSchemaAny = JsonSchemaKeywords &
+  (
+    | {
+        /**
+         * A URI reference to another schema.
+         *
+         * @see https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1
+         */
+        $ref?: string;
+      }
+    | {
+        /**
+         * Declares the primitive type of the schema.
+         */
+        type: typeof JSON_SCHEMA_PRIMITIVE_TYPES;
+      }
+  );
 
 /**
  * JSON Schema keywords for array validation.
@@ -1220,7 +1232,10 @@ export type JsonSchema =
  */
 export interface JsonSchemaLike extends JsonSchemaKeywords {
   $id?: string;
-  $schema?: string;
+  $schema?:
+    | "https://json-schema.org/draft/2020-12/schema"
+    | "http://json-schema.org/draft-07/schema#"
+    | "http://json-schema.org/draft-04/schema#";
   $vocabulary?: Record<string, boolean>;
   $comment?: string;
   $anchor?: string;

@@ -16,9 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-import type { Model } from "./model";
+import type { Base } from "./base";
 
-export interface Tenant extends Model {
+export interface Tenant extends Base {
   /**
    * The name of the tenant.
    */

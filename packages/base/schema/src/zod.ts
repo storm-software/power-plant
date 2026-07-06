@@ -16,9 +16,18 @@
 
  ------------------------------------------------------------------- */
 
+import { deepClone } from "@stryke/helpers/deep-clone";
 import * as z from "zod/mini";
+import * as z4 from "zod/v4";
 import { JSON_SCHEMA_TYPES } from "./constants";
-import type { JsonSchema, JsonSchemaMap } from "./types";
+import { getJsonSchema, traverseSchema } from "./helpers";
+import { isJsonSchemaAny } from "./type-checks";
+import type {
+  JsonSchema,
+  JsonSchemaLike,
+  JsonSchemaMap,
+  SchemaEnvelope
+} from "./types";
 
 const jsonSchemaType = z.enum(JSON_SCHEMA_TYPES);
 
@@ -153,5 +162,37 @@ export const jsonSchema: z.ZodMiniType<JsonSchema> = z.lazy(() => {
     multipleOf: z.optional(jsonSchemaNumeric)
   });
 
-  return z.union([referenceSchema, jsonSchemaDocument]);
+  return z.union([
+    referenceSchema,
+    jsonSchemaDocument
+  ]) as z.ZodMiniType<JsonSchema>;
 });
+
+/**
+ * Converts a JSON Schema or {@link SchemaEnvelope} to a Zod schema.
+ *
+ * @param schema - The JSON Schema or {@link SchemaEnvelope} to convert to a Zod schema.
+ * @param params - Optional parameters for the conversion.
+ * @returns A Zod schema representing the JSON Schema.
+ */
+export function toZodSchema(
+  schema: JsonSchema | SchemaEnvelope,
+  params: Parameters<typeof z4.fromJSONSchema>[1] = {}
+): z4.ZodType {
+  const jsonSchema = deepClone(getJsonSchema(schema));
+  traverseSchema(jsonSchema, subSchema => {
+    if (isJsonSchemaAny(subSchema)) {
+      (subSchema as JsonSchemaLike).type = [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "null",
+        "array",
+        "object"
+      ];
+    }
+  });
+
+  return z4.fromJSONSchema(jsonSchema as z.core.JSONSchema.JSONSchema, params);
+}

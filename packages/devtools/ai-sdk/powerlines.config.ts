@@ -16,24 +16,20 @@
 
  ------------------------------------------------------------------- */
 
-export interface Model {
-  /**
-   * A unique identifier for the model.
-   */
-  id: string;
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-  /**
-   * The timestamp when the model was created.
-   */
-  createdAt: Date;
+const config: UserConfig = defineConfig({
+  input: ["src/index.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
+  },
+  resolve: {
+    skipNodeModulesBundle: true
+  },
+  plugins: [tsdown()]
+});
 
-  /**
-   * The timestamp when the model was last updated.
-   */
-  updatedAt: Date;
-
-  /**
-   * The description of the model.
-   */
-  description?: string;
-}
+export default config;

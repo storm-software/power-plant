@@ -378,3 +378,64 @@ export function isValidSchemaConfigFile(fileName: string): boolean {
     findFileExtensionSafe(fileName)
   );
 }
+
+/**
+ * Traverses a JSON Schema and applies a callback function to each schema fragment.
+ *
+ * @remarks
+ * This function recursively traverses a JSON Schema, including nested schemas in properties, composition keywords (`allOf`, `anyOf`, `oneOf`), and other schema keywords. The provided callback function is invoked for each schema fragment encountered during the traversal. The results of the callback are collected and returned as an array.
+ *
+ * @param schema - The JSON Schema to traverse.
+ * @param callback - The callback function to apply to each schema fragment.
+ * @returns An array of results returned by the callback function.
+ */
+export function traverseSchema<T>(
+  schema: JsonSchema,
+  callback: (schema: JsonSchema) => T | void
+): T[] {
+  const results: T[] = [];
+
+  function traverse(schema: JsonSchema) {
+    const result = callback(schema);
+    if (result !== undefined) {
+      results.push(result);
+    }
+
+    if (isJsonSchemaObject(schema)) {
+      for (const propSchema of Object.values(schema.properties ?? {})) {
+        traverse(propSchema);
+      }
+    }
+
+    for (const keyword of [
+      "allOf",
+      "anyOf",
+      "oneOf",
+      "not",
+      "if",
+      "then",
+      "else",
+      "$ref",
+      "items",
+      "additionalProperties",
+      "unevaluatedProperties",
+      "propertyNames",
+      "unevaluatedItems",
+      "contains"
+    ] as const) {
+      const value = (schema as JsonSchemaLike)[keyword];
+      if (Array.isArray(value)) {
+        for (const subSchema of value) {
+          if (isJsonSchema(subSchema)) {
+            traverse(subSchema);
+          }
+        }
+      } else if (isJsonSchema(value)) {
+        traverse(value);
+      }
+    }
+  }
+
+  traverse(schema);
+  return results;
+}

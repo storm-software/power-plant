@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { Model } from "./model";
+import type { Base } from "./base";
 
 export interface DeviceOperatingSystem {
   /**
@@ -42,7 +42,7 @@ export interface DeviceOperatingSystem {
   release: string;
 }
 
-export interface Device extends Model {
+export interface Device extends Base {
   /**
    * The name of the device.
    *

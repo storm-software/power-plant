@@ -16,13 +16,13 @@
 
  ------------------------------------------------------------------- */
 
+import type { Base } from "./base";
 import type { Device } from "./device";
 import type { Execution } from "./execution";
-import type { Model } from "./model";
 import type { Tenant } from "./tenant";
 import type { User } from "./user";
 
-export interface Session extends Model {
+export interface Session extends Base {
   /**
    * The device that started the session.
    */

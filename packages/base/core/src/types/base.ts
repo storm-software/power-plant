@@ -16,17 +16,24 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./base";
-export * from "./config";
-export * from "./context";
-export * from "./device";
-export * from "./execution";
-export * from "./generator";
-export * from "./input";
-export * from "./meta";
-export * from "./output";
-export * from "./schema";
-export * from "./session";
-export * from "./settings";
-export * from "./tenant";
-export * from "./user";
+export interface Base {
+  /**
+   * A unique identifier for the model.
+   */
+  id: string;
+
+  /**
+   * The timestamp when the model was created.
+   */
+  createdAt: Date;
+
+  /**
+   * The timestamp when the model was last updated.
+   */
+  updatedAt: Date;
+
+  /**
+   * The description of the model.
+   */
+  description?: string;
+}

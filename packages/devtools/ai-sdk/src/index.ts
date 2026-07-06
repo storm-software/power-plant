@@ -16,17 +16,23 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./base";
-export * from "./config";
-export * from "./context";
-export * from "./device";
-export * from "./execution";
-export * from "./generator";
-export * from "./input";
-export * from "./meta";
-export * from "./output";
-export * from "./schema";
-export * from "./session";
-export * from "./settings";
-export * from "./tenant";
-export * from "./user";
+/* eslint-disable */
+
+import { createEngine } from "@power-plant/bindings";
+import { tool } from "ai";
+import { z } from "zod/mini";
+
+const engine = createEngine();
+
+export const generate = tool({
+  description:
+    "Generate text (including source code, documentation, and more) with Power Plant generators.",
+  inputSchema: z.object({
+    generator: z.string(),
+    spec: z.any(),
+    options: z.optional(z.record(z.string(), z.any()))
+  }),
+  execute: async ({ generator, spec, options }) => {
+    return engine.execute(generator, { ...options, spec });
+  }
+});

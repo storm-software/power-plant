@@ -16,12 +16,12 @@
 
  ------------------------------------------------------------------- */
 
-import type { Model } from "./model";
+import type { Base } from "./base";
 import type { Tenant } from "./tenant";
 
 export type UserRole = "user" | "admin" | "superadmin";
 
-export interface User extends Model {
+export interface User extends Base {
   /**
    * The username of the user.
    */

@@ -58,7 +58,7 @@ export interface MetaConfig<TSpec, TOptions extends object> {
    * @remarks
    * The `name` property is a string that can be used to give the schema a human-readable identifier. It can be used in documentation, error messages, or other contexts where it is helpful to have a name associated with the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
    */
-  name?: MetaValue<TSpec, TOptions, string>;
+  name?: string;
 
   /**
    * A version string that indicates the version of the schema. This property can be used to track changes or updates to the schema over time, allowing consumers of the schema to determine which version they are working with. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
@@ -68,12 +68,12 @@ export interface MetaConfig<TSpec, TOptions extends object> {
    *
    * @defaultValue "1.0"
    */
-  version?: MetaValue<TSpec, TOptions, string | Date | number>;
+  version?: string | Date | number;
 
   /**
    * A string that describes the schema in some way.
    */
-  description?: MetaValue<TSpec, TOptions, string>;
+  description?: string;
 
   /**
    * A string that provides a human-readable name for the schema, which can be used in documentation, tooling, or other contexts to identify or reference the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
