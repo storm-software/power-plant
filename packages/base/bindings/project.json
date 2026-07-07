@@ -102,6 +102,30 @@
         }
       }
     },
+    "build-aarch64-pc-windows-msvc": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "target": "aarch64-pc-windows-msvc"
+        }
+      }
+    },
+    "build-x86_64-pc-windows-msvc": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "target": "x86_64-pc-windows-msvc"
+        }
+      }
+    },
+    "build-i686-pc-windows-msvc": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "target": "i686-pc-windows-msvc"
+        }
+      }
+    },
     "artifacts": {
       "executor": "nx:run-commands",
       "options": {
