@@ -82,7 +82,7 @@ jobs:
           # Linux (x86_64)
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            build-flags: --use-napi-cross
+            build-flags: ""
             profile: release-linux-gnu-x86_64
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
