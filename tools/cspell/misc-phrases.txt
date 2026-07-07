@@ -1,9 +1,13 @@
 # Add Miscellaneous specific phrases here
+
+# Tool Names
 smol
 libc
+kustomization
 
 # File Extensions
 haml
 adoc
 avsc
 avdl
+

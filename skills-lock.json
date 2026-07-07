@@ -55,6 +55,12 @@
       "skillPath": "Skills/json-schema-lookup/SKILL.md",
       "computedHash": "a291c4e1d941a9c4cc667945520b570a081b504769a912a090fd7c1b5763fbde"
     },
+    "nix-best-practices": {
+      "source": "0xbigboss/claude-code",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/nix-best-practices/SKILL.md",
+      "computedHash": "f6d14bf40d4b505dd50cb389711eae74bc1459740adb27f4641cd75c21042311"
+    },
     "openapi-spec-generation": {
       "source": "wshobson/agents",
       "sourceType": "github",

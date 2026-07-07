@@ -19,11 +19,11 @@
 const fs = require("node:fs");
 const childProcess = require("node:child_process");
 
-const earthquakePkg = JSON.parse(
-  fs.readFileSync(require.resolve("@earthquake/build/package.json"), "utf-8")
+const powerPlantPkg = JSON.parse(
+  fs.readFileSync(require.resolve("@power-plant/build/package.json"), "utf-8")
 );
-const version = earthquakePkg.version;
-const baseDir = `/tmp/earthquake-${version}`;
+const version = powerPlantPkg.version;
+const baseDir = `/tmp/power-plant-${version}`;
 const bindingEntry = `${baseDir}/node_modules/@power-plant/bindings-wasm32-wasi/power-plant-bindings.wasi.cjs`;
 
 if (!fs.existsSync(bindingEntry)) {
@@ -32,7 +32,7 @@ if (!fs.existsSync(bindingEntry)) {
   fs.mkdirSync(baseDir, { recursive: true });
 
   // eslint-disable-next-line no-console
-  console.log(`[earthquake] Downloading ${bindingPkg} on WebContainer...`);
+  console.log(`[power-plant] Downloading ${bindingPkg} on WebContainer...`);
   childProcess.execFileSync("pnpm", ["i", bindingPkg], {
     cwd: baseDir,
     stdio: "inherit"

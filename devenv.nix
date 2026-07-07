@@ -11,7 +11,11 @@
 
   packages = with pkgs; [
     sccache
+    libclang
   ];
+
+  # bindgen loads libclang at build time; point it at nix libclang, not host /usr/lib.
+  env.LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";
 
   languages.c.enable = true;
 

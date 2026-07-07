@@ -337,9 +337,9 @@
     "access": "public"
   },
   "inlinedDependencies": {
-    "@stryke/helpers": "0.10.34",
-    "@stryke/path": "0.29.21",
-    "@stryke/string-format": "0.17.36",
+    "@stryke/helpers": "0.10.35",
+    "@stryke/path": "0.29.22",
+    "@stryke/string-format": "0.17.37",
     "graphql": "17.0.2",
     "zod": "4.4.3"
   }

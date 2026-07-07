@@ -1,0 +1,8 @@
+{
+  "name": "native-cbm",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "crates/cbm/src",
+  "targets": {},
+  "tags": []
+}
