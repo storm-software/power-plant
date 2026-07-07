@@ -11,7 +11,6 @@
 
   packages = with pkgs; [
     sccache
-    clang
   ];
 
   languages.c.enable = true;
