@@ -42,12 +42,12 @@ catalog:
   "@nx/vite": 23.0.1
   "@nx/vitest": 23.0.1
   "@nx/workspace": 23.0.1
-  "@powerlines/nx": ^0.13.180
-  "@powerlines/plugin-babel": ^0.13.137
-  "@powerlines/plugin-napi-rs": ^0.2.194
-  "@powerlines/plugin-tsdown": ^0.1.542
-  "@powerlines/tsconfig": ^0.4.189
-  "@powerlines/tsdoc": ^0.2.137
+  "@powerlines/nx": ^0.13.181
+  "@powerlines/plugin-babel": ^0.13.138
+  "@powerlines/plugin-napi-rs": ^0.2.195
+  "@powerlines/plugin-tsdown": ^0.1.543
+  "@powerlines/tsconfig": ^0.4.190
+  "@powerlines/tsdoc": ^0.2.138
   "@standard-schema/spec": ^1.1.0
   "@storm-software/config": ^1.138.26
   "@storm-software/config-tools": ^1.190.89
@@ -92,7 +92,7 @@ catalog:
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.0.1
-  powerlines: ^0.47.141
+  powerlines: ^0.47.142
   prettier: ^3.9.4
   rimraf: ^6.1.3
   signal-exit: ^4.1.0

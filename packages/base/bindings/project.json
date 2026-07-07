@@ -18,6 +18,100 @@
         "cwd": "{projectRoot}"
       }
     },
+    "build-x86_64-apple-darwin": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "x86_64-apple-darwin"
+        }
+      }
+    },
+    "build-aarch64-apple-darwin": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "aarch64-apple-darwin"
+        }
+      }
+    },
+    "build-x86_64-unknown-linux-gnu": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "x86_64-unknown-linux-gnu"
+        }
+      }
+    },
+    "build-x86_64-unknown-linux-musl": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "x86_64-unknown-linux-musl",
+          "crossCompile": "true"
+        }
+      }
+    },
+    "build-aarch64-unknown-linux-gnu": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "aarch64-unknown-linux-gnu",
+          "crossCompile": "true"
+        }
+      }
+    },
+    "build-aarch64-unknown-linux-musl": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "aarch64-unknown-linux-musl",
+          "crossCompile": "true"
+        }
+      }
+    },
+    "build-armv7-unknown-linux-gnueabihf": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "armv7-unknown-linux-gnueabihf",
+          "crossCompile": "true"
+        }
+      }
+    },
+    "build-aarch64-linux-android": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "aarch64-linux-android"
+        }
+      }
+    },
+    "build-armv7-linux-androideabi": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "armv7-linux-androideabi"
+        }
+      }
+    },
+    "build-wasm32-wasip1-threads": {
+      "executor": "@powerlines/nx:build",
+      "options": {
+        "additionalArgs": {
+          "profile": "release",
+          "target": "wasm32-wasip1-threads"
+        }
+      }
+    },
     "artifacts": {
       "executor": "nx:run-commands",
       "options": {

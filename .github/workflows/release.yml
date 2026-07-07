@@ -72,53 +72,43 @@ jobs:
           # macOS
           - host: macos-latest
             target: x86_64-apple-darwin
-            build-flags: ""
             profile: release-darwin-x86_64
           - host: macos-latest
             target: aarch64-apple-darwin
-            build-flags: ""
             profile: release-darwin
 
           # Linux (x86_64)
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            build-flags: ""
             profile: release-linux-gnu-x86_64
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            build-flags: -x
             profile: release-linux-musl-x86_64
 
           # Linux (aarch64)
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            build-flags: -x
             profile: release-linux-gnu-aarch64
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
-            build-flags: -x
             profile: release-linux-musl-aarch64
 
           # Linux (armv7)
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
-            build-flags: -x
             profile: release-linux-gnueabihf-armv7
 
           # Linux (Android)
           - host: ubuntu-latest
             target: aarch64-linux-android
-            build-flags: ""
             profile: release-linux-android-aarch64
           - host: ubuntu-latest
             target: armv7-linux-androideabi
-            build-flags: ""
             profile: release-linux-android-armv7
 
           # WebAssembly
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
-            build-flags: ""
             profile: release-wasm32-wasip1
     steps:
       - name: Setup workspace
@@ -131,10 +121,9 @@ jobs:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build native binding
-        run: devenv --profile ${{ matrix.profile }} --no-tui --impure shell build-native ${{ matrix.target }} ${{ matrix.build-flags }}
+        run: devenv --profile ${{ matrix.profile }} --no-tui --impure shell build-native ${{ matrix.target }}
         env:
           NATIVE_TARGET: ${{ matrix.target }}
-          NATIVE_BUILD_FLAGS: ${{ matrix.build-flags }}
           NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM: 1
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 

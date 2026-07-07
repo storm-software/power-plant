@@ -20,7 +20,7 @@
   languages.c.enable = true;
 
   scripts = {
-    build-native.exec = "pnpm build-native --target=$1 --buildFlags=$2";
+    build-native.exec = "pnpm build-native --target=$1";
   };
 
   profiles = {

@@ -23,7 +23,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 target="${NATIVE_TARGET:-}"
-build_flags="${NATIVE_BUILD_FLAGS:-}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -35,26 +34,13 @@ while [[ $# -gt 0 ]]; do
       target="${1#*=}"
       shift
       ;;
-    --buildFlags)
-      build_flags="$2"
-      shift 2
-      ;;
-    --buildFlags=*)
-      build_flags="${1#*=}"
-      shift
-      ;;
     *)
       shift
       ;;
   esac
 done
 
-build_flags_arg=""
-if [[ -n "$build_flags" ]]; then
-  build_flags_arg=" $build_flags"
-fi
-
-command="pnpm exec napi build --release${build_flags_arg} --cwd=\"$REPO_ROOT/packages/base/bindings/src\" --manifest-path=\"$REPO_ROOT/crates/bindings/Cargo.toml\" --package-json-path=\"$REPO_ROOT/packages/base/bindings/package.json\" --target=\"${target}\""
+command="pnpm nx run bindings:build-$target"
 
 printf '\033[1;37m ⚙️  Bootstrapping the monorepo before building native %s artifacts...\033[0m\n' "$target"
 
@@ -66,24 +52,14 @@ fi
 
 printf '\033[1;37m 🏗️  Building the Power Plant native %s artifacts - running command: \n%s\n\033[0m\n' "$target" "$command"
 
-cd "$REPO_ROOT/packages/base/bindings"
-
 set +e
 if command -v timeout > /dev/null 2>&1; then
   # shellcheck disable=SC2086
-  timeout 15m pnpm exec napi build --release${build_flags_arg} \
-    --cwd="$REPO_ROOT/packages/base/bindings/src" \
-    --manifest-path="../../../../crates/bindings/Cargo.toml" \
-    --package-json-path="../package.json" \
-    --target="$target"
+  timeout 15m $command
   exit_code=$?
 else
   # shellcheck disable=SC2086
-  pnpm exec napi build --release${build_flags_arg} \
-    --cwd="$REPO_ROOT/packages/base/bindings/src" \
-    --manifest-path="../../../../crates/bindings/Cargo.toml" \
-    --package-json-path="../package.json" \
-    --target="$target"
+  $command
   exit_code=$?
 fi
 set -e
