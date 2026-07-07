@@ -27,5 +27,6 @@ imports:
   - storm-ops/devenv-modules/base
   - storm-ops/devenv-modules/core
   - storm-ops/devenv-modules/rust
+  - storm-ops/devenv-modules/cpp
   - storm-ops/devenv-modules/claude
   - storm-ops/devenv-modules/mdbook
