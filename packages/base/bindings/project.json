@@ -22,7 +22,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "x86_64-apple-darwin"
         }
       }
@@ -31,7 +30,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "aarch64-apple-darwin"
         }
       }
@@ -40,7 +38,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "x86_64-unknown-linux-gnu"
         }
       }
@@ -49,7 +46,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "x86_64-unknown-linux-musl",
           "crossCompile": "true"
         }
@@ -59,7 +55,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "aarch64-unknown-linux-gnu",
           "crossCompile": "true"
         }
@@ -69,7 +64,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "aarch64-unknown-linux-musl",
           "crossCompile": "true"
         }
@@ -79,7 +73,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "armv7-unknown-linux-gnueabihf",
           "crossCompile": "true"
         }
@@ -89,7 +82,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "aarch64-linux-android"
         }
       }
@@ -98,7 +90,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "armv7-linux-androideabi"
         }
       }
@@ -107,7 +98,6 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "profile": "release",
           "target": "wasm32-wasip1-threads"
         }
       }
