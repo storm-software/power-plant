@@ -7221,8 +7221,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001802:
-    resolution: {integrity: sha512-vmv8ub2xwTNmljSKf82mtCk5JH7hC+YgzLj3P5zotvA0tPQ9016tdNNOG8WRca1IxOnhSsivB+J0z5FeE5LOUw==}
+  caniuse-lite@1.0.30001803:
+    resolution: {integrity: sha512-g/uHREV2ZpK9qMalCsWaxmA6ol+DX8GYhuf3T40RKoP+oL7vhRJh8LNt73PCjpnR6l14FzfPrB5Yux4PKm2meg==}
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
@@ -23219,7 +23219,7 @@ snapshots:
 
   browserslist@4.16.6:
     dependencies:
-      caniuse-lite: 1.0.30001802
+      caniuse-lite: 1.0.30001803
       colorette: 1.4.0
       electron-to-chromium: 1.5.388
       escalade: 3.2.0
@@ -23228,7 +23228,7 @@ snapshots:
   browserslist@4.28.5:
     dependencies:
       baseline-browser-mapping: 2.10.42
-      caniuse-lite: 1.0.30001802
+      caniuse-lite: 1.0.30001803
       electron-to-chromium: 1.5.388
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.5)
@@ -23368,7 +23368,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001802: {}
+  caniuse-lite@1.0.30001803: {}
 
   capital-case@1.0.4:
     dependencies:
@@ -24017,7 +24017,7 @@ snapshots:
 
   cssnano-preset-simple@2.0.0(postcss@8.5.16):
     dependencies:
-      caniuse-lite: 1.0.30001802
+      caniuse-lite: 1.0.30001803
       postcss: 8.5.16
 
   cssnano-simple@2.0.0(postcss@8.5.16):
@@ -28154,7 +28154,7 @@ snapshots:
       browserify-zlib: 0.2.0
       browserslist: 4.16.6
       buffer: 5.6.0
-      caniuse-lite: 1.0.30001802
+      caniuse-lite: 1.0.30001803
       chalk: 2.4.2
       chokidar: 3.5.1
       constants-browserify: 1.0.0

@@ -17,18 +17,12 @@
  ------------------------------------------------------------------- */
 
 import type { Execution, Session, UserConfig } from "@power-plant/core";
-import type {
-  BindingError,
-  BindingGetSessionOutput,
-  BindingRecallOutput
-} from "../bindings.cjs";
+import type { BindingError, BindingExecutionDocument } from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
   startAsyncRuntime
 } from "../bindings.cjs";
-import { fromBindingRecallOutput } from "./from-binding-recall-output";
-import { toBindingStoreInput } from "./to-binding-store-input";
 
 // @ts-expect-error TS2540: the polyfill of `asyncDispose`.
 Symbol.asyncDispose ??= Symbol("Symbol.asyncDispose");
@@ -79,7 +73,8 @@ export class NativeBindingEngine {
       startAsyncRuntime();
     }
 
-    const result = await this.#binding.getSession();
+    const result: Awaited<ReturnType<BindingEngine["getSession"]>> =
+      await this.#binding.getSession();
     if ("isBindingErrors" in result && result.isBindingErrors) {
       throw new Error(
         `Power Plant - Get Session failed with errors: ${result.errors
@@ -88,11 +83,9 @@ export class NativeBindingEngine {
       );
     }
 
-    const output = result as BindingGetSessionOutput;
-
     return {
-      ...output.session,
-      startedAt: new Date(output.session.startedAt)
+      ...result.session,
+      startedAt: new Date(result.session.startedAt)
     };
   }
 
@@ -108,16 +101,29 @@ export class NativeBindingEngine {
    */
   public async store<TSpec, TOptions extends object>(
     execution: Execution<TSpec, TOptions>
-  ): Promise<any> {
-    // this.#config.logger.debug("Power Plant - Store started.");
-
+  ): Promise<void> {
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
       startAsyncRuntime();
     }
 
     const result: Awaited<ReturnType<BindingEngine["store"]>> =
-      await this.#binding.store(toBindingStoreInput(execution));
+      await this.#binding.store({
+        execution: {
+          documents: Object.entries(execution.documents).map(
+            ([path, document]) =>
+              ({
+                ...document,
+                path
+              }) as BindingExecutionDocument
+          ),
+          meta: {
+            id: execution.meta.id,
+            executedAt: execution.meta.executedAt.toISOString(),
+            executedBy: execution.meta.executedBy
+          }
+        }
+      });
     if (
       (result as { errors: BindingError[]; isBindingErrors: boolean })
         ?.isBindingErrors
@@ -130,10 +136,6 @@ export class NativeBindingEngine {
           .join("\n")}`
       );
     }
-
-    // this.#config.logger.debug("Power Plant - Scan completed.");
-
-    return {};
   }
 
   /**
@@ -146,14 +148,13 @@ export class NativeBindingEngine {
   public async recall<TSpec, TOptions extends object>(
     executionId: string
   ): Promise<Execution<TSpec, TOptions>> {
-    // this.#config.logger.debug("Power Plant - Recall started.");
-
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
       startAsyncRuntime();
     }
 
-    const result = await this.#binding.recall({ executionId });
+    const result: Awaited<ReturnType<BindingEngine["recall"]>> =
+      await this.#binding.recall({ executionId });
     if ("isBindingErrors" in result && result.isBindingErrors) {
       throw new Error(
         `Power Plant - Recall failed with errors: ${result.errors
@@ -162,11 +163,17 @@ export class NativeBindingEngine {
       );
     }
 
-    // this.#config.logger.debug("Power Plant - Recall completed.");
-
-    const recallOutput = result as BindingRecallOutput;
-
-    return fromBindingRecallOutput<TSpec, TOptions>(recallOutput);
+    return {
+      documents: result.execution.documents.reduce((ret, document) => {
+        ret[document.path] = document;
+        return ret;
+      }, {}),
+      meta: {
+        id: result.execution.meta.id,
+        executedAt: new Date(result.execution.meta.executedAt),
+        executedBy: result.execution.meta.executedBy
+      }
+    };
   }
 
   /**
