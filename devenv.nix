@@ -89,6 +89,17 @@
       };
     };
 
+    release-windows = {
+      extends = [
+        "release"
+      ];
+      module = {
+        packages = with pkgs; [
+          cargo-xwin
+        ];
+      };
+    };
+
     release-darwin = {
       extends = [
         "release"
@@ -189,5 +200,31 @@
       };
     };
 
+    release-windows-x86_64 = {
+      extends = [
+        "release-windows"
+      ];
+      module = {
+        languages.rust.targets = [ "x86_64-pc-windows-msvc" ];
+      };
+    };
+
+    release-windows-aarch64 = {
+      extends = [
+        "release-windows"
+      ];
+      module = {
+        languages.rust.targets = [ "aarch64-pc-windows-msvc" ];
+      };
+    };
+
+    release-windows-i686 = {
+      extends = [
+        "release-windows"
+      ];
+      module = {
+        languages.rust.targets = [ "i686-pc-windows-msvc" ];
+      };
+    };
   };
 }

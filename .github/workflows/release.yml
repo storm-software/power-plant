@@ -77,6 +77,17 @@ jobs:
             target: aarch64-apple-darwin
             profile: release-darwin
 
+          # Windows MSVC
+          - host: ubuntu-latest
+            target: x86_64-pc-windows-msvc
+            profile: release-windows-x86_64
+          - host: ubuntu-latest
+            target: aarch64-pc-windows-msvc
+            profile: release-windows-aarch64
+          - host: ubuntu-latest
+            target: i686-pc-windows-msvc
+            profile: release-windows-i686
+
           # Linux (x86_64)
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
@@ -141,77 +152,6 @@ jobs:
         with:
           name: bindings-${{ matrix.target }}
           path: packages/base/bindings/src/*.wasm
-          if-no-files-found: error
-
-  build-bindings-windows:
-    name: Build bindings - ${{ matrix.target }}
-    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
-      github.event.pull_request.draft == false
-    runs-on: ${{ matrix.host }}
-    environment: production
-    permissions:
-      contents: write
-      id-token: write
-    needs:
-      - start
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - host: windows-latest
-            target: x86_64-pc-windows-msvc
-          - host: windows-latest
-            target: aarch64-pc-windows-msvc
-          - host: windows-latest
-            target: i686-pc-windows-msvc
-    steps:
-      - name: Setup workspace
-        uses: storm-software/action-setup@main
-        with:
-          gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
-          gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
-          storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
-
-      - name: Install
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-          targets: ${{ matrix.target }}
-
-      - name: Cache cargo
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: |
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            ~/.napi-rs
-            .cargo-cache
-            target/
-          key: ${{ matrix.target }}-cargo-${{ matrix.host }}
-
-      - name: Setup toolchain
-        run: ${{ matrix.setup }}
-        if: ${{ matrix.setup }}
-        shell: bash
-
-      - name: Setup node x86
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        if: matrix.target == 'i686-pc-windows-msvc'
-        with:
-          cache: pnpm
-          architecture: x86
-
-      - name: Build
-        run: pnpm build-native --target ${{ matrix.target }}
-        shell: bash
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
-        with:
-          name: bindings-${{ matrix.target }}
-          path: packages/base/bindings/src/*.node
           if-no-files-found: error
 
   build-bindings-freebsd:
@@ -283,7 +223,6 @@ jobs:
     needs:
       - start
       - build-bindings-unix
-      - build-bindings-windows
       - build-bindings-freebsd
     steps:
       - name: Setup workspace

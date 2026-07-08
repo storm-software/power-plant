@@ -106,27 +106,27 @@
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "target": "aarch64-pc-windows-msvc"
-        },
-        "logLevel": "debug"
+          "target": "aarch64-pc-windows-msvc",
+          "crossCompile": "true"
+        }
       }
     },
     "build-x86_64-pc-windows-msvc": {
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "target": "x86_64-pc-windows-msvc"
-        },
-        "logLevel": "debug"
+          "target": "x86_64-pc-windows-msvc",
+          "crossCompile": "true"
+        }
       }
     },
     "build-i686-pc-windows-msvc": {
       "executor": "@powerlines/nx:build",
       "options": {
         "additionalArgs": {
-          "target": "i686-pc-windows-msvc"
-        },
-        "logLevel": "debug"
+          "target": "i686-pc-windows-msvc",
+          "crossCompile": "true"
+        }
       }
     },
     "artifacts": {
