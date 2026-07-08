@@ -29,7 +29,9 @@ arcstr       = { workspace = true }
 ariadne      = { workspace = true }
 blake3       = { workspace = true }
 camino       = { workspace = true }
+config       = { workspace = true, features = ["json"] }
 derive_more  = { workspace = true }
+dirs         = { workspace = true }
 oxc_index    = { workspace = true }
 regex        = { workspace = true }
 rustc-hash   = { workspace = true }

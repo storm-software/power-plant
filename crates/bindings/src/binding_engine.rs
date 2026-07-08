@@ -1,9 +1,13 @@
 use crate::{
   types::{
     binding_error::{BindingErrors, BindingResult},
-    binding_input::{BindingRecallInput, BindingSearchInput, BindingStoreInput},
+    binding_input::{
+      BindingGetSettingsInput, BindingRecallInput, BindingSearchInput, BindingStoreInput,
+    },
     binding_options::BindingOptions,
-    binding_output::{BindingRecallOutput, BindingSearchOutput, BindingStoreOutput},
+    binding_output::{
+      BindingGetSettingsOutput, BindingRecallOutput, BindingSearchOutput, BindingStoreOutput,
+    },
   },
   utils::to_binding_error,
 };
@@ -27,6 +31,23 @@ impl BindingEngine {
     }
 
     Ok(Self { inner: inner.expect("Unable to create Power Plant engine") })
+  }
+
+  #[napi]
+  pub fn get_settings<'env>(
+    &mut self,
+    env: &'env Env,
+    input: BindingGetSettingsInput,
+  ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingGetSettingsOutput>>> {
+    let result = self.inner.get_settings(input.into());
+    let fut = async move {
+      match result {
+        Ok(output) => Ok(Either::B(output.into())),
+        Err(err) => Ok(Either::A(BindingErrors::new(vec![to_binding_error(&err)]))),
+      }
+    };
+
+    env.spawn_future(fut)
   }
 
   #[napi]

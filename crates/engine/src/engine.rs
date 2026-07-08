@@ -1,7 +1,7 @@
 use derive_more::Debug;
 use power_plant_core::{
-  NormalizedOptions, Options, RecallInput, RecallOutput, SearchInput, SearchOutput, StoreInput,
-  StoreOutput,
+  GetSettingsInput, GetSettingsOutput, NormalizedOptions, Options, RecallInput, RecallOutput,
+  SearchInput, SearchOutput, Settings, StoreInput, StoreOutput,
 };
 #[cfg(feature = "ladybug")]
 use power_plant_storage::IndexedExecutionStore;
@@ -16,6 +16,7 @@ use crate::{PowerPlantEngineError, PowerPlantEngineResult};
 pub struct Engine {
   pub(super) session: Session,
   pub(super) options: NormalizedOptions,
+  pub(super) settings: Settings,
   #[debug(skip)]
   pub(super) execution_store: Arc<dyn ExecutionStore>,
   pub(super) is_closed: bool,
@@ -24,19 +25,26 @@ pub struct Engine {
 impl Engine {
   pub fn new(options: Options) -> PowerPlantEngineResult<Self> {
     let normalized_options = NormalizedOptions::from(options);
-    let executions_path = normalized_options.paths.data_path.join("executions");
+    let settings = Settings::from_normalized_options(normalized_options.clone());
+
+    let executions_path = settings.paths.data.join("executions").into();
     let execution_store = create_execution_store(executions_path)?;
 
     Ok(Self {
-      options: normalized_options,
-      is_closed: false,
       session: Session::dummy(),
+      options: normalized_options,
+      settings,
       execution_store,
+      is_closed: false,
     })
   }
 
   pub fn is_closed(&self) -> bool {
     self.is_closed
+  }
+
+  pub fn get_settings(&self, input: GetSettingsInput) -> PowerPlantEngineResult<GetSettingsOutput> {
+    Ok(GetSettingsOutput::from(self.settings.clone()))
   }
 
   pub fn store(&mut self, input: StoreInput) -> PowerPlantEngineResult<StoreOutput> {
@@ -164,6 +172,7 @@ mod tests {
     Engine {
       session: Session::dummy(),
       options: NormalizedOptions::default(),
+      settings: Settings::default(),
       execution_store: store,
       is_closed: false,
     }

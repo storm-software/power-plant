@@ -1,15 +1,43 @@
-use crate::types::binding_input::BindingExecution;
-use derive_more::Debug;
-use power_plant_core::{RecallOutput, SearchOutput, StoreOutput};
+use crate::types::{binding_input::BindingExecution, binding_settings::BindingSettings};
+use power_plant_core::{GetSettingsOutput, RecallOutput, SearchOutput, StoreOutput};
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Clone, PartialEq, Eq)]
+#[napi_derive::napi(object, object_from_js = false)]
+pub struct BindingGetSettingsOutput {
+  /// The loaded settings.
+  pub settings: BindingSettings,
+}
+
+impl From<GetSettingsOutput> for BindingGetSettingsOutput {
+  fn from(value: GetSettingsOutput) -> Self {
+    Self { settings: BindingSettings::from(value.settings) }
+  }
+}
+
+#[derive(Clone)]
 #[napi_derive::napi(object, object_from_js = false)]
 pub struct BindingRecallOutput {
   /// The recalled execution.
   pub execution: BindingExecution,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+impl PartialEq for BindingExecution {
+  fn eq(&self, other: &Self) -> bool {
+    self.documents == other.documents && self.meta == other.meta
+  }
+}
+
+impl Eq for BindingExecution {}
+
+impl PartialEq for BindingRecallOutput {
+  fn eq(&self, other: &Self) -> bool {
+    self.execution == other.execution
+  }
+}
+
+impl Eq for BindingRecallOutput {}
+
+#[derive(Clone)]
 #[napi_derive::napi(object, object_from_js = false)]
 pub struct BindingExecutionSearchHit {
   /// The id of the matching execution.
@@ -20,14 +48,14 @@ pub struct BindingExecutionSearchHit {
   pub snippet: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Clone)]
 #[napi_derive::napi(object, object_from_js = false)]
 pub struct BindingSearchOutput {
   /// Matching executions ordered by relevance.
   pub hits: Vec<BindingExecutionSearchHit>,
 }
 
-#[derive(Default, Debug)]
+#[derive(Clone, PartialEq, Eq, Default)]
 #[napi_derive::napi(object, object_from_js = false)]
 pub struct BindingStoreOutput {
   /// Whether the store operation was successful.

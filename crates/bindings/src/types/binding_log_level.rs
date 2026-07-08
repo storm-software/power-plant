@@ -1,9 +1,8 @@
-use derive_more::Debug;
 use napi_derive::napi;
 use power_plant_core::LogLevel;
 use std::fmt::{self, Display, Formatter};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(PartialEq, Eq, Clone, Copy, Default)]
 #[napi]
 pub enum BindingLogLevel {
   Silent,

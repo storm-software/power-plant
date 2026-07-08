@@ -1,9 +1,42 @@
+use std::path::Path;
+
 use derive_more::Debug;
-use power_plant_core::{RecallInput, SearchInput, StoreInput};
+use power_plant_core::{GetSettingsInput, RecallInput, SearchInput, StoreInput};
 use power_plant_models::{
   Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
   InputMeta, Meta, OutputMeta, SchemaMeta, SchemaMetaExample,
 };
+
+#[derive(Clone, PartialEq, Eq)]
+#[napi_derive::napi(object)]
+pub struct BindingGetSettingsInput {
+  /// The current working directory to load settings from.
+  pub cwd: Option<String>,
+}
+
+impl BindingGetSettingsInput {
+  pub fn new(cwd: Option<String>) -> Self {
+    Self { cwd }
+  }
+}
+
+impl BindingGetSettingsInput {
+  pub fn from_cwd(cwd: &Path) -> Self {
+    Self { cwd: Some(cwd.to_string_lossy().to_string()) }
+  }
+}
+
+impl From<GetSettingsInput> for BindingGetSettingsInput {
+  fn from(value: GetSettingsInput) -> Self {
+    Self { cwd: value.cwd }
+  }
+}
+
+impl From<BindingGetSettingsInput> for GetSettingsInput {
+  fn from(value: BindingGetSettingsInput) -> Self {
+    Self { cwd: value.cwd }
+  }
+}
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[napi_derive::napi(object)]
@@ -139,7 +172,7 @@ pub struct BindingExecutionMeta {
   pub executed_by: String,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Clone)]
 #[napi_derive::napi(object)]
 pub struct BindingExecution {
   /// The documents of the execution.
@@ -148,7 +181,7 @@ pub struct BindingExecution {
   pub meta: BindingExecutionMeta,
 }
 
-#[derive(Clone, PartialEq, Debug)]
+#[derive(Clone, PartialEq)]
 #[napi_derive::napi(object, object_to_js = false)]
 pub struct BindingStoreInput {
   /// The execution that produced the input.

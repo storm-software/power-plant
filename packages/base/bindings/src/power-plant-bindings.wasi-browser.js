@@ -79,6 +79,7 @@ export const transformAsync = __napiModule.exports.transformAsync;
 export const BindingEngine = __napiModule.exports.BindingEngine;
 export const TraceSubscriberGuard = __napiModule.exports.TraceSubscriberGuard;
 export const BindingLogLevel = __napiModule.exports.BindingLogLevel;
+export const BindingMode = __napiModule.exports.BindingMode;
 export const createTokioRuntime = __napiModule.exports.createTokioRuntime;
 export const initTraceSubscriber = __napiModule.exports.initTraceSubscriber;
 export const shutdownAsyncRuntime = __napiModule.exports.shutdownAsyncRuntime;

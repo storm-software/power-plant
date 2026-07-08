@@ -1,11 +1,10 @@
 use power_plant_core::{Log, LogMessage};
 
 use crate::types::binding_log_level::BindingLogLevel;
-use derive_more::Debug;
 
 /// Represents a log entry in the Power Plant binding.
 #[napi_derive::napi(object, object_from_js = false)]
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct BindingLog {
   /// The log message.
   pub message: String,

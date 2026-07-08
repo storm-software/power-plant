@@ -145,6 +145,7 @@ module.exports.transformAsync = __napiModule.exports.transformAsync;
 module.exports.BindingEngine = __napiModule.exports.BindingEngine;
 module.exports.TraceSubscriberGuard = __napiModule.exports.TraceSubscriberGuard;
 module.exports.BindingLogLevel = __napiModule.exports.BindingLogLevel;
+module.exports.BindingMode = __napiModule.exports.BindingMode;
 module.exports.createTokioRuntime = __napiModule.exports.createTokioRuntime;
 module.exports.initTraceSubscriber = __napiModule.exports.initTraceSubscriber;
 module.exports.shutdownAsyncRuntime = __napiModule.exports.shutdownAsyncRuntime;

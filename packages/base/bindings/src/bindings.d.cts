@@ -1226,6 +1226,9 @@ export interface TypeScriptOptions {
 }
 export declare class BindingEngine {
   constructor(options: BindingOptions);
+  getSettings(
+    input: BindingGetSettingsInput
+  ): Promise<BindingResult<BindingGetSettingsOutput>>;
   store(input: BindingStoreInput): Promise<BindingResult<BindingStoreOutput>>;
   recall(
     input: BindingRecallInput
@@ -1239,6 +1242,23 @@ export declare class BindingEngine {
 
 export declare class TraceSubscriberGuard {
   close(): void;
+}
+
+export interface BindingEnvPaths {
+  /** Path to the cache directory. */
+  cache: string;
+  /** Path to the configuration directory. */
+  config: string;
+  /** Path to the data directory. */
+  data: string;
+  /** Path to the log directory. */
+  logs: string;
+  /** Path to the temporary directory. */
+  temp: string;
+  /** Path to the downloads directory. */
+  downloads: string;
+  /** Path to the executable directory. */
+  executable: string;
 }
 
 export type BindingError =
@@ -1315,6 +1335,16 @@ export interface BindingGeneratorMeta {
   description?: string;
 }
 
+export interface BindingGetSettingsInput {
+  /** The current working directory to load settings from. */
+  cwd?: string;
+}
+
+export interface BindingGetSettingsOutput {
+  /** The loaded settings. */
+  settings: BindingSettings;
+}
+
 export interface BindingInputMeta {
   /** A unique identifier for the component. */
   id: string;
@@ -1360,7 +1390,18 @@ export declare const enum BindingLogLevel {
   Debug = 4
 }
 
+export declare const enum BindingMode {
+  /** Development mode. */
+  Development = 0,
+  /** Production mode. */
+  Production = 1,
+  /** Test mode. */
+  Test = 2
+}
+
 export interface BindingOptions {
+  /** The mode. */
+  mode?: "development" | "production" | "test";
   /** The log level. */
   logLevel?: "debug" | "info" | "warn" | "error" | "silent";
   /** Callback for log messages. */
@@ -1368,22 +1409,10 @@ export interface BindingOptions {
     logLevel: "debug" | "info" | "warn" | "error",
     log: BindingLog
   ) => Promise<void>;
-  /** Disable tracing. */
-  disableTracing?: boolean;
   /** The current working directory. */
-  cwd: string;
-  /** Path to cache directory. */
-  cachePath: string;
-  /** Path to data directory. */
-  dataPath: string;
-  /** Path to log directory. */
-  logPath: string;
-  /** Path to temporary directory. */
-  tempPath: string;
-  /** Path to configuration directory. */
-  configPath: string;
+  cwd?: string;
   /** Path to output directory. */
-  outputPath: string;
+  outputPath?: string;
 }
 
 export interface BindingOutputMeta {
@@ -1462,6 +1491,27 @@ export interface BindingSearchInput {
 export interface BindingSearchOutput {
   /** Matching executions ordered by relevance. */
   hits: Array<BindingExecutionSearchHit>;
+}
+
+export interface BindingSettings {
+  /** The app mode to use. */
+  mode: "development" | "production" | "test";
+  /** The paths to use.`` */
+  paths: {
+    cache: string;
+    config: string;
+    data: string;
+    logs: string;
+    temp: string;
+    downloads: string;
+    executable: string;
+  };
+  /** The log level to use. */
+  logLevel: "debug" | "info" | "warn" | "error" | "silent";
+  /** Whether to skip execution metadata storage after completing generation. */
+  skipStorage: boolean;
+  /** Whether to skip tracing. */
+  skipTracing: boolean;
 }
 
 export interface BindingStoreInput {

@@ -818,6 +818,7 @@ module.exports.transformAsync = nativeBinding.transformAsync;
 module.exports.BindingEngine = nativeBinding.BindingEngine;
 module.exports.TraceSubscriberGuard = nativeBinding.TraceSubscriberGuard;
 module.exports.BindingLogLevel = nativeBinding.BindingLogLevel;
+module.exports.BindingMode = nativeBinding.BindingMode;
 module.exports.createTokioRuntime = nativeBinding.createTokioRuntime;
 module.exports.initTraceSubscriber = nativeBinding.initTraceSubscriber;
 module.exports.shutdownAsyncRuntime = nativeBinding.shutdownAsyncRuntime;
