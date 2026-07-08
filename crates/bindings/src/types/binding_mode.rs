@@ -1,5 +1,5 @@
 use napi_derive::napi;
-use power_plant_core::Mode;
+use power_plant_core::settings::Mode;
 use std::fmt::{self, Display, Formatter};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

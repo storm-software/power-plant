@@ -1,4 +1,8 @@
-use crate::{LogLevel, Logger, Mode, Options};
+use crate::{
+  Options,
+  log::{LogLevel, Logger},
+  settings::Mode,
+};
 use camino::Utf8PathBuf;
 use derive_more::Debug;
 use std::sync::Arc;
@@ -16,7 +20,7 @@ impl Default for NormalizedPathOptions {
   fn default() -> Self {
     Self {
       cwd: std::env::current_dir().unwrap().to_string_lossy().to_string().into(),
-      output: std::env::current_dir().unwrap().join("output").to_string_lossy().to_string().into(),
+      output: std::env::current_dir().unwrap().to_string_lossy().to_string().into(),
     }
   }
 }
@@ -26,6 +30,8 @@ impl Default for NormalizedPathOptions {
 pub struct NormalizedOptions {
   /// The mode.
   pub mode: Option<Mode>,
+  /// The user name to use for the application.
+  pub username: Option<String>,
   /// The log level.
   pub log_level: LogLevel,
   /// Callback for logging messages.
@@ -38,6 +44,7 @@ impl Default for NormalizedOptions {
   fn default() -> Self {
     Self {
       mode: None,
+      username: None,
       log_level: LogLevel::default(),
       custom_logger: None,
       paths: NormalizedPathOptions::default(),
@@ -47,19 +54,16 @@ impl Default for NormalizedOptions {
 
 impl From<Options> for NormalizedOptions {
   fn from(opts: Options) -> Self {
+    let cwd = opts.cwd.unwrap_or(std::env::current_dir().unwrap().to_string_lossy().to_string());
+
     Self {
       mode: opts.mode,
+      username: opts.username,
       log_level: opts.log_level.unwrap_or_default(),
       custom_logger: opts.custom_logger,
       paths: NormalizedPathOptions {
-        cwd: opts
-          .cwd
-          .unwrap_or(std::env::current_dir().unwrap().to_string_lossy().to_string())
-          .into(),
-        output: opts
-          .output_path
-          .unwrap_or(std::env::current_dir().unwrap().join("output").to_string_lossy().to_string())
-          .into(),
+        cwd: cwd.clone().into(),
+        output: opts.output_path.unwrap_or(cwd.clone()).into(),
       },
     }
   }

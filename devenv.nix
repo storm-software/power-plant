@@ -97,6 +97,9 @@
         packages = with pkgs; [
           cargo-xwin
         ];
+        languages.rust = {
+          lld.enable = true;
+        };
       };
     };
 

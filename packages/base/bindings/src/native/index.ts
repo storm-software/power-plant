@@ -50,13 +50,7 @@ export class NativeBindingEngine {
 
     this.#binding = new BindingEngine({
       logLevel: context.settings.logLevel,
-      disableTracing: context.settings.skipTracing,
       cwd: context.cwd,
-      cachePath: context.settings.paths.cache,
-      dataPath: context.settings.paths.data,
-      logPath: context.settings.paths.log,
-      tempPath: context.settings.paths.temp,
-      configPath: context.settings.paths.config,
       outputPath: context.cwd
     });
   }

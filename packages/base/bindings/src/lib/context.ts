@@ -381,8 +381,7 @@ export async function createExecutionContext<
         },
         document,
         {
-          source: [],
-          language: "other"
+          source: []
         }
       ) as ExecutionDocument<TSpec, TOptions>;
     } else {

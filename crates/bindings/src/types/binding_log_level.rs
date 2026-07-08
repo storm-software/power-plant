@@ -1,5 +1,5 @@
 use napi_derive::napi;
-use power_plant_core::LogLevel;
+use power_plant_core::log::LogLevel;
 use std::fmt::{self, Display, Formatter};
 
 #[derive(PartialEq, Eq, Clone, Copy, Default)]

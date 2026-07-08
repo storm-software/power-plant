@@ -1,5 +1,5 @@
 use napi_derive::napi;
-use power_plant_core::EnvPaths;
+use power_plant_core::settings::EnvPaths;
 use std::fmt::{self, Display, Formatter};
 
 #[derive(Debug, Clone, PartialEq, Eq)]

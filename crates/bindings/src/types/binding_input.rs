@@ -1,42 +1,9 @@
-use std::path::Path;
-
 use derive_more::Debug;
-use power_plant_core::{GetSettingsInput, RecallInput, SearchInput, StoreInput};
+use power_plant_core::inputs::{RecallInput, SearchInput, StoreInput};
 use power_plant_models::{
   Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta, GeneratorMeta,
   InputMeta, Meta, OutputMeta, SchemaMeta, SchemaMetaExample,
 };
-
-#[derive(Clone, PartialEq, Eq)]
-#[napi_derive::napi(object)]
-pub struct BindingGetSettingsInput {
-  /// The current working directory to load settings from.
-  pub cwd: Option<String>,
-}
-
-impl BindingGetSettingsInput {
-  pub fn new(cwd: Option<String>) -> Self {
-    Self { cwd }
-  }
-}
-
-impl BindingGetSettingsInput {
-  pub fn from_cwd(cwd: &Path) -> Self {
-    Self { cwd: Some(cwd.to_string_lossy().to_string()) }
-  }
-}
-
-impl From<GetSettingsInput> for BindingGetSettingsInput {
-  fn from(value: GetSettingsInput) -> Self {
-    Self { cwd: value.cwd }
-  }
-}
-
-impl From<BindingGetSettingsInput> for GetSettingsInput {
-  fn from(value: BindingGetSettingsInput) -> Self {
-    Self { cwd: value.cwd }
-  }
-}
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[napi_derive::napi(object)]
@@ -140,8 +107,9 @@ pub struct BindingExecutionSourceMeta {
 #[derive(Debug, Clone, PartialEq)]
 #[napi_derive::napi(object)]
 pub struct BindingExecutionSource {
+  #[debug(skip)]
   /// The language of the generated source code.
-  pub language: String,
+  pub language: Option<String>,
   /// The content of the generated source code.
   pub content: String,
   /// Metadata about how the source code was generated.
@@ -151,12 +119,8 @@ pub struct BindingExecutionSource {
 #[derive(Debug, Clone, PartialEq)]
 #[napi_derive::napi(object)]
 pub struct BindingExecutionDocument {
-  /// The name of the document.
-  pub name: String,
   /// The path of the document.
   pub path: String,
-  /// The extension of the document.
-  pub extension: Option<String>,
   /// The sources of the document.
   pub source: Vec<BindingExecutionSource>,
 }
@@ -355,19 +319,32 @@ impl From<BindingExecutionSourceMeta> for ExecutionSourceMeta {
   }
 }
 
-impl From<BindingExecutionSource> for ExecutionSource {
-  fn from(value: BindingExecutionSource) -> Self {
-    Self { language: value.language, content: value.content, meta: value.meta.into() }
+struct ExecutionSourceParams {
+  binding: BindingExecutionSource,
+  path: String,
+}
+
+impl From<ExecutionSourceParams> for ExecutionSource {
+  fn from(value: ExecutionSourceParams) -> Self {
+    Self {
+      language: value.path.as_str().into(),
+      content: value.binding.content,
+      meta: value.binding.meta.into(),
+    }
   }
 }
 
 impl From<BindingExecutionDocument> for ExecutionDocument {
   fn from(value: BindingExecutionDocument) -> Self {
+    let path = value.path.clone();
+
     Self {
-      name: value.name,
       path: value.path,
-      extension: value.extension,
-      source: value.source.into_iter().map(Into::into).collect(),
+      source: value
+        .source
+        .into_iter()
+        .map(|binding| ExecutionSourceParams { binding, path: path.clone() }.into())
+        .collect(),
     }
   }
 }
@@ -548,18 +525,13 @@ impl From<ExecutionSourceMeta> for BindingExecutionSourceMeta {
 
 impl From<ExecutionSource> for BindingExecutionSource {
   fn from(value: ExecutionSource) -> Self {
-    Self { language: value.language, content: value.content, meta: value.meta.into() }
+    Self { language: Some(value.language), content: value.content, meta: value.meta.into() }
   }
 }
 
 impl From<ExecutionDocument> for BindingExecutionDocument {
   fn from(value: ExecutionDocument) -> Self {
-    Self {
-      name: value.name,
-      path: value.path,
-      extension: value.extension,
-      source: value.source.into_iter().map(Into::into).collect(),
-    }
+    Self { path: value.path, source: value.source.into_iter().map(Into::into).collect() }
   }
 }
 

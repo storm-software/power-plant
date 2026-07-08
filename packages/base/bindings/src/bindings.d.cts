@@ -1226,9 +1226,8 @@ export interface TypeScriptOptions {
 }
 export declare class BindingEngine {
   constructor(options: BindingOptions);
-  getSettings(
-    input: BindingGetSettingsInput
-  ): Promise<BindingResult<BindingGetSettingsOutput>>;
+  getSettings(): Promise<BindingResult<BindingGetSettingsOutput>>;
+  getSession(): Promise<BindingResult<BindingGetSessionOutput>>;
   store(input: BindingStoreInput): Promise<BindingResult<BindingStoreOutput>>;
   recall(
     input: BindingRecallInput
@@ -1242,6 +1241,15 @@ export declare class BindingEngine {
 
 export declare class TraceSubscriberGuard {
   close(): void;
+}
+
+export interface BindingDevice {
+  name: string;
+  displayName: string;
+  platform: string;
+  distro: string;
+  desktopEnv: string;
+  cpuArch: string;
 }
 
 export interface BindingEnvPaths {
@@ -1278,12 +1286,8 @@ export interface BindingExecution {
 }
 
 export interface BindingExecutionDocument {
-  /** The name of the document. */
-  name: string;
   /** The path of the document. */
   path: string;
-  /** The extension of the document. */
-  extension?: string;
   /** The sources of the document. */
   source: Array<BindingExecutionSource>;
 }
@@ -1308,7 +1312,7 @@ export interface BindingExecutionSearchHit {
 
 export interface BindingExecutionSource {
   /** The language of the generated source code. */
-  language: string;
+  language?: string;
   /** The content of the generated source code. */
   content: string;
   /** Metadata about how the source code was generated. */
@@ -1335,9 +1339,9 @@ export interface BindingGeneratorMeta {
   description?: string;
 }
 
-export interface BindingGetSettingsInput {
-  /** The current working directory to load settings from. */
-  cwd?: string;
+export interface BindingGetSessionOutput {
+  /** The current session. */
+  session: BindingSession;
 }
 
 export interface BindingGetSettingsOutput {
@@ -1402,6 +1406,8 @@ export declare const enum BindingMode {
 export interface BindingOptions {
   /** The mode. */
   mode?: "development" | "production" | "test";
+  /** The username of the user currently using the application */
+  username?: string;
   /** The log level. */
   logLevel?: "debug" | "info" | "warn" | "error" | "silent";
   /** Callback for log messages. */
@@ -1493,9 +1499,18 @@ export interface BindingSearchOutput {
   hits: Array<BindingExecutionSearchHit>;
 }
 
+export interface BindingSession {
+  sessionId: string;
+  startedAt: string;
+  user: BindingUser;
+  device: BindingDevice;
+}
+
 export interface BindingSettings {
   /** The app mode to use. */
   mode: "development" | "production" | "test";
+  /** The default username to use. */
+  defaultUser: string;
   /** The paths to use.`` */
   paths: {
     cache: string;
@@ -1508,10 +1523,8 @@ export interface BindingSettings {
   };
   /** The log level to use. */
   logLevel: "debug" | "info" | "warn" | "error" | "silent";
-  /** Whether to skip execution metadata storage after completing generation. */
+  /** Whether to skip storage. */
   skipStorage: boolean;
-  /** Whether to skip tracing. */
-  skipTracing: boolean;
 }
 
 export interface BindingStoreInput {
@@ -1524,6 +1537,12 @@ export interface BindingStoreOutput {
   success: boolean;
   /** Any warnings encountered during the store operation. */
   errors: Array<string>;
+}
+
+export interface BindingUser {
+  name: string;
+  displayName: string;
+  languagePreferences: Array<string>;
 }
 
 export declare function createTokioRuntime(

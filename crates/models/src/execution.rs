@@ -43,12 +43,8 @@ pub struct ExecutionSource {
 /// Mirrors `ExecutionDocument` from `execution.ts`.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ExecutionDocument {
-  /// The name of the document.
-  pub name: String,
   /// The path of the document.
   pub path: String,
-  /// The extension of the document.
-  pub extension: Option<String>,
   /// The sources of the document.
   pub source: Vec<ExecutionSource>,
 }

@@ -1,5 +1,23 @@
-use crate::types::{binding_input::BindingExecution, binding_settings::BindingSettings};
-use power_plant_core::{GetSettingsOutput, RecallOutput, SearchOutput, StoreOutput};
+use crate::types::{
+  binding_input::BindingExecution, binding_session::BindingSession,
+  binding_settings::BindingSettings,
+};
+use power_plant_core::outputs::{
+  GetSessionOutput, GetSettingsOutput, RecallOutput, SearchOutput, StoreOutput,
+};
+
+#[derive(Clone, PartialEq, Eq)]
+#[napi_derive::napi(object, object_from_js = false)]
+pub struct BindingGetSessionOutput {
+  /// The current session.
+  pub session: BindingSession,
+}
+
+impl From<GetSessionOutput> for BindingGetSessionOutput {
+  fn from(value: GetSessionOutput) -> Self {
+    Self { session: BindingSession::from(value.session) }
+  }
+}
 
 #[derive(Clone, PartialEq, Eq)]
 #[napi_derive::napi(object, object_from_js = false)]

@@ -1,4 +1,4 @@
-use power_plant_core::{Log, LogMessage};
+use power_plant_core::log::{Log, LogMessage};
 
 use crate::types::binding_log_level::BindingLogLevel;
 

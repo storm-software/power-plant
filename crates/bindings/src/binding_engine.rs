@@ -1,12 +1,11 @@
 use crate::{
   types::{
     binding_error::{BindingErrors, BindingResult},
-    binding_input::{
-      BindingGetSettingsInput, BindingRecallInput, BindingSearchInput, BindingStoreInput,
-    },
+    binding_input::{BindingRecallInput, BindingSearchInput, BindingStoreInput},
     binding_options::BindingOptions,
     binding_output::{
-      BindingGetSettingsOutput, BindingRecallOutput, BindingSearchOutput, BindingStoreOutput,
+      BindingGetSessionOutput, BindingGetSettingsOutput, BindingRecallOutput, BindingSearchOutput,
+      BindingStoreOutput,
     },
   },
   utils::to_binding_error,
@@ -37,9 +36,24 @@ impl BindingEngine {
   pub fn get_settings<'env>(
     &mut self,
     env: &'env Env,
-    input: BindingGetSettingsInput,
   ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingGetSettingsOutput>>> {
-    let result = self.inner.get_settings(input.into());
+    let result = self.inner.get_settings();
+    let fut = async move {
+      match result {
+        Ok(output) => Ok(Either::B(output.into())),
+        Err(err) => Ok(Either::A(BindingErrors::new(vec![to_binding_error(&err)]))),
+      }
+    };
+
+    env.spawn_future(fut)
+  }
+
+  #[napi]
+  pub fn get_session<'env>(
+    &mut self,
+    env: &'env Env,
+  ) -> napi::Result<PromiseRaw<'env, BindingResult<BindingGetSessionOutput>>> {
+    let result = self.inner.get_session();
     let fut = async move {
       match result {
         Ok(output) => Ok(Either::B(output.into())),

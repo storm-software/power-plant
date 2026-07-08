@@ -22,7 +22,7 @@ import type { DeepPartial, MaybePromise } from "@stryke/types/base";
 import type { UserConfig } from "./config";
 import type { ExecutionDocument, ExecutionSource } from "./execution";
 import type { Input, InputConfig } from "./input";
-import type { MetaConfig, MetaValue } from "./meta";
+import type { MetaConfig } from "./meta";
 import type { Output, OutputConfig } from "./output";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
@@ -33,7 +33,7 @@ export interface GeneratorMeta<
   /**
    * A string description (or a function that returns a string) outlining the purpose or behavior of the generator.
    */
-  description?: MetaValue<TSpec, TOptions, string>;
+  description?: string;
 }
 
 export type GeneratedDocument<TSpec, TOptions extends object> = Partial<

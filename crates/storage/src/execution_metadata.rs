@@ -1,4 +1,4 @@
-use power_plant_core::SearchInput;
+use power_plant_core::inputs::SearchInput;
 use power_plant_models::Execution;
 
 /// Fixed embedding dimension used by the Ladybug vector index.
@@ -27,7 +27,6 @@ pub(crate) fn extract_execution_metadata(execution: &Execution) -> ExecutionMeta
   let mut text_parts = vec![execution.meta.id.clone(), execution.meta.executed_by.clone()];
 
   for document in &execution.documents {
-    text_parts.push(document.name.clone());
     text_parts.push(document.path.clone());
 
     for source in &document.source {
@@ -208,9 +207,7 @@ mod tests {
 
     Execution {
       documents: vec![ExecutionDocument {
-        name: "user.ts".into(),
         path: "src/user.ts".into(),
-        extension: Some("ts".into()),
         source: vec![ExecutionSource {
           language: "typescript".into(),
           content: "export {}".into(),

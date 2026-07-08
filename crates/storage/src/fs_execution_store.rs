@@ -2,7 +2,10 @@ use std::fs;
 use std::path::PathBuf;
 
 use camino::Utf8PathBuf;
-use power_plant_core::{ExecutionSearchHit, SearchInput, SearchOutput};
+use power_plant_core::{
+  inputs::SearchInput,
+  outputs::{ExecutionSearchHit, SearchOutput},
+};
 use power_plant_models::Execution;
 
 use crate::{
@@ -143,9 +146,7 @@ mod tests {
 
     Execution {
       documents: vec![ExecutionDocument {
-        name: "doc".into(),
         path: "src/doc.ts".into(),
-        extension: Some("ts".into()),
         source: vec![ExecutionSource {
           language: "typescript".into(),
           content: "export {}".into(),

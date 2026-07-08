@@ -17,7 +17,10 @@
  ------------------------------------------------------------------- */
 
 import type { Execution } from "@power-plant/core";
-import type { BindingStoreInput } from "../bindings.cjs";
+import type {
+  BindingExecutionDocument,
+  BindingStoreInput
+} from "../bindings.cjs";
 
 /**
  * Convert a generator execution into the shape expected by the native binding.
@@ -28,12 +31,18 @@ export function toBindingStoreInput<TSpec, TOptions extends object>(
   // Execution metadata is resolved to concrete values before store is called.
   return {
     execution: {
-      documents: execution.documents,
+      documents: Object.entries(execution.documents).map(
+        ([path, document]) =>
+          ({
+            ...document,
+            path
+          }) as BindingExecutionDocument
+      ),
       meta: {
         id: execution.meta.id,
         executedAt: execution.meta.executedAt.toISOString(),
         executedBy: execution.meta.executedBy
       }
     }
-  } as BindingStoreInput;
+  };
 }

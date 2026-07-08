@@ -10,12 +10,8 @@ use std::path::PathBuf;
 /// set to the class name (e.g. "TextDocument", "PdfDocument").
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Document {
-  /// The name of the document.
-  pub name: String,
   /// The path to the document.
   pub path: PathBuf,
-  /// Document type category: "text", "pdf", "csv", "html", "image", "audio", "unstructured", "dlt_row".
-  pub extension: String,
   /// The data id of the document.
   pub data_id: String,
   /// The external metadata of the document.
@@ -26,13 +22,7 @@ pub struct Document {
 
 impl Document {
   /// Create a new document.
-  pub fn new(
-    extension: String,
-    name: String,
-    path: PathBuf,
-    data_id: String,
-    metadata: Option<String>,
-  ) -> Self {
-    Self { extension, name, path, data_id, metadata, source: vec![] }
+  pub fn new(path: PathBuf, data_id: String, metadata: Option<String>) -> Self {
+    Self { path, data_id, metadata, source: vec![] }
   }
 }

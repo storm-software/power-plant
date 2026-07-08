@@ -1,12 +1,13 @@
 use derive_more::Debug;
 use power_plant_core::{
-  GetSettingsInput, GetSettingsOutput, NormalizedOptions, Options, RecallInput, RecallOutput,
-  SearchInput, SearchOutput, Settings, StoreInput, StoreOutput,
+  Options,
+  context::Context,
+  inputs::{RecallInput, SearchInput, StoreInput},
+  outputs::{GetSessionOutput, GetSettingsOutput, RecallOutput, SearchOutput, StoreOutput},
 };
 #[cfg(feature = "ladybug")]
 use power_plant_storage::IndexedExecutionStore;
 use power_plant_storage::{ExecutionStore, FsExecutionStore, StorageError};
-use power_plant_tracing::{Session, actions::StoreEnd, actions::StoreStart, trace_action};
 use std::future::{Future, ready};
 use std::sync::Arc;
 
@@ -14,52 +15,52 @@ use crate::{PowerPlantEngineError, PowerPlantEngineResult};
 
 #[derive(Debug, Clone)]
 pub struct Engine {
-  pub(super) session: Session,
-  pub(super) options: NormalizedOptions,
-  pub(super) settings: Settings,
+  pub(super) context: Context,
   #[debug(skip)]
   pub(super) execution_store: Arc<dyn ExecutionStore>,
   pub(super) is_closed: bool,
 }
 
 impl Engine {
+  #[tracing::instrument(skip(options), level = "trace")]
   pub fn new(options: Options) -> PowerPlantEngineResult<Self> {
-    let normalized_options = NormalizedOptions::from(options);
-    let settings = Settings::from_normalized_options(normalized_options.clone());
+    let context = Context::new(options);
 
-    let executions_path = settings.paths.data.join("executions").into();
+    let executions_path = context.settings.paths.data.join("executions").into();
     let execution_store = create_execution_store(executions_path)?;
 
-    Ok(Self {
-      session: Session::dummy(),
-      options: normalized_options,
-      settings,
-      execution_store,
-      is_closed: false,
-    })
+    Ok(Self { context, execution_store, is_closed: false })
   }
 
   pub fn is_closed(&self) -> bool {
     self.is_closed
   }
 
-  pub fn get_settings(&self, input: GetSettingsInput) -> PowerPlantEngineResult<GetSettingsOutput> {
-    Ok(GetSettingsOutput::from(self.settings.clone()))
+  #[tracing::instrument(skip_all, level = "trace")]
+  pub fn get_settings(&self) -> PowerPlantEngineResult<GetSettingsOutput> {
+    Ok(GetSettingsOutput::from(self.context.settings.clone()))
   }
 
+  #[tracing::instrument(skip_all, level = "trace")]
+  pub fn get_session(&self) -> PowerPlantEngineResult<GetSessionOutput> {
+    Ok(GetSessionOutput::from(self.context.session.clone()))
+  }
+
+  #[tracing::instrument(skip(self, input), fields(execution_id = %input.execution.meta.id), level = "trace")]
   pub fn store(&mut self, input: StoreInput) -> PowerPlantEngineResult<StoreOutput> {
     self.create_error_if_closed()?;
 
     let execution_id = input.execution.meta.id.clone();
-    trace_action!(StoreStart { action: "StoreStart", execution_id: execution_id.clone() });
+    tracing::trace!(action = "StoreStart", execution_id = %execution_id);
 
     self.execution_store.store(&input.execution).map_err(storage_error)?;
 
-    trace_action!(StoreEnd { action: "StoreEnd", execution_id });
+    tracing::trace!(action = "StoreEnd", execution_id = %execution_id);
 
     Ok(StoreOutput { success: true, errors: vec![] })
   }
 
+  #[tracing::instrument(skip(self, input), fields(execution_id = %input.execution_id), level = "trace")]
   pub fn recall(&mut self, input: RecallInput) -> PowerPlantEngineResult<RecallOutput> {
     self.create_error_if_closed()?;
 
@@ -68,6 +69,7 @@ impl Engine {
     Ok(RecallOutput { execution })
   }
 
+  #[tracing::instrument(skip(self, input), fields(query = ?input.query, executed_by = ?input.executed_by, limit = ?input.limit), level = "trace")]
   pub fn search(&mut self, input: SearchInput) -> PowerPlantEngineResult<SearchOutput> {
     self.create_error_if_closed()?;
 
@@ -77,6 +79,7 @@ impl Engine {
   }
 
   #[must_use = "Future must be awaited to do the actual cleanup work"]
+  #[tracing::instrument(skip(self), level = "trace")]
   pub fn close(&mut self) -> impl Future<Output = PowerPlantEngineResult<()>> + Send + 'static {
     self.is_closed = true;
     ready(Ok(()))
@@ -126,7 +129,7 @@ fn create_execution_store(
 mod tests {
   use super::*;
   use chrono::Utc;
-  use power_plant_core::SearchInput;
+  use power_plant_core::inputs::SearchInput;
   use power_plant_models::{
     Execution, ExecutionDocument, ExecutionMeta, ExecutionSource, ExecutionSourceMeta,
     GeneratorMeta, InputMeta, Meta, OutputMeta, SchemaMeta,
@@ -148,9 +151,7 @@ mod tests {
 
     Execution {
       documents: vec![ExecutionDocument {
-        name: "doc".into(),
         path: "src/doc.ts".into(),
-        extension: Some("ts".into()),
         source: vec![ExecutionSource {
           language: "typescript".into(),
           content: "export {}".into(),
@@ -169,13 +170,7 @@ mod tests {
   }
 
   fn engine_with_store(store: Arc<dyn ExecutionStore>) -> Engine {
-    Engine {
-      session: Session::dummy(),
-      options: NormalizedOptions::default(),
-      settings: Settings::default(),
-      execution_store: store,
-      is_closed: false,
-    }
+    Engine { context: Context::new(Options::default()), execution_store: store, is_closed: false }
   }
 
   #[test]

@@ -1,7 +1,7 @@
 use crate::types::binding_log_level::BindingLogLevel;
 use crate::types::binding_mode::BindingMode;
 use napi_derive::napi;
-use power_plant_core::{EnvPaths, Settings};
+use power_plant_core::settings::{EnvPaths, Settings};
 use std::fmt::{self, Display, Formatter};
 
 use crate::types::binding_env_paths::BindingEnvPaths;
@@ -12,6 +12,8 @@ pub struct BindingSettings {
   /// The app mode to use.
   #[napi(ts_type = "'development' | 'production' | 'test'")]
   pub mode: BindingMode,
+  /// The default username to use.
+  pub default_user: String,
   /// The paths to use.``
   #[napi(
     ts_type = "{ cache: string, config: string, data: string, logs: string, temp: string, downloads: string, executable: string }"
@@ -20,12 +22,8 @@ pub struct BindingSettings {
   /// The log level to use.
   #[napi(ts_type = "'debug' | 'info' | 'warn' | 'error' | 'silent'")]
   pub log_level: BindingLogLevel,
-  /// Whether to skip execution metadata storage after completing generation.
-  #[napi(ts_type = "boolean")]
+  /// Whether to skip storage.
   pub skip_storage: bool,
-  /// Whether to skip tracing.
-  #[napi(ts_type = "boolean")]
-  pub skip_tracing: bool,
 }
 
 impl Default for BindingSettings {
@@ -33,9 +31,9 @@ impl Default for BindingSettings {
     Self {
       mode: BindingMode::Production,
       paths: BindingEnvPaths::default(),
+      default_user: String::from("default"),
       log_level: BindingLogLevel::Info,
       skip_storage: false,
-      skip_tracing: false,
     }
   }
 }
@@ -44,12 +42,12 @@ impl BindingSettings {
   /// Create a new settings instance.
   pub fn new(
     mode: BindingMode,
+    default_user: String,
     paths: BindingEnvPaths,
     log_level: BindingLogLevel,
     skip_storage: bool,
-    skip_tracing: bool,
   ) -> Self {
-    Self { mode, paths, log_level, skip_storage, skip_tracing }
+    Self { mode, default_user, paths, log_level, skip_storage }
   }
 }
 
@@ -57,8 +55,8 @@ impl Display for BindingSettings {
   fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
     write!(
       f,
-      "mode: {}, paths: {}, log_level: {}, skip_storage: {}, skip_tracing: {}",
-      self.mode, self.paths, self.log_level, self.skip_storage, self.skip_tracing
+      "mode: {}, default_user: {}, paths: {}, log_level: {}, skip_storage: {}",
+      self.mode, self.default_user, self.paths, self.log_level, self.skip_storage
     )
   }
 }
@@ -69,8 +67,8 @@ impl From<Settings> for BindingSettings {
       mode: value.mode.into(),
       paths: value.paths.into(),
       log_level: value.log_level.into(),
+      default_user: value.default_user,
       skip_storage: value.skip_storage,
-      skip_tracing: value.skip_tracing,
     }
   }
 }
@@ -81,8 +79,8 @@ impl From<BindingSettings> for Settings {
       mode: value.mode.into(),
       paths: value.paths.clone().into(),
       log_level: value.log_level.into(),
+      default_user: value.default_user,
       skip_storage: value.skip_storage,
-      skip_tracing: value.skip_tracing,
     }
   }
 }

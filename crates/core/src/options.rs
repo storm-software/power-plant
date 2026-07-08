@@ -1,10 +1,15 @@
-use crate::{LogLevel, Logger, Mode};
+use crate::{
+  log::{LogLevel, Logger},
+  settings::Mode,
+};
 
 #[derive(Debug, Clone)]
 /// Configuration options for the Power Plant.
 pub struct Options {
   /// The mode.
   pub mode: Option<Mode>,
+  /// The user name to use for the application.
+  pub username: Option<String>,
   /// The log level.
   pub log_level: Option<LogLevel>,
   /// Callback for logging messages.
@@ -17,18 +22,26 @@ pub struct Options {
 
 impl Default for Options {
   fn default() -> Self {
-    Self { mode: None, log_level: None, custom_logger: None, cwd: None, output_path: None }
+    Self {
+      mode: None,
+      username: None,
+      log_level: None,
+      custom_logger: None,
+      cwd: None,
+      output_path: None,
+    }
   }
 }
 
 impl Options {
   pub fn new(
     mode: Option<Mode>,
+    username: Option<String>,
     log_level: Option<LogLevel>,
     custom_logger: Option<Logger>,
     cwd: Option<String>,
     output_path: Option<String>,
   ) -> Self {
-    Self { mode, log_level, custom_logger, cwd, output_path }
+    Self { mode, username, log_level, custom_logger, cwd, output_path }
   }
 }

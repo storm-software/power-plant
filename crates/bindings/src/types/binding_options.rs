@@ -7,7 +7,7 @@ use crate::types::{
 };
 use crate::utils::to_power_plant_error;
 use napi::bindgen_prelude::Promise;
-use power_plant_core::{Logger, Options};
+use power_plant_core::{Options, log::Logger};
 
 pub type BindingLogger = Option<JsCallback<BindingLog, Promise<()>>>;
 
@@ -17,6 +17,8 @@ pub struct BindingOptions {
   /// The mode.
   #[napi(ts_type = "'development' | 'production' | 'test'")]
   pub mode: Option<BindingMode>,
+  /// The username of the user currently using the application
+  pub username: Option<String>,
   #[napi(ts_type = "'debug' | 'info' | 'warn' | 'error' | 'silent'")]
   /// The log level.
   pub log_level: Option<BindingLogLevel>,
@@ -33,7 +35,14 @@ pub struct BindingOptions {
 
 impl Default for BindingOptions {
   fn default() -> Self {
-    Self { mode: None, log_level: None, custom_logger: None, cwd: None, output_path: None }
+    Self {
+      mode: None,
+      username: None,
+      log_level: None,
+      custom_logger: None,
+      cwd: None,
+      output_path: None,
+    }
   }
 }
 
@@ -65,6 +74,7 @@ impl Into<Options> for BindingOptions {
 
     Options {
       mode: self.mode.map(|mode| mode.into()),
+      username: self.username,
       log_level,
       custom_logger,
       cwd: self.cwd,

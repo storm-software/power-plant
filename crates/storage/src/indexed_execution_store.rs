@@ -1,7 +1,7 @@
 #[cfg(feature = "ladybug")]
 use std::sync::Arc;
 
-use power_plant_core::{SearchInput, SearchOutput};
+use power_plant_core::{inputs::SearchInput, outputs::SearchOutput};
 use power_plant_models::Execution;
 
 use crate::{ExecutionStore, StorageError};

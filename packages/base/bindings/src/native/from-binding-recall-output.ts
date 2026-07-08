@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { Execution } from "@power-plant/core";
+import type { Execution, ExecutionDocument } from "@power-plant/core";
 import type { BindingRecallOutput } from "../bindings.cjs";
 
 /**
@@ -26,7 +26,13 @@ export function fromBindingRecallOutput<TSpec, TOptions extends object>(
   output: BindingRecallOutput
 ): Execution<TSpec, TOptions> {
   return {
-    documents: output.execution.documents,
+    documents: output.execution.documents.reduce(
+      (ret, document) => {
+        ret[document.path] = document;
+        return ret;
+      },
+      {} as Record<string, ExecutionDocument<TSpec, TOptions>>
+    ),
     meta: {
       id: output.execution.meta.id,
       executedAt: new Date(output.execution.meta.executedAt),

@@ -59,61 +59,12 @@ export interface ExecutionSourceMeta<TSpec, TOptions extends object> {
   data?: MetaValue<TSpec, TOptions, MetaData<TSpec, TOptions>>;
 }
 
-export type Language =
-  | "typescript"
-  | "javascript"
-  | "python"
-  | "java"
-  | "c#"
-  | "c++"
-  | "c"
-  | "rust"
-  | "go"
-  | "php"
-  | "ruby"
-  | "swift"
-  | "kotlin"
-  | "scala"
-  | "haskell"
-  | "elm"
-  | "elixir"
-  | "erlang"
-  | "ocaml"
-  | "f#"
-  | "groovy"
-  | "groovy-server-pages"
-  | "html"
-  | "css"
-  | "scss"
-  | "less"
-  | "sass"
-  | "stylus"
-  | "pug"
-  | "haml"
-  | "slim"
-  | "markdown"
-  | "rst"
-  | "asciidoc"
-  | "org"
-  | "textile"
-  | "creole"
-  | "mediawiki"
-  | "yaml"
-  | "json"
-  | "toml"
-  | "xml"
-  | "csv"
-  | "tsv"
-  | "sql"
-  | "graphql"
-  | "protobuf"
-  | "thrift"
-  | "capnp"
-  | "avro"
-  | "avro-json"
-  | "other";
-
 export interface ExecutionSource<TSpec, TOptions extends object> {
+  /**
+   * The language of the document.
+   */
+  language?: string;
+
   /**
    * The content of the source code.
    */
@@ -130,16 +81,6 @@ export interface ExecutionDocument<TSpec, TOptions extends object> {
    * The path of the document.
    */
   path: string;
-
-  /**
-   * The language of the document.
-   */
-  language: Language;
-
-  /**
-   * The extension of the document.
-   */
-  extension?: string;
 
   /**
    * The source of the document.

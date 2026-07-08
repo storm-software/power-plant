@@ -4,6 +4,7 @@
 smol
 libc
 kustomization
+xwin
 
 # File Extensions
 haml
