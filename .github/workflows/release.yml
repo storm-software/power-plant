@@ -250,9 +250,6 @@ jobs:
           pattern: bindings-*
           merge-multiple: true
 
-      - name: Deploy binding artifacts to npm dirs
-        run: pnpm nx run bindings:deploy-artifacts
-
       - name: Release repository updates
         run: devenv --profile release --no-tui shell release ${{
           steps.setSHAs.outputs.base }} ${{ steps.setSHAs.outputs.head }}

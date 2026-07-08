@@ -40,13 +40,6 @@ export interface UserConfig<
   debug?: true;
 
   /**
-   * The path to the configuration file that will be used to load the settings.
-   *
-   * @defaultValue "power-plant.config.ts"
-   */
-  configFile?: string;
-
-  /**
    * The settings to use for the application.
    */
   settings?: DeepPartial<Settings>;

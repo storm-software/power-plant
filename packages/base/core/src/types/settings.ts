@@ -44,13 +44,6 @@ export interface Settings {
    * @defaultValue false
    */
   skipStorage: boolean;
-
-  /**
-   * Whether to skip tracing.
-   *
-   * @defaultValue false
-   */
-  skipTracing: boolean;
 }
 
 export interface Logger {

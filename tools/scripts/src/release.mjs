@@ -36,11 +36,22 @@ try {
 
   await echo`${chalk.whiteBright(` 📦  Releasing workspace packages (Base tag: "${base}", Head tag: "${head}")`)}`;
 
-  let proc = $`pnpm build`.timeout(`${30 * 60}s`);
+  let proc = $`pnpm nx run bindings:deploy-artifacts`.timeout(`${30 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });
   let result = await proc;
+  if (result.exitCode !== 0) {
+    throw new Error(
+      `An error occurred while deploying artifacts: \n\n${result.message}\n`
+    );
+  }
+
+  proc = $`pnpm build`.timeout(`${30 * 60}s`);
+  proc.stdout.on("data", data => {
+    echo`${data}`;
+  });
+  result = await proc;
   if (result.exitCode !== 0) {
     throw new Error(
       `An error occurred while building workspace packages: \n\n${result.message}\n`

@@ -18,15 +18,12 @@
 
 import type {
   Context,
-  Device,
   ExecutionDocument,
   Input,
   Logger,
   Output,
   SchemaOf,
   SessionContext,
-  Tenant,
-  User,
   UserConfig,
   UserConfigExport
 } from "@power-plant/core";
@@ -35,12 +32,10 @@ import { toArray } from "@stryke/convert/to-array";
 import { toMode } from "@stryke/env/environment-checks";
 import { getEnvPaths } from "@stryke/env/get-env-paths";
 import { readFileIfExisting } from "@stryke/fs/read-file";
-import { writeFile } from "@stryke/fs/write-file";
 import { joinPaths } from "@stryke/path/join";
 import { isFunction } from "@stryke/type-checks/is-function";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import { isSetString } from "@stryke/type-checks/is-set-string";
-import { uuid } from "@stryke/unique-id/uuid";
 import { loadConfig } from "c12";
 import defu from "defu";
 import { createJiti } from "jiti";
@@ -48,7 +43,6 @@ import { existsSync } from "node:fs";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
-import type { LocalStore } from "../types/local-store";
 
 const homeDir = os.homedir();
 
@@ -72,48 +66,6 @@ const jiti = createJiti(process.cwd(), {
   fsCache: joinPaths(paths.cache, "jiti")
 });
 
-function createDevice(now: Date): Device {
-  return {
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    name: os.hostname(),
-    arch: os.arch(),
-    platform: os.platform(),
-    os: {
-      type: os.type(),
-      release: os.release()
-    }
-  };
-}
-
-function createUser(now: Date, tenant: Tenant): User {
-  return {
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    username: os.userInfo().username,
-    role: "user",
-    tenant
-  };
-}
-
-function createTenant(now: Date): Tenant {
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const currency = Intl.NumberFormat().resolvedOptions().currency;
-  const language = Intl.NumberFormat().resolvedOptions().locale;
-
-  return {
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    name: "Default Tenant",
-    timezone: timezone ?? "UTC",
-    currency: currency ?? "USD",
-    language: language ?? "en-US"
-  };
-}
-
 /**
  * Create a context for the engine.
  *
@@ -134,25 +86,23 @@ export async function createContext(
           "production"
   );
 
-  const configFile =
-    userConfig.configFile ||
-    existsSync(joinPaths(cwd, `power-plant.${mode}.config.ts`))
-      ? joinPaths(cwd, `power-plant.${mode}.config.ts`)
-      : existsSync(joinPaths(cwd, `power-plant.${mode}.config.tsx`))
-        ? joinPaths(cwd, `power-plant.${mode}.config.tsx`)
-        : existsSync(joinPaths(cwd, `power-plant.config.mts`))
-          ? joinPaths(cwd, `power-plant.config.mts`)
-          : existsSync(joinPaths(cwd, `power-plant.config.cts`))
-            ? joinPaths(cwd, `power-plant.config.cts`)
-            : existsSync(joinPaths(cwd, `power-plant.config.mjs`))
-              ? joinPaths(cwd, `power-plant.config.mjs`)
-              : existsSync(joinPaths(cwd, `power-plant.config.cjs`))
-                ? joinPaths(cwd, `power-plant.config.cjs`)
-                : existsSync(joinPaths(cwd, `power-plant.config.js`))
-                  ? joinPaths(cwd, `power-plant.config.js`)
-                  : existsSync(joinPaths(cwd, `power-plant.config.jsx`))
-                    ? joinPaths(cwd, `power-plant.config.jsx`)
-                    : undefined;
+  const configFile = existsSync(joinPaths(cwd, `power-plant.${mode}.config.ts`))
+    ? joinPaths(cwd, `power-plant.${mode}.config.ts`)
+    : existsSync(joinPaths(cwd, `power-plant.${mode}.config.tsx`))
+      ? joinPaths(cwd, `power-plant.${mode}.config.tsx`)
+      : existsSync(joinPaths(cwd, `power-plant.config.mts`))
+        ? joinPaths(cwd, `power-plant.config.mts`)
+        : existsSync(joinPaths(cwd, `power-plant.config.cts`))
+          ? joinPaths(cwd, `power-plant.config.cts`)
+          : existsSync(joinPaths(cwd, `power-plant.config.mjs`))
+            ? joinPaths(cwd, `power-plant.config.mjs`)
+            : existsSync(joinPaths(cwd, `power-plant.config.cjs`))
+              ? joinPaths(cwd, `power-plant.config.cjs`)
+              : existsSync(joinPaths(cwd, `power-plant.config.js`))
+                ? joinPaths(cwd, `power-plant.config.js`)
+                : existsSync(joinPaths(cwd, `power-plant.config.jsx`))
+                  ? joinPaths(cwd, `power-plant.config.jsx`)
+                  : undefined;
 
   let projectConfig: UserConfig[] = [];
   if (configFile) {
@@ -292,61 +242,6 @@ export async function createContext(
 }
 
 /**
- * Create a context for the engine.
- *
- * @param userConfig - The user configuration.
- * @returns A promise that resolves to a context.
- */
-export async function createSessionContext(
-  userConfig: UserConfig = {}
-): Promise<SessionContext> {
-  const baseContext = await createContext(userConfig);
-  const now = new Date();
-
-  const store = JSON.parse(
-    (await readFileIfExisting(
-      joinPaths(baseContext.cwd, ".local-store.json")
-    )) || "{}"
-  ) as LocalStore;
-
-  const device = store.device ?? createDevice(now);
-  const tenant = store.tenant ?? createTenant(now);
-  const user = store.user ?? createUser(now, tenant);
-
-  if (!store.tenant) {
-    tenant.name = user.username;
-  }
-
-  const sessionContext = {
-    ...baseContext,
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    device,
-    user,
-    tenant,
-    executions: []
-  } satisfies SessionContext;
-
-  if (!store.device || !store.user || !store.tenant) {
-    await writeFile(
-      joinPaths(baseContext.cwd, ".store.json"),
-      JSON.stringify(
-        {
-          device,
-          user,
-          tenant
-        },
-        null,
-        2
-      )
-    );
-  }
-
-  return sessionContext;
-}
-
-/**
  * Create an execution context for the engine.
  *
  * @param executionId - The ID of the execution.
@@ -383,7 +278,7 @@ export async function createExecutionContext<
         {
           source: []
         }
-      ) as ExecutionDocument<TSpec, TOptions>;
+      );
     } else {
       documents[pathOrDocument.path] = defu(pathOrDocument, document);
     }
@@ -412,11 +307,9 @@ export async function createExecutionContext<
     meta: {
       id: executionId,
       executedAt: new Date(),
-      executedBy: sessionContext.user.id
+      executedBy: ""
     }
-  } as Unstable_ExecutionContext<TSpec, TOptions, TReturns>;
-
-  sessionContext.executions.push(context);
+  } as unknown as Unstable_ExecutionContext<TSpec, TOptions, TReturns>;
 
   return context;
 }
