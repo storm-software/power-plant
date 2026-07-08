@@ -21,9 +21,10 @@ import type { Execution, ExecutionDocument } from "./execution";
 import type { Input } from "./input";
 import type { Output } from "./output";
 import type { SchemaOf } from "./schema";
+import type { Session } from "./session";
 import type { Logger, Settings } from "./settings";
 
-export interface Context {
+export interface SessionContext {
   /**
    * The current working directory.
    */
@@ -46,9 +47,12 @@ export interface Context {
    * The logger for the context.
    */
   logger: Logger;
-}
 
-export type SessionContext = Context;
+  /**
+   * The session for the context.
+   */
+  session: Session;
+}
 
 export interface ExecutionContext<
   TSpec,

@@ -39,8 +39,9 @@ import type { Engine, InferEngineOptions } from "./types/engine";
 export async function createEngine(
   userConfig: UserConfig = {}
 ): Promise<Engine> {
-  const context = await createSessionContext(userConfig);
-  const bindings = new NativeBindingEngine(context);
+  const bindings = new NativeBindingEngine(userConfig);
+  const session = await bindings.getSession();
+  const context = createSessionContext(session, userConfig);
 
   const execute = async <TSpec, TOptions extends object, TReturns = void>(
     config: GeneratorConfig<TSpec, TOptions, TReturns>,
@@ -64,7 +65,7 @@ export async function createEngine(
           meta: {
             id: executionId,
             executedAt: new Date(),
-            executedBy: context.user.id
+            executedBy: context.session.user.name
           }
         } as any);
       }

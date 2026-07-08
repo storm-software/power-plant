@@ -16,8 +16,12 @@
 
  ------------------------------------------------------------------- */
 
-import type { Context, Execution } from "@power-plant/core";
-import type { BindingError, BindingRecallOutput } from "../bindings.cjs";
+import type { Execution, Session, UserConfig } from "@power-plant/core";
+import type {
+  BindingError,
+  BindingGetSessionOutput,
+  BindingRecallOutput
+} from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
@@ -30,7 +34,7 @@ import { toBindingStoreInput } from "./to-binding-store-input";
 Symbol.asyncDispose ??= Symbol("Symbol.asyncDispose");
 
 export class NativeBindingEngine {
-  #context: Context;
+  #config: UserConfig;
 
   #isClosed = false;
 
@@ -45,13 +49,12 @@ export class NativeBindingEngine {
    *
    * @param context - The context containing configuration and utilities for the engine.
    */
-  public constructor(context: Context) {
-    this.#context = context;
+  public constructor(config: UserConfig) {
+    this.#config = config;
 
     this.#binding = new BindingEngine({
-      logLevel: context.settings.logLevel,
-      cwd: context.cwd,
-      outputPath: context.cwd
+      logLevel: config.settings?.logLevel,
+      cwd: config.cwd
     });
   }
 
@@ -62,6 +65,35 @@ export class NativeBindingEngine {
    */
   public get isClosed(): boolean {
     return this.#isClosed;
+  }
+
+  /**
+   * Retrieve the current session information from the engine, which includes details about the execution environment, configuration, and any relevant metadata. This method interacts with the underlying binding engine to obtain the session data and returns it in a structured format. It is useful for understanding the context in which the engine is operating and for debugging purposes.
+   *
+   * @returns A promise that resolves to the current session information.
+   * @throws An error if the get session operation fails due to binding errors or other issues.
+   */
+  public async getSession(): Promise<Session> {
+    await this.#stopWorkers?.();
+    if (NativeBindingEngine.asyncRuntimeShutdown) {
+      startAsyncRuntime();
+    }
+
+    const result = await this.#binding.getSession();
+    if ("isBindingErrors" in result && result.isBindingErrors) {
+      throw new Error(
+        `Power Plant - Get Session failed with errors: ${result.errors
+          .map(e => e.field0.message)
+          .join("\n")}`
+      );
+    }
+
+    const output = result as BindingGetSessionOutput;
+
+    return {
+      ...output.session,
+      startedAt: new Date(output.session.startedAt)
+    };
   }
 
   /**
@@ -77,7 +109,7 @@ export class NativeBindingEngine {
   public async store<TSpec, TOptions extends object>(
     execution: Execution<TSpec, TOptions>
   ): Promise<any> {
-    this.#context.logger.debug("Power Plant - Store started.");
+    // this.#config.logger.debug("Power Plant - Store started.");
 
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
@@ -99,7 +131,7 @@ export class NativeBindingEngine {
       );
     }
 
-    this.#context.logger.debug("Power Plant - Scan completed.");
+    // this.#config.logger.debug("Power Plant - Scan completed.");
 
     return {};
   }
@@ -114,7 +146,7 @@ export class NativeBindingEngine {
   public async recall<TSpec, TOptions extends object>(
     executionId: string
   ): Promise<Execution<TSpec, TOptions>> {
-    this.#context.logger.debug("Power Plant - Recall started.");
+    // this.#config.logger.debug("Power Plant - Recall started.");
 
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
@@ -130,7 +162,7 @@ export class NativeBindingEngine {
       );
     }
 
-    this.#context.logger.debug("Power Plant - Recall completed.");
+    // this.#config.logger.debug("Power Plant - Recall completed.");
 
     const recallOutput = result as BindingRecallOutput;
 

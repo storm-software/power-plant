@@ -19,16 +19,12 @@
 import { snakeCase } from "@stryke/string-format/snake-case";
 import { titleCase } from "@stryke/string-format/title-case";
 import { AsyncLocalStorage } from "node:async_hooks";
-import type {
-  Context,
-  ExecutionContext,
-  SessionContext
-} from "./types/context";
+import type { ExecutionContext, SessionContext } from "./types/context";
 
 /**
  * The context store for a specific context.
  */
-export interface ContextStore<TContext extends Context> {
+export interface ContextStore<TContext extends SessionContext> {
   asyncLocalStorage: AsyncLocalStorage<TContext>;
   use: () => TContext;
   tryUse: () => TContext | undefined;
@@ -43,7 +39,7 @@ const globalStore = globalThis as unknown as Record<string, ContextStore<any>>;
 
 const GLOBAL_CONTEXT_KEY = "$$__power_plant_{key}_context__";
 
-function createContextStore<TContext extends Context>(
+function createContextStore<TContext extends SessionContext>(
   key: string
 ): ContextStore<TContext> {
   const contextKey = GLOBAL_CONTEXT_KEY.replace(
@@ -176,25 +172,3 @@ export const callExecutionContext = executionContext.call;
  * @returns The result of the callback.
  */
 export const callAsyncExecutionContext = executionContext.callAsync;
-
-/**
- * Returns the current context. If no execution context is available, it will return the session context.
- *
- * @returns The current execution context or the session context if no execution context is available.
- * @throws An error if both execution and session context are not available.
- */
-export const useContext = <TContext extends SessionContext>(): TContext => {
-  const context = tryUseExecutionContext();
-  if (context === undefined) {
-    const sessionContext = useSessionContext();
-    if (sessionContext === undefined) {
-      throw new Error(
-        `Both execution and session context are not available. Please ensure that the context has been initialized before using it.`
-      );
-    }
-
-    return sessionContext as unknown as TContext;
-  }
-
-  return context as unknown as TContext;
-};

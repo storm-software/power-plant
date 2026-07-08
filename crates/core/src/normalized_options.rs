@@ -12,16 +12,11 @@ use std::sync::Arc;
 pub struct NormalizedPathOptions {
   /// The current working directory.
   pub cwd: Utf8PathBuf,
-  /// Path to output directory.
-  pub output: Utf8PathBuf,
 }
 
 impl Default for NormalizedPathOptions {
   fn default() -> Self {
-    Self {
-      cwd: std::env::current_dir().unwrap().to_string_lossy().to_string().into(),
-      output: std::env::current_dir().unwrap().to_string_lossy().to_string().into(),
-    }
+    Self { cwd: std::env::current_dir().unwrap().to_string_lossy().to_string().into() }
   }
 }
 
@@ -61,10 +56,7 @@ impl From<Options> for NormalizedOptions {
       username: opts.username,
       log_level: opts.log_level.unwrap_or_default(),
       custom_logger: opts.custom_logger,
-      paths: NormalizedPathOptions {
-        cwd: cwd.clone().into(),
-        output: opts.output_path.unwrap_or(cwd.clone()).into(),
-      },
+      paths: NormalizedPathOptions { cwd: cwd.clone().into() },
     }
   }
 }

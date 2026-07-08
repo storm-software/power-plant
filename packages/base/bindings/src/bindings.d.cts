@@ -1417,8 +1417,6 @@ export interface BindingOptions {
   ) => Promise<void>;
   /** The current working directory. */
   cwd?: string;
-  /** Path to output directory. */
-  outputPath?: string;
 }
 
 export interface BindingOutputMeta {
