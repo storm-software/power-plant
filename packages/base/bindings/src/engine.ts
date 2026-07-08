@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { GeneratorConfig, UserConfig } from "@power-plant/core";
+import type { Execution, GeneratorConfig, UserConfig } from "@power-plant/core";
 import { callAsyncSessionContext } from "@power-plant/core";
 import { uuid } from "@stryke/unique-id/uuid";
 import { createSessionContext } from "./lib/context";
@@ -58,17 +58,33 @@ export async function createEngine(
       );
 
       const { documents, returns } = await generator(options);
+
+      const execution = {
+        executionId,
+        documents: Object.fromEntries(
+          Object.entries(documents).map(([path, document]) => [
+            path,
+            {
+              ...document,
+              path,
+              meta: {
+                executionId
+              }
+            }
+          ])
+        ),
+        meta: {
+          id: executionId,
+          executedAt: new Date(),
+          executedBy: context.session.user.name
+        }
+      } as Execution<TSpec, TOptions>;
+
       if (!context.settings.skipStorage) {
-        await bindings.store({
-          executionId,
-          documents,
-          meta: {
-            id: executionId,
-            executedAt: new Date(),
-            executedBy: context.session.user.name
-          }
-        } as any);
+        await bindings.store(execution);
       }
+
+      context.executions.push(execution);
 
       return returns;
     });

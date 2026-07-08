@@ -52,6 +52,11 @@ export interface SessionContext {
    * The session for the context.
    */
   session: Session;
+
+  /**
+   * The executions that have been performed in the context.
+   */
+  executions: Execution<any, any>[];
 }
 
 export interface ExecutionContext<

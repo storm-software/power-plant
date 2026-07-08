@@ -36,7 +36,7 @@ try {
 
   await echo`${chalk.whiteBright(` 📦  Releasing workspace packages (Base tag: "${base}", Head tag: "${head}")`)}`;
 
-  let proc = $`pnpm nx run bindings:deploy-artifacts`.timeout(`${30 * 60}s`);
+  let proc = $`pnpm nx run bindings:artifacts`.timeout(`${30 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });

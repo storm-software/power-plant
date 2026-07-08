@@ -34,8 +34,6 @@ import { isBindingFailureResult } from "./utils";
 Symbol.asyncDispose ??= Symbol("Symbol.asyncDispose");
 
 export class NativeBindingEngine {
-  #config: UserConfig;
-
   #isClosed = false;
 
   #binding: BindingEngine;
@@ -50,8 +48,6 @@ export class NativeBindingEngine {
    * @param context - The context containing configuration and utilities for the engine.
    */
   public constructor(config: UserConfig) {
-    this.#config = config;
-
     this.#binding = new BindingEngine({
       logLevel: config.settings?.logLevel,
       cwd: config.cwd
