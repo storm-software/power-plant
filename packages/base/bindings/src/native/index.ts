@@ -16,13 +16,19 @@
 
  ------------------------------------------------------------------- */
 
-import type { Execution, Session, UserConfig } from "@power-plant/core";
+import type {
+  Execution,
+  ExecutionDocument,
+  Session,
+  UserConfig
+} from "@power-plant/core";
 import type { BindingError, BindingExecutionDocument } from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
   startAsyncRuntime
 } from "../bindings.cjs";
+import { isBindingFailureResult } from "./utils";
 
 // @ts-expect-error TS2540: the polyfill of `asyncDispose`.
 Symbol.asyncDispose ??= Symbol("Symbol.asyncDispose");
@@ -75,7 +81,7 @@ export class NativeBindingEngine {
 
     const result: Awaited<ReturnType<BindingEngine["getSession"]>> =
       await this.#binding.getSession();
-    if ("isBindingErrors" in result && result.isBindingErrors) {
+    if (isBindingFailureResult(result)) {
       throw new Error(
         `Power Plant - Get Session failed with errors: ${result.errors
           .map(e => e.field0.message)
@@ -119,15 +125,12 @@ export class NativeBindingEngine {
           ),
           meta: {
             id: execution.meta.id,
-            executedAt: execution.meta.executedAt.toISOString(),
+            executedAt: execution.meta.executedAt.getTime(),
             executedBy: execution.meta.executedBy
           }
         }
       });
-    if (
-      (result as { errors: BindingError[]; isBindingErrors: boolean })
-        ?.isBindingErrors
-    ) {
+    if (isBindingFailureResult(result)) {
       throw new Error(
         `Power Plant - Scan failed with errors: ${(
           result as { errors: BindingError[] }
@@ -155,7 +158,7 @@ export class NativeBindingEngine {
 
     const result: Awaited<ReturnType<BindingEngine["recall"]>> =
       await this.#binding.recall({ executionId });
-    if ("isBindingErrors" in result && result.isBindingErrors) {
+    if (isBindingFailureResult(result)) {
       throw new Error(
         `Power Plant - Recall failed with errors: ${result.errors
           .map(e => e.field0.message)
@@ -164,10 +167,13 @@ export class NativeBindingEngine {
     }
 
     return {
-      documents: result.execution.documents.reduce((ret, document) => {
-        ret[document.path] = document;
-        return ret;
-      }, {}),
+      documents: result.execution.documents.reduce(
+        (ret, document) => {
+          ret[document.path] = document;
+          return ret;
+        },
+        {} as Record<string, ExecutionDocument<TSpec, TOptions>>
+      ),
       meta: {
         id: result.execution.meta.id,
         executedAt: new Date(result.execution.meta.executedAt),

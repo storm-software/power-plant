@@ -36,16 +36,16 @@ pub struct DataPoint {
   /// Unique identifier
   pub id: String,
 
-  /// Creation timestamp (milliseconds since epoch, matching Python)
+  /// Creation timestamp (milliseconds since epoch)
   pub created_at: i64,
 
-  /// Last update timestamp (milliseconds since epoch, matching Python)
+  /// Last update timestamp (milliseconds since epoch)
   pub updated_at: i64,
 
   /// Whether this entity has been validated against an ontology
   pub ontology_valid: bool,
 
-  /// Version number (default 1, matching Python)
+  /// Version number (default 1)
   #[serde(default = "default_version")]
   pub version: i32,
 
@@ -59,7 +59,7 @@ pub struct DataPoint {
   #[serde(rename = "type")]
   pub data_type: String,
 
-  /// Dataset this data point belongs to (list of JSON values, matching Python)
+  /// Dataset this data point belongs to (list of JSON values)
   pub belongs_to_set: Option<Vec<serde_json::Value>>,
 
   /// Pipeline that created this data point
@@ -80,11 +80,11 @@ pub struct DataPoint {
 
   /// Content hash of the raw `Data` artefact that produced this DataPoint.
   /// Propagates from upstream `Data.content_hash` through every task in
-  /// the cognify pipeline, enabling content-addressed lineage queries.
+  /// the pipeline, enabling content-addressed lineage queries.
   #[serde(default, skip_serializing_if = "Option::is_none")]
   pub source_content_hash: Option<String>,
 
-  /// Feedback weight (default 0.5, matching Python)
+  /// Feedback weight (default 0.5)
   #[serde(default = "default_feedback_weight")]
   pub feedback_weight: f64,
 }

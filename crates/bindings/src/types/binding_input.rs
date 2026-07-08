@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use derive_more::Debug;
 use power_plant_core::inputs::{RecallInput, SearchInput, StoreInput};
 use power_plant_models::{
@@ -131,7 +132,7 @@ pub struct BindingExecutionMeta {
   /// The id of the execution.
   pub id: String,
   /// The date and time when the execution was performed.
-  pub executed_at: String,
+  pub executed_at: i64,
   /// The user who performed the execution.
   pub executed_by: String,
 }
@@ -191,7 +192,7 @@ impl Default for BindingStoreInput {
         documents: vec![],
         meta: BindingExecutionMeta {
           id: String::new(),
-          executed_at: String::new(),
+          executed_at: 0,
           executed_by: String::new(),
         },
       },
@@ -353,7 +354,7 @@ impl From<BindingExecutionMeta> for ExecutionMeta {
   fn from(value: BindingExecutionMeta) -> Self {
     Self {
       id: value.id,
-      executed_at: value.executed_at.parse().unwrap_or_else(|_| chrono::Utc::now()),
+      executed_at: DateTime::from_timestamp_millis(value.executed_at).unwrap_or_else(|| Utc::now()),
       executed_by: value.executed_by,
     }
   }
@@ -539,7 +540,7 @@ impl From<ExecutionMeta> for BindingExecutionMeta {
   fn from(value: ExecutionMeta) -> Self {
     Self {
       id: value.id,
-      executed_at: value.executed_at.to_rfc3339(),
+      executed_at: value.executed_at.timestamp_millis(),
       executed_by: value.executed_by,
     }
   }

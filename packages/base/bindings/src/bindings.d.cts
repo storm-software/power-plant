@@ -1296,7 +1296,7 @@ export interface BindingExecutionMeta {
   /** The id of the execution. */
   id: string;
   /** The date and time when the execution was performed. */
-  executedAt: string;
+  executedAt: number;
   /** The user who performed the execution. */
   executedBy: string;
 }
@@ -1499,7 +1499,7 @@ export interface BindingSearchOutput {
 
 export interface BindingSession {
   sessionId: string;
-  startedAt: string;
+  startedAt: number;
   user: BindingUser;
   device: BindingDevice;
 }
