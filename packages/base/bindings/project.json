@@ -107,7 +107,8 @@
       "options": {
         "additionalArgs": {
           "target": "aarch64-pc-windows-msvc"
-        }
+        },
+        "logLevel": "trace"
       }
     },
     "build-x86_64-pc-windows-msvc": {
@@ -115,7 +116,8 @@
       "options": {
         "additionalArgs": {
           "target": "x86_64-pc-windows-msvc"
-        }
+        },
+        "logLevel": "trace"
       }
     },
     "build-i686-pc-windows-msvc": {
@@ -123,7 +125,8 @@
       "options": {
         "additionalArgs": {
           "target": "i686-pc-windows-msvc"
-        }
+        },
+        "logLevel": "trace"
       }
     },
     "artifacts": {
