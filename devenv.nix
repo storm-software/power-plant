@@ -229,5 +229,15 @@
         languages.rust.targets = [ "i686-pc-windows-msvc" ];
       };
     };
+
+    release-freebsd-x86_64 = {
+      extends = [
+        "release-cross"
+        "release-unix"
+      ];
+      module = {
+        languages.rust.targets = [ "x86_64-unknown-freebsd" ];
+      };
+    };
   };
 }

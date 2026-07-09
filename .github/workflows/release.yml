@@ -121,6 +121,11 @@ jobs:
           - host: ubuntu-latest
             target: wasm32-wasip1-threads
             profile: release-wasm32-wasip1
+
+          # FreeBSD
+          - host: ubuntu-latest
+            target: x86_64-unknown-freebsd
+            profile: release-freebsd-x86_64
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -154,62 +159,62 @@ jobs:
           path: packages/base/bindings/artifacts/*.wasm
           if-no-files-found: error
 
-  build-bindings-freebsd:
-    name: Build bindings - x86_64-unknown-freebsd
-    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
-      github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
-    environment: production
-    permissions:
-      contents: write
-      id-token: write
-    needs:
-      - start
-    steps:
-      - name: Setup workspace
-        uses: storm-software/action-setup@main
-        with:
-          gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
-          gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
-          storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
+      # build-bindings-freebsd:
+      #   name: Build bindings - x86_64-unknown-freebsd
+      #   if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
+      #     github.event.pull_request.draft == false
+      #   runs-on: ubuntu-latest
+      #   environment: production
+      #   permissions:
+      #     contents: write
+      #     id-token: write
+      #   needs:
+      #     - start
+      #   steps:
+      #     - name: Setup workspace
+      #       uses: storm-software/action-setup@main
+      #       with:
+      #         gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
+      #         gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
+      #         gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
+      #         storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
 
-      - name: Build on FreeBSD
-        uses: cross-platform-actions/action@5ea7e8e4677bd726033a10b094ba1c5762b15dee # v1.3.0
-        env:
-          DEBUG: napi:*
-          RUSTUP_IO_THREADS: 1
-          COREPACK_DEFAULT_TO_LATEST: 0
-        with:
-          operating_system: freebsd
-          version: "15.0"
-          memory: 8G
-          cpu_count: 3
-          environment_variables: DEBUG RUSTUP_IO_THREADS
-          shell: bash
-          run: |
-            sudo pkg install -y -f curl node libnghttp2 npm cmake
-            sudo npm install -g corepack
-            curl https://sh.rustup.rs -sSf --output rustup.sh
-            sh rustup.sh -y --profile minimal --default-toolchain stable
-            export COREPACK_INTEGRITY_KEYS=0
-            sudo corepack enable
-            source "$HOME/.cargo/env"
-            # @swc/core has no FreeBSD native binary; skip postinstall bootstrap (pnpm nx sync).
-            pnpm install --frozen-lockfile --ignore-scripts
-            cd packages/base/bindings
-            pnpm exec napi build --release \
-              --package-json-path package.json \
-              --output-dir artifacts \
-              --manifest-path ../../../crates/bindings/Cargo.toml \
-              --target x86_64-unknown-freebsd
+      #     - name: Build on FreeBSD
+      #       uses: cross-platform-actions/action@5ea7e8e4677bd726033a10b094ba1c5762b15dee # v1.3.0
+      #       env:
+      #         DEBUG: napi:*
+      #         RUSTUP_IO_THREADS: 1
+      #         COREPACK_DEFAULT_TO_LATEST: 0
+      #       with:
+      #         operating_system: freebsd
+      #         version: "15.0"
+      #         memory: 8G
+      #         cpu_count: 3
+      #         environment_variables: DEBUG RUSTUP_IO_THREADS
+      #         shell: bash
+      #         run: |
+      #           sudo pkg install -y -f curl node libnghttp2 npm cmake
+      #           sudo npm install -g corepack
+      #           curl https://sh.rustup.rs -sSf --output rustup.sh
+      #           sh rustup.sh -y --profile minimal --default-toolchain stable
+      #           export COREPACK_INTEGRITY_KEYS=0
+      #           sudo corepack enable
+      #           source "$HOME/.cargo/env"
+      #           # @swc/core has no FreeBSD native binary; skip postinstall bootstrap (pnpm nx sync).
+      #           pnpm install --frozen-lockfile --ignore-scripts
+      #           cd packages/base/bindings
+      #           pnpm exec napi build --release \
+      #             --package-json-path package.json \
+      #             --output-dir artifacts \
+      #             --manifest-path ../../../crates/bindings/Cargo.toml \
+      #             --target x86_64-unknown-freebsd
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
-        with:
-          name: bindings-x86_64-unknown-freebsd
-          path: packages/base/bindings/artifacts/*.node
-          if-no-files-found: error
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
+      #   with:
+      #     name: bindings-x86_64-unknown-freebsd
+      #     path: packages/base/bindings/artifacts/*.node
+      #     if-no-files-found: error
 
   release:
     name: Release
@@ -223,7 +228,6 @@ jobs:
     needs:
       - start
       - build-bindings-unix
-      - build-bindings-freebsd
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
