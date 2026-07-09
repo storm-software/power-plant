@@ -59,12 +59,12 @@ const config: UserConfig = defineConfig({
           asyncInit: true
         }
       },
-      jsBinding: "bindings.cjs",
-      dts: "bindings.d.cts",
+      jsBinding: "../src/bindings.cjs",
+      dts: "../src/bindings.d.cts",
       dtsHeader:
         "export type MaybePromise<T> = T | Promise<T>\nexport type Nullable<T> = T | null | undefined\ntype VoidNullable<T = void> = T | null | undefined | void\nexport type BindingStringOrRegex = string | RegExp\ntype BindingResult<T> = { errors: BindingError[], isBindingErrors: boolean } | T\n\n",
       npmDir: "npm",
-      outputDir: "src",
+      outputDir: "artifacts",
       manifestPath: "crates/bindings/Cargo.toml"
     })
   ]
