@@ -172,8 +172,9 @@ impl IncrementalClassification {
 
 #[cfg(test)]
 mod tests {
+  use crate::Language;
+
   use super::*;
-  use crate::pipeline::infer_language;
   use std::collections::HashMap;
   use std::fs;
   use std::path::PathBuf;
@@ -187,7 +188,7 @@ mod tests {
     fs::write(&path, contents).unwrap();
     (
       base,
-      FileInfo { path: path.clone(), rel_path: rel.to_string(), language: infer_language(rel) },
+      FileInfo { path: path.clone(), rel_path: rel.to_string(), language: Language::from(rel) },
     )
   }
 

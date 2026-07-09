@@ -3088,33 +3088,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "power-plant-cbm"
-version = "0.1.1"
-dependencies = [
- "async-scoped",
- "base-encode",
- "base64-simd",
- "bindgen 0.72.1",
- "cc",
- "cow-utils",
- "dashmap",
- "futures",
- "glob",
- "infer",
- "memchr",
- "nom 8.0.0",
- "rayon",
- "regex",
- "regress 0.10.5",
- "serde",
- "serde_json",
- "tokio",
- "tree-sitter",
- "uuid",
- "xxhash-rust",
-]
-
-[[package]]
 name = "power-plant-core"
 version = "0.1.1"
 dependencies = [
@@ -3221,6 +3194,33 @@ dependencies = [
  "tracing-chrome",
  "tracing-subscriber",
  "ts-rs",
+]
+
+[[package]]
+name = "power-plant-tree-sitter"
+version = "0.1.1"
+dependencies = [
+ "async-scoped",
+ "base-encode",
+ "base64-simd",
+ "bindgen 0.72.1",
+ "cc",
+ "cow-utils",
+ "dashmap",
+ "futures",
+ "glob",
+ "infer",
+ "memchr",
+ "nom 8.0.0",
+ "rayon",
+ "regex",
+ "regress 0.10.5",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tree-sitter",
+ "uuid",
+ "xxhash-rust",
 ]
 
 [[package]]

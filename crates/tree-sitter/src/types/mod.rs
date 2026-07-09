@@ -1,3 +1,3 @@
-pub mod languages;
+pub mod language;
 
-pub use languages::*;
+pub use language::*;

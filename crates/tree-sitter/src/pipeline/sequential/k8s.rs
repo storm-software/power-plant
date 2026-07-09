@@ -3,8 +3,8 @@ use super::super::error::PipelineResult;
 use super::super::extract::read_file;
 use super::super::fqn::compute_fqn;
 use super::super::types::FileInfo;
-use super::super::types::Language;
 use super::SequentialPipelineState;
+use crate::Language;
 
 fn basename(rel: &str) -> &str {
   rel.rsplit('/').next().unwrap_or(rel)
@@ -52,7 +52,7 @@ pub fn pass_k8s(ctx: &mut PipelineContext<'_>, files: &[FileInfo]) -> PipelineRe
       continue;
     }
 
-    if matches!(language, Language::Yaml | Language::K8s) {
+    if matches!(language, Language::Yaml) {
       let Ok((data, _)) = read_file(&file.path) else {
         continue;
       };

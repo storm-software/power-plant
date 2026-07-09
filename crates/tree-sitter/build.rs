@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::{
-  collections::HashMap,
+  collections::{HashMap, HashSet},
   env,
   fmt::Write as _,
   fs::{create_dir_all, read_dir, read_to_string, write},
@@ -292,9 +292,75 @@ pub enum Language {
   });
   language_enum.push_str("}\n");
 
-  let result = write(src_path.join("types/languages.rs"), language_enum);
+  language_enum.push_str(
+    "\nimpl From<&str> for Language {\n    fn from(file_path: &str) -> Self {\n        let path = std::path::Path::new(file_path);\n\n        if let Some(file_name) = path.file_name().and_then(|name| name.to_str()) {\n            let lowered_file_name = file_name.to_ascii_lowercase();\n            match lowered_file_name.as_str() {\n",
+  );
+
+  let mut seen_filenames = HashSet::new();
+  sorted_grammars.iter().for_each(|grammar| {
+    grammar.filenames.iter().filter(|filename| !filename.contains('*')).for_each(|filename| {
+      let normalized_filename = filename.to_ascii_lowercase();
+      if !seen_filenames.insert(normalized_filename.clone()) {
+        return;
+      }
+      let escaped_filename = escape_rust_string(&normalized_filename);
+      writeln!(
+        language_enum,
+        "                \"{escaped_filename}\" => return Self::{},",
+        grammar.pascal_name
+      )
+      .expect("Writing to String cannot fail");
+    });
+  });
+
+  language_enum.push_str(
+    "                _ => {}\n            }\n        }\n\n        let lowered_file_path = file_path.to_ascii_lowercase();\n\n",
+  );
+
+  let mut seen_globs = HashSet::new();
+  sorted_grammars.iter().for_each(|grammar| {
+    grammar.filenames.iter().filter(|filename| filename.contains('*')).for_each(|glob| {
+      let normalized_glob = glob.to_ascii_lowercase();
+      if !seen_globs.insert(normalized_glob.clone()) {
+        return;
+      }
+      let escaped_glob = escape_rust_string(&normalized_glob);
+      writeln!(
+        language_enum,
+        "        if glob::Pattern::new(\"{escaped_glob}\").unwrap().matches(&lowered_file_path) {{ return Self::{}; }}",
+        grammar.pascal_name
+      )
+      .expect("Writing to String cannot fail");
+    });
+  });
+
+  language_enum.push_str("\n");
+
+  let mut seen_extensions = HashSet::new();
+  sorted_grammars.iter().for_each(|grammar| {
+    grammar.extensions.iter().for_each(|extension| {
+      if let Some(normalized_extension) = normalized_extension(extension) {
+        if !seen_extensions.insert(normalized_extension.clone()) {
+          return;
+        }
+        writeln!(
+          language_enum,
+          "        if lowered_file_path.ends_with(\"{}\") {{ return Self::{}; }}",
+          escape_rust_string(&normalized_extension),
+          grammar.pascal_name,
+        )
+        .expect("Writing to String cannot fail");
+      }
+    });
+  });
+
+  language_enum.push_str(
+    "\n        Self::Unknown\n    }\n}\n\nimpl From<&String> for Language {\n    fn from(file_path: &String) -> Self {\n        Self::from(file_path.as_str())\n    }\n}\n\nimpl From<&std::path::Path> for Language {\n    fn from(file_path: &std::path::Path) -> Self {\n        Self::from(file_path.to_string_lossy().as_ref())\n    }\n}\n\nimpl From<std::path::PathBuf> for Language {\n    fn from(file_path: std::path::PathBuf) -> Self {\n        Self::from(file_path.as_path())\n    }\n}\n",
+  );
+
+  let result = write(src_path.join("types/language.rs"), language_enum);
   if result.is_err() {
-    panic!("Failed to write tree_sitter mod.rs: {}", result.err().unwrap());
+    panic!("Failed to write types/language.rs: {}", result.err().unwrap());
   }
 
   // let bindings = bindgen::Builder::default()
@@ -347,6 +413,23 @@ fn collect_query_paths(queries_dir: &Path) -> Vec<PathBuf> {
 
 fn normalize_include_path(path: &Path) -> String {
   path.to_string_lossy().replace('\\', "/")
+}
+
+fn escape_rust_string(value: &str) -> String {
+  value.replace('\\', "\\\\").replace('"', "\\\"")
+}
+
+fn normalized_extension(extension: &str) -> Option<String> {
+  let trimmed = extension.trim();
+  if trimmed.is_empty() {
+    return None;
+  }
+
+  if trimmed.starts_with('.') {
+    Some(trimmed.to_ascii_lowercase())
+  } else {
+    Some(format!(".{}", trimmed.to_ascii_lowercase()))
+  }
 }
 
 fn query_constant_name(relative_query_path: &Path) -> String {

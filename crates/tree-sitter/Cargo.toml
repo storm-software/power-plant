@@ -7,7 +7,7 @@ edition = { workspace = true }
 homepage = { workspace = true }
 keywords = { workspace = true }
 license = { workspace = true }
-name = 'power-plant-cbm'
+name = 'power-plant-tree-sitter'
 publish = false
 readme = './README.md'
 repository = { workspace = true }
@@ -48,3 +48,4 @@ bindgen = { workspace = true }
 cc = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
+glob = { workspace = true }
