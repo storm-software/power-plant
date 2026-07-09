@@ -1,17 +1,17 @@
 [package]
 authors       = { workspace = true }
 categories    = { workspace = true }
-description   = "Algorithmic code embeddings: TF-IDF, Random Indexing, and combined semantic scoring."
-documentation = "https://docs.rs/power-plant"
+description   = 'Algorithmic code embeddings: TF-IDF, Random Indexing, and combined semantic scoring.'
+documentation = 'https://docs.rs/power-plant'
 edition       = { workspace = true }
 homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
-name          = "power-plant-semantic"
+name          = 'power-plant-semantic'
 publish       = false
-readme        = "./README.md"
+readme        = './README.md'
 repository    = { workspace = true }
-version       = "0.1.0"
+version       = '0.1.1'
 
 [lib]
 doctest = false
@@ -20,20 +20,18 @@ doctest = false
 workspace = true
 
 [features]
-default = ["ast-minhash"]
-# AST MinHash via crates.io `normalize-code-similarity` (tree-sitter AST walk + LSH).
-ast-minhash = ["dep:normalize-code-similarity", "dep:tree-sitter"]
-# Load nomic-embed-code static lookup table from codebase-memory-mcp `vendored/nomic/` files.
+default          = ['ast-minhash']
+ast-minhash      = ['dep:normalize-code-similarity', 'dep:tree-sitter']
 nomic-pretrained = []
 
 [dependencies]
-rustc-hash = { workspace = true }
-xxhash-rust = { workspace = true, features = ["xxh3"] }
+rustc-hash                = { workspace = true }
+xxhash-rust               = { workspace = true, features = ['xxh3'] }
 normalize-code-similarity = { workspace = true, optional = true }
-tree-sitter = { workspace = true, optional = true }
+tree-sitter               = { workspace = true, optional = true }
 
 [target.'cfg(not(target_family = "wasm"))'.dependencies]
 rayon = { workspace = true }
 
 [dev-dependencies]
-tempfile = "3.20.0"
+tempfile = '3.20.0'

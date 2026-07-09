@@ -1,24 +1,24 @@
 [package]
-authors = { workspace = true }
-categories = { workspace = true }
-description = '☢️ Node.js Bindings for the Power Plant runtime.'
+authors       = { workspace = true }
+categories    = { workspace = true }
+description   = '☢️ Node.js Bindings for the Power Plant runtime.'
 documentation = 'https://docs.rs/power-plant'
-edition = { workspace = true }
-homepage = { workspace = true }
-keywords = { workspace = true }
-license = { workspace = true }
-name = 'power-plant-bindings'
-publish = false
-readme = './README.md'
-repository = { workspace = true }
-version = '0.1.1'
+edition       = { workspace = true }
+homepage      = { workspace = true }
+keywords      = { workspace = true }
+license       = { workspace = true }
+name          = 'power-plant-bindings'
+publish       = false
+readme        = './README.md'
+repository    = { workspace = true }
+version       = '0.1.2'
 
 [lints]
 workspace = true
 
 [lib]
 crate-type = ['cdylib']
-doctest = false
+doctest    = false
 
 [dependencies]
 power-plant-core = { workspace = true }
@@ -37,11 +37,11 @@ flate2 = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }
 napi = { workspace = true, features = [
-    'async',
-    'anyhow',
-    'napi6',
-    'serde',
-    'tokio_rt',
+  'async',
+  'anyhow',
+  'napi6',
+  'serde',
+  'tokio_rt'
 ] }
 napi-derive = { workspace = true }
 num_cpus = { workspace = true }
@@ -63,19 +63,19 @@ mimalloc-safe = { workspace = true, features = ['skip_collect_on_exit'] }
 
 [target.'cfg(all(any(target_os = "linux", target_os = "freebsd"), not(target_arch = "aarch64"), not(target_env = "ohos")))'.dependencies]
 mimalloc-safe = { workspace = true, features = [
-    'skip_collect_on_exit',
-    'local_dynamic_tls',
+  'skip_collect_on_exit',
+  'local_dynamic_tls'
 ] }
 
 [target.'cfg(all(target_os = "linux", target_arch = "aarch64"))'.dependencies]
 mimalloc-safe = { workspace = true, features = [
-    'skip_collect_on_exit',
-    'no_opt_arch',
-    'local_dynamic_tls',
+  'skip_collect_on_exit',
+  'no_opt_arch',
+  'local_dynamic_tls'
 ] }
 
 [build-dependencies]
-napi-build = { workspace = true }
+napi-build       = { workspace = true }
 static_vcruntime = { version = '3.0' }
 
 [features]

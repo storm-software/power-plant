@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.3](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.3) (07/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `Cargo.lock` file ([d563c06](https://github.com/storm-software/power-plant/commit/d563c06))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
+### Updated Dependencies
+
+- Updated **bindings** to **v0.0.3**
+- Updated **core** to **v0.0.7**
+
 ## [0.0.2](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.2) (07/09/2026)
 
 ### Features

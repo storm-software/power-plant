@@ -1,0 +1,9 @@
+![Power Plant's logo banner](https://public.storm-cdn.com/power-plant/media/banner-1280x320-dark.gif)
+
+# Changelog for Power Plant - Native Semantic
+
+## [0.1.1](https://github.com/storm-software/power-plant/releases/tag/native-semantic%400.1.1) (07/09/2026)
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))

@@ -2,6 +2,20 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/core%400.0.7) (07/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `Cargo.lock` file ([d563c06](https://github.com/storm-software/power-plant/commit/d563c06))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.7**
+
 ## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/core%400.0.6) (07/09/2026)
 
 ### Miscellaneous

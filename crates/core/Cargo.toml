@@ -1,17 +1,17 @@
 [package]
-authors = { workspace = true }
-categories = { workspace = true }
-description = "☢️ Shared functionality and type definitions used across the Power Plant runtime."
-documentation = "https://docs.rs/power-plant"
-edition = { workspace = true }
-homepage = { workspace = true }
-keywords = { workspace = true }
-license = { workspace = true }
-name = 'power-plant-core'
-publish = false
-readme = './README.md'
-repository = { workspace = true }
-version = '0.1.1'
+authors       = { workspace = true }
+categories    = { workspace = true }
+description   = '☢️ Shared functionality and type definitions used across the Power Plant runtime.'
+documentation = 'https://docs.rs/power-plant'
+edition       = { workspace = true }
+homepage      = { workspace = true }
+keywords      = { workspace = true }
+license       = { workspace = true }
+name          = 'power-plant-core'
+publish       = false
+readme        = './README.md'
+repository    = { workspace = true }
+version       = '0.1.2'
 
 [lib]
 doctest = false
@@ -21,20 +21,19 @@ workspace = true
 
 [dependencies]
 power-plant-models = { workspace = true }
-power-plant-utils = { workspace = true }
-
-camino = { workspace = true }
-chrono = { workspace = true }
-config = { workspace = true, features = ["json"] }
-derive_more = { workspace = true }
-dirs = { workspace = true }
-serde = { workspace = true, features = ["derive"], optional = true }
-serde_json = { workspace = true }
-thiserror = { workspace = true }
-url = { workspace = true }
-uuid = { workspace = true }
-whoami = { workspace = true }
+power-plant-utils  = { workspace = true }
+camino             = { workspace = true }
+chrono             = { workspace = true }
+config             = { workspace = true, features = ['json'] }
+derive_more        = { workspace = true }
+dirs               = { workspace = true }
+serde              = { workspace = true, features = ['derive'], optional = true }
+serde_json         = { workspace = true }
+thiserror          = { workspace = true }
+url                = { workspace = true }
+uuid               = { workspace = true }
+whoami             = { workspace = true }
 
 [features]
-default = ["serde"]
-serde = ["dep:serde"]
+default = ['serde']
+serde   = ['dep:serde']

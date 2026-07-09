@@ -1,17 +1,17 @@
 [package]
-authors = { workspace = true }
-categories = { workspace = true }
-description = '☢️ Data models used across the Power Plant ecosystem.'
+authors       = { workspace = true }
+categories    = { workspace = true }
+description   = '☢️ Data models used across the Power Plant ecosystem.'
 documentation = 'https://docs.rs/power-plant'
-edition = { workspace = true }
-homepage = { workspace = true }
-keywords = { workspace = true }
-license = { workspace = true }
-name = 'power-plant-models'
-publish = false
-readme = './README.md'
-repository = { workspace = true }
-version = '0.1.1'
+edition       = { workspace = true }
+homepage      = { workspace = true }
+keywords      = { workspace = true }
+license       = { workspace = true }
+name          = 'power-plant-models'
+publish       = false
+readme        = './README.md'
+repository    = { workspace = true }
+version       = '0.1.2'
 
 [lib]
 doctest = false
@@ -21,12 +21,11 @@ workspace = true
 
 [dependencies]
 power-plant-utils = { workspace = true }
-
-chrono = { workspace = true, features = ["serde"] }
-serde = { workspace = true, features = ["derive"], optional = true }
-serde_json = { workspace = true }
-uuid = { workspace = true }
+chrono            = { workspace = true, features = ['serde'] }
+serde             = { workspace = true, features = ['derive'], optional = true }
+serde_json        = { workspace = true }
+uuid              = { workspace = true }
 
 [features]
-default = ["serde"]
-serde = ["dep:serde"]
+default = ['serde']
+serde   = ['dep:serde']
