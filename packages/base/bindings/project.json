@@ -132,8 +132,7 @@
     "artifacts": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "napi artifacts --cwd=\"{projectRoot}/src\" --package-json-path ../ -o=../artifacts --npm-dir ../npm",
-        "cwd": "{projectRoot}"
+        "command": "napi artifacts --cwd={projectRoot}/src --package-json-path ../ -o=../artifacts --npm-dir ../npm"
       }
     },
     "napi-prepublish": {
