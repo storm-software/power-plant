@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/graphql-input",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "A Power Plant input for reading the source specification from a GraphQL schema document.",
   "keywords": [
@@ -122,9 +122,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@graphql-tools/apollo-engine-loader": "catalog:",
     "@graphql-tools/code-file-loader": "catalog:",

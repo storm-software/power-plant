@@ -2,6 +2,38 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/core%400.0.6) (07/09/2026)
+
+### Miscellaneous
+
+- **core:** Added initial logic to extract meta values ([9a24f77](https://github.com/storm-software/power-plant/commit/9a24f77))
+- **core:** Update `release` script to include artifact release and moved over bindings ([1bfa779](https://github.com/storm-software/power-plant/commit/1bfa779))
+- **monorepo:** Added `deploy-artifacts` to release script ([1325ae6](https://github.com/storm-software/power-plant/commit/1325ae6))
+- **core:** Update type defintiions for session data models ([4a58aa6](https://github.com/storm-software/power-plant/commit/4a58aa6))
+- **core:** Updated settings to include `skipStorage` and `skipTracing` options ([17dd863](https://github.com/storm-software/power-plant/commit/17dd863))
+- **monorepo:** Update pnpm version to v11.9.0 ([bd75d11](https://github.com/storm-software/power-plant/commit/bd75d11))
+
+### Features
+
+- **native-core:** Added `Session` and `Settings` to `Context` and access function bindings ([0a6870d](https://github.com/storm-software/power-plant/commit/0a6870d))
+- **ai-sdk:** Initial check-in of the AI SDK tools package ([12f01e1](https://github.com/storm-software/power-plant/commit/12f01e1))
+- **handlebars:** Initial check-in of the Handlebars templating generator package ([f9eb5ff](https://github.com/storm-software/power-plant/commit/f9eb5ff))
+- **asyncapi-schema:** Initial check-in of the AsyncAPI schema package ([98b03ec](https://github.com/storm-software/power-plant/commit/98b03ec))
+- **unstorage-input:** Updated `file` input to use `unstorage` for greater flexibility ([21f8358](https://github.com/storm-software/power-plant/commit/21f8358))
+- **unstorage-output:** Update default output extension to use `unstorage` for flexibility ([f48e7ea](https://github.com/storm-software/power-plant/commit/f48e7ea))
+- **core:** Restructure `generator` to remove duplicate required configruations ([aceeb9d](https://github.com/storm-software/power-plant/commit/aceeb9d))
+- **engine:** Split out `engine` logic from `core` to reduce dependency size required by extensions ([f1c212f](https://github.com/storm-software/power-plant/commit/f1c212f))
+- **native-models:** Added the `Execution` models to define the stucture of source data ([7d3ec6b](https://github.com/storm-software/power-plant/commit/7d3ec6b))
+- **monorepo:** Added native crates to support backend memory storage ([dac9923](https://github.com/storm-software/power-plant/commit/dac9923))
+
+### Continuous Integration
+
+- **bindings:** Resolve issue with Bindings project's `artifacts` target name ([9a16f04](https://github.com/storm-software/power-plant/commit/9a16f04))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.6**
+
 ## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/core%400.0.5) (06/28/2026)
 
 ### Features

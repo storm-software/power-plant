@@ -1,17 +1,17 @@
 [package]
 authors       = { workspace = true }
 categories    = { workspace = true }
-description   = "☢️ Utility types and functions used across the Power Plant runtime."
-documentation = "https://docs.rs/power-plant"
+description   = '☢️ Utility types and functions used across the Power Plant runtime.'
+documentation = 'https://docs.rs/power-plant'
 edition       = { workspace = true }
 homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
-name          = "power-plant-utils"
+name          = 'power-plant-utils'
 publish       = false
-readme        = "./README.md"
+readme        = './README.md'
 repository    = { workspace = true }
-version       = "0.1.0"
+version       = '0.1.1'
 
 [lib]
 doctest = false
@@ -37,10 +37,10 @@ regress         = { workspace = true }
 rustc-hash      = { workspace = true }
 simdutf8        = { workspace = true }
 sugar_path      = { workspace = true }
-tokio           = { workspace = true, features = ["sync"] }
-uuid            = { workspace = true, features = ["v4"] }
-xxhash-rust     = { workspace = true, features = ["xxh3"] }
+tokio           = { workspace = true, features = ['sync'] }
+uuid            = { workspace = true, features = ['v4'] }
+xxhash-rust     = { workspace = true, features = ['xxh3'] }
 
 [target.'cfg(not(target_family = "wasm"))'.dependencies]
-async-scoped = { workspace = true, features = ["use-tokio"] }
+async-scoped = { workspace = true, features = ['use-tokio'] }
 rayon        = { workspace = true }

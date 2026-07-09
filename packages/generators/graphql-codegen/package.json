@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/graphql-codegen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "A Power Plant generator for using GraphQL Codegen to generate source code from a GraphQL schema.",
   "keywords": [
@@ -66,9 +66,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@graphql-codegen/core": "catalog:",
     "@graphql-codegen/plugin-helpers": "catalog:",

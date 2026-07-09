@@ -2,6 +2,19 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.6) (07/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Resolve workspace linting issues ([bb6b3a2](https://github.com/storm-software/power-plant/commit/bb6b3a2))
+
+### Features
+
+- **ai-sdk:** Initial check-in of the AI SDK tools package ([12f01e1](https://github.com/storm-software/power-plant/commit/12f01e1))
+- **asyncapi-schema:** Initial check-in of the AsyncAPI schema package ([98b03ec](https://github.com/storm-software/power-plant/commit/98b03ec))
+- **unstorage-input:** Updated `file` input to use `unstorage` for greater flexibility ([21f8358](https://github.com/storm-software/power-plant/commit/21f8358))
+- **monorepo:** Added native crates to support backend memory storage ([dac9923](https://github.com/storm-software/power-plant/commit/dac9923))
+
 ## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.5) (06/28/2026)
 
 ### Features

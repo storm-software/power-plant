@@ -1,0 +1,21 @@
+![Power Plant's logo banner](https://public.storm-cdn.com/power-plant/media/banner-1280x320-dark.gif)
+
+# Changelog for Power Plant - Native Storage
+
+## [0.1.1](https://github.com/storm-software/power-plant/releases/tag/native-storage%400.1.1) (07/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Resolve issues with invalid triples configuration ([d0a441b](https://github.com/storm-software/power-plant/commit/d0a441b))
+
+### Features
+
+- **native-core:** Added `Session` and `Settings` to `Context` and access function bindings ([0a6870d](https://github.com/storm-software/power-plant/commit/0a6870d))
+- **native-engine:** Reorganized the native crates structure ([04c570d](https://github.com/storm-software/power-plant/commit/04c570d))
+- **core:** Restructure `generator` to remove duplicate required configruations ([aceeb9d](https://github.com/storm-software/power-plant/commit/aceeb9d))
+- **native-core:** Update naive engine to support metadata `search` functionality ([7d339d9](https://github.com/storm-software/power-plant/commit/7d339d9))
+- **native-storage:** Added a crate to store `Execution` data after generation ([71bc930](https://github.com/storm-software/power-plant/commit/71bc930))
+
+### Continuous Integration
+
+- **bindings:** Update GitHub action workflow to cross-build native modules ([e1a4ab0](https://github.com/storm-software/power-plant/commit/e1a4ab0))

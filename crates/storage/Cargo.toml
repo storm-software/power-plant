@@ -1,17 +1,17 @@
 [package]
 authors       = { workspace = true }
 categories    = { workspace = true }
-description   = "Execution persistence for the Power Plant runtime."
-documentation = "https://docs.rs/power-plant"
+description   = 'Execution persistence for the Power Plant runtime.'
+documentation = 'https://docs.rs/power-plant'
 edition       = { workspace = true }
 homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
-name          = "power-plant-storage"
+name          = 'power-plant-storage'
 publish       = false
-readme        = "./README.md"
+readme        = './README.md'
 repository    = { workspace = true }
-version       = "0.1.0"
+version       = '0.1.1'
 
 [lib]
 doctest = false
@@ -22,21 +22,20 @@ workspace = true
 [dependencies]
 power-plant-core   = { workspace = true }
 power-plant-models = { workspace = true }
-
-blake3     = { workspace = true }
-camino     = { workspace = true }
-chrono     = { workspace = true, features = ["serde"], optional = true }
-lbug       = { workspace = true, optional = true }
-serde      = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true }
-thiserror  = "2.0.12"
+blake3             = { workspace = true }
+camino             = { workspace = true }
+chrono             = { workspace = true, features = ['serde'], optional = true }
+lbug               = { workspace = true, optional = true }
+serde              = { workspace = true, features = ['derive'] }
+serde_json         = { workspace = true }
+thiserror          = '2.0.12'
 
 [features]
 default = []
-ladybug = ["dep:chrono", "dep:lbug"]
+ladybug = ['dep:chrono', 'dep:lbug']
 testing = []
 
 [dev-dependencies]
-chrono             = { workspace = true, features = ["serde"] }
+chrono             = { workspace = true, features = ['serde'] }
 power-plant-models = { workspace = true }
 serde_json         = { workspace = true }

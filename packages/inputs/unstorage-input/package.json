@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/unstorage-input",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "description": "A Power Plant input for reading the source specification from an Unstorage driver.",
   "keywords": [
@@ -93,9 +93,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",
