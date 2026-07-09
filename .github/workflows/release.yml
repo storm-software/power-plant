@@ -143,7 +143,7 @@ jobs:
         if: matrix.target != 'wasm32-wasip1-threads'
         with:
           name: bindings-${{ matrix.target }}
-          path: packages/base/bindings/src/*.node
+          path: packages/base/bindings/artifacts/*.node
           if-no-files-found: error
 
       - name: Upload artifact - WASM
@@ -151,7 +151,7 @@ jobs:
         if: matrix.target == 'wasm32-wasip1-threads'
         with:
           name: bindings-${{ matrix.target }}
-          path: packages/base/bindings/src/*.wasm
+          path: packages/base/bindings/artifacts/*.wasm
           if-no-files-found: error
 
   build-bindings-freebsd:
@@ -199,16 +199,16 @@ jobs:
             pnpm install --frozen-lockfile --ignore-scripts
             cd packages/base/bindings
             pnpm exec napi build --release \
-              --cwd ./src \
-              --manifest-path ../../../../crates/bindings/Cargo.toml \
-              --package-json-path ../package.json \
+              --package-json-path package.json \
+              --output-dir artifacts \
+              --manifest-path ../../../crates/bindings/Cargo.toml \
               --target x86_64-unknown-freebsd
 
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
         with:
           name: bindings-x86_64-unknown-freebsd
-          path: packages/base/bindings/src/*.node
+          path: packages/base/bindings/artifacts/*.node
           if-no-files-found: error
 
   release:

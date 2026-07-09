@@ -14,3 +14,10 @@ avdl
 
 # Developer Names
 dtolnay
+
+# Semantics
+jaccard
+tfidf
+nnze
+nomic
+pvec
