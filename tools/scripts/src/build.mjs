@@ -20,6 +20,7 @@
 import { $, argv, chalk, echo } from "zx";
 
 try {
+  const crates = argv.crates || argv.type === "crates" || argv.type === "cargo";
   let configuration = argv.configuration;
   if (!configuration) {
     if (argv.prod) {
@@ -32,7 +33,9 @@ try {
   }
 
   echo`${chalk.whiteBright(
-    ` 🏗️  Building the monorepo in ${configuration} mode...`
+    ` 🏗️  Building the monorepo${
+      crates ? "'s crate projects" : ""
+    } in ${configuration} mode...`
   )}`;
 
   let proc = $`pnpm bootstrap`.timeout(`${1 * 60}s`);
@@ -48,7 +51,9 @@ try {
     );
   }
 
-  proc = $`pnpm nx run-many --target=build --exclude=monorepo --configuration=${
+  proc = $`pnpm nx run-many --target=build --exclude=monorepo ${
+    crates ? "--projects=crates/*" : ""
+  } --configuration=${
     configuration
   } --outputStyle=dynamic-legacy --parallel=5`.timeout(`${60 * 60}s`);
   proc.stdout.on("data", data => {
@@ -57,14 +62,16 @@ try {
   result = await proc;
   if (result.exitCode !== 0) {
     throw new Error(
-      `An error occurred while building the monorepo in ${
-        configuration
-      } mode: \n\n${result.message}\n`
+      `An error occurred while building the monorepo${
+        crates ? "'s crate projects" : ""
+      } in ${configuration} mode: \n\n${result.message}\n`
     );
   }
 
   echo`${chalk.green(
-    ` ✔ Successfully built the monorepo in ${configuration} mode!`
+    ` ✔ Successfully built the monorepo${
+      crates ? "'s crate projects" : ""
+    } in ${configuration} mode!`
   )}\n`;
 } catch (error) {
   echo`${chalk.red(error?.message ? error.message : "A failure occurred while building the monorepo")}`;

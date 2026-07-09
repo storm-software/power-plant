@@ -12,9 +12,9 @@
         ],
         "projectsRelationship": "independent"
       },
-      "native": {
+      "crates": {
         "projects": ["crates/*"],
-        "projectsRelationship": "fixed",
+        "projectsRelationship": "independent",
         "changelog": {
           "createRelease": "github",
           "entryWhenNoChanges": false
@@ -22,11 +22,8 @@
         "version": {
           "currentVersionResolver": "git-tag",
           "specifierSource": "conventional-commits",
-          "groupPreVersionCommand": "pnpm build-native",
+          "groupPreVersionCommand": "pnpm build --crates",
           "versionActions": "@storm-software/workspace-tools/release/rust-version-actions"
-        },
-        "releaseTag": {
-          "pattern": "power-plant-rs@{version}"
         }
       }
     }

@@ -5,7 +5,7 @@
   "namespace": "power-plant",
   "repository": "https://github.com/storm-software/power-plant",
   "packageManager": "pnpm",
-  "logLevel": "trace",
+  "logLevel": "info",
   "docs": "https://docs.stormsoftware.com/projects/power-plant",
   "release": {
     "banner": {

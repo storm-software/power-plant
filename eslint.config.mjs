@@ -29,9 +29,6 @@ export default defineConfig({
   ignores: [
     "crates/**/*",
     "packages/base/bindings/src/bindings.*",
-    "packages/base/bindings/src/power-plant-bindings.*",
-    "packages/base/bindings/src/wasi-worker-browser.mjs",
-    "packages/base/bindings/src/wasi-worker.mjs",
-    "packages/base/bindings/src/webcontainer-fallback.cjs"
+    "packages/base/bindings/artifacts/*"
   ]
 });
