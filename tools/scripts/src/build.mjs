@@ -50,7 +50,7 @@ try {
 
   proc = $`pnpm nx run-many --target=build --exclude=monorepo --configuration=${
     configuration
-  } --outputStyle=dynamic-legacy --parallel=5`.timeout(`${45 * 60}s`);
+  } --outputStyle=dynamic-legacy --parallel=5`.timeout(`${60 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });

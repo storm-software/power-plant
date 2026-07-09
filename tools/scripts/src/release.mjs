@@ -47,7 +47,7 @@ try {
     );
   }
 
-  proc = $`pnpm build`.timeout(`${30 * 60}s`);
+  proc = $`pnpm build`.timeout(`${60 * 60}s`);
   proc.stdout.on("data", data => {
     echo`${data}`;
   });
