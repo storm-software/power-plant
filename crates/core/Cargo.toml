@@ -1,30 +1,17 @@
 [package]
-authors       = { workspace = true }
-categories    = { workspace = true }
-<<<<<<< HEAD
-description   = '☢️ Shared functionality and type definitions used across the Power Plant runtime.'
-documentation = 'https://docs.rs/power-plant'
-=======
-description   = "☢️ Shared functionality and type definitions used across the Power Plant runtime."
+authors = { workspace = true }
+categories = { workspace = true }
+description = "☢️ Shared functionality and type definitions used across the Power Plant runtime."
 documentation = "https://docs.rs/power-plant"
->>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)
-edition       = { workspace = true }
-homepage      = { workspace = true }
-keywords      = { workspace = true }
-license       = { workspace = true }
-<<<<<<< HEAD
-name          = 'power-plant-core'
-publish       = false
-readme        = './README.md'
-repository    = { workspace = true }
-version       = '0.1.1'
-=======
-name          = "power-plant-core"
-publish       = false
-readme        = "./README.md"
-repository    = { workspace = true }
-version       = "0.1.0"
->>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)
+edition = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+name = 'power-plant-core'
+publish = false
+readme = './README.md'
+repository = { workspace = true }
+version = '0.1.1'
 
 [lib]
 doctest = false
@@ -34,46 +21,20 @@ workspace = true
 
 [dependencies]
 power-plant-models = { workspace = true }
-power-plant-utils  = { workspace = true }
-<<<<<<< HEAD
-arcstr             = { workspace = true }
-ariadne            = { workspace = true }
-blake3             = { workspace = true }
-camino             = { workspace = true }
-config             = { workspace = true, features = ['json'] }
-derive_more        = { workspace = true }
-dirs               = { workspace = true }
-chrono             = { workspace = true }
-regex              = { workspace = true }
-rustc-hash         = { workspace = true }
-schemars           = { workspace = true, optional = true }
-serde              = { workspace = true, features = ['derive'], optional = true }
-serde_json         = { workspace = true }
-sugar_path         = { workspace = true }
-thiserror          = { workspace = true }
-url                = { workspace = true }
-uuid               = { workspace = true }
-whoami             = { workspace = true }
+power-plant-utils = { workspace = true }
 
-[features]
-default                     = ['serde']
-deserialize_bundler_options = ['dep:schemars', 'dep:serde']
-serde                       = ['dep:serde']
-=======
-
-camino      = { workspace = true }
-chrono      = { workspace = true }
-config      = { workspace = true, features = ["json"] }
+camino = { workspace = true }
+chrono = { workspace = true }
+config = { workspace = true, features = ["json"] }
 derive_more = { workspace = true }
-dirs        = { workspace = true }
-serde       = { workspace = true, features = ["derive"], optional = true }
-serde_json  = { workspace = true }
-thiserror   = { workspace = true }
-url         = { workspace = true }
-uuid        = { workspace = true }
-whoami      = { workspace = true }
+dirs = { workspace = true }
+serde = { workspace = true, features = ["derive"], optional = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+url = { workspace = true }
+uuid = { workspace = true }
+whoami = { workspace = true }
 
 [features]
 default = ["serde"]
-serde   = ["dep:serde"]
->>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)
+serde = ["dep:serde"]
