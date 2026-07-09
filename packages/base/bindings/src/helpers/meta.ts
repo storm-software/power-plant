@@ -305,7 +305,7 @@ export function resolveMetaLinks<TSpec, TOptions extends object>(
  * @param config - Optional metadata configuration to extract and normalize.
  * @returns The normalized specification metadata.
  */
-export function extractMeta<TSpec, TOptions extends object>(
+export function resolveMeta<TSpec, TOptions extends object>(
   schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
   config?: MetaConfig<TSpec, TOptions>
 ): Meta<TSpec, TOptions> {
@@ -320,7 +320,6 @@ export function extractMeta<TSpec, TOptions extends object>(
     meta,
     config?.version
   );
-  meta.id = resolveMetaId(extractedSchema?.schema, meta);
   meta.title = resolveMetaTitle(extractedSchema?.schema, meta, config?.title);
   meta.links = resolveMetaLinks(extractedSchema?.schema, meta, config?.links);
 

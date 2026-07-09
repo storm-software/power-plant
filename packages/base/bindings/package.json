@@ -127,6 +127,20 @@
         "default": "./dist/lib/context.mjs"
       }
     },
+    "./lib/extract": {
+      "require": {
+        "types": "./dist/lib/extract.d.cts",
+        "default": "./dist/lib/extract.cjs"
+      },
+      "import": {
+        "types": "./dist/lib/extract.d.mts",
+        "default": "./dist/lib/extract.mjs"
+      },
+      "default": {
+        "types": "./dist/lib/extract.d.mts",
+        "default": "./dist/lib/extract.mjs"
+      }
+    },
     "./lib/generator": {
       "require": {
         "types": "./dist/lib/generator.d.cts",

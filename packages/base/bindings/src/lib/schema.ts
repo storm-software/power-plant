@@ -31,7 +31,7 @@ import type {
 import { extractSchemaWithSource } from "@power-plant/schema";
 import { isFunction } from "@stryke/type-checks/is-function";
 import {
-  extractMeta,
+  resolveMeta,
   resolveMetaDescription,
   resolveMetaExample
 } from "../helpers/meta";
@@ -49,7 +49,7 @@ export function extractSchemaMeta<TSpec, TOptions extends object>(
   input?: SchemaMetaConfig<TSpec, TOptions>
 ): SchemaMeta<TSpec, TOptions> {
   const jsonSchema = schema?.schema ?? {};
-  const meta = extractMeta<TSpec, TOptions>(schema, input) as SchemaMeta<
+  const meta = resolveMeta<TSpec, TOptions>(schema, input) as SchemaMeta<
     TSpec,
     TOptions
   >;

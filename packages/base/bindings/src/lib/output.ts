@@ -36,7 +36,7 @@ import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
 import { isFunction } from "@stryke/type-checks/is-function";
-import { extractMeta, resolveMetaDescription } from "../helpers/meta";
+import { resolveMeta, resolveMetaDescription } from "../helpers/meta";
 import { isOutputConfigObject } from "../helpers/type-checks";
 import { createSchema } from "./schema";
 
@@ -52,7 +52,7 @@ export function extractOutputMeta<TSpec, TOptions extends object>(
   config?: OutputMetaConfig<TSpec, TOptions>
 ): OutputMeta<TSpec, TOptions> {
   const jsonSchema = schema?.schema ?? {};
-  const meta = extractMeta<TSpec, TOptions>(schema, config) as OutputMeta<
+  const meta = resolveMeta<TSpec, TOptions>(schema, config) as OutputMeta<
     TSpec,
     TOptions
   >;

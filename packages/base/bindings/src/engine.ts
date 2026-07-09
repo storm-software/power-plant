@@ -16,10 +16,16 @@
 
  ------------------------------------------------------------------- */
 
-import type { Execution, GeneratorConfig, UserConfig } from "@power-plant/core";
+import type {
+  ExecutionDocument,
+  ExecutionMeta,
+  GeneratorConfig,
+  UserConfig
+} from "@power-plant/core";
 import { callAsyncSessionContext } from "@power-plant/core";
 import { uuid } from "@stryke/unique-id/uuid";
 import { createSessionContext } from "./lib/context";
+import { extractExecution } from "./lib/extract";
 import { createGenerator } from "./lib/generator";
 import { NativeBindingEngine } from "./native";
 import type { Engine, InferEngineOptions } from "./types/engine";
@@ -57,28 +63,36 @@ export async function createEngine(
         options
       );
 
-      const { documents, returns } = await generator(options);
+      const {
+        documents,
+        returns,
+        spec,
+        options: returnedOptions
+      } = await generator(options);
 
-      const execution = {
-        executionId,
-        documents: Object.fromEntries(
-          Object.entries(documents).map(([path, document]) => [
-            path,
-            {
-              ...document,
+      const execution = await extractExecution(
+        {
+          documents: Object.fromEntries(
+            Object.entries(documents).map(([path, document]) => [
               path,
-              meta: {
-                executionId
-              }
-            }
-          ])
-        ),
-        meta: {
-          id: executionId,
-          executedAt: new Date(),
-          executedBy: context.session.user.name
-        }
-      } as Execution<TSpec, TOptions>;
+              {
+                ...document,
+                path,
+                meta: {
+                  executionId
+                }
+              } as ExecutionDocument<TSpec, TOptions>
+            ])
+          ),
+          meta: {
+            executionId,
+            executedAt: new Date(),
+            executedBy: context.session.user.name
+          } as ExecutionMeta<TSpec, TOptions>
+        },
+        spec,
+        returnedOptions
+      );
 
       if (!context.settings.skipStorage) {
         await bindings.store(execution);

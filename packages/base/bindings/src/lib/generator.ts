@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type {
+  ExecutionContext,
   Generator,
   GeneratorConfig,
   GeneratorConfigObject,
@@ -121,35 +122,40 @@ export async function createGenerator<
       output
     );
 
-    return callAsyncExecutionContext(context, async () => {
-      const spec = isFunction(input.input)
-        ? await (
-            input.input as unknown as (
-              options: TOptions
-            ) => TSpec | Promise<TSpec>
-          )({ storage: context.storage, ...options })
-        : input.input;
+    return callAsyncExecutionContext(
+      context as unknown as ExecutionContext<TSpec, TOptions, TReturns>,
+      async () => {
+        const spec = isFunction(input.input)
+          ? await (
+              input.input as unknown as (
+                options: TOptions
+              ) => TSpec | Promise<TSpec>
+            )({ storage: context.storage, ...options })
+          : input.input;
 
-      context["~spec"] = spec;
+        context["~spec"] = spec;
 
-      let generatorFn!: GeneratorFunction<TSpec, TOptions>;
-      if (isFunction(configObject.generator)) {
-        generatorFn = configObject.generator;
-      } else {
-        generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
-          configObject.generator,
-          { storage: context.storage, ...options }
-        );
+        let generatorFn!: GeneratorFunction<TSpec, TOptions>;
+        if (isFunction(configObject.generator)) {
+          generatorFn = configObject.generator;
+        } else {
+          generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
+            configObject.generator,
+            { storage: context.storage, ...options }
+          );
+        }
+
+        const documents = await generatorFn(spec, options);
+        const returns = await output.output(spec, options, documents);
+
+        return {
+          spec,
+          options,
+          documents,
+          returns
+        };
       }
-
-      const documents = await generatorFn(spec, options);
-      const returns = await output.output(spec, options, documents);
-
-      return {
-        documents,
-        returns
-      };
-    });
+    );
   };
 
   return {

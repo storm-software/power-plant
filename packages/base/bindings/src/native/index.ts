@@ -19,10 +19,11 @@
 import type {
   Execution,
   ExecutionDocument,
+  ExtractedExecution,
   Session,
   UserConfig
 } from "@power-plant/core";
-import type { BindingError, BindingExecutionDocument } from "../bindings.cjs";
+import type { BindingError } from "../bindings.cjs";
 import {
   BindingEngine,
   shutdownAsyncRuntime,
@@ -102,7 +103,7 @@ export class NativeBindingEngine {
    * @throws An error if the store operation fails due to binding errors or other issues.
    */
   public async store<TSpec, TOptions extends object>(
-    execution: Execution<TSpec, TOptions>
+    execution: ExtractedExecution<TSpec, TOptions>
   ): Promise<void> {
     await this.#stopWorkers?.();
     if (NativeBindingEngine.asyncRuntimeShutdown) {
@@ -112,17 +113,17 @@ export class NativeBindingEngine {
     const result: Awaited<ReturnType<BindingEngine["store"]>> =
       await this.#binding.store({
         execution: {
+          ...execution,
           documents: Object.entries(execution.documents).map(
-            ([path, document]) =>
-              ({
-                ...document,
-                path
-              }) as BindingExecutionDocument
-          ),
+            ([path, document]) => ({
+              ...document,
+              path
+            })
+          ) as any[],
           meta: {
-            id: execution.meta.id,
-            executedAt: execution.meta.executedAt.getTime(),
-            executedBy: execution.meta.executedBy
+            ...execution.meta,
+            id: execution.meta.executionId,
+            executedAt: execution.meta.executedAt.getTime()
           }
         }
       });
@@ -164,17 +165,18 @@ export class NativeBindingEngine {
 
     return {
       documents: result.execution.documents.reduce(
-        (ret, document) => {
+        (ret, document: any) => {
           ret[document.path] = document;
           return ret;
         },
         {} as Record<string, ExecutionDocument<TSpec, TOptions>>
       ),
       meta: {
-        id: result.execution.meta.id,
+        ...result.execution.meta,
+        executionId: result.execution.meta.id,
         executedAt: new Date(result.execution.meta.executedAt),
         executedBy: result.execution.meta.executedBy
-      }
+      } as unknown as Execution<TSpec, TOptions>["meta"]
     };
   }
 
