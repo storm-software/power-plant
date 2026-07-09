@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "description": "☢️ Text generation that gives your AI superpowers",
   "keywords": ["power-plant", "storm-software"],

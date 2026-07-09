@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Native Storage
 
+## [0.1.3](https://github.com/storm-software/power-plant/releases/tag/native-storage%400.1.3) (07/09/2026)
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue specifying release executor for native packages ([fd2d16e](https://github.com/storm-software/power-plant/commit/fd2d16e))
+
 ## [0.1.1](https://github.com/storm-software/power-plant/releases/tag/native-storage%400.1.1) (07/09/2026)
 
 ### Miscellaneous

@@ -7,12 +7,12 @@ edition       = { workspace = true }
 homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
-name          = "power-plant-semantic"
+name          = 'power-plant-semantic'
 private       = false
 publish       = true
-readme        = "./README.md"
+readme        = './README.md'
 repository    = { workspace = true }
-version       = '0.1.1'
+version       = '0.1.2'
 
 [lib]
 doctest = false
@@ -29,7 +29,7 @@ nomic-pretrained = []
 normalize-code-similarity = { workspace = true, optional = true }
 rustc-hash                = { workspace = true }
 tree-sitter               = { workspace = true, optional = true }
-xxhash-rust               = { workspace = true, features = ["xxh3"] }
+xxhash-rust               = { workspace = true, features = ['xxh3'] }
 
 [target.'cfg(not(target_family = "wasm"))'.dependencies]
 rayon = { workspace = true }
