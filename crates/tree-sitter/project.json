@@ -1,0 +1,8 @@
+{
+  "name": "native-tree-sitter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "crates/tree-sitter/src",
+  "targets": {},
+  "tags": []
+}

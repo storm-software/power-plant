@@ -29,11 +29,20 @@ pub struct BindingOptions {
   pub custom_logger: Option<BindingLogger>,
   /// The current working directory.
   pub cwd: Option<String>,
+  /// The repository root.
+  pub repository_root: Option<String>,
 }
 
 impl Default for BindingOptions {
   fn default() -> Self {
-    Self { mode: None, username: None, log_level: None, custom_logger: None, cwd: None }
+    Self {
+      mode: None,
+      username: None,
+      log_level: None,
+      custom_logger: None,
+      cwd: None,
+      repository_root: None,
+    }
   }
 }
 
@@ -69,6 +78,7 @@ impl Into<Options> for BindingOptions {
       log_level,
       custom_logger,
       cwd: self.cwd,
+      repository_root: self.repository_root,
     }
   }
 }

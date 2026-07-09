@@ -18,6 +18,7 @@ pub struct Session {
   pub user: UserInfo,
   /// Information about the current device.
   pub device: DeviceInfo,
+
 }
 
 impl Session {

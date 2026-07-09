@@ -1,8 +1,7 @@
 //! Configuration types used by the Power Plant application.
 
-use std::path::Path;
-
 use crate::{NormalizedOptions, log::LogLevel};
+use camino::Utf8PathBuf;
 use derive_more::Debug;
 
 pub mod env_paths;
@@ -73,17 +72,11 @@ impl Settings {
   }
 
   /// Load settings from the current working directory.
-  pub fn from_cwd(cwd: &Path) -> Self {
+  pub fn from_cwd(cwd: &Utf8PathBuf) -> Self {
     let config = config::Config::builder()
-      .add_source(config::File::with_name(
-        &(cwd.to_string_lossy().to_string() + "/power-plant.config.json"),
-      ))
-      .add_source(config::File::with_name(
-        &(cwd.to_string_lossy().to_string() + "/power-plant.json"),
-      ))
-      .add_source(config::File::with_name(
-        &(cwd.to_string_lossy().to_string() + "/.power-plant/config.json"),
-      ))
+      .add_source(config::File::with_name(&(cwd.to_string() + "/power-plant.config.json")))
+      .add_source(config::File::with_name(&(cwd.to_string() + "/power-plant.json")))
+      .add_source(config::File::with_name(&(cwd.to_string() + "/.power-plant/config.json")))
       .add_source(config::File::with_name(get_settings_file_path().as_str()))
       .add_source(config::Environment::with_prefix("POWER_PLANT"))
       .add_source(config::Environment::with_prefix("POWERPLANT"))
@@ -118,6 +111,6 @@ impl Settings {
 
 impl From<&NormalizedOptions> for Settings {
   fn from(options: &NormalizedOptions) -> Self {
-    Self::from_cwd(&options.paths.cwd.clone().into_std_path_buf())
+    Self::from_cwd(&options.cwd)
   }
 }

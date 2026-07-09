@@ -21,6 +21,7 @@ workspace = true
 
 [dependencies]
 power-plant-utils = { workspace = true }
+<<<<<<< HEAD
 blake3            = { workspace = true }
 chrono            = { workspace = true, features = ['serde'] }
 oxc_index         = { workspace = true, optional = true }
@@ -33,3 +34,14 @@ uuid              = { workspace = true }
 default                     = ['serde']
 deserialize_bundler_options = ['dep:schemars', 'dep:serde']
 serde                       = ['dep:serde', 'oxc_index/serde']
+=======
+
+chrono     = { workspace = true, features = ["serde"] }
+serde      = { workspace = true, features = ["derive"], optional = true }
+serde_json = { workspace = true }
+uuid       = { workspace = true }
+
+[features]
+default = ["serde"]
+serde   = ["dep:serde"]
+>>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)

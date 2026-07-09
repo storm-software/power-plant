@@ -23,6 +23,8 @@ import path from "node:path";
 import { argv, echo } from "zx";
 import "zx/globals";
 
+const UPSTREAM_BRANCHES = ["main", "master"];
+
 /**
  * Generate boilerplate code for new tree-sitter language support.
  *
@@ -39,22 +41,118 @@ async function main() {
   const langs = JSON.parse(
     await readFile("tools/config/languages.json", "utf8")
   );
+  const { langs: languagesWithNodeTypes, updated } = await addNodeTypes(langs);
+
+  if (updated) {
+    await writeFile(
+      "tools/config/languages.json",
+      `${JSON.stringify(languagesWithNodeTypes, null, 2)}\n`,
+      "utf8"
+    );
+  }
 
   if (mode === "all" || mode === "wrappers") {
-    await generateWrappers(langs);
+    await generateWrappers(languagesWithNodeTypes);
   }
 
   if (mode === "all" || mode === "enum") {
-    generateEnum(langs);
+    generateEnum(languagesWithNodeTypes);
   }
 
   if (mode === "all" || mode === "specs") {
-    generateSpecs(langs);
+    generateSpecs(languagesWithNodeTypes);
   }
 
   if (mode === "all" || mode === "language") {
-    generateLanguageC(langs);
+    generateLanguageC(languagesWithNodeTypes);
   }
+}
+
+async function addNodeTypes(langs) {
+  let updated = false;
+  const languagesWithNodeTypes = await Promise.all(
+    langs.map(async lang => {
+      const nodeTypesSourcePath = path.join(
+        "crates/cbm/vendored/grammars",
+        lang.name,
+        "node-types.json"
+      );
+
+      if (!(await exists(nodeTypesSourcePath))) {
+        return lang;
+      }
+
+      const nodeTypesPath = await resolveUpstreamNodeTypesPath(lang);
+
+      if (!nodeTypesPath) {
+        return lang;
+      }
+
+      if (lang.node_types === nodeTypesPath) {
+        return lang;
+      }
+
+      updated = true;
+      return {
+        ...lang,
+        node_types: nodeTypesPath
+      };
+    })
+  );
+
+  return { langs: languagesWithNodeTypes, updated };
+}
+
+async function resolveUpstreamNodeTypesPath(lang) {
+  const repoSlug = getGithubRepoSlug(lang.repo);
+
+  if (!repoSlug) {
+    return null;
+  }
+
+  const candidates = getNodeTypesCandidates(lang.subdir);
+
+  for (const branch of UPSTREAM_BRANCHES) {
+    for (const candidate of candidates) {
+      const rawUrl = `https://raw.githubusercontent.com/${repoSlug}/${branch}/${candidate}`;
+      try {
+        const response = await fetch(rawUrl, { method: "HEAD" });
+        if (response.ok) {
+          return candidate;
+        }
+      } catch {
+        // Ignore transient network failures and try the next candidate.
+      }
+    }
+  }
+
+  return null;
+}
+
+function getGithubRepoSlug(repoUrl) {
+  if (!repoUrl) {
+    return null;
+  }
+
+  const match = repoUrl.match(
+    /^https:\/\/github\.com\/([^/]+\/[^/]+?)(?:\.git)?\/?$/u
+  );
+
+  return match?.[1] ?? null;
+}
+
+function getNodeTypesCandidates(subdir) {
+  const candidates = [];
+
+  if (subdir) {
+    candidates.push(`${subdir}/src/node-types.json`);
+    candidates.push(`${subdir}/node-types.json`);
+  }
+
+  candidates.push("src/node-types.json");
+  candidates.push("node-types.json");
+
+  return [...new Set(candidates)];
 }
 
 async function generateWrappers(langs) {

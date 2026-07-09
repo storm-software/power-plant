@@ -1,15 +1,12 @@
 ///! Log level for Power Plant operations.
 use config::ValueKind;
 
-#[cfg(feature = "deserialize_bundler_options")]
-use schemars::JsonSchema;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Display, Formatter};
 
 /// Log level for Power Plant operations.
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize), serde(rename_all = "camelCase"))]
-#[cfg_attr(feature = "deserialize_bundler_options", derive(JsonSchema), serde(deny_unknown_fields))]
 #[derive(Debug, PartialEq, Eq, Clone, Copy, Default)]
 pub enum LogLevel {
   /// Show no logs.

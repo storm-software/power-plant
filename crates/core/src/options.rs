@@ -16,11 +16,20 @@ pub struct Options {
   pub custom_logger: Option<Logger>,
   /// The current working directory.
   pub cwd: Option<String>,
+  /// The repository path.
+  pub repository_root: Option<String>,
 }
 
 impl Default for Options {
   fn default() -> Self {
-    Self { mode: None, username: None, log_level: None, custom_logger: None, cwd: None }
+    Self {
+      mode: None,
+      username: None,
+      log_level: None,
+      custom_logger: None,
+      cwd: None,
+      repository_root: None,
+    }
   }
 }
 
@@ -31,7 +40,8 @@ impl Options {
     log_level: Option<LogLevel>,
     custom_logger: Option<Logger>,
     cwd: Option<String>,
+    repository_root: Option<String>,
   ) -> Self {
-    Self { mode, username, log_level, custom_logger, cwd }
+    Self { mode, username, log_level, custom_logger, cwd, repository_root }
   }
 }

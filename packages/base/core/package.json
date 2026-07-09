@@ -3,10 +3,7 @@
   "version": "0.0.6",
   "private": false,
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "storm-software"],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -133,9 +130,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
     "@stryke/string-format": "catalog:",

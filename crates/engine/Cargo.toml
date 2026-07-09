@@ -28,6 +28,7 @@ power-plant-models  = { workspace = true }
 power-plant-storage = { workspace = true }
 power-plant-tracing = { workspace = true }
 power-plant-utils   = { workspace = true }
+<<<<<<< HEAD
 storm-config        = { workspace = true }
 arcstr              = { workspace = true }
 ariadne             = { workspace = true }
@@ -44,6 +45,24 @@ thiserror           = { workspace = true }
 tokio               = { workspace = true, features = ['rt', 'macros', 'sync', 'time'] }
 tracing             = { workspace = true }
 tracing-subscriber  = { workspace = true }
+=======
+
+arcstr             = { workspace = true }
+ariadne            = { workspace = true }
+blake3             = { workspace = true }
+camino             = { workspace = true }
+derive_more        = { workspace = true }
+rayon              = { workspace = true }
+regex              = { workspace = true }
+rustc-hash         = { workspace = true }
+schemars           = { workspace = true, optional = true }
+serde              = { workspace = true, features = ["derive"], optional = true }
+serde_json         = { workspace = true }
+thiserror          = { workspace = true }
+tokio              = { workspace = true, features = ["rt", "macros", "sync", "time"] }
+tracing            = { workspace = true }
+tracing-subscriber = { workspace = true }
+>>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)
 
 [features]
 default      = ['serde']

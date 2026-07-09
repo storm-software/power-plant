@@ -1,18 +1,18 @@
 {
   "name": "@power-plant/bindings-linux-x64-musl",
+<<<<<<< HEAD
   "version": "0.0.2",
   "cpu": [
     "x64"
   ],
+=======
+  "version": "0.0.1",
+  "cpu": ["x64"],
+>>>>>>> b9d8249 (feat(native-tree-sitter): Initial check-in of the Tree Sitter crate with grammars)
   "main": "power-plant-bindings.linux-x64-musl.node",
-  "files": [
-    "power-plant-bindings.linux-x64-musl.node"
-  ],
+  "files": ["power-plant-bindings.linux-x64-musl.node"],
   "description": "☢️ Text generation that gives your AI superpowers",
-  "keywords": [
-    "power-plant",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "storm-software"],
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -32,10 +32,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "os": [
-    "linux"
-  ],
-  "libc": [
-    "musl"
-  ]
+  "os": ["linux"],
+  "libc": ["musl"]
 }

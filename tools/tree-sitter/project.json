@@ -1,0 +1,8 @@
+{
+  "name": "tools-tree-sitter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/tree-sitter",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}

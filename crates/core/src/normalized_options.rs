@@ -9,19 +9,6 @@ use std::sync::Arc;
 
 /// The normalized path options for Power Plant.
 #[derive(Debug, Clone)]
-pub struct NormalizedPathOptions {
-  /// The current working directory.
-  pub cwd: Utf8PathBuf,
-}
-
-impl Default for NormalizedPathOptions {
-  fn default() -> Self {
-    Self { cwd: std::env::current_dir().unwrap().to_string_lossy().to_string().into() }
-  }
-}
-
-/// The normalized path options for Power Plant.
-#[derive(Debug, Clone)]
 pub struct NormalizedOptions {
   /// The mode.
   pub mode: Option<Mode>,
@@ -31,32 +18,42 @@ pub struct NormalizedOptions {
   pub log_level: LogLevel,
   /// Callback for logging messages.
   pub custom_logger: Option<Logger>,
-  /// Normalized path options.
-  pub paths: NormalizedPathOptions,
+  /// The current working directory.
+  pub cwd: Utf8PathBuf,
+  /// The repository root.
+  pub repository_root: Utf8PathBuf,
 }
 
 impl Default for NormalizedOptions {
   fn default() -> Self {
+    let cwd = Utf8PathBuf::from_path_buf(std::env::current_dir().unwrap()).unwrap();
+
     Self {
       mode: None,
       username: None,
       log_level: LogLevel::default(),
       custom_logger: None,
-      paths: NormalizedPathOptions::default(),
+      cwd: cwd.clone(),
+      repository_root: cwd,
     }
   }
 }
 
 impl From<Options> for NormalizedOptions {
   fn from(opts: Options) -> Self {
-    let cwd = opts.cwd.unwrap_or(std::env::current_dir().unwrap().to_string_lossy().to_string());
-
     Self {
       mode: opts.mode,
       username: opts.username,
       log_level: opts.log_level.unwrap_or_default(),
       custom_logger: opts.custom_logger,
-      paths: NormalizedPathOptions { cwd: cwd.clone().into() },
+      cwd: opts
+        .cwd
+        .unwrap_or(std::env::current_dir().unwrap().to_string_lossy().to_string())
+        .into(),
+      repository_root: opts
+        .repository_root
+        .unwrap_or(std::env::current_dir().unwrap().to_string_lossy().to_string())
+        .into(),
     }
   }
 }

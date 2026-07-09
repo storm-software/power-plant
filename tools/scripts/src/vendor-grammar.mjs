@@ -36,7 +36,7 @@ if (!repoUrl || !name) {
   process.exit(1);
 }
 
-const grammarDir = path.join("crates/cbm/vendored/grammars", name);
+const grammarDir = path.join("crates/tree-sitter/grammars", name);
 const tmpDir = mkdtempSync(path.join(os.tmpdir(), "vendor-grammar-"));
 const repoDir = path.join(tmpDir, "repo");
 

@@ -1,0 +1,8 @@
+{
+  "collections": [
+    "https://github.com/arborist-ts/registry/blob/main/parsers.toml",
+    "https://github.com/orgs/tree-sitter-grammars/repositories",
+    "https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers",
+    "https://dcreager.net/2021/06/tree-sitter-map/"
+  ]
+}
