@@ -1,25 +1,25 @@
 //! Power Plant Common crate: provides various utilities and helper functions
 //! and common types used across other Power Plant crates.
 
-/// Module containing the DataPoint type.
+pub mod data;
 pub mod data_point;
-pub use data_point::*;
-
-/// Module containing the Document type.
 pub mod document;
-pub use document::*;
-
-/// Module containing the SourceCode type.
-pub mod source_code;
-pub use source_code::*;
-
-/// Module containing metadata types used by execution models.
-pub mod meta;
-pub use meta::*;
-
-/// Module containing execution types.
+pub mod embedding;
+pub mod entity;
 pub mod execution;
+pub mod has_datapoint;
+pub mod meta;
+pub mod source_code;
+
+pub use data::*;
+pub use data_point::*;
+pub use document::*;
+pub use embedding::*;
+pub use entity::*;
 pub use execution::*;
+pub use has_datapoint::*;
+pub use meta::*;
+pub use source_code::*;
 
 #[cfg(test)]
 mod tests {

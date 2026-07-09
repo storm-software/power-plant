@@ -3054,7 +3054,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-bindings"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -3089,7 +3089,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-core"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "camino",
  "chrono",
@@ -3108,7 +3108,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-engine"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "arcstr",
  "blake3",
@@ -3135,7 +3135,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-models"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "chrono",
  "power-plant-utils",
@@ -3146,7 +3146,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-semantic"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "normalize-code-similarity",
  "rayon",
@@ -3158,7 +3158,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-storage"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "blake3",
  "camino",
@@ -3173,7 +3173,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-tracing"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -3198,7 +3198,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-tree-sitter"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "async-scoped",
  "base-encode",
@@ -3225,7 +3225,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-utils"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "async-scoped",
@@ -3848,6 +3848,12 @@ dependencies = [
  "cpufeatures 0.2.17",
  "digest",
 ]
+
+[[package]]
+name = "sha1_smol"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbfa15b3dddfee50a0fff136974b3e1bde555604ba463834a7eb7deb6417705d"
 
 [[package]]
 name = "sharded-slab"
@@ -4613,6 +4619,7 @@ dependencies = [
  "getrandom 0.4.3",
  "js-sys",
  "serde_core",
+ "sha1_smol",
  "wasm-bindgen",
 ]
 

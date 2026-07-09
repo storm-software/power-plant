@@ -8,6 +8,7 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-utils'
+private       = true
 publish       = false
 readme        = './README.md'
 repository    = { workspace = true }
@@ -15,10 +16,8 @@ version       = '0.1.2'
 
 [lib]
 doctest = false
-
 [lints]
 workspace = true
-
 [dependencies]
 anyhow          = { workspace = true }
 base-encode     = { workspace = true }

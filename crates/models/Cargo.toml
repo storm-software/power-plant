@@ -8,7 +8,8 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-models'
-publish       = false
+private       = false
+publish       = true
 readme        = './README.md'
 repository    = { workspace = true }
 version       = '0.1.2'
@@ -21,11 +22,12 @@ workspace = true
 
 [dependencies]
 power-plant-utils = { workspace = true }
-chrono            = { workspace = true, features = ['serde'] }
-serde             = { workspace = true, features = ['derive'], optional = true }
-serde_json        = { workspace = true }
-uuid              = { workspace = true }
+
+chrono     = { workspace = true, features = ["serde"] }
+serde      = { workspace = true, features = ["derive"], optional = true }
+serde_json = { workspace = true }
+uuid       = { workspace = true }
 
 [features]
-default = ['serde']
-serde   = ['dep:serde']
+default = ["serde"]
+serde   = ["dep:serde"]

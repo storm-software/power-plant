@@ -77,7 +77,7 @@ catalog:
   "@stryke/unique-id": ^0.3.107
   "@stryke/url": ^0.4.46
   "@stryke/zod": ^0.3.41
-  "@types/node": ^25.9.4
+  "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
   ai: ^7.0.17
@@ -98,7 +98,7 @@ catalog:
   signal-exit: ^4.1.0
   ts-json-schema-generator: ^2.9.0
   ts-node: ^10.9.2
-  tsdown: ^0.22.3
+  tsdown: ^0.22.4
   tslib: ^2.8.1
   unstorage: ^1.17.5
   untyped: ^1.5.2

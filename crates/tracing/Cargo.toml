@@ -8,6 +8,7 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-tracing'
+private       = true
 publish       = false
 readme        = './README.md'
 repository    = { workspace = true }
@@ -32,6 +33,11 @@ ariadne            = { workspace = true }
 bitflags           = { workspace = true }
 blake3             = { workspace = true }
 dashmap            = { workspace = true }
+oxc                = { workspace = true }
+oxc_allocator      = { workspace = true }
+oxc_ecmascript     = { workspace = true }
+oxc_index          = { workspace = true }
+oxc_traverse       = { workspace = true }
 rustc-hash         = { workspace = true }
 serde              = { workspace = true, optional = true }
 serde_json         = { workspace = true }
@@ -40,8 +46,3 @@ tracing            = { workspace = true }
 tracing-chrome     = { workspace = true }
 tracing-subscriber = { workspace = true }
 ts-rs              = { workspace = true }
-oxc                = { workspace = true }
-oxc_allocator      = { workspace = true }
-oxc_ecmascript     = { workspace = true }
-oxc_index          = { workspace = true }
-oxc_traverse       = { workspace = true }
