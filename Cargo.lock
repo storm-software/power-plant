@@ -2348,7 +2348,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-bindings"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -2383,7 +2383,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-cbm"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-scoped",
@@ -2414,7 +2414,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "arcstr",
  "blake3",
@@ -2440,7 +2440,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-engine"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "arcstr",
  "blake3",
@@ -2468,7 +2468,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-models"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "blake3",
  "chrono",
@@ -2482,7 +2482,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-storage"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "blake3",
  "camino",
@@ -2497,7 +2497,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-tracing"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -2522,7 +2522,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-utils"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-scoped",
@@ -3080,9 +3080,9 @@ dependencies = [
 
 [[package]]
 name = "storm-workspace"
-version = "0.19.314"
+version = "0.19.323"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c4d33318e4901e22e4dee759452d6e21e451da8b18cb0f48c623619fc903c1eb"
+checksum = "32a747bcc8bcf76a8dcc5aa6d222834692f835ff2bee13c6f46cc35ef64e1540"
 dependencies = [
  "thiserror",
 ]

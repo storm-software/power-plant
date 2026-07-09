@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/bindings-wasm32-wasi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "cpu": [
     "wasm32"
   ],

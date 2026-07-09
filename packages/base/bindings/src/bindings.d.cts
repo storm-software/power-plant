@@ -1417,8 +1417,6 @@ export interface BindingOptions {
   ) => Promise<void>;
   /** The current working directory. */
   cwd?: string;
-  /** The repository root. */
-  repositoryRoot?: string;
 }
 
 export interface BindingOutputMeta {
