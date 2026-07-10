@@ -12,7 +12,7 @@ private       = true
 publish       = false
 readme        = './README.md'
 repository    = { workspace = true }
-version       = '0.1.5'
+version       = '0.1.6'
 
 [lints]
 workspace = true

@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.7) (07/10/2026)
+
+### Bug Fixes
+
+- **alloy-js:** Removed incorrect schema reference from generator ([e4a6751](https://github.com/storm-software/power-plant/commit/e4a6751))
+
+### Features
+
+- **alloy-js:** Added `typescript`, `hcl`, `markdown`, `json`, and `yaml` components ([949bf09](https://github.com/storm-software/power-plant/commit/949bf09))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.11**
+- Updated **schema** to **v0.0.11**
+
 ## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.6) (07/10/2026)
 
 ### Miscellaneous

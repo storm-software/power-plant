@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Native Tree Sitter
 
+## [0.1.6](https://github.com/storm-software/power-plant/releases/tag/native-tree-sitter%400.1.6) (07/10/2026)
+
+### Miscellaneous
+
+- **native-tree-sitter:** Resolve Cargo linting issues ([50c13df](https://github.com/storm-software/power-plant/commit/50c13df))
+
 ## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-tree-sitter%400.1.5) (07/10/2026)
 
 ### Miscellaneous
