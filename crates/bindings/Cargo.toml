@@ -29,9 +29,11 @@ camino = { workspace = true }
 chrono = { workspace = true, features = ['serde'] }
 dashmap = { workspace = true }
 derive_more = { workspace = true }
+fast_glob = { workspace = true }
 flate2 = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }
+memchr = { workspace = true }
 napi = { workspace = true, features = [
     'async',
     'anyhow',
@@ -49,6 +51,8 @@ power-plant-core = { workspace = true }
 power-plant-engine = { workspace = true }
 power-plant-models = { workspace = true }
 power-plant-tracing = { workspace = true }
+regex = { workspace = true }
+regress = { workspace = true }
 rustc-hash = { workspace = true }
 serde_json = { workspace = true }
 

@@ -28,7 +28,7 @@ fn test_pretty_type_name() {
 fn test_prettify_type_name() {
   assert_eq!(
     prettify_type_name(
-      "napi::threadsafe_function::ThreadsafeFunction<rolldown_binding::types::binding_rendered_chunk::RenderedChunk, napi::bindgen_runtime::js_values::either::Either<napi::bindgen_runtime::js_values::either::Either<napi::bindgen_runtime::js_values::promise::Promise<core::option::Option<alloc::string::String>>, core::option::Option<alloc::string::String>>, napi::threadsafe_function::UnknownReturnValue>, false>"
+      "napi::threadsafe_function::ThreadsafeFunction<power_plant_bindings::types::binding_rendered_chunk::RenderedChunk, napi::bindgen_runtime::js_values::either::Either<napi::bindgen_runtime::js_values::either::Either<napi::bindgen_runtime::js_values::promise::Promise<core::option::Option<alloc::string::String>>, core::option::Option<alloc::string::String>>, napi::threadsafe_function::UnknownReturnValue>, false>"
     ),
     "ThreadsafeFunction<RenderedChunk, Either<Either<Promise<Option<String>>, Option<String>>, UnknownReturnValue>, false>"
   );

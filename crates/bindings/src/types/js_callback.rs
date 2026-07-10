@@ -1,10 +1,10 @@
+use crate::utils::pretty_type_name;
 use futures::Future;
 use napi::{
   Either, Status,
   bindgen_prelude::{FromNapiValue, JsValuesTupleIntoVec, Promise},
   threadsafe_function::{ThreadsafeFunction, UnknownReturnValue},
 };
-use power_plant_utils::debug::pretty_type_name;
 use std::sync::{Arc, Condvar, Mutex};
 
 /// `JsCallback`  is a type alias for `ThreadsafeFunction`. It represents a JavaScript function that passed to Rust side.

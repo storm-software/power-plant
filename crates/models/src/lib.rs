@@ -4,6 +4,7 @@
 pub mod data;
 pub mod data_point;
 pub mod document;
+pub mod document_chunk;
 pub mod embedding;
 pub mod entity;
 pub mod execution;
@@ -14,6 +15,7 @@ pub mod source_code;
 pub use data::*;
 pub use data_point::*;
 pub use document::*;
+pub use document_chunk::*;
 pub use embedding::*;
 pub use entity::*;
 pub use execution::*;

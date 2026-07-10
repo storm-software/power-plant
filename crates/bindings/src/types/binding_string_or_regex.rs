@@ -3,8 +3,8 @@ use std::fmt::Debug;
 use napi::bindgen_prelude::{TypeName, ValidateNapiValue};
 use napi::{Either, bindgen_prelude::FromNapiValue, sys};
 
-use power_plant_utils::js_regex::HybridRegex;
-use power_plant_utils::pattern_filter::StringOrRegex;
+use crate::utils::HybridRegex;
+use crate::utils::StringOrRegex;
 
 use super::js_regex::JsRegExp;
 

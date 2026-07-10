@@ -1,7 +1,7 @@
 use memchr::memmem;
 use std::{borrow::Cow, path::Path};
 
-use crate::js_regex::HybridRegex;
+use crate::utils::HybridRegex;
 use fast_glob::glob_match;
 
 #[derive(Debug, Clone)]

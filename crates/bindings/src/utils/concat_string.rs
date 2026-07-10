@@ -39,7 +39,7 @@
 /// # Example
 ///
 /// ```rust
-/// use rolldown_utils::concat_string;
+/// use power_plant_bindings::concat_string;
 ///
 /// println!("{}", concat_string!("Hello", String::from(" "), "world"));
 /// ```

@@ -3079,6 +3079,8 @@ dependencies = [
  "power-plant-engine",
  "power-plant-models",
  "power-plant-tracing",
+ "regex",
+ "regress 0.10.5",
  "rustc-hash 2.1.3",
  "serde_json",
  "static_vcruntime",

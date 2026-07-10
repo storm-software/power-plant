@@ -7,7 +7,7 @@ use napi::{
   sys,
 };
 
-use power_plant_utils::js_regex::HybridRegex;
+use crate::utils::HybridRegex;
 
 #[derive(Debug, Default, Clone)]
 pub struct JsRegExp {

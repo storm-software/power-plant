@@ -111,7 +111,6 @@ power-plant-semantic    = { path = "./crates/semantic" }
 power-plant-storage     = { path = "./crates/storage" }
 power-plant-tracing     = { path = "./crates/tracing" }
 power-plant-tree-sitter = { path = "./crates/tree-sitter" }
-power-plant-utils       = { path = "./crates/utils" }
 
 # Pin time to last known-good version for lbug compatibility.
 time = "=0.3.46"

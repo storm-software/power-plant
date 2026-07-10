@@ -102,7 +102,7 @@ fn regress_regexp_replace_all<'h>(
 
 #[cfg(test)]
 mod test {
-  use crate::js_regex::{HybridRegex, regress_regexp_replace_all};
+  use super::{HybridRegex, regress_regexp_replace_all};
 
   #[test]
   fn with_flags() {
