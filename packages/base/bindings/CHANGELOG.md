@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Bindings
 
+## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/bindings%400.0.5) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Resolve merge conflicts ([0355057](https://github.com/storm-software/power-plant/commit/0355057))
+- **monorepo:** Update `Cargo.lock` file ([d563c06](https://github.com/storm-software/power-plant/commit/d563c06))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.9**
+- Updated **schema** to **v0.0.9**
+
 ## [0.0.4](https://github.com/storm-software/power-plant/releases/tag/bindings%400.0.4) (07/09/2026)
 
 ### Miscellaneous
