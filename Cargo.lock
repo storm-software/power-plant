@@ -3063,9 +3063,11 @@ dependencies = [
  "chrono",
  "dashmap",
  "derive_more",
+ "fast-glob",
  "flate2",
  "futures",
  "itertools 0.14.0",
+ "memchr",
  "mimalloc-safe",
  "napi",
  "napi-build",
@@ -3217,34 +3219,6 @@ dependencies = [
  "serde_json",
  "tokio",
  "tree-sitter",
- "uuid",
- "xxhash-rust",
-]
-
-[[package]]
-name = "power-plant-utils"
-version = "0.1.6"
-dependencies = [
- "anyhow",
- "async-scoped",
- "base-encode",
- "base64-simd",
- "cow-utils",
- "dashmap",
- "fast-glob",
- "form_urlencoded",
- "futures",
- "infer",
- "memchr",
- "mime",
- "nom 8.0.0",
- "rayon",
- "regex",
- "regress 0.10.5",
- "rustc-hash 2.1.3",
- "simdutf8",
- "sugar_path",
- "tokio",
  "uuid",
  "xxhash-rust",
 ]
