@@ -1,6 +1,6 @@
-use super::state::Pipeline;
-use super::types::FileInfo;
-use super::worker_pool::effective_worker_count;
+use crate::FileInfo;
+use crate::state::Pipeline;
+use crate::worker_pool::effective_worker_count;
 
 /// Stored per-file hash row used for incremental classification.
 #[derive(Debug, Clone, PartialEq, Eq)]

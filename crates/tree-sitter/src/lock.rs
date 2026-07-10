@@ -9,22 +9,17 @@ const LOCK_SPIN: Duration = Duration::from_millis(100);
 
 /// Try to acquire the global index lock without blocking.
 pub fn try_lock() -> bool {
-    PIPELINE_BUSY
-        .compare_exchange(0, 1, Ordering::Acquire, Ordering::Relaxed)
-        .is_ok()
+  PIPELINE_BUSY.compare_exchange(0, 1, Ordering::Acquire, Ordering::Relaxed).is_ok()
 }
 
 /// Acquire the global index lock, spinning until available.
 pub fn lock() {
-    while PIPELINE_BUSY
-        .compare_exchange(0, 1, Ordering::Acquire, Ordering::Relaxed)
-        .is_err()
-    {
-        thread::sleep(LOCK_SPIN);
-    }
+  while PIPELINE_BUSY.compare_exchange(0, 1, Ordering::Acquire, Ordering::Relaxed).is_err() {
+    thread::sleep(LOCK_SPIN);
+  }
 }
 
 /// Release the global index lock.
 pub fn unlock() {
-    PIPELINE_BUSY.store(0, Ordering::Release);
+  PIPELINE_BUSY.store(0, Ordering::Release);
 }

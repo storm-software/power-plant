@@ -2,8 +2,8 @@ use super::super::context::PipelineContext;
 use super::super::error::PipelineResult;
 use super::super::extract::read_file;
 use super::super::fqn::compute_fqn;
-use super::super::types::FileInfo;
 use super::SequentialPipelineState;
+use crate::FileInfo;
 use crate::Language;
 
 fn basename(rel: &str) -> &str {

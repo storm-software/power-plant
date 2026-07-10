@@ -1,9 +1,9 @@
 use std::path::PathBuf;
 
-use super::error::{PipelineError, PipelineResult};
-use super::sequential::SequentialPipelineState;
-use super::state::Pipeline;
-use super::types::{CancellationToken, FileInfo, IndexMode};
+use crate::error::{PipelineError, PipelineResult};
+use crate::sequential::SequentialPipelineState;
+use crate::state::Pipeline;
+use crate::{CancellationToken, FileInfo, IndexMode};
 
 /// Shared context passed to each pipeline pass. Mirrors `cbm_pipeline_ctx_t`.
 pub struct PipelineContext<'a> {

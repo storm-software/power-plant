@@ -8,8 +8,8 @@ use super::context::{
 use super::error::PipelineResult;
 use super::sequential::{self, SequentialPipelineState};
 use super::state::Pipeline;
-use super::types::{FileInfo, MIN_FILES_FOR_PARALLEL, SEQUENTIAL_PASS_COUNT};
 use super::worker_pool::effective_worker_count;
+use crate::types::{FileInfo, MIN_FILES_FOR_PARALLEL, SEQUENTIAL_PASS_COUNT};
 
 /// Default sequential passes mirroring `run_sequential_pipeline` in pipeline.c.
 pub fn default_sequential_passes() -> [SequentialPass; SEQUENTIAL_PASS_COUNT] {
@@ -239,8 +239,7 @@ impl GraphIndexer for StubGraphIndexer {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::pipeline::error::PipelineError;
-  use crate::pipeline::types::IndexMode;
+  use crate::{IndexMode, error::PipelineError};
 
   #[test]
   fn pipeline_run_completes_with_stubs() {

@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/bindings-android-arm-eabi",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "cpu": [
     "arm"
   ],

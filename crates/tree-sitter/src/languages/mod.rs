@@ -1,5 +1,3 @@
-/// COBOL language support for the [tree-sitter][] parsing library.
-pub mod tree_sitter_COBOL;
 /// Ada language support for the [tree-sitter][] parsing library.
 pub mod tree_sitter_ada;
 /// Agda language support for the [tree-sitter][] parsing library.
@@ -40,6 +38,8 @@ pub mod tree_sitter_cfscript;
 pub mod tree_sitter_clojure;
 /// CMake language support for the [tree-sitter][] parsing library.
 pub mod tree_sitter_cmake;
+/// COBOL language support for the [tree-sitter][] parsing library.
+pub mod tree_sitter_cobol;
 /// Common Lisp language support for the [tree-sitter][] parsing library.
 pub mod tree_sitter_commonlisp;
 /// C++ language support for the [tree-sitter][] parsing library.

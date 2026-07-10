@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/bindings-darwin-arm64",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "cpu": [
     "arm64"
   ],

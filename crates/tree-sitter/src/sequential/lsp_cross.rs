@@ -4,7 +4,7 @@ use super::super::context::PipelineContext;
 use super::super::error::PipelineResult;
 use super::super::extract::{module_is_dir, read_file};
 use super::super::fqn::module_dir_fqn;
-use super::super::types::FileInfo;
+use crate::FileInfo;
 
 fn has_cross_lsp(language: Language) -> bool {
   matches!(

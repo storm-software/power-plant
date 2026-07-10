@@ -30,7 +30,7 @@ pub struct Document {
 }
 
 /// Map a file extension to a document type string, returning `None` for
-/// unrecognised extensions.
+/// unrecognized extensions.
 ///
 /// Public wrapper over the internal [`extension_to_doc_type`] mapping so the
 /// ingestion pipeline can pick the right loader at ADD time using the same

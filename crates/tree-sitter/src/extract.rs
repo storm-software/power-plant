@@ -1,7 +1,7 @@
 use std::path::Path;
 
-use super::error::{PipelineError, PipelineResult};
 use crate::Language;
+use crate::error::{PipelineError, PipelineResult};
 
 /// Tree-sitter extraction budget per file (mirrors `CBM_EXTRACT_BUDGET`).
 pub const EXTRACT_BUDGET: usize = 5_000_000;

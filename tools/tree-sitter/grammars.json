@@ -1431,7 +1431,7 @@
     "enum_name": "COBOL",
     "display_name": "COBOL",
     "pascal_name": "COBOL",
-    "ts_function": "tree_sitter_COBOL",
+    "ts_function": "tree_sitter_cobol",
     "repository": "",
     "sub_directory": "",
     "extensions": [".cbl", ".cob"],
