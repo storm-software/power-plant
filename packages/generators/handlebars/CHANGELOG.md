@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Handlebars
 
+## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/handlebars%400.0.6) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `Cargo.lock` file ([d563c06](https://github.com/storm-software/power-plant/commit/d563c06))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.10**
+- Updated **schema** to **v0.0.10**
+
 ## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/handlebars%400.0.5) (07/10/2026)
 
 ### Miscellaneous

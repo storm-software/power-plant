@@ -2,6 +2,20 @@
 
 # Changelog for Power Plant - Native Engine
 
+## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-engine%400.1.5) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Resolve merge conflicts ([0355057](https://github.com/storm-software/power-plant/commit/0355057))
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue specifying release executor for native packages ([fd2d16e](https://github.com/storm-software/power-plant/commit/fd2d16e))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
 ## [0.1.4](https://github.com/storm-software/power-plant/releases/tag/native-engine%400.1.4) (07/10/2026)
 
 ### Miscellaneous

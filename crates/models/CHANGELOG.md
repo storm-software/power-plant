@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Native Models
 
+## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-models%400.1.5) (07/10/2026)
+
+### Miscellaneous
+
+- **native-tree-sitter:** Reorganized Tree Sitter crate ([f9c7511](https://github.com/storm-software/power-plant/commit/f9c7511))
+- **monorepo:** Resolve merge conflicts ([0355057](https://github.com/storm-software/power-plant/commit/0355057))
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue specifying release executor for native packages ([fd2d16e](https://github.com/storm-software/power-plant/commit/fd2d16e))
+
+### Features
+
+- **native-tree-sitter:** Initial check-in of the Tree Sitter crate with grammars ([5c6d56e](https://github.com/storm-software/power-plant/commit/5c6d56e))
+
 ## [0.1.4](https://github.com/storm-software/power-plant/releases/tag/native-models%400.1.4) (07/10/2026)
 
 ### Miscellaneous

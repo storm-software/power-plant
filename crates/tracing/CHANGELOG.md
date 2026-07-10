@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Native Tracing
 
+## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-tracing%400.1.5) (07/10/2026)
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue specifying release executor for native packages ([fd2d16e](https://github.com/storm-software/power-plant/commit/fd2d16e))
+
 ## [0.1.4](https://github.com/storm-software/power-plant/releases/tag/native-tracing%400.1.4) (07/10/2026)
 
 ### Bug Fixes
