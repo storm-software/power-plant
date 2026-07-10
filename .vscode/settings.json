@@ -188,7 +188,7 @@
   },
   "[markdown]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnPaste": true
   },
   "[mdx]": {
@@ -218,7 +218,7 @@
   },
   "[toml]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[yaml]": {
     "editor.formatOnSave": true,

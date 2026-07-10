@@ -28,8 +28,6 @@ dirs               = { workspace = true }
 power-plant-models = { workspace = true }
 serde              = { workspace = true, features = ['derive'], optional = true }
 serde_json         = { workspace = true }
-thiserror          = { workspace = true }
-url                = { workspace = true }
 uuid               = { workspace = true }
 whoami             = { workspace = true }
 

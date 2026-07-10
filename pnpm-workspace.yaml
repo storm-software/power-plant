@@ -51,19 +51,19 @@ catalog:
   "@powerlines/tsconfig": ^0.4.190
   "@powerlines/tsdoc": ^0.2.138
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.26
-  "@storm-software/config-tools": ^1.190.89
-  "@storm-software/cspell": ^0.46.157
-  "@storm-software/eslint": ^0.170.123
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.52
-  "@storm-software/git-tools": ^2.131.97
-  "@storm-software/linting-tools": ^1.134.19
-  "@storm-software/markdownlint": ^0.30.245
-  "@storm-software/pnpm-tools": ^0.7.100
-  "@storm-software/prettier": ^0.59.142
-  "@storm-software/tsconfig": ^0.48.156
-  "@storm-software/untyped": ^0.24.231
-  "@storm-software/workspace-tools": ^1.296.69
+  "@storm-software/config": ^1.138.27
+  "@storm-software/config-tools": ^1.190.90
+  "@storm-software/cspell": ^0.46.158
+  "@storm-software/eslint": ^0.170.124
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.53
+  "@storm-software/git-tools": ^2.131.98
+  "@storm-software/linting-tools": ^1.134.20
+  "@storm-software/markdownlint": ^0.30.246
+  "@storm-software/pnpm-tools": ^0.7.101
+  "@storm-software/prettier": ^0.59.143
+  "@storm-software/tsconfig": ^0.48.157
+  "@storm-software/untyped": ^0.24.232
+  "@storm-software/workspace-tools": ^1.296.70
   "@stryke/convert": ^0.7.26
   "@stryke/date": ^0.0.7
   "@stryke/env": ^0.20.113
@@ -163,6 +163,7 @@ minimumReleaseAgeExclude:
   - "@stryke/*"
   - "@powerlines/*"
   - powerlines
+  - prettier@3.9.5
 allowBuilds:
   "@hyperjump/json-pointer": true
   "@hyperjump/json-schema": true

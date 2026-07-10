@@ -8,7 +8,6 @@ homepage = { workspace = true }
 keywords = { workspace = true }
 license = { workspace = true }
 name = 'power-plant-bindings'
-private = true
 publish = false
 readme = './README.md'
 repository = { workspace = true }
@@ -23,37 +22,27 @@ doctest = false
 
 [dependencies]
 anyhow = { workspace = true }
-arcstr = { workspace = true }
 async-channel = { workspace = true }
-camino = { workspace = true }
 chrono = { workspace = true, features = ['serde'] }
-dashmap = { workspace = true }
 derive_more = { workspace = true }
 fast-glob = { workspace = true }
-flate2 = { workspace = true }
 futures = { workspace = true }
-itertools = { workspace = true }
 memchr = { workspace = true }
 napi = { workspace = true, features = [
     'async',
     'anyhow',
     'napi6',
-    'serde',
+    'serde-json',
     'tokio_rt',
 ] }
 napi-derive = { workspace = true }
 num_cpus = { workspace = true }
-oxc_parser_napi = { workspace = true }
-oxc_resolver = { workspace = true }
-oxc_resolver_napi = { workspace = true }
-oxc_transform_napi = { workspace = true }
 power-plant-core = { workspace = true }
 power-plant-engine = { workspace = true }
 power-plant-models = { workspace = true }
 power-plant-tracing = { workspace = true }
 regex = { workspace = true }
 regress = { workspace = true }
-rustc-hash = { workspace = true }
 serde_json = { workspace = true }
 
 [target.'cfg(windows)'.dependencies]

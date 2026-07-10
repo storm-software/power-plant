@@ -1,21 +1,12 @@
 //! Power Plant binding crate: provides N-API (Node.js) facing helpers to create, start and
 //! shutdown a tuned Tokio runtime (including WASM specific lifecycle helpers) used by the
-//! power_plant build pipeline. The runtime sizing is customized to better match power_plant's
+//! Power Plant build pipeline. The runtime sizing is customized to better match Power Plant's
 //! workload characteristics (more CPU-bound / blocking tasks on worker threads).
 
 // Allow type complexity rule, because NAPI-RS requires the direct types to generate the TypeScript definitions.
 #![allow(clippy::type_complexity)]
 // Due to the bound of NAPI-RS, we need to use `String` though we only need `&str`.
 #![allow(clippy::needless_pass_by_value)]
-// Most of transmute are just change the lifetime `'a` to `'static`., the annotation, e.g.
-//
-// BindingsTransformPluginContext::new(unsafe {
-//   std::mem::transmute::<
-//     &power_plant_plugin::TransformPluginContext<'_>,
-//     &power_plant_plugin::TransformPluginContext<'_>,
-//   >(ctx)
-// }),
-// Looks redundant
 #![allow(clippy::missing_transmute_annotations)]
 
 #[cfg(all(target_family = "wasm", tokio_unstable))]
