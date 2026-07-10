@@ -3054,7 +3054,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-bindings"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -3079,7 +3079,6 @@ dependencies = [
  "power-plant-engine",
  "power-plant-models",
  "power-plant-tracing",
- "power-plant-utils",
  "rustc-hash 2.1.3",
  "serde_json",
  "static_vcruntime",
@@ -3089,7 +3088,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-core"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "camino",
  "chrono",
@@ -3097,7 +3096,6 @@ dependencies = [
  "derive_more",
  "dirs 6.0.0",
  "power-plant-models",
- "power-plant-utils",
  "serde",
  "serde_json",
  "thiserror 2.0.18",
@@ -3108,7 +3106,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-engine"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "arcstr",
  "blake3",
@@ -3119,7 +3117,6 @@ dependencies = [
  "power-plant-models",
  "power-plant-storage",
  "power-plant-tracing",
- "power-plant-utils",
  "rayon",
  "regex",
  "rolldown-ariadne",
@@ -3135,10 +3132,9 @@ dependencies = [
 
 [[package]]
 name = "power-plant-models"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "chrono",
- "power-plant-utils",
  "serde",
  "serde_json",
  "uuid",
@@ -3146,7 +3142,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-semantic"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "normalize-code-similarity",
  "rayon",
@@ -3158,7 +3154,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-storage"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "blake3",
  "camino",
@@ -3173,7 +3169,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-tracing"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "anyhow",
  "arcstr",
@@ -3198,7 +3194,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-tree-sitter"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "async-scoped",
  "base-encode",
@@ -3225,7 +3221,7 @@ dependencies = [
 
 [[package]]
 name = "power-plant-utils"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "anyhow",
  "async-scoped",

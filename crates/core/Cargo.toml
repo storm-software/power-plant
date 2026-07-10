@@ -8,7 +8,6 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-core'
-private       = false
 publish       = true
 readme        = './README.md'
 repository    = { workspace = true }
@@ -21,13 +20,12 @@ doctest = false
 workspace = true
 
 [dependencies]
-power-plant-models = { workspace = true }
-power-plant-utils  = { workspace = true }
 camino             = { workspace = true }
 chrono             = { workspace = true }
 config             = { workspace = true, features = ['json'] }
 derive_more        = { workspace = true }
 dirs               = { workspace = true }
+power-plant-models = { workspace = true }
 serde              = { workspace = true, features = ['derive'], optional = true }
 serde_json         = { workspace = true }
 thiserror          = { workspace = true }

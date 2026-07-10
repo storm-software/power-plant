@@ -8,7 +8,6 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-storage'
-private       = false
 publish       = true
 readme        = './README.md'
 repository    = { workspace = true }

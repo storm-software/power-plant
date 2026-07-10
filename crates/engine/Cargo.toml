@@ -8,7 +8,6 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-engine'
-private       = false
 publish       = true
 readme        = './README.md'
 repository    = { workspace = true }
@@ -24,16 +23,15 @@ doctest = false
 workspace = true
 
 [dependencies]
-power-plant-core    = { workspace = true }
-power-plant-models  = { workspace = true }
-power-plant-storage = { workspace = true }
-power-plant-tracing = { workspace = true }
-power-plant-utils   = { workspace = true }
 arcstr              = { workspace = true }
 ariadne             = { workspace = true }
 blake3              = { workspace = true }
 camino              = { workspace = true }
 derive_more         = { workspace = true }
+power-plant-core    = { workspace = true }
+power-plant-models  = { workspace = true }
+power-plant-storage = { workspace = true }
+power-plant-tracing = { workspace = true }
 rayon               = { workspace = true }
 regex               = { workspace = true }
 rustc-hash          = { workspace = true }

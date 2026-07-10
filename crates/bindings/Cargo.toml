@@ -33,11 +33,11 @@ flate2 = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }
 napi = { workspace = true, features = [
-  'async',
-  'anyhow',
-  'napi6',
-  'serde',
-  'tokio_rt'
+    'async',
+    'anyhow',
+    'napi6',
+    'serde',
+    'tokio_rt'
 ] }
 napi-derive = { workspace = true }
 num_cpus = { workspace = true }
@@ -49,7 +49,6 @@ power-plant-core = { workspace = true }
 power-plant-engine = { workspace = true }
 power-plant-models = { workspace = true }
 power-plant-tracing = { workspace = true }
-power-plant-utils = { workspace = true }
 rustc-hash = { workspace = true }
 serde_json = { workspace = true }
 
@@ -64,15 +63,15 @@ mimalloc-safe = { workspace = true, features = ['skip_collect_on_exit'] }
 
 [target.'cfg(all(any(target_os = "linux", target_os = "freebsd"), not(target_arch = "aarch64"), not(target_env = "ohos")))'.dependencies]
 mimalloc-safe = { workspace = true, features = [
-  'skip_collect_on_exit',
-  'local_dynamic_tls'
+    'skip_collect_on_exit',
+    'local_dynamic_tls'
 ] }
 
 [target.'cfg(all(target_os = "linux", target_arch = "aarch64"))'.dependencies]
 mimalloc-safe = { workspace = true, features = [
-  'skip_collect_on_exit',
-  'no_opt_arch',
-  'local_dynamic_tls'
+    'skip_collect_on_exit',
+    'no_opt_arch',
+    'local_dynamic_tls'
 ] }
 
 [build-dependencies]

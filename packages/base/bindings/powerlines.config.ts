@@ -59,6 +59,7 @@ const config: UserConfig = defineConfig({
           asyncInit: true
         }
       },
+      profile: "prod",
       jsBinding: "../src/bindings.cjs",
       dts: "../src/bindings.d.cts",
       dtsHeader:

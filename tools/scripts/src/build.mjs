@@ -23,9 +23,7 @@ try {
   const crates = argv.crates || argv.type === "crates" || argv.type === "cargo";
   let configuration = argv.configuration;
   if (!configuration) {
-    if (argv.prod) {
-      configuration = "production";
-    } else if (argv.dev) {
+    if (argv.dev) {
       configuration = "development";
     } else {
       configuration = "production";

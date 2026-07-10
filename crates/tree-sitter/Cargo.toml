@@ -9,7 +9,6 @@ homepage      = { workspace = true }
 keywords      = { workspace = true }
 license       = { workspace = true }
 name          = 'power-plant-tree-sitter'
-private       = false
 publish       = true
 readme        = './README.md'
 repository    = { workspace = true }

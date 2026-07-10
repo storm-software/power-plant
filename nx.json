@@ -22,7 +22,6 @@
         "version": {
           "currentVersionResolver": "git-tag",
           "specifierSource": "conventional-commits",
-          "groupPreVersionCommand": "pnpm build --crates",
           "versionActions": "@storm-software/workspace-tools/release/rust-version-actions"
         }
       }
