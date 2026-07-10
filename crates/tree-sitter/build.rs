@@ -7,20 +7,6 @@ use std::{
   path::{Path, PathBuf},
 };
 
-// {
-//     "name": "typst",
-//     "enum": "TYPST",
-//     "display": "Typst",
-//     "ts_func": "tree_sitter_typst",
-//     "repo": "https://github.com/uben0/tree-sitter-typst",
-//     "subdir": "",
-//     "extensions": [".typ"],
-//     "filenames": [],
-//     "has_scanner": true,
-//     "module_root": "source_file",
-//     "node_types": "src/node-types.json"
-//   },
-
 #[derive(Serialize, Deserialize, Debug)]
 struct Grammar {
   name: String,
@@ -39,8 +25,6 @@ struct Grammar {
 }
 
 fn main() {
-  println!("cargo::rustc-check-cfg=cfg(cbm_native)");
-
   let crate_path = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
   let src_path = crate_path.join("src");
 

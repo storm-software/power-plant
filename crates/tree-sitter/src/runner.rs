@@ -11,7 +11,7 @@ use super::state::Pipeline;
 use super::worker_pool::effective_worker_count;
 use crate::types::{FileInfo, MIN_FILES_FOR_PARALLEL, SEQUENTIAL_PASS_COUNT};
 
-/// Default sequential passes mirroring `run_sequential_pipeline` in pipeline.c.
+/// Default sequential passes.
 pub fn default_sequential_passes() -> [SequentialPass; SEQUENTIAL_PASS_COUNT] {
   [
     SequentialPass { name: "definitions", ignore_error: false, run: sequential::pass_definitions },
@@ -23,7 +23,7 @@ pub fn default_sequential_passes() -> [SequentialPass; SEQUENTIAL_PASS_COUNT] {
   ]
 }
 
-/// Orchestrates multi-pass indexing. Mirrors `cbm_pipeline_run`.
+/// Orchestrates multi-pass indexing.
 pub struct PipelineRunner<D, G, R> {
   pub discoverer: D,
   pub indexer: G,
@@ -128,7 +128,7 @@ where
   }
 }
 
-/// Run sequential passes with timing and cancellation checks.
+/// Run sequential passes.
 pub fn run_sequential_passes(
   ctx: &mut PipelineContext<'_>,
   files: &[FileInfo],

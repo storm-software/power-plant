@@ -123,25 +123,6 @@ const {
   }
 });
 module.exports = __napiModule.exports;
-module.exports.Severity = __napiModule.exports.Severity;
-module.exports.ParseResult = __napiModule.exports.ParseResult;
-module.exports.ExportExportNameKind = __napiModule.exports.ExportExportNameKind;
-module.exports.ExportImportNameKind = __napiModule.exports.ExportImportNameKind;
-module.exports.ExportLocalNameKind = __napiModule.exports.ExportLocalNameKind;
-module.exports.ImportNameKind = __napiModule.exports.ImportNameKind;
-module.exports.parseAsync = __napiModule.exports.parseAsync;
-module.exports.parseSync = __napiModule.exports.parseSync;
-module.exports.rawTransferSupported = __napiModule.exports.rawTransferSupported;
-module.exports.ResolverFactory = __napiModule.exports.ResolverFactory;
-module.exports.EnforceExtension = __napiModule.exports.EnforceExtension;
-module.exports.ModuleType = __napiModule.exports.ModuleType;
-module.exports.sync = __napiModule.exports.sync;
-module.exports.HelperMode = __napiModule.exports.HelperMode;
-module.exports.isolatedDeclaration = __napiModule.exports.isolatedDeclaration;
-module.exports.moduleRunnerTransform =
-  __napiModule.exports.moduleRunnerTransform;
-module.exports.transform = __napiModule.exports.transform;
-module.exports.transformAsync = __napiModule.exports.transformAsync;
 module.exports.BindingEngine = __napiModule.exports.BindingEngine;
 module.exports.TraceSubscriberGuard = __napiModule.exports.TraceSubscriberGuard;
 module.exports.BindingLogLevel = __napiModule.exports.BindingLogLevel;

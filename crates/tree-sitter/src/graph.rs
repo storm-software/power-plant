@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use serde_json::json;
 
-/// In-memory graph node. Mirrors `cbm_gbuf_node_t`.
+/// In-memory graph node.
 #[derive(Debug, Clone)]
 pub struct GraphNode {
   pub id: i64,
@@ -15,7 +15,7 @@ pub struct GraphNode {
   pub properties_json: String,
 }
 
-/// In-memory graph edge. Mirrors `cbm_gbuf_edge_t`.
+/// In-memory graph edge.
 #[derive(Debug, Clone)]
 pub struct GraphEdge {
   pub source_id: i64,

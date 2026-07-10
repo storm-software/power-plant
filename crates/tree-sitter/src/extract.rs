@@ -17,7 +17,7 @@ pub(crate) enum ReadStatus {
   Empty,
 }
 
-/// One extracted definition. Mirrors `CBMDefinition`.
+/// One extracted definition.
 #[derive(Debug, Clone, Default)]
 pub struct Definition {
   pub name: String,
@@ -38,7 +38,7 @@ pub struct Definition {
   pub is_entry_point: bool,
 }
 
-/// Call site from extraction. Mirrors `CBMCall`.
+/// Call site from extraction.
 #[derive(Debug, Clone, Default)]
 pub struct CallSite {
   pub callee_name: String,
@@ -46,7 +46,7 @@ pub struct CallSite {
   pub is_method: bool,
 }
 
-/// Resolved call from LSP / registry. Mirrors resolved_calls entries.
+/// Resolved call from LSP / registry.
 #[derive(Debug, Clone, Default)]
 pub struct ResolvedCall {
   pub callee_name: String,
@@ -55,7 +55,7 @@ pub struct ResolvedCall {
   pub confidence: f64,
 }
 
-/// Import extracted from source. Mirrors `CBMImport`.
+/// Import extracted from source.
 #[derive(Debug, Clone, Default)]
 pub struct Import {
   pub module_path: String,
@@ -63,7 +63,7 @@ pub struct Import {
   pub namespace: Option<String>,
 }
 
-/// Type usage edge candidate. Mirrors usage entries.
+/// Type usage edge candidate.
 #[derive(Debug, Clone, Default)]
 pub struct Usage {
   pub type_name: String,
@@ -110,7 +110,7 @@ pub struct ImplTrait {
   pub type_qn: String,
 }
 
-/// Per-file extraction result. Mirrors `CBMFileResult`.
+/// Per-file extraction result.
 #[derive(Debug, Clone, Default)]
 pub struct FileResult {
   pub has_error: bool,
@@ -147,7 +147,7 @@ pub(crate) fn read_file(path: &Path) -> Result<(Vec<u8>, ReadStatus), ReadStatus
   Ok((data, ReadStatus::Ok))
 }
 
-/// Extraction backend — native Rust or C FFI (`cbm_extract_file`).
+/// Extraction backend.
 pub trait Extractor {
   fn extract_file(
     &self,
@@ -158,7 +158,7 @@ pub trait Extractor {
   ) -> PipelineResult<FileResult>;
 }
 
-/// No-op extractor for tests and wasm builds without native CBM.
+/// No-op extractor for tests and wasm builds.
 #[derive(Debug, Default)]
 pub struct StubExtractor;
 
@@ -176,14 +176,7 @@ impl Extractor for StubExtractor {
 
 /// Default extraction backend for this build target.
 pub fn default_extractor() -> Box<dyn Extractor + Send + Sync> {
-  #[cfg(cbm_native)]
-  {
-    Box::new(super::cbm_native::CbmExtractor)
-  }
-  #[cfg(not(cbm_native))]
-  {
-    Box::new(StubExtractor)
-  }
+  { Box::new(StubExtractor) }
 }
 
 pub(crate) fn oversized_reason(size: u64) -> String {

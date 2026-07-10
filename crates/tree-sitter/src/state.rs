@@ -4,7 +4,7 @@ use std::sync::Arc;
 use super::fqn;
 use crate::{CancellationToken, CommittedCounts, FileError, FileErrorPhase, IndexMode};
 
-/// Main indexing pipeline handle. Mirrors `cbm_pipeline_t`.
+/// Main indexing pipeline handle.
 #[derive(Debug)]
 pub struct Pipeline {
   pub repo_path: PathBuf,
