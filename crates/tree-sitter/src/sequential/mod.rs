@@ -60,7 +60,7 @@ impl SequentialPipelineState {
   }
 }
 
-pub fn run_pass(
+pub(crate) fn run_pass(
   name: &str,
   ctx: &mut PipelineContext<'_>,
   files: &[FileInfo],

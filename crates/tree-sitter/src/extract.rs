@@ -9,7 +9,7 @@ pub const EXTRACT_BUDGET: usize = 5_000_000;
 const DEFAULT_MAX_FILE_BYTES: u64 = 512 * 1024 * 1024;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ReadStatus {
+pub(crate) enum ReadStatus {
   Ok,
   OpenFail,
   Oom,
@@ -127,14 +127,14 @@ pub struct FileResult {
   pub impl_traits: Vec<ImplTrait>,
 }
 
-pub fn max_file_bytes() -> u64 {
+pub(crate) fn max_file_bytes() -> u64 {
   std::env::var("CBM_MAX_FILE_BYTES")
     .ok()
     .and_then(|v| v.parse().ok())
     .unwrap_or(DEFAULT_MAX_FILE_BYTES)
 }
 
-pub fn read_file(path: &Path) -> Result<(Vec<u8>, ReadStatus), ReadStatus> {
+pub(crate) fn read_file(path: &Path) -> Result<(Vec<u8>, ReadStatus), ReadStatus> {
   let meta = std::fs::metadata(path).map_err(|_| ReadStatus::OpenFail)?;
   let size = meta.len();
   if size == 0 {
@@ -186,7 +186,7 @@ pub fn default_extractor() -> Box<dyn Extractor + Send + Sync> {
   }
 }
 
-pub fn oversized_reason(size: u64) -> String {
+pub(crate) fn oversized_reason(size: u64) -> String {
   let cap = max_file_bytes();
   format!("oversized ({} MB > {} MB)", size / (1024 * 1024), cap / (1024 * 1024))
 }
@@ -203,15 +203,15 @@ pub fn module_is_dir(language: Language) -> bool {
   matches!(language, Language::Java | Language::Go)
 }
 
-pub fn quarantine_file() -> Option<String> {
+pub(crate) fn quarantine_file() -> Option<String> {
   std::env::var("CBM_INDEX_QUARANTINE_FILE").ok()
 }
 
-pub fn is_quarantined(rel_path: &str) -> bool {
+pub(crate) fn is_quarantined(rel_path: &str) -> bool {
   quarantine_file().is_some_and(|q| q == rel_path)
 }
 
-pub fn quarantine_phase(rel_path: &str) -> &'static str {
+pub(crate) fn quarantine_phase(rel_path: &str) -> &'static str {
   if quarantine_file().is_some_and(|q| q == rel_path) {
     std::env::var("CBM_INDEX_QUARANTINE_PHASE")
       .ok()
@@ -223,6 +223,6 @@ pub fn quarantine_phase(rel_path: &str) -> &'static str {
   }
 }
 
-pub fn extract_error_message(err: PipelineError) -> String {
+pub(crate) fn extract_error_message(err: PipelineError) -> String {
   err.to_string()
 }
