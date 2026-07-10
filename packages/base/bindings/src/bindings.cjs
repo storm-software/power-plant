@@ -81,12 +81,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-android-arm64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -104,12 +104,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-android-arm-eabi/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -141,12 +141,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-win32-x64-gnu/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -164,12 +164,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-win32-x64-msvc/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -188,12 +188,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-win32-ia32-msvc/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -211,12 +211,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-win32-arm64-msvc/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -239,12 +239,12 @@ function requireNative() {
       const bindingPackageVersion =
         require("@power-plant/bindings-darwin-universal/package.json").version;
       if (
-        bindingPackageVersion !== "0.0.5" &&
+        bindingPackageVersion !== "0.0.6" &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
       ) {
         throw new Error(
-          `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+          `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
         );
       }
       return binding;
@@ -262,12 +262,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-darwin-x64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -285,12 +285,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-darwin-arm64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -314,12 +314,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-freebsd-x64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -337,12 +337,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-freebsd-arm64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -367,12 +367,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-x64-musl/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -390,12 +390,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-x64-gnu/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -415,12 +415,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-arm64-musl/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -438,12 +438,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-arm64-gnu/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -463,12 +463,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-arm-musleabihf/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -486,12 +486,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-arm-gnueabihf/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -511,12 +511,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-loong64-musl/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -534,12 +534,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-loong64-gnu/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -559,12 +559,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-riscv64-musl/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -582,12 +582,12 @@ function requireNative() {
           const bindingPackageVersion =
             require("@power-plant/bindings-linux-riscv64-gnu/package.json").version;
           if (
-            bindingPackageVersion !== "0.0.5" &&
+            bindingPackageVersion !== "0.0.6" &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+              `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
             );
           }
           return binding;
@@ -606,12 +606,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-linux-ppc64-gnu/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -629,12 +629,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-linux-s390x-gnu/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -658,12 +658,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-openharmony-arm64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -681,12 +681,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-openharmony-x64/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;
@@ -704,12 +704,12 @@ function requireNative() {
         const bindingPackageVersion =
           require("@power-plant/bindings-openharmony-arm/package.json").version;
         if (
-          bindingPackageVersion !== "0.0.5" &&
+          bindingPackageVersion !== "0.0.6" &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== "0"
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
+            `Native binding package version mismatch, expected 0.0.6 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`
           );
         }
         return binding;

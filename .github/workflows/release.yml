@@ -54,7 +54,7 @@ jobs:
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
           discord-webhook: ${{ secrets.STORM_BOT_DISCORD_WEBHOOK}}
 
-  build-bindings-unix:
+  build-bindings:
     name: Build bindings - ${{ matrix.target }}
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
       github.event.pull_request.draft == false
@@ -143,7 +143,7 @@ jobs:
           NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM: 1
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Upload artifact - Unix
+      - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
         if: matrix.target != 'wasm32-wasip1-threads'
         with:
@@ -170,7 +170,7 @@ jobs:
       id-token: write
     needs:
       - start
-      - build-bindings-unix
+      - build-bindings
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main

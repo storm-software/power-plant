@@ -19,7 +19,6 @@
 import type { Children } from "@alloy-js/core";
 import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator, useExecutionContext } from "@power-plant/core";
-import schema from "@power-plant/graphql-schema";
 import { render } from "./render";
 
 /**
@@ -56,7 +55,6 @@ export default defineGenerator<any, Options, void>({
       }
     ]
   },
-  schema,
   generator: async (
     spec,
     options
