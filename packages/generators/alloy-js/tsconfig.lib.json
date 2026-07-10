@@ -7,9 +7,15 @@
     "outDir": "./out-tsc"
   },
   "references": [
-    { "path": "../../schemas/graphql-schema/tsconfig.lib.json" },
-    { "path": "../../base/schema/tsconfig.lib.json" },
-    { "path": "../../base/core/tsconfig.lib.json" }
+    {
+      "path": "../../schemas/graphql-schema/tsconfig.lib.json"
+    },
+    {
+      "path": "../../base/schema/tsconfig.lib.json"
+    },
+    {
+      "path": "../../base/core/tsconfig.lib.json"
+    }
   ],
   "include": [
     "src/**/*.ts",

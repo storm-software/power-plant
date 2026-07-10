@@ -32,10 +32,7 @@ import defu from "defu";
 import { useMeta } from "../contexts/meta";
 import type { ComponentProps } from "../types/components";
 
-export type SourceFileProps<
-  TSpec,
-  TOptions extends object
-> = SourceFilePropsExternal &
+export type SourceFileProps = SourceFilePropsExternal &
   ComponentProps & {
     /**
      * The metadata associated with the source file.
@@ -43,7 +40,7 @@ export type SourceFileProps<
      * @remarks
      * The values stored in the metadata will be available in the rendering context.
      */
-    meta?: MetaConfig<TSpec, TOptions>;
+    meta?: MetaConfig<any, any>;
   };
 
 /**
@@ -52,9 +49,7 @@ export type SourceFileProps<
  * @param props - The properties for the source file.
  * @returns The rendered source file component.
  */
-export function SourceFile<TSpec, TOptions extends object>(
-  props: SourceFileProps<TSpec, TOptions>
-) {
+export function SourceFile(props: SourceFileProps) {
   const [{ children, meta, path, header, filetype, reference }] = splitProps(
     props,
     ["children", "meta", "path", "header", "filetype", "reference"]

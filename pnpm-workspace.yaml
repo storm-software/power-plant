@@ -11,6 +11,8 @@ catalog:
   "@ai-sdk/provider-utils": ^5.0.6
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
+  "@alloy-js/json": ^0.24.0
+  "@alloy-js/markdown": ^0.24.0
   "@alloy-js/typescript": ^0.24.0
   "@asyncapi/generator": ^3.3.0
   "@asyncapi/parser": ^3.6.0
