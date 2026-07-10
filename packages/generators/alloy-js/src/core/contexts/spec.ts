@@ -35,7 +35,7 @@ export function useSpec(): any {
   const context = useContext(SpecContext);
   if (!context) {
     throw new Error(
-      "Specification context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@powerlines/plugin-alloy`."
+      "Specification context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 

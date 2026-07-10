@@ -46,7 +46,11 @@ import {
   useTSMemberScope,
   useTSNamePolicy
 } from "@alloy-js/typescript";
-import type { JsonSchema, JsonSchemaPrimitiveType } from "@power-plant/schema";
+import type {
+  JsonSchema,
+  JsonSchemaLike,
+  JsonSchemaPrimitiveType
+} from "@power-plant/schema";
 import {
   getPrimarySchemaType,
   getPropertiesList,
@@ -337,7 +341,7 @@ export function InterfaceDeclaration(props: InterfaceDeclarationProps) {
           name={interfaceName.value}
         />
       }>
-      <SchemaContext.Provider value={schema}>
+      <SchemaContext.Provider value={schema as JsonSchemaLike}>
         <TSDocObjectSchema heading={doc} schema={schema!} />
         <BaseInterfaceDeclaration
           export={true}
@@ -373,7 +377,7 @@ export function InterfaceDeclarationProperty(
 
   return (
     <Show when={isSetString(name)}>
-      <SchemaPropertyContext.Provider value={schema}>
+      <SchemaPropertyContext.Provider value={schema as JsonSchemaLike}>
         <TSDocSchemaProperty schema={schema} defaultValue={defaultValue} />
         <InterfaceMember
           name={name}

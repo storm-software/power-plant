@@ -37,7 +37,7 @@ export function useExecution(): ExecutionContextCore<any, any, any> {
   const context = useContext(ExecutionContext);
   if (!context) {
     throw new Error(
-      "Execution context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@powerlines/plugin-alloy`."
+      "Execution context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 

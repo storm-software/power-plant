@@ -37,7 +37,7 @@ export function useMeta(): Record<string, MetaConfig<any, any>> {
   const context = useContext(MetaContext);
   if (!context) {
     throw new Error(
-      "Meta context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@powerlines/plugin-alloy`."
+      "Meta context is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 

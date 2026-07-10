@@ -23,7 +23,6 @@ import type {
   GeneratorFunctionResult,
   MetaConfig
 } from "@power-plant/core";
-import { getLanguage } from "@power-plant/core/utils";
 import { noop } from "@stryke/helpers/noop";
 import { replacePath } from "@stryke/path/replace";
 import { list } from "@stryke/string-format/list";
@@ -83,7 +82,6 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
 
         documents[file.path] = {
           path: file.path,
-          language: getLanguage(file.path),
           source: [
             {
               content: file.contents,
@@ -93,14 +91,9 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
         };
       } else if (file.sourcePath && documents[file.sourcePath]) {
         const metadata = meta[file.path] ?? {};
-        const language = getLanguage(file.path);
 
         documents[file.path] = {
           ...documents[file.sourcePath],
-          language:
-            language === "other"
-              ? documents[file.sourcePath]!.language
-              : language,
           path: file.path,
           source:
             documents[file.sourcePath]?.source?.map(source =>

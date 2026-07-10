@@ -18,12 +18,7 @@
 
 import type { ComponentContext } from "@alloy-js/core";
 import { createNamedContext, useContext } from "@alloy-js/core";
-import type {
-  Device,
-  SessionContext as SessionContextCore,
-  Tenant,
-  User
-} from "@power-plant/core";
+import type { SessionContext as SessionContextCore } from "@power-plant/core";
 
 /**
  * The session context used to access the session data.
@@ -41,7 +36,7 @@ export function useSession(): SessionContextCore {
   const session = useContext(SessionContext);
   if (!session) {
     throw new Error(
-      "Session is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@powerlines/plugin-alloy`."
+      "Session is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 
@@ -55,73 +50,4 @@ export function useSession(): SessionContextCore {
  */
 export function useSessionSafe(): SessionContextCore | undefined {
   return useContext(SessionContext);
-}
-
-/**
- * Hook to access the device context.
- *
- * @returns The device.
- * @throws An error if the device is not set.
- */
-export function useDevice(): Device {
-  const session = useSession();
-
-  return session.device;
-}
-
-/**
- * Hook to safely access the device context.
- *
- * @returns The device or undefined if not set.
- */
-export function useDeviceSafe(): Device | undefined {
-  const session = useSessionSafe();
-
-  return session?.device;
-}
-
-/**
- * Hook to access the user context.
- *
- * @returns The user.
- * @throws An error if the user is not set.
- */
-export function useUser(): User {
-  const session = useSession();
-
-  return session.user;
-}
-
-/**
- * Hook to safely access the user context.
- *
- * @returns The user or undefined if not set.
- */
-export function useUserSafe(): User | undefined {
-  const session = useSessionSafe();
-
-  return session?.user;
-}
-
-/**
- * Hook to access the tenant context.
- *
- * @returns The tenant.
- * @throws An error if the tenant is not set.
- */
-export function useTenant(): Tenant {
-  const user = useUser();
-
-  return user.tenant;
-}
-
-/**
- * Hook to safely access the tenant context.
- *
- * @returns The tenant or undefined if not set.
- */
-export function useTenantSafe(): Tenant | undefined {
-  const user = useUserSafe();
-
-  return user?.tenant;
 }

@@ -36,6 +36,7 @@ import {
 } from "@alloy-js/typescript";
 import type {
   JsonSchema,
+  JsonSchemaLike,
   JsonSchemaObject,
   JsonSchemaType
 } from "@power-plant/schema";
@@ -185,7 +186,7 @@ export function ObjectDeclarationProperty(
 
   return (
     <Show when={isSetString(name)}>
-      <SchemaPropertyContext.Provider value={schema}>
+      <SchemaPropertyContext.Provider value={schema as JsonSchemaLike}>
         <TSDocSchemaProperty schema={schema} defaultValue={value} />
         <ObjectProperty
           name={name}
