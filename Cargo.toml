@@ -175,7 +175,6 @@ strip = "symbols"
 debug = true
 inherits = "release"
 
-
 [profile.release-wasi]
 inherits = "release"
 opt-level = "s"
