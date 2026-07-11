@@ -1,4 +1,4 @@
-#include "../../common/scanner.h"
+#include "common/scanner.h"
 
 void *tree_sitter_cfml_external_scanner_create() {
     Scanner *scanner = (Scanner *)ts_calloc(1, sizeof(Scanner));

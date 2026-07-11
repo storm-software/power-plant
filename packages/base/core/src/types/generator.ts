@@ -20,7 +20,7 @@ import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { DeepPartial, MaybePromise } from "@stryke/types/base";
 import type { UserConfig } from "./config";
-import type { ExecutionDocument, ExecutionSource } from "./execution";
+import type { ExecutionDocument, ExecutionDocumentChunk } from "./execution";
 import type { Input, InputConfig } from "./input";
 import type { MetaConfig } from "./meta";
 import type { Output, OutputConfig } from "./output";
@@ -43,7 +43,7 @@ export type GeneratedDocument<TSpec, TOptions extends object> = Partial<
     /**
      * The sources of the document.
      */
-    source?: DeepPartial<ExecutionSource<TSpec, TOptions>>[];
+    chunks?: DeepPartial<ExecutionDocumentChunk<TSpec, TOptions>>[];
   };
 
 export type GeneratorFunction<TSpec, TOptions extends object> = (
@@ -60,8 +60,14 @@ export interface GeneratorResult<
   TOptions extends object,
   TReturns = void
 > {
+  /**
+   * The specification used to generate the documents.
+   */
   spec: TSpec;
 
+  /**
+   * The options used to generate the documents.
+   */
   options: TOptions;
 
   /**

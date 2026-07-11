@@ -20,6 +20,7 @@ import type { Children, OutputFile as AlloyOutputFile } from "@alloy-js/core";
 import { renderAsync, traverseOutput } from "@alloy-js/core";
 import type {
   ExecutionContext,
+  ExecutionDocumentChunk,
   GeneratorFunctionResult,
   MetaConfig
 } from "@power-plant/core";
@@ -74,6 +75,8 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
   );
 
   const documents = {} as GeneratorFunctionResult<TSpec, TOptions>;
+  const copies = {} as Record<string, string>;
+
   await traverseOutput(output, {
     visitDirectory: noop,
     visitFile: file => {
@@ -82,29 +85,34 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
 
         documents[file.path] = {
           path: file.path,
-          source: [
+          chunks: [
             {
               content: file.contents,
               meta: metadata
             }
           ]
         };
-      } else if (file.sourcePath && documents[file.sourcePath]) {
-        const metadata = meta[file.path] ?? {};
-
-        documents[file.path] = {
-          ...documents[file.sourcePath],
-          path: file.path,
-          source:
-            documents[file.sourcePath]?.source?.map(source =>
-              defu(source, {
-                meta: metadata
-              })
-            ) ?? []
-        };
+      } else if (file.sourcePath) {
+        copies[file.sourcePath] = file.path;
       }
     }
   });
+
+  for (const [sourcePath, targetPath] of Object.entries(copies)) {
+    if (!documents[sourcePath]) {
+      throw new Error(`Source path ${sourcePath} not found in documents.`);
+    } else {
+      documents[targetPath] = {
+        ...documents[sourcePath],
+        path: targetPath,
+        chunks: documents[sourcePath].chunks?.map(chunk =>
+          defu(chunk, {
+            meta: meta[targetPath] ?? {}
+          })
+        ) as ExecutionDocumentChunk<TSpec, TOptions>[]
+      };
+    }
+  }
 
   return documents;
 }

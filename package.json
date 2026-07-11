@@ -45,6 +45,8 @@
     "help": "nx help",
     "lint": "pnpm exec zx tools/scripts/src/lint.mjs",
     "local-registry": "nx local-registry monorepo",
+    "codegen-lang": "pnpm exec zx tools/scripts/src/codegen-lang.mjs",
+    "new-lang": "pnpm exec zx tools/scripts/src/new-lang.mjs",
     "nuke": "pnpm exec zx tools/scripts/src/nuke.mjs",
     "nx": "nx",
     "push": "git push origin main:main",

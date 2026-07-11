@@ -1,38 +1,33 @@
-//! This crate provides Crystal language support for the [tree-sitter][] parsing library.
+//! Crystal language support for the [tree-sitter][] parsing library.
 //!
-//! Typically, you will use the [language][tree_sitter_crystal] function to add the Crystal language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
+//! Typically, you will use the [`LANGUAGE`] constant to add the Crystal language to a
+//! tree-sitter [`Parser`][], and then use the parser to parse some code:
 //!
 //! ```
 //! let code = "";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_crystal::language()).expect("Error loading Crystal grammar");
+//! parser
+//!     .set_language(&tree_sitter_crystal::LANGUAGE.into())
+//!     .expect("Error loading Crystal grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
-use tree_sitter::Language;
+use tree_sitter_language::LanguageFn;
 
 unsafe extern "C" {
-    unsafe fn tree_sitter_crystal() -> Language;
+    fn tree_sitter_crystal() -> *const ();
 }
 
-/// Get the tree-sitter [Language][tree_sitter_crystal] for the Crystal grammar.
-///
-/// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-pub fn language() -> Language {
-    unsafe { tree_sitter_crystal() }
-}
+/// The tree-sitter [`LanguageFn`] for this grammar.
+pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_crystal) };
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../grammars/crystal/node-types.json");
-
+pub const NODE_TYPES: &str = include_str!("../../grammars/crystal/node-types.json");
 
 #[cfg(test)]
 mod tests {
@@ -40,7 +35,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(&super::language())
+            .set_language(&super::LANGUAGE.into())
             .expect("Error loading Crystal language");
     }
 }

@@ -11,19 +11,6 @@
           "packages/devtools/*"
         ],
         "projectsRelationship": "independent"
-      },
-      "crates": {
-        "projects": ["crates/*"],
-        "projectsRelationship": "independent",
-        "changelog": {
-          "createRelease": "github",
-          "entryWhenNoChanges": false
-        },
-        "version": {
-          "currentVersionResolver": "git-tag",
-          "specifierSource": "conventional-commits",
-          "versionActions": "@storm-software/workspace-tools/release/rust-version-actions"
-        }
       }
     }
   },

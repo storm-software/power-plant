@@ -55,7 +55,7 @@ catalog:
   "@storm-software/config-tools": ^1.190.92
   "@storm-software/cspell": ^0.46.160
   "@storm-software/eslint": ^0.170.126
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.54
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.55
   "@storm-software/git-tools": ^2.131.100
   "@storm-software/linting-tools": ^1.134.22
   "@storm-software/markdownlint": ^0.30.248

@@ -141,6 +141,7 @@ tracing = { version = "0.1.41", features = ["valuable"] }
 tracing-chrome = "0.7.2"
 tracing-subscriber = { version = "0.3.19", default-features = false }
 tree-sitter = "0.26.10"
+tree-sitter-language = "0.1.7"
 ts-rs = "11.1.0"
 uuid = { version = "1.4.2", features = ["v4", "v5", "serde", "js"] }
 whoami = "2.1.2"

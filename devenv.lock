@@ -94,11 +94,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1783571997,
-        "narHash": "sha256-ctVbuCjDg0HwGCjjTHtwmjjK23GTPtNady1fTs24kjY=",
+        "lastModified": 1783604885,
+        "narHash": "sha256-tzMgSkV7kljEkqIjlgV6F+n+xD+/a35Db8bs7a4BFAo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "80bd90efcad203e11e2c13e968c82a0ce2db3a2e",
+        "rev": "767b0d3ec98a143ad9ed7dfc0d5553510ac27133",
         "type": "github"
       },
       "original": {
@@ -143,11 +143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783663825,
-        "narHash": "sha256-TTrNVoFdEw8j0Hn+shP1KAsimTmszTWBIIUliTaAuY0=",
+        "lastModified": 1783747106,
+        "narHash": "sha256-KlepQu/O5m11lAjcJ4ER5bc6bIzyX2UMPDARzMzQfIw=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "072adf9b18936c1062c48123a9b77891d5968f2c",
+        "rev": "e598b37857b895b81020a65a802ef55f5bbed72f",
         "type": "github"
       },
       "original": {
@@ -180,11 +180,11 @@
     "storm-ops": {
       "flake": false,
       "locked": {
-        "lastModified": 1783728255,
-        "narHash": "sha256-hhx9hzzGysSYk8KOUe3pEAB5slESAEDxHVKYZAI/IHQ=",
+        "lastModified": 1783729507,
+        "narHash": "sha256-+ew0gtrrDKfHTKxkz+SYyWPC2eNxZ2fV113TZoNn0X4=",
         "owner": "storm-software",
         "repo": "storm-ops",
-        "rev": "cf18a181936cb9436e7b6e616c72827c72145dae",
+        "rev": "4fd37930e44d20b151fbe2eecf8a1b0e0c235ae8",
         "type": "github"
       },
       "original": {

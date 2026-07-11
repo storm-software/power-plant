@@ -3,7 +3,7 @@ use std::{
   collections::{HashMap, HashSet},
   env,
   fmt::Write as _,
-  fs::{create_dir_all, read_dir, read_to_string, write},
+  fs::{create_dir_all, read_dir, read_to_string, remove_file, write},
   path::{Path, PathBuf},
 };
 
@@ -45,16 +45,10 @@ fn main() {
     .expect("Failed to parse grammars.json");
 
   let mut languages_files = Vec::new();
-
-  let mut c_config = cc::Build::new();
-  c_config
-    .flag_if_supported("-Wno-unused-parameter")
-    .flag_if_supported("-Wno-unused-but-set-variable")
-    .flag_if_supported("-Wno-trigraphs");
-  #[cfg(target_env = "msvc")]
-  c_config.flag("-utf-8");
+  let mut compiled_grammars: Vec<&Grammar> = Vec::new();
 
   let grammars_path = PathBuf::from("grammars");
+  println!("cargo:rerun-if-changed={}", grammars_path.display());
   let languages_path = src_path.join("languages");
   create_dir_all(&languages_path).expect("Must be able to create generated languages directory");
 
@@ -76,21 +70,8 @@ fn main() {
     }
 
     let parser_path = grammar_dir.join("parser.c");
-    if parser_path.exists() {
-      c_config.file(&parser_path);
-      println!("cargo:rerun-if-changed={}", parser_path.display());
-
-      let scanner_path = grammar_dir.join("scanner.c");
-      if scanner_path.exists() {
-        c_config.file(&scanner_path);
-        println!("cargo:rerun-if-changed={}", scanner_path.display());
-      }
-    }
-
-    let queries_dir = grammar_dir.join("queries");
-    let queries = if queries_dir.exists() { collect_query_paths(&queries_dir) } else { Vec::new() };
-    for query_path in &queries {
-      println!("cargo:rerun-if-changed={}", query_path.display());
+    if !parser_path.exists() {
+      continue;
     }
 
     let grammar_key = grammar_dir
@@ -101,9 +82,58 @@ fn main() {
       .get(grammar_key)
       .unwrap_or_else(|| panic!("Missing grammar manifest entry for {grammar_key}"));
 
+    // Compile each grammar as its own static library so `#include "tree_sitter/parser.h"`
+    // resolves to that grammar's vendored headers (ABI versions differ across grammars).
+    let mut c_config = cc::Build::new();
+    c_config
+      .std("c11")
+      .include(&grammar_dir)
+      .flag_if_supported("-Wno-unused-parameter")
+      .flag_if_supported("-Wno-unused-but-set-variable")
+      .flag_if_supported("-Wno-trigraphs")
+      .flag_if_supported("-Wno-unused-variable")
+      .flag_if_supported("-Wno-unused-function");
+    #[cfg(target_env = "msvc")]
+    c_config.flag("-utf-8");
+
+    c_config.file(&parser_path);
+    println!("cargo:rerun-if-changed={}", parser_path.display());
+
+    let scanner_path = grammar_dir.join("scanner.c");
+    let has_scanner = scanner_path.is_file();
+    if has_scanner != grammar.has_scanner {
+      println!(
+        "cargo:warning=grammar {grammar_key}: manifest has_scanner={} but scanner.c {}",
+        grammar.has_scanner,
+        if has_scanner { "exists" } else { "is missing" }
+      );
+    }
+    if has_scanner {
+      c_config.file(&scanner_path);
+      println!("cargo:rerun-if-changed={}", scanner_path.display());
+    }
+
+    c_config.compile(&format!("tree-sitter-{grammar_key}"));
+
+    let queries_dir = grammar_dir.join("queries");
+    let queries = if queries_dir.exists() { collect_query_paths(&queries_dir) } else { Vec::new() };
+    for query_path in &queries {
+      println!("cargo:rerun-if-changed={}", query_path.display());
+    }
+
+    let ts_c_function = discover_language_symbol(&parser_path)
+      .unwrap_or_else(|| grammar.ts_function.clone());
+    if ts_c_function != grammar.ts_function {
+      println!(
+        "cargo:warning=grammar {grammar_key}: manifest ts_function={} but parser.c defines {}",
+        grammar.ts_function, ts_c_function
+      );
+    }
+
+    let node_types_path = grammar_dir.join("node-types.json");
     let mut node_types_section = String::new();
-    if grammar.node_types.as_ref().is_some() {
-      let include_path = normalize_include_path(&grammar_dir.join("node-types.json"));
+    if grammar.node_types.as_ref().is_some() || node_types_path.is_file() {
+      let include_path = normalize_include_path(&node_types_path);
       writeln!(
         node_types_section,
         "/// The content of the [`node-types.json`][] file for this grammar."
@@ -117,7 +147,7 @@ fn main() {
       .expect("Writing to String cannot fail");
       writeln!(
         node_types_section,
-        "pub const NODE_TYPES: &'static str = include_str!(\"../../{include_path}\");"
+        "pub const NODE_TYPES: &str = include_str!(\"../../{include_path}\");"
       )
       .expect("Writing to String cannot fail");
     }
@@ -132,7 +162,7 @@ fn main() {
 
       writeln!(
         query_constants,
-        "pub const {const_name}: &'static str = include_str!(\"../../{include_path}\");"
+        "pub const {const_name}: &str = include_str!(\"../../{include_path}\");"
       )
       .expect("Writing to String cannot fail");
     }
@@ -140,45 +170,35 @@ fn main() {
     let language_path = languages_path.join(format!("{}.rs", grammar.ts_function));
 
     let mut language_source = format!(
-      r#"//! This crate provides {} language support for the [tree-sitter][] parsing library.
+      r#"//! {display} language support for the [tree-sitter][] parsing library.
 //!
-//! Typically, you will use the [language][{}] function to add the {} language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
+//! Typically, you will use the [`LANGUAGE`] constant to add the {display} language to a
+//! tree-sitter [`Parser`][], and then use the parser to parse some code:
 //!
 //! ```
 //! let code = "";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language({}::language()).expect("Error loading {} grammar");
+//! parser
+//!     .set_language(&{module}::LANGUAGE.into())
+//!     .expect("Error loading {display} grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
-use tree_sitter::Language;
+use tree_sitter_language::LanguageFn;
 
 unsafe extern "C" {{
-    unsafe fn {}() -> Language;
+    fn {ts_c_fn}() -> *const ();
 }}
 
-/// Get the tree-sitter [Language][{}] for the {} grammar.
-///
-/// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-pub fn language() -> Language {{
-    unsafe {{ {}() }}
-}}
+/// The tree-sitter [`LanguageFn`] for this grammar.
+pub const LANGUAGE: LanguageFn = unsafe {{ LanguageFn::from_raw({ts_c_fn}) }};
 "#,
-      grammar.display_name,
-      grammar.ts_function,
-      grammar.display_name,
-      grammar.ts_function,
-      grammar.display_name,
-      grammar.ts_function,
-      grammar.ts_function,
-      grammar.display_name,
-      grammar.ts_function,
+      display = grammar.display_name,
+      module = grammar.ts_function,
+      ts_c_fn = ts_c_function,
     );
 
     if !node_types_section.is_empty() {
@@ -193,14 +213,13 @@ pub fn language() -> Language {{
 
     language_source.push_str(&format!(
       r#"
-
 #[cfg(test)]
 mod tests {{
     #[test]
     fn test_can_load_grammar() {{
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(&super::language())
+            .set_language(&super::LANGUAGE.into())
             .expect("Error loading {} language");
     }}
 }}
@@ -208,31 +227,24 @@ mod tests {{
       grammar.display_name,
     ));
 
-    let result = write(language_path.clone(), language_source);
-    if result.is_err() {
-      panic!("Failed to write tree_sitter_{}.rs: {}", grammar.name, result.err().unwrap());
-    }
+    write_if_changed(&language_path, &language_source);
 
     languages_files.push(
       language_path.file_name().expect("Language file must have a valid UTF-8 name").to_owned(),
     );
-    c_config.include(&language_path);
-    println!("cargo:rerun-if-changed={}", language_path.display());
+    compiled_grammars.push(grammar);
   }
 
   let mut language_module = String::new();
-  for language_file in {
-    languages_files.sort();
-    languages_files
-  }
-  .iter()
-  {
+  languages_files.sort();
+  for language_file in &languages_files {
     let file_name = language_file.to_string_lossy();
+    let module_name = file_name.trim_end_matches(".rs");
 
     let grammar_key = file_name.trim_start_matches("tree_sitter_").trim_end_matches(".rs");
     let grammar = grammars_manifest
       .values()
-      .find(|g| g.ts_function == file_name.trim_end_matches(".rs"))
+      .find(|g| g.ts_function == module_name)
       .unwrap_or_else(|| {
         grammars_manifest
           .get(grammar_key)
@@ -245,35 +257,40 @@ mod tests {{
       grammar.display_name
     )
     .expect("Writing to String cannot fail");
-    writeln!(
-      language_module,
-      "pub mod {};",
-      language_file.to_string_lossy().trim_end_matches(".rs")
-    )
-    .expect("Writing to String cannot fail");
+    writeln!(language_module, "pub mod {module_name};").expect("Writing to String cannot fail");
   }
 
   let languages_module_path = languages_path.join("mod.rs");
-  let result = write(languages_module_path.clone(), language_module);
-  if result.is_err() {
-    panic!("Failed to write tree_sitter mod.rs: {}", result.err().unwrap());
-  }
+  write_if_changed(&languages_module_path, &language_module);
 
-  c_config.include(&languages_module_path);
-  println!("cargo:rerun-if-changed={}", languages_module_path.to_string_lossy());
+  cleanup_stale_language_modules(&languages_path, &languages_files);
 
-  let mut language_enum = r#"/// Source language for extraction.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+  write_language_enum(&src_path, &grammars_manifest, &compiled_grammars);
+  write_lang_specs(&src_path, &grammars_manifest);
+}
+
+fn write_language_enum(
+  src_path: &Path,
+  grammars_manifest: &HashMap<String, Grammar>,
+  compiled_grammars: &[&Grammar],
+) {
+  let mut language_enum = r#"use tree_sitter_language::LanguageFn;
+
+use crate::languages;
+
+/// Source language for extraction.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub enum Language {
     #[default]
     Unknown,
 "#
   .to_string();
+
   let mut sorted_grammars = grammars_manifest.values().collect::<Vec<_>>();
   sorted_grammars.sort_by(|a, b| a.pascal_name.cmp(&b.pascal_name));
-  sorted_grammars.iter().for_each(|grammar| {
+  for grammar in &sorted_grammars {
     writeln!(language_enum, "    {},", grammar.pascal_name).expect("Writing to String cannot fail");
-  });
+  }
   language_enum.push_str("}\n");
 
   language_enum.push_str(
@@ -281,11 +298,11 @@ pub enum Language {
   );
 
   let mut seen_filenames = HashSet::new();
-  sorted_grammars.iter().for_each(|grammar| {
-    grammar.filenames.iter().filter(|filename| !filename.contains('*')).for_each(|filename| {
+  for grammar in &sorted_grammars {
+    for filename in grammar.filenames.iter().filter(|filename| !filename.contains('*')) {
       let normalized_filename = filename.to_ascii_lowercase();
       if !seen_filenames.insert(normalized_filename.clone()) {
-        return;
+        continue;
       }
       let escaped_filename = escape_rust_string(&normalized_filename);
       writeln!(
@@ -294,19 +311,19 @@ pub enum Language {
         grammar.pascal_name
       )
       .expect("Writing to String cannot fail");
-    });
-  });
+    }
+  }
 
   language_enum.push_str(
     "                _ => {}\n            }\n        }\n\n        let lowered_file_path = file_path.to_ascii_lowercase();\n\n",
   );
 
   let mut seen_globs = HashSet::new();
-  sorted_grammars.iter().for_each(|grammar| {
-    grammar.filenames.iter().filter(|filename| filename.contains('*')).for_each(|glob| {
+  for grammar in &sorted_grammars {
+    for glob in grammar.filenames.iter().filter(|filename| filename.contains('*')) {
       let normalized_glob = glob.to_ascii_lowercase();
       if !seen_globs.insert(normalized_glob.clone()) {
-        return;
+        continue;
       }
       let escaped_glob = escape_rust_string(&normalized_glob);
       writeln!(
@@ -315,63 +332,318 @@ pub enum Language {
         grammar.pascal_name
       )
       .expect("Writing to String cannot fail");
-    });
-  });
+    }
+  }
 
   language_enum.push_str("\n");
 
+  let mut extension_entries = Vec::new();
   let mut seen_extensions = HashSet::new();
-  sorted_grammars.iter().for_each(|grammar| {
-    grammar.extensions.iter().for_each(|extension| {
+  for grammar in &sorted_grammars {
+    for extension in &grammar.extensions {
       if let Some(normalized_extension) = normalized_extension(extension) {
-        if !seen_extensions.insert(normalized_extension.clone()) {
-          return;
+        if seen_extensions.insert(normalized_extension.clone()) {
+          extension_entries.push((
+            normalized_extension,
+            grammar.pascal_name.clone(),
+            grammar.display_name.clone(),
+          ));
         }
-        writeln!(
-          language_enum,
-          "        if lowered_file_path.ends_with(\"{}\") {{ return Self::{}; }}",
-          escape_rust_string(&normalized_extension),
-          grammar.pascal_name,
-        )
-        .expect("Writing to String cannot fail");
       }
-    });
-  });
+    }
+  }
+  extension_entries.sort_by(|a, b| b.0.len().cmp(&a.0.len()).then_with(|| a.0.cmp(&b.0)));
+  for (normalized_extension, pascal_name, display_name) in &extension_entries {
+    writeln!(
+      language_enum,
+      "        // {display_name}\n        if lowered_file_path.ends_with(\"{}\") {{ return Self::{pascal_name}; }}",
+      escape_rust_string(normalized_extension),
+    )
+    .expect("Writing to String cannot fail");
+  }
 
   language_enum.push_str(
     "\n        Self::Unknown\n    }\n}\n\nimpl From<&String> for Language {\n    fn from(file_path: &String) -> Self {\n        Self::from(file_path.as_str())\n    }\n}\n\nimpl From<&std::path::Path> for Language {\n    fn from(file_path: &std::path::Path) -> Self {\n        Self::from(file_path.to_string_lossy().as_ref())\n    }\n}\n\nimpl From<std::path::PathBuf> for Language {\n    fn from(file_path: std::path::PathBuf) -> Self {\n        Self::from(file_path.as_path())\n    }\n}\n",
   );
 
-  let result = write(src_path.join("types/language.rs"), language_enum);
-  if result.is_err() {
-    panic!("Failed to write types/language.rs: {}", result.err().unwrap());
+  // Map Language enum → LanguageFn for compiled grammars only.
+  let mut compiled_by_pascal: HashMap<&str, &Grammar> = HashMap::new();
+  for grammar in compiled_grammars {
+    compiled_by_pascal.insert(grammar.pascal_name.as_str(), grammar);
   }
 
-  // let bindings = bindgen::Builder::default()
-  //     .header(ffi.join("bindings.h").to_string_lossy())
-  //     .clang_arg(format!("-I{}", vendored.display()))
-  //     .clang_arg(format!(
-  //         "-I{}",
-  //         vendored.join("ts_runtime/include").display()
-  //     ))
-  //     .clang_arg("-DCBM_BIND_TS_ALLOCATOR=0")
-  //     .allowlist_function("cbm_.*")
-  //     .allowlist_type("CBM.*")
-  //     .allowlist_var("CBM_.*")
-  //     .default_enum_style(bindgen::EnumVariation::ModuleConsts)
-  //     .allowlist_type("TSTree")
-  //     .allowlist_type("TSNode")
-  //     .opaque_type("TSTree")
-  //     .opaque_type("TSNode")
-  //     .opaque_type("CBMExtractCtx")
-  //     .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
-  //     .generate()
-  //     .expect("cbm bindgen failed");
+  language_enum.push_str(
+    r#"
+impl Language {
+    /// Returns the tree-sitter [`LanguageFn`] for this source language, if a
+    /// grammar was compiled into this crate.
+    ///
+    /// [`LanguageFn`] is a zero-cost function pointer to the grammar's static
+    /// `TSLanguage`; convert with [`tree_sitter::Language::from`] when loading
+    /// a [`tree_sitter::Parser`].
+    #[must_use]
+    pub const fn language_fn(self) -> Option<LanguageFn> {
+        match self {
+"#,
+  );
 
-  // let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
-  // bindings
-  //     .write_to_file(out_dir.join("bindings.rs"))
-  //     .expect("write cbm bindings.rs failed");
+  for grammar in &sorted_grammars {
+    if compiled_by_pascal.contains_key(grammar.pascal_name.as_str()) {
+      writeln!(
+        language_enum,
+        "            Self::{} => Some(languages::{}::LANGUAGE),",
+        grammar.pascal_name, grammar.ts_function
+      )
+      .expect("Writing to String cannot fail");
+    }
+  }
+
+  language_enum.push_str(
+    r#"            Self::Unknown => None,
+        }
+    }
+
+    /// Human-readable language label (e.g. `"TypeScript"`).
+    #[must_use]
+    pub const fn display_name(self) -> &'static str {
+        match self {
+"#,
+  );
+
+  for grammar in &sorted_grammars {
+    writeln!(
+      language_enum,
+      "            Self::{} => \"{}\",",
+      grammar.pascal_name,
+      escape_rust_string(&grammar.display_name),
+    )
+    .expect("Writing to String cannot fail");
+  }
+  language_enum.push_str(
+    r#"            Self::Unknown => "Unknown",
+        }
+    }
+
+    /// Stable enum identifier from the grammar manifest (e.g. `"TYPESCRIPT"`).
+    #[must_use]
+    pub const fn enum_name(self) -> &'static str {
+        match self {
+"#,
+  );
+
+  for grammar in &sorted_grammars {
+    writeln!(
+      language_enum,
+      "            Self::{} => \"{}\",",
+      grammar.pascal_name,
+      escape_rust_string(&grammar.enum_name),
+    )
+    .expect("Writing to String cannot fail");
+  }
+
+  language_enum.push_str(
+    r#"            Self::Unknown => "UNKNOWN",
+        }
+    }
+
+    /// Root tree-sitter node kind for this language's translation unit.
+    #[must_use]
+    pub const fn module_root(self) -> &'static str {
+        match self {
+"#,
+  );
+
+  for grammar in &sorted_grammars {
+    writeln!(
+      language_enum,
+      "            Self::{} => \"{}\",",
+      grammar.pascal_name,
+      escape_rust_string(&grammar.module_root),
+    )
+    .expect("Writing to String cannot fail");
+  }
+
+  language_enum.push_str(
+    r#"            Self::Unknown => "",
+        }
+    }
+
+    /// Build a [`tree_sitter::Language`] handle for this source language.
+    ///
+    /// Prefer [`crate::parser::LanguageParser`] when parsing many files so the
+    /// underlying [`tree_sitter::Parser`] and language assignment are reused.
+    #[must_use]
+    pub fn tree_sitter_language(self) -> Option<tree_sitter::Language> {
+        self.language_fn().map(tree_sitter::Language::from)
+    }
+}
+
+impl std::fmt::Display for Language {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.display_name())
+    }
+}
+"#,
+  );
+
+  write_if_changed(&src_path.join("types/language.rs"), &language_enum);
+}
+
+/// Generate lang-spec boilerplate from `grammars.json`.
+///
+/// Mirrors `generate_specs` in
+/// https://github.com/DeusData/codebase-memory-mcp/blob/main/scripts/generate-lang-code.py:
+/// module-root arrays plus empty node-kind specs keyed by [`Language`].
+fn write_lang_specs(src_path: &Path, grammars_manifest: &HashMap<String, Grammar>) {
+  let mut sorted_grammars = grammars_manifest.values().collect::<Vec<_>>();
+  sorted_grammars.sort_by(|a, b| a.pascal_name.cmp(&b.pascal_name));
+
+  let mut source = String::from(
+    r#"//! Generated lang-spec tables from `tools/tree-sitter/grammars.json`.
+//!
+//! Equivalent to `generate_specs` in upstream `generate-lang-code.py`:
+//! - per-language module-root node-kind arrays
+//! - boilerplate [`LangSpec`] rows with empty extraction kinds
+//!
+//! Hand-tuned node-kind tables live in [`crate::lang_spec`]; that module
+//! overlays curated kinds on top of [`modules_for`].
+
+use crate::Language;
+use crate::lang_spec::LangSpec;
+
+const EMPTY: &[&str] = &[];
+
+"#,
+  );
+
+  // Module type arrays (paste-equivalent of `{name}_module_types` in lang_specs.c).
+  for grammar in &sorted_grammars {
+    let const_name = module_types_const_name(&grammar.name);
+    let module_root = escape_rust_string(&grammar.module_root);
+    writeln!(
+      source,
+      "/// Module / translation-unit node kinds for {}.",
+      grammar.display_name
+    )
+    .expect("Writing to String cannot fail");
+    writeln!(
+      source,
+      "pub(crate) const {const_name}: &[&str] = &[\"{module_root}\"];"
+    )
+    .expect("Writing to String cannot fail");
+  }
+
+  source.push_str(
+    r#"
+/// Root AST node kinds for `language` (empty for [`Language::Unknown`]).
+#[must_use]
+pub const fn modules_for(language: Language) -> &'static [&'static str] {
+    match language {
+"#,
+  );
+
+  for grammar in &sorted_grammars {
+    let const_name = module_types_const_name(&grammar.name);
+    writeln!(
+      source,
+      "        Language::{} => {const_name},",
+      grammar.pascal_name
+    )
+    .expect("Writing to String cannot fail");
+  }
+
+  source.push_str(
+    r#"        Language::Unknown => EMPTY,
+    }
+}
+
+/// Boilerplate lang spec: empty extraction kinds + manifest `module_root`.
+///
+/// Matches upstream `generate_specs` table rows that fill only module types
+/// and the tree-sitter factory (factory is [`Language::language_fn`] here).
+#[must_use]
+pub const fn manifest_lang_spec(language: Language) -> LangSpec {
+    LangSpec {
+        functions: EMPTY,
+        classes: EMPTY,
+        calls: EMPTY,
+        imports: EMPTY,
+        import_from: EMPTY,
+        branches: EMPTY,
+        modules: modules_for(language),
+    }
+}
+"#,
+  );
+
+  write_if_changed(&src_path.join("lang_spec_gen.rs"), &source);
+}
+
+fn module_types_const_name(grammar_name: &str) -> String {
+  let mut name = grammar_name.to_ascii_uppercase();
+  name.push_str("_MODULE_TYPES");
+  name
+}
+
+fn cleanup_stale_language_modules(languages_path: &Path, active_files: &[std::ffi::OsString]) {
+  let active: HashSet<&str> =
+    active_files.iter().filter_map(|name| name.to_str()).collect();
+
+  let entries = read_dir(languages_path).expect("Must be able to read languages directory");
+  for entry in entries.filter_map(Result::ok) {
+    let path = entry.path();
+    if path.extension().is_none_or(|ext| ext != "rs") {
+      continue;
+    }
+    let file_name = entry.file_name();
+    if file_name == "mod.rs" {
+      continue;
+    }
+    if file_name.to_str().is_some_and(|name| active.contains(name)) {
+      continue;
+    }
+    remove_file(&path).unwrap_or_else(|err| {
+      panic!("Failed to remove stale language module {}: {err}", path.display());
+    });
+  }
+}
+
+fn discover_language_symbol(parser_path: &Path) -> Option<String> {
+  let contents = read_to_string(parser_path).ok()?;
+  let mut last = None;
+  for line in contents.lines().rev() {
+    let trimmed = line.trim();
+    if !trimmed.contains("TSLanguage") || !trimmed.contains("tree_sitter_") {
+      continue;
+    }
+    if let Some(name) = extract_tree_sitter_symbol(trimmed) {
+      last = Some(name);
+      break;
+    }
+  }
+  last
+}
+
+fn extract_tree_sitter_symbol(line: &str) -> Option<String> {
+  let start = line.find("tree_sitter_")?;
+  let rest = &line[start..];
+  let end = rest.find('(')?;
+  let name = &rest[..end];
+  if name.chars().all(|ch| ch.is_ascii_alphanumeric() || ch == '_') {
+    Some(name.to_owned())
+  } else {
+    None
+  }
+}
+
+fn write_if_changed(path: &Path, contents: &str) {
+  let existing = read_to_string(path).ok();
+  if existing.as_deref() == Some(contents) {
+    return;
+  }
+  write(path, contents).unwrap_or_else(|err| {
+    panic!("Failed to write {}: {err}", path.display());
+  });
 }
 
 fn collect_query_paths(queries_dir: &Path) -> Vec<PathBuf> {

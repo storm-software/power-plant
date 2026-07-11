@@ -1,36 +1,31 @@
-//! This crate provides SQL language support for the [tree-sitter][] parsing library.
+//! SQL language support for the [tree-sitter][] parsing library.
 //!
-//! Typically, you will use the [language][tree_sitter_sql] function to add the SQL language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
+//! Typically, you will use the [`LANGUAGE`] constant to add the SQL language to a
+//! tree-sitter [`Parser`][], and then use the parser to parse some code:
 //!
 //! ```
 //! let code = "";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_sql::language()).expect("Error loading SQL grammar");
+//! parser
+//!     .set_language(&tree_sitter_sql::LANGUAGE.into())
+//!     .expect("Error loading SQL grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
-use tree_sitter::Language;
+use tree_sitter_language::LanguageFn;
 
 unsafe extern "C" {
-    unsafe fn tree_sitter_sql() -> Language;
+    fn tree_sitter_sql() -> *const ();
 }
 
-/// Get the tree-sitter [Language][tree_sitter_sql] for the SQL grammar.
-///
-/// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-pub fn language() -> Language {
-    unsafe { tree_sitter_sql() }
-}
+/// The tree-sitter [`LanguageFn`] for this grammar.
+pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_sql) };
 
-pub const HIGHLIGHTS_SCM_QUERY: &'static str = include_str!("../../grammars/sql/queries/highlights.scm");
-pub const INDENTS_SCM_QUERY: &'static str = include_str!("../../grammars/sql/queries/indents.scm");
-
+pub const HIGHLIGHTS_SCM_QUERY: &str = include_str!("../../grammars/sql/queries/highlights.scm");
+pub const INDENTS_SCM_QUERY: &str = include_str!("../../grammars/sql/queries/indents.scm");
 
 #[cfg(test)]
 mod tests {
@@ -38,7 +33,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(&super::language())
+            .set_language(&super::LANGUAGE.into())
             .expect("Error loading SQL language");
     }
 }

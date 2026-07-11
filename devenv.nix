@@ -21,6 +21,8 @@
 
   scripts = {
     build-native.exec = "pnpm build-native --target=$1";
+    codegen-lang.exec = "pnpm codegen-lang";
+    new-lang.exec = "pnpm new-lang $1 $2";
   };
 
   profiles = {

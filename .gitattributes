@@ -3,13 +3,16 @@
 ###############################
 # Set default behavior to automatically normalize line endings.
 * text=auto eol=lf
+
 # Force batch scripts to always use CRLF line endings so that if a repo is accessed
 # in Windows via a file share from Linux, the scripts will work.
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
+
 # Force bash scripts to always use LF line endings so that if a repo is accessed
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
+
 ###############################
 # Git Large File System (LFS) #
 ###############################
@@ -19,8 +22,10 @@
 *.gz filter=lfs diff=lfs merge=lfs -text
 *.tar filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
+
 # Documents
 *.pdf filter=lfs diff=lfs merge=lfs -text
+
 # Images
 *.gif filter=lfs diff=lfs merge=lfs -text
 *.ico filter=lfs diff=lfs merge=lfs -text
@@ -28,16 +33,22 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.webp filter=lfs diff=lfs merge=lfs -text
+
 # Fonts
 *.woff2 filter=lfs diff=lfs merge=lfs -text
+
 # Other
 *.exe filter=lfs diff=lfs merge=lfs -text
+
+# Tree-sitter grammars
+crates/tree-sitter/grammars/lean/parser.c filter=lfs diff=lfs merge=lfs -text
+crates/tree-sitter/grammars/systemverilog/parser.c filter=lfs diff=lfs merge=lfs -text
+
 ###############################
 # GitHub linguist             #
 ###############################
 apps/**/.next/** -text linguist-vendored
+
 # Make dist folder indexable for github search
 dist/** linguist-generated=false
 pnpm-lock.yaml linguist-generated=true
-crates/cbm/vendored/grammars/lean/parser.c filter=lfs diff=lfs merge=lfs -text
-crates/cbm/vendored/grammars/systemverilog/parser.c filter=lfs diff=lfs merge=lfs -text

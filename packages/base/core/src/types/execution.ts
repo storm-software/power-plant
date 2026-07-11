@@ -22,19 +22,14 @@ import type { InferExtractedMeta, Meta } from "./meta";
 import type { OutputMeta } from "./output";
 import type { SchemaMeta } from "./schema";
 
-export interface ExecutionSource<TSpec, TOptions extends object> {
+export interface ExecutionDocumentChunk<TSpec, TOptions extends object> {
   /**
-   * The language of the document.
-   */
-  language?: string;
-
-  /**
-   * The content of the source code.
+   * The content of the chunk.
    */
   content: string;
 
   /**
-   * The metadata of the source code.
+   * The metadata of the chunk.
    */
   meta: Meta<TSpec, TOptions>;
 }
@@ -46,9 +41,14 @@ export interface ExecutionDocument<TSpec, TOptions extends object> {
   path: string;
 
   /**
-   * The source of the document.
+   * The language of the document.
    */
-  source: ExecutionSource<TSpec, TOptions>[];
+  language?: string;
+
+  /**
+   * The chunks of the document.
+   */
+  chunks: ExecutionDocumentChunk<TSpec, TOptions>[];
 
   /**
    * The metadata of the document.
@@ -128,13 +128,13 @@ export type ExecutionResult<
 };
 
 export type ExtractedExecutionSource<TSpec, TOptions extends object> = Omit<
-  ExecutionSource<TSpec, TOptions>,
+  ExecutionDocumentChunk<TSpec, TOptions>,
   "meta"
 > & {
   /**
    * The extracted metadata of the execution.
    */
-  meta: InferExtractedMeta<ExecutionSource<TSpec, TOptions>["meta"]>;
+  meta: InferExtractedMeta<ExecutionDocumentChunk<TSpec, TOptions>["meta"]>;
 };
 
 export type ExtractedExecutionDocument<TSpec, TOptions extends object> = Omit<
