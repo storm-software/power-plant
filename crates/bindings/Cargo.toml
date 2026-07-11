@@ -47,6 +47,7 @@ serde_json = { workspace = true }
 
 [target.'cfg(windows)'.dependencies]
 winapi = { version = '0.3', features = ['fileapi', 'psapi'] }
+cow-utils = { workspace = true }
 
 [target.'cfg(windows)'.build-dependencies]
 winres = '0.1'
