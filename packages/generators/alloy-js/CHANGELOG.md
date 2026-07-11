@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.8) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+- **schema:** Resolve typing issues with `JsonSchema` ([151279c](https://github.com/storm-software/power-plant/commit/151279c))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.12**
+- Updated **schema** to **v0.0.12**
+
 ## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.7) (07/10/2026)
 
 ### Bug Fixes

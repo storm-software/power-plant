@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Input
 
+## [0.0.11](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.11) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.12**
+- Updated **schema** to **v0.0.12**
+
 ## [0.0.10](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.10) (07/10/2026)
 
 ### Updated Dependencies

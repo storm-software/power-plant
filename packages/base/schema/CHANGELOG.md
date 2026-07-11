@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.12) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+- **schema:** Resolve typing issues with `JsonSchema` ([151279c](https://github.com/storm-software/power-plant/commit/151279c))
+
 ## [0.0.10](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.10) (07/10/2026)
 
 ### Miscellaneous

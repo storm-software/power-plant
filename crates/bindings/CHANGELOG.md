@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Native Bindings
 
+## [0.1.7](https://github.com/storm-software/power-plant/releases/tag/native-bindings%400.1.7) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Remove unused crates from `Cargo.toml` files ([6dfee5d](https://github.com/storm-software/power-plant/commit/6dfee5d))
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+- **monorepo:** Remove unused `utils` crate and resolve cargo build issues ([f81592a](https://github.com/storm-software/power-plant/commit/f81592a))
+
+### Bug Fixes
+
+- **native-bindings:** Resolve Windows bindings build issue ([778d48b](https://github.com/storm-software/power-plant/commit/778d48b))
+
+### Continuous Integration
+
+- **monorepo:** Ensure `prod` profile is used in `release` build ([4801300](https://github.com/storm-software/power-plant/commit/4801300))
+
 ## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-bindings%400.1.5) (07/10/2026)
 
 ### Miscellaneous

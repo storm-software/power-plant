@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Native Storage
 
+## [0.1.7](https://github.com/storm-software/power-plant/releases/tag/native-storage%400.1.7) (07/10/2026)
+
+### Continuous Integration
+
+- **monorepo:** Ensure `prod` profile is used in `release` build ([4801300](https://github.com/storm-software/power-plant/commit/4801300))
+
 ## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-storage%400.1.5) (07/10/2026)
 
 ### Bug Fixes

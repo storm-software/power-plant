@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Native Tree Sitter
 
+## [0.1.7](https://github.com/storm-software/power-plant/releases/tag/native-tree-sitter%400.1.7) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `prod` profile to `release` for consistency ([cb18dbd](https://github.com/storm-software/power-plant/commit/cb18dbd))
+- **monorepo:** Remove unused crates from `Cargo.toml` files ([6dfee5d](https://github.com/storm-software/power-plant/commit/6dfee5d))
+
+### Continuous Integration
+
+- **monorepo:** Ensure `prod` profile is used in `release` build ([4801300](https://github.com/storm-software/power-plant/commit/4801300))
+
 ## [0.1.6](https://github.com/storm-software/power-plant/releases/tag/native-tree-sitter%400.1.6) (07/10/2026)
 
 ### Miscellaneous

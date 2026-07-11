@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Native Models
 
+## [0.1.7](https://github.com/storm-software/power-plant/releases/tag/native-models%400.1.7) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Remove unused `utils` crate and resolve cargo build issues ([f81592a](https://github.com/storm-software/power-plant/commit/f81592a))
+
+### Continuous Integration
+
+- **monorepo:** Ensure `prod` profile is used in `release` build ([4801300](https://github.com/storm-software/power-plant/commit/4801300))
+
 ## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-models%400.1.5) (07/10/2026)
 
 ### Miscellaneous

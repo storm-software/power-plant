@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.8) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+
+### Updated Dependencies
+
+- Updated **bindings** to **v0.0.8**
+- Updated **core** to **v0.0.12**
+
 ## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.7) (07/10/2026)
 
 ### Updated Dependencies

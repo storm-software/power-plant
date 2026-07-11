@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Bindings
 
+## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/bindings%400.0.8) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `prod` profile to `release` for consistency ([cb18dbd](https://github.com/storm-software/power-plant/commit/cb18dbd))
+- **monorepo:** Cleaned up unused dependencies from the workspace's `Cargo.toml` file ([7b0de29](https://github.com/storm-software/power-plant/commit/7b0de29))
+
+### Continuous Integration
+
+- **monorepo:** Ensure `prod` profile is used in `release` build ([4801300](https://github.com/storm-software/power-plant/commit/4801300))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.12**
+- Updated **schema** to **v0.0.12**
+
 ## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/bindings%400.0.7) (07/10/2026)
 
 ### Bug Fixes

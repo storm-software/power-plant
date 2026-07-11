@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Native Tracing
 
+## [0.1.7](https://github.com/storm-software/power-plant/releases/tag/native-tracing%400.1.7) (07/10/2026)
+
+### Miscellaneous
+
+- **monorepo:** Remove unused crates from `Cargo.toml` files ([6dfee5d](https://github.com/storm-software/power-plant/commit/6dfee5d))
+
 ## [0.1.5](https://github.com/storm-software/power-plant/releases/tag/native-tracing%400.1.5) (07/10/2026)
 
 ### Bug Fixes
