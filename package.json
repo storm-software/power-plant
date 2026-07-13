@@ -33,6 +33,7 @@
     "clean": "pnpm exec zx tools/scripts/src/clean.mjs",
     "commit": "pnpm exec storm-git commit",
     "dep-graph": "nx dep-graph",
+    "delete-stale-tags": "pnpm exec zx tools/scripts/src/delete-stale-tags.mjs",
     "e2e": "nx e2e",
     "format": "pnpm exec zx tools/scripts/src/format.mjs",
     "graph": "nx graph",
