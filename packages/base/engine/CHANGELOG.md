@@ -1,5 +1,21 @@
 ![Power Plant's logo banner](https://public.storm-cdn.com/power-plant/media/banner-1280x320-dark.gif)
 
+# Changelog for Power Plant - Engine
+
+## [0.0.9](https://github.com/storm-software/power-plant/releases/tag/engine%400.0.9) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Removed `bindings` references from repository ([4ddaa4f](https://github.com/storm-software/power-plant/commit/4ddaa4f))
+- **monorepo:** Remove unused bindings code from the repository ([939b4e3](https://github.com/storm-software/power-plant/commit/939b4e3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.13**
+- Updated **schema** to **v0.0.13**
+
+![Power Plant's logo banner](https://public.storm-cdn.com/power-plant/media/banner-1280x320-dark.gif)
+
 # Changelog for Power Plant - Bindings
 
 ## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/bindings%400.0.8) (07/10/2026)

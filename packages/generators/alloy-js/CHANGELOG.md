@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.9](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.9) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspaces' devenv modules ([e157ddb](https://github.com/storm-software/power-plant/commit/e157ddb))
+
+### Features
+
+- **native-tree-sitter:** Updated Tree Sitter extractor and added AST walker implementation ([3d2a5b9](https://github.com/storm-software/power-plant/commit/3d2a5b9))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.13**
+- Updated **schema** to **v0.0.13**
+
 ## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.8) (07/10/2026)
 
 ### Miscellaneous

@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.13](https://github.com/storm-software/power-plant/releases/tag/core%400.0.13) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspaces' devenv modules ([e157ddb](https://github.com/storm-software/power-plant/commit/e157ddb))
+- **monorepo:** Remove unused bindings code from the repository ([939b4e3](https://github.com/storm-software/power-plant/commit/939b4e3))
+
+### Features
+
+- **native-tree-sitter:** Updated Tree Sitter extractor and added AST walker implementation ([3d2a5b9](https://github.com/storm-software/power-plant/commit/3d2a5b9))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.13**
+
 ## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/core%400.0.12) (07/10/2026)
 
 ### Miscellaneous

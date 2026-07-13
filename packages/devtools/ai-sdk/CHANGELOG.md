@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.9](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.9) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspaces' devenv modules ([e157ddb](https://github.com/storm-software/power-plant/commit/e157ddb))
+- **monorepo:** Remove unused bindings code from the repository ([939b4e3](https://github.com/storm-software/power-plant/commit/939b4e3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.13**
+- Updated **engine** to **v0.0.9**
+
 ## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.8) (07/10/2026)
 
 ### Miscellaneous

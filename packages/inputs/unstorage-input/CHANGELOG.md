@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Input
 
+## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.12) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspaces' devenv modules ([e157ddb](https://github.com/storm-software/power-plant/commit/e157ddb))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.13**
+- Updated **schema** to **v0.0.13**
+
 ## [0.0.11](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.11) (07/10/2026)
 
 ### Miscellaneous

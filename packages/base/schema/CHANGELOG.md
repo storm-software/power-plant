@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.13](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.13) (07/13/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspaces' devenv modules ([e157ddb](https://github.com/storm-software/power-plant/commit/e157ddb))
+
 ## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.12) (07/10/2026)
 
 ### Miscellaneous
