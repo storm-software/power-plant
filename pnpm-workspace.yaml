@@ -113,7 +113,7 @@ catalog:
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
-  "@power-plant/bindings": workspace:*
+  "@power-plant/engine": workspace:*
   "@power-plant/unstorage-input": workspace:*
   "@power-plant/graphql-input": workspace:*
   "@power-plant/ai-input": workspace:*

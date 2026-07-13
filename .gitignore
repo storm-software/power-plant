@@ -17,10 +17,6 @@ powerlines.d.ts
 node_modules
 .pnpm-store
 
-# NAPI-RS generated files
-packages/base/bindings/artifacts/*.node
-packages/base/bindings/artifacts/*.wasm
-
 # IDEs and editors
 /.idea
 .project
