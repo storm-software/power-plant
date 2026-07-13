@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/handlebars",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "description": "A Power Plant generator for using Handlebars to generate source code.",
   "keywords": [
