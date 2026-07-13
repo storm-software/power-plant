@@ -18,7 +18,7 @@
 
 /* eslint-disable */
 
-import { createEngine } from "@power-plant/bindings";
+import { createEngine } from "@power-plant/engine";
 import { tool } from "ai";
 import { z } from "zod/mini";
 

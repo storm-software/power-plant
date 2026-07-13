@@ -25,10 +25,5 @@ export default defineConfig({
   name: "power-plant",
   tsdoc: {
     configFile: "@powerlines/tsdoc/recommended.json"
-  },
-  ignores: [
-    "crates/**/*",
-    "packages/base/bindings/src/bindings.*",
-    "packages/base/bindings/artifacts/*"
-  ]
+  }
 });

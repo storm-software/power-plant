@@ -40,10 +40,6 @@
 # Other
 *.exe filter=lfs diff=lfs merge=lfs -text
 
-# Tree-sitter grammars
-crates/tree-sitter/grammars/lean/parser.c filter=lfs diff=lfs merge=lfs -text
-crates/tree-sitter/grammars/systemverilog/parser.c filter=lfs diff=lfs merge=lfs -text
-
 ###############################
 # GitHub linguist             #
 ###############################

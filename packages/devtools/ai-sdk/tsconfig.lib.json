@@ -6,7 +6,7 @@
   },
   "references": [
     { "path": "../../base/core/tsconfig.lib.json" },
-    { "path": "../../base/bindings/tsconfig.lib.json" }
+    { "path": "../../base/engine/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

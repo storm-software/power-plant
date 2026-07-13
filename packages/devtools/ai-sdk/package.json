@@ -62,7 +62,7 @@
   "typings": "dist/index.d.mts",
   "files": ["dist"],
   "dependencies": {
-    "@power-plant/bindings": "workspace:*",
+    "@power-plant/engine": "workspace:*",
     "@power-plant/core": "workspace:*",
     "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",

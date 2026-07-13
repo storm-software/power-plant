@@ -17,23 +17,29 @@
  ------------------------------------------------------------------- */
 
 import type { Base } from "./base";
-import type { Device } from "./device";
-import type { Execution } from "./execution";
-import type { User } from "./user";
 
-export interface Session extends Base {
+export interface User extends Base {
   /**
-   * The device that started the session.
+   * The username of the user.
    */
-  device: Device;
+  username: string;
 
   /**
-   * The user who started the session.
+   * The email of the user.
    */
-  user: User;
+  email?: string;
 
   /**
-   * The executions of the session.
+   * The default language of the tenant.
+   *
+   * @defaultValue "en-US"
    */
-  executions: Execution<any, any>[];
+  language: string;
+
+  /**
+   * The default timezone of the tenant.
+   *
+   * @defaultValue "UTC"
+   */
+  timezone: string;
 }

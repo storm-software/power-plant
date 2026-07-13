@@ -16,24 +16,20 @@
 
  ------------------------------------------------------------------- */
 
-import type { Base } from "./base";
-import type { Device } from "./device";
-import type { Execution } from "./execution";
-import type { User } from "./user";
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-export interface Session extends Base {
-  /**
-   * The device that started the session.
-   */
-  device: Device;
+const config: UserConfig = defineConfig({
+  input: ["src/index.ts", "src/helpers/*.ts", "src/lib/*.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
+  },
+  resolve: {
+    skipNodeModulesBundle: true
+  },
+  plugins: [tsdown()]
+});
 
-  /**
-   * The user who started the session.
-   */
-  user: User;
-
-  /**
-   * The executions of the session.
-   */
-  executions: Execution<any, any>[];
-}
+export default config;

@@ -7,26 +7,8 @@ inputs:
     url: github:cachix/devenv-nixpkgs/rolling
   nixpkgs-unstable:
     url: github:nixos/nixpkgs/nixpkgs-unstable
-  rust-overlay:
-    url: github:oxalica/rust-overlay
-    inputs:
-      nixpkgs:
-        follows: nixpkgs
-  fenix:
-    url: github:nix-community/fenix
-    inputs:
-      nixpkgs:
-        follows: nixpkgs
-  sccache:
-    url: github:mozilla/sccache
-    inputs:
-      nixpkgs:
-        follows: nixpkgs
 
 imports:
   - storm-ops/devenv-modules/base
   - storm-ops/devenv-modules/core
-  - storm-ops/devenv-modules/rust
-  - storm-ops/devenv-modules/cpp
   - storm-ops/devenv-modules/claude
-  - storm-ops/devenv-modules/mdbook

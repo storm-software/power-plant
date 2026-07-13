@@ -14,9 +14,6 @@ on:
 
 env:
   CI: true
-  DEBUG: napi:*
-  MACOSX_DEPLOYMENT_TARGET: "10.13"
-  CARGO_INCREMENTAL: "1"
   STORM_REPOSITORY: ${{ github.repositoryUrl }}
   STORM_WORKSPACE_ROOT: ${{ github.workspace }}
   GITHUB_ACTOR: ${{ github.actor }}
@@ -54,111 +51,6 @@ jobs:
           telegram-chat: ${{ secrets.STORM_BOT_TELEGRAM_NOTIFICATION_CHAT }}
           discord-webhook: ${{ secrets.STORM_BOT_DISCORD_WEBHOOK}}
 
-  build-bindings:
-    name: Build bindings - ${{ matrix.target }}
-    if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
-      github.event.pull_request.draft == false
-    runs-on: ${{ matrix.host }}
-    environment: production
-    permissions:
-      contents: write
-      id-token: write
-    needs:
-      - start
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          # macOS
-          - host: macos-latest
-            target: x86_64-apple-darwin
-            profile: release-darwin-x86_64
-          - host: macos-latest
-            target: aarch64-apple-darwin
-            profile: release-darwin
-
-          # Windows MSVC
-          - host: ubuntu-latest
-            target: x86_64-pc-windows-msvc
-            profile: release-windows-x86_64
-          - host: ubuntu-latest
-            target: aarch64-pc-windows-msvc
-            profile: release-windows-aarch64
-          - host: ubuntu-latest
-            target: i686-pc-windows-msvc
-            profile: release-windows-i686
-
-          # Linux (x86_64)
-          - host: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            profile: release-linux-gnu-x86_64
-          - host: ubuntu-latest
-            target: x86_64-unknown-linux-musl
-            profile: release-linux-musl-x86_64
-
-          # Linux (aarch64)
-          - host: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            profile: release-linux-gnu-aarch64
-          - host: ubuntu-latest
-            target: aarch64-unknown-linux-musl
-            profile: release-linux-musl-aarch64
-
-          # Linux (armv7)
-          - host: ubuntu-latest
-            target: armv7-unknown-linux-gnueabihf
-            profile: release-linux-gnueabihf-armv7
-
-          # Linux (Android)
-          - host: ubuntu-latest
-            target: aarch64-linux-android
-            profile: release-linux-android-aarch64
-          - host: ubuntu-latest
-            target: armv7-linux-androideabi
-            profile: release-linux-android-armv7
-
-          # WebAssembly
-          - host: ubuntu-latest
-            target: wasm32-wasip1-threads
-            profile: release-wasm32-wasip1
-
-          # FreeBSD
-          - host: ubuntu-latest
-            target: x86_64-unknown-freebsd
-            profile: release-freebsd-x86_64
-    steps:
-      - name: Setup workspace
-        uses: storm-software/action-devenv-setup@main
-        with:
-          gpg-sign-key: ${{ secrets.STORM_BOT_GPG_SIGN_KEY }}
-          gpg-private-key: ${{ secrets.STORM_BOT_GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.STORM_BOT_GPG_PASSPHRASE }}
-          storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Build native binding
-        run: devenv --profile ${{ matrix.profile }} --no-tui --impure shell build-native ${{ matrix.target }}
-        env:
-          NATIVE_TARGET: ${{ matrix.target }}
-          NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM: 1
-          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
-        if: matrix.target != 'wasm32-wasip1-threads'
-        with:
-          name: bindings-${{ matrix.target }}
-          path: packages/base/bindings/artifacts/*.node
-          if-no-files-found: error
-
-      - name: Upload artifact - WASM
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.6.2
-        if: matrix.target == 'wasm32-wasip1-threads'
-        with:
-          name: bindings-${{ matrix.target }}
-          path: packages/base/bindings/artifacts/*.wasm
-          if-no-files-found: error
-
   release:
     name: Release
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') &&
@@ -170,7 +62,6 @@ jobs:
       id-token: write
     needs:
       - start
-      - build-bindings
     steps:
       - name: Setup workspace
         uses: storm-software/action-devenv-setup@main
@@ -190,15 +81,8 @@ jobs:
           set-environment-variables-for-job: true
           error-on-no-successful-workflow: false
 
-      - name: Download binding artifacts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          path: packages/base/bindings/artifacts
-          pattern: bindings-*
-          merge-multiple: true
-
       - name: Release repository updates
-        run: devenv --profile release --no-tui shell release ${{
+        run: devenv --profile production --no-tui shell release ${{
           steps.setSHAs.outputs.base }} ${{ steps.setSHAs.outputs.head }}
         env:
           NX_BASE: ${{ steps.setSHAs.outputs.base }}
@@ -211,8 +95,6 @@ jobs:
           STORM_REPOSITORY: ${{ github.repositoryUrl }}
           NPM_TOKEN: ${{ secrets.STORM_BOT_NPM_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.STORM_BOT_CLOUDFLARE_TOKEN }}
-          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          CARGO_REGISTRY_TOKEN: ${{ secrets.STORM_BOT_CARGO_TOKEN }}
           TAG: ${{ inputs.tag }}
 
   success:

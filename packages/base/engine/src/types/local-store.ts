@@ -16,24 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-import type { Base } from "./base";
-import type { Device } from "./device";
-import type { Execution } from "./execution";
-import type { User } from "./user";
+import type { Device, User } from "@power-plant/core";
 
-export interface Session extends Base {
-  /**
-   * The device that started the session.
-   */
-  device: Device;
-
-  /**
-   * The user who started the session.
-   */
-  user: User;
-
-  /**
-   * The executions of the session.
-   */
-  executions: Execution<any, any>[];
+export interface LocalStore {
+  device?: Device;
+  user?: User;
 }

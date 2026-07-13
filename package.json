@@ -1,41 +1,35 @@
 {
   "name": "@power-plant/monorepo",
   "version": "0.0.1",
-  "type": "module",
+  "private": true,
   "description": "☢️ Text generation that gives your AI superpowers",
-  "repository": {
-    "type": "github",
-    "url": "https://github.com/storm-software/power-plant.git"
-  },
+  "keywords": ["power-plant", "storm-software", "monorepo"],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
     "email": "support@stormsoftware.com"
   },
-  "author": {
-    "name": "Storm Software",
-    "email": "contact@stormsoftware.com",
-    "url": "https://stormsoftware.com"
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git"
   },
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/storm-software"
   },
   "license": "Apache-2.0",
-  "private": true,
-  "packageManager": "pnpm@11.9.0",
-  "engines": {
-    "node": ">=24.16.0",
-    "pnpm": ">=11.9.0"
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
   },
-  "keywords": ["power-plant", "storm-software", "monorepo"],
+  "type": "module",
   "scripts": {
     "adr": "pnpm log4brains adr new",
     "adr-preview": "pnpm log4brains preview",
     "bootstrap": "pnpm exec zx tools/scripts/src/bootstrap.mjs",
     "build": "pnpm exec zx tools/scripts/src/build.mjs --prod",
     "build-dev": "pnpm exec zx tools/scripts/src/build.mjs --dev",
-    "build-native": "bash tools/scripts/src/build-native.sh",
     "clean": "pnpm exec zx tools/scripts/src/clean.mjs",
     "commit": "pnpm exec storm-git commit",
     "dep-graph": "nx dep-graph",
@@ -45,8 +39,6 @@
     "help": "nx help",
     "lint": "pnpm exec zx tools/scripts/src/lint.mjs",
     "local-registry": "nx local-registry monorepo",
-    "codegen-lang": "pnpm exec zx tools/scripts/src/codegen-lang.mjs",
-    "new-lang": "pnpm exec zx tools/scripts/src/new-lang.mjs",
     "nuke": "pnpm exec zx tools/scripts/src/nuke.mjs",
     "nx": "nx",
     "push": "git push origin main:main",
@@ -56,7 +48,9 @@
     "update-storm": "pnpm exec zx tools/scripts/src/update-storm.mjs",
     "view-config": "pnpm exec storm-config"
   },
+  "prettier": "@storm-software/prettier/recommended.json",
   "devDependencies": {
+    "@ls-lint/ls-lint": "catalog:",
     "@nx/devkit": "catalog:",
     "@nx/eslint-plugin": "catalog:",
     "@nx/js": "catalog:",
@@ -97,8 +91,10 @@
     "vitest": "catalog:",
     "zx": "catalog:"
   },
-  "optionalDependencies": {
-    "@ls-lint/ls-lint": "catalog:"
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=24.16.0",
+    "pnpm": ">=11.9.0"
   },
   "manypkg": {
     "defaultBranch": "main",
@@ -119,6 +115,5 @@
       "release"
     ]
   },
-  "prettier": "@storm-software/prettier/recommended.json",
   "triggerEmptyDevReleaseByIncrementingThisNumber": 0
 }

@@ -10,7 +10,7 @@
       "path": "./packages/base/core"
     },
     {
-      "path": "./packages/base/bindings"
+      "path": "./packages/base/engine"
     },
     {
       "path": "./packages/schemas/openapi-schema"

@@ -17,11 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type { Storage } from "unstorage";
-import type {
-  Execution,
-  ExecutionDocument,
-  ExtractedExecution
-} from "./execution";
+import type { Execution, ExecutionDocument } from "./execution";
 import type { Input } from "./input";
 import type { Output } from "./output";
 import type { SchemaOf } from "./schema";
@@ -56,11 +52,6 @@ export interface SessionContext {
    * The session for the context.
    */
   session: Session;
-
-  /**
-   * The executions that have been performed in the context.
-   */
-  executions: ExtractedExecution<any, any>[];
 }
 
 export interface ExecutionContext<
