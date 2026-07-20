@@ -20,7 +20,6 @@ import type { Children, OutputFile as AlloyOutputFile } from "@alloy-js/core";
 import { renderAsync, traverseOutput } from "@alloy-js/core";
 import type {
   ExecutionContext,
-  ExecutionDocumentChunk,
   GeneratorFunctionResult,
   MetaConfig
 } from "@power-plant/core";
@@ -109,7 +108,7 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
           defu(chunk, {
             meta: meta[targetPath] ?? {}
           })
-        ) as ExecutionDocumentChunk[]
+        )
       };
     }
   }

@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { loadSchema } from "@graphql-tools/load";
-import { useContext } from "@power-plant/core/context";
+import { useExecution } from "@power-plant/core/context";
 import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import { defaultSchemaLoadOptions } from "@power-plant/graphql-schema/codegen";
 import { createSchemaLoaders } from "./loaders";
@@ -35,7 +35,7 @@ import { formatLoadError, toSchemaPointer } from "./utilities";
  */
 export async function input(options: Options): Promise<GraphQLSchema> {
   const { inputPath, ...rest } = options;
-  const { cwd } = useContext();
+  const { cwd } = useExecution();
 
   const pointer = toSchemaPointer(inputPath);
 

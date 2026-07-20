@@ -2,7 +2,7 @@
   "name": "@power-plant/monorepo",
   "version": "0.0.1",
   "private": true,
-  "description": "☢️ Text generation that gives your AI superpowers",
+  "description": "☢️ Generate anything from a specification",
   "keywords": ["power-plant", "storm-software", "monorepo"],
   "homepage": "https://stormsoftware.com",
   "bugs": {

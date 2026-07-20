@@ -21,10 +21,6 @@ import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import { input } from "./input";
 import type { Options } from "./types";
 
-export { createSchemaLoaders } from "./loaders";
-export type { Options } from "./types";
-export { toSchemaPointer } from "./utilities";
-
 export default defineInput<GraphQLSchema, Options>({
   meta: {
     name: "graphql-input",
