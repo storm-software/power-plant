@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.16) (07/20/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update types and tagline used in `package.json` and `README.md` files ([19e044a](https://github.com/storm-software/power-plant/commit/19e044a))
+- **core:** Remove unused meta functions and resolve TSC issues ([febf6f0](https://github.com/storm-software/power-plant/commit/febf6f0))
+
 ## [0.0.13](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.13) (07/13/2026)
 
 ### Miscellaneous

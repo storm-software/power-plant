@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Hey API
 
+## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.12) (07/20/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update types and tagline used in `package.json` and `README.md` files ([19e044a](https://github.com/storm-software/power-plant/commit/19e044a))
+- **core:** Remove unused meta functions and resolve TSC issues ([febf6f0](https://github.com/storm-software/power-plant/commit/febf6f0))
+
+### Features
+
+- **dtcg-schema:** Added the Design Tokens Community Group schema package ([1f116ee](https://github.com/storm-software/power-plant/commit/1f116ee))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.16**
+- Updated **schema** to **v0.0.16**
+
 ## [0.0.11](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.11) (07/13/2026)
 
 ### Updated Dependencies
