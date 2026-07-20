@@ -18,7 +18,7 @@
 
 import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator, useExecution } from "@power-plant/core";
-import type { DTCGSchema } from "@power-plant/dtcg-schema";
+import type { Tokens } from "@power-plant/dtcg-schema";
 import schema from "@power-plant/dtcg-schema";
 import type { Options as InputOptions } from "@power-plant/terrazzo-input";
 import input from "@power-plant/terrazzo-input";
@@ -48,7 +48,7 @@ function toChunkContent(contents: string | Buffer): string {
  * @param options - Terrazzo config (plugins, outDir, lint, …).
  * @returns Generated documents keyed by output filename.
  */
-export default defineGenerator<DTCGSchema, Options, void>({
+export default defineGenerator<Tokens, Options, void>({
   meta: {
     name: "terrazzo",
     title: "Terrazzo",
@@ -80,7 +80,7 @@ export default defineGenerator<DTCGSchema, Options, void>({
   generator: async (
     spec,
     options
-  ): Promise<GeneratorFunctionResult<DTCGSchema, Options>> => {
+  ): Promise<GeneratorFunctionResult<Tokens, Options>> => {
     const { inputPath, ...rawConfig } = options;
     const { cwd } = useExecution();
 
@@ -123,7 +123,7 @@ export default defineGenerator<DTCGSchema, Options, void>({
 
         return documents;
       },
-      {} as GeneratorFunctionResult<DTCGSchema, Options>
+      {} as GeneratorFunctionResult<Tokens, Options>
     );
   }
 });

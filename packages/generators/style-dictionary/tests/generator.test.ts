@@ -17,9 +17,9 @@
  ------------------------------------------------------------------- */
 
 import type { Tokens } from "@power-plant/dtcg-schema";
-import type { Plugin } from "@terrazzo/parser";
+import { formats, transformGroups } from "style-dictionary/enums";
 import { describe, expect, it, vi } from "vitest";
-import terrazzo from "../src/index";
+import styleDictionary from "../src/index";
 
 vi.mock("@power-plant/core", async importOriginal => {
   const actual = await importOriginal<typeof import("@power-plant/core")>();
@@ -36,36 +36,35 @@ const tokens = {
   color: {
     blue: {
       $type: "color",
-      $value: {
-        colorSpace: "srgb",
-        components: [0.2, 0.4, 0.8],
-        hex: "#3366cc"
-      }
+      $value: "#3366cc"
     }
   }
 } as Tokens;
 
-const testPlugin: Plugin = {
-  name: "test-plugin",
-  async build({ outputFile }) {
-    outputFile("tokens.css", ":root { --color-blue: #3366cc; }");
-  }
-};
-
-describe("terrazzo generator", () => {
-  it("runs Terrazzo build and returns plugin output files", async () => {
-    const documents = await terrazzo.generator(tokens, {
+describe("style-dictionary generator", () => {
+  it("runs Style Dictionary formatAllPlatforms and returns output files", async () => {
+    const documents = await styleDictionary.generator(tokens, {
       inputPath: "tokens.json",
-      plugins: [testPlugin]
+      platforms: {
+        css: {
+          transformGroup: transformGroups.css,
+          files: [
+            {
+              destination: "variables.css",
+              format: formats.cssVariables
+            }
+          ]
+        }
+      }
     });
 
-    expect(documents["tokens.css"]).toEqual({
-      path: "tokens.css",
+    expect(documents["variables.css"]).toEqual({
+      path: "variables.css",
       chunks: [
         {
-          content: ":root { --color-blue: #3366cc; }",
+          content: expect.stringContaining("--color-blue: #3366cc"),
           meta: {
-            name: "test-plugin"
+            name: "css"
           }
         }
       ]

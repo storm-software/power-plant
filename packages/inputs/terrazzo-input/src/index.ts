@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { defineInput } from "@power-plant/core";
-import type { DTCGSchema } from "@power-plant/dtcg-schema";
+import type { Tokens } from "@power-plant/dtcg-schema";
 import schema from "@power-plant/dtcg-schema";
 import { input } from "./input";
 import type { Options } from "./types";
@@ -25,7 +25,7 @@ import type { Options } from "./types";
 export type { Options } from "./types";
 export { toTokenFilename } from "./utilities";
 
-export default defineInput<DTCGSchema, Options>({
+export default defineInput<Tokens, Options>({
   meta: {
     name: "terrazzo-input",
     description:

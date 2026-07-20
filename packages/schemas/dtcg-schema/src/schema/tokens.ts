@@ -698,7 +698,6 @@ export type TokenGroup = TokenGroupProperties & {
     | string
     | TokenExtensions
     | TokenExtendsReference
-    | TokenDeprecated
     | undefined;
 };
 

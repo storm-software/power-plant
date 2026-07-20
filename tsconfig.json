@@ -43,6 +43,9 @@
       "path": "./packages/generators/terrazzo"
     },
     {
+      "path": "./packages/generators/style-dictionary"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {

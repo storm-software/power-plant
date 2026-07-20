@@ -17,13 +17,12 @@
  ------------------------------------------------------------------- */
 
 import { defineSchema } from "@power-plant/core";
-import type * as z from "zod/mini";
+import type { Tokens } from "./schema";
 import { tokensSchema } from "./schema";
 
 export * from "./schema";
-export type DTCGSchema = z.infer<typeof tokensSchema>;
 
-export default defineSchema<DTCGSchema>({
+export default defineSchema<Tokens>({
   meta: {
     name: "dtcg-schema",
     title: "Design Tokens Community Group (DTCG) Schema",

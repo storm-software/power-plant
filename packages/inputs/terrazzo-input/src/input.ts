@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { useExecution } from "@power-plant/core";
-import type { DTCGSchema } from "@power-plant/dtcg-schema";
+import type { Tokens } from "@power-plant/dtcg-schema";
 import { defineConfig, parse } from "@terrazzo/parser";
 import { pathToFileURL } from "node:url";
 import { loadTokenSources } from "./loaders";
@@ -31,9 +31,9 @@ import { formatParseError, fromTokenNormalizedSet } from "./utilities";
  * @see https://github.com/terrazzoapp/terrazzo/tree/main/packages/parser
  *
  * @param options - The options for the input.
- * @returns The loaded {@link DTCGSchema} document.
+ * @returns The loaded {@link Tokens} document.
  */
-export async function input(options: Options): Promise<DTCGSchema> {
+export async function input(options: Options): Promise<Tokens> {
   const { inputPath, config: rawConfig, ...parseOptions } = options;
   const { cwd } = useExecution();
 

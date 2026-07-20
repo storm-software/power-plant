@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { DTCGSchema, Token, TokenGroup } from "@power-plant/dtcg-schema";
+import type { Token, TokenGroup, Tokens } from "@power-plant/dtcg-schema";
 import { isFileReference } from "@stryke/resolve/type-checks";
 import type { LoadReference } from "@stryke/resolve/types";
 import { isString } from "@stryke/type-checks/is-string";
@@ -64,18 +64,18 @@ export function toTokenFilename(reference: LoadReference, cwd: string): URL {
 }
 
 /**
- * Normalizes loaded token source content into a {@link DTCGSchema} object.
+ * Normalizes loaded token source content into a {@link Tokens} object.
  *
  * @param src - Raw source content from a loader (`string` or object).
  * @returns The DTCG tokens document.
  */
-export function toDTCGSchema(src: unknown): DTCGSchema {
+export function toTokens(src: unknown): Tokens {
   if (isString(src)) {
-    return JSON.parse(src) as DTCGSchema;
+    return JSON.parse(src) as Tokens;
   }
 
   if (src && typeof src === "object") {
-    return src as DTCGSchema;
+    return src as Tokens;
   }
 
   throw new Error(
@@ -142,12 +142,12 @@ function applyGroupMetadata(
 
 /**
  * Converts a Terrazzo {@link TokenNormalizedSet} (flat `id` → token map) into a
- * nested {@link DTCGSchema} document.
+ * nested {@link Tokens} document.
  *
  * @param tokens - Normalized tokens from `@terrazzo/parser` `parse()`.
  * @returns Nested DTCG tokens document.
  */
-export function fromTokenNormalizedSet(tokens: TokenNormalizedSet): DTCGSchema {
+export function fromTokenNormalizedSet(tokens: TokenNormalizedSet): Tokens {
   const document: Record<string, unknown> = {};
 
   for (const token of Object.values(tokens)) {
@@ -174,7 +174,7 @@ export function fromTokenNormalizedSet(tokens: TokenNormalizedSet): DTCGSchema {
     cursor[leaf] = toTokenNode(token);
   }
 
-  return document as DTCGSchema;
+  return document as Tokens;
 }
 
 /**
