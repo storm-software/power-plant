@@ -49,6 +49,12 @@
       "skillPath": "skills/graphql-schema/SKILL.md",
       "computedHash": "95f5384cc907635fc31121648dffffed0bb6f773ee594cbfe9be9e5e4a0e6aba"
     },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "computedHash": "f361db4e15e6bfd562a9282b1dccda513910a50061f9e838ce017be9c69dde3f"
+    },
     "json-schema-lookup": {
       "source": "sammcj/agentic-coding",
       "sourceType": "github",

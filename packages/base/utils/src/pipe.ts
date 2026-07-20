@@ -21,20 +21,21 @@ import type {
   GeneratorConfigObject,
   GeneratorFunction,
   InputConfig,
+  InputConfigObject,
   OutputConfig,
-  SchemaConfigObject,
+  OutputConfigObject,
   UserConfig
 } from "@power-plant/core";
 import { createExecute } from "@power-plant/core";
 import {
   resolveChildInput,
   resolveChildOutput,
-  resolveChildSchema,
   resolveGeneratorFunction,
   resolveInputValue,
   resolveOutputFunction,
   resolveSchemaOverride,
-  unwrapSchemaSource
+  unwrapInputSchemaSource,
+  unwrapOutputSchemaSource
 } from "./helpers";
 import type {
   AnyGeneratorConfig,
@@ -44,16 +45,22 @@ import type {
   PipeSpec
 } from "./types";
 
-function buildPipeSchema<TGenerators extends AnyGeneratorConfig[]>(
-  generators: TGenerators,
-  schemaOverride?: PipeGeneratorConfig<TGenerators>["schema"]
-): SchemaConfigObject<PipeSpec<TGenerators>> {
-  if (schemaOverride !== undefined) {
-    return resolveSchemaOverride<PipeSpec<TGenerators>>(schemaOverride);
-  }
-
-  const prefixItems = generators.map(config =>
-    unwrapSchemaSource(resolveChildSchema(config))
+/**
+ * Pipes an ordered list of bare input configs into one tuple {@link InputConfigObject}.
+ *
+ * @remarks
+ * Missing (`undefined`) entries are skipped at resolve time (slot stays
+ * `undefined`; array length preserved). An empty list yields a noop input that
+ * resolves to `[]`. Child schemas become `prefixItems` aligned with the list.
+ */
+export function pipeInputs<
+  TSpec extends any[],
+  TOptions extends object = object
+>(inputs: {
+  [I in keyof TSpec]: InputConfig<TSpec[I], TOptions> | undefined;
+}): InputConfigObject<TSpec, TOptions> {
+  const prefixItems = (inputs as (InputConfig<any, any> | undefined)[]).map(
+    input => unwrapInputSchemaSource(input)
   );
 
   return {
@@ -63,72 +70,76 @@ function buildPipeSchema<TGenerators extends AnyGeneratorConfig[]>(
       items: false,
       minItems: prefixItems.length,
       maxItems: prefixItems.length
+    },
+    input: async options => {
+      const spec = [] as unknown as TSpec;
+      const list = inputs as (InputConfig<any, TOptions> | undefined)[];
+
+      for (let index = 0; index < list.length; index++) {
+        const input = list[index];
+        if (input === undefined) {
+          continue;
+        }
+
+        (spec as unknown[])[index] = await resolveInputValue(
+          input,
+          options,
+          "pipe",
+          index
+        );
+      }
+
+      return spec;
     }
   };
 }
 
-function buildPipeInput<TGenerators extends AnyGeneratorConfig[]>(
-  generators: TGenerators,
-  inputOverride?: PipeGeneratorConfig<TGenerators>["input"]
-): InputConfig<PipeSpec<TGenerators>, PipeOptions<TGenerators>> {
-  if (inputOverride !== undefined) {
-    return inputOverride;
-  }
+/**
+ * Pipes an ordered list of bare output configs into one {@link OutputConfigObject}.
+ *
+ * @remarks
+ * Every output runs in order with its own `spec[i]` slice; the last return
+ * value is kept. An empty list yields `undefined`. Child schemas become
+ * `prefixItems` aligned with the list.
+ */
+export function pipeOutputs<
+  TSpec extends any[],
+  TOptions extends object = object,
+  TReturns = void
+>(outputs: {
+  [I in keyof TSpec]: OutputConfig<TSpec[I], TOptions, any> | undefined;
+}): OutputConfigObject<TSpec, TOptions, TReturns> {
+  const list = outputs as (OutputConfig<any, TOptions, any> | undefined)[];
+  const prefixItems = list.map(output => unwrapOutputSchemaSource(output));
 
-  return async (options: PipeOptions<TGenerators>) => {
-    const spec = [] as unknown as PipeSpec<TGenerators>;
+  return {
+    schema: {
+      type: "array",
+      prefixItems,
+      items: false,
+      minItems: prefixItems.length,
+      maxItems: prefixItems.length
+    },
+    output: async (spec, options, documents) => {
+      if (list.length === 0) {
+        return undefined as TReturns;
+      }
 
-    for (let index = 0; index < generators.length; index++) {
-      const childInput = resolveChildInput(generators[index]!);
-      (spec as unknown[])[index] = await resolveInputValue(
-        childInput,
-        options,
-        "pipe",
-        index
-      );
+      let lastReturns: TReturns = undefined as TReturns;
+
+      for (let index = 0; index < list.length; index++) {
+        const slice = (spec as unknown[])[index] as TSpec[number];
+        const outputFn = resolveOutputFunction<
+          TSpec[number],
+          TOptions,
+          TReturns
+        >(list[index], "pipe", index);
+
+        lastReturns = await outputFn(slice, options, documents);
+      }
+
+      return lastReturns;
     }
-
-    return spec;
-  };
-}
-
-function buildPipeOutput<TGenerators extends AnyGeneratorConfig[]>(
-  generators: TGenerators,
-  outputOverride?: PipeGeneratorConfig<TGenerators>["output"]
-): OutputConfig<
-  PipeSpec<TGenerators>,
-  PipeOptions<TGenerators>,
-  PipeReturns<TGenerators>
-> {
-  if (outputOverride !== undefined) {
-    return outputOverride;
-  }
-
-  return async (
-    spec: PipeSpec<TGenerators>,
-    options: PipeOptions<TGenerators>,
-    documents: Record<string, GeneratedDocument>
-  ) => {
-    if (generators.length === 0) {
-      return undefined as PipeReturns<TGenerators>;
-    }
-
-    const lastIndex = generators.length - 1;
-    const lastSpec = (spec as unknown[])[
-      lastIndex
-    ] as PipeSpec<TGenerators>[number];
-    const outputFn = resolveOutputFunction<
-      typeof lastSpec,
-      PipeOptions<TGenerators>,
-      PipeReturns<TGenerators>
-    >(
-      resolveChildOutput(generators[lastIndex]!) as
-        OutputConfig<any, any, any> | undefined,
-      "pipe",
-      lastIndex
-    );
-
-    return outputFn(lastSpec, options, documents);
   };
 }
 
@@ -165,11 +176,34 @@ function toExecutableConfig<TGenerators extends AnyGeneratorConfig[]>(
   const { generator, meta, schema, input, output } = config;
   const generators = generator as TGenerators;
 
+  const childInputs = generators.map(child => resolveChildInput(child)) as {
+    [I in keyof PipeSpec<TGenerators>]:
+      | InputConfig<PipeSpec<TGenerators>[I], PipeOptions<TGenerators>>
+      | undefined;
+  };
+
+  const childOutputs = generators.map(child => resolveChildOutput(child)) as {
+    [I in keyof PipeSpec<TGenerators>]:
+      | OutputConfig<PipeSpec<TGenerators>[I], PipeOptions<TGenerators>, any>
+      | undefined;
+  };
+
   return {
     meta,
-    schema: buildPipeSchema(generators, schema),
-    input: buildPipeInput(generators, input),
-    output: buildPipeOutput(generators, output),
+    schema:
+      schema !== undefined
+        ? resolveSchemaOverride<PipeSpec<TGenerators>>(schema)
+        : undefined,
+    input:
+      input ??
+      pipeInputs<PipeSpec<TGenerators>, PipeOptions<TGenerators>>(childInputs),
+    output:
+      output ??
+      pipeOutputs<
+        PipeSpec<TGenerators>,
+        PipeOptions<TGenerators>,
+        PipeReturns<TGenerators>
+      >(childOutputs),
     generator: buildPipeGenerator(generators)
   };
 }
@@ -180,8 +214,8 @@ function toExecutableConfig<TGenerators extends AnyGeneratorConfig[]>(
  * @remarks
  * `config.generator` is an ordered array of child generator configs.
  * Spec / schema / input shapes are a tuple aligned with that array.
- * Child generators run in array order; documents are merged; returns come
- * from the last generator only.
+ * Child generators run in array order; documents are merged; every child
+ * output runs (own spec slice) and returns come from the last generator only.
  *
  * @example
  * ```ts

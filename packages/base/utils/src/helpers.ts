@@ -98,6 +98,26 @@ export function unwrapSchemaSource(
   return schema as SchemaSourceConfig;
 }
 
+export function unwrapInputSchemaSource(
+  input: InputConfig<any, any> | undefined
+): SchemaSourceConfig | { type: "any" } {
+  if (input !== undefined && isInputConfigObject(input) && input.schema) {
+    return unwrapSchemaSource(input.schema);
+  }
+
+  return { type: "any" };
+}
+
+export function unwrapOutputSchemaSource(
+  output: OutputConfig<any, any, any> | undefined
+): SchemaSourceConfig | { type: "any" } {
+  if (output !== undefined && isOutputConfigObject(output) && output.schema) {
+    return unwrapSchemaSource(output.schema);
+  }
+
+  return { type: "any" };
+}
+
 export function resolveSchemaOverride<TSpec>(
   schemaOverride: NonNullable<
     InferSchemaConfig<AnyGeneratorConfig> | SchemaConfigObject<any>
@@ -162,7 +182,7 @@ export function resolveOutputFunction<TSpec, TOptions extends object, TReturns>(
   }
 
   if (isOutputConfigObject(output) && isFunction(output.output)) {
-    return output.output;
+    return output.output as OutputFunction<TSpec, TOptions, TReturns>;
   }
 
   throw new TypeError(

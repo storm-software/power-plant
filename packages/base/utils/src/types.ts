@@ -119,7 +119,9 @@ export type PipeOutputs<TGenerators extends AnyGeneratorConfig[]> = {
  *
  * @remarks
  * `schema` / `input` validate and produce the tuple {@link PipeSpec}.
- * `output` produces {@link PipeReturns} (last generator only).
+ * `output` produces {@link PipeReturns} (last generator only; all outputs run).
+ * When `schema` is omitted, the composed input/output schemas from
+ * {@link pipeInputs} / {@link pipeOutputs} are used instead.
  */
 export type PipeGeneratorConfig<TGenerators extends AnyGeneratorConfig[]> =
   Omit<
@@ -206,6 +208,8 @@ export type CombinedOutputs<
  * @remarks
  * `schema` / `input` / `output` validate and produce the joined
  * {@link CombinedSpec} / {@link CombinedReturns} shapes (keys match `generator`).
+ * When `schema` is omitted, the composed input/output schemas from
+ * {@link combineInputs} / {@link combineOutputs} are used instead.
  */
 export type CombinedGeneratorConfig<
   TGenerators extends Record<string, AnyGeneratorConfig>

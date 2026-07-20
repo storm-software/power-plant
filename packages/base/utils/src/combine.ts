@@ -21,8 +21,9 @@ import type {
   GeneratorConfigObject,
   GeneratorFunction,
   InputConfig,
+  InputConfigObject,
   OutputConfig,
-  SchemaConfigObject,
+  OutputConfigObject,
   UserConfig
 } from "@power-plant/core";
 import { createExecute } from "@power-plant/core";
@@ -30,12 +31,12 @@ import type { SchemaSourceConfig } from "@power-plant/schema";
 import {
   resolveChildInput,
   resolveChildOutput,
-  resolveChildSchema,
   resolveGeneratorFunction,
   resolveInputValue,
   resolveOutputFunction,
   resolveSchemaOverride,
-  unwrapSchemaSource
+  unwrapInputSchemaSource,
+  unwrapOutputSchemaSource
 } from "./helpers";
 import type {
   AnyGeneratorConfig,
@@ -45,98 +46,103 @@ import type {
   CombinedSpec
 } from "./types";
 
-function buildCombinedSchema<
-  TGenerators extends Record<string, AnyGeneratorConfig>
->(
-  generators: TGenerators,
-  schemaOverride?: CombinedGeneratorConfig<TGenerators>["schema"]
-): SchemaConfigObject<CombinedSpec<TGenerators>> {
-  if (schemaOverride !== undefined) {
-    return resolveSchemaOverride<CombinedSpec<TGenerators>>(schemaOverride);
-  }
-
+/**
+ * Combines a map of bare input configs into one keyed {@link InputConfigObject}.
+ *
+ * @remarks
+ * Missing (`undefined`) entries are skipped. An empty map yields a noop input
+ * that resolves to `{}`. Child schemas are merged into an object schema keyed
+ * the same way; children without a schema use `{ type: "any" }`.
+ */
+export function combineInputs<
+  TSpec extends Record<string, any>,
+  TOptions extends object = object
+>(inputs: {
+  [K in keyof TSpec]: InputConfig<TSpec[K], TOptions> | undefined;
+}): InputConfigObject<TSpec, TOptions> {
   const properties: Record<string, SchemaSourceConfig | { type: "any" }> = {};
 
-  for (const [key, config] of Object.entries(generators)) {
-    properties[key] = unwrapSchemaSource(resolveChildSchema(config));
+  for (const [key, input] of Object.entries(inputs)) {
+    if (input === undefined) {
+      continue;
+    }
+
+    properties[key] = unwrapInputSchemaSource(input);
   }
+
+  const propertyKeys = Object.keys(properties);
 
   return {
     schema: {
       type: "object",
       properties,
-      required: Object.keys(properties),
+      required: propertyKeys,
       additionalProperties: false
+    },
+    input: async options => {
+      const spec = {} as TSpec;
+
+      for (const key of Object.keys(inputs) as (keyof TSpec & string)[]) {
+        const input = inputs[key];
+        if (input === undefined) {
+          continue;
+        }
+
+        spec[key] = await resolveInputValue(input, options, "combine", key);
+      }
+
+      return spec;
     }
   };
 }
 
-function buildCombinedInput<
-  TGenerators extends Record<string, AnyGeneratorConfig>
->(
-  generators: TGenerators,
-  inputOverride?: CombinedGeneratorConfig<TGenerators>["input"]
-): InputConfig<CombinedSpec<TGenerators>, CombinedOptions<TGenerators>> {
-  if (inputOverride !== undefined) {
-    return inputOverride;
+/**
+ * Combines a map of bare output configs into one keyed {@link OutputConfigObject}.
+ *
+ * @remarks
+ * An empty map yields a noop output that resolves to `{}`. Each child receives
+ * its own keyed slice of the joined spec. Child schemas are merged into an
+ * object schema keyed the same way.
+ */
+export function combineOutputs<
+  TSpec extends Record<string, any>,
+  TOptions extends object = object,
+  TReturns extends { [K in keyof TSpec]: any } = {
+    [K in keyof TSpec]: void;
+  }
+>(outputs: {
+  [K in keyof TSpec]: OutputConfig<TSpec[K], TOptions, TReturns[K]> | undefined;
+}): OutputConfigObject<TSpec, TOptions, TReturns> {
+  const properties: Record<string, SchemaSourceConfig | { type: "any" }> = {};
+
+  for (const [key, output] of Object.entries(outputs)) {
+    properties[key] = unwrapOutputSchemaSource(output);
   }
 
-  return async (options: CombinedOptions<TGenerators>) => {
-    const spec = {} as CombinedSpec<TGenerators>;
+  const propertyKeys = Object.keys(properties);
 
-    for (const key of Object.keys(generators) as (keyof TGenerators &
-      string)[]) {
-      const childInput = resolveChildInput(generators[key]!);
-      spec[key] = (await resolveInputValue(
-        childInput,
-        options,
-        "combine",
-        key
-      )) as CombinedSpec<TGenerators>[typeof key];
+  return {
+    schema: {
+      type: "object",
+      properties,
+      required: propertyKeys,
+      additionalProperties: false
+    },
+    output: async (spec, options, documents) => {
+      const returns = {} as TReturns;
+
+      for (const key of Object.keys(outputs) as (keyof TSpec & string)[]) {
+        const outputFn = resolveOutputFunction<
+          TSpec[typeof key],
+          TOptions,
+          TReturns[typeof key]
+        >(outputs[key], "combine", key);
+
+        returns[key] = await outputFn(spec[key], options, documents);
+      }
+
+      return returns;
     }
-
-    return spec;
-  };
-}
-
-function buildCombinedOutput<
-  TGenerators extends Record<string, AnyGeneratorConfig>
->(
-  generators: TGenerators,
-  outputOverride?: CombinedGeneratorConfig<TGenerators>["output"]
-): OutputConfig<
-  CombinedSpec<TGenerators>,
-  CombinedOptions<TGenerators>,
-  CombinedReturns<TGenerators>
-> {
-  if (outputOverride !== undefined) {
-    return outputOverride;
-  }
-
-  return async (
-    spec: CombinedSpec<TGenerators>,
-    options: CombinedOptions<TGenerators>,
-    documents: Record<string, GeneratedDocument>
-  ) => {
-    const returns = {} as CombinedReturns<TGenerators>;
-
-    for (const key of Object.keys(generators) as (keyof TGenerators &
-      string)[]) {
-      const outputFn = resolveOutputFunction<
-        CombinedSpec<TGenerators>[typeof key],
-        CombinedOptions<TGenerators>,
-        CombinedReturns<TGenerators>[typeof key]
-      >(
-        resolveChildOutput(generators[key]!) as
-          OutputConfig<any, any, any> | undefined,
-        "combine",
-        key
-      );
-
-      returns[key] = await outputFn(spec[key], options, documents);
-    }
-
-    return returns;
   };
 }
 
@@ -174,11 +180,55 @@ function toExecutableConfig<
 > {
   const { generator: generators, meta, schema, input, output } = config;
 
+  const childInputs = {} as {
+    [K in keyof CombinedSpec<TGenerators>]:
+      | InputConfig<CombinedSpec<TGenerators>[K], CombinedOptions<TGenerators>>
+      | undefined;
+  };
+  const childOutputs = {} as {
+    [K in keyof CombinedSpec<TGenerators>]:
+      | OutputConfig<
+          CombinedSpec<TGenerators>[K],
+          CombinedOptions<TGenerators>,
+          CombinedReturns<TGenerators>[K]
+        >
+      | undefined;
+  };
+
+  for (const key of Object.keys(generators) as (keyof TGenerators & string)[]) {
+    childInputs[key] = resolveChildInput(generators[key]!) as
+      | InputConfig<
+          CombinedSpec<TGenerators>[typeof key],
+          CombinedOptions<TGenerators>
+        >
+      | undefined;
+    childOutputs[key] = resolveChildOutput(generators[key]!) as
+      | OutputConfig<
+          CombinedSpec<TGenerators>[typeof key],
+          CombinedOptions<TGenerators>,
+          CombinedReturns<TGenerators>[typeof key]
+        >
+      | undefined;
+  }
+
   return {
     meta,
-    schema: buildCombinedSchema(generators, schema),
-    input: buildCombinedInput(generators, input),
-    output: buildCombinedOutput(generators, output),
+    schema:
+      schema !== undefined
+        ? resolveSchemaOverride<CombinedSpec<TGenerators>>(schema)
+        : undefined,
+    input:
+      input ??
+      combineInputs<CombinedSpec<TGenerators>, CombinedOptions<TGenerators>>(
+        childInputs
+      ),
+    output:
+      output ??
+      combineOutputs<
+        CombinedSpec<TGenerators>,
+        CombinedOptions<TGenerators>,
+        CombinedReturns<TGenerators>
+      >(childOutputs),
     generator: buildCombinedGenerator(generators)
   };
 }
