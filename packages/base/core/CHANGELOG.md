@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.18](https://github.com/storm-software/power-plant/releases/tag/core%400.0.18) (07/20/2026)
+
+### Miscellaneous
+
+- **core:** Resolve typescript compiler issues in package ([2538a3f](https://github.com/storm-software/power-plant/commit/2538a3f))
+
 ## [0.0.17](https://github.com/storm-software/power-plant/releases/tag/core%400.0.17) (07/20/2026)
 
 ### Features
