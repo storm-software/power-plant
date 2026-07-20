@@ -41,7 +41,7 @@ export interface OutputProps<
   /**
    * The current meta context.
    */
-  meta?: Record<string, MetaConfig<any, TContext["options"]>>;
+  meta?: Record<string, MetaConfig>;
 
   /**
    * The current specification.

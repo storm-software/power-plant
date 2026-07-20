@@ -16,9 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { Device, User } from "@power-plant/core";
-
 export interface LocalStore {
-  device?: Device;
-  user?: User;
+  device?: string;
+  user?: string;
 }

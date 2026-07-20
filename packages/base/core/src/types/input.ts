@@ -19,38 +19,25 @@
 import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
-import type { Meta, MetaConfig, MetaValue } from "./meta";
+import type { MetaConfig } from "./meta";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
+
+export interface InputMetaConfig extends MetaConfig {
+  /**
+   * A string that describes how the specification will be read/extracted.
+   */
+  readFrom?: string;
+}
 
 export type InputFunction<TSpec, TOptions extends object> = (
   options: TOptions
 ) => MaybePromise<TSpec>;
 
-export interface InputMetaConfig<
-  TSpec,
-  TOptions extends object
-> extends MetaConfig<TSpec, TOptions> {
-  /**
-   * A string that describes how the specification will be read/extracted. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  readFrom?: MetaValue<TSpec, TOptions, string>;
-}
-
-export interface InputMeta<TSpec, TOptions extends object> extends Meta<
-  TSpec,
-  TOptions
-> {
-  /**
-   * A string that describes how the specification will be read/extracted. This property can provide context about the input of the specification, such as whether it is derived from a file, a database, an API, or any other input. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  readFrom?: string;
-}
-
 export interface InputConfigObject<TSpec, TOptions extends object> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec>;
 
   /**
    * The input implementation, either as a callable function, a static value, or a file reference.
@@ -60,7 +47,7 @@ export interface InputConfigObject<TSpec, TOptions extends object> {
   /**
    * Optional metadata that provides contextual information for the input.
    */
-  meta?: InputMetaConfig<TSpec, TOptions>;
+  meta?: InputMetaConfig;
 }
 
 export type InputConfig<TSpec, TOptions extends object> =
@@ -79,12 +66,12 @@ export interface Input<TSpec, TOptions extends object> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema: SchemaOf<TSpec, TOptions>;
+  schema: SchemaOf<TSpec>;
 
   /**
    * Optional metadata that provides contextual information for the input.
    */
-  meta?: InputMeta<TSpec, TOptions>;
+  meta?: InputMetaConfig;
 
   /**
    * The input of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.

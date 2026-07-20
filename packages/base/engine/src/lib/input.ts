@@ -22,8 +22,7 @@ import type {
   InputConfig,
   InputConfigObject,
   InputFunction,
-  InputMeta,
-  InputMetaConfig,
+  MetaConfig,
   SchemaConfigObject,
   SchemaOf
 } from "@power-plant/core";
@@ -35,41 +34,26 @@ import type {
 import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
-import { isFunction } from "@stryke/type-checks/is-function";
 import { resolveMeta, resolveMetaDescription } from "../helpers/meta";
 import { isInputConfigObject } from "../helpers/type-checks";
 import { createSchema } from "./schema";
 
 /**
- * Extracts and normalizes {@link InputMeta | input metadata} from a given {@link InputMetaConfig}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ * Extracts and normalizes input metadata from a given configuration. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
  *
  * @param schema - The schema that the input input is expected to conform to.
  * @param input - The input metadata input to extract and normalize.
  * @returns The normalized input metadata.
  */
-export function extractInputMeta<TSpec, TOptions extends object>(
-  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
-  input?: InputMetaConfig<TSpec, TOptions>
-): InputMeta<TSpec, TOptions> {
+export function extractInputMeta<TSpec>(
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec>,
+  input?: MetaConfig
+): MetaConfig {
   const jsonSchema = schema?.schema ?? {};
-  const meta = resolveMeta<TSpec, TOptions>(schema, input) as InputMeta<
-    TSpec,
-    TOptions
-  >;
+  const meta = resolveMeta(schema, input);
 
   meta.description = resolveMetaDescription(
-    isFunction(meta.title)
-      ? async (spec: TSpec, options: TOptions) => {
-          const title = await Promise.resolve(
-            (meta.title as (spec: TSpec, options: TOptions) => string)(
-              spec,
-              options
-            )
-          );
-
-          return `Determines the ${title ?? ""} specification from a {title} input.`;
-        }
-      : `Determines the ${meta.title ?? ""} specification from a {title} input.`,
+    `Determines the ${meta.title ?? ""} specification from a {title} input.`,
     jsonSchema,
     meta,
     input?.description
@@ -87,7 +71,7 @@ export function extractInputMeta<TSpec, TOptions extends object>(
  * @returns A promise that resolves to a normalized input descriptor.
  */
 export async function createInput<TSpec, TOptions extends object>(
-  schema: SchemaOf<TSpec, TOptions>,
+  schema: SchemaOf<TSpec>,
   config: InputConfig<TSpec, TOptions>,
   options: InferCreateInputOptions<typeof config> = {}
 ): Promise<Input<TSpec, TOptions>> {
@@ -99,12 +83,12 @@ export async function createInput<TSpec, TOptions extends object>(
     ? config
     : { input: config, meta: {} };
 
-  let resolvedSchema: SchemaOf<TSpec, TOptions> = schema;
+  let resolvedSchema: SchemaOf<TSpec> = schema;
   if (inputSchema) {
     let resolvedInputSchema:
       | SchemaSourceConfig<TSpec>
       | SchemaEnvelopeOf<TSpec>
-      | SchemaConfigObject<TSpec, TOptions>
+      | SchemaConfigObject<TSpec>
       | undefined;
 
     if (isLoadReference(inputSchema)) {
@@ -112,7 +96,7 @@ export async function createInput<TSpec, TOptions extends object>(
         resolvedInputSchema = await load<
           | SchemaSourceConfig<TSpec>
           | SchemaEnvelopeOf<TSpec>
-          | SchemaConfigObject<TSpec, TOptions>
+          | SchemaConfigObject<TSpec>
         >(inputSchema, options);
       } catch {
         // Do nothing
@@ -122,10 +106,7 @@ export async function createInput<TSpec, TOptions extends object>(
     }
 
     if (resolvedInputSchema) {
-      resolvedSchema = await createSchema<TSpec, TOptions>(
-        resolvedInputSchema,
-        options
-      );
+      resolvedSchema = await createSchema<TSpec>(resolvedInputSchema, options);
       resolvedSchema.schema = mergeMetadata<TSpec>(
         resolvedSchema.schema,
         schema.schema
@@ -163,6 +144,6 @@ export async function createInput<TSpec, TOptions extends object>(
   return {
     schema: resolvedSchema,
     input: resolvedInput,
-    meta: extractInputMeta<TSpec, TOptions>(resolvedSchema, meta)
+    meta: extractInputMeta<TSpec>(resolvedSchema, meta)
   };
 }

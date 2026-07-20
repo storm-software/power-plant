@@ -29,8 +29,8 @@ export interface Unstable_ExecutionContext<
   TReturns = void
 > extends ExecutionContext<TSpec, TOptions, TReturns> {
   "~spec": TSpec;
-  schema: SchemaOf<TSpec, TOptions>;
+  schema: SchemaOf<TSpec>;
   input: Input<TSpec, TOptions>;
   output: Output<TSpec, TOptions, TReturns>;
-  documents: Record<string, ExecutionDocument<TSpec, TOptions>>;
+  documents: Record<string, ExecutionDocument>;
 }

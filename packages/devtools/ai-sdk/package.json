@@ -62,6 +62,8 @@
   "typings": "dist/index.d.mts",
   "files": ["dist"],
   "dependencies": {
+    "@ai-sdk/provider": "catalog:",
+    "@ai-sdk/provider-utils": "catalog:",
     "@power-plant/engine": "workspace:*",
     "@power-plant/core": "workspace:*",
     "@stryke/string-format": "catalog:",

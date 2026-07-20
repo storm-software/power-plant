@@ -8,7 +8,8 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@ai-sdk/provider-utils": ^5.0.7
+  "@ai-sdk/provider": ^4.0.3
+  "@ai-sdk/provider-utils": ^5.0.11
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -23,19 +24,19 @@ catalog:
   "@emnapi/runtime": 1.11.2
   "@graphql-codegen/core": ^6.2.0
   "@graphql-codegen/plugin-helpers": ^7.1.0
-  "@graphql-tools/apollo-engine-loader": ^8.0.32
-  "@graphql-tools/code-file-loader": ^8.1.34
-  "@graphql-tools/git-loader": ^8.0.38
-  "@graphql-tools/github-loader": ^9.1.4
-  "@graphql-tools/graphql-file-loader": ^8.1.16
-  "@graphql-tools/json-file-loader": ^8.0.30
-  "@graphql-tools/load": ^8.1.13
-  "@graphql-tools/url-loader": ^9.1.4
-  "@graphql-tools/utils": ^11.2.0
+  "@graphql-tools/apollo-engine-loader": ^8.0.34
+  "@graphql-tools/code-file-loader": ^8.1.36
+  "@graphql-tools/git-loader": ^8.0.40
+  "@graphql-tools/github-loader": ^9.1.6
+  "@graphql-tools/graphql-file-loader": ^8.1.18
+  "@graphql-tools/json-file-loader": ^8.0.32
+  "@graphql-tools/load": ^8.1.15
+  "@graphql-tools/url-loader": ^9.1.6
+  "@graphql-tools/utils": ^11.2.2
   "@graphql-typed-document-node/core": ^3.2.0
   "@hey-api/openapi-ts": ^0.99.0
   "@ls-lint/ls-lint": ^2.3.1
-  "@napi-rs/cli": ^3.7.2
+  "@napi-rs/cli": ^3.7.3
   "@napi-rs/wasm-runtime": ^1.1.6
   "@nx/devkit": 23.0.1
   "@nx/eslint-plugin": 23.0.1
@@ -44,26 +45,26 @@ catalog:
   "@nx/vite": 23.0.1
   "@nx/vitest": 23.0.1
   "@nx/workspace": 23.0.1
-  "@powerlines/nx": ^0.13.182
-  "@powerlines/plugin-babel": ^0.13.139
-  "@powerlines/plugin-napi-rs": ^0.2.196
-  "@powerlines/plugin-tsdown": ^0.1.544
-  "@powerlines/tsconfig": ^0.4.191
-  "@powerlines/tsdoc": ^0.2.139
+  "@powerlines/nx": ^0.13.183
+  "@powerlines/plugin-babel": ^0.13.140
+  "@powerlines/plugin-napi-rs": ^0.2.197
+  "@powerlines/plugin-tsdown": ^0.1.545
+  "@powerlines/tsconfig": ^0.4.192
+  "@powerlines/tsdoc": ^0.2.140
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.35
-  "@storm-software/config-tools": ^1.190.98
-  "@storm-software/cspell": ^0.46.166
-  "@storm-software/eslint": ^0.170.132
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.61
-  "@storm-software/git-tools": ^2.131.106
-  "@storm-software/linting-tools": ^1.134.28
-  "@storm-software/markdownlint": ^0.30.254
-  "@storm-software/pnpm-tools": ^0.7.109
-  "@storm-software/prettier": ^0.59.151
-  "@storm-software/tsconfig": ^0.48.165
-  "@storm-software/untyped": ^0.24.240
-  "@storm-software/workspace-tools": ^1.296.78
+  "@storm-software/config": ^1.138.44
+  "@storm-software/config-tools": ^1.190.107
+  "@storm-software/cspell": ^0.46.175
+  "@storm-software/eslint": ^0.170.141
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.70
+  "@storm-software/git-tools": ^2.131.115
+  "@storm-software/linting-tools": ^1.134.37
+  "@storm-software/markdownlint": ^0.30.263
+  "@storm-software/pnpm-tools": ^0.7.118
+  "@storm-software/prettier": ^0.59.160
+  "@storm-software/tsconfig": ^0.48.174
+  "@storm-software/untyped": ^0.24.249
+  "@storm-software/workspace-tools": ^1.296.87
   "@stryke/convert": ^0.7.26
   "@stryke/date": ^0.0.7
   "@stryke/env": ^0.20.113
@@ -82,7 +83,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.22
+  ai: ^7.0.31
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
@@ -94,19 +95,19 @@ catalog:
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.0.1
-  powerlines: ^0.47.143
+  powerlines: ^0.47.144
   prettier: ^3.9.5
   rimraf: ^6.1.3
   signal-exit: ^4.1.0
   ts-json-schema-generator: ^2.9.0
   ts-node: ^10.9.2
-  tsdown: ^0.22.5
+  tsdown: ^0.22.9
   tslib: ^2.8.1
   unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.2
   verdaccio: 6.0.5
-  vite: ^8.1.4
+  vite: ^8.1.5
   vitest: ~4.1.10
   zod: ^4.4.3
   zx: ^8.8.5

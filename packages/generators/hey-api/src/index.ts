@@ -66,7 +66,7 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
         c.gen.render().forEach(r => {
           ret[r.path] = {
             path: r.path,
-            source: [
+            chunks: [
               {
                 content: r.content
               }

@@ -42,7 +42,7 @@ function toGeneratedDocuments(
     return {
       [filePath]: {
         path: filePath,
-        source: [{ content: rendered }]
+        chunks: [{ content: rendered }]
       }
     };
   }
@@ -55,7 +55,7 @@ function toGeneratedDocuments(
 
       documents[path] = {
         path,
-        source: [{ content: result.content }]
+        chunks: [{ content: result.content }]
       };
 
       return documents;

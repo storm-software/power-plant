@@ -18,9 +18,6 @@
 
 import { defineInput } from "@power-plant/core";
 import type { GraphQLSchema } from "@power-plant/graphql-schema";
-import { isFileReference } from "@stryke/resolve/type-checks";
-import { isString } from "@stryke/type-checks/is-string";
-import { isURL } from "@stryke/type-checks/is-url";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -33,16 +30,8 @@ export default defineInput<GraphQLSchema, Options>({
     name: "graphql-input",
     description:
       "An input extension that reads the specification from a GraphQL schema document using loaders defined in GraphQL-Tools packages.",
-    readFrom: (_spec: GraphQLSchema, options: Options) =>
-      `Reads the GraphQL schema from ${
-        isString(options.inputPath)
-          ? `"${options.inputPath}"`
-          : isURL(options.inputPath)
-            ? `the remote source at "${options.inputPath.toString()}"`
-            : isFileReference(options.inputPath)
-              ? `the file at "${options.inputPath.file}"`
-              : "a specified schema source"
-      }.`,
+    usage:
+      "Reads the GraphQL schema from a file path, remote URL, or schema loader source configured via inputPath.",
     version: "1.0",
     tags: ["graphql"],
     links: [

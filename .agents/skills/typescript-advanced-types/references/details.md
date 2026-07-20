@@ -26,14 +26,14 @@ class TypedEventEmitter<T extends Record<string, any>> {
   emit<K extends keyof T>(event: K, data: T[K]): void {
     const callbacks = this.listeners[event];
     if (callbacks) {
-      callbacks.forEach(callback => callback(data));
+      callbacks.forEach((callback) => callback(data));
     }
   }
 }
 
 const emitter = new TypedEventEmitter<EventMap>();
 
-emitter.on("user:created", data => {
+emitter.on("user:created", (data) => {
   console.log(data.id, data.name); // Type-safe!
 });
 
@@ -74,7 +74,7 @@ class APIClient<Config extends Record<string, Record<HTTPMethod, any>>> {
           {
             params: ExtractParams<Config[Path][Method]>;
             body?: ExtractBody<Config[Path][Method]>;
-          }
+          },
         ]
   ): Promise<ExtractResponse<Config[Path][Method]>> {
     // Implementation here
@@ -89,12 +89,12 @@ const users = await api.request("/users", "GET");
 // Type: User[]
 
 const newUser = await api.request("/users", "POST", {
-  body: { name: "John", email: "john@example.com" }
+  body: { name: "John", email: "john@example.com" },
 });
 // Type: User
 
 const user = await api.request("/users/:id", "GET", {
-  params: { id: "123" }
+  params: { id: "123" },
 });
 // Type: User
 ```
@@ -253,25 +253,25 @@ interface LoginForm {
 const validator = new FormValidator<LoginForm>({
   email: [
     {
-      validate: v => v.includes("@"),
-      message: "Email must contain @"
+      validate: (v) => v.includes("@"),
+      message: "Email must contain @",
     },
     {
-      validate: v => v.length > 0,
-      message: "Email is required"
-    }
+      validate: (v) => v.length > 0,
+      message: "Email is required",
+    },
   ],
   password: [
     {
-      validate: v => v.length >= 8,
-      message: "Password must be at least 8 characters"
-    }
-  ]
+      validate: (v) => v.length >= 8,
+      message: "Password must be at least 8 characters",
+    },
+  ],
 });
 
 const errors = validator.validate({
   email: "invalid",
-  password: "short"
+  password: "short",
 });
 // Type: { email?: string[]; password?: string[]; } | null
 ```
@@ -375,7 +375,7 @@ function isString(value: unknown): value is string {
 
 function isArrayOf<T>(
   value: unknown,
-  guard: (item: unknown) => item is T
+  guard: (item: unknown) => item is T,
 ): value is T[] {
   return Array.isArray(value) && value.every(guard);
 }
@@ -383,7 +383,7 @@ function isArrayOf<T>(
 const data: unknown = ["a", "b", "c"];
 
 if (isArrayOf(data, isString)) {
-  data.forEach(s => s.toUpperCase()); // Type: string[]
+  data.forEach((s) => s.toUpperCase()); // Type: string[]
 }
 ```
 

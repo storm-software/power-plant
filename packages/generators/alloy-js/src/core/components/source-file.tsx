@@ -40,7 +40,7 @@ export type SourceFileProps = SourceFilePropsExternal &
      * @remarks
      * The values stored in the metadata will be available in the rendering context.
      */
-    meta?: MetaConfig<any, any>;
+    meta?: MetaConfig;
   };
 
 /**

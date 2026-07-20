@@ -113,13 +113,13 @@ export function defineOutput<TSpec, TOptions extends object, TReturns = void>(
  * @param schema - The schema configuration to define. This can be either a schema source configuration, a schema envelope, or a schema configuration object.
  * @returns A schema configuration object that contains the provided schema. If the input was already a schema configuration object, it will be returned unchanged.
  */
-export function defineSchema<TSpec, TOptions extends object>(
+export function defineSchema<TSpec>(
   schema:
     | SchemaSourceConfig<TSpec>
     | SchemaEnvelopeOf<TSpec>
-    | SchemaConfigObject<TSpec, TOptions>
-): SchemaConfigObject<TSpec, TOptions> {
-  if (isSchemaConfigObject<TSpec, TOptions>(schema)) {
+    | SchemaConfigObject<TSpec>
+): SchemaConfigObject<TSpec> {
+  if (isSchemaConfigObject<TSpec>(schema)) {
     return schema;
   }
 

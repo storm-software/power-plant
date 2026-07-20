@@ -76,9 +76,9 @@ export function isOutputConfigObject<
  * @param config - The configuration to check.
  * @returns True if the configuration is a {@link SchemaConfigObject}, false otherwise.
  */
-export function isSchemaConfigObject<TSpec, TOptions extends object>(
+export function isSchemaConfigObject<TSpec>(
   config: unknown
-): config is SchemaConfigObject<TSpec, TOptions> {
+): config is SchemaConfigObject<TSpec> {
   return (
     isSetObject(config) && "schema" in config && config.schema !== undefined
   );

@@ -18,21 +18,35 @@
 
 /* eslint-disable */
 
+import type { Engine } from "@power-plant/engine";
 import { createEngine } from "@power-plant/engine";
+import type { Tool } from "@ai-sdk/provider-utils";
 import { tool } from "ai";
 import { z } from "zod/mini";
 
-const engine = createEngine();
+let enginePromise: Promise<Engine> | undefined;
+
+function getEngine(): Promise<Engine> {
+  enginePromise ??= createEngine();
+
+  return enginePromise;
+}
+
+const inputSchema = z.object({
+  generator: z.string(),
+  spec: z.any(),
+  options: z.optional(z.record(z.string(), z.any()))
+});
+
+type GenerateInput = z.infer<typeof inputSchema>;
 
 export const generate = tool({
   description:
     "Generate text (including source code, documentation, and more) with Power Plant generators.",
-  inputSchema: z.object({
-    generator: z.string(),
-    spec: z.any(),
-    options: z.optional(z.record(z.string(), z.any()))
-  }),
+  inputSchema,
   execute: async ({ generator, spec, options }) => {
+    const engine = await getEngine();
+
     return engine.execute(generator, { ...options, spec });
   }
-});
+}) as Tool<GenerateInput, unknown>;

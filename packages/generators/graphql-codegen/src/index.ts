@@ -45,7 +45,7 @@ export default defineGenerator<GraphQLSchema, Options, void>({
     return {
       [options.filename]: {
         path: options.filename,
-        source: [
+        chunks: [
           {
             content: output
           }

@@ -18,7 +18,7 @@
 
 import { loadSchema } from "@graphql-tools/load";
 import { useContext } from "@power-plant/core/context";
-import type { GraphQLSchemaDocument } from "@power-plant/graphql-schema";
+import type { GraphQLSchema } from "@power-plant/graphql-schema";
 import { defaultSchemaLoadOptions } from "@power-plant/graphql-schema/codegen";
 import { createSchemaLoaders } from "./loaders";
 import type { Options } from "./types";
@@ -33,7 +33,7 @@ import { formatLoadError, toSchemaPointer } from "./utilities";
  * @param options - The options for the input.
  * @returns A loaded {@link GraphQLSchema} instance.
  */
-export async function input(options: Options): Promise<GraphQLSchemaDocument> {
+export async function input(options: Options): Promise<GraphQLSchema> {
   const { inputPath, ...rest } = options;
   const { cwd } = useContext();
 

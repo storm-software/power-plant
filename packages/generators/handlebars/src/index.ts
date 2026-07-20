@@ -68,7 +68,7 @@ export default defineGenerator<any, Options, void>({
     return {
       [outputFile]: {
         path: appendPath(outputFile, cwd),
-        source: [
+        chunks: [
           {
             content,
             meta: {}

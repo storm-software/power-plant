@@ -149,11 +149,21 @@ export const executionAsyncLocalStorage = executionContext.asyncLocalStorage;
 export const useExecutionContext = executionContext.use;
 
 /**
+ * @deprecated Use {@link useExecutionContext} instead.
+ */
+export const useContext = useExecutionContext;
+
+/**
  * The function to try to use the execution context.
  *
  * @returns The execution context or undefined if the execution context is not available.
  */
 export const tryUseExecutionContext = executionContext.tryUse;
+
+/**
+ * @deprecated Use {@link tryUseExecutionContext} instead.
+ */
+export const tryUseContext = tryUseExecutionContext;
 
 /**
  * The function to call the execution context.

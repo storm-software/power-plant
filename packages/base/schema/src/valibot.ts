@@ -86,7 +86,7 @@ const jsonSchemaKeywords = v.object({
   writeOnly: v.optional(v.boolean())
 });
 
-export const jsonSchema: v.GenericSchema<JsonSchema> = v.lazy(() => {
+export const jsonSchema = v.lazy(() => {
   const jsonSchemaMapItems: v.GenericSchema<JsonSchemaMap["items"]> = v.object({
     type: v.literal("array"),
     prefixItems: v.tuple([jsonSchema, jsonSchema]),
@@ -155,4 +155,4 @@ export const jsonSchema: v.GenericSchema<JsonSchema> = v.lazy(() => {
   });
 
   return v.union([referenceSchema, jsonSchemaDocument]);
-});
+}) as v.GenericSchema<JsonSchema>;

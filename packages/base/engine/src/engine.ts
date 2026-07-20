@@ -78,13 +78,13 @@ export async function createEngine(
                 meta: {
                   executionId
                 }
-              } as ExecutionDocument<TSpec, TOptions>
+              } as ExecutionDocument
             ])
           ),
           meta: {
             executionId,
             executedAt: new Date(),
-            executedBy: context.session.user.username
+            executedBy: context.session.user
           } as ExecutionMeta<TSpec, TOptions>
         },
         spec,

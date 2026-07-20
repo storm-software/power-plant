@@ -23,39 +23,15 @@ import { openapiSchema } from "./schema";
 export * from "./schema";
 export type OpenAPISchema = z.infer<typeof openapiSchema>;
 
-export default defineSchema<OpenAPISchema, any>({
+export default defineSchema<OpenAPISchema>({
   meta: {
     name: "openapi-schema",
     title: "OpenAPI Schema",
     version: "1.0",
     description:
       "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
-    spec: (spec: OpenAPISchema) =>
-      spec.info.title
-        ? `The ${
-            spec.info.version ? `${spec.info.version} version of the ` : ""
-          }${spec.info.title} HTTP API.${
-            spec.info.description
-              ? ` ${spec.info.description}`
-              : spec.info.summary
-                ? ` ${spec.info.summary}`
-                : ""
-          }`
-        : spec.info.description
-          ? ` ${spec.info.description}`
-          : spec.info.summary
-            ? ` ${spec.info.summary}`
-            : "",
-    tags: (spec: OpenAPISchema) => spec.tags?.map(tag => tag.name) ?? [],
-    links: (spec: OpenAPISchema) =>
-      spec.externalDocs
-        ? [
-            {
-              href: spec.externalDocs.url,
-              description: spec.externalDocs.description
-            }
-          ]
-        : []
+    spec: "An OpenAPI HTTP API specification.",
+    tags: ["openapi"]
   },
   schema: openapiSchema
 });

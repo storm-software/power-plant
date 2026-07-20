@@ -77,11 +77,11 @@ export async function createGenerator<
     configObject.schema = { type: "any" };
   }
 
-  const schema = await createSchema<TSpec, TOptions>(
+  const schema = await createSchema<TSpec>(
     configObject.schema as
       | SchemaSourceConfig<TSpec>
       | SchemaEnvelopeOf<TSpec>
-      | SchemaConfigObject<TSpec, TOptions>,
+      | SchemaConfigObject<TSpec>,
     { storage: sessionContext.storage, ...options }
   );
 

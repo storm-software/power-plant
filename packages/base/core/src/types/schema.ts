@@ -21,42 +21,27 @@ import type {
   SchemaEnvelopeOf,
   SchemaSourceConfig
 } from "@power-plant/schema";
-import type { Meta, MetaConfig, MetaValue } from "./meta";
+import type { MetaConfig } from "./meta";
 
 export type SchemaMetaExample<TSpec> =
   TSpec | { name?: string; description?: string; value: TSpec };
 
-export interface SchemaMetaConfig<
-  TSpec,
-  TOptions extends object = any
-> extends MetaConfig<TSpec, TOptions> {
+export interface SchemaMetaConfig<TSpec> extends MetaConfig {
   /**
    * Examples of valid data for the schema. This can be a single example or an array of examples.
    */
-  examples?:
-    | SchemaMetaExample<TSpec>
-    | MetaValue<TSpec, TOptions, SchemaMetaExample<TSpec>[]>;
+  examples?: SchemaMetaExample<TSpec> | SchemaMetaExample<TSpec>[];
 
   /**
    * A description of the specification that is described by this schema.
    */
-  spec?: MetaValue<TSpec, TOptions, string>;
-}
-
-export interface SchemaMeta<TSpec, TOptions extends object = any> extends Meta<
-  TSpec,
-  TOptions
-> {
-  /**
-   * Examples of valid data for the schema.
-   */
-  examples: MetaValue<TSpec, TOptions, SchemaMetaExample<TSpec>[]>;
+  spec?: string;
 }
 
 /**
  * Schema input wrapper that attaches optional contextual metadata.
  */
-export interface SchemaConfigObject<TSpec, TOptions extends object = any> {
+export interface SchemaConfigObject<TSpec> {
   /**
    * The schema that defines the structure of the specification input for the generator. This schema is used to validate the input specification and ensure that it conforms to the expected format before being processed by the generator.
    */
@@ -65,14 +50,12 @@ export interface SchemaConfigObject<TSpec, TOptions extends object = any> {
   /**
    * Optional metadata that provides contextual information for the schema.
    */
-  meta?: SchemaMetaConfig<TSpec, TOptions>;
+  meta?: SchemaMetaConfig<TSpec>;
 }
 
 export type InferCreateSchemaOptions<
   T extends
-    | SchemaSourceConfig<any>
-    | SchemaEnvelopeOf<any>
-    | SchemaConfigObject<any, any>
+    SchemaSourceConfig<any> | SchemaEnvelopeOf<any> | SchemaConfigObject<any>
 > = T extends SchemaSourceConfig<any> | SchemaEnvelopeOf<any>
   ? InferExtractOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
@@ -81,14 +64,11 @@ export type InferCreateSchemaOptions<
 /**
  * A schema extracted from a source input, normalized to JSON Schema.
  */
-export interface Schema<
-  TSpec,
-  TOptions extends object = any
-> extends SchemaEnvelopeOf<TSpec> {
+export interface Schema<TSpec> extends SchemaEnvelopeOf<TSpec> {
   /**
    * Optional contextual metadata associated with the schema.
    */
-  meta: SchemaMeta<TSpec, TOptions>;
+  meta: SchemaMetaConfig<TSpec>;
 }
 
 /**
@@ -98,7 +78,4 @@ export interface Schema<
  *
  * @see {@link Schema}
  */
-export type SchemaOf<TSpec, TOptions extends object = any> = Schema<
-  TSpec,
-  TOptions
->;
+export type SchemaOf<TSpec> = Schema<TSpec>;

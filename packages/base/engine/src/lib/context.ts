@@ -33,13 +33,10 @@ import { joinPaths } from "@stryke/path/join-paths";
 import { isSetString } from "@stryke/type-checks/is-set-string";
 import { uuid } from "@stryke/unique-id/uuid";
 import defu from "defu";
-import { createJiti } from "jiti";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
 import type { LocalStore } from "../types/local-store";
-
-const homeDir = os.homedir();
 
 const logger: Logger = {
   // eslint-disable-next-line no-console
@@ -56,36 +53,6 @@ const paths = getEnvPaths({
   appId: "power-plant",
   orgId: "storm-software"
 });
-
-const jiti = createJiti(process.cwd(), {
-  fsCache: joinPaths(paths.cache, "jiti")
-});
-
-function createDevice(now: Date): Device {
-  return {
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    name: os.hostname(),
-    arch: os.arch(),
-    platform: os.platform(),
-    os: {
-      type: os.type(),
-      release: os.release()
-    }
-  };
-}
-
-function createUser(now: Date): User {
-  return {
-    id: uuid(),
-    createdAt: now,
-    updatedAt: now,
-    username: os.userInfo().username,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? "UTC",
-    language: Intl.NumberFormat().resolvedOptions().locale ?? "en-US"
-  };
-}
 
 /**
  * Create a session context for the engine.
@@ -111,13 +78,16 @@ export async function createSessionContext(
       "{}"
   ) as LocalStore;
 
-  const device = store.device ?? createDevice(now);
-  const user = store.user ?? createUser(now);
+  const device = store.device ?? os.hostname();
+  const user = store.user ?? os.userInfo().username;
 
   return defu(
     {
       cwd,
       session: {
+        id: uuid(),
+        createdAt: now,
+        updatedAt: now,
         device,
         user,
         executions: []
@@ -151,14 +121,14 @@ export async function createExecutionContext<
   executionId: string,
   sessionContext: SessionContext,
   options: TOptions,
-  schema: SchemaOf<TSpec, TOptions>,
+  schema: SchemaOf<TSpec>,
   input: Input<TSpec, TOptions>,
   output: Output<TSpec, TOptions, TReturns>
 ): Promise<Unstable_ExecutionContext<TSpec, TOptions, TReturns>> {
-  const documents: Record<string, ExecutionDocument<TSpec, TOptions>> = {};
+  const documents: Record<string, ExecutionDocument> = {};
   const addDocument = (
-    pathOrDocument: string | ExecutionDocument<TSpec, TOptions>,
-    document?: Omit<ExecutionDocument<TSpec, TOptions>, "path">
+    pathOrDocument: string | ExecutionDocument,
+    document?: Omit<ExecutionDocument, "path">
   ) => {
     if (isSetString(pathOrDocument)) {
       documents[pathOrDocument] = defu(
@@ -167,13 +137,16 @@ export async function createExecutionContext<
         },
         document,
         {
-          source: []
+          chunks: [],
+          meta: {}
         }
       );
     } else {
       documents[pathOrDocument.path] = defu(pathOrDocument, document);
     }
   };
+
+  let specValue: TSpec | undefined;
 
   const context = {
     ...sessionContext,
@@ -186,13 +159,13 @@ export async function createExecutionContext<
     output,
     documents,
     spec() {
-      if (!this["~spec"]) {
+      if (!specValue) {
         throw new Error(
           "The specification was accessed prior to the input processing."
         );
       }
 
-      return this["~spec"] as TSpec;
+      return specValue;
     },
     addDocument,
     meta: {
@@ -200,7 +173,19 @@ export async function createExecutionContext<
       executedAt: new Date(),
       executedBy: ""
     }
-  } as unknown as Unstable_ExecutionContext<TSpec, TOptions, TReturns>;
+  } as unknown as Unstable_ExecutionContext<TSpec, TOptions, TReturns> & {
+    "~spec"?: TSpec;
+  };
+
+  Object.defineProperty(context, "~spec", {
+    get() {
+      return specValue;
+    },
+    set(value: TSpec) {
+      specValue = value;
+    },
+    enumerable: false
+  });
 
   return context;
 }

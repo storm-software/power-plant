@@ -18,12 +18,11 @@
 
 import type {
   InferCreateOutputOptions,
+  MetaConfig,
   Output,
   OutputConfig,
   OutputConfigObject,
   OutputFunction,
-  OutputMeta,
-  OutputMetaConfig,
   SchemaConfigObject,
   SchemaOf
 } from "@power-plant/core";
@@ -35,41 +34,26 @@ import type {
 import { mergeMetadata } from "@power-plant/schema";
 import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
-import { isFunction } from "@stryke/type-checks/is-function";
 import { resolveMeta, resolveMetaDescription } from "../helpers/meta";
 import { isOutputConfigObject } from "../helpers/type-checks";
 import { createSchema } from "./schema";
 
 /**
- * Extracts and normalizes {@link OutputMeta | output metadata} from a given {@link OutputMetaConfig}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
+ * Extracts and normalizes output metadata from a given configuration. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
  *
  * @param schema - The schema that the specification is expected to conform to.
  * @param config - The output metadata config to extract and normalize.
  * @returns The normalized output metadata.
  */
-export function extractOutputMeta<TSpec, TOptions extends object>(
-  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
-  config?: OutputMetaConfig<TSpec, TOptions>
-): OutputMeta<TSpec, TOptions> {
+export function extractOutputMeta<TSpec>(
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec>,
+  config?: MetaConfig
+): MetaConfig {
   const jsonSchema = schema?.schema ?? {};
-  const meta = resolveMeta<TSpec, TOptions>(schema, config) as OutputMeta<
-    TSpec,
-    TOptions
-  >;
+  const meta = resolveMeta(schema, config);
 
   meta.description = resolveMetaDescription(
-    isFunction(meta.title)
-      ? async (spec: TSpec, options: TOptions) => {
-          const title = await Promise.resolve(
-            (meta.title as (spec: TSpec, options: TOptions) => string)(
-              spec,
-              options
-            )
-          );
-
-          return `Accepts a ${title ?? ""} specification and processes it with a {title} output.`;
-        }
-      : `Accepts a ${meta.title ?? ""} specification and processes it with a {title} output.`,
+    `Accepts a ${meta.title ?? ""} specification and processes it with a {title} output.`,
     jsonSchema,
     meta,
     config?.description
@@ -91,7 +75,7 @@ export async function createOutput<
   TOptions extends object,
   TReturns = void
 >(
-  schema: SchemaOf<TSpec, TOptions>,
+  schema: SchemaOf<TSpec>,
   config: OutputConfig<TSpec, TOptions, TReturns>,
   options: InferCreateOutputOptions<typeof config> = {}
 ): Promise<Output<TSpec, TOptions, TReturns>> {
@@ -103,12 +87,12 @@ export async function createOutput<
     ? config
     : { output: config, meta: {} };
 
-  let resolvedSchema: SchemaOf<TSpec, TOptions> = schema;
+  let resolvedSchema: SchemaOf<TSpec> = schema;
   if (configSchema) {
     let resolvedConfigSchema:
       | SchemaSourceConfig<TSpec>
       | SchemaEnvelopeOf<TSpec>
-      | SchemaConfigObject<TSpec, TOptions>
+      | SchemaConfigObject<TSpec>
       | undefined;
 
     if (isLoadReference(configSchema)) {
@@ -116,7 +100,7 @@ export async function createOutput<
         resolvedConfigSchema = await load<
           | SchemaSourceConfig<TSpec>
           | SchemaEnvelopeOf<TSpec>
-          | SchemaConfigObject<TSpec, TOptions>
+          | SchemaConfigObject<TSpec>
         >(configSchema, options);
       } catch {
         // Do nothing
@@ -126,10 +110,7 @@ export async function createOutput<
     }
 
     if (resolvedConfigSchema) {
-      resolvedSchema = await createSchema<TSpec, TOptions>(
-        resolvedConfigSchema,
-        options
-      );
+      resolvedSchema = await createSchema<TSpec>(resolvedConfigSchema, options);
       resolvedSchema.schema = mergeMetadata<TSpec>(
         resolvedSchema.schema,
         schema.schema
@@ -166,6 +147,6 @@ export async function createOutput<
   return {
     schema: resolvedSchema,
     output: resolvedOutput,
-    meta: extractOutputMeta<TSpec, TOptions>(resolvedSchema, meta)
+    meta: extractOutputMeta<TSpec>(resolvedSchema, meta)
   };
 }

@@ -26,7 +26,7 @@ const asyncapiSchema = z.fromJSONSchema(
 );
 export type AsyncAPISchema = z.infer<typeof asyncapiSchema>;
 
-export default defineSchema<AsyncAPISchema, any>({
+export default defineSchema<AsyncAPISchema>({
   meta: {
     name: "asyncapi-schema",
     title: "AsyncAPI Schema",

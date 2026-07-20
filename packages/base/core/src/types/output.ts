@@ -20,7 +20,7 @@ import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
 import type { GeneratedDocument } from "./generator";
-import type { Meta, MetaConfig } from "./meta";
+import type { MetaConfig } from "./meta";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
 export type OutputFunction<TSpec, TOptions extends object, TReturns = void> = (
@@ -28,26 +28,6 @@ export type OutputFunction<TSpec, TOptions extends object, TReturns = void> = (
   options: TOptions,
   documents: Record<string, GeneratedDocument<TSpec, TOptions>>
 ) => MaybePromise<TReturns>;
-
-export interface OutputMetaConfig<
-  TSpec,
-  TOptions extends object
-> extends MetaConfig<TSpec, TOptions> {
-  /**
-   * A string that describes how the specification will be extracted or generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  produces?: string;
-}
-
-export interface OutputMeta<TSpec, TOptions extends object> extends Meta<
-  TSpec,
-  TOptions
-> {
-  /**
-   * A string that describes how the specification will be extracted or generated. This property can provide context about the source of the specification, such as whether it is derived from a file, a database, an API, or any other source. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the expected data when used in conjunction with compatible tools.
-   */
-  produces?: string;
-}
 
 export interface OutputConfigObject<
   TSpec,
@@ -57,12 +37,12 @@ export interface OutputConfigObject<
   /**
    * The schema that defines the structure of the specification output for the generator. This schema is used to validate the output specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec>;
 
   /**
    * Optional metadata that provides contextual information for the output.
    */
-  meta?: OutputMetaConfig<TSpec, TOptions>;
+  meta?: MetaConfig;
 
   /**
    * The output implementation, either as a callable function or a file reference.
@@ -85,12 +65,12 @@ export interface Output<TSpec, TOptions extends object, TReturns = void> {
   /**
    * The schema that defines the structure of the specification output for the generator. This schema is used to validate the output specification and ensure that it conforms to the expected format before being processed by the generator.
    */
-  schema: SchemaOf<TSpec, TOptions>;
+  schema: SchemaOf<TSpec>;
 
   /**
    * Optional metadata that provides contextual information for the output.
    */
-  meta?: OutputMeta<TSpec, TOptions>;
+  meta?: MetaConfig;
 
   /**
    * The output of the generator, which can be used to specify where the generator sends its output data. This can be defined as a function that takes the specification and returns a value, or it can be a static value.

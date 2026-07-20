@@ -16,83 +16,12 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  Execution,
-  ExtractedExecution,
-  ExtractedExecutionDocument,
-  ExtractedExecutionSource,
-  InferExtractedMeta,
-  Meta,
-  MetaValue
-} from "@power-plant/core";
-import { isFunction } from "@stryke/type-checks/is-function";
-
-export async function extractMetaValue<TSpec, TOptions extends object, TValue>(
-  metaValue: MetaValue<TSpec, TOptions, TValue>,
-  spec: TSpec,
-  options: TOptions
-): Promise<TValue> {
-  return isFunction(metaValue)
-    ? Promise.resolve(metaValue(spec, options))
-    : Promise.resolve(metaValue);
-}
-
-export async function extractMeta<TSpec, TOptions extends object>(
-  meta: Meta<TSpec, TOptions>,
-  spec: TSpec,
-  options: TOptions
-): Promise<InferExtractedMeta<Meta<TSpec, TOptions>>> {
-  return Object.fromEntries(
-    await Promise.all(
-      Object.entries(meta).map(async ([key, value]) => {
-        const extractedValue = await extractMetaValue(value, spec, options);
-
-        return [key, extractedValue];
-      })
-    )
-  ) as InferExtractedMeta<Meta<TSpec, TOptions>>;
-}
+import type { Execution } from "@power-plant/core";
 
 export async function extractExecution<TSpec, TOptions extends object>(
   execution: Execution<TSpec, TOptions>,
-  spec: TSpec,
-  options: TOptions
-): Promise<ExtractedExecution<TSpec, TOptions>> {
-  const extractedDocuments: Record<
-    string,
-    ExtractedExecutionDocument<TSpec, TOptions>
-  > = {};
-
-  for (const [path, document] of Object.entries(execution.documents)) {
-    const extractedSources: ExtractedExecutionSource<TSpec, TOptions>[] = [];
-
-    for (const source of document.source) {
-      const extractedSource: ExtractedExecutionSource<TSpec, TOptions> = {
-        ...source,
-        meta: await extractMeta(source.meta, spec, options)
-      };
-      extractedSources.push(extractedSource);
-    }
-
-    const extractedDocument: ExtractedExecutionDocument<TSpec, TOptions> = {
-      ...document,
-      source: extractedSources,
-      meta: await extractMeta(document.meta, spec, options)
-    };
-
-    extractedDocuments[path] = extractedDocument;
-  }
-
-  const meta = await extractMeta(execution.meta, spec, options);
-
-  return {
-    ...execution,
-    documents: extractedDocuments,
-    meta: {
-      ...meta,
-      executionId: execution.meta.executionId,
-      executedAt: execution.meta.executedAt,
-      executedBy: execution.meta.executedBy
-    } as InferExtractedMeta<Execution<TSpec, TOptions>["meta"]>
-  };
+  _spec: TSpec,
+  _options: TOptions
+): Promise<Execution<TSpec, TOptions>> {
+  return execution;
 }

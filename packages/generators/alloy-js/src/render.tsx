@@ -49,7 +49,7 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
   spec: TSpec,
   children: Children
 ): Promise<GeneratorFunctionResult<TSpec, TOptions>> {
-  const meta = {} as Record<string, MetaConfig<TSpec, TOptions>>;
+  const meta = {} as Record<string, MetaConfig>;
   const { cwd, logger } = context;
   const output = await renderAsync(
     <Output context={context} spec={spec} meta={meta}>
@@ -109,7 +109,7 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
           defu(chunk, {
             meta: meta[targetPath] ?? {}
           })
-        ) as ExecutionDocumentChunk<TSpec, TOptions>[]
+        ) as ExecutionDocumentChunk[]
       };
     }
   }

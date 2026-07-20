@@ -20,31 +20,29 @@ import type { SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { DeepPartial, MaybePromise } from "@stryke/types/base";
 import type { UserConfig } from "./config";
-import type { ExecutionDocument, ExecutionDocumentChunk } from "./execution";
 import type { Input, InputConfig } from "./input";
 import type { MetaConfig } from "./meta";
 import type { Output, OutputConfig } from "./output";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
-export interface GeneratorMeta<
-  TSpec,
-  TOptions extends object
-> extends MetaConfig<TSpec, TOptions> {
+export type GeneratorMeta<TSpec, TOptions extends object> = MetaConfig & {
   /**
-   * A string description (or a function that returns a string) outlining the purpose or behavior of the generator.
+   * A string description outlining the purpose or behavior of the generator.
    */
   description?: string;
+};
+
+export interface GeneratedDocumentChunk {
+  content?: string;
+  meta?: MetaConfig;
 }
 
-export type GeneratedDocument<TSpec, TOptions extends object> = Partial<
-  Omit<ExecutionDocument<TSpec, TOptions>, "source">
-> &
-  Pick<ExecutionDocument<TSpec, TOptions>, "path"> & {
-    /**
-     * The sources of the document.
-     */
-    chunks?: DeepPartial<ExecutionDocumentChunk<TSpec, TOptions>>[];
-  };
+export interface GeneratedDocument<TSpec, TOptions extends object> {
+  path: string;
+  language?: string;
+  chunks?: DeepPartial<GeneratedDocumentChunk>[];
+  meta?: MetaConfig;
+}
 
 export type GeneratorFunction<TSpec, TOptions extends object> = (
   spec: TSpec,
@@ -94,7 +92,7 @@ export interface GeneratorConfigObject<
   /**
    * The schema config that defines the structure of the specification object for this generator.
    */
-  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec, TOptions>;
+  schema?: SchemaConfig<TSpec> | SchemaConfigObject<TSpec>;
 
   /**
    * The input config for the generator specification.
@@ -131,7 +129,7 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   /**
    * The schema config that defines the structure of the specification object for this generator.
    */
-  schema: SchemaOf<TSpec, TOptions>;
+  schema: SchemaOf<TSpec>;
 
   /**
    * The input of the generator, which can be used to specify where the generator retrieves its input data from. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
@@ -155,4 +153,52 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   generator: (
     options: TOptions & UserConfig
   ) => Promise<GeneratorResult<TSpec, TOptions, TReturns>>;
+}
+
+export type InferSchemaConfig<T extends GeneratorConfig<any, any, any>> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : T extends GeneratorConfigObject<any, any, any>
+      ? T["schema"]
+      : never;
+
+export type InferGeneratorMeta<T extends GeneratorConfig<any, any, any>> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : T extends GeneratorConfigObject<any, any, any>
+      ? T["meta"]
+      : never;
+
+export type InferInputConfig<T extends GeneratorConfig<any, any, any>> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : T extends GeneratorConfigObject<any, any, any>
+      ? T["input"]
+      : never;
+
+export type InferOutputConfig<T extends GeneratorConfig<any, any, any>> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : T extends GeneratorConfigObject<any, any, any>
+      ? T["output"]
+      : never;
+
+export type InferGeneratorFunction<T extends GeneratorConfig<any, any, any>> =
+  T extends LoadReference
+    ? InferLoadOptions<T>
+    : T extends GeneratorConfigObject<any, any, any>
+      ? T["generator"]
+      : never;
+
+export type InferGeneratorResult<T extends GeneratorConfig<any, any, any>> =
+  InferGeneratorFunction<T> extends GeneratorFunction<any, any>
+    ? Awaited<ReturnType<InferGeneratorFunction<T>>>
+    : never;
+
+export interface InferGenerator<T extends GeneratorConfig<any, any, any>> {
+  meta?: InferGeneratorMeta<T>;
+  schema: InferSchemaConfig<T>;
+  input: InferInputConfig<T>;
+  output: InferOutputConfig<T>;
+  generator: InferGeneratorFunction<T>;
 }

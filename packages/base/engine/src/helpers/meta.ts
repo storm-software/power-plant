@@ -17,11 +17,9 @@
  ------------------------------------------------------------------- */
 
 import type {
-  Meta,
   MetaConfig,
   MetaLink,
-  MetaValue,
-  SchemaMeta,
+  SchemaMetaConfig,
   SchemaMetaExample,
   SchemaOf
 } from "@power-plant/core";
@@ -35,7 +33,6 @@ import { getUnique } from "@stryke/helpers/get-unique";
 import { kebabCase } from "@stryke/string-format/kebab-case";
 import { titleCase } from "@stryke/string-format/title-case";
 import { isDate } from "@stryke/type-checks/is-date";
-import { isFunction } from "@stryke/type-checks/is-function";
 import { isNumber } from "@stryke/type-checks/is-number";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import { isSetString } from "@stryke/type-checks/is-set-string";
@@ -59,16 +56,12 @@ export function formatMetaVersion(value: string | number | Date): string {
  * @param input - The input from which to extract the version. It can be a string, number, undefined, or Date object.
  * @returns A string representing the extracted version information.
  */
-export function resolveMetaVersion<TSpec, TOptions extends object>(
+export function resolveMetaVersion(
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>,
-  input?: MetaValue<TSpec, TOptions, string | number | Date>
-): MetaValue<TSpec, TOptions, string> {
+  meta: Partial<MetaConfig>,
+  input?: string | number | Date
+): string {
   const value = input ?? meta?.version ?? schema?.version;
-  if (isFunction(value)) {
-    return async (spec: TSpec, options: TOptions) =>
-      formatMetaVersion(await Promise.resolve(value(spec, options)));
-  }
 
   return formatMetaVersion(value as string | number | Date);
 }
@@ -81,11 +74,11 @@ export function resolveMetaVersion<TSpec, TOptions extends object>(
  * @param input - An explicit name value to prioritize when provided.
  * @returns The resolved metadata name.
  */
-export function resolveMetaName<TSpec, TOptions extends object>(
+export function resolveMetaName(
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>,
-  input?: MetaValue<TSpec, TOptions, string>
-): MetaValue<TSpec, TOptions, string> {
+  meta: Partial<MetaConfig>,
+  input?: string
+): string {
   return (
     input ??
     meta.name ??
@@ -106,25 +99,14 @@ export function resolveMetaName<TSpec, TOptions extends object>(
  * @param meta - Metadata values used to resolve name and version.
  * @returns The resolved metadata identifier, or a generated id when no name is available.
  */
-export function resolveMetaId<TSpec, TOptions extends object>(
+export function resolveMetaId(
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>
-): MetaValue<TSpec, TOptions, string> {
-  const name = resolveMetaName<TSpec, TOptions>(schema, meta);
-  const version = resolveMetaVersion<TSpec, TOptions>(schema, meta);
+  meta: Partial<MetaConfig>
+): string {
+  const name = resolveMetaName(schema, meta);
+  const version = resolveMetaVersion(schema, meta);
 
-  return name
-    ? isFunction(name)
-      ? isFunction(version)
-        ? async (spec: TSpec, options: TOptions) =>
-            `${kebabCase(await Promise.resolve(name(spec, options)))}@${await Promise.resolve(version(spec, options))}`
-        : async (spec: TSpec, options: TOptions) =>
-            `${kebabCase(await Promise.resolve(name(spec, options)))}@${version}`
-      : isFunction(version)
-        ? async (spec: TSpec, options: TOptions) =>
-            `${kebabCase(name)}@${await Promise.resolve(version(spec, options))}`
-        : `${kebabCase(name)}@${version}`
-    : uuid();
+  return name ? `${kebabCase(name)}@${version}` : uuid();
 }
 
 /**
@@ -135,24 +117,17 @@ export function resolveMetaId<TSpec, TOptions extends object>(
  * @param input - An explicit display name value to prioritize when provided.
  * @returns The resolved metadata display name.
  */
-export function resolveMetaTitle<TSpec, TOptions extends object>(
+export function resolveMetaTitle(
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>,
-  input?: MetaValue<TSpec, TOptions, string>
-): MetaValue<TSpec, TOptions, string> {
+  meta: Partial<MetaConfig>,
+  input?: string
+): string {
   const value = input ?? meta.title ?? schema?.title;
   if (value !== undefined) {
     return value;
   }
 
-  const name = meta.name;
-  if (isFunction(name)) {
-    return async (spec: TSpec, options: TOptions) => {
-      return titleCase(await Promise.resolve(name(spec, options)));
-    };
-  }
-
-  return titleCase(name ?? stringifyType(schema));
+  return titleCase(meta.name ?? stringifyType(schema));
 }
 
 /**
@@ -164,52 +139,17 @@ export function resolveMetaTitle<TSpec, TOptions extends object>(
  * @param input - An explicit description value to prioritize when provided.
  * @returns The resolved description, if available.
  */
-export function resolveMetaDescription<TSpec, TOptions extends object>(
-  template: MetaValue<TSpec, TOptions, string>,
+export function resolveMetaDescription(
+  template: string,
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>,
-  input?: MetaValue<TSpec, TOptions, string>
-): MetaValue<TSpec, TOptions, string> {
-  meta.title ??= resolveMetaTitle<TSpec, TOptions>(schema, meta);
+  meta: Partial<MetaConfig>,
+  input?: string
+): string {
+  meta.title ??= resolveMetaTitle(schema, meta);
 
-  const title = meta.title;
-  const defaultDescription: Meta<TSpec, TOptions>["description"] = isFunction(
-    title
-  )
-    ? async (spec: TSpec, options: TOptions) => {
-        return isFunction(template)
-          ? (await Promise.resolve(template(spec, options))).replaceAll(
-              /\{\s*title\s*\}/g,
-              await Promise.resolve(title(spec, options))
-            )
-          : template.replaceAll(
-              /\{\s*title\s*\}/g,
-              await Promise.resolve(title(spec, options))
-            );
-      }
-    : isFunction(template)
-      ? async (spec: TSpec, options: TOptions) =>
-          (await Promise.resolve(template(spec, options))).replaceAll(
-            /\{\s*title\s*\}/g,
-            await Promise.resolve(title)
-          )
-      : template.replaceAll(/\{\s*title\s*\}/g, title);
-
+  const title = meta.title ?? "";
+  const defaultDescription = template.replaceAll(/\{\s*title\s*\}/g, title);
   const resolved = input ?? meta.description ?? schema?.description;
-  if (isFunction(resolved)) {
-    const descriptionFn = resolved;
-
-    return async (spec: TSpec, options: TOptions) => {
-      const description = await Promise.resolve(descriptionFn(spec, options));
-      if (isSetString(description)) {
-        return description;
-      }
-
-      return isFunction(defaultDescription)
-        ? Promise.resolve(defaultDescription(spec, options))
-        : Promise.resolve(defaultDescription);
-    };
-  }
 
   return isSetString(resolved) ? resolved : defaultDescription;
 }
@@ -223,13 +163,11 @@ export function resolveMetaDescription<TSpec, TOptions extends object>(
  * @param input - Explicit examples to prioritize when provided.
  * @returns A normalized list of examples with generated descriptions when needed.
  */
-export function resolveMetaExample<TSpec, TOptions extends object>(
+export function resolveMetaExample<TSpec>(
   schema: JsonSchema,
-  meta: Partial<SchemaMeta<TSpec, TOptions>>,
-  input?:
-    | SchemaMetaExample<TSpec>
-    | MetaValue<TSpec, TOptions, SchemaMetaExample<TSpec>[]>
-): MetaValue<TSpec, TOptions, SchemaMetaExample<TSpec>[]> {
+  meta: Partial<SchemaMetaConfig<TSpec>>,
+  input?: SchemaMetaExample<TSpec> | SchemaMetaExample<TSpec>[]
+): SchemaMetaExample<TSpec>[] {
   const normalizeExamples = (examples: unknown[]): SchemaMetaExample<TSpec>[] =>
     examples
       .map((example: unknown, i: number) =>
@@ -255,10 +193,6 @@ export function resolveMetaExample<TSpec, TOptions extends object>(
       .filter(Boolean) as SchemaMetaExample<TSpec>[];
 
   const value = input ?? meta.examples ?? schema?.examples ?? [];
-  if (isFunction(value)) {
-    return async (spec: TSpec, options: TOptions) =>
-      normalizeExamples(toArray(await Promise.resolve(value(spec, options))));
-  }
 
   return normalizeExamples(toArray(value));
 }
@@ -271,31 +205,16 @@ export function resolveMetaExample<TSpec, TOptions extends object>(
  * @param input - Explicit links to prioritize when provided.
  * @returns A unique list of metadata links.
  */
-export function resolveMetaLinks<TSpec, TOptions extends object>(
+export function resolveMetaLinks(
   schema: JsonSchema,
-  meta: Partial<Meta<TSpec, TOptions>>,
-  input?: MetaValue<TSpec, TOptions, MetaLink[]>
-): MetaValue<TSpec, TOptions, MetaLink[]> {
-  return isFunction(input) || isFunction(meta.links)
-    ? async (spec: TSpec, options: TOptions) =>
-        getUnique(
-          toArray(
-            isFunction(input)
-              ? await Promise.resolve(input(spec, options))
-              : input
-          )
-            .concat(
-              isFunction(meta.links)
-                ? await Promise.resolve(meta.links(spec, options))
-                : (meta.links ?? [])
-            )
-            .concat(schema?.docs ?? [])
-        )
-    : getUnique(
-        toArray(input)
-          .concat(meta.links ?? [])
-          .concat(schema?.docs ?? [])
-      );
+  meta: Partial<MetaConfig>,
+  input?: MetaLink[]
+): MetaLink[] {
+  return getUnique(
+    toArray(input)
+      .concat(meta.links ?? [])
+      .concat(schema?.docs ?? [])
+  );
 }
 
 /**
@@ -305,14 +224,14 @@ export function resolveMetaLinks<TSpec, TOptions extends object>(
  * @param config - Optional metadata configuration to extract and normalize.
  * @returns The normalized specification metadata.
  */
-export function resolveMeta<TSpec, TOptions extends object>(
-  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec, TOptions>,
-  config?: MetaConfig<TSpec, TOptions>
-): Meta<TSpec, TOptions> {
+export function resolveMeta<TSpec>(
+  schema: ExtractedSchemaEnvelope<TSpec> | SchemaOf<TSpec>,
+  config?: MetaConfig
+): MetaConfig {
   const extractedSchema = isSchemaOf<TSpec>(schema)
     ? schema
     : (schema ?? ({ schema: {} } as ExtractedSchemaEnvelope<TSpec>));
-  const meta = {} as Meta<TSpec, TOptions>;
+  const meta = {} as MetaConfig;
 
   meta.name = resolveMetaName(extractedSchema.schema, meta, config?.name);
   meta.version = resolveMetaVersion(

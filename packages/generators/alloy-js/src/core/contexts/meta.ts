@@ -24,8 +24,8 @@ import type { MetaConfig } from "@power-plant/core";
  * The Meta context used in template rendering.
  */
 export const MetaContext: ComponentContext<
-  Record<string, MetaConfig<any, any>>
-> = createNamedContext<Record<string, MetaConfig<any, any>>>("MetaContext");
+  Record<string, MetaConfig>
+> = createNamedContext<Record<string, MetaConfig>>("MetaContext");
 
 /**
  * Hook to access the {@link MetaContext | Meta context}.
@@ -33,7 +33,7 @@ export const MetaContext: ComponentContext<
  * @returns The Meta context.
  * @throws An error if the Meta context is not set.
  */
-export function useMeta(): Record<string, MetaConfig<any, any>> {
+export function useMeta(): Record<string, MetaConfig> {
   const context = useContext(MetaContext);
   if (!context) {
     throw new Error(
@@ -50,6 +50,6 @@ export function useMeta(): Record<string, MetaConfig<any, any>> {
  * @returns The Meta context or undefined if not set.
  */
 export function useMetaSafe():
-  Record<string, MetaConfig<any, any>> | undefined {
+  Record<string, MetaConfig> | undefined {
   return useContext(MetaContext);
 }

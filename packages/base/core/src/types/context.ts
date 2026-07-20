@@ -73,7 +73,7 @@ export interface ExecutionContext<
   /**
    * The schema for the execution.
    */
-  get schema(): SchemaOf<TSpec, TOptions>;
+  get schema(): SchemaOf<TSpec>;
 
   /**
    * The input for the execution.
@@ -88,7 +88,7 @@ export interface ExecutionContext<
   /**
    * The documents that are currently being processed, indexed by the document path.
    */
-  get documents(): Record<string, ExecutionDocument<TSpec, TOptions>>;
+  get documents(): Record<string, ExecutionDocument>;
 
   /**
    * Adds a document to the currently processing documents.
@@ -97,7 +97,7 @@ export interface ExecutionContext<
    * @param document - The document to add (without the path), if {@link pathOrDocument} is a string representing the document path.
    */
   addDocument: (
-    pathOrDocument: string | ExecutionDocument<TSpec, TOptions>,
-    document?: Omit<ExecutionDocument<TSpec, TOptions>, "path">
+    pathOrDocument: string | ExecutionDocument,
+    document?: Omit<ExecutionDocument, "path">
   ) => void;
 }

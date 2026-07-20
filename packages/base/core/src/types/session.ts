@@ -17,20 +17,18 @@
  ------------------------------------------------------------------- */
 
 import type { Base } from "./base";
-import type { Device } from "./device";
 import type { Execution } from "./execution";
-import type { User } from "./user";
 
 export interface Session extends Base {
   /**
    * The device that started the session.
    */
-  device: Device;
+  device: string;
 
   /**
    * The user who started the session.
    */
-  user: User;
+  user: string;
 
   /**
    * The executions of the session.

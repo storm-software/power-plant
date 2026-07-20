@@ -85,9 +85,9 @@ export default defineOutput<any, Options>({
     await Promise.all(
       Object.values(documents).map(async document => {
         return Promise.all(
-          document.source
-            ?.filter(source => isSetString(source?.content))
-            ?.map(async source =>
+          document.chunks
+            ?.filter(chunk => isSetString(chunk?.content))
+            ?.map(async chunk =>
               outputStorage.setItem(
                 isValidFileSystemPath(document.path)
                   ? appendPath(
@@ -99,7 +99,7 @@ export default defineOutput<any, Options>({
                       ).outputPath || cwd
                     )
                   : document.path,
-                String(source.content)
+                String(chunk.content)
               )
             ) ?? []
         );
