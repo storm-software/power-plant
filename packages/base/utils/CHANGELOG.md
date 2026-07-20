@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Utils
 
+## [0.0.3](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.3) (07/20/2026)
+
+### Features
+
+- **utils:** Added `combineInputs`, `combineOutputs`, `pipeInputs`, and `pipeOutputs` functions ([823ee69](https://github.com/storm-software/power-plant/commit/823ee69))
+
 ## [0.0.2](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.2) (07/20/2026)
 
 ### Features
