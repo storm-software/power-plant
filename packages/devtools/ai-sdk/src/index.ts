@@ -16,18 +16,16 @@
 
  ------------------------------------------------------------------- */
 
-/* eslint-disable */
-
-import type { Engine } from "@power-plant/engine";
-import { createEngine } from "@power-plant/engine";
 import type { Tool } from "@ai-sdk/provider-utils";
+import type { ExecuteFunction } from "@power-plant/core";
+import { createExecute } from "@power-plant/core";
 import { tool } from "ai";
 import { z } from "zod/mini";
 
-let enginePromise: Promise<Engine> | undefined;
+let enginePromise: Promise<ExecuteFunction> | undefined;
 
-function getEngine(): Promise<Engine> {
-  enginePromise ??= createEngine();
+async function getExecute(): Promise<ExecuteFunction> {
+  enginePromise ??= createExecute();
 
   return enginePromise;
 }
@@ -45,8 +43,8 @@ export const generate = tool({
     "Generate text (including source code, documentation, and more) with Power Plant generators.",
   inputSchema,
   execute: async ({ generator, spec, options }) => {
-    const engine = await getEngine();
+    const execute = await getExecute();
 
-    return engine.execute(generator, { ...options, spec });
+    return execute(generator, { ...options, spec });
   }
 }) as Tool<GenerateInput, unknown>;

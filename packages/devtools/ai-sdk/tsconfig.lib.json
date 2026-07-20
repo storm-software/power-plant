@@ -4,10 +4,7 @@
     "tsBuildInfoFile": "out-tsc/tsconfig.tsbuildinfo",
     "outDir": "./out-tsc"
   },
-  "references": [
-    { "path": "../../base/core/tsconfig.lib.json" },
-    { "path": "../../base/engine/tsconfig.lib.json" }
-  ],
+  "references": [{ "path": "../../base/core/tsconfig.lib.json" }],
   "include": [
     "src/**/*.ts",
     "src/**/*.js",

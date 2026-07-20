@@ -17,7 +17,8 @@
  ------------------------------------------------------------------- */
 
 import type { Storage } from "unstorage";
-import type { Execution, ExecutionDocument } from "./execution";
+import type { Execution } from "./execution";
+import type { GeneratedDocument } from "./generator";
 import type { Input } from "./input";
 import type { Output } from "./output";
 import type { SchemaOf } from "./schema";
@@ -59,7 +60,7 @@ export interface ExecutionContext<
   TOptions extends object,
   TReturns = void
 >
-  extends SessionContext, Execution<TSpec, TOptions> {
+  extends SessionContext, Execution<TSpec> {
   /**
    * The options for the execution.
    */
@@ -88,7 +89,7 @@ export interface ExecutionContext<
   /**
    * The documents that are currently being processed, indexed by the document path.
    */
-  get documents(): Record<string, ExecutionDocument>;
+  get documents(): Record<string, GeneratedDocument>;
 
   /**
    * Adds a document to the currently processing documents.
@@ -97,7 +98,12 @@ export interface ExecutionContext<
    * @param document - The document to add (without the path), if {@link pathOrDocument} is a string representing the document path.
    */
   addDocument: (
-    pathOrDocument: string | ExecutionDocument,
-    document?: Omit<ExecutionDocument, "path">
+    pathOrDocument: string | GeneratedDocument,
+    document?: Omit<GeneratedDocument, "path">
   ) => void;
+}
+
+export interface LocalStore {
+  device?: string;
+  user?: string;
 }

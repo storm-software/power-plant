@@ -25,19 +25,12 @@ import type { MetaConfig } from "./meta";
 import type { Output, OutputConfig } from "./output";
 import type { SchemaConfigObject, SchemaOf } from "./schema";
 
-export type GeneratorMeta<TSpec, TOptions extends object> = MetaConfig & {
-  /**
-   * A string description outlining the purpose or behavior of the generator.
-   */
-  description?: string;
-};
-
 export interface GeneratedDocumentChunk {
   content?: string;
   meta?: MetaConfig;
 }
 
-export interface GeneratedDocument<TSpec, TOptions extends object> {
+export interface GeneratedDocument {
   path: string;
   language?: string;
   chunks?: DeepPartial<GeneratedDocumentChunk>[];
@@ -47,7 +40,7 @@ export interface GeneratedDocument<TSpec, TOptions extends object> {
 export type GeneratorFunction<TSpec, TOptions extends object> = (
   spec: TSpec,
   options: TOptions
-) => MaybePromise<Record<string, GeneratedDocument<TSpec, TOptions>>>;
+) => MaybePromise<Record<string, GeneratedDocument>>;
 
 export type GeneratorFunctionResult<TSpec, TOptions extends object> = Awaited<
   ReturnType<GeneratorFunction<TSpec, TOptions>>
@@ -87,7 +80,7 @@ export interface GeneratorConfigObject<
   /**
    * Optional metadata about the generator, such as a description of the output it produces.
    */
-  meta?: GeneratorMeta<TSpec, TOptions>;
+  meta?: MetaConfig;
 
   /**
    * The schema config that defines the structure of the specification object for this generator.
@@ -124,7 +117,7 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   /**
    * Optional metadata about the generator, such as a description of the output it produces.
    */
-  meta?: GeneratorMeta<TSpec, TOptions>;
+  meta?: MetaConfig;
 
   /**
    * The schema config that defines the structure of the specification object for this generator.
@@ -162,7 +155,7 @@ export type InferSchemaConfig<T extends GeneratorConfig<any, any, any>> =
       ? T["schema"]
       : never;
 
-export type InferGeneratorMeta<T extends GeneratorConfig<any, any, any>> =
+export type InferMeta<T extends GeneratorConfig<any, any, any>> =
   T extends LoadReference
     ? InferLoadOptions<T>
     : T extends GeneratorConfigObject<any, any, any>
@@ -196,7 +189,7 @@ export type InferGeneratorResult<T extends GeneratorConfig<any, any, any>> =
     : never;
 
 export interface InferGenerator<T extends GeneratorConfig<any, any, any>> {
-  meta?: InferGeneratorMeta<T>;
+  meta?: InferMeta<T>;
   schema: InferSchemaConfig<T>;
   input: InferInputConfig<T>;
   output: InferOutputConfig<T>;

@@ -19,5 +19,5 @@
 export * from "./config";
 export * from "./context";
 export * from "./define";
-export * from "./type-checks";
+export * from "./execute";
 export type * from "./types";

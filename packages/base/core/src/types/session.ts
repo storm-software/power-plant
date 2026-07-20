@@ -33,5 +33,5 @@ export interface Session extends Base {
   /**
    * The executions of the session.
    */
-  executions: Execution<any, any>[];
+  executions: Execution<any>[];
 }

@@ -5,8 +5,8 @@
     "outDir": "./out-tsc"
   },
   "references": [
-    { "path": "../schema/tsconfig.lib.json" },
-    { "path": "../core/tsconfig.lib.json" }
+    { "path": "../core/tsconfig.lib.json" },
+    { "path": "../schema/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

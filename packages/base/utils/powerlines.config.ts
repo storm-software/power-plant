@@ -16,18 +16,20 @@
 
  ------------------------------------------------------------------- */
 
-import type { GeneratorConfig, UserConfig } from "@power-plant/core";
-import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-export type InferEngineOptions<
-  TGeneratorConfig extends GeneratorConfig<any, any, any>
-> = TGeneratorConfig extends LoadReference
-  ? InferLoadOptions<TGeneratorConfig> & UserConfig
-  : UserConfig;
+const config: UserConfig = defineConfig({
+  input: ["src/index.ts", "src/pipe.ts", "src/combine.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
+  },
+  resolve: {
+    skipNodeModulesBundle: true
+  },
+  plugins: [tsdown()]
+});
 
-export interface Engine {
-  execute: <TSpec, TOptions extends object, TReturns = void>(
-    generatorConfig: GeneratorConfig<TSpec, TOptions, TReturns>,
-    options: InferEngineOptions<typeof generatorConfig> & TOptions
-  ) => Promise<TReturns>;
-}
+export default config;

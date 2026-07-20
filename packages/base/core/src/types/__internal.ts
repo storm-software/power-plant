@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type { ExecutionContext } from "./context";
-import type { ExecutionDocument } from "./execution";
+import type { GeneratedDocument } from "./generator";
 import type { Input } from "./input";
 import type { Output } from "./output";
 import type { SchemaOf } from "./schema";
@@ -32,5 +32,5 @@ export interface Unstable_ExecutionContext<
   schema: SchemaOf<TSpec>;
   input: Input<TSpec, TOptions>;
   output: Output<TSpec, TOptions, TReturns>;
-  documents: Record<string, ExecutionDocument>;
+  documents: Record<string, GeneratedDocument>;
 }

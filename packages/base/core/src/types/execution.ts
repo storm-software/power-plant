@@ -16,48 +16,13 @@
 
  ------------------------------------------------------------------- */
 
-import type { GeneratedDocument, GeneratorMeta } from "./generator";
+import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import type { UserConfig } from "./config";
+import type { GeneratedDocument, GeneratorConfig } from "./generator";
 import type { MetaConfig } from "./meta";
 import type { SchemaMetaConfig } from "./schema";
 
-export interface ExecutionDocumentChunk {
-  /**
-   * The content of the chunk.
-   */
-  content: string;
-
-  /**
-   * The metadata of the chunk.
-   */
-  meta: MetaConfig;
-}
-
-export interface ExecutionDocument {
-  /**
-   * The path of the document.
-   */
-  path: string;
-
-  /**
-   * The language of the document.
-   */
-  language?: string;
-
-  /**
-   * The chunks of the document.
-   */
-  chunks: ExecutionDocumentChunk[];
-
-  /**
-   * The metadata of the document.
-   */
-  meta: MetaConfig;
-}
-
-export interface ExecutionMeta<
-  TSpec,
-  TOptions extends object
-> extends MetaConfig {
+export interface ExecutionMeta<TSpec> extends MetaConfig {
   /**
    * A unique identifier for the execution, typically used by the backend systems.
    *
@@ -82,11 +47,6 @@ export interface ExecutionMeta<
   spec: TSpec;
 
   /**
-   * The metadata of the generator used to execute the source code during the execution.
-   */
-  generator: GeneratorMeta<TSpec, TOptions>;
-
-  /**
    * The metadata of the schema used to generate the source code during the execution.
    */
   schema: SchemaMetaConfig<TSpec>;
@@ -100,27 +60,39 @@ export interface ExecutionMeta<
    * The metadata of the output used to generate the source code during the execution.
    */
   output: MetaConfig;
+
+  /**
+   * The metadata of the generator used to execute the source code during the execution.
+   */
+  generator: MetaConfig;
 }
 
-export interface Execution<TSpec, TOptions extends object> {
+export interface Execution<TSpec> {
   /**
    * The documents of the execution, indexed by the document path.
    */
-  documents: Record<string, ExecutionDocument>;
+  documents: Record<string, GeneratedDocument>;
 
   /**
    * The metadata of the execution.
    */
-  meta: ExecutionMeta<TSpec, TOptions>;
+  meta: ExecutionMeta<TSpec>;
 }
 
-export type ExecutionResult<
-  TSpec,
-  TOptions extends object,
-  TReturns = void
-> = GeneratedDocument<TSpec, TOptions> & {
+export type ExecutionResult<TReturns = void> = GeneratedDocument & {
   /**
    * The returned value of the generator function.
    */
   returns?: TReturns;
 };
+
+export type InferEngineOptions<
+  TGeneratorConfig extends GeneratorConfig<any, any, any>
+> = TGeneratorConfig extends LoadReference
+  ? InferLoadOptions<TGeneratorConfig> & UserConfig
+  : UserConfig;
+
+export type ExecuteFunction = <TSpec, TOptions extends object, TReturns = void>(
+  generatorConfig: GeneratorConfig<TSpec, TOptions, TReturns>,
+  options: InferEngineOptions<typeof generatorConfig> & TOptions
+) => Promise<TReturns>;

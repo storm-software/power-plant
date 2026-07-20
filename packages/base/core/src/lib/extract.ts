@@ -16,20 +16,12 @@
 
  ------------------------------------------------------------------- */
 
-import tsdown from "@powerlines/plugin-tsdown";
-import type { UserConfig } from "powerlines";
-import { defineConfig } from "powerlines/config";
+import type { Execution } from "../types/execution";
 
-const config: UserConfig = defineConfig({
-  input: ["src/index.ts", "src/helpers/*.ts", "src/lib/*.ts"],
-  platform: "node",
-  output: {
-    format: ["cjs", "esm"]
-  },
-  resolve: {
-    skipNodeModulesBundle: true
-  },
-  plugins: [tsdown()]
-});
-
-export default config;
+export async function extractExecution<TSpec, TOptions extends object>(
+  execution: Execution<TSpec>,
+  _spec: TSpec,
+  _options: TOptions
+): Promise<Execution<TSpec>> {
+  return execution;
+}

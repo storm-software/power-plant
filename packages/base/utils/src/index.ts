@@ -16,12 +16,6 @@
 
  ------------------------------------------------------------------- */
 
-import type { Execution } from "@power-plant/core";
-
-export async function extractExecution<TSpec, TOptions extends object>(
-  execution: Execution<TSpec, TOptions>,
-  _spec: TSpec,
-  _options: TOptions
-): Promise<Execution<TSpec, TOptions>> {
-  return execution;
-}
+export * from "./combine";
+export * from "./pipe";
+export type * from "./types";

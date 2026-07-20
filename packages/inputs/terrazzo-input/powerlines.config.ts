@@ -26,6 +26,9 @@ const config: UserConfig = defineConfig({
   output: {
     format: ["cjs", "esm"]
   },
+  resolve: {
+    skipNodeModulesBundle: true
+  },
   plugins: [tsdown()]
 });
 

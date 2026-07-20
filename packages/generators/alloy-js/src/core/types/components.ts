@@ -19,17 +19,14 @@
 import type { Children } from "@alloy-js/core";
 import type { GeneratedDocument } from "@power-plant/core";
 
-export type OutputFile<TSpec, TOptions extends object> = Omit<
-  GeneratedDocument<TSpec, TOptions>,
-  "source"
-> & {
+export type OutputFile = Omit<GeneratedDocument, "source"> & {
   kind: "file";
 };
 
-export interface OutputDirectory<TSpec, TOptions extends object> {
+export interface OutputDirectory {
   kind: "directory";
   path: string;
-  content: (OutputDirectory<TSpec, TOptions> | OutputFile<TSpec, TOptions>)[];
+  content: (OutputDirectory | OutputFile)[];
 }
 
 /**

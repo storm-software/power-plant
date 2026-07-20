@@ -16,13 +16,13 @@
 
  ------------------------------------------------------------------- */
 
+import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type {
   GeneratorConfigObject,
   InputConfigObject,
   OutputConfigObject,
   SchemaConfigObject
-} from "@power-plant/core";
-import { isSetObject } from "@stryke/type-checks/is-set-object";
+} from "../types";
 
 /**
  * Checks if the provided configuration is a {@link GeneratorConfigObject}.

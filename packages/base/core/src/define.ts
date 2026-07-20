@@ -22,7 +22,7 @@ import {
   isInputConfigObject,
   isOutputConfigObject,
   isSchemaConfigObject
-} from "./type-checks";
+} from "./helpers/type-checks";
 import type { GeneratorConfigObject } from "./types/generator";
 import type { InputConfig, InputConfigObject } from "./types/input";
 import type { OutputConfig, OutputConfigObject } from "./types/output";

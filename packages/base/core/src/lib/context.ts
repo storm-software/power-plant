@@ -16,19 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  ExecutionDocument,
-  Input,
-  Logger,
-  Output,
-  SchemaOf,
-  SessionContext,
-  Settings,
-  UserConfig
-} from "@power-plant/core";
-import type { Unstable_ExecutionContext } from "@power-plant/core/types/__internal";
 import { getEnvPaths } from "@stryke/env/get-env-paths";
 import { readFileIfExisting } from "@stryke/fs/read-file";
+import { writeFile } from "@stryke/fs/write-file";
 import { joinPaths } from "@stryke/path/join-paths";
 import { isSetString } from "@stryke/type-checks/is-set-string";
 import { uuid } from "@stryke/unique-id/uuid";
@@ -36,7 +26,14 @@ import defu from "defu";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
-import type { LocalStore } from "../types/local-store";
+import type { UserConfig } from "../types/config";
+import type { LocalStore, SessionContext } from "../types/context";
+import type { GeneratedDocument } from "../types/generator";
+import type { Input } from "../types/input";
+import type { Output } from "../types/output";
+import type { SchemaOf } from "../types/schema";
+import type { Logger, Settings } from "../types/settings";
+import type { Unstable_ExecutionContext } from "../types/__internal";
 
 const logger: Logger = {
   // eslint-disable-next-line no-console
@@ -78,8 +75,22 @@ export async function createSessionContext(
       "{}"
   ) as LocalStore;
 
-  const device = store.device ?? os.hostname();
-  const user = store.user ?? os.userInfo().username;
+  const device = store.device || os.hostname() || uuid();
+  const user = store.user || os.userInfo().username || uuid();
+
+  if (!isSetString(store.device) || !isSetString(store.user)) {
+    await writeFile(
+      joinPaths(paths.data, ".local-store.json"),
+      JSON.stringify(
+        {
+          device,
+          user
+        },
+        null,
+        2
+      )
+    );
+  }
 
   return defu(
     {
@@ -125,10 +136,10 @@ export async function createExecutionContext<
   input: Input<TSpec, TOptions>,
   output: Output<TSpec, TOptions, TReturns>
 ): Promise<Unstable_ExecutionContext<TSpec, TOptions, TReturns>> {
-  const documents: Record<string, ExecutionDocument> = {};
+  const documents: Record<string, GeneratedDocument> = {};
   const addDocument = (
-    pathOrDocument: string | ExecutionDocument,
-    document?: Omit<ExecutionDocument, "path">
+    pathOrDocument: string | GeneratedDocument,
+    document?: Omit<GeneratedDocument, "path">
   ) => {
     if (isSetString(pathOrDocument)) {
       documents[pathOrDocument] = defu(

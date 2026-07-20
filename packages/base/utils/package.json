@@ -1,24 +1,15 @@
 {
-  "name": "@power-plant/ai-sdk",
-  "version": "0.0.12",
+  "name": "@power-plant/utils",
+  "version": "0.0.1",
   "private": false,
-  "description": "☢️ An AI SDK tool that allows AI models to leverage Power Plant generators to enhance their capabilities",
-  "keywords": ["ai", "ai-sdk", "power-plant", "storm-software"],
-  "homepage": "https://stormsoftware.com",
-  "bugs": {
-    "url": "https://stormsoftware.com/support",
-    "email": "support@stormsoftware.com"
-  },
-  "repository": {
-    "type": "github",
-    "url": "https://github.com/storm-software/power-plant.git",
-    "directory": "packages/devtools/ai-sdk"
-  },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/storm-software"
-  },
+  "description": "Various utilities that help in the development of Power Plant extensions",
+  "keywords": ["power-plant", "storm-software"],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/base/utils"
+  },
   "author": {
     "name": "Storm Software",
     "email": "contact@stormsoftware.com",
@@ -54,7 +45,35 @@
         "default": "./dist/index.mjs"
       }
     },
-    "./package.json": "./package.json"
+    "./combine": {
+      "require": {
+        "types": "./dist/combine.d.cts",
+        "default": "./dist/combine.cjs"
+      },
+      "import": {
+        "types": "./dist/combine.d.mts",
+        "default": "./dist/combine.mjs"
+      },
+      "default": {
+        "types": "./dist/combine.d.mts",
+        "default": "./dist/combine.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./pipe": {
+      "require": {
+        "types": "./dist/pipe.d.cts",
+        "default": "./dist/pipe.cjs"
+      },
+      "import": {
+        "types": "./dist/pipe.d.mts",
+        "default": "./dist/pipe.mjs"
+      },
+      "default": {
+        "types": "./dist/pipe.d.mts",
+        "default": "./dist/pipe.mjs"
+      }
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -62,14 +81,12 @@
   "typings": "dist/index.d.mts",
   "files": ["dist"],
   "dependencies": {
-    "@ai-sdk/provider": "catalog:",
-    "@ai-sdk/provider-utils": "catalog:",
+    "@power-plant/schema": "workspace:*",
     "@power-plant/core": "workspace:*",
     "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
-    "ai": "catalog:",
-    "zod": "catalog:"
+    "defu": "catalog:"
   },
   "devDependencies": {
     "@powerlines/plugin-tsdown": "catalog:",
