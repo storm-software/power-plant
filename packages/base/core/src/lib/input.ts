@@ -17,16 +17,6 @@
  ------------------------------------------------------------------- */
 
 import type {
-  InferCreateInputOptions,
-  Input,
-  InputConfig,
-  InputConfigObject,
-  InputFunction,
-  MetaConfig,
-  SchemaConfigObject,
-  SchemaOf
-} from "@power-plant/core";
-import type {
   ExtractedSchemaEnvelope,
   SchemaEnvelopeOf,
   SchemaSourceConfig
@@ -36,6 +26,16 @@ import { load } from "@stryke/resolve/load";
 import { isLoadReference } from "@stryke/resolve/type-checks";
 import { resolveMeta, resolveMetaDescription } from "../helpers/meta";
 import { isInputConfigObject } from "../helpers/type-checks";
+import type {
+  InferCreateInputOptions,
+  Input,
+  InputConfig,
+  InputConfigObject,
+  InputFunction,
+  MetaConfig,
+  SchemaConfigObject,
+  SchemaOf
+} from "../types";
 import { createSchema } from "./schema";
 
 /**

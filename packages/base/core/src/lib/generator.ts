@@ -16,23 +16,20 @@
 
  ------------------------------------------------------------------- */
 
+import { mapStorageToFileSystem } from "@power-plant/schema/storage";
+import { load } from "@stryke/resolve/load";
+import { isFunction } from "@stryke/type-checks/is-function";
+import type { UserConfig } from "vite";
+import { callAsyncExecutionContext } from "../context";
+import { isGeneratorConfigObject } from "../helpers/type-checks";
 import type {
-  ExecutionContext,
   Generator,
   GeneratorConfig,
   GeneratorConfigObject,
   GeneratorFunction,
   InferCreateGeneratorOptions,
-  SchemaConfigObject,
-  SessionContext,
-  UserConfig
-} from "@power-plant/core";
-import { callAsyncExecutionContext } from "@power-plant/core";
-import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
-import { mapStorageToFileSystem } from "@power-plant/schema/storage";
-import { load } from "@stryke/resolve/load";
-import { isFunction } from "@stryke/type-checks/is-function";
-import { isGeneratorConfigObject } from "../helpers/type-checks";
+  SessionContext
+} from "../types";
 import { createExecutionContext } from "./context";
 import { createInput } from "./input";
 import { createOutput } from "./output";
@@ -77,13 +74,10 @@ export async function createGenerator<
     configObject.schema = { type: "any" };
   }
 
-  const schema = await createSchema<TSpec>(
-    configObject.schema as
-      | SchemaSourceConfig<TSpec>
-      | SchemaEnvelopeOf<TSpec>
-      | SchemaConfigObject<TSpec>,
-    { storage: sessionContext.storage, ...options }
-  );
+  const schema = await createSchema<TSpec>(configObject.schema, {
+    storage: sessionContext.storage,
+    ...options
+  });
 
   let inputConfig = configObject.input;
   if (!inputConfig) {
@@ -122,40 +116,37 @@ export async function createGenerator<
       output
     );
 
-    return callAsyncExecutionContext(
-      context as unknown as ExecutionContext<TSpec, TOptions, TReturns>,
-      async () => {
-        const spec = isFunction(input.input)
-          ? await (
-              input.input as unknown as (
-                options: TOptions
-              ) => TSpec | Promise<TSpec>
-            )({ storage: context.storage, ...options })
-          : input.input;
+    return callAsyncExecutionContext(context, async () => {
+      const spec = isFunction(input.input)
+        ? await (
+            input.input as unknown as (
+              options: TOptions
+            ) => TSpec | Promise<TSpec>
+          )({ storage: context.storage, ...options })
+        : input.input;
 
-        context["~spec"] = spec;
+      context["~spec"] = spec;
 
-        let generatorFn!: GeneratorFunction<TSpec, TOptions>;
-        if (isFunction(configObject.generator)) {
-          generatorFn = configObject.generator;
-        } else {
-          generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
-            configObject.generator,
-            { storage: context.storage, ...options }
-          );
-        }
-
-        const documents = await generatorFn(spec, options);
-        const returns = await output.output(spec, options, documents);
-
-        return {
-          spec,
-          options,
-          documents,
-          returns
-        };
+      let generatorFn!: GeneratorFunction<TSpec, TOptions>;
+      if (isFunction(configObject.generator)) {
+        generatorFn = configObject.generator;
+      } else {
+        generatorFn = await load<GeneratorFunction<TSpec, TOptions>>(
+          configObject.generator,
+          { storage: context.storage, ...options }
+        );
       }
-    );
+
+      const documents = await generatorFn(spec, options);
+      const returns = await output.output(spec, options, documents);
+
+      return {
+        spec,
+        options,
+        documents,
+        returns
+      };
+    });
   };
 
   return {

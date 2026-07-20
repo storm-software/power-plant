@@ -17,15 +17,8 @@
  ------------------------------------------------------------------- */
 
 import type {
-  InferCreateSchemaOptions,
-  SchemaConfigObject,
-  SchemaMetaConfig,
-  SchemaOf
-} from "@power-plant/core";
-import type {
   ExtractedSchemaEnvelope,
-  SchemaEnvelopeOf,
-  SchemaSourceConfig
+  SchemaConfig
 } from "@power-plant/schema";
 import { extractSchemaWithSource } from "@power-plant/schema";
 import {
@@ -34,6 +27,12 @@ import {
   resolveMetaExample
 } from "../helpers/meta";
 import { isSchemaConfigObject } from "../helpers/type-checks";
+import type {
+  InferCreateSchemaOptions,
+  SchemaConfigObject,
+  SchemaMetaConfig,
+  SchemaOf
+} from "../types";
 
 /**
  * Extracts and normalizes {@link SchemaMetaConfig | schema metadata} from a given {@link SchemaMetaConfig}. This function ensures that the metadata is in a consistent format, converting version numbers to strings and filtering out any invalid or empty tags.
@@ -68,10 +67,7 @@ export function extractSchemaMeta<TSpec>(
  * @returns A promise that resolves to a normalized schema descriptor.
  */
 export async function createSchema<TSpec>(
-  input:
-    | SchemaSourceConfig<TSpec>
-    | SchemaEnvelopeOf<TSpec>
-    | SchemaConfigObject<TSpec>,
+  input: SchemaConfig<TSpec> | SchemaConfigObject<TSpec>,
   options: InferCreateSchemaOptions<typeof input> = {}
 ): Promise<SchemaOf<TSpec>> {
   const { meta, schema } = isSchemaConfigObject<TSpec>(input)

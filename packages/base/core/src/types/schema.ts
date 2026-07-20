@@ -18,6 +18,7 @@
 
 import type {
   InferExtractOptions,
+  SchemaConfig,
   SchemaEnvelopeOf,
   SchemaSourceConfig
 } from "@power-plant/schema";
@@ -54,12 +55,15 @@ export interface SchemaConfigObject<TSpec> {
 }
 
 export type InferCreateSchemaOptions<
-  T extends
-    SchemaSourceConfig<any> | SchemaEnvelopeOf<any> | SchemaConfigObject<any>
-> = T extends SchemaSourceConfig<any> | SchemaEnvelopeOf<any>
-  ? InferExtractOptions<T>
-  : // eslint-disable-next-line ts/no-empty-object-type
-    {};
+  T extends SchemaConfig<any> | SchemaConfigObject<any>
+> =
+  T extends SchemaConfigObject<any>
+    ? // eslint-disable-next-line ts/no-empty-object-type
+      {}
+    : T extends SchemaConfig<any>
+      ? InferExtractOptions<T>
+      : // eslint-disable-next-line ts/no-empty-object-type
+        {};
 
 /**
  * A schema extracted from a source input, normalized to JSON Schema.
