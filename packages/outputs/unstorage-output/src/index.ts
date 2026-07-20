@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import { defineOutput, useContext } from "@power-plant/core";
+import { defineOutput, useExecution } from "@power-plant/core";
 import { appendPath, isValidFileSystemPath } from "@stryke/path";
 import { isSetString } from "@stryke/type-checks/is-set-string";
 import type { Storage } from "unstorage";
@@ -54,7 +54,7 @@ export default defineOutput<any, Options>({
     ]
   },
   output: async (spec, options, documents) => {
-    const { cwd, storage } = useContext();
+    const { cwd, storage } = useExecution();
 
     const outputStorage = (
       options as {

@@ -19,7 +19,7 @@
 import type { UserConfig } from "@hey-api/openapi-ts";
 import { createClient } from "@hey-api/openapi-ts";
 import type { GeneratorFunctionResult } from "@power-plant/core";
-import { defineGenerator, useContext } from "@power-plant/core";
+import { defineGenerator, useExecution } from "@power-plant/core";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import schema from "@power-plant/openapi-schema";
 import { toArray } from "@stryke/convert/to-array";
@@ -49,7 +49,7 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
     spec,
     options
   ): Promise<GeneratorFunctionResult<OpenAPISchema, Arrayable<UserConfig>>> => {
-    const { cwd } = useContext();
+    const { cwd } = useExecution();
 
     const context = await createClient(
       toArray(options).map(option => ({

@@ -16,28 +16,17 @@
 
  ------------------------------------------------------------------- */
 
-import { defineSchema } from "@power-plant/core";
-import type * as z from "zod/mini";
-import { openapiSchema } from "./schema";
+import tsdown from "@powerlines/plugin-tsdown";
+import type { UserConfig } from "powerlines";
+import { defineConfig } from "powerlines/config";
 
-export * from "./schema";
-export type OpenAPISchema = z.infer<typeof openapiSchema>;
-
-export default defineSchema<OpenAPISchema>({
-  meta: {
-    name: "openapi-schema",
-    title: "OpenAPI Schema",
-    version: "1.0",
-    description:
-      "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
-    spec: "An OpenAPI HTTP API specification.",
-    tags: ["openapi"],
-    links: [
-      {
-        name: "OpenAPI Specification",
-        url: "https://www.openapis.org/"
-      }
-    ]
+const config: UserConfig = defineConfig({
+  input: ["src/index.ts"],
+  platform: "node",
+  output: {
+    format: ["cjs", "esm"]
   },
-  schema: openapiSchema
+  plugins: [tsdown()]
 });
+
+export default config;

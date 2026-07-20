@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import { useContext } from "@power-plant/core";
+import { useExecution } from "@power-plant/core";
 import { mapStorageToFileSystem } from "@power-plant/schema/storage";
 import { findFileExtensionSafe } from "@stryke/path/find";
 import { load } from "@stryke/resolve/load";
@@ -66,7 +66,7 @@ export async function input<TSpec>(options: Options): Promise<TSpec> {
     );
   }
 
-  const { storage } = useContext();
+  const { storage } = useExecution();
 
   const inputStorage = (
     options as {

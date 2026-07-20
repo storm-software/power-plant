@@ -22,6 +22,9 @@
       "path": "./packages/schemas/graphql-schema"
     },
     {
+      "path": "./packages/schemas/dtcg-schema"
+    },
+    {
       "path": "./packages/generators/hey-api"
     },
     {
@@ -37,6 +40,9 @@
       "path": "./packages/generators/handlebars"
     },
     {
+      "path": "./packages/generators/terrazzo"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
@@ -44,6 +50,9 @@
     },
     {
       "path": "./packages/inputs/graphql-input"
+    },
+    {
+      "path": "./packages/inputs/terrazzo-input"
     },
     {
       "path": "./packages/inputs/ai-input"

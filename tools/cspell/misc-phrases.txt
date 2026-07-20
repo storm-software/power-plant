@@ -5,6 +5,8 @@ smol
 libc
 kustomization
 xwin
+dtcg
+terrazzo
 
 # File Extensions
 haml

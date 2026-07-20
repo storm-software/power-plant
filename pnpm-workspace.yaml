@@ -80,6 +80,7 @@ catalog:
   "@stryke/unique-id": ^0.3.107
   "@stryke/url": ^0.4.46
   "@stryke/zod": ^0.3.41
+  '@terrazzo/parser': ^2.4.0
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
@@ -117,16 +118,19 @@ overrides:
   "@power-plant/engine": workspace:*
   "@power-plant/unstorage-input": workspace:*
   "@power-plant/graphql-input": workspace:*
+  "@power-plant/terrazzo-input": workspace:*
   "@power-plant/ai-input": workspace:*
   "@power-plant/unstorage-output": workspace:*
   "@power-plant/openapi-schema": workspace:*
   "@power-plant/asyncapi-schema": workspace:*
   "@power-plant/graphql-schema": workspace:*
+  "@power-plant/dtcg-schema": workspace:*
   "@power-plant/hey-api": workspace:*
   "@power-plant/asyncapi": workspace:*
   "@power-plant/graphql-codegen": workspace:*
   "@power-plant/alloy-js": workspace:*
   "@power-plant/handlebars": workspace:*
+  "@power-plant/terrazzo": workspace:*
   "@power-plant/ai-sdk": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

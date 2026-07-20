@@ -421,6 +421,9 @@ catalogs:
     '@stryke/zod':
       specifier: ^0.3.41
       version: 0.3.41
+    '@terrazzo/parser':
+      specifier: ^2.4.0
+      version: 2.4.0
     '@types/node':
       specifier: ^25.9.5
       version: 25.9.5
@@ -521,16 +524,19 @@ overrides:
   '@power-plant/engine': workspace:*
   '@power-plant/unstorage-input': workspace:*
   '@power-plant/graphql-input': workspace:*
+  '@power-plant/terrazzo-input': workspace:*
   '@power-plant/ai-input': workspace:*
   '@power-plant/unstorage-output': workspace:*
   '@power-plant/openapi-schema': workspace:*
   '@power-plant/asyncapi-schema': workspace:*
   '@power-plant/graphql-schema': workspace:*
+  '@power-plant/dtcg-schema': workspace:*
   '@power-plant/hey-api': workspace:*
   '@power-plant/asyncapi': workspace:*
   '@power-plant/graphql-codegen': workspace:*
   '@power-plant/alloy-js': workspace:*
   '@power-plant/handlebars': workspace:*
+  '@power-plant/terrazzo': workspace:*
   '@power-plant/ai-sdk': workspace:*
   '@power-plant/tools-config': workspace:*
   '@power-plant/tools-errors': workspace:*
@@ -1135,6 +1141,40 @@ importers:
         specifier: 'catalog:'
         version: 0.47.144(5774f86c5ef30fcd842e4061b2338030)
 
+  packages/generators/terrazzo:
+    dependencies:
+      '@power-plant/core':
+        specifier: workspace:*
+        version: link:../../base/core
+      '@power-plant/dtcg-schema':
+        specifier: workspace:*
+        version: link:../../schemas/dtcg-schema
+      '@power-plant/schema':
+        specifier: workspace:*
+        version: link:../../base/schema
+      '@power-plant/terrazzo-input':
+        specifier: workspace:*
+        version: link:../../inputs/terrazzo-input
+      '@stryke/type-checks':
+        specifier: 'catalog:'
+        version: 0.6.28
+      '@stryke/types':
+        specifier: 'catalog:'
+        version: 0.12.23
+      '@terrazzo/parser':
+        specifier: 'catalog:'
+        version: 2.4.0
+    devDependencies:
+      '@powerlines/plugin-tsdown':
+        specifier: 'catalog:'
+        version: 0.1.545(5774f86c5ef30fcd842e4061b2338030)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.9.5
+      powerlines:
+        specifier: 'catalog:'
+        version: 0.47.144(5774f86c5ef30fcd842e4061b2338030)
+
   packages/inputs/ai-input:
     dependencies:
       '@ai-sdk/provider-utils':
@@ -1236,6 +1276,43 @@ importers:
         specifier: 'catalog:'
         version: 0.47.144(5774f86c5ef30fcd842e4061b2338030)
 
+  packages/inputs/terrazzo-input:
+    dependencies:
+      '@power-plant/core':
+        specifier: workspace:*
+        version: link:../../base/core
+      '@power-plant/dtcg-schema':
+        specifier: workspace:*
+        version: link:../../schemas/dtcg-schema
+      '@power-plant/schema':
+        specifier: workspace:*
+        version: link:../../base/schema
+      '@stryke/convert':
+        specifier: 'catalog:'
+        version: 0.7.26
+      '@stryke/resolve':
+        specifier: 'catalog:'
+        version: 0.0.11(@nx/jest@23.0.1(@babel/traverse@7.29.7)(@types/node@25.9.5)(babel-plugin-macros@3.1.0)(jest@30.0.5(@types/node@25.9.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26)(@types/node@25.9.5)(typescript@6.0.3)))(nx@23.0.1)(ts-node@10.9.2(@swc/core@1.7.26)(@types/node@25.9.5)(typescript@6.0.3))(typescript@6.0.3)(verdaccio@6.0.5(typanion@3.14.0)))(jest@30.0.5(@types/node@25.9.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26)(@types/node@25.9.5)(typescript@6.0.3)))(zod@4.4.3)
+      '@stryke/type-checks':
+        specifier: 'catalog:'
+        version: 0.6.28
+      '@stryke/types':
+        specifier: 'catalog:'
+        version: 0.12.23
+      '@terrazzo/parser':
+        specifier: 'catalog:'
+        version: 2.4.0
+    devDependencies:
+      '@powerlines/plugin-tsdown':
+        specifier: 'catalog:'
+        version: 0.1.545(5774f86c5ef30fcd842e4061b2338030)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.9.5
+      powerlines:
+        specifier: 'catalog:'
+        version: 0.47.144(5774f86c5ef30fcd842e4061b2338030)
+
   packages/inputs/unstorage-input:
     dependencies:
       '@power-plant/core':
@@ -1309,6 +1386,28 @@ importers:
       '@asyncapi/specs':
         specifier: 'catalog:'
         version: 6.11.1
+      '@power-plant/core':
+        specifier: workspace:*
+        version: link:../../base/core
+      '@power-plant/schema':
+        specifier: workspace:*
+        version: link:../../base/schema
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
+    devDependencies:
+      '@powerlines/plugin-tsdown':
+        specifier: 'catalog:'
+        version: 0.1.545(5774f86c5ef30fcd842e4061b2338030)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.9.5
+      powerlines:
+        specifier: 'catalog:'
+        version: 0.47.144(5774f86c5ef30fcd842e4061b2338030)
+
+  packages/schemas/dtcg-schema:
+    dependencies:
       '@power-plant/core':
         specifier: workspace:*
         version: link:../../base/core
@@ -3334,6 +3433,10 @@ packages:
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
+
+  '@humanwhocodes/momoa@3.3.10':
+    resolution: {integrity: sha512-KWiFQpSAqEIyrTXko3hFNLeQvSK8zXlJQzhhxsyVn58WFRYXST99b3Nqnu+ttOtjds2Pl2grUHGpe2NzhPynuQ==}
+    engines: {node: '>=18'}
 
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
@@ -6081,6 +6184,29 @@ packages:
   '@taplo/lib@0.5.0':
     resolution: {integrity: sha512-+xIqpQXJco3T+VGaTTwmhxLa51qpkQxCjRwezjFZgr+l21ExlywJFcDfTrNmL6lG6tqb0h8GyJKO3UPGPtSCWg==}
 
+  '@terrazzo/json-schema-tools@0.2.1':
+    resolution: {integrity: sha512-hJPz/huIuYCbXmTV6TU9PNl8BeFFoSQVXfB2oHf7fiY1rymrfMfoFJAQ0IErVoisuBR0DdYquTlQkY/cnz+vEQ==}
+    peerDependencies:
+      '@humanwhocodes/momoa': ^3.0.0
+      yaml-to-momoa: 0.0.9
+    peerDependenciesMeta:
+      yaml-to-momoa:
+        optional: true
+
+  '@terrazzo/parser@2.4.0':
+    resolution: {integrity: sha512-9lTsqAp13nOARSWPFN+55A09OaSU2UfMh3K1x4XlbpTvUGnUtb1rnUg+3t8+5VwTGWVtDA5cUhZfpNESQpxucA==}
+    peerDependencies:
+      yaml-to-momoa: 0.0.9
+    peerDependenciesMeta:
+      yaml-to-momoa:
+        optional: true
+
+  '@terrazzo/token-tools@2.4.0':
+    resolution: {integrity: sha512-nO0VFZrhsgX3IVsTxVxHiQS4qZK8rFSR7rMh39jJ81xfIlNELYEmE251vgzdly6JHUFk8m8k4EI5L74ekcoxvQ==}
+
+  '@terrazzo/token-types@2.4.0':
+    resolution: {integrity: sha512-VE1hhpGCGw57pfflLzC6Xjn/akag526lM6gAf3SNVjEL6AUvGRevjyWG3mgX8I9O5UzbMOH/Gn3RVp63SdE+NA==}
+
   '@textlint/ast-node-types@14.4.2':
     resolution: {integrity: sha512-e8/drNznaZHS/qGDC83k6Ht1wDWNHzGQ0RHcXD+72YMFercEFvp6WVfW5XbCbxGbSITEO5NBCOCTyeccS9lxEA==}
 
@@ -6121,6 +6247,9 @@ packages:
 
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
+
+  '@types/babel__code-frame@7.27.0':
+    resolution: {integrity: sha512-Dwlo+LrxDx/0SpfmJ/BKveHf7QXWvLBLc+x03l5sbzykj3oB9nHygCpSECF1a+s+QIxbghe+KHqC90vGtxLRAA==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -7703,6 +7832,9 @@ packages:
 
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
+
+  colorjs.io@0.6.1:
+    resolution: {integrity: sha512-8lyR2wHzuIykCpqHKgluGsqQi5iDm3/a2IgP2GBZrasn2sBRkE4NOGsglZxWLs/jZQoNkmA/KM/8NV16rLUdBg==}
 
   columnify@1.6.0:
     resolution: {integrity: sha512-lomjuFZKfM6MSAnV9aCZC9sc0qGbmZdfygNv+nCpqVkSKdCxCklLtd16O0EILGkImHw9ZpHkAnHaB+8Zxq5W6Q==}
@@ -9840,6 +9972,10 @@ packages:
     resolution: {integrity: sha512-mfcwb6IzQyOKTs84CQMrOwW4gQcaTOAWJ0zzJCl2WSPDrWk/OzDaImWFH3djXhb24g4eudZfLRozAvPGw4d9hQ==}
     engines: {node: '>= 0.4'}
 
+  is-what@4.1.16:
+    resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
+    engines: {node: '>=12.13'}
+
   is-what@5.5.0:
     resolution: {integrity: sha512-oG7cgbmg5kLYae2N5IVd3jm2s+vldjxJzK1pcu9LfpGuQ93MQSzo0okvRna+7y5ifrD+20FE8FvjusyGaz14fw==}
     engines: {node: '>=18'}
@@ -10863,6 +10999,10 @@ packages:
   meow@13.2.0:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
+
+  merge-anything@5.1.7:
+    resolution: {integrity: sha512-eRtbOb1N5iyH0tkQDAoQ4Ipsp/5qSR79Dzrz8hEPxRX10RWWR/iQXdoKmBSRCThY1Fh5EhISDtpSc93fpxUniQ==}
+    engines: {node: '>=12.13'}
 
   merge-descriptors@1.0.3:
     resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
@@ -13778,6 +13918,9 @@ packages:
     resolution: {integrity: sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==}
     engines: {node: '>=8'}
     hasBin: true
+
+  wildcard-match@5.1.4:
+    resolution: {integrity: sha512-wldeCaczs8XXq7hj+5d/F38JE2r7EXgb6WQDM84RVwxy81T/sxB5e9+uZLK9Q9oNz1mlvjut+QtvgaOQFPVq/g==}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -16989,6 +17132,8 @@ snapshots:
   '@humanfs/types@0.15.0': {}
 
   '@humanwhocodes/module-importer@1.0.1': {}
+
+  '@humanwhocodes/momoa@3.3.10': {}
 
   '@humanwhocodes/retry@0.4.3': {}
 
@@ -21859,6 +22004,32 @@ snapshots:
     dependencies:
       '@taplo/core': 0.2.0
 
+  '@terrazzo/json-schema-tools@0.2.1(@humanwhocodes/momoa@3.3.10)':
+    dependencies:
+      '@humanwhocodes/momoa': 3.3.10
+
+  '@terrazzo/parser@2.4.0':
+    dependencies:
+      '@humanwhocodes/momoa': 3.3.10
+      '@terrazzo/json-schema-tools': 0.2.1(@humanwhocodes/momoa@3.3.10)
+      '@terrazzo/token-tools': 2.4.0
+      '@terrazzo/token-types': 2.4.0
+      '@types/babel__code-frame': 7.27.0
+      colorjs.io: 0.6.1
+      fast-deep-equal: 3.1.3
+      merge-anything: 5.1.7
+      picocolors: 1.1.1
+      scule: 1.3.0
+
+  '@terrazzo/token-tools@2.4.0':
+    dependencies:
+      '@humanwhocodes/momoa': 3.3.10
+      '@terrazzo/token-types': 2.4.0
+      colorjs.io: 0.6.1
+      wildcard-match: 5.1.4
+
+  '@terrazzo/token-types@2.4.0': {}
+
   '@textlint/ast-node-types@14.4.2': {}
 
   '@textlint/markdown-to-ast@14.4.2':
@@ -21908,6 +22079,8 @@ snapshots:
 
   '@types/argparse@1.0.38': {}
 
+  '@types/babel__code-frame@7.27.0': {}
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.29.7
@@ -21936,7 +22109,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.2':
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
 
   '@types/debug@4.1.13':
     dependencies:
@@ -21946,7 +22119,7 @@ snapshots:
 
   '@types/es-aggregate-error@1.0.6':
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
 
   '@types/esquery@1.5.4':
     dependencies:
@@ -22006,7 +22179,7 @@ snapshots:
 
   '@types/protocol-buffers-schema@3.4.3':
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
 
   '@types/react-transition-group@4.4.12(@types/react@17.0.4)':
     dependencies:
@@ -22032,7 +22205,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -23641,6 +23814,8 @@ snapshots:
 
   colorette@2.0.20: {}
 
+  colorjs.io@0.6.1: {}
+
   columnify@1.6.0:
     dependencies:
       strip-ansi: 6.0.1
@@ -25174,10 +25349,6 @@ snapshots:
     dependencies:
       bser: 2.1.1
 
-  fdir@6.5.0(picomatch@4.0.4):
-    optionalDependencies:
-      picomatch: 4.0.4
-
   fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
       picomatch: 4.0.5
@@ -26145,6 +26316,8 @@ snapshots:
       call-bound: 1.0.4
       get-intrinsic: 1.3.0
 
+  is-what@4.1.16: {}
+
   is-what@5.5.0: {}
 
   is-wsl@2.2.0:
@@ -26811,7 +26984,7 @@ snapshots:
 
   jest-worker@27.0.0-next.5:
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -27676,6 +27849,10 @@ snapshots:
   media-typer@0.3.0: {}
 
   meow@13.2.0: {}
+
+  merge-anything@5.1.7:
+    dependencies:
+      is-what: 4.1.16
 
   merge-descriptors@1.0.3: {}
 
@@ -28930,7 +29107,7 @@ snapshots:
 
   parse5@3.0.3:
     dependencies:
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
 
   parseqs@0.0.6: {}
 
@@ -29422,7 +29599,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.2
-      '@types/node': 25.9.5
+      '@types/node': 26.1.1
       long: 5.3.2
 
   protocols@2.0.2: {}
@@ -30701,8 +30878,8 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@4.0.5)
+      picomatch: 4.0.5
 
   tinypool@2.1.0: {}
 
@@ -31600,6 +31777,8 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  wildcard-match@5.1.4: {}
 
   word-wrap@1.2.5: {}
 

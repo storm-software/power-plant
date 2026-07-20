@@ -16,28 +16,4 @@
 
  ------------------------------------------------------------------- */
 
-import { defineSchema } from "@power-plant/core";
-import type * as z from "zod/mini";
-import { openapiSchema } from "./schema";
-
-export * from "./schema";
-export type OpenAPISchema = z.infer<typeof openapiSchema>;
-
-export default defineSchema<OpenAPISchema>({
-  meta: {
-    name: "openapi-schema",
-    title: "OpenAPI Schema",
-    version: "1.0",
-    description:
-      "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
-    spec: "An OpenAPI HTTP API specification.",
-    tags: ["openapi"],
-    links: [
-      {
-        name: "OpenAPI Specification",
-        url: "https://www.openapis.org/"
-      }
-    ]
-  },
-  schema: openapiSchema
-});
+export * from "./tokens";

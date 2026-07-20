@@ -28,7 +28,7 @@ import type {
   GeneratorFunctionResult,
   SchemaConfigObject
 } from "@power-plant/core";
-import { defineGenerator, useContext } from "@power-plant/core";
+import { defineGenerator, useExecution } from "@power-plant/core";
 
 function toGeneratedDocuments(
   filePath: string,
@@ -94,7 +94,7 @@ export default defineGenerator<AsyncAPIDocumentInterface, Options, void>({
     options
   ): Promise<GeneratorFunctionResult<AsyncAPIDocumentInterface, Options>> => {
     const { templateName, outputPath, entrypoint, ...rest } = options;
-    const { cwd } = useContext();
+    const { cwd } = useExecution();
 
     if (!isAsyncAPIDocument(spec)) {
       throw new Error("Invalid AsyncAPI schema");

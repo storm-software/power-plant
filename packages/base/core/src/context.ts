@@ -105,11 +105,21 @@ export const sessionAsyncLocalStorage = sessionContext.asyncLocalStorage;
 export const useSessionContext = sessionContext.use;
 
 /**
+ * Alias for {@link useSessionContext}.
+ */
+export const useSession = useSessionContext;
+
+/**
  * The function to try to use the session context.
  *
  * @returns The session context or undefined if the session context is not available.
  */
 export const tryUseSessionContext = sessionContext.tryUse;
+
+/**
+ * Alias for {@link tryUseSessionContext}.
+ */
+export const tryUseSession = tryUseSessionContext;
 
 /**
  * The function to call the session context.
@@ -121,6 +131,11 @@ export const tryUseSessionContext = sessionContext.tryUse;
 export const callSessionContext = sessionContext.call;
 
 /**
+ * Alias for {@link callSessionContext}.
+ */
+export const callSession = callSessionContext;
+
+/**
  * The function to call the session context asynchronously.
  *
  * @param instance - The instance of the session context.
@@ -128,6 +143,11 @@ export const callSessionContext = sessionContext.call;
  * @returns The result of the callback.
  */
 export const callAsyncSessionContext = sessionContext.callAsync;
+
+/**
+ * Alias for {@link callAsyncSessionContext}.
+ */
+export const callAsyncSession = callAsyncSessionContext;
 
 /**
  * The context store for the execution context. This is used to store the execution context for a specific execution.
@@ -149,9 +169,9 @@ export const executionAsyncLocalStorage = executionContext.asyncLocalStorage;
 export const useExecutionContext = executionContext.use;
 
 /**
- * @deprecated Use {@link useExecutionContext} instead.
+ * Alias for {@link useExecutionContext}.
  */
-export const useContext = useExecutionContext;
+export const useExecution = useExecutionContext;
 
 /**
  * The function to try to use the execution context.
@@ -161,9 +181,9 @@ export const useContext = useExecutionContext;
 export const tryUseExecutionContext = executionContext.tryUse;
 
 /**
- * @deprecated Use {@link tryUseExecutionContext} instead.
+ * Alias for {@link tryUseExecutionContext}.
  */
-export const tryUseContext = tryUseExecutionContext;
+export const tryUseExecution = tryUseExecutionContext;
 
 /**
  * The function to call the execution context.
@@ -175,6 +195,11 @@ export const tryUseContext = tryUseExecutionContext;
 export const callExecutionContext = executionContext.call;
 
 /**
+ * Alias for {@link callExecutionContext}.
+ */
+export const callExecution = callExecutionContext;
+
+/**
  * The function to call the execution context asynchronously.
  *
  * @param instance - The instance of the execution context.
@@ -182,3 +207,8 @@ export const callExecutionContext = executionContext.call;
  * @returns The result of the callback.
  */
 export const callAsyncExecutionContext = executionContext.callAsync;
+
+/**
+ * Alias for {@link callAsyncExecutionContext}.
+ */
+export const callAsyncExecution = callAsyncExecutionContext;

@@ -18,26 +18,30 @@
 
 import { defineSchema } from "@power-plant/core";
 import type * as z from "zod/mini";
-import { openapiSchema } from "./schema";
+import { tokensSchema } from "./schema";
 
 export * from "./schema";
-export type OpenAPISchema = z.infer<typeof openapiSchema>;
+export type DTCGSchema = z.infer<typeof tokensSchema>;
 
-export default defineSchema<OpenAPISchema>({
+export default defineSchema<DTCGSchema>({
   meta: {
-    name: "openapi-schema",
-    title: "OpenAPI Schema",
+    name: "dtcg-schema",
+    title: "Design Tokens Community Group (DTCG) Schema",
     version: "1.0",
     description:
-      "An OpenAPI 3.0, 3.1, or 3.2 specification document used to describe HTTP APIs.",
-    spec: "An OpenAPI HTTP API specification.",
-    tags: ["openapi"],
+      "A Design Tokens Community Group (DTCG) specification document used to describe Design Tokens.",
+    spec: "A Design Tokens Community Group (DTCG) specification document.",
+    tags: ["dtcg"],
     links: [
       {
-        name: "OpenAPI Specification",
-        url: "https://www.openapis.org/"
+        name: "Design Tokens Community Group (DTCG)",
+        url: "https://www.w3.org/community/design-tokens/"
+      },
+      {
+        name: "Design Tokens Format Module (DTCG)",
+        url: "https://www.w3.org/community/design-tokens/format-module/"
       }
     ]
   },
-  schema: openapiSchema
+  schema: tokensSchema
 });
