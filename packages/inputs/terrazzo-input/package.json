@@ -1,0 +1,145 @@
+{
+  "name": "@power-plant/terrazzo-input",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A Power Plant input for reading the source specification from a Design Tokens Community Group (DTCG) schema document and parsing it into a Design Tokens format using Terrazzo.",
+  "keywords": [
+    "dtcg",
+    "design-tokens",
+    "terrazzo",
+    "power-plant-input",
+    "power-plant",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/inputs/terrazzo-input"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "default": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./input": {
+      "require": {
+        "types": "./dist/input.d.cts",
+        "default": "./dist/input.cjs"
+      },
+      "import": {
+        "types": "./dist/input.d.mts",
+        "default": "./dist/input.mjs"
+      },
+      "default": {
+        "types": "./dist/input.d.mts",
+        "default": "./dist/input.mjs"
+      }
+    },
+    "./loaders": {
+      "require": {
+        "types": "./dist/loaders.d.cts",
+        "default": "./dist/loaders.cjs"
+      },
+      "import": {
+        "types": "./dist/loaders.d.mts",
+        "default": "./dist/loaders.mjs"
+      },
+      "default": {
+        "types": "./dist/loaders.d.mts",
+        "default": "./dist/loaders.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      },
+      "default": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      }
+    },
+    "./utilities": {
+      "require": {
+        "types": "./dist/utilities.d.cts",
+        "default": "./dist/utilities.cjs"
+      },
+      "import": {
+        "types": "./dist/utilities.d.mts",
+        "default": "./dist/utilities.mjs"
+      },
+      "default": {
+        "types": "./dist/utilities.d.mts",
+        "default": "./dist/utilities.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": ["dist"],
+  "dependencies": {
+    "@power-plant/core": "workspace:*",
+    "@power-plant/dtcg-schema": "workspace:*",
+    "@power-plant/schema": "workspace:*",
+    "@stryke/convert": "catalog:",
+    "@stryke/resolve": "catalog:",
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
+    "@terrazzo/parser": "catalog:"
+  },
+  "devDependencies": {
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@types/node": "catalog:",
+    "powerlines": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
