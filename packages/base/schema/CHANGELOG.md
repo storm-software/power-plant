@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.17](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.17) (07/20/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the workspace packages' `README.md` file ([d028d1c](https://github.com/storm-software/power-plant/commit/d028d1c))
+
 ## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.16) (07/20/2026)
 
 ### Miscellaneous

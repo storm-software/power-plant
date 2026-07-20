@@ -2,6 +2,21 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.13](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.13) (07/20/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the workspace packages' `README.md` file ([d028d1c](https://github.com/storm-software/power-plant/commit/d028d1c))
+
+### Features
+
+- **utils:** Deprecated Engine and added the Utilities helper package ([0caa1ac](https://github.com/storm-software/power-plant/commit/0caa1ac))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.17**
+- Updated **schema** to **v0.0.17**
+
 ## [0.0.12](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.12) (07/20/2026)
 
 ### Miscellaneous

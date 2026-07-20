@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.17](https://github.com/storm-software/power-plant/releases/tag/core%400.0.17) (07/20/2026)
+
+### Features
+
+- **style-dictionary:** Added the Style Dictionary generator package ([799856e](https://github.com/storm-software/power-plant/commit/799856e))
+- **utils:** Deprecated Engine and added the Utilities helper package ([0caa1ac](https://github.com/storm-software/power-plant/commit/0caa1ac))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.17**
+
 ## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/core%400.0.16) (07/20/2026)
 
 ### Miscellaneous

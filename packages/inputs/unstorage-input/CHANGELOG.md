@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Input
 
+## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.16) (07/20/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the workspace packages' `README.md` file ([d028d1c](https://github.com/storm-software/power-plant/commit/d028d1c))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.17**
+- Updated **schema** to **v0.0.17**
+
 ## [0.0.15](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.15) (07/20/2026)
 
 ### Miscellaneous
