@@ -19,15 +19,12 @@
 import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator, useExecution } from "@power-plant/core";
 import type { Tokens } from "@power-plant/dtcg-schema";
-import schema from "@power-plant/dtcg-schema";
-import type { Options as InputOptions } from "@power-plant/terrazzo-input";
-import input from "@power-plant/terrazzo-input";
 import { isString } from "@stryke/type-checks/is-string";
 import { isAbsolute, resolve } from "node:path";
 import StyleDictionary from "style-dictionary";
 import type { Config } from "style-dictionary/types";
 
-export type Options = Config & InputOptions;
+export type Options = Omit<Config, "tokens">;
 
 function toChunkContent(contents: unknown): string {
   if (isString(contents)) {
@@ -73,7 +70,7 @@ function resolvePaths(
  * @param options - Style Dictionary config (platforms, hooks, …).
  * @returns Generated documents keyed by output filename.
  */
-export default defineGenerator<Tokens, Options, void>({
+export default defineGenerator<Tokens | never, Options, void>({
   meta: {
     name: "style-dictionary",
     title: "Style Dictionary",
@@ -96,25 +93,19 @@ export default defineGenerator<Tokens, Options, void>({
       }
     ]
   },
-  schema,
-  input,
   generator: async (
     spec,
     options
-  ): Promise<GeneratorFunctionResult<Tokens, Options>> => {
-    const {
-      inputPath: _inputPath,
-      config: _inputConfig,
-      ...rawConfig
-    } = options;
+  ): Promise<GeneratorFunctionResult<Tokens | never, Options>> => {
+    const { source, include, usesDtcg, ...rest } = options;
     const { cwd } = useExecution();
 
     const sd = new StyleDictionary({
-      ...rawConfig,
-      source: resolvePaths(rawConfig.source, cwd),
-      include: resolvePaths(rawConfig.include, cwd),
+      ...rest,
+      source: resolvePaths(source, cwd),
+      include: resolvePaths(include, cwd),
       tokens: spec,
-      usesDtcg: rawConfig.usesDtcg ?? true
+      usesDtcg: usesDtcg ?? true
     });
 
     const platformOutputs = (await sd.formatAllPlatforms()) as Record<

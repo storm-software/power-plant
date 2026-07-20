@@ -72,7 +72,6 @@
     "@power-plant/core": "workspace:*",
     "@power-plant/dtcg-schema": "workspace:*",
     "@power-plant/schema": "workspace:*",
-    "@power-plant/terrazzo-input": "workspace:*",
     "@stryke/type-checks": "catalog:",
     "@stryke/types": "catalog:",
     "style-dictionary": "catalog:"

@@ -1102,9 +1102,6 @@ importers:
       '@power-plant/schema':
         specifier: workspace:*
         version: link:../../base/schema
-      '@power-plant/terrazzo-input':
-        specifier: workspace:*
-        version: link:../../inputs/terrazzo-input
       '@stryke/type-checks':
         specifier: 'catalog:'
         version: 0.6.28
