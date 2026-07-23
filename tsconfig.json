@@ -25,6 +25,9 @@
       "path": "./packages/schemas/dtcg-schema"
     },
     {
+      "path": "./packages/schemas/prisma-schema"
+    },
+    {
       "path": "./packages/generators/hey-api"
     },
     {
@@ -46,6 +49,9 @@
       "path": "./packages/generators/style-dictionary"
     },
     {
+      "path": "./packages/generators/prisma"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
@@ -59,6 +65,9 @@
     },
     {
       "path": "./packages/inputs/ai-input"
+    },
+    {
+      "path": "./packages/inputs/prisma-input"
     },
     {
       "path": "./packages/devtools/ai-sdk"
