@@ -18,7 +18,7 @@
 
 import type { Children } from "@alloy-js/core";
 import type { GeneratorFunctionResult } from "@power-plant/core";
-import { defineGenerator, useExecutionContext } from "@power-plant/core";
+import { defineGenerator } from "@power-plant/core";
 import { render } from "./render";
 
 /**
@@ -59,8 +59,6 @@ export default defineGenerator<any, Options, void>({
     spec,
     options
   ): Promise<GeneratorFunctionResult<any, Options>> => {
-    const context = useExecutionContext();
-
-    return render(context, spec, options.template);
+    return render(options.template);
   }
 });

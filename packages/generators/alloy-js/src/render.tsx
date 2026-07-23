@@ -23,6 +23,7 @@ import type {
   GeneratorFunctionResult,
   MetaConfig
 } from "@power-plant/core";
+import { useExecution } from "@power-plant/core";
 import { noop } from "@stryke/helpers/noop";
 import { replacePath } from "@stryke/path/replace";
 import { list } from "@stryke/string-format/list";
@@ -36,22 +37,25 @@ import { Output } from "./core";
  * ```tsx
  * import { render } from "@power-plant/alloy-js/render";
  *
- * await render(context, spec, <> ... </>);
+ * await renderBase(context, <> ... </>);
  * ```
  *
  * @param context - The Power Plant execution context.
  * @param children - The children components to render.
  * @returns A promise that resolves when rendering is complete.
  */
-export async function render<TSpec, TOptions extends object, TReturns = void>(
+export async function renderBase<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(
   context: ExecutionContext<TSpec, TOptions, TReturns>,
-  spec: TSpec,
   children: Children
 ): Promise<GeneratorFunctionResult<TSpec, TOptions>> {
   const meta = {} as Record<string, MetaConfig>;
   const { cwd, logger } = context;
   const output = await renderAsync(
-    <Output context={context} spec={spec} meta={meta}>
+    <Output context={context} meta={meta}>
       {children}
     </Output>
   );
@@ -114,4 +118,25 @@ export async function render<TSpec, TOptions extends object, TReturns = void>(
   }
 
   return documents;
+}
+
+/**
+ * A function to render children components within the [Alloy](https://alloy-framework.github.io) context, and register any generated documents on the execution context.
+ *
+ * @example
+ * ```tsx
+ * import { render } from "@power-plant/alloy-js/render";
+ *
+ * await render(<> ... </>);
+ * ```
+ *
+ * @param children - The children components to render.
+ * @returns A promise that resolves when rendering is complete.
+ */
+export async function render<TSpec, TOptions extends object, TReturns = void>(
+  children: Children
+): Promise<GeneratorFunctionResult<TSpec, TOptions>> {
+  const context = useExecution<TSpec, TOptions, TReturns>();
+
+  return renderBase<TSpec, TOptions, TReturns>(context, children);
 }
