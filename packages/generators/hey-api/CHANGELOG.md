@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Hey API
 
+## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.16) (07/23/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.20**
+- Updated **schema** to **v0.0.19**
+
 ## [0.0.15](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.15) (07/23/2026)
 
 ### Updated Dependencies

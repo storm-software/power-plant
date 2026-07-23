@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.19) (07/23/2026)
+
+### Features
+
+- **schema:** Added logic to validate no schema contradictions exist in config ([3b020cb](https://github.com/storm-software/power-plant/commit/3b020cb))
+
 ## [0.0.17](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.17) (07/20/2026)
 
 ### Miscellaneous
