@@ -20,7 +20,10 @@ import type {
   ExtractedSchemaEnvelope,
   SchemaConfig
 } from "@power-plant/schema";
-import { extractSchemaWithSource } from "@power-plant/schema";
+import {
+  assertSchemasDoNotContradict,
+  extractSchemaWithSource
+} from "@power-plant/schema";
 import {
   resolveMeta,
   resolveMetaDescription,
@@ -29,6 +32,8 @@ import {
 import { isSchemaConfigObject } from "../helpers/type-checks";
 import type {
   InferCreateSchemaOptions,
+  Input,
+  Output,
   SchemaConfigObject,
   SchemaMetaConfig,
   SchemaOf
@@ -80,4 +85,37 @@ export async function createSchema<TSpec>(
     ...resolvedSchema,
     meta: extractSchemaMeta<TSpec>(resolvedSchema, meta)
   };
+}
+
+/**
+ * Ensures resolved input/output schema overrides do not contradict the generator schema.
+ *
+ * @param baseSchema - The resolved generator schema.
+ * @param input - The resolved generator input descriptor.
+ * @param output - The resolved generator output descriptor.
+ */
+export function assertGeneratorConfigSchemasDoNotContradict<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>(
+  baseSchema: SchemaOf<TSpec>,
+  input: Input<TSpec, TOptions> | undefined,
+  output: Output<TSpec, TOptions, TReturns> | undefined
+): void {
+  if (input && input.schema !== baseSchema) {
+    assertSchemasDoNotContradict(
+      baseSchema.schema,
+      input.schema.schema,
+      "input"
+    );
+  }
+
+  if (output && output.schema !== baseSchema) {
+    assertSchemasDoNotContradict(
+      baseSchema.schema,
+      output.schema.schema,
+      "output"
+    );
+  }
 }

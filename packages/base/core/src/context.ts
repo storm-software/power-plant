@@ -198,6 +198,22 @@ export function useExecution<
 }
 
 /**
+ * A hook to allow access to the execution context.
+ *
+ * @remarks
+ * Alias for {@link useExecutionContext}.
+ *
+ * @template TSpec - The type of the specification that the generator will produce.
+ * @template TOptions - The type of the options that will be passed to the generator during generation.
+ * @template TReturns - The type of the returns that the generator will produce.
+ * @returns The execution context.
+ * @throws An error if the execution context is not available.
+ */
+export function useContext<TSpec, TOptions extends object, TReturns = void>() {
+  return useExecutionContext<TSpec, TOptions, TReturns>();
+}
+
+/**
  * The function to try to use the execution context.
  *
  * @returns The execution context or undefined if the execution context is not available.

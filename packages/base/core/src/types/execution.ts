@@ -94,5 +94,5 @@ export type InferEngineOptions<
 
 export type ExecuteFunction = <TSpec, TOptions extends object, TReturns = void>(
   generatorConfig: GeneratorConfig<TSpec, TOptions, TReturns>,
-  options: InferEngineOptions<typeof generatorConfig> & TOptions
+  options?: InferEngineOptions<typeof generatorConfig> & TOptions
 ) => Promise<TReturns>;

@@ -33,7 +33,10 @@ import type {
 import { createExecutionContext } from "./context";
 import { createInput } from "./input";
 import { createOutput } from "./output";
-import { createSchema } from "./schema";
+import {
+  assertGeneratorConfigSchemasDoNotContradict,
+  createSchema
+} from "./schema";
 
 /**
  * Creates a generator from raw schema/input/output configurations and resolves all descriptors.
@@ -105,6 +108,8 @@ export async function createGenerator<
       ...options
     })
   ]);
+
+  assertGeneratorConfigSchemasDoNotContradict(schema, input, output);
 
   const generator = async (options: TOptions & UserConfig) => {
     const context = await createExecutionContext<TSpec, TOptions, TReturns>(
