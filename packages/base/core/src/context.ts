@@ -161,17 +161,41 @@ export const executionContext =
 export const executionAsyncLocalStorage = executionContext.asyncLocalStorage;
 
 /**
- * The function to use the execution context.
+ * A hook to allow access to the execution context.
  *
+ * @template TSpec - The type of the specification that the generator will produce.
+ * @template TOptions - The type of the options that will be passed to the generator during generation.
+ * @template TReturns - The type of the returns that the generator will produce.
  * @returns The execution context.
  * @throws An error if the execution context is not available.
  */
-export const useExecutionContext = executionContext.use;
+export function useExecutionContext<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>() {
+  return executionContext.use() as ExecutionContext<TSpec, TOptions, TReturns>;
+}
 
 /**
+ * A hook to allow access to the execution context.
+ *
+ * @remarks
  * Alias for {@link useExecutionContext}.
+ *
+ * @template TSpec - The type of the specification that the generator will produce.
+ * @template TOptions - The type of the options that will be passed to the generator during generation.
+ * @template TReturns - The type of the returns that the generator will produce.
+ * @returns The execution context.
+ * @throws An error if the execution context is not available.
  */
-export const useExecution = useExecutionContext;
+export function useExecution<
+  TSpec,
+  TOptions extends object,
+  TReturns = void
+>() {
+  return useExecutionContext<TSpec, TOptions, TReturns>();
+}
 
 /**
  * The function to try to use the execution context.
