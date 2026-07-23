@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/graphql-codegen",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "private": false,
   "description": "A Power Plant generator for using GraphQL Codegen to generate source code from a GraphQL schema.",
   "keywords": [

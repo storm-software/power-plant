@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/core%400.0.19) (07/23/2026)
+
+### Miscellaneous
+
+- **core:** Added typescript type parameters to the `useExecution` function ([dd8ab39](https://github.com/storm-software/power-plant/commit/dd8ab39))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.18**
+
 ## [0.0.18](https://github.com/storm-software/power-plant/releases/tag/core%400.0.18) (07/20/2026)
 
 ### Miscellaneous
