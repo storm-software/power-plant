@@ -64,6 +64,7 @@ catalog:
   "@storm-software/untyped": ^0.24.251
   "@storm-software/workspace-tools": ^1.296.89
   "@stryke/convert": ^0.7.27
+  "@stryke/capnp": ^0.12.123
   "@stryke/date": ^0.0.8
   "@stryke/env": ^0.20.114
   "@stryke/fs": ^0.33.97
@@ -124,6 +125,8 @@ overrides:
   "@power-plant/dtcg-schema": workspace:*
   "@power-plant/prisma-schema": workspace:*
   "@power-plant/prisma-input": workspace:*
+  "@power-plant/capnp-schema": workspace:*
+  "@power-plant/capnp-input": workspace:*
   "@power-plant/hey-api": workspace:*
   "@power-plant/asyncapi": workspace:*
   "@power-plant/graphql-codegen": workspace:*
@@ -132,6 +135,7 @@ overrides:
   "@power-plant/terrazzo": workspace:*
   "@power-plant/style-dictionary": workspace:*
   "@power-plant/prisma": workspace:*
+  "@power-plant/capnp": workspace:*
   "@power-plant/ai-sdk": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

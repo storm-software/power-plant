@@ -28,6 +28,9 @@
       "path": "./packages/schemas/prisma-schema"
     },
     {
+      "path": "./packages/schemas/capnp-schema"
+    },
+    {
       "path": "./packages/generators/hey-api"
     },
     {
@@ -52,6 +55,9 @@
       "path": "./packages/generators/prisma"
     },
     {
+      "path": "./packages/generators/capnp"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
@@ -68,6 +74,9 @@
     },
     {
       "path": "./packages/inputs/prisma-input"
+    },
+    {
+      "path": "./packages/inputs/capnp-input"
     },
     {
       "path": "./packages/devtools/ai-sdk"
