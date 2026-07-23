@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.19) (07/23/2026)
+
+### Miscellaneous
+
+- **alloy-js:** Update `render` function to call context hooks ([593bd68](https://github.com/storm-software/power-plant/commit/593bd68))
+
 ## [0.0.18](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.18) (07/23/2026)
 
 ### Updated Dependencies
