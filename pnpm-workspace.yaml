@@ -33,6 +33,7 @@ catalog:
   "@graphql-tools/utils": ^11.2.2
   "@graphql-typed-document-node/core": ^3.2.0
   "@hey-api/openapi-ts": ^0.99.0
+  "openapi-typescript": ^7.13.0
   "@ls-lint/ls-lint": ^2.3.1
   "@nx/devkit": 23.0.1
   "@nx/eslint-plugin": 23.0.1
@@ -136,6 +137,7 @@ overrides:
   "@power-plant/style-dictionary": workspace:*
   "@power-plant/prisma": workspace:*
   "@power-plant/capnp": workspace:*
+  "@power-plant/openapi-typescript": workspace:*
   "@power-plant/ai-sdk": workspace:*
   "@power-plant/tools-config": workspace:*
   "@power-plant/tools-errors": workspace:*

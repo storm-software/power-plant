@@ -58,6 +58,9 @@
       "path": "./packages/generators/capnp"
     },
     {
+      "path": "./packages/generators/openapi-typescript"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
