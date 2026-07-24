@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.25](https://github.com/storm-software/power-plant/releases/tag/core%400.0.25) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Add extra configuration values to `extract` options ([2b73467](https://github.com/storm-software/power-plant/commit/2b73467))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.24**
+
 ## [0.0.24](https://github.com/storm-software/power-plant/releases/tag/core%400.0.24) (07/24/2026)
 
 ### Miscellaneous

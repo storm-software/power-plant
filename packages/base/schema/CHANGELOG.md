@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.24](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.24) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Add extra configuration values to `extract` options ([2b73467](https://github.com/storm-software/power-plant/commit/2b73467))
+
 ## [0.0.23](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.23) (07/24/2026)
 
 ### Miscellaneous

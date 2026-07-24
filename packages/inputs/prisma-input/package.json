@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/prisma-input",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "description": "A Power Plant input for reading Prisma schema files into a DMMF document.",
   "keywords": [
