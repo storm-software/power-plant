@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.29](https://github.com/storm-software/power-plant/releases/tag/core%400.0.29) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Update `extract` to allow `cwd` parameter in options ([282be6c](https://github.com/storm-software/power-plant/commit/282be6c))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.28**
+
 ## [0.0.28](https://github.com/storm-software/power-plant/releases/tag/core%400.0.28) (07/24/2026)
 
 ### Updated Dependencies

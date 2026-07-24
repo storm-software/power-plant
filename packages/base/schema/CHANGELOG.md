@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.28](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.28) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Update `extract` to allow `cwd` parameter in options ([282be6c](https://github.com/storm-software/power-plant/commit/282be6c))
+
 ## [0.0.26](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.26) (07/24/2026)
 
 ### Miscellaneous

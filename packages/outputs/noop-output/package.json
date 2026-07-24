@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/noop-output",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "description": "A Power Plant output that just returns the generated documents.",
   "keywords": ["noop", "power-plant-output", "power-plant", "storm-software"],

@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.8) (07/24/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.29**
+
 ## [0.0.7](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.7) (07/24/2026)
 
 ### Updated Dependencies
