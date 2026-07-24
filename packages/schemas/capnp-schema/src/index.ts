@@ -30,7 +30,6 @@ export default defineSchema<CapnpSchema>({
     version: "1.0",
     description:
       "A Cap'n Proto schema language document describing structs, fields, unions/groups, enums, interfaces, constants, and annotations.",
-    spec: "A Cap'n Proto schema language document.",
     tags: ["capnp", "capnproto"],
     links: [
       {
