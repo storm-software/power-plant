@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Utils
 
+## [0.0.9](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.9) (07/23/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' `README.md` files ([f9a7662](https://github.com/storm-software/power-plant/commit/f9a7662))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.23**
+- Updated **schema** to **v0.0.22**
+
 ## [0.0.8](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.8) (07/23/2026)
 
 ### Updated Dependencies

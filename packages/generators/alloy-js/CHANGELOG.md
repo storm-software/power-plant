@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.20](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.20) (07/23/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' `README.md` files ([f9a7662](https://github.com/storm-software/power-plant/commit/f9a7662))
+
+### Features
+
+- **alloy-js:** Added the `generate` function to output the generated templates ([50bfc0e](https://github.com/storm-software/power-plant/commit/50bfc0e))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.23**
+- Updated **noop-output** to **v0.0.2**
+- Updated **schema** to **v0.0.22**
+
 ## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.19) (07/23/2026)
 
 ### Miscellaneous

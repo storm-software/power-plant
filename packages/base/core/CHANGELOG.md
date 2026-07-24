@@ -2,6 +2,20 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.23](https://github.com/storm-software/power-plant/releases/tag/core%400.0.23) (07/23/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' `README.md` files ([f9a7662](https://github.com/storm-software/power-plant/commit/f9a7662))
+
+### Features
+
+- **alloy-js:** Added the `generate` function to output the generated templates ([50bfc0e](https://github.com/storm-software/power-plant/commit/50bfc0e))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.22**
+
 ## [0.0.22](https://github.com/storm-software/power-plant/releases/tag/core%400.0.22) (07/23/2026)
 
 ### Updated Dependencies

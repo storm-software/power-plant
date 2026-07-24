@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/terrazzo",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "private": false,
   "description": "A Power Plant generator for using Terrazzo to generate platform code from Design Tokens Community Group (DTCG) tokens.",
   "keywords": [
