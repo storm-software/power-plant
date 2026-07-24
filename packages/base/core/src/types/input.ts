@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaConfig } from "@power-plant/schema";
+import type { BaseExtractOptions, SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { MaybePromise } from "@stryke/types/base";
 import type { MetaConfig } from "./meta";
@@ -57,10 +57,11 @@ export type InputConfig<TSpec, TOptions extends object> =
   | InputConfigObject<TSpec, TOptions>;
 
 export type InferCreateInputOptions<T extends InputConfig<any, any>> =
-  T extends LoadReference
+  (T extends LoadReference
     ? InferLoadOptions<T>
     : // eslint-disable-next-line ts/no-empty-object-type
-      {};
+      {}) &
+    BaseExtractOptions;
 
 export interface Input<TSpec, TOptions extends object> {
   /**

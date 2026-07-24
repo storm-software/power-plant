@@ -16,7 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type { SchemaConfig } from "@power-plant/schema";
+import type { BaseExtractOptions, SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { DeepPartial, MaybePromise } from "@stryke/types/base";
 import type { UserConfig } from "./config";
@@ -111,7 +111,8 @@ export type InferCreateGeneratorOptions<
 > = (T extends LoadReference
   ? InferLoadOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
-    {}) & { tsconfig?: string };
+    {}) &
+  BaseExtractOptions;
 
 export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   /**

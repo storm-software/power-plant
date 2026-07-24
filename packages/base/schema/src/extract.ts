@@ -22,7 +22,7 @@ import { resolveSafe } from "@stryke/fs/resolve";
 import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
 import { isStandardJsonSchema } from "@stryke/json";
-import { findFileExtensionSafe } from "@stryke/path/find";
+import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
@@ -227,26 +227,21 @@ function resolveCompilerOptions(
 }
 
 function createProgramFromFileSystem(
-  rootFile: string,
+  file: string,
   options: {
     cwd?: string;
     fs?: FileSystemInterfaceOptions;
     tsconfig?: string;
   }
 ): ts.Program {
-  const projectRoot = options.cwd ?? dirname(rootFile);
-  const createSystem = createFSBackedSystem as (
-    files: Map<string, string>,
-    root: string,
-    typescriptModule: typeof ts,
-    tsLibDirectory?: string
-  ) => ts.System;
+  const projectRoot = options.cwd ?? findFilePath(file);
+
   const createHost = createVirtualCompilerHost as (
     system: ts.System,
     compilerOptions: ts.CompilerOptions,
     typescriptModule: typeof ts
   ) => { compilerHost: ts.CompilerHost };
-  const system = createSystem(new Map(), projectRoot, ts);
+  const system = createFSBackedSystem(new Map(), projectRoot, ts);
 
   if (options.fs) {
     bindFileSystemToSystem(system, options.fs);
@@ -260,7 +255,7 @@ function createProgramFromFileSystem(
   const { compilerHost } = createHost(system, compilerOptions, ts);
 
   return ts.createProgram({
-    rootNames: [rootFile],
+    rootNames: [file],
     options: compilerOptions,
     host: compilerHost
   });
@@ -871,7 +866,10 @@ export function extractSource(
  */
 export async function extractTSType(
   input: FileReferenceInput,
-  options: InferLoadOptions<typeof input> & { tsconfig?: string } = {}
+  options: InferLoadOptions<typeof input> & {
+    tsconfig?: string;
+    cwd?: string;
+  } = {}
 ): Promise<JsonSchema> {
   const fileReference = extractFileReference(input);
   if (!fileReference) {
