@@ -30,7 +30,8 @@ const config: UserConfig = defineConfig({
   ],
   platform: "node",
   output: {
-    format: ["cjs", "esm"]
+    format: ["cjs", "esm"],
+    minify: false
   },
   plugins: [tsdown()]
 });

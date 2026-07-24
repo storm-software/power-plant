@@ -24,7 +24,8 @@ const config: UserConfig = defineConfig({
   input: ["src/*.ts", "src/helpers/*.ts"],
   platform: "node",
   output: {
-    format: ["cjs", "esm"]
+    format: ["cjs", "esm"],
+    minify: false
   },
   resolve: {
     skipNodeModulesBundle: true

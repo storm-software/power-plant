@@ -43,11 +43,11 @@ catalog:
   "@nx/vite": 23.0.1
   "@nx/vitest": 23.0.1
   "@nx/workspace": 23.0.1
-  "@powerlines/nx": ^0.13.188
-  "@powerlines/plugin-babel": ^0.13.145
-  "@powerlines/plugin-tsdown": ^0.1.550
-  "@powerlines/tsconfig": ^0.4.197
-  "@powerlines/tsdoc": ^0.2.145
+  "@powerlines/nx": ^0.13.189
+  "@powerlines/plugin-babel": ^0.13.146
+  "@powerlines/plugin-tsdown": ^0.1.551
+  "@powerlines/tsconfig": ^0.4.198
+  "@powerlines/tsdoc": ^0.2.146
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
@@ -96,7 +96,7 @@ catalog:
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.0.1
-  powerlines: ^0.47.149
+  powerlines: ^0.47.150
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
@@ -112,7 +112,7 @@ catalog:
   vitest: ~4.1.10
   zod: ^4.4.3
   zx: ^8.8.5
-  '@typescript/vfs': ^1.6.4
+  "@typescript/vfs": ^1.6.4
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
