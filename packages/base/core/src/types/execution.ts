@@ -16,6 +16,7 @@
 
  ------------------------------------------------------------------- */
 
+import type { BaseExtractOptions } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { UserConfig } from "./config";
 import type { GeneratedDocument, GeneratorConfig } from "./generator";
@@ -86,13 +87,14 @@ export type ExecutionResult<TReturns = void> = GeneratedDocument & {
   returns?: TReturns;
 };
 
-export type InferEngineOptions<
+export type InferExecuteOptions<
   TGeneratorConfig extends GeneratorConfig<any, any, any>
-> = TGeneratorConfig extends LoadReference
+> = (TGeneratorConfig extends LoadReference
   ? InferLoadOptions<TGeneratorConfig> & UserConfig
-  : UserConfig;
+  : UserConfig) &
+  BaseExtractOptions;
 
 export type ExecuteFunction = <TSpec, TOptions extends object, TReturns = void>(
   generatorConfig: GeneratorConfig<TSpec, TOptions, TReturns>,
-  options?: InferEngineOptions<typeof generatorConfig> & TOptions
+  options?: InferExecuteOptions<typeof generatorConfig> & TOptions
 ) => Promise<TReturns>;

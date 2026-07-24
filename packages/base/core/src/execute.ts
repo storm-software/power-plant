@@ -25,7 +25,7 @@ import type { UserConfig } from "./types/config";
 import type {
   ExecuteFunction,
   ExecutionMeta,
-  InferEngineOptions
+  InferExecuteOptions
 } from "./types/execution";
 import type { GeneratedDocument, GeneratorConfig } from "./types/generator";
 
@@ -80,8 +80,8 @@ export async function createExecute(
 
   const execute = async <TSpec, TOptions extends object, TReturns = void>(
     config: GeneratorConfig<TSpec, TOptions, TReturns>,
-    options: InferEngineOptions<typeof config> &
-      TOptions = {} as InferEngineOptions<typeof config> & TOptions
+    options: InferExecuteOptions<typeof config> &
+      TOptions = {} as InferExecuteOptions<typeof config> & TOptions
   ): Promise<TReturns> =>
     callAsyncSessionContext<TReturns>(context, async () => {
       const executionId = uuid();
@@ -168,8 +168,8 @@ export async function createExecute(
  */
 export async function execute<TSpec, TOptions extends object, TReturns = void>(
   config: GeneratorConfig<TSpec, TOptions, TReturns>,
-  options: InferEngineOptions<typeof config> &
-    TOptions = {} as InferEngineOptions<typeof config> & TOptions
+  options: InferExecuteOptions<typeof config> &
+    TOptions = {} as InferExecuteOptions<typeof config> & TOptions
 ): Promise<TReturns> {
   const innerExecute = await createExecute(options);
 

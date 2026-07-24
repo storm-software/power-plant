@@ -18,6 +18,7 @@
 
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
+import type { Config } from "ts-json-schema-generator/dist/src/Config";
 import type { Storage } from "unstorage";
 import type { InputObject, Schema as UntypedBaseSchema } from "untyped";
 import type { BaseIssue, BaseSchema } from "valibot";
@@ -1685,24 +1686,19 @@ export type SchemaConfig<TSpec = any> =
   | SchemaSourceConfig<TSpec>
   | SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
+export type BaseExtractOptions = {
+  /**
+   * An optional storage instance to use for caching schema extraction results. If provided, the storage instance will be used to store and retrieve cached schema extraction results, which can improve performance by avoiding redundant schema extraction operations. If not provided, the default storage mechanism will be used.
+   */
+  storage?: Storage;
+} & Omit<Config, "path" | "type">;
+
 export type InferExtractOptions<T extends SchemaConfig> =
   (T extends LoadReference
     ? Omit<InferLoadOptions<T>, "fs">
     : // eslint-disable-next-line ts/no-empty-object-type
-      {}) & {
-    /**
-     * An optional storage instance to use for caching schema extraction results. If provided, the storage instance will be used to store and retrieve cached schema extraction results, which can improve performance by avoiding redundant schema extraction operations. If not provided, the default storage mechanism will be used.
-     */
-    storage?: Storage;
-
-    /**
-     * An optional path to a TypeScript configuration file to use for the schema extraction process. If provided, the TypeScript configuration file will be used to compile the TypeScript code before extracting the schema. If not provided, the default TypeScript configuration will be used.
-     *
-     * @see https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-     * @see https://www.typescriptlang.org/docs/handbook/compiler-options.html
-     */
-    tsconfig?: string;
-  };
+      {}) &
+    BaseExtractOptions;
 
 /**
  * A schema envelope that contains the normalized schema and its source variant.

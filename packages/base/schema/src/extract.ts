@@ -36,7 +36,6 @@ import {
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
-import type { Config as TsJsonSchemaGeneratorConfig } from "ts-json-schema-generator/dist/src/Config.js";
 import type * as z3 from "zod/v3";
 import { mapStorageToFileSystem } from "./storage";
 import {
@@ -689,20 +688,23 @@ export async function extractTSType(
   });
 
   try {
-    const generatorConfig: TsJsonSchemaGeneratorConfig = {
+    return createGenerator({
       path: resolvedPath || fileReference.file,
       type: exportName,
       expose: "all",
       jsDoc: "extended",
+      markdownDescription: true,
+      fullDescription: true,
+      skipTypeCheck: true,
       ...options
-    };
-
-    const generator = createGenerator(generatorConfig);
-
-    return generator.createSchema(exportName) as JsonSchema;
+    }).createSchema(exportName) as JsonSchema;
   } catch (error) {
     throw new Error(
-      `Failed to generate a JSON schema for "${fileReference.file}" using the type "${exportName}". Error: ${(error as Error).message}`
+      `Failed to generate a JSON schema for "${fileReference.file}"${
+        resolvedPath && resolvedPath !== fileReference.file
+          ? ` (resolved: ${resolvedPath})`
+          : ""
+      } using the type "${exportName}". Error: ${(error as Error).message}`
     );
   }
 }
