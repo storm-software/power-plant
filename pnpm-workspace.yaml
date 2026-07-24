@@ -120,6 +120,7 @@ overrides:
   "@power-plant/terrazzo-input": workspace:*
   "@power-plant/ai-input": workspace:*
   "@power-plant/unstorage-output": workspace:*
+  "@power-plant/noop-output": workspace:*
   "@power-plant/openapi-schema": workspace:*
   "@power-plant/asyncapi-schema": workspace:*
   "@power-plant/graphql-schema": workspace:*

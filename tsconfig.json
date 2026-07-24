@@ -64,6 +64,9 @@
       "path": "./packages/outputs/unstorage-output"
     },
     {
+      "path": "./packages/outputs/noop-output"
+    },
+    {
       "path": "./packages/inputs/unstorage-input"
     },
     {
