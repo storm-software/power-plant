@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.21](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.21) (07/24/2026)
+
+### Miscellaneous
+
+- **monorepo:** Regenerate `README.md` files for the workspace ([8c112b8](https://github.com/storm-software/power-plant/commit/8c112b8))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.24**
+- Updated **noop-output** to **v0.0.3**
+- Updated **schema** to **v0.0.23**
+
 ## [0.0.20](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.20) (07/23/2026)
 
 ### Miscellaneous

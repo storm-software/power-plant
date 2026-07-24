@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.10](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.10) (07/24/2026)
+
+### Miscellaneous
+
+- **monorepo:** Regenerate `README.md` files for the workspace ([8c112b8](https://github.com/storm-software/power-plant/commit/8c112b8))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.24**
+- Updated **schema** to **v0.0.23**
+- Updated **terrazzo-input** to **v0.0.10**
+
 ## [0.0.9](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.9) (07/23/2026)
 
 ### Miscellaneous

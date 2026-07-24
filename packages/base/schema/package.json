@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/schema",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "private": false,
   "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
@@ -169,5 +169,13 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "inlinedDependencies": {
+    "@storm-software/config-tools": "1.190.109",
+    "@stryke/fs": "0.33.97",
+    "acorn": "8.17.0",
+    "mlly": "1.8.2",
+    "pathe": "2.0.3",
+    "ufo": "1.6.4"
   }
 }

@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.20](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.20) (07/24/2026)
+
+### Miscellaneous
+
+- **monorepo:** Regenerate `README.md` files for the workspace ([8c112b8](https://github.com/storm-software/power-plant/commit/8c112b8))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.24**
+
 ## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.19) (07/23/2026)
 
 ### Miscellaneous

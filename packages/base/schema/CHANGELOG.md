@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.23](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.23) (07/24/2026)
+
+### Miscellaneous
+
+- **monorepo:** Regenerate `README.md` files for the workspace ([8c112b8](https://github.com/storm-software/power-plant/commit/8c112b8))
+
+### Bug Fixes
+
+- **schema:** Resolve issue extracting schemas from package path ([ac2255f](https://github.com/storm-software/power-plant/commit/ac2255f))
+
 ## [0.0.22](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.22) (07/23/2026)
 
 ### Miscellaneous

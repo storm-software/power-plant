@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.3](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.3) (07/24/2026)
+
+### Miscellaneous
+
+- **monorepo:** Regenerate `README.md` files for the workspace ([8c112b8](https://github.com/storm-software/power-plant/commit/8c112b8))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.24**
+
 ## [0.0.2](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.2) (07/23/2026)
 
 ### Features
