@@ -20,6 +20,7 @@ catalog:
   "@asyncapi/specs": ^6.11.1
   "@babel/core": ^8.0.1
   "@babel/preset-typescript": ^8.0.1
+  "@content-collections/core": ^0.15.2
   "@graphql-codegen/core": ^6.2.0
   "@graphql-codegen/plugin-helpers": ^7.1.0
   "@graphql-tools/apollo-engine-loader": ^8.0.34
@@ -136,6 +137,7 @@ overrides:
   "@power-plant/handlebars": workspace:*
   "@power-plant/terrazzo": workspace:*
   "@power-plant/style-dictionary": workspace:*
+  "@power-plant/content-collections": workspace:*
   "@power-plant/prisma": workspace:*
   "@power-plant/capnp": workspace:*
   "@power-plant/openapi-typescript": workspace:*

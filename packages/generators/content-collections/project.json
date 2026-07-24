@@ -1,0 +1,11 @@
+{
+  "name": "content-collections",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/generators/content-collections/src",
+  "targets": {
+    "nx-release-publish": {
+      "executor": "@storm-software/workspace-tools:npm-publish"
+    }
+  }
+}

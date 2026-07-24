@@ -86,6 +86,9 @@
     },
     {
       "path": "./packages/devtools/ai-sdk"
+    },
+    {
+      "path": "./packages/generators/content-collections"
     }
   ],
   "files": []
