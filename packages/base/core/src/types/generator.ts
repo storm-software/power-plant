@@ -108,10 +108,10 @@ export type GeneratorConfig<TSpec, TOptions extends object, TReturns = void> =
 
 export type InferCreateGeneratorOptions<
   T extends GeneratorConfig<any, any, any>
-> = T extends LoadReference
+> = (T extends LoadReference
   ? InferLoadOptions<T>
   : // eslint-disable-next-line ts/no-empty-object-type
-    {};
+    {}) & { tsconfig?: string };
 
 export interface Generator<TSpec, TOptions extends object, TReturns = void> {
   /**

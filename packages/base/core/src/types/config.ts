@@ -40,6 +40,14 @@ export interface UserConfig<
   debug?: true;
 
   /**
+   * An optional path to a TypeScript configuration file to use for the schema extraction process. If provided, the TypeScript configuration file will be used to compile the TypeScript code before extracting the schema. If not provided, the default TypeScript configuration will be used.
+   *
+   * @see https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+   * @see https://www.typescriptlang.org/docs/handbook/compiler-options.html
+   */
+  tsconfig?: string;
+
+  /**
    * The settings to use for the application.
    */
   settings?: DeepPartial<Settings>;

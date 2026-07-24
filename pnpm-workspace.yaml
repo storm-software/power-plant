@@ -34,7 +34,7 @@ catalog:
   "@graphql-tools/utils": ^11.2.2
   "@graphql-typed-document-node/core": ^3.2.0
   "@hey-api/openapi-ts": ^0.99.0
-  "openapi-typescript": ^7.13.0
+  openapi-typescript: ^7.13.0
   "@ls-lint/ls-lint": ^2.3.1
   "@nx/devkit": 23.0.1
   "@nx/eslint-plugin": 23.0.1
@@ -43,11 +43,11 @@ catalog:
   "@nx/vite": 23.0.1
   "@nx/vitest": 23.0.1
   "@nx/workspace": 23.0.1
-  "@powerlines/nx": ^0.13.183
-  "@powerlines/plugin-babel": ^0.13.140
-  "@powerlines/plugin-tsdown": ^0.1.545
-  "@powerlines/tsconfig": ^0.4.192
-  "@powerlines/tsdoc": ^0.2.140
+  "@powerlines/nx": ^0.13.186
+  "@powerlines/plugin-babel": ^0.13.143
+  "@powerlines/plugin-tsdown": ^0.1.548
+  "@powerlines/tsconfig": ^0.4.195
+  "@powerlines/tsdoc": ^0.2.143
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
@@ -85,7 +85,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.34
+  ai: ^7.0.35
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
@@ -96,7 +96,7 @@ catalog:
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.0.1
-  powerlines: ^0.47.144
+  powerlines: ^0.47.147
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0

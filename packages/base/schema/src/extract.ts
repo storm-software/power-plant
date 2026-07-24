@@ -18,6 +18,7 @@
 
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import { extractFileReference } from "@stryke/convert/extract-file-reference";
+import { resolveSafe } from "@stryke/fs/resolve";
 import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
 import { isStandardJsonSchema } from "@stryke/json";
@@ -673,7 +674,7 @@ export function extractSource(
  */
 export async function extractTSType(
   input: FileReferenceInput,
-  options: InferLoadOptions<typeof input> = {}
+  options: InferLoadOptions<typeof input> & { tsconfig?: string } = {}
 ): Promise<JsonSchema> {
   const fileReference = extractFileReference(input);
   if (!fileReference) {
@@ -683,12 +684,15 @@ export async function extractTSType(
   }
 
   const exportName = fileReference.export ?? "*";
+  const resolvedPath = await resolveSafe(fileReference.file, {
+    fs: options.fs
+  });
 
   try {
     const generatorConfig: TsJsonSchemaGeneratorConfig = {
-      path: fileReference.file,
+      path: resolvedPath || fileReference.file,
       type: exportName,
-      expose: "export",
+      expose: "all",
       jsDoc: "extended",
       ...options
     };
