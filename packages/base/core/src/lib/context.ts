@@ -26,7 +26,6 @@ import defu from "defu";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
-import type { Unstable_ExecutionContext } from "../types/__internal";
 import type { UserConfig } from "../types/config";
 import type { LocalStore, SessionContext } from "../types/context";
 import type { GeneratedDocument } from "../types/generator";
@@ -34,6 +33,7 @@ import type { Input } from "../types/input";
 import type { Output } from "../types/output";
 import type { SchemaOf } from "../types/schema";
 import type { Logger, Settings } from "../types/settings";
+import type { Unstable_ExecutionContext } from "../types/__internal";
 
 const logger: Logger = {
   // eslint-disable-next-line no-console

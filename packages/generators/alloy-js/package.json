@@ -297,6 +297,20 @@
         "default": "./dist/core/types/components.mjs"
       }
     },
+    "./generate": {
+      "require": {
+        "types": "./dist/generate.d.cts",
+        "default": "./dist/generate.cjs"
+      },
+      "import": {
+        "types": "./dist/generate.d.mts",
+        "default": "./dist/generate.mjs"
+      },
+      "default": {
+        "types": "./dist/generate.d.mts",
+        "default": "./dist/generate.mjs"
+      }
+    },
     "./hcl": {
       "require": {
         "types": "./dist/hcl/index.d.cts",
@@ -871,6 +885,7 @@
     "@alloy-js/typescript": "catalog:",
     "@power-plant/core": "workspace:*",
     "@power-plant/schema": "workspace:*",
+    "@power-plant/noop-output": "workspace:*",
     "@stryke/convert": "catalog:",
     "@stryke/helpers": "catalog:",
     "@stryke/path": "catalog:",

@@ -31,7 +31,7 @@ import defu from "defu";
 import { Output } from "./core";
 
 /**
- * A function to render children components within the [Alloy](https://alloy-framework.github.io) context, and register any generated documents on the execution context.
+ * A function to render template components within the [Alloy-js](https://alloy-framework.github.io) context, and register any generated documents on the execution context.
  *
  * @example
  * ```tsx
@@ -41,7 +41,7 @@ import { Output } from "./core";
  * ```
  *
  * @param context - The Power Plant execution context.
- * @param children - The children components to render.
+ * @param template - The children components to render.
  * @returns A promise that resolves when rendering is complete.
  */
 export async function renderBase<
@@ -50,13 +50,13 @@ export async function renderBase<
   TReturns = void
 >(
   context: ExecutionContext<TSpec, TOptions, TReturns>,
-  children: Children
+  template: Children
 ): Promise<GeneratorFunctionResult<TSpec, TOptions>> {
   const meta = {} as Record<string, MetaConfig>;
   const { cwd, logger } = context;
   const output = await renderAsync(
     <Output context={context} meta={meta}>
-      {children}
+      {template}
     </Output>
   );
 
@@ -130,13 +130,13 @@ export async function renderBase<
  * await render(<> ... </>);
  * ```
  *
- * @param children - The children components to render.
+ * @param template - The children components to render.
  * @returns A promise that resolves when rendering is complete.
  */
 export async function render<TSpec, TOptions extends object, TReturns = void>(
-  children: Children
+  template: Children
 ): Promise<GeneratorFunctionResult<TSpec, TOptions>> {
   const context = useExecution<TSpec, TOptions, TReturns>();
 
-  return renderBase<TSpec, TOptions, TReturns>(context, children);
+  return renderBase<TSpec, TOptions, TReturns>(context, template);
 }
