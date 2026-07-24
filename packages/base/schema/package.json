@@ -134,6 +134,7 @@
     "@stryke/helpers": "catalog:",
     "@stryke/json": "catalog:",
     "@stryke/path": "catalog:",
+    "@stryke/fs": "catalog:",
     "@stryke/resolve": "catalog:",
     "@stryke/string-format": "catalog:",
     "@stryke/type-checks": "catalog:",
@@ -141,6 +142,7 @@
     "@stryke/unique-id": "catalog:",
     "@stryke/url": "catalog:",
     "@stryke/zod": "catalog:",
+    "@typescript/vfs": "catalog:",
     "@valibot/to-json-schema": "catalog:",
     "defu": "catalog:",
     "ts-json-schema-generator": "catalog:",
@@ -169,13 +171,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "inlinedDependencies": {
-    "@storm-software/config-tools": "1.190.109",
-    "@stryke/fs": "0.33.97",
-    "acorn": "8.17.0",
-    "mlly": "1.8.2",
-    "pathe": "2.0.3",
-    "ufo": "1.6.4"
   }
 }
