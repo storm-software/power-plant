@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.26](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.26) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Update package build to set `minify` to `false` ([5736cdf](https://github.com/storm-software/power-plant/commit/5736cdf))
+
 ## [0.0.25](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.25) (07/24/2026)
 
 ### Miscellaneous

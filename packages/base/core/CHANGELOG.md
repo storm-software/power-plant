@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.27](https://github.com/storm-software/power-plant/releases/tag/core%400.0.27) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Update package build to set `minify` to `false` ([5736cdf](https://github.com/storm-software/power-plant/commit/5736cdf))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.26**
+
 ## [0.0.26](https://github.com/storm-software/power-plant/releases/tag/core%400.0.26) (07/24/2026)
 
 ### Updated Dependencies

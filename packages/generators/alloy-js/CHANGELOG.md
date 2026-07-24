@@ -2,6 +2,14 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.24](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.24) (07/24/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.27**
+- Updated **noop-output** to **v0.0.6**
+- Updated **schema** to **v0.0.26**
+
 ## [0.0.23](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.23) (07/24/2026)
 
 ### Updated Dependencies
