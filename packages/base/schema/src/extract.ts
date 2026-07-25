@@ -23,6 +23,7 @@ import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
 import { isStandardJsonSchema } from "@stryke/json";
 import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
+import { replacePath } from "@stryke/path/replace";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
@@ -884,8 +885,15 @@ export async function extractTSType(
   });
   const filePath = resolvedPath || fileReference.file;
 
+  const tsconfig = options.tsconfig
+    ? replacePath(options.tsconfig, options.cwd || process.cwd())
+    : undefined;
+
   try {
-    const tsProgram = createProgramFromFileSystem(filePath, options);
+    const tsProgram = createProgramFromFileSystem(filePath, {
+      ...options,
+      tsconfig
+    });
     const generatorConfig = {
       path: filePath,
       type: exportName,
@@ -895,7 +903,8 @@ export async function extractTSType(
       fullDescription: true,
       skipTypeCheck: true,
       tsProgram,
-      ...options
+      ...options,
+      tsconfig
     } as unknown as Parameters<typeof createGenerator>[0];
 
     return createGenerator(generatorConfig).createSchema(
@@ -1012,7 +1021,6 @@ export async function extractSchemaWithSource<TSpec = any>(
     });
 
     const resolvedConfig = unwrapSchemaConfig(resolved);
-
     if (isSchemaWithSource(resolvedConfig)) {
       source = resolvedConfig.source;
     } else if (isSchema(resolvedConfig)) {
