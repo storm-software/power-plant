@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.29](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.29) (07/24/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with invalid `tsconfig` path ([f2ede24](https://github.com/storm-software/power-plant/commit/f2ede24))
+
 ## [0.0.28](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.28) (07/24/2026)
 
 ### Miscellaneous
