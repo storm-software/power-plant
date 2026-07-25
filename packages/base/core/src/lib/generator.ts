@@ -79,6 +79,7 @@ export async function createGenerator<
 
   const schema = await createSchema<TSpec>(configObject.schema, {
     storage: sessionContext.storage,
+    logger: sessionContext.logger,
     tsconfig: options.tsconfig,
     ...options
   });

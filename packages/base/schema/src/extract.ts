@@ -63,6 +63,7 @@ import {
   isValibotSchema
 } from "./type-checks";
 import type {
+  BaseExtractOptions,
   ExtractedSchemaEnvelope,
   InferExtractOptions,
   JsonSchema,
@@ -867,10 +868,7 @@ export function extractSource(
  */
 export async function extractTSType(
   input: FileReferenceInput,
-  options: InferLoadOptions<typeof input> & {
-    tsconfig?: string;
-    cwd?: string;
-  } = {}
+  options: InferLoadOptions<typeof input> & BaseExtractOptions = {}
 ): Promise<JsonSchema> {
   const fileReference = extractFileReference(input);
   if (!fileReference) {
@@ -906,6 +904,16 @@ export async function extractTSType(
       ...options,
       tsconfig
     } as unknown as Parameters<typeof createGenerator>[0];
+
+    options.logger?.debug?.(
+      `Generating JSON schema for "${filePath}" using the type "${
+        exportName
+      }" with the following configuration: ${JSON.stringify(
+        generatorConfig,
+        null,
+        2
+      )}`
+    );
 
     return createGenerator(generatorConfig).createSchema(
       exportName

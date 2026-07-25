@@ -1686,6 +1686,13 @@ export type SchemaConfig<TSpec = any> =
   | SchemaSourceConfig<TSpec>
   | SchemaEnvelope<JsonSchemaOf<TSpec>>;
 
+interface Logger {
+  debug: (message: string) => void;
+  info: (message: string) => void;
+  warn: (message: string) => void;
+  error: (message: string) => void;
+}
+
 export type BaseExtractOptions = {
   /**
    * An optional storage instance to use for caching schema extraction results. If provided, the storage instance will be used to store and retrieve cached schema extraction results, which can improve performance by avoiding redundant schema extraction operations. If not provided, the default storage mechanism will be used.
@@ -1696,6 +1703,11 @@ export type BaseExtractOptions = {
    * An optional working directory to use for resolving file references. If provided, the working directory will be used to resolve file references, which can improve performance by avoiding redundant file resolution operations. If not provided, the current working directory will be used.
    */
   cwd?: string;
+
+  /**
+   * An optional logger to use for logging messages. If provided, the logger will be used to log messages, which can improve performance by avoiding redundant logging operations. If not provided, the default logger will be used.
+   */
+  logger?: Logger;
 } & Omit<Config, "path" | "type">;
 
 export type InferExtractOptions<T extends SchemaConfig> =
