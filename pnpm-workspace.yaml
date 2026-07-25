@@ -85,7 +85,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.35
+  ai: ^7.0.36
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
