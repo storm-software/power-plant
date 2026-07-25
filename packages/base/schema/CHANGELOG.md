@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.30](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.30) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Added `logger` to `extract` function's options ([18304b9](https://github.com/storm-software/power-plant/commit/18304b9))
+
 ## [0.0.29](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.29) (07/24/2026)
 
 ### Bug Fixes

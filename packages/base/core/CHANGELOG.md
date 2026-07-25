@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.31](https://github.com/storm-software/power-plant/releases/tag/core%400.0.31) (07/24/2026)
+
+### Miscellaneous
+
+- **schema:** Added `logger` to `extract` function's options ([18304b9](https://github.com/storm-software/power-plant/commit/18304b9))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.30**
+
 ## [0.0.30](https://github.com/storm-software/power-plant/releases/tag/core%400.0.30) (07/24/2026)
 
 ### Updated Dependencies
