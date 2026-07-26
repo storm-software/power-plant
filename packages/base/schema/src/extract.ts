@@ -22,8 +22,9 @@ import { resolveSafe } from "@stryke/fs/resolve";
 import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
 import { isStandardJsonSchema } from "@stryke/json";
+import { appendPath } from "@stryke/path/append";
 import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
-import { replacePath } from "@stryke/path/replace";
+import { joinPaths } from "@stryke/path/join";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
@@ -236,7 +237,11 @@ function createProgramFromFileSystem(
     tsconfig?: string;
   }
 ): ts.Program {
-  const projectRoot = options.cwd ?? findFilePath(file);
+  const projectRoot = options.tsconfig
+    ? findFilePath(options.tsconfig)
+    : options.cwd
+      ? options.cwd
+      : findFilePath(file);
 
   const createHost = createVirtualCompilerHost as (
     system: ts.System,
@@ -884,8 +889,8 @@ export async function extractTSType(
   const filePath = resolvedPath || fileReference.file;
 
   const tsconfig = options.tsconfig
-    ? replacePath(options.tsconfig, options.cwd || process.cwd())
-    : undefined;
+    ? appendPath(options.tsconfig, options.cwd || process.cwd())
+    : joinPaths(options.cwd || process.cwd(), "tsconfig.json");
 
   try {
     const tsProgram = createProgramFromFileSystem(filePath, {
