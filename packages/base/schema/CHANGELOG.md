@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.34](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.34) (07/26/2026)
+
+### Miscellaneous
+
+- **schema:** Set `skipTypeCheck` to true ([9066161](https://github.com/storm-software/power-plant/commit/9066161))
+
 ## [0.0.33](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.33) (07/26/2026)
 
 ### Miscellaneous

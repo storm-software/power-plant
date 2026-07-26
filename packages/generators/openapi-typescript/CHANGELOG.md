@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Openapi Typescript
 
+## [0.0.15](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.15) (07/26/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.35**
+- Updated **schema** to **v0.0.34**
+
 ## [0.0.14](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.14) (07/26/2026)
 
 ### Updated Dependencies
