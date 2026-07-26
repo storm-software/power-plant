@@ -127,6 +127,8 @@
   "typings": "dist/index.d.mts",
   "files": ["dist"],
   "dependencies": {
+    "@deepkit/core": "catalog:",
+    "@deepkit/type": "catalog:",
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
     "@stryke/date": "catalog:",
@@ -145,13 +147,14 @@
     "@valibot/to-json-schema": "catalog:",
     "defu": "catalog:",
     "esbuild": "catalog:",
+    "jiti": "catalog:",
     "normalize-path": "catalog:",
-    "ts-json-schema-generator": "catalog:",
     "typescript": "^6.0.3",
     "unstorage": "catalog:",
     "untyped": "catalog:"
   },
   "devDependencies": {
+    "@deepkit/type-compiler": "catalog:",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:",

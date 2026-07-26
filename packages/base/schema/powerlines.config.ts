@@ -35,7 +35,7 @@ const config: UserConfig = defineConfig({
   },
   resolve: {
     skipNodeModulesBundle: true,
-    noExternal: ["ts-json-schema-generator"]
+    noExternal: ["@deepkit/type-compiler"]
   },
   plugins: [tsdown()]
 });

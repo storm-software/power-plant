@@ -16,18 +16,33 @@
 
  ------------------------------------------------------------------- */
 
+import {
+  isType,
+  reflect,
+  stringifyType,
+  type Type
+} from "@deepkit/type";
+import {
+  Cache,
+  DeclarationTransformer,
+  ReflectionTransformer,
+} from "@deepkit/type-compiler";
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import { extractFileReference } from "@stryke/convert/extract-file-reference";
 import { resolveSafe } from "@stryke/fs/resolve";
 import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
+import { omit } from "@stryke/helpers/omit";
 import { isStandardJsonSchema } from "@stryke/json";
 import { appendPath } from "@stryke/path/append";
-import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
+import {
+  findFileDotExtensionSafe,
+  findFileExtensionSafe,
+  findFilePath
+} from "@stryke/path/find";
 import { joinPaths } from "@stryke/path/join";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
-import { resolve as resolveModuleContent } from "@stryke/resolve/resolve";
 import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
 import { isSetString } from "@stryke/type-checks";
@@ -38,11 +53,13 @@ import {
   isZod3Type
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
-import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
-import type { Config } from "ts-json-schema-generator/dist/src/Config";
-import { DEFAULT_CONFIG } from "ts-json-schema-generator/dist/src/Config";
-import ts from "typescript";
+import defu from "defu";
+import { build, type Plugin } from "esbuild";
+import { createJiti } from "jiti";
+import { readFile } from "node:fs/promises";
+import ts, { DiagnosticCategory } from "typescript";
 import type * as z3 from "zod/v3";
+import { reflectionToJsonSchema } from "./reflection";
 import { mapStorageToFileSystem } from "./storage";
 import {
   isFileReference,
@@ -473,6 +490,8 @@ export function extractHash(
   } else if (isSetObject(unwrappedConfig)) {
     if (isZod3Type(unwrappedConfig)) {
       return murmurhash({ variant, input: unwrappedConfig._def });
+    } else if (isType(unwrappedConfig)) {
+      return murmurhash({ variant, input: stringifyType(unwrappedConfig) });
     } else if (isStandardJsonSchema(unwrappedConfig)) {
       return murmurhash({ variant, input: unwrappedConfig["~standard"] });
     } else if (isJsonSchema(unwrappedConfig)) {
@@ -498,6 +517,17 @@ export function extractHash(
   throw new Error(
     `Failed to create an input hash for the provided schema definition input. The input must be a Zod schema, a Standard JSON Schema, a JSON Schema object, a Valibot BaseSchema, or a reflected Deepkit Type object.`
   );
+}
+
+/**
+ * Converts a reflected Deepkit {@link Type} into a JSON Schema (draft-2020-12) representation.
+ */
+export function extractReflection(reflection: Type): JsonSchema | undefined {
+  if (!isType(reflection)) {
+    return undefined;
+  }
+
+  return reflectionToJsonSchema(reflection);
 }
 
 /**
@@ -548,6 +578,8 @@ export function extractResolvedVariant(
   if (isSetObject(input)) {
     if (isZod3Type(input)) {
       return "zod3";
+    } else if (isType(input)) {
+      return "reflection";
     } else if (isUntypedConfigStrict(input) || isUntypedSchemaStrict(input)) {
       return "untyped";
     } else if (isStandardJsonSchema(input)) {
@@ -611,6 +643,8 @@ export async function extractSchema(
     resolvedVariant === "valibot"
   ) {
     schema = extractJsonSchema(input);
+  } else if (resolvedVariant === "reflection") {
+    schema = extractReflection(input as Type);
   }
 
   if (schema) {
@@ -664,6 +698,12 @@ export function extractSource(
       variant: "valibot",
       schema: input as ValibotSchema
     };
+  } else if (variant === "reflection") {
+    return {
+      hash: extractHash(variant, input),
+      variant: "reflection",
+      schema: input as Type
+    };
   }
 
   throw new Error(
@@ -671,144 +711,185 @@ export function extractSource(
   );
 }
 
-function getTsCompilerOptions(config: Config): ts.CompilerOptions {
-  if (config.tsconfig) {
-    const raw = ts.sys.readFile(config.tsconfig);
-    if (!raw) {
-      throw new Error(`Cannot read config file "${config.tsconfig}"`);
+const deepkitCache = new Cache();
+
+function rewriteTypeOnlyImports(source: string): string {
+  return source
+    .replaceAll(/\bimport\s+type\s+/g, "import ")
+    .replaceAll(/\bexport\s+type\s+\*\s+from/g, "export * from")
+    .replaceAll(/\bexport\s+type\s+\{/g, "export {");
+}
+
+function resolveReflectionConfig(
+  options: BaseExtractOptions
+) {
+  return {
+    reflection: options.reflection ?? "default",
+    exclude: options.exclude
+  };
+}
+
+function getCompilerOptions(
+  options: BaseExtractOptions
+): ts.CompilerOptions {
+  const cwd = options.cwd || process.cwd();
+  const tsconfigPath = options.tsconfig
+    ? appendPath(options.tsconfig, cwd)
+    : joinPaths(cwd, "tsconfig.json");
+
+  try {
+    const raw = ts.sys.readFile(tsconfigPath);
+    if (raw) {
+      const parsed = ts.parseConfigFileTextToJson(tsconfigPath, raw);
+      if (parsed.config) {
+        const result = ts.parseJsonConfigFileContent(
+          parsed.config,
+          ts.sys,
+          findFilePath(tsconfigPath) || cwd,
+          {},
+          tsconfigPath
+        );
+
+        return {
+          ...result.options,
+          noEmit: true,
+          experimentalDecorators: true,
+          emitDecoratorMetadata: true
+        };
+      }
     }
-
-    const parsedConfig = ts.parseConfigFileTextToJson(config.tsconfig, raw);
-    if (parsedConfig.error) {
-      throw new Error(parsedConfig.error.messageText.toString());
-    }
-
-    if (!parsedConfig.config) {
-      throw new Error(`Invalid parsed config file "${config.tsconfig}"`);
-    }
-
-    const parseResult = ts.parseJsonConfigFileContent(
-      parsedConfig.config,
-      ts.sys,
-      findFilePath(config.tsconfig),
-      {},
-      config.tsconfig
-    );
-    parseResult.options.noEmit = true;
-    delete parseResult.options.out;
-    delete parseResult.options.outDir;
-    delete parseResult.options.outFile;
-    delete parseResult.options.declaration;
-    delete parseResult.options.declarationDir;
-    delete parseResult.options.declarationMap;
-
-    return parseResult.options;
+  } catch {
+    // Fall through to defaults when tsconfig is missing or invalid.
   }
 
   return {
-    noEmit: true,
-    emitDecoratorMetadata: true,
-    experimentalDecorators: true,
     target: ts.ScriptTarget.ES2022,
     module: ts.ModuleKind.ESNext,
     moduleResolution: ts.ModuleResolutionKind.Bundler,
-    strictNullChecks: false,
+    strictNullChecks: true,
+    experimentalDecorators: true,
+    emitDecoratorMetadata: true,
     skipLibCheck: true,
-    skipDefaultLibCheck: true,
     esModuleInterop: true,
-    types: ["node"]
+    noEmit: true
   };
 }
 
-function getScriptKind(fileName: string): ts.ScriptKind {
-  const extension = findFileExtensionSafe(fileName)?.toLowerCase();
-  switch (extension) {
-    case "tsx":
-      return ts.ScriptKind.TSX;
-    case "jsx":
-      return ts.ScriptKind.JSX;
-    case "js":
-    case "cjs":
-    case "mjs":
-      return ts.ScriptKind.JS;
-    default:
-      return ts.ScriptKind.TS;
+function transpileWithDeepkit(
+  code: string,
+  fileName: string,
+  options: BaseExtractOptions
+): ts.TranspileOutput {
+  const reflectionConfig = resolveReflectionConfig(options);
+  deepkitCache.tick();
+
+  return ts.transpileModule(code, {
+    compilerOptions: getCompilerOptions(options),
+    fileName,
+    transformers: {
+      before: [
+        context =>
+          new ReflectionTransformer(context, deepkitCache).withReflection(
+            reflectionConfig
+          )
+      ],
+      after: [
+        context =>
+          new DeclarationTransformer(context, deepkitCache).withReflection(
+            reflectionConfig
+          )
+      ]
+    }
+  });
+}
+
+async function readSourceFile(
+  path: string,
+  fs?: FileSystemInterface
+): Promise<string | undefined> {
+  try {
+    if (fs?.promises?.readFile) {
+      return await fs.promises.readFile(path, "utf8");
+    }
+
+    return await readFile(path, "utf8");
+  } catch {
+    return undefined;
   }
 }
 
-/**
- * Builds a TypeScript program from original sources collected during the
- * esbuild graph walk so type information remains intact for schema generation.
- */
-function createProgramFromSources(
-  filePath: string,
-  source: string,
-  config: Config
-): ts.Program {
-  const compilerOptions = getTsCompilerOptions(config);
-  const host = ts.createCompilerHost(compilerOptions, true);
+function createDeepkitPlugin(
+  options: BaseExtractOptions & { fs?: FileSystemInterface }
+): Plugin {
+  return {
+    name: "power-plant:deepkit",
+    setup(pluginBuild) {
+      pluginBuild.onLoad({ filter: /\.(m|c)?tsx?$/ }, async args => {
+        if (args.pluginData?.isReflected) {
+          const contents = await readSourceFile(args.path, options.fs);
+          if (!contents) {
+            return null;
+          }
 
-  const baseFileExists = host.fileExists.bind(host);
-  const baseReadFile = host.readFile.bind(host);
-  const baseGetSourceFile = host.getSourceFile.bind(host);
+          return {
+            contents,
+            loader: "ts",
+            pluginData: { isReflected: true }
+          };
+        }
 
-  host.fileExists = name => filePath === name || baseFileExists(name);
-  host.readFile = name => (filePath === name ? source : baseReadFile(name));
+        const raw = await readSourceFile(args.path, options.fs);
+        if (!raw) {
+          return null;
+        }
 
-  host.getSourceFile = (
-    name,
-    languageVersionOrOptions,
-    onError,
-    shouldCreateNewSourceFile
-  ) => {
-    if (filePath === name) {
-      const scriptTarget =
-        typeof languageVersionOrOptions === "object"
-          ? languageVersionOrOptions.languageVersion
-          : languageVersionOrOptions;
+        const result = transpileWithDeepkit(
+          rewriteTypeOnlyImports(raw),
+          args.path,
+          options
+        );
 
-      return ts.createSourceFile(
-        name,
-        source,
-        scriptTarget ?? compilerOptions.target ?? ts.ScriptTarget.ES2022,
-        true,
-        getScriptKind(name)
-      );
+        if (result.diagnostics?.length) {
+          const errors = result.diagnostics.filter(
+            diagnostic => diagnostic.category === DiagnosticCategory.Error
+          );
+          if (errors.length > 0) {
+            const errorMessage = `Deepkit Type reflection transpilation errors: ${
+              args.path
+            } \n ${errors
+              .map(
+                diagnostic =>
+                  `-${diagnostic.file ? `${diagnostic.file.fileName}:` : ""} ${
+                    typeof diagnostic.messageText === "string"
+                      ? diagnostic.messageText
+                      : diagnostic.messageText.messageText
+                  } (at ${diagnostic.start}:${diagnostic.length})`
+              )
+              .join("\n")}`;
+            options.logger?.error?.(errorMessage);
+            throw new Error(errorMessage);
+          }
+        }
+
+        return {
+          contents: result.outputText,
+          loader: "ts",
+          pluginData: { isReflected: true }
+        };
+      });
     }
-
-    return baseGetSourceFile(
-      name,
-      languageVersionOrOptions,
-      onError,
-      shouldCreateNewSourceFile
-    );
   };
-
-  const program = ts.createProgram([filePath], compilerOptions, host);
-  if (!config.skipTypeCheck) {
-    const diagnostics = ts.getPreEmitDiagnostics(program);
-    if (diagnostics.length) {
-      throw new Error(
-        `Type check error: ${diagnostics
-          .map(diagnostic => diagnostic.messageText.toString())
-          .join("\n")}`
-      );
-    }
-  }
-
-  return program;
 }
 
 /**
- * Resolves a type definition to a JSON Schema. First bundles the TypeScript
- * module graph for {@link FileReference.file} with esbuild (preserving original
- * sources), then feeds that program to
- * [ts-json-schema-generator](https://github.com/vega/ts-json-schema-generator)
- * using the referenced export name as the target type when one is provided.
+ * Resolves a type definition to a JSON Schema. Bundles the TypeScript module
+ * graph with esbuild using `@deepkit/type-compiler` reflection transformers,
+ * then converts the reflected Deepkit {@link Type} via {@link reflectionToJsonSchema}.
  *
  * @param input - The type definition to compile. This can be either a string or a {@link FileReference} object.
- * @param options - Optional overrides reserved for API compatibility.
+ * @param options - Optional overrides for reflection and file resolution.
  * @returns A promise that resolves to the generated JSON Schema.
+ * @see https://deepkit.io/en/documentation/runtime-types/reflection
  */
 export async function extractTSType(
   input: FileReferenceInput,
@@ -821,49 +902,93 @@ export async function extractTSType(
     );
   }
 
-  const exportName = fileReference.export ?? "*";
+  const exportName = fileReference.export ?? "default";
   const resolvedPath = await resolveSafe(fileReference.file, {
     fs: options.fs
   });
   const filePath = resolvedPath || fileReference.file;
+  const cwd = options.cwd || process.cwd();
 
   try {
-    const tsconfig = options.tsconfig
-      ? appendPath(options.tsconfig, options.cwd || process.cwd())
-      : joinPaths(options.cwd || process.cwd(), "tsconfig.json");
-
-    const bundled = await resolveModuleContent(filePath, {
-      cwd: options.cwd || process.cwd(),
-      fs: options.fs
-    });
-
     options.logger?.debug?.(
       `Generating JSON schema for bundled "${filePath}" using the type "${exportName}"`
     );
 
-    const config = {
-      ...DEFAULT_CONFIG,
-      expose: "all",
-      jsDoc: "extended",
-      markdownDescription: true,
-      fullDescription: true,
-      ...options,
-      tsconfig,
-      path: filePath,
-      type: exportName,
-      skipTypeCheck: true,
-      functions: "schema"
-    } as Config;
-
-    const tsProgram = createProgramFromSources(filePath, bundled, config);
-    const generator = createGenerator({
-      ...config,
-      // ts-json-schema-generator may resolve a different typescript major than
-      // this package; the program shapes are compatible at runtime.
-      tsProgram: tsProgram as unknown as NonNullable<Config["tsProgram"]>
+    const result = await build({
+      platform: "node",
+      format: "esm",
+      logLevel: "silent",
+      entryPoints: [filePath],
+      write: false,
+      sourcemap: false,
+      splitting: false,
+      treeShaking: true,
+      bundle: true,
+      packages: "bundle",
+      keepNames: true,
+      metafile: false,
+      absWorkingDir: cwd,
+      plugins: [createDeepkitPlugin(options as BaseExtractOptions & { fs?: FileSystemInterface })]
     });
 
-    return generator.createSchema(exportName) as JsonSchema;
+    if (result.errors.length > 0) {
+      throw new Error(result.errors.map(error => error.text).join(", "));
+    }
+
+    const bundled = result.outputFiles?.filter(Boolean)[0]?.text;
+    if (!isSetString(bundled)) {
+      throw new Error(
+        `No output files generated for "${filePath}". Please check the configuration and try again.`
+      );
+    }
+
+    const evaluated = await createJiti(cwd).evalModule(bundled, {
+      filename: filePath,
+      ext: findFileDotExtensionSafe(filePath) || ".ts"
+    }) as Record<string, unknown>;
+
+    let resolved =
+      evaluated[exportName] ?? evaluated[`__Ω${exportName}`];
+    if (resolved === undefined) {
+      throw new Error(
+        `The export "${exportName}" could not be resolved in the "${filePath}" module. ${
+          Object.keys(evaluated).length === 0
+            ? `After bundling, no exports were found in the module.`
+            : `After bundling, the available exports were: ${Object.keys(
+                evaluated
+              ).join(", ")}.`
+        }`
+      );
+    }
+
+    try {
+      const type = reflect(resolved);
+      if (isType(type)) {
+        resolved = type;
+      }
+    } catch {
+      // If reflection fails, assume the resolved output is already usable.
+    }
+
+    if (isType(resolved)) {
+      const schema = extractReflection(resolved);
+      if (!schema) {
+        throw new Error(
+          `Failed to convert the reflected Deepkit type for "${exportName}" to JSON Schema.`
+        );
+      }
+
+      return schema;
+    }
+
+    const schema = extractJsonSchema(resolved);
+    if (!schema) {
+      throw new Error(
+        `The export "${exportName}" could not be converted to a JSON Schema.`
+      );
+    }
+
+    return schema;
   } catch (error) {
     throw new Error(
       `Failed to generate a JSON schema for "${fileReference.file}"${
@@ -876,7 +1001,7 @@ export async function extractTSType(
 }
 
 /**
- * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](esbuild.github.io) using [ts-json-schema-generator](https://github.com/vega/ts-json-schema-generator) to obtain the actual schema definition before extraction.
+ * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
  *
  * @example
  * ```ts
@@ -890,8 +1015,8 @@ export async function extractTSType(
  * const schema4 = await extract(context, zodSchema);
  * // Resolve a schema definition from a Valibot schema
  * const schema5 = await extract(context, valibotSchema);
- * // Resolve a schema definition from an untyped schema
- * const schema6 = await extract(context, untypedSchema);
+ * // Resolve a schema definition from a reflected Deepkit Type object
+ * const schema6 = await extract(context, reflectionType);
  * ```
  *
  * @see https://zod.dev/
@@ -899,7 +1024,7 @@ export async function extractTSType(
  * @see https://standardschema.dev/json-schema#what-schema-libraries-support-this-spec
  * @see https://json-schema.org/
  * @see https://ajv.js.org/json-type-definition.html
- * @see https://github.com/vega/ts-json-schema-generator
+ * @see https://deepkit.io/en/documentation/runtime-types/reflection
  * @see https://github.com/unjs/untyped
  * @see https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
  *
@@ -965,14 +1090,28 @@ export async function extractSchemaWithSource<TSpec = any>(
       fs = mapStorageToFileSystem(options.storage);
     }
 
+    const loadOptions = defu(omit(options, ["storage", "logger", "tsconfig"]), {
+      fs,
+      cwd: options.cwd
+    });
+
     let resolved = await loadSafe<SchemaConfig>(
       unwrappedConfig as FileReferenceInput,
-      { ...options, fs }
+      loadOptions
     );
     resolved ??= await extractTSType(unwrappedConfig as FileReferenceInput, {
       ...options,
       fs
     });
+
+    try {
+      const type = reflect(resolved);
+      if (isType(type)) {
+        resolved = type as SchemaConfig;
+      }
+    } catch {
+      // If reflection fails, proceed with the resolved value as-is.
+    }
 
     const resolvedConfig = unwrapSchemaConfig(resolved);
     if (isSchemaWithSource(resolvedConfig)) {
@@ -1017,7 +1156,7 @@ export async function extractSchemaWithSource<TSpec = any>(
 }
 
 /**
- * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](esbuild.github.io) using [ts-json-schema-generator](https://github.com/vega/ts-json-schema-generator) to obtain the actual schema definition before extraction.
+ * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
  *
  * @example
  * ```ts
@@ -1031,8 +1170,8 @@ export async function extractSchemaWithSource<TSpec = any>(
  * const schema4 = await extract(context, zodSchema);
  * // Resolve a schema definition from a Valibot schema
  * const schema5 = await extract(context, valibotSchema);
- * // Resolve a schema definition from an untyped schema
- * const schema6 = await extract(context, untypedSchema);
+ * // Resolve a schema definition from a reflected Deepkit Type object
+ * const schema6 = await extract(context, reflectionType);
  * ```
  *
  * @see https://zod.dev/
@@ -1040,7 +1179,7 @@ export async function extractSchemaWithSource<TSpec = any>(
  * @see https://standardschema.dev/json-schema#what-schema-libraries-support-this-spec
  * @see https://json-schema.org/
  * @see https://ajv.js.org/json-type-definition.html
- * @see https://github.com/vega/ts-json-schema-generator
+ * @see https://deepkit.io/en/documentation/runtime-types/reflection
  * @see https://github.com/unjs/untyped
  * @see https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
  *

@@ -16,9 +16,9 @@
 
  ------------------------------------------------------------------- */
 
+import type { ReceiveType, Type } from "@deepkit/type";
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
-import type { Config } from "ts-json-schema-generator/dist/src/Config";
 import type { Storage } from "unstorage";
 import type { InputObject, Schema as UntypedBaseSchema } from "untyped";
 import type { BaseIssue, BaseSchema } from "valibot";
@@ -97,41 +97,6 @@ export type JsonSchemaStringFormat =
   | "password";
 
 /**
- * A single function parameter entry emitted when `function` is true.
- *
- * @remarks
- * Power Plant extension used with `ts-json-schema-generator` `functions: "schema"` mode.
- * Boolean flags are omitted when false. Defaults live on `schema.default`.
- */
-export interface JsonSchemaFunctionParameter {
-  /**
-   * Parameter name. Binding-pattern parameters use synthetic names (`$0`, `$1`, ...).
-   * Rest parameter names omit the `...` prefix.
-   */
-  name: string;
-
-  /**
-   * JSON Schema for the parameter value.
-   */
-  schema: JsonSchema;
-
-  /**
-   * True when the parameter is declared with `?`.
-   */
-  optional?: boolean;
-
-  /**
-   * True when the parameter is a rest parameter (`...args`).
-   */
-  rest?: boolean;
-
-  /**
-   * True when the parameter is a `this` parameter.
-   */
-  this?: boolean;
-}
-
-/**
  * Metadata and annotation keywords shared across JSON Schema shapes.
  *
  * @see https://json-schema.org/draft/2020-12/json-schema-core#section-8
@@ -205,47 +170,6 @@ export interface JsonSchemaMetadataKeywords {
    * @see https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-8.2.7
    */
   $dynamicAnchor?: string;
-
-  /**
-   * An indicator specifying if the schema is a function or not.
-   *
-   * @remarks
-   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
-   * When true, `parameters` describes the function arguments in declaration order and `returns`
-   * describes the return value (omitted for `void` / `undefined` / `never`).
-   *
-   * Constructor schemas also emit an own-property `"constructor": true` on the wire (see
-   * `JSON_SCHEMA_CONSTRUCTOR_KEY`). That key is intentionally omitted from this interface
-   * because a TypeScript `constructor` property collides with `Object.prototype.constructor` and
-   * breaks assignability across the schema union. Read it with `hasJsonSchemaConstructorFlag`.
-   */
-  function?: boolean;
-
-  /**
-   * When true, the function is asynchronous (`async` and/or returns `Promise<T>`).
-   *
-   * @remarks
-   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
-   * When set, `returns` describes the unwrapped `T` from `Promise<T>` (one layer).
-   */
-  async?: boolean;
-
-  /**
-   * Ordered function parameters when `function` is true.
-   *
-   * @remarks
-   * Always present for function schemas (may be an empty array). Each entry wraps a parameter
-   * schema with metadata such as `name`, `optional`, `rest`, and `this`.
-   */
-  parameters?: JsonSchemaFunctionParameter[];
-
-  /**
-   * Return-value schema when `function` is true.
-   *
-   * @remarks
-   * Omitted for `void`, `undefined`, and `never` return types.
-   */
-  returns?: JsonSchema;
 
   /**
    * A name for the schema, which can be used by documentation tools or other libraries that support this feature to provide a human-readable name or description for the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the schema when used in conjunction with compatible tools.
@@ -1272,6 +1196,89 @@ export interface JsonSchemaRef extends JsonSchemaKeywords {
   $ref: string;
 }
 
+export interface JsonSchemaFunction extends JsonSchemaKeywords {
+  /**
+   * Declares whether values are numbers or integers.
+   */
+  type: "object";
+
+  /**
+   * An indicator specifying if the schema is a function or not.
+   *
+   * @remarks
+   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
+   * When true, `parameters` describes the function arguments in declaration order and `returns`
+   * describes the return value (omitted for `void` / `undefined` / `never`).
+   *
+   * Constructor schemas also emit an own-property `"constructor": true` on the wire (see
+   * `JSON_SCHEMA_CONSTRUCTOR_KEY`). That key is intentionally omitted from this interface
+   * because a TypeScript `constructor` property collides with `Object.prototype.constructor` and
+   * breaks assignability across the schema union. Read it with `hasJsonSchemaConstructorFlag`.
+   */
+  function: true;
+
+  /**
+   * When true, the function is asynchronous (`async` and/or returns `Promise<T>`).
+   *
+   * @remarks
+   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
+   * When set, `returns` describes the unwrapped `T` from `Promise<T>` (one layer).
+   */
+  async?: boolean;
+
+  /**
+   * Ordered function parameters when `function` is true.
+   *
+   * @remarks
+   * Always present for function schemas (may be an empty array). Each entry wraps a parameter
+   * schema with metadata such as `name`, `optional`, `rest`, and `this`.
+   */
+  parameters?: JsonSchemaFunctionParameter[];
+
+  /**
+   * Return-value schema when `function` is true.
+   *
+   * @remarks
+   * Omitted for `void`, `undefined`, and `never` return types.
+   */
+  returns?: JsonSchema;
+}
+
+/**
+ * A single function parameter entry emitted when `function` is true.
+ *
+ * @remarks
+ * Power Plant extension for function parameter schemas emitted from Deepkit reflection.
+ * Boolean flags are omitted when false. Defaults live on `schema.default`.
+ */
+export interface JsonSchemaFunctionParameter extends JsonSchemaKeywords {
+  /**
+   * Parameter name. Binding-pattern parameters use synthetic names (`$0`, `$1`, ...).
+   * Rest parameter names omit the `...` prefix.
+   */
+  name: string;
+
+  /**
+   * JSON Schema for the parameter value.
+   */
+  schema: JsonSchema;
+
+  /**
+   * True when the parameter is declared with `?`.
+   */
+  optional?: boolean;
+
+  /**
+   * True when the parameter is a rest parameter (`...args`).
+   */
+  rest?: boolean;
+
+  /**
+   * True when the parameter is a `this` parameter.
+   */
+  this?: boolean;
+}
+
 /**
  * JSON Schema (draft 2020-12) type that can be used to validate JSON data. It is a union of all the specific JSON Schema types, as well as the metadata properties that can be included in any JSON Schema.
  *
@@ -1302,7 +1309,8 @@ export type JsonSchema =
   | JsonSchemaNullable
   | JsonSchemaAllOf
   | JsonSchemaUnknown
-  | JsonSchemaSet;
+  | JsonSchemaSet
+  | JsonSchemaFunction;
 
 /**
  * An object containing common JSON Schema metadata properties that can be included in any schema type. This interface is used to define the shared metadata properties that can be present in all JSON Schema types, such as `$id`, `$schema`, `title`, `description`, and others. It serves as a base for all specific JSON Schema types, allowing them to include these common metadata properties without having to redefine them in each type.
@@ -1695,7 +1703,12 @@ export type SpecOf<TJsonSchema extends JsonSchema> =
  * Supported source variants from which a schema can be extracted.
  */
 export type SchemaSourceVariant =
-  "standard-schema" | "json-schema" | "zod3" | "untyped" | "valibot";
+  | "standard-schema"
+  | "json-schema"
+  | "zod3"
+  | "untyped"
+  | "valibot"
+  | "reflection";
 
 /**
  * Accepted schema input variants, including raw type definitions.
@@ -1734,7 +1747,9 @@ export type SchemaSourceConfig<TSpec = any> =
   | z3.ZodType<TSpec, any, any>
   | UntypedConfigObject
   | UntypedSchema
-  | ValibotSchema<TSpec>;
+  | ValibotSchema<TSpec>
+  | Type
+  | ReceiveType<TSpec>;
 
 /**
  * Any accepted schema input, including normalized schemas and references.
@@ -1781,10 +1796,25 @@ export type BaseExtractOptions = {
   cwd?: string;
 
   /**
+   * An optional path to a `tsconfig.json` used when reflecting TypeScript types.
+   */
+  tsconfig?: string;
+
+  /**
    * An optional logger to use for logging messages. If provided, the logger will be used to log messages, which can improve performance by avoiding redundant logging operations. If not provided, the default logger will be used.
    */
   logger?: Logger;
-} & Omit<Config, "path" | "type">;
+
+  /**
+   * An optional mode for the reflection.
+   */
+  reflection?: string[] | "default" | "explicit" | "never" | undefined;
+
+  /**
+   * An optional list of paths to exclude from the reflection.
+   */
+  exclude?: string[];
+};
 
 export type InferExtractOptions<T extends SchemaConfig> =
   (T extends LoadReference
@@ -1900,6 +1930,19 @@ export interface ValibotSchemaSource<
 }
 
 /**
+ * Source descriptor for Deepkit reflection type inputs.
+ */
+export interface ReflectionSchemaSource<
+  TSpec = any
+> extends BaseSchemaSource<TSpec> {
+  /** Indicates the source input is a Deepkit reflection {@link Type}. */
+  variant: "reflection";
+
+  /** The original Deepkit reflection type. */
+  schema: Type;
+}
+
+/**
  * Union of all normalized schema source descriptor variants.
  */
 export type SchemaSource<TSpec = any> =
@@ -1907,7 +1950,8 @@ export type SchemaSource<TSpec = any> =
   | StandardSchemaSchemaSource<TSpec>
   | Zod3SchemaSource<TSpec>
   | UntypedSchemaSource<TSpec>
-  | ValibotSchemaSource<TSpec>;
+  | ValibotSchemaSource<TSpec>
+  | ReflectionSchemaSource<TSpec>;
 
 /**
  * A normalized schema plus metadata about the source that produced it.
