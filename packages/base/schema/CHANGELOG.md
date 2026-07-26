@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.32](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.32) (07/26/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with root path directory in virtual typescript config ([b1b1a02](https://github.com/storm-software/power-plant/commit/b1b1a02))
+
 ## [0.0.31](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.31) (07/25/2026)
 
 ### Bug Fixes
