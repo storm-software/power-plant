@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.36](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.36) (07/26/2026)
+
+### Features
+
+- **schema:** Added support for function types in schema ([0f3179e](https://github.com/storm-software/power-plant/commit/0f3179e))
+
 ## [0.0.35](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.35) (07/26/2026)
 
 ### Miscellaneous
