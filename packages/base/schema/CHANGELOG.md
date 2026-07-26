@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.33](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.33) (07/26/2026)
+
+### Miscellaneous
+
+- **schema:** Update `extract` to no longer use vfs ([ce51ac4](https://github.com/storm-software/power-plant/commit/ce51ac4))
+
 ## [0.0.32](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.32) (07/26/2026)
 
 ### Bug Fixes
