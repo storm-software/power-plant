@@ -69,6 +69,16 @@ export const JSON_SCHEMA_METADATA_KEYS = [
 ] satisfies ReadonlyArray<keyof JsonSchemaMetadataKeywords>;
 
 /**
+ * Own-property key set to `true` on constructor function schemas.
+ *
+ * @remarks
+ * Must be read with `Object.hasOwn(schema, JSON_SCHEMA_CONSTRUCTOR_KEY)` (or
+ * `hasJsonSchemaConstructorFlag`) — never via `schema.constructor`, which
+ * resolves `Object.prototype.constructor`.
+ */
+export const JSON_SCHEMA_CONSTRUCTOR_KEY = "constructor" as const;
+
+/**
  * Keywords whose values are a flat record of named JSON Schema fragments.
  * Each child schema is merged recursively with its counterpart.
  */

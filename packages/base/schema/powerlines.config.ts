@@ -33,6 +33,10 @@ const config: UserConfig = defineConfig({
     format: ["cjs", "esm"],
     minify: false
   },
+  resolve: {
+    skipNodeModulesBundle: true,
+    noExternal: ["ts-json-schema-generator"]
+  },
   plugins: [tsdown()]
 });
 

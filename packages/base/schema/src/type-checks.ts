@@ -32,7 +32,11 @@ import type {
   TypeDescriptor as UntypedTypeDescriptor
 } from "untyped";
 import type { BaseSchema } from "valibot";
-import { JSON_SCHEMA_PRIMITIVE_TYPES, JSON_SCHEMA_TYPES } from "./constants";
+import {
+  JSON_SCHEMA_CONSTRUCTOR_KEY,
+  JSON_SCHEMA_PRIMITIVE_TYPES,
+  JSON_SCHEMA_TYPES
+} from "./constants";
 import type {
   ExtractedSchemaEnvelope as SchemaWithSource,
   JsonSchema,
@@ -1219,6 +1223,27 @@ export function isValibotSchema(
     isFunction(schema.reference) &&
     isSetString(schema.expects) &&
     isFunction(schema["~run"])
+  );
+}
+
+/**
+ * Returns true when `input` is a function schema that represents a constructor.
+ *
+ * @remarks
+ * Uses `Object.hasOwn` on {@link JSON_SCHEMA_CONSTRUCTOR_KEY}. Do not read
+ * `schema.constructor` — that returns `Object.prototype.constructor`.
+ *
+ * @param input - A JSON Schema (or unknown value) to inspect.
+ * @returns True when the schema has an own `"constructor": true` flag.
+ */
+export function hasJsonSchemaConstructorFlag(input: unknown): boolean {
+  if (!isSetObject(input)) {
+    return false;
+  }
+
+  return (
+    Object.hasOwn(input, JSON_SCHEMA_CONSTRUCTOR_KEY) &&
+    (input as Record<string, unknown>)[JSON_SCHEMA_CONSTRUCTOR_KEY] === true
   );
 }
 

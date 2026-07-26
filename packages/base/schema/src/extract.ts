@@ -25,11 +25,10 @@ import { isStandardJsonSchema } from "@stryke/json";
 import { appendPath } from "@stryke/path/append";
 import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
 import { joinPaths } from "@stryke/path/join";
-import { plugin as createResolvePlugin } from "@stryke/resolve/bundle";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import { resolve as resolveModuleContent } from "@stryke/resolve/resolve";
-import type { BundleOptions, InferLoadOptions } from "@stryke/resolve/types";
+import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
 import { isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
@@ -39,8 +38,6 @@ import {
   isZod3Type
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
-import type { Plugin } from "esbuild";
-import { build } from "esbuild";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
 import type { Config } from "ts-json-schema-generator/dist/src/Config";
 import { DEFAULT_CONFIG } from "ts-json-schema-generator/dist/src/Config";
@@ -77,10 +74,6 @@ import type {
 } from "./types";
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
-
-function normalizePath(filePath: string): string {
-  return filePath.replaceAll("\\", "/");
-}
 
 function isWrappedSchemaConfig<TSpec = any>(
   input: SchemaConfig<TSpec>
@@ -727,20 +720,8 @@ function getTsCompilerOptions(config: Config): ts.CompilerOptions {
   };
 }
 
-/**
- * Rewrites type-only imports/exports so esbuild still walks them while
- * collecting the original TypeScript sources for schema generation.
- */
-function rewriteTypeOnlyImports(source: string): string {
-  return source
-    .replace(/\bimport\s+type\s+/g, "import ")
-    .replace(/\bexport\s+type\s+\*\s+from/g, "export * from")
-    .replace(/\bexport\s+type\s+\{/g, "export {");
-}
-
 function getScriptKind(fileName: string): ts.ScriptKind {
   const extension = findFileExtensionSafe(fileName)?.toLowerCase();
-
   switch (extension) {
     case "tsx":
       return ts.ScriptKind.TSX;
@@ -756,123 +737,23 @@ function getScriptKind(fileName: string): ts.ScriptKind {
 }
 
 /**
- * Uses esbuild (with `@stryke/resolve` path resolution) to walk the module
- * graph, capturing original TypeScript sources before types are erased.
- */
-async function bundleTypeScriptSources(
-  filePath: string,
-  options: {
-    cwd?: string;
-    fs?: BundleOptions["fs"];
-  }
-): Promise<{ entryFileName: string; sources: Map<string, string> }> {
-  const cwd = options.cwd || process.cwd();
-  const sources = new Map<string, string>();
-
-  const capturePlugin: Plugin = {
-    name: "power-plant-capture-ts-sources",
-    setup(buildApi) {
-      buildApi.onLoad({ filter: /.*/ }, async args => {
-        if (/[/\\]node_modules[/\\]/.test(args.path)) {
-          return null;
-        }
-
-        try {
-          const original = await resolveModuleContent(args.path, {
-            skipBundle: true,
-            cwd,
-            fs: options.fs
-          });
-          sources.set(normalizePath(args.path), original);
-
-          const extension = findFileExtensionSafe(args.path);
-          const loader =
-            extension === "tsx" || extension === "jsx"
-              ? extension
-              : extension === "js" || extension === "cjs" || extension === "mjs"
-                ? "js"
-                : "ts";
-
-          return {
-            contents: rewriteTypeOnlyImports(original),
-            loader
-          };
-        } catch {
-          return null;
-        }
-      });
-    }
-  };
-
-  const result = await build({
-    absWorkingDir: cwd,
-    entryPoints: [filePath],
-    bundle: true,
-    write: false,
-    platform: "node",
-    format: "esm",
-    logLevel: "silent",
-    // Keep package code external; TypeScript resolves those from disk/@types.
-    packages: "external",
-    plugins: [
-      capturePlugin,
-      // Truthy `fs` disables the stryke namespace so our capture onLoad sees paths.
-      createResolvePlugin({
-        originalInput: filePath,
-        cwd,
-        fs: options.fs ?? {}
-      })
-    ]
-  });
-
-  if (result.errors.length > 0) {
-    throw new Error(
-      `Failed to bundle TypeScript sources for "${filePath}": ${result.errors
-        .map(error => error.text)
-        .join(", ")}`
-    );
-  }
-
-  if (sources.size === 0) {
-    const fallback = await resolveModuleContent(filePath, {
-      skipBundle: true,
-      cwd,
-      fs: options.fs
-    });
-    sources.set(normalizePath(filePath), fallback);
-  }
-
-  return {
-    entryFileName: filePath,
-    sources
-  };
-}
-
-/**
  * Builds a TypeScript program from original sources collected during the
  * esbuild graph walk so type information remains intact for schema generation.
  */
 function createProgramFromSources(
-  entryFileName: string,
-  sources: Map<string, string>,
+  filePath: string,
+  source: string,
   config: Config
 ): ts.Program {
   const compilerOptions = getTsCompilerOptions(config);
   const host = ts.createCompilerHost(compilerOptions, true);
-  const normalizedSources = new Map(
-    [...sources.entries()].map(([key, value]) => [normalizePath(key), value])
-  );
-
-  const getContent = (name: string) =>
-    normalizedSources.get(normalizePath(name)) ?? normalizedSources.get(name);
 
   const baseFileExists = host.fileExists.bind(host);
   const baseReadFile = host.readFile.bind(host);
   const baseGetSourceFile = host.getSourceFile.bind(host);
 
-  host.fileExists = name =>
-    getContent(name) !== undefined || baseFileExists(name);
-  host.readFile = name => getContent(name) ?? baseReadFile(name);
+  host.fileExists = name => filePath === name || baseFileExists(name);
+  host.readFile = name => (filePath === name ? source : baseReadFile(name));
 
   host.getSourceFile = (
     name,
@@ -880,8 +761,7 @@ function createProgramFromSources(
     onError,
     shouldCreateNewSourceFile
   ) => {
-    const content = getContent(name);
-    if (content !== undefined) {
+    if (filePath === name) {
       const scriptTarget =
         typeof languageVersionOrOptions === "object"
           ? languageVersionOrOptions.languageVersion
@@ -889,7 +769,7 @@ function createProgramFromSources(
 
       return ts.createSourceFile(
         name,
-        content,
+        source,
         scriptTarget ?? compilerOptions.target ?? ts.ScriptTarget.ES2022,
         true,
         getScriptKind(name)
@@ -904,7 +784,7 @@ function createProgramFromSources(
     );
   };
 
-  const program = ts.createProgram([entryFileName], compilerOptions, host);
+  const program = ts.createProgram([filePath], compilerOptions, host);
   if (!config.skipTypeCheck) {
     const diagnostics = ts.getPreEmitDiagnostics(program);
     if (diagnostics.length) {
@@ -952,30 +832,30 @@ export async function extractTSType(
       ? appendPath(options.tsconfig, options.cwd || process.cwd())
       : joinPaths(options.cwd || process.cwd(), "tsconfig.json");
 
-    const { entryFileName, sources } = await bundleTypeScriptSources(filePath, {
+    const bundled = await resolveModuleContent(filePath, {
       cwd: options.cwd || process.cwd(),
       fs: options.fs
     });
 
+    options.logger?.debug?.(
+      `Generating JSON schema for bundled "${filePath}" using the type "${exportName}"`
+    );
+
     const config = {
       ...DEFAULT_CONFIG,
-      expose: "all" as const,
-      jsDoc: "extended" as const,
+      expose: "all",
+      jsDoc: "extended",
       markdownDescription: true,
       fullDescription: true,
       ...options,
       tsconfig,
-      path: entryFileName,
+      path: filePath,
       type: exportName,
-      skipTypeCheck: true
+      skipTypeCheck: true,
+      functions: "schema"
     } as Config;
 
-    const tsProgram = createProgramFromSources(entryFileName, sources, config);
-
-    options.logger?.debug?.(
-      `Generating JSON schema for bundled "${filePath}" using the type "${exportName}" (${sources.size} source file(s))`
-    );
-
+    const tsProgram = createProgramFromSources(filePath, bundled, config);
     const generator = createGenerator({
       ...config,
       // ts-json-schema-generator may resolve a different typescript major than

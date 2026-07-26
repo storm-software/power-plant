@@ -97,6 +97,41 @@ export type JsonSchemaStringFormat =
   | "password";
 
 /**
+ * A single function parameter entry emitted when `function` is true.
+ *
+ * @remarks
+ * Power Plant extension used with `ts-json-schema-generator` `functions: "schema"` mode.
+ * Boolean flags are omitted when false. Defaults live on `schema.default`.
+ */
+export interface JsonSchemaFunctionParameter {
+  /**
+   * Parameter name. Binding-pattern parameters use synthetic names (`$0`, `$1`, ...).
+   * Rest parameter names omit the `...` prefix.
+   */
+  name: string;
+
+  /**
+   * JSON Schema for the parameter value.
+   */
+  schema: JsonSchema;
+
+  /**
+   * True when the parameter is declared with `?`.
+   */
+  optional?: boolean;
+
+  /**
+   * True when the parameter is a rest parameter (`...args`).
+   */
+  rest?: boolean;
+
+  /**
+   * True when the parameter is a `this` parameter.
+   */
+  this?: boolean;
+}
+
+/**
  * Metadata and annotation keywords shared across JSON Schema shapes.
  *
  * @see https://json-schema.org/draft/2020-12/json-schema-core#section-8
@@ -170,6 +205,47 @@ export interface JsonSchemaMetadataKeywords {
    * @see https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-8.2.7
    */
   $dynamicAnchor?: string;
+
+  /**
+   * An indicator specifying if the schema is a function or not.
+   *
+   * @remarks
+   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
+   * When true, `parameters` describes the function arguments in declaration order and `returns`
+   * describes the return value (omitted for `void` / `undefined` / `never`).
+   *
+   * Constructor schemas also emit an own-property `"constructor": true` on the wire (see
+   * `JSON_SCHEMA_CONSTRUCTOR_KEY`). That key is intentionally omitted from this interface
+   * because a TypeScript `constructor` property collides with `Object.prototype.constructor` and
+   * breaks assignability across the schema union. Read it with `hasJsonSchemaConstructorFlag`.
+   */
+  function?: boolean;
+
+  /**
+   * When true, the function is asynchronous (`async` and/or returns `Promise<T>`).
+   *
+   * @remarks
+   * This is an internal property used by Power Plant - it is not part of the JSON Schema specification.
+   * When set, `returns` describes the unwrapped `T` from `Promise<T>` (one layer).
+   */
+  async?: boolean;
+
+  /**
+   * Ordered function parameters when `function` is true.
+   *
+   * @remarks
+   * Always present for function schemas (may be an empty array). Each entry wraps a parameter
+   * schema with metadata such as `name`, `optional`, `rest`, and `this`.
+   */
+  parameters?: JsonSchemaFunctionParameter[];
+
+  /**
+   * Return-value schema when `function` is true.
+   *
+   * @remarks
+   * Omitted for `void`, `undefined`, and `never` return types.
+   */
+  returns?: JsonSchema;
 
   /**
    * A name for the schema, which can be used by documentation tools or other libraries that support this feature to provide a human-readable name or description for the schema. The presence of this property does not affect the validation behavior of the schema itself, but it can provide additional context or information about the schema when used in conjunction with compatible tools.

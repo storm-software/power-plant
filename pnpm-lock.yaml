@@ -488,7 +488,7 @@ catalogs:
       specifier: ^5.5.0
       version: 5.5.0
     ts-json-schema-generator:
-      specifier: ^2.9.0
+      specifier: 2.9.0
       version: 2.9.0
     ts-node:
       specifier: ^10.9.2
@@ -575,6 +575,9 @@ overrides:
   postcss: '>=8.5.1'
   shell-quote: '>=1.8.2'
   simple-git: '>=3.27.0'
+
+patchedDependencies:
+  ts-json-schema-generator@2.9.0: ad5f3ab2aed184accd6c59460deeb71063e7f4e171bf9c1d28c2c4271ad86bd3
 
 importers:
 
@@ -826,7 +829,7 @@ importers:
         version: 3.0.0
       ts-json-schema-generator:
         specifier: 'catalog:'
-        version: 2.9.0
+        version: 2.9.0(patch_hash=ad5f3ab2aed184accd6c59460deeb71063e7f4e171bf9c1d28c2c4271ad86bd3)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -31049,7 +31052,7 @@ snapshots:
       picomatch: 4.0.5
       typescript: 6.0.3
 
-  ts-json-schema-generator@2.9.0:
+  ts-json-schema-generator@2.9.0(patch_hash=ad5f3ab2aed184accd6c59460deeb71063e7f4e171bf9c1d28c2c4271ad86bd3):
     dependencies:
       '@types/json-schema': 7.0.15
       commander: 14.0.3
