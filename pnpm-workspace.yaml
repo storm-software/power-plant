@@ -112,7 +112,6 @@ catalog:
   vitest: ~4.1.10
   zod: ^4.4.3
   zx: ^8.8.5
-  "@typescript/vfs": ^1.6.4
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*

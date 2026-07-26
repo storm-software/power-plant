@@ -23,7 +23,7 @@ import { murmurhash } from "@stryke/hash";
 import { deepClone } from "@stryke/helpers/deep-clone";
 import { isStandardJsonSchema } from "@stryke/json";
 import { appendPath } from "@stryke/path/append";
-import { findFileExtensionSafe, findFilePath } from "@stryke/path/find";
+import { findFileExtensionSafe } from "@stryke/path/find";
 import { joinPaths } from "@stryke/path/join";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
@@ -31,24 +31,13 @@ import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
 import { isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
-import type {
-  FileReferenceInput,
-  FileSystemInterface,
-  FileSystemInterfaceOptions
-} from "@stryke/types";
+import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
   extractJsonSchema as extractJsonSchemaZod,
   isZod3Type
 } from "@stryke/zod";
-import {
-  createFSBackedSystem,
-  createVirtualCompilerHost
-} from "@typescript/vfs";
 import { toJsonSchema } from "@valibot/to-json-schema";
-import { dirname } from "node:path";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
-import { DEFAULT_CONFIG } from "ts-json-schema-generator/dist/src/Config";
-import ts from "typescript";
 import type * as z3 from "zod/v3";
 import { mapStorageToFileSystem } from "./storage";
 import {
@@ -81,193 +70,6 @@ import type {
 } from "./types";
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
-
-const DEFAULT_TS_COMPILER_OPTIONS: ts.CompilerOptions = {
-  noEmit: true,
-  emitDecoratorMetadata: true,
-  experimentalDecorators: true,
-  target: ts.ScriptTarget.ES2022,
-  module: ts.ModuleKind.ESNext,
-  strictNullChecks: false,
-  skipLibCheck: true,
-  skipDefaultLibCheck: true,
-  esModuleInterop: true
-};
-
-function readFileAsString(
-  fs: FileSystemInterfaceOptions,
-  fileName: string
-): string | undefined {
-  if (!fs.readFileSync) {
-    return undefined;
-  }
-
-  try {
-    const content = fs.readFileSync(fileName, "utf8");
-
-    return typeof content === "string" ? content : undefined;
-  } catch {
-    return undefined;
-  }
-}
-
-function fileExistsOnFs(
-  fs: FileSystemInterfaceOptions,
-  fileName: string
-): boolean {
-  if (fs.existsSync) {
-    try {
-      return fs.existsSync(fileName);
-    } catch {
-      return false;
-    }
-  }
-
-  if (fs.statSync) {
-    try {
-      fs.statSync(fileName);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  return readFileAsString(fs, fileName) !== undefined;
-}
-
-/**
- * Prefers `options.fs` for System I/O so virtual storage-backed files resolve
- * through createFSBackedSystem instead of only the real disk.
- */
-function bindFileSystemToSystem(
-  system: ts.System,
-  fs: FileSystemInterfaceOptions
-): void {
-  const baseFileExists = system.fileExists.bind(system);
-  const baseReadFile = system.readFile.bind(system);
-  const baseDirectoryExists = system.directoryExists.bind(system);
-  const baseRealpath = system.realpath?.bind(system);
-
-  system.fileExists = (fileName: string) =>
-    fileExistsOnFs(fs, fileName) || baseFileExists(fileName);
-
-  system.readFile = (fileName: string) => {
-    if (fileExistsOnFs(fs, fileName)) {
-      const content = readFileAsString(fs, fileName);
-      if (content !== undefined) {
-        return content;
-      }
-    }
-
-    return baseReadFile(fileName);
-  };
-
-  system.directoryExists = (directory: string) => {
-    try {
-      if (fs.statSync) {
-        const stat = fs.statSync(directory);
-        if (stat?.isDirectory?.()) {
-          return true;
-        }
-      } else if (fs.existsSync?.(directory)) {
-        return true;
-      }
-    } catch {
-      // Fall through to the FS-backed system.
-    }
-
-    return baseDirectoryExists(directory);
-  };
-
-  if (system.realpath && fs.realpathSync) {
-    system.realpath = (path: string) => {
-      try {
-        return String(fs.realpathSync!(path));
-      } catch {
-        return baseRealpath?.(path) ?? path;
-      }
-    };
-  }
-}
-
-function resolveCompilerOptions(
-  system: ts.System,
-  tsconfig: string | undefined,
-  fs: FileSystemInterfaceOptions | undefined
-): ts.CompilerOptions {
-  if (!tsconfig) {
-    return { ...DEFAULT_TS_COMPILER_OPTIONS };
-  }
-
-  // createFSBackedSystem intentionally hides tsconfig paths; read directly.
-  const raw =
-    (fs ? readFileAsString(fs, tsconfig) : undefined) ??
-    ts.sys.readFile(tsconfig);
-  if (!raw) {
-    return { ...DEFAULT_TS_COMPILER_OPTIONS };
-  }
-
-  const parsed = ts.parseConfigFileTextToJson(tsconfig, raw);
-  if (!parsed.config) {
-    return { ...DEFAULT_TS_COMPILER_OPTIONS };
-  }
-
-  const result = ts.parseJsonConfigFileContent(
-    parsed.config,
-    system,
-    dirname(tsconfig),
-    {},
-    tsconfig
-  );
-  const options: ts.CompilerOptions = { ...result.options, noEmit: true };
-  delete options.out;
-  delete options.outDir;
-  delete options.outFile;
-  delete options.declaration;
-  delete options.declarationDir;
-  delete options.declarationMap;
-
-  return options;
-}
-
-function createProgramFromFileSystem(
-  file: string,
-  options: {
-    cwd?: string;
-    fs?: FileSystemInterfaceOptions;
-    tsconfig?: string;
-  }
-): ts.Program {
-  const projectRoot = options.tsconfig
-    ? findFilePath(options.tsconfig)
-    : options.cwd
-      ? options.cwd
-      : findFilePath(file);
-
-  const createHost = createVirtualCompilerHost as (
-    system: ts.System,
-    compilerOptions: ts.CompilerOptions,
-    typescriptModule: typeof ts
-  ) => { compilerHost: ts.CompilerHost };
-  const system = createFSBackedSystem(new Map(), projectRoot, ts);
-
-  if (options.fs) {
-    bindFileSystemToSystem(system, options.fs);
-  }
-
-  const compilerOptions = resolveCompilerOptions(
-    system,
-    options.tsconfig,
-    options.fs
-  );
-  const { compilerHost } = createHost(system, compilerOptions, ts);
-
-  return ts.createProgram({
-    rootNames: [file],
-    options: compilerOptions,
-    host: compilerHost
-  });
-}
 
 function isWrappedSchemaConfig<TSpec = any>(
   input: SchemaConfig<TSpec>
@@ -889,27 +691,20 @@ export async function extractTSType(
   });
   const filePath = resolvedPath || fileReference.file;
 
-  const tsconfig = options.tsconfig
-    ? appendPath(options.tsconfig, options.cwd || process.cwd())
-    : joinPaths(options.cwd || process.cwd(), "tsconfig.json");
-
   try {
-    // const tsProgram = createProgramFromFileSystem(filePath, {
-    //   ...options,
-    //   tsconfig
-    // });
     const generatorConfig = {
-      ...DEFAULT_CONFIG,
       path: filePath,
       type: exportName,
       expose: "all" as const,
       jsDoc: "extended" as const,
       markdownDescription: true,
       fullDescription: true,
-      // tsProgram,
+      skipTypeCheck: true,
       ...options,
-      tsconfig
-    } as unknown as Parameters<typeof createGenerator>[0];
+      tsconfig: options.tsconfig
+        ? appendPath(options.tsconfig, options.cwd || process.cwd())
+        : joinPaths(options.cwd || process.cwd(), "tsconfig.json")
+    };
 
     // eslint-disable-next-line no-console
     console.log(
