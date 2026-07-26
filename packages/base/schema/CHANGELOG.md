@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.31](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.31) (07/25/2026)
+
+### Bug Fixes
+
+- **schema:** Reenable type checking ([7d6be29](https://github.com/storm-software/power-plant/commit/7d6be29))
+
 ## [0.0.30](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.30) (07/24/2026)
 
 ### Miscellaneous
