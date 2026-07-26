@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.37](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.37) (07/26/2026)
+
+### Bug Fixes
+
+- **schema:** Resolved build issues ([72a23c3](https://github.com/storm-software/power-plant/commit/72a23c3))
+
+### Features
+
+- **schema:** Update `schema` to use `deepkit` instead of `ts-json-schema-generator` ([0cea48d](https://github.com/storm-software/power-plant/commit/0cea48d))
+
 ## [0.0.36](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.36) (07/26/2026)
 
 ### Features
