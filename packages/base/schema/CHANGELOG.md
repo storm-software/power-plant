@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.35](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.35) (07/26/2026)
+
+### Miscellaneous
+
+- **schema:** Updated `extract` logic to use `esbuild` to bundle code prior to extracting schema ([1660eb6](https://github.com/storm-software/power-plant/commit/1660eb6))
+
 ## [0.0.34](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.34) (07/26/2026)
 
 ### Miscellaneous

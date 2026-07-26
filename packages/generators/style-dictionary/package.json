@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/style-dictionary",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "private": false,
   "description": "A Power Plant generator for using Style Dictionary to generate platform code from design tokens.",
   "keywords": [

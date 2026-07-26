@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/alloy-js",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "private": false,
   "description": "A Power Plant generator for using Alloy JS to generate source code.",
   "keywords": [
