@@ -47,6 +47,7 @@ import {
 import { toJsonSchema } from "@valibot/to-json-schema";
 import { dirname } from "node:path";
 import { createGenerator } from "ts-json-schema-generator/dist/factory/generator";
+import { DEFAULT_CONFIG } from "ts-json-schema-generator/dist/src/Config";
 import ts from "typescript";
 import type * as z3 from "zod/v3";
 import { mapStorageToFileSystem } from "./storage";
@@ -893,24 +894,25 @@ export async function extractTSType(
     : joinPaths(options.cwd || process.cwd(), "tsconfig.json");
 
   try {
-    const tsProgram = createProgramFromFileSystem(filePath, {
-      ...options,
-      tsconfig
-    });
+    // const tsProgram = createProgramFromFileSystem(filePath, {
+    //   ...options,
+    //   tsconfig
+    // });
     const generatorConfig = {
+      ...DEFAULT_CONFIG,
       path: filePath,
       type: exportName,
       expose: "all" as const,
       jsDoc: "extended" as const,
       markdownDescription: true,
       fullDescription: true,
-      skipTypeCheck: false,
-      tsProgram,
+      // tsProgram,
       ...options,
       tsconfig
     } as unknown as Parameters<typeof createGenerator>[0];
 
-    options.logger?.debug?.(
+    // eslint-disable-next-line no-console
+    console.log(
       `Generating JSON schema for "${filePath}" using the type "${
         exportName
       }" with the following configuration: ${JSON.stringify(
