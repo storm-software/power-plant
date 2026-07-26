@@ -53,7 +53,6 @@ import {
   isZod3Type
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
-import defu from "defu";
 import { build, type Plugin } from "esbuild";
 import { createJiti } from "jiti";
 import { readFile } from "node:fs/promises";
@@ -1090,10 +1089,11 @@ export async function extractSchemaWithSource<TSpec = any>(
       fs = mapStorageToFileSystem(options.storage);
     }
 
-    const loadOptions = defu(omit(options, ["storage", "logger", "tsconfig"]), {
+    const loadOptions = {
+      ...omit(options, ["storage", "logger", "tsconfig"]),
       fs,
-      cwd: options.cwd
-    });
+      cwd: options.cwd ?? undefined
+    } as InferLoadOptions<FileReferenceInput>;
 
     let resolved = await loadSafe<SchemaConfig>(
       unwrappedConfig as FileReferenceInput,
