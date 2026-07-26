@@ -125,7 +125,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
@@ -144,6 +146,8 @@
     "@stryke/zod": "catalog:",
     "@valibot/to-json-schema": "catalog:",
     "defu": "catalog:",
+    "esbuild": "catalog:",
+    "normalize-path": "catalog:",
     "ts-json-schema-generator": "catalog:",
     "typescript": "^6.0.3",
     "unstorage": "catalog:",

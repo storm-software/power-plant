@@ -445,6 +445,9 @@ catalogs:
     defu:
       specifier: ^6.1.7
       version: 6.1.7
+    esbuild:
+      specifier: ^0.28.1
+      version: 0.28.1
     eslint:
       specifier: ^10.7.0
       version: 10.7.0
@@ -463,6 +466,9 @@ catalogs:
     log4brains:
       specifier: ^1.1.0
       version: 1.1.0
+    normalize-path:
+      specifier: ^3.0.0
+      version: 3.0.0
     nx:
       specifier: 23.0.1
       version: 23.0.1
@@ -812,6 +818,12 @@ importers:
       defu:
         specifier: 'catalog:'
         version: 6.1.7
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.28.1
+      normalize-path:
+        specifier: 'catalog:'
+        version: 3.0.0
       ts-json-schema-generator:
         specifier: 'catalog:'
         version: 2.9.0

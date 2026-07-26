@@ -1,3 +1,5 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it, vi } from "vitest";
 import {
   bundleReferences,
@@ -7,8 +9,16 @@ import {
   extractSchema,
   extractSchemaWithSource,
   extractSource,
+  extractTSType,
   extractVariant
 } from "../src/extract";
+
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const tsTypeFixtures = join(
+  packageRoot,
+  "tests/fixtures/extract-ts-type"
+);
+const extractTsOptions = { cwd: packageRoot };
 
 describe("schema/src/extract.ts", () => {
   it("bundleReferences rewrites internal document references", () => {
@@ -91,11 +101,89 @@ describe("schema/src/extract.ts", () => {
     expect(withSource.schema).toEqual({ type: "string" });
     expect(withSource.source.variant).toBe("json-schema");
 
-    const extracted = await extract({ type: "string" } as any, {
-      skipCache: true
-    });
+    const extracted = await extract({ type: "string" } as any);
     expect(extracted.variant).toBe("json-schema");
     expect(extracted.schema).toEqual({ type: "string" });
     expect(extracted.hash.length).toBeGreaterThan(0);
+  });
+
+  describe("extractTSType", () => {
+    it("rejects input that is not a file reference", async () => {
+      await expect(extractTSType({} as any)).rejects.toThrow(
+        /Failed to extract a file reference/
+      );
+    });
+
+    it("generates JSON Schema for a named export from a fixture module", async () => {
+      const schema = await extractTSType(
+        `${tsTypeFixtures}/simple.ts#User`,
+        extractTsOptions
+      );
+
+      expect(schema.$ref).toBe("#/definitions/User");
+      expect(schema.definitions?.User).toMatchObject({
+        type: "object",
+        properties: {
+          id: { type: "string" },
+          name: { $ref: "#/definitions/UserName" },
+          age: { type: "number" }
+        },
+        required: ["id", "name"]
+      });
+      expect(schema.definitions?.User?.description).toMatch(/user record/i);
+    });
+
+    it("accepts a FileReference object with file and export", async () => {
+      const schema = await extractTSType(
+        {
+          file: `${tsTypeFixtures}/simple.ts`,
+          export: "UserName"
+        },
+        extractTsOptions
+      );
+
+      expect(schema.$ref).toBe("#/definitions/UserName");
+      expect(schema.definitions?.UserName).toMatchObject({ type: "string" });
+    });
+
+    it("bundles imported types across the module graph", async () => {
+      const schema = await extractTSType(
+        `${tsTypeFixtures}/with-import.ts#ImportedUser`,
+        extractTsOptions
+      );
+
+      expect(schema.$ref).toBe("#/definitions/ImportedUser");
+      expect(schema.definitions?.ImportedUser).toMatchObject({
+        type: "object",
+        properties: {
+          id: { $ref: "#/definitions/SharedId" },
+          label: { type: "string" }
+        },
+        required: ["id", "label"]
+      });
+      expect(schema.definitions?.SharedId).toMatchObject({ type: "string" });
+    });
+
+    it("wraps generator failures with file path and export name", async () => {
+      await expect(
+        extractTSType(`${tsTypeFixtures}/simple.ts#NotARealExport`, extractTsOptions)
+      ).rejects.toThrow(
+        /Failed to generate a JSON schema for.*simple\.ts.*using the type "NotARealExport"/
+      );
+    });
+
+    it("invokes logger.debug when schema generation succeeds", async () => {
+      const debug = vi.fn();
+      await extractTSType(`${tsTypeFixtures}/simple.ts#User`, {
+        ...extractTsOptions,
+        logger: { debug }
+      });
+
+      expect(debug).toHaveBeenCalledWith(
+        expect.stringMatching(
+          /Generating JSON schema for bundled.*simple\.ts.*using the type "User"/
+        )
+      );
+    });
   });
 });

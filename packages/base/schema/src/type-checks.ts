@@ -429,6 +429,10 @@ export function isJsonSchemaAny(input: unknown): input is JsonSchemaAny {
     hasValidJsonSchemaKeywords(schema) &&
     isOptionalString(schema.$ref) &&
     (!schema.type ||
+      (isSetString(schema.type) &&
+        JSON_SCHEMA_PRIMITIVE_TYPE_SET.has(
+          schema.type as JsonSchemaPrimitiveType
+        )) ||
       (Array.isArray(schema.type) &&
         schema.type.every(t => JSON_SCHEMA_PRIMITIVE_TYPES.includes(t))))
   );
@@ -1336,7 +1340,12 @@ export function isUntypedSchema(input: unknown): input is UntypedSchema {
  * @returns True if the input is an untyped schema and not a JSON Schema.
  */
 export function isUntypedSchemaStrict(input: unknown): input is UntypedSchema {
-  return isUntypedSchema(input) && !isJsonSchema(input);
+  if (!isUntypedSchema(input) || isJsonSchema(input)) {
+    return false;
+  }
+
+  const schema = input as Record<string, unknown>;
+  return !("type" in schema);
 }
 
 /**
@@ -1348,6 +1357,9 @@ export function isUntypedSchemaStrict(input: unknown): input is UntypedSchema {
  * @param input - The value to check.
  * @returns True if the input is an untyped input object, false otherwise.
  */
+/** @deprecated Use {@link isUntypedConfig} */
+export const isUntypedInput = isUntypedConfig;
+
 export function isUntypedConfig(input: unknown): input is UntypedConfigObject {
   if (!isSetObject(input)) {
     return false;
@@ -1374,6 +1386,9 @@ export function isUntypedConfig(input: unknown): input is UntypedConfigObject {
  * @param input - The value to check.
  * @returns True if the input is an untyped input object and not JSON Schema.
  */
+/** @deprecated Use {@link isUntypedConfigStrict} */
+export const isUntypedInputStrict = isUntypedConfigStrict;
+
 export function isUntypedConfigStrict(
   input: unknown
 ): input is UntypedConfigObject {

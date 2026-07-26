@@ -379,6 +379,9 @@ export function isValidSchemaConfigFile(fileName: string): boolean {
   );
 }
 
+/** @deprecated Use {@link isValidSchemaConfigFile} */
+export const isValidSchemaInputFile = isValidSchemaConfigFile;
+
 /**
  * Traverses a JSON Schema and applies a callback function to each schema fragment.
  *

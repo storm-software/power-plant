@@ -34,6 +34,7 @@ catalog:
   "@graphql-tools/utils": ^11.2.2
   "@graphql-typed-document-node/core": ^3.2.0
   "@hey-api/openapi-ts": ^0.99.0
+  esbuild: ^0.28.1
   openapi-typescript: ^7.13.0
   "@ls-lint/ls-lint": ^2.3.1
   "@nx/devkit": 23.0.1
@@ -112,6 +113,7 @@ catalog:
   vitest: ~4.1.10
   zod: ^4.4.3
   zx: ^8.8.5
+  normalize-path: ^3.0.0
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
