@@ -899,7 +899,7 @@ export async function extractTSType(
       jsDoc: "extended" as const,
       markdownDescription: true,
       fullDescription: true,
-      skipTypeCheck: true,
+      skipTypeCheck: false,
       tsProgram,
       ...options,
       tsconfig
