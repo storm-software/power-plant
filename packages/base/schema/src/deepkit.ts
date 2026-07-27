@@ -16,29 +16,4 @@
 
  ------------------------------------------------------------------- */
 
-import tsdown from "@powerlines/plugin-tsdown";
-import type { UserConfig } from "powerlines";
-import { defineConfig } from "powerlines/config";
-
-const config: UserConfig = defineConfig({
-  input: [
-    "src/index.ts",
-    "src/codegen.ts",
-    "src/zod.ts",
-    "src/valibot.ts",
-    "src/deepkit.ts",
-    "src/storage/index.ts"
-  ],
-  platform: "node",
-  output: {
-    format: ["cjs", "esm"],
-    minify: false
-  },
-  resolve: {
-    skipNodeModulesBundle: true,
-    noExternal: ["@deepkit/type-compiler"]
-  },
-  plugins: [tsdown()]
-});
-
-export default config;
+export * from "@deepkit/type-compiler";
