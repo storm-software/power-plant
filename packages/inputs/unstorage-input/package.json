@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/unstorage-input",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "private": false,
   "description": "A Power Plant input for reading the source specification from an Unstorage driver.",
   "keywords": [

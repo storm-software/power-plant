@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Graphql Input
 
+## [0.0.40](https://github.com/storm-software/power-plant/releases/tag/graphql-input%400.0.40) (07/27/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.44**
+- Updated **schema** to **v0.0.43**
+
 ## [0.0.39](https://github.com/storm-software/power-plant/releases/tag/graphql-input%400.0.39) (07/27/2026)
 
 ### Updated Dependencies

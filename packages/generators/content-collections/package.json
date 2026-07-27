@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/content-collections",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "private": false,
   "description": "A Power Plant generator that uses @content-collections/core to generate type-safe content data access hooks.",
   "keywords": [
