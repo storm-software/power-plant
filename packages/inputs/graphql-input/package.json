@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/graphql-input",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "private": false,
   "description": "A Power Plant input for reading the source specification from a GraphQL schema document.",
   "keywords": [

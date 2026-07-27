@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.39](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.39) (07/26/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with missing `@deepkit/type-compiler` export ([794bf6e](https://github.com/storm-software/power-plant/commit/794bf6e))
+
 ## [0.0.38](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.38) (07/26/2026)
 
 ### Miscellaneous
