@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.41](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.41) (07/27/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with missing package dependency ([3730f08](https://github.com/storm-software/power-plant/commit/3730f08))
+
 ## [0.0.40](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.40) (07/26/2026)
 
 ### Features
