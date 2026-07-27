@@ -916,9 +916,11 @@ export async function extractTSType(
       splitting: false,
       treeShaking: true,
       bundle: true,
-      packages: "bundle",
       keepNames: true,
       metafile: false,
+      minify: true,
+      legalComments: "none",
+      target: "es2022",
       absWorkingDir: cwd,
       plugins: [
         createDeepkitPlugin(
@@ -990,13 +992,15 @@ export async function extractTSType(
         resolvedPath && resolvedPath !== fileReference.file
           ? ` (resolved: ${resolvedPath})`
           : ""
-      } using the type "${exportName}". Error: ${(error as Error).message}`
+      } using the type "${exportName}". Error: ${(error as Error).message}${
+        (error as Error).stack ? `\n${(error as Error).stack}` : ""
+      }`
     );
   }
 }
 
 /**
- * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
+ * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [\@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
  *
  * @example
  * ```ts
@@ -1152,7 +1156,7 @@ export async function extractSchemaWithSource<TSpec = any>(
 }
 
 /**
- * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
+ * Extracts a JSON Schema from a given schema definition input, which can be a Zod schema, a Valibot schema, any Standard JSON Schema type, a plain JSON Schema object, an untyped schema, a Deepkit Type object, or a {@link FileReferenceInput} to an exported TypeScript type definition or any of the previous options. If the input is a {@link FileReferenceInput} (e.g. a file path with an export), the source code will be bundled with [esbuild](https://esbuild.github.io) using [\@deepkit/type-compiler](https://deepkit.io/en/documentation/runtime-types/getting-started) reflection to obtain the actual schema definition before extraction.
  *
  * @example
  * ```ts
