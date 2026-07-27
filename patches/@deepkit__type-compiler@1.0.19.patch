@@ -84,7 +84,7 @@ index 19a47631f582a35a4b7b4f741f75b50be745265e..960bc41e086fc7d9c99bc0df3fd614d8
      protected wrapWithAssignType(fn: Expression, type: Expression): ts.CallExpression;
 +    /**
 +     * Emit `{ __meta?: never & [name, value] }` — the runtime shape of `TypeAnnotation<name, value>`.
-+     * Consumed later via `typeAnnotation.getOption(type, name)`.
++     * Consumed later via `typeAnnotation.getForName(type, name)`.
 +     */
 +    protected emitTypeAnnotation(program: CompilerProgram, name: string, value: JSDocTagValue): void;
 +    protected collectJSDocAnnotations(node: Node | undefined): {
@@ -418,7 +418,7 @@ index 68c5189f562855aa99054f1d8bebf71cbca0674b..e4945b82a210f854727439da819f8eb8
      }
 +    /**
 +     * Emit `{ __meta?: never & [name, value] }` — the runtime shape of `TypeAnnotation<name, value>`.
-+     * Consumed later via `typeAnnotation.getOption(type, name)`.
++     * Consumed later via `typeAnnotation.getForName(type, name)`.
 +     */
 +    emitTypeAnnotation(program, name, value) {
 +        program.pushFrame();
@@ -823,7 +823,7 @@ index dabfaf5ec91b3f18561078721e3eb9561a74fed4..960bc41e086fc7d9c99bc0df3fd614d8
      protected wrapWithAssignType(fn: Expression, type: Expression): ts.CallExpression;
 +    /**
 +     * Emit `{ __meta?: never & [name, value] }` — the runtime shape of `TypeAnnotation<name, value>`.
-+     * Consumed later via `typeAnnotation.getOption(type, name)`.
++     * Consumed later via `typeAnnotation.getForName(type, name)`.
 +     */
 +    protected emitTypeAnnotation(program: CompilerProgram, name: string, value: JSDocTagValue): void;
 +    protected collectJSDocAnnotations(node: Node | undefined): {
@@ -846,20 +846,18 @@ index dabfaf5ec91b3f18561078721e3eb9561a74fed4..960bc41e086fc7d9c99bc0df3fd614d8
       * Checks if reflection was disabled/enabled in file via JSDoc attribute for a particular
       * Node, e.g `@reflection no`. If nothing is found, "reflection" config option needs to be used.
 diff --git a/dist/esm/src/compiler.js b/dist/esm/src/compiler.js
-index 4badbb307d172c042dee7a937b2d7ddf223965bc..41833fdc42c4f9678256420d5ea5dde49791f1de 100644
+index 4badbb307d172c042dee7a937b2d7ddf223965bc..9cb8f7af071ed0175422ecdd7dce0852cb25a653 100644
 --- a/dist/esm/src/compiler.js
 +++ b/dist/esm/src/compiler.js
-@@ -8,8 +8,8 @@
+@@ -8,7 +8,7 @@
   * You should have received a copy of the MIT License along with this program.
   */
  import ts, { isJSDocImportTag, } from 'typescript';
 -import { ensureImportIsEmitted, extractJSDocAttribute, findSourceFile, getEscapedText, getGlobalsOfSourceFile, getIdentifierName, getNameAsString, getPropertyName, hasModifier, isNodeWithLocals, NodeConverter, serializeEntityNameAsExpression, } from './reflection-ast.js';
--import { ReflectionOp, TypeNumberBrand } from '@deepkit/type-spec';
 +import { ensureImportIsEmitted, extractJSDocAttribute, extractJSDocTags, findSourceFile, getEscapedText, getGlobalsOfSourceFile, getIdentifierName, getNameAsString, getPropertyName, hasModifier, isNodeWithLocals, NodeConverter, serializeEntityNameAsExpression, } from './reflection-ast.js';
-+import { MappedModifier, ReflectionOp, TypeNumberBrand } from '@deepkit/type-spec';
+ import { ReflectionOp, TypeNumberBrand } from '@deepkit/type-spec';
  import { Resolver } from './resolver.js';
  import { knownLibFilesForCompilerOptions } from '@typescript/vfs';
- import { debug, debug2 } from './debug.js';
 @@ -966,71 +966,71 @@ export class ReflectionTransformer {
                  const narrowed = node;
                  //class nodes have always their own program, so the start is always fresh, means we don't need a frame
@@ -984,29 +982,17 @@ index 4badbb307d172c042dee7a937b2d7ddf223965bc..41833fdc42c4f9678256420d5ea5dde4
                  }
                  break;
              }
-@@ -1061,18 +1061,18 @@ export class ReflectionTransformer {
+@@ -1060,8 +1060,8 @@ export class ReflectionTransformer {
+                 }
                  let modifier = 0;
                  if (narrowed.questionToken) {
-                     if (narrowed.questionToken.kind === SyntaxKind.QuestionToken) {
+-                    if (narrowed.questionToken.kind === SyntaxKind.QuestionToken) {
 -                        modifier |= 1 /* MappedModifier.optional */;
-+                        modifier |= MappedModifier.optional;
++                  if (narrowed.questionToken.kind === SyntaxKind.QuestionToken) {
++                    modifier |= 1 /* MappedModifier.optional */;
                      }
                      if (narrowed.questionToken.kind === SyntaxKind.MinusToken) {
--                        modifier |= 2 /* MappedModifier.removeOptional */;
-+                        modifier |= MappedModifier.removeOptional;
-                     }
-                 }
-                 if (narrowed.readonlyToken) {
-                     if (narrowed.readonlyToken.kind === SyntaxKind.ReadonlyKeyword) {
--                        modifier |= 4 /* MappedModifier.readonly */;
-+                        modifier |= MappedModifier.readonly;
-                     }
-                     if (narrowed.readonlyToken.kind === SyntaxKind.MinusToken) {
--                        modifier |= 8 /* MappedModifier.removeReadonly */;
-+                        modifier |= MappedModifier.removeReadonly;
-                     }
-                 }
-                 program.pushCoRoutine();
+                         modifier |= 2 /* MappedModifier.removeOptional */;
 @@ -1108,9 +1108,19 @@ export class ReflectionTransformer {
                          narrowed = this.intrinsicMetaDeclaration;
                      }
@@ -1191,7 +1177,7 @@ index 4badbb307d172c042dee7a937b2d7ddf223965bc..41833fdc42c4f9678256420d5ea5dde4
      }
 +    /**
 +     * Emit `{ __meta?: never & [name, value] }` — the runtime shape of `TypeAnnotation<name, value>`.
-+     * Consumed later via `typeAnnotation.getOption(type, name)`.
++     * Consumed later via `typeAnnotation.getForName(type, name)`.
 +     */
 +    emitTypeAnnotation(program, name, value) {
 +        program.pushFrame();
@@ -1834,7 +1820,7 @@ index 0737f2a37a8a53d5ad27583f041b3f34529f192d..b32496a4c038b890fc20ddb96d5690d2
  
 +    /**
 +     * Emit `{ __meta?: never & [name, value] }` — the runtime shape of `TypeAnnotation<name, value>`.
-+     * Consumed later via `typeAnnotation.getOption(type, name)`.
++     * Consumed later via `typeAnnotation.getForName(type, name)`.
 +     */
 +    protected emitTypeAnnotation(program: CompilerProgram, name: string, value: JSDocTagValue): void {
 +        program.pushFrame();
