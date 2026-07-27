@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.44](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.44) (07/27/2026)
+
+### Miscellaneous
+
+- **schema:** Reduce size of bundled package ([89fb3c7](https://github.com/storm-software/power-plant/commit/89fb3c7))
+
 ## [0.0.41](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.41) (07/27/2026)
 
 ### Bug Fixes
