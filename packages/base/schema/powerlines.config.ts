@@ -35,7 +35,21 @@ const config: UserConfig = defineConfig({
     minify: false
   },
   resolve: {
-    skipNodeModulesBundle: true,
+    external: [
+      "@deepkit/type-spec",
+      "@deepkit/type",
+      "@standard-schema/spec",
+      "@stryke/*",
+      "@valibot/to-json-schema",
+      "zod",
+      "valibot",
+      "defu",
+      "esbuild",
+      "jiti",
+      "typescript",
+      "unstorage",
+      "untyped"
+    ],
     noExternal: ["@deepkit/type-compiler"]
   },
   plugins: [tsdown()]

@@ -162,7 +162,6 @@
     "defu": "catalog:",
     "esbuild": "catalog:",
     "jiti": "catalog:",
-    "normalize-path": "catalog:",
     "typescript": "^6.0.3",
     "unstorage": "catalog:",
     "untyped": "catalog:"
@@ -189,5 +188,17 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "inlinedDependencies": {
+    "@deepkit/type-compiler": "1.0.19",
+    "@marcj/ts-clone-node": "2.2.0",
+    "@typescript/vfs": "1.5.0",
+    "braces": "3.0.3",
+    "compatfactory": "2.0.9",
+    "fill-range": "7.1.1",
+    "is-number": "7.0.0",
+    "micromatch": "4.0.8",
+    "picomatch": "2.3.2",
+    "to-regex-range": "5.0.1"
   }
 }

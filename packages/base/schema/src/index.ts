@@ -16,8 +16,8 @@
 
  ------------------------------------------------------------------- */
 
-export * from "./constants";
 export * from "./compatibility";
+export * from "./constants";
 export * from "./extract";
 export * from "./helpers";
 export * from "./metadata";

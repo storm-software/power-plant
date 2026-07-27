@@ -1784,7 +1784,7 @@ interface Logger {
   error: (message: string) => void;
 }
 
-export type BaseExtractOptions = {
+export interface BaseExtractOptions {
   /**
    * An optional storage instance to use for caching schema extraction results. If provided, the storage instance will be used to store and retrieve cached schema extraction results, which can improve performance by avoiding redundant schema extraction operations. If not provided, the default storage mechanism will be used.
    */
@@ -1814,7 +1814,7 @@ export type BaseExtractOptions = {
    * An optional list of paths to exclude from the reflection.
    */
   exclude?: string[];
-};
+}
 
 export type InferExtractOptions<T extends SchemaConfig> =
   (T extends LoadReference

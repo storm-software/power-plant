@@ -16,11 +16,7 @@
 
  ------------------------------------------------------------------- */
 
-import type {
-  Type,
-  TypeClass,
-  TypeObjectLiteral
-} from "@deepkit/type";
+import type { Type, TypeClass, TypeObjectLiteral } from "@deepkit/type";
 import {
   ReflectionClass,
   ReflectionKind,
