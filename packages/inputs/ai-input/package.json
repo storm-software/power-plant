@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/ai-input",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "private": false,
   "description": "A Power Plant input for reading the source specification from an AI model.",
   "keywords": [

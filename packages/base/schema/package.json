@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/schema",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "private": false,
   "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
@@ -75,6 +75,20 @@
       "default": {
         "types": "./dist/codegen.d.mts",
         "default": "./dist/codegen.mjs"
+      }
+    },
+    "./deepkit": {
+      "require": {
+        "types": "./dist/deepkit.d.cts",
+        "default": "./dist/deepkit.cjs"
+      },
+      "import": {
+        "types": "./dist/deepkit.d.mts",
+        "default": "./dist/deepkit.mjs"
+      },
+      "default": {
+        "types": "./dist/deepkit.d.mts",
+        "default": "./dist/deepkit.mjs"
       }
     },
     "./package.json": "./package.json",
