@@ -16,17 +16,8 @@
 
  ------------------------------------------------------------------- */
 
-import {
-  isType,
-  reflect,
-  stringifyType,
-  type Type
-} from "@deepkit/type";
-import {
-  Cache,
-  DeclarationTransformer,
-  ReflectionTransformer,
-} from "@deepkit/type-compiler";
+import type { Type } from "@deepkit/type";
+import { isType, reflect, stringifyType } from "@deepkit/type";
 import type { StandardJSONSchemaV1 } from "@standard-schema/spec";
 import { extractFileReference } from "@stryke/convert/extract-file-reference";
 import { resolveSafe } from "@stryke/fs/resolve";
@@ -53,11 +44,17 @@ import {
   isZod3Type
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
-import { build, type Plugin } from "esbuild";
+import type { Plugin } from "esbuild";
+import { build } from "esbuild";
 import { createJiti } from "jiti";
 import { readFile } from "node:fs/promises";
 import ts, { DiagnosticCategory } from "typescript";
 import type * as z3 from "zod/v3";
+import {
+  Cache,
+  DeclarationTransformer,
+  ReflectionTransformer
+} from "./deepkit";
 import { reflectionToJsonSchema } from "./reflection";
 import { mapStorageToFileSystem } from "./storage";
 import {
@@ -719,18 +716,14 @@ function rewriteTypeOnlyImports(source: string): string {
     .replaceAll(/\bexport\s+type\s+\{/g, "export {");
 }
 
-function resolveReflectionConfig(
-  options: BaseExtractOptions
-) {
+function resolveReflectionConfig(options: BaseExtractOptions) {
   return {
     reflection: options.reflection ?? "default",
     exclude: options.exclude
   };
 }
 
-function getCompilerOptions(
-  options: BaseExtractOptions
-): ts.CompilerOptions {
+function getCompilerOptions(options: BaseExtractOptions): ts.CompilerOptions {
   const cwd = options.cwd || process.cwd();
   const tsconfigPath = options.tsconfig
     ? appendPath(options.tsconfig, cwd)
@@ -927,7 +920,11 @@ export async function extractTSType(
       keepNames: true,
       metafile: false,
       absWorkingDir: cwd,
-      plugins: [createDeepkitPlugin(options as BaseExtractOptions & { fs?: FileSystemInterface })]
+      plugins: [
+        createDeepkitPlugin(
+          options as BaseExtractOptions & { fs?: FileSystemInterface }
+        )
+      ]
     });
 
     if (result.errors.length > 0) {
@@ -941,13 +938,12 @@ export async function extractTSType(
       );
     }
 
-    const evaluated = await createJiti(cwd).evalModule(bundled, {
+    const evaluated = (await createJiti(cwd).evalModule(bundled, {
       filename: filePath,
       ext: findFileDotExtensionSafe(filePath) || ".ts"
-    }) as Record<string, unknown>;
+    })) as Record<string, unknown>;
 
-    let resolved =
-      evaluated[exportName] ?? evaluated[`__Ω${exportName}`];
+    let resolved = evaluated[exportName] ?? evaluated[`__Ω${exportName}`];
     if (resolved === undefined) {
       throw new Error(
         `The export "${exportName}" could not be resolved in the "${filePath}" module. ${
