@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.40](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.40) (07/26/2026)
+
+### Features
+
+- **schema:** Added `deepkit` type annotations and bundled patched `@deepkit/type-compiler` dependency ([4ace9c6](https://github.com/storm-software/power-plant/commit/4ace9c6))
+
 ## [0.0.39](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.39) (07/26/2026)
 
 ### Bug Fixes

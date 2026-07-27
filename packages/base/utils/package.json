@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/utils",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "private": false,
   "description": "Various utilities that help in the development of Power Plant extensions",
   "keywords": ["power-plant", "storm-software"],
