@@ -38,6 +38,7 @@ const config: UserConfig = defineConfig({
     external: [
       "@deepkit/type-spec",
       "@deepkit/type",
+      "@deepkit/core",
       "@standard-schema/spec",
       "@stryke/*",
       "@valibot/to-json-schema",

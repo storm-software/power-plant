@@ -253,6 +253,9 @@ catalogs:
     '@deepkit/type-compiler':
       specifier: 1.0.19
       version: 1.0.19
+    '@deepkit/type-spec':
+      specifier: ^1.0.19
+      version: 1.0.19
     '@graphql-codegen/core':
       specifier: ^6.2.0
       version: 6.2.0
@@ -779,6 +782,9 @@ importers:
       '@deepkit/type':
         specifier: 'catalog:'
         version: 1.0.19(@deepkit/core@1.0.19)
+      '@deepkit/type-spec':
+        specifier: 'catalog:'
+        version: 1.0.19
       '@standard-schema/spec':
         specifier: 'catalog:'
         version: 1.1.0

@@ -143,6 +143,7 @@
   "dependencies": {
     "@deepkit/core": "catalog:",
     "@deepkit/type": "catalog:",
+    "@deepkit/type-spec": "catalog:",
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
     "@stryke/date": "catalog:",

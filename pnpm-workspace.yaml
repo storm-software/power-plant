@@ -46,6 +46,7 @@ catalog:
   "@nx/workspace": 23.0.1
   "@deepkit/core": ^1.0.19
   "@deepkit/type": ^1.0.19
+  "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
   "@powerlines/nx": ^0.13.199
   "@powerlines/plugin-babel": ^0.13.156
