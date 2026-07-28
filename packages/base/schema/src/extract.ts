@@ -1053,16 +1053,19 @@ export async function extractSchemaWithSource<TSpec = any>(
 
   const unwrapped = unwrapSchemaConfig(input);
   if (isEmptyObject(unwrapped)) {
+    const schema = {
+      type: JSON_SCHEMA_TYPES
+    };
+    const hash = extractHash("json-schema", schema);
+
     return {
       variant: "json-schema",
+      hash,
+      schema,
       source: {
-        hash: extractHash("json-schema", {
-          type: JSON_SCHEMA_TYPES
-        }),
         variant: "json-schema",
-        schema: {
-          type: JSON_SCHEMA_TYPES
-        }
+        hash,
+        schema
       }
     } as ExtractedSchemaEnvelope<TSpec>;
   }
