@@ -48,11 +48,11 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.206
-  "@powerlines/plugin-babel": ^0.13.163
-  "@powerlines/plugin-tsdown": ^0.1.568
-  "@powerlines/tsconfig": ^0.4.214
-  "@powerlines/tsdoc": ^0.2.162
+  "@powerlines/nx": ^0.13.207
+  "@powerlines/plugin-babel": ^0.13.164
+  "@powerlines/plugin-tsdown": ^0.1.569
+  "@powerlines/tsconfig": ^0.4.215
+  "@powerlines/tsdoc": ^0.2.163
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
@@ -86,7 +86,7 @@ catalog:
   "@stryke/unique-id": ^0.3.110
   "@stryke/url": ^0.4.49
   "@stryke/zod": ^0.3.44
-  "@terrazzo/parser": ^2.4.0
+  "@terrazzo/parser": ^2.5.0
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
@@ -101,7 +101,7 @@ catalog:
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.0.1
-  powerlines: ^0.47.167
+  powerlines: ^0.47.168
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
@@ -182,7 +182,7 @@ minimumReleaseAgeExclude:
   - "@stryke/*"
   - "@powerlines/*"
   - powerlines
-  - prettier@3.9.5
+  - "@terrazzo/token-types@2.5.0"
 allowBuilds:
   "@deepkit/type-compiler": false
   "@hyperjump/json-pointer": true

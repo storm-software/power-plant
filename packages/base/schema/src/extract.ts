@@ -36,7 +36,12 @@ import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
-import { isBoolean, isEmptyObject, isSetString } from "@stryke/type-checks";
+import {
+  isBoolean,
+  isEmptyObject,
+  isObject,
+  isSetString
+} from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
@@ -1052,9 +1057,9 @@ export async function extractSchemaWithSource<TSpec = any>(
   }
 
   const unwrapped = unwrapSchemaConfig(input);
-  if (isEmptyObject(unwrapped)) {
+  if (isObject(unwrapped) && isEmptyObject(unwrapped)) {
     const schema = {
-      type: JSON_SCHEMA_TYPES
+      type: [...JSON_SCHEMA_TYPES]
     };
     const hash = extractHash("json-schema", schema);
 

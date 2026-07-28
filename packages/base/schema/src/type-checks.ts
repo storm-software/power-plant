@@ -519,7 +519,8 @@ export function isJsonSchemaBoolean(
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "boolean" &&
+    ((isSetString(schema.type) && schema.type === "boolean") ||
+      (Array.isArray(schema.type) && schema.type.includes("boolean"))) &&
     isOptionalBoolean(schema.default)
   );
 }
@@ -714,12 +715,12 @@ export function isJsonSchemaNativeEnum(
 
   const schema = input as Record<string, unknown>;
   const isValidType =
-    schema.type === "string" ||
-    schema.type === "number" ||
-    (Array.isArray(schema.type) &&
-      schema.type.length === 2 &&
-      schema.type[0] === "string" &&
-      schema.type[1] === "number");
+    (isSetString(schema.type) && schema.type === "string") ||
+    (Array.isArray(schema.type) && schema.type.includes("string")) ||
+    (isSetString(schema.type) && schema.type === "number") ||
+    (Array.isArray(schema.type) && schema.type.includes("number")) ||
+    (isSetString(schema.type) && schema.type === "integer") ||
+    (Array.isArray(schema.type) && schema.type.includes("integer"));
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
@@ -760,7 +761,8 @@ export function isJsonSchemaNull(input: unknown): input is JsonSchemaNull {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "null" &&
+    ((isSetString(schema.type) && schema.type === "null") ||
+      (Array.isArray(schema.type) && schema.type.includes("null"))) &&
     (schema.const === undefined || schema.const === null) &&
     (schema.enum === undefined ||
       (Array.isArray(schema.enum) && schema.enum.every(v => v === null))) &&
@@ -878,7 +880,8 @@ export function isJsonSchemaObject(input: unknown): input is JsonSchemaObject {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "object" &&
+    ((isSetString(schema.type) && schema.type === "object") ||
+      (Array.isArray(schema.type) && schema.type.includes("object"))) &&
     (schema.properties === undefined ||
       isRecordOfSchemaLike(schema.properties)) &&
     (schema.patternProperties === undefined ||
@@ -921,7 +924,8 @@ export function isJsonSchemaString(input: unknown): input is JsonSchemaString {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "string" &&
+    ((isSetString(schema.type) && schema.type === "string") ||
+      (Array.isArray(schema.type) && schema.type.includes("string"))) &&
     isOptionalNumber(schema.minLength) &&
     isOptionalNumber(schema.maxLength) &&
     isOptionalString(schema.pattern) &&
@@ -949,7 +953,8 @@ export function isJsonSchemaSet(input: unknown): input is JsonSchemaSet {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "array" &&
+    ((isSetString(schema.type) && schema.type === "array") ||
+      (Array.isArray(schema.type) && schema.type.includes("array"))) &&
     schema.uniqueItems === true &&
     isOptionalJsonSchemaArray(schema.prefixItems) &&
     isOptionalJsonSchema(schema.items) &&
@@ -979,7 +984,8 @@ export function isJsonSchemaRecord(input: unknown): input is JsonSchemaRecord {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "object" &&
+    ((isSetString(schema.type) && schema.type === "object") ||
+      (Array.isArray(schema.type) && schema.type.includes("object"))) &&
     (schema.patternProperties === undefined ||
       isRecordOfSchemaLike(schema.patternProperties)) &&
     (schema.additionalProperties === undefined ||
@@ -1004,7 +1010,8 @@ export function isJsonSchemaTuple(input: unknown): input is JsonSchemaTuple {
 
   return (
     hasValidJsonSchemaKeywords(schema) &&
-    schema.type === "array" &&
+    ((isSetString(schema.type) && schema.type === "array") ||
+      (Array.isArray(schema.type) && schema.type.includes("array"))) &&
     isArrayOf(schema.prefixItems, isJsonSchema) &&
     isOptionalNumber(schema.minItems) &&
     isOptionalNumber(schema.maxItems) &&
@@ -1071,28 +1078,40 @@ export function isJsonSchemaPrimitiveUnion(
       return false;
     }
 
-    if (schema.type === "string") {
+    if (
+      (isSetString(schema.type) && schema.type === "string") ||
+      (Array.isArray(schema.type) && schema.type.includes("string"))
+    ) {
       return (
         schema.enum.every(value => isSetString(value)) &&
         (schema.default === undefined || isSetString(schema.default))
       );
     }
 
-    if (schema.type === "number") {
+    if (
+      (isSetString(schema.type) && schema.type === "number") ||
+      (Array.isArray(schema.type) && schema.type.includes("number"))
+    ) {
       return (
         schema.enum.every(value => isSetNumber(value)) &&
         (schema.default === undefined || isSetNumber(schema.default))
       );
     }
 
-    if (schema.type === "boolean") {
+    if (
+      (isSetString(schema.type) && schema.type === "boolean") ||
+      (Array.isArray(schema.type) && schema.type.includes("boolean"))
+    ) {
       return (
         schema.enum.every(value => isBoolean(value)) &&
         (schema.default === undefined || isBoolean(schema.default))
       );
     }
 
-    if (schema.type === "integer") {
+    if (
+      (isSetString(schema.type) && schema.type === "integer") ||
+      (Array.isArray(schema.type) && schema.type.includes("integer"))
+    ) {
       if (schema.format !== "int64") {
         return false;
       }
@@ -1104,7 +1123,8 @@ export function isJsonSchemaPrimitiveUnion(
     }
 
     return (
-      schema.type === "null" &&
+      ((isSetString(schema.type) && schema.type === "null") ||
+        (Array.isArray(schema.type) && schema.type.includes("null"))) &&
       schema.enum.every(value => value === null) &&
       (schema.default === undefined || schema.default === null)
     );
