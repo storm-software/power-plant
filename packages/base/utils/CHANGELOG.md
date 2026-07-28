@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Utils
 
+## [0.0.33](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.33) (07/27/2026)
+
+### Miscellaneous
+
+- **core:** Updated logic to use `JsonSchemaAny` for any schemas ([1832abe](https://github.com/storm-software/power-plant/commit/1832abe))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.47**
+- Updated **schema** to **v0.0.45**
+
 ## [0.0.32](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.32) (07/27/2026)
 
 ### Updated Dependencies

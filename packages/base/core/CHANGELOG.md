@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.47](https://github.com/storm-software/power-plant/releases/tag/core%400.0.47) (07/27/2026)
+
+### Miscellaneous
+
+- **core:** Updated logic to use `JsonSchemaAny` for any schemas ([1832abe](https://github.com/storm-software/power-plant/commit/1832abe))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.45**
+
 ## [0.0.46](https://github.com/storm-software/power-plant/releases/tag/core%400.0.46) (07/27/2026)
 
 ### Bug Fixes
