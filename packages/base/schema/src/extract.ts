@@ -36,7 +36,7 @@ import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
-import { isSetString } from "@stryke/type-checks";
+import { isEmptyObject, isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
@@ -50,6 +50,7 @@ import { createJiti } from "jiti";
 import { readFile } from "node:fs/promises";
 import ts, { DiagnosticCategory } from "typescript";
 import type * as z3 from "zod/v3";
+import { JSON_SCHEMA_TYPES } from "./constants";
 import {
   Cache,
   DeclarationTransformer,
@@ -1036,36 +1037,47 @@ export async function extractSchemaWithSource<TSpec = any>(
   input: SchemaConfig,
   options: InferExtractOptions<typeof input> = {}
 ): Promise<ExtractedSchemaEnvelope<TSpec>> {
-  const unwrappedConfig = unwrapSchemaConfig(input);
-
-  if (isSchemaWithSource(unwrappedConfig)) {
-    return unwrappedConfig as ExtractedSchemaEnvelope<TSpec>;
+  if (isSchemaWithSource(input)) {
+    return input;
   }
 
-  if (isSchema(unwrappedConfig)) {
+  if (isSchema(input)) {
     return {
-      ...unwrappedConfig,
+      ...input,
       source: {
-        hash: extractHash("json-schema", unwrappedConfig.schema),
+        hash: extractHash("json-schema", input.schema),
         variant: "json-schema",
-        schema: unwrappedConfig.schema
+        schema: input.schema
+      }
+    } as ExtractedSchemaEnvelope<TSpec>;
+  }
+
+  const unwrapped = unwrapSchemaConfig(input);
+  if (isEmptyObject(unwrapped)) {
+    return {
+      variant: "json-schema",
+      source: {
+        hash: extractHash("json-schema", {
+          type: JSON_SCHEMA_TYPES
+        }),
+        variant: "json-schema",
+        schema: {
+          type: JSON_SCHEMA_TYPES
+        }
       }
     } as ExtractedSchemaEnvelope<TSpec>;
   }
 
   let source: SchemaSource;
-
-  const variant = extractVariant(unwrappedConfig);
-  const hash = extractHash(variant, unwrappedConfig);
+  const variant = extractVariant(unwrapped);
+  const hash = extractHash(variant, unwrapped);
 
   if (variant === "file-reference") {
-    const fileReference = extractFileReference(
-      unwrappedConfig as FileReferenceInput
-    );
+    const fileReference = extractFileReference(unwrapped);
     if (!fileReference) {
       throw new Error(
         `Failed to extract a valid file reference from the provided input "${JSON.stringify(
-          unwrappedConfig
+          unwrapped
         )}". Please ensure that the input is correctly formatted as a file reference (e.g. "./schema.ts#MySchema") and that the file exists at the specified path.`
       );
     }
@@ -1095,11 +1107,8 @@ export async function extractSchemaWithSource<TSpec = any>(
       cwd: options.cwd ?? undefined
     } as InferLoadOptions<FileReferenceInput>;
 
-    let resolved = await loadSafe<SchemaConfig>(
-      unwrappedConfig as FileReferenceInput,
-      loadOptions
-    );
-    resolved ??= await extractTSType(unwrappedConfig as FileReferenceInput, {
+    let resolved = await loadSafe<SchemaConfig>(unwrapped, loadOptions);
+    resolved ??= await extractTSType(unwrapped, {
       ...options,
       fs
     });
@@ -1138,7 +1147,7 @@ export async function extractSchemaWithSource<TSpec = any>(
       "reflection"
     ].includes(variant)
   ) {
-    source = extractSource(variant, unwrappedConfig as SchemaSourceConfig);
+    source = extractSource(variant, unwrapped as SchemaSourceConfig);
   } else {
     throw new Error(
       `Invalid schema definition input "${

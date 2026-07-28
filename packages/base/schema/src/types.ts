@@ -369,7 +369,7 @@ export type JsonSchemaAny = JsonSchemaKeywords &
         /**
          * Declares the primitive type of the schema.
          */
-        type?: JsonSchemaPrimitiveType | JsonSchemaPrimitiveType[];
+        type?: JsonSchemaType | JsonSchemaType[];
       }
   );
 
