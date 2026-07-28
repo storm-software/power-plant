@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.46](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.46) (07/28/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue extracting `JsonSchemaAny` types ([1328b8d](https://github.com/storm-software/power-plant/commit/1328b8d))
+
 ## [0.0.45](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.45) (07/27/2026)
 
 ### Miscellaneous

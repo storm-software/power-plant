@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Style Dictionary
 
+## [0.0.33](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.33) (07/28/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.48**
+- Updated **schema** to **v0.0.46**
+
 ## [0.0.32](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.32) (07/27/2026)
 
 ### Updated Dependencies
