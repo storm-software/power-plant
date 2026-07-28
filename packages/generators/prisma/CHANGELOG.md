@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Prisma
 
+## [0.0.32](https://github.com/storm-software/power-plant/releases/tag/prisma%400.0.32) (07/28/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.51**
+- Updated **schema** to **v0.0.49**
+
 ## [0.0.31](https://github.com/storm-software/power-plant/releases/tag/prisma%400.0.31) (07/28/2026)
 
 ### Updated Dependencies

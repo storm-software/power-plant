@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.49](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.49) (07/28/2026)
+
+### Miscellaneous
+
+- **schema:** Update type-checks to properly handle `type` arrays ([bf53fab](https://github.com/storm-software/power-plant/commit/bf53fab))
+
 ## [0.0.48](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.48) (07/28/2026)
 
 ### Bug Fixes
