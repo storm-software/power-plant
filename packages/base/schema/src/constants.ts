@@ -42,13 +42,13 @@ export const JSON_SCHEMA_PRIMITIVE_TYPES = [
   JsonSchemaTypeNames.INTEGER,
   JsonSchemaTypeNames.BOOLEAN,
   JsonSchemaTypeNames.NULL
-];
+] as const;
 
 export const JSON_SCHEMA_TYPES = [
   ...JSON_SCHEMA_PRIMITIVE_TYPES,
   JsonSchemaTypeNames.ARRAY,
   JsonSchemaTypeNames.OBJECT
-];
+] as const;
 
 export const JSON_SCHEMA_METADATA_KEYS = [
   "$id",

@@ -434,11 +434,9 @@ export function isJsonSchemaAny(input: unknown): input is JsonSchemaAny {
     isOptionalString(schema.$ref) &&
     (!schema.type ||
       (isSetString(schema.type) &&
-        JSON_SCHEMA_PRIMITIVE_TYPE_SET.has(
-          schema.type as JsonSchemaPrimitiveType
-        )) ||
+        JSON_SCHEMA_TYPE_SET.has(schema.type as JsonSchemaType)) ||
       (Array.isArray(schema.type) &&
-        schema.type.every(t => JSON_SCHEMA_PRIMITIVE_TYPES.includes(t))))
+        schema.type.every(t => JSON_SCHEMA_TYPES.includes(t))))
   );
 }
 

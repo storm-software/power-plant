@@ -36,7 +36,7 @@ import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
-import { isEmptyObject, isSetString } from "@stryke/type-checks";
+import { isBoolean, isEmptyObject, isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
@@ -475,14 +475,13 @@ export function extractHash(
   input: SchemaConfig
 ): string {
   const unwrappedConfig = unwrapSchemaConfig(input);
-
-  if (isSchemaWithSource(unwrappedConfig) || isSchema(unwrappedConfig)) {
-    return murmurhash({ variant, input: unwrappedConfig.schema });
+  if (isSchemaWithSource(input) || isSchema(input)) {
+    return murmurhash({ variant, input: unwrappedConfig });
   }
 
   if (isSetString(unwrappedConfig)) {
     return murmurhash({ variant, input: unwrappedConfig });
-  } else if (typeof unwrappedConfig === "boolean") {
+  } else if (isBoolean(unwrappedConfig)) {
     return murmurhash({ variant, input: unwrappedConfig });
   } else if (isSetObject(unwrappedConfig)) {
     if (isZod3Type(unwrappedConfig)) {
