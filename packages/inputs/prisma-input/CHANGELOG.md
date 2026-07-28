@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Prisma Input
 
+## [0.0.31](https://github.com/storm-software/power-plant/releases/tag/prisma-input%400.0.31) (07/28/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.50**
+- Updated **schema** to **v0.0.48**
+
 ## [0.0.30](https://github.com/storm-software/power-plant/releases/tag/prisma-input%400.0.30) (07/28/2026)
 
 ### Updated Dependencies

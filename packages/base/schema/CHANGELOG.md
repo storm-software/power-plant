@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.48](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.48) (07/28/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with missing schema source fields ([219869c](https://github.com/storm-software/power-plant/commit/219869c))
+
 ## [0.0.47](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.47) (07/28/2026)
 
 ### Miscellaneous
