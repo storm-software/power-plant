@@ -51,11 +51,14 @@ function createContextStore<TContext extends SessionContext>(
         .replace(/[_-]*$/g, "")
     )
   );
+
+  const asyncLocalStorage = new AsyncLocalStorage<TContext>();
+
   globalStore[contextKey] ??
     (globalStore[contextKey] = {
-      asyncLocalStorage: new AsyncLocalStorage<TContext>(),
+      asyncLocalStorage,
       use(): TContext {
-        const instance = this.asyncLocalStorage.getStore();
+        const instance = asyncLocalStorage.getStore();
         if (instance === undefined) {
           throw new Error(
             `The ${titleCase(
@@ -70,16 +73,16 @@ function createContextStore<TContext extends SessionContext>(
         return instance;
       },
       tryUse(): TContext | undefined {
-        return this.asyncLocalStorage.getStore();
+        return asyncLocalStorage.getStore();
       },
       call<R>(instance: TContext, callback: () => R): R {
-        return this.asyncLocalStorage.run(instance, callback);
+        return asyncLocalStorage.run(instance, callback);
       },
       async callAsync<R>(
         instance: TContext,
         callback: () => R | Promise<R>
       ): Promise<R> {
-        return this.asyncLocalStorage.run(instance, callback);
+        return asyncLocalStorage.run(instance, callback);
       }
     });
 
