@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Graphql Codegen
 
+## [0.0.45](https://github.com/storm-software/power-plant/releases/tag/graphql-codegen%400.0.45) (07/28/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.49**
+- Updated **schema** to **v0.0.47**
+
 ## [0.0.44](https://github.com/storm-software/power-plant/releases/tag/graphql-codegen%400.0.44) (07/28/2026)
 
 ### Updated Dependencies

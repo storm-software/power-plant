@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/asyncapi",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "private": false,
   "description": "A Power Plant generator for using @asyncapi/generator to generate code from an AsyncAPI schema.",
   "keywords": [

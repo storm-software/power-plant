@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.47](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.47) (07/28/2026)
+
+### Miscellaneous
+
+- **schema:** Ensure `any` schema includes all possible `type` values ([b9799a6](https://github.com/storm-software/power-plant/commit/b9799a6))
+
 ## [0.0.46](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.46) (07/28/2026)
 
 ### Bug Fixes
