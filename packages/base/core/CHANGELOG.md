@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.46](https://github.com/storm-software/power-plant/releases/tag/core%400.0.46) (07/27/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with undefined local store ([c01c9e9](https://github.com/storm-software/power-plant/commit/c01c9e9))
+
 ## [0.0.45](https://github.com/storm-software/power-plant/releases/tag/core%400.0.45) (07/27/2026)
 
 ### Updated Dependencies
