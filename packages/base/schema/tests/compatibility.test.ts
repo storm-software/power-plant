@@ -1,9 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { JSON_SCHEMA_ANY } from "../src/constants";
 import {
   assertSchemasDoNotContradict,
   findSchemaContradictions
 } from "../src/compatibility";
-import type { JsonSchemaAny } from "../src/types";
+import { describe, expect, it } from "vitest";
 
 describe("schema/src/compatibility.ts", () => {
   it("returns no issues for compatible object schemas", () => {
@@ -75,8 +75,9 @@ describe("schema/src/compatibility.ts", () => {
   });
 
   it("treats unconstrained schemas as compatible", () => {
-    const anySchema: JsonSchemaAny = {};
-    expect(findSchemaContradictions(anySchema, { type: "string" })).toEqual([]);
+    expect(
+      findSchemaContradictions(JSON_SCHEMA_ANY, { type: "string" })
+    ).toEqual([]);
     expect(findSchemaContradictions({}, { type: "object" })).toEqual([]);
   });
 

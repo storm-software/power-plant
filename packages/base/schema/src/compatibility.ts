@@ -47,17 +47,8 @@ function isUnconstrainedSchema(schema: JsonSchema): boolean {
   }
 
   const structuralKeys = Object.keys(schema).filter(key => !isMetadataKey(key));
-  if (structuralKeys.length === 0) {
-    return true;
-  }
 
-  // Legacy non-standard marker still emitted by some callers.
-  // Prefer `JsonSchemaAny` (`{}`) for new code.
-  return (
-    structuralKeys.length === 1 &&
-    structuralKeys[0] === "type" &&
-    (schema as { type?: unknown }).type === "any"
-  );
+  return structuralKeys.length === 0;
 }
 
 function resolveSchemaTypes(schema: JsonSchema): JsonSchemaType[] | "any" {

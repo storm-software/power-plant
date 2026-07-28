@@ -38,6 +38,7 @@ import {
   unwrapInputSchemaSource,
   unwrapOutputSchemaSource
 } from "./helpers";
+
 import type {
   AnyGeneratorConfig,
   CombinedGeneratorConfig,
@@ -52,7 +53,7 @@ import type {
  * @remarks
  * Missing (`undefined`) entries are skipped. An empty map yields a noop input
  * that resolves to `{}`. Child schemas are merged into an object schema keyed
- * the same way; children without a schema use `{ type: "any" }`.
+ * the same way; children without a schema use `JSON_SCHEMA_ANY`.
  */
 export function combineInputs<
   TSpec extends Record<string, any>,
@@ -60,7 +61,7 @@ export function combineInputs<
 >(inputs: {
   [K in keyof TSpec]: InputConfig<TSpec[K], TOptions> | undefined;
 }): InputConfigObject<TSpec, TOptions> {
-  const properties: Record<string, SchemaSourceConfig | { type: "any" }> = {};
+  const properties: Record<string, SchemaSourceConfig> = {};
 
   for (const [key, input] of Object.entries(inputs)) {
     if (input === undefined) {
@@ -113,7 +114,7 @@ export function combineOutputs<
 >(outputs: {
   [K in keyof TSpec]: OutputConfig<TSpec[K], TOptions, TReturns[K]> | undefined;
 }): OutputConfigObject<TSpec, TOptions, TReturns> {
-  const properties: Record<string, SchemaSourceConfig | { type: "any" }> = {};
+  const properties: Record<string, SchemaSourceConfig> = {};
 
   for (const [key, output] of Object.entries(outputs)) {
     properties[key] = unwrapOutputSchemaSource(output);

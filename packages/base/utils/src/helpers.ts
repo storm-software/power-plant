@@ -33,11 +33,18 @@ import {
   isOutputConfigObject,
   isSchemaConfigObject
 } from "@power-plant/core/helpers/type-checks";
-import type { SchemaConfig, SchemaSourceConfig } from "@power-plant/schema";
+import type {
+  JsonSchemaAny,
+  SchemaConfig,
+  SchemaSourceConfig
+} from "@power-plant/schema";
 import { isFunction } from "@stryke/type-checks/is-function";
 import type { AnyGeneratorConfig } from "./types";
 
 export type CompositeUtility = "combine" | "pipe";
+
+/** Unconstrained schema fallback (`JsonSchemaAny`). */
+export const JSON_SCHEMA_ANY: JsonSchemaAny = {};
 
 function formatChildLabel(
   utility: CompositeUtility,
@@ -86,9 +93,9 @@ export function unwrapSchemaSource(
     | SchemaConfigObject<any>
     | InferSchemaConfig<AnyGeneratorConfig>
     | undefined
-): SchemaSourceConfig | { type: "any" } {
+): SchemaSourceConfig {
   if (schema === undefined) {
-    return { type: "any" };
+    return JSON_SCHEMA_ANY;
   }
 
   if (isSchemaConfigObject(schema)) {
@@ -100,22 +107,22 @@ export function unwrapSchemaSource(
 
 export function unwrapInputSchemaSource(
   input: InputConfig<any, any> | undefined
-): SchemaSourceConfig | { type: "any" } {
+): SchemaSourceConfig {
   if (input !== undefined && isInputConfigObject(input) && input.schema) {
     return unwrapSchemaSource(input.schema);
   }
 
-  return { type: "any" };
+  return JSON_SCHEMA_ANY;
 }
 
 export function unwrapOutputSchemaSource(
   output: OutputConfig<any, any, any> | undefined
-): SchemaSourceConfig | { type: "any" } {
+): SchemaSourceConfig {
   if (output !== undefined && isOutputConfigObject(output) && output.schema) {
     return unwrapSchemaSource(output.schema);
   }
 
-  return { type: "any" };
+  return JSON_SCHEMA_ANY;
 }
 
 export function resolveSchemaOverride<TSpec>(

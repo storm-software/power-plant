@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { describe, expect, it, vi } from "vitest";
+import { JSON_SCHEMA_ANY } from "../src/helpers";
 import { pipe, pipeInputs, pipeOutputs } from "../src/pipe";
 import { createTestExecute, invokeInput, invokeOutput } from "./helpers";
 
@@ -87,7 +88,7 @@ describe("pipeInputs", () => {
     expect(config.schema).toMatchObject({
       prefixItems: [
         { type: "object", properties: { name: { type: "string" } } },
-        { type: "any" }
+        JSON_SCHEMA_ANY
       ]
     });
   });
@@ -152,7 +153,7 @@ describe("pipeOutputs", () => {
     expect(config.schema).toMatchObject({
       prefixItems: [
         { type: "object", properties: { id: { type: "number" } } },
-        { type: "any" }
+        JSON_SCHEMA_ANY
       ]
     });
   });

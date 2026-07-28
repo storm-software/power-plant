@@ -16,6 +16,7 @@
 
  ------------------------------------------------------------------- */
 
+import type { SchemaConfig } from "@power-plant/schema";
 import { mapStorageToFileSystem } from "@power-plant/schema/storage";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
@@ -73,11 +74,11 @@ export async function createGenerator<
     );
   }
 
-  if (!configObject.schema) {
-    configObject.schema = { type: "any" };
-  }
+  // Default to unconstrained JsonSchemaAny (`{}`) when no schema is provided.
+  const schemaConfig = configObject.schema ?? ({} as SchemaConfig<TSpec>);
+  configObject.schema = schemaConfig;
 
-  const schema = await createSchema<TSpec>(configObject.schema, {
+  const schema = await createSchema<TSpec>(schemaConfig, {
     storage: sessionContext.storage,
     logger: sessionContext.logger,
     tsconfig: options.tsconfig,

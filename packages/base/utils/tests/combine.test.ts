@@ -18,6 +18,7 @@
 
 import { describe, expect, it, vi } from "vitest";
 import { combine, combineInputs, combineOutputs } from "../src/combine";
+import { JSON_SCHEMA_ANY } from "../src/helpers";
 import { createTestExecute, invokeInput, invokeOutput } from "./helpers";
 
 vi.mock("@power-plant/core", async importOriginal => {
@@ -74,7 +75,7 @@ describe("combineInputs", () => {
     expect(partial.schema).toMatchObject({
       required: ["keep"],
       properties: {
-        keep: { type: "any" }
+        keep: JSON_SCHEMA_ANY
       }
     });
     expect(partial.schema).not.toHaveProperty("properties.skip");
@@ -92,7 +93,7 @@ describe("combineInputs", () => {
     expect(config.schema).toMatchObject({
       properties: {
         a: { type: "object", properties: { name: { type: "string" } } },
-        b: { type: "any" }
+        b: JSON_SCHEMA_ANY
       }
     });
   });
@@ -181,7 +182,7 @@ describe("combineOutputs", () => {
     expect(config.schema).toMatchObject({
       properties: {
         a: { type: "object", properties: { id: { type: "number" } } },
-        b: { type: "any" }
+        b: JSON_SCHEMA_ANY
       }
     });
   });

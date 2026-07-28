@@ -16,7 +16,15 @@
 
  ------------------------------------------------------------------- */
 
-import type { JsonSchemaMetadataKeywords } from "./types";
+import type { JsonSchemaAny, JsonSchemaMetadataKeywords } from "./types";
+
+/**
+ * Runtime value for an unconstrained {@link JsonSchemaAny} schema.
+ *
+ * @remarks
+ * Prefer this over the non-standard `type: "any"` marker.
+ */
+export const JSON_SCHEMA_ANY: JsonSchemaAny = {};
 
 export const JsonSchemaTypeNames = {
   STRING: "string",
