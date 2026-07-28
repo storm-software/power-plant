@@ -1370,6 +1370,7 @@ export function isUntypedSchemaStrict(input: unknown): input is UntypedSchema {
   }
 
   const schema = input as Record<string, unknown>;
+
   return !("type" in schema);
 }
 

@@ -348,7 +348,12 @@ export type JsonSchemaKeywords = JsonSchemaMetadataKeywords &
   JsonSchemaConditionalKeywords;
 
 /**
- * A schema that can point to another schema via `$ref`.
+ * Unconstrained JSON Schema fragment (TypeScript `any`).
+ *
+ * @remarks
+ * Prefer an empty / metadata-only object — never the non-standard
+ * `type: "any"` marker. May also carry an optional `$ref`, or a primitive
+ * `type` when used as a catch-all branch (e.g. inside `not`).
  */
 export type JsonSchemaAny = JsonSchemaKeywords &
   (
@@ -364,7 +369,7 @@ export type JsonSchemaAny = JsonSchemaKeywords &
         /**
          * Declares the primitive type of the schema.
          */
-        type: typeof JSON_SCHEMA_PRIMITIVE_TYPES;
+        type?: JsonSchemaPrimitiveType | JsonSchemaPrimitiveType[];
       }
   );
 

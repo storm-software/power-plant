@@ -3,7 +3,7 @@ import {
   assertSchemasDoNotContradict,
   findSchemaContradictions
 } from "../src/compatibility";
-import { JsonSchema } from "../src/types";
+import type { JsonSchemaAny } from "../src/types";
 
 describe("schema/src/compatibility.ts", () => {
   it("returns no issues for compatible object schemas", () => {
@@ -75,9 +75,8 @@ describe("schema/src/compatibility.ts", () => {
   });
 
   it("treats unconstrained schemas as compatible", () => {
-    expect(findSchemaContradictions({ type: "any" } as JsonSchema, { type: "string" })).toEqual(
-      []
-    );
+    const anySchema: JsonSchemaAny = {};
+    expect(findSchemaContradictions(anySchema, { type: "string" })).toEqual([]);
     expect(findSchemaContradictions({}, { type: "object" })).toEqual([]);
   });
 

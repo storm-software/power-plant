@@ -37,17 +37,27 @@ function isMetadataKey(key: string): boolean {
   return METADATA_KEYS.has(key);
 }
 
+/**
+ * Returns true when `schema` is unconstrained (`JsonSchemaAny`):
+ * empty, metadata-only, or otherwise lacking structural keywords.
+ */
 function isUnconstrainedSchema(schema: JsonSchema): boolean {
   if (!isSetObject(schema)) {
     return true;
   }
 
-  if ((schema as { type?: string }).type === "any") {
+  const structuralKeys = Object.keys(schema).filter(key => !isMetadataKey(key));
+  if (structuralKeys.length === 0) {
     return true;
   }
 
-  const structuralKeys = Object.keys(schema).filter(key => !isMetadataKey(key));
-  return structuralKeys.length === 0;
+  // Legacy non-standard marker still emitted by some callers.
+  // Prefer `JsonSchemaAny` (`{}`) for new code.
+  return (
+    structuralKeys.length === 1 &&
+    structuralKeys[0] === "type" &&
+    (schema as { type?: unknown }).type === "any"
+  );
 }
 
 function resolveSchemaTypes(schema: JsonSchema): JsonSchemaType[] | "any" {
@@ -94,7 +104,7 @@ function valuesEqual(left: unknown, right: unknown): boolean {
  *
  * @remarks
  * Metadata-only keywords are ignored. Either schema may be unconstrained
- * (`{}`, `{ type: "any" }`, or missing structural keywords) without
+ * (`JsonSchemaAny`, empty object, or missing structural keywords) without
  * producing contradictions.
  *
  * @param base - The base JSON Schema fragment.
@@ -220,7 +230,7 @@ export function findSchemaContradictions(
  * @param base - The base JSON Schema fragment.
  * @param override - The JSON Schema fragment to compare against the base.
  * @param label - A label used in the thrown error message.
- * @throws {Error} When one or more structural contradictions are found.
+ * @throws Will throw an Error when one or more structural contradictions are found.
  */
 export function assertSchemasDoNotContradict(
   base: JsonSchema,
