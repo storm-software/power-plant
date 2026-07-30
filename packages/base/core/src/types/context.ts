@@ -25,12 +25,14 @@ import type { SchemaOf } from "./schema";
 import type { Session } from "./session";
 import type { Logger, Settings } from "./settings";
 
-export interface SessionContext {
+export interface Context {
   /**
    * The current working directory.
    */
   cwd: string;
+}
 
+export interface SessionContext extends Context {
   /**
    * The settings for the context.
    */
