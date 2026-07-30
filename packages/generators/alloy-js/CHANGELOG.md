@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.49](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.49) (07/30/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update packages to use `version` from `package.json` file in definitions ([ad22acd](https://github.com/storm-software/power-plant/commit/ad22acd))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.52**
+- Updated **noop-output** to **v0.0.31**
+- Updated **schema** to **v0.0.50**
+
 ## [0.0.48](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.48) (07/28/2026)
 
 ### Updated Dependencies

@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/core",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "private": false,
   "description": "☢️ Generate anything from a specification",
   "keywords": ["power-plant", "storm-software"],

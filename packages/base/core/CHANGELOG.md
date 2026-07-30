@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.52](https://github.com/storm-software/power-plant/releases/tag/core%400.0.52) (07/30/2026)
+
+### Miscellaneous
+
+- **core:** Added `Context` as base interface to allow type augmenting later ([75548e2](https://github.com/storm-software/power-plant/commit/75548e2))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.50**
+
 ## [0.0.51](https://github.com/storm-software/power-plant/releases/tag/core%400.0.51) (07/28/2026)
 
 ### Updated Dependencies

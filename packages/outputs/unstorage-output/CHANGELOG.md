@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Output
 
+## [0.0.48](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.48) (07/30/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update packages to use `version` from `package.json` file in definitions ([ad22acd](https://github.com/storm-software/power-plant/commit/ad22acd))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.52**
+- Updated **schema** to **v0.0.50**
+
 ## [0.0.47](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.47) (07/28/2026)
 
 ### Updated Dependencies
