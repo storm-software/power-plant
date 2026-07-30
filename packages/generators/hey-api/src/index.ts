@@ -24,6 +24,7 @@ import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import schema from "@power-plant/openapi-schema";
 import { toArray } from "@stryke/convert/to-array";
 import type { Arrayable } from "@stryke/types/array";
+import packageJson from "../package.json";
 
 export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
   meta: {
@@ -31,7 +32,7 @@ export default defineGenerator<OpenAPISchema, Arrayable<UserConfig>, void>({
     title: "Hey API",
     description:
       "A generator that uses the OpenAPI specification to generate source code using Hey API.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["openapi"],
     links: [
       {

@@ -29,6 +29,7 @@ import { isString } from "@stryke/type-checks/is-string";
 import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { isAbsolute, resolve } from "node:path";
+import packageJson from "../package.json";
 
 export interface Options {
   /**
@@ -124,7 +125,7 @@ export default defineGenerator<CapnpSchema, Options, void>({
     title: "Cap'n Proto",
     description:
       "A generator that uses `@stryke/capnp` `capnpc` to compile Cap'n Proto schemas into TypeScript/JavaScript source code.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["capnp", "capnproto", "capnpc"],
     links: [
       {

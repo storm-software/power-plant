@@ -22,6 +22,7 @@ import { isSetString } from "@stryke/type-checks/is-set-string";
 import type { Storage } from "unstorage";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
+import packageJson from "../package.json";
 
 export type Options =
   | {
@@ -36,7 +37,7 @@ export default defineOutput<any, Options>({
     name: "unstorage-output",
     description:
       "An output that writes generated documents to an Unstorage driver.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["unstorage"],
     links: [
       {

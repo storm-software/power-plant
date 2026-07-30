@@ -18,6 +18,7 @@
 
 import { defineSchema } from "@power-plant/core";
 import type * as z from "zod/mini";
+import packageJson from "../package.json";
 import { prismaSchema } from "./schema";
 
 export * from "./schema";
@@ -27,7 +28,7 @@ export default defineSchema<PrismaSchema>({
   meta: {
     name: "prisma-schema",
     title: "Prisma Schema",
-    version: "1.0",
+    version: packageJson.version,
     description:
       "A Prisma DMMF (Data Model Meta Format) document describing models, enums, and client operation mappings from a Prisma schema.",
     spec: "A Prisma DMMF document.",

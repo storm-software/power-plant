@@ -20,6 +20,7 @@ import { defineInput } from "@power-plant/core";
 import { isFileReference } from "@stryke/resolve/type-checks";
 import { isString } from "@stryke/type-checks/is-string";
 import { isURL } from "@stryke/type-checks/is-url";
+import packageJson from "../package.json";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -65,7 +66,7 @@ export default defineInput<any, Options>({
             }" Unstorage driver`
           : ""
       }.`,
-    version: "1.0",
+    version: packageJson.version,
     tags: ["unstorage", "input"],
     links: [
       {

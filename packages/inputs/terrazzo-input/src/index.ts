@@ -19,6 +19,7 @@
 import { defineInput } from "@power-plant/core";
 import type { Tokens } from "@power-plant/dtcg-schema";
 import schema from "@power-plant/dtcg-schema";
+import packageJson from "../package.json";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -32,7 +33,7 @@ export default defineInput<Tokens, Options>({
       "An input extension that reads the specification from a Design Tokens Community Group (DTCG) schema document and parses it into a Design Tokens format using Terrazzo.",
     usage:
       "Reads the Design Tokens Community Group (DTCG) schema from a file path, remote URL, or schema loader source configured via inputPath.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["dtcg"],
     links: [
       {

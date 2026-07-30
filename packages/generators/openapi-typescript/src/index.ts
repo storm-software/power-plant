@@ -22,6 +22,7 @@ import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import schema from "@power-plant/openapi-schema";
 import type { OpenAPI3, OpenAPITSOptions } from "openapi-typescript";
 import openapiTS, { astToString } from "openapi-typescript";
+import packageJson from "../package.json";
 
 export type Options = Omit<OpenAPITSOptions, "cwd"> & {
   /**
@@ -69,7 +70,7 @@ export default defineGenerator<OpenAPISchema, Options, void>({
     title: "OpenAPI TypeScript",
     description:
       "A generator that uses openapi-typescript to generate TypeScript types from an OpenAPI schema.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["openapi", "openapi-typescript"],
     links: [
       {

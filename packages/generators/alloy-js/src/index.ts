@@ -19,6 +19,7 @@
 import type { Children } from "@alloy-js/core";
 import type { GeneratorFunctionResult } from "@power-plant/core";
 import { defineGenerator } from "@power-plant/core";
+import packageJson from "../package.json";
 import { render } from "./render";
 
 /**
@@ -42,7 +43,7 @@ export default defineGenerator<any, Options, void>({
     name: "alloy-js",
     description:
       "A generator that uses Alloy-js to generate source code from a specification.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["alloy-js"],
     links: [
       {

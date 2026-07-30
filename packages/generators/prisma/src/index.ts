@@ -26,6 +26,7 @@ import type { Generator } from "@prisma/internals";
 import prismaInternals from "@prisma/internals";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve } from "node:path";
+import packageJson from "../package.json";
 
 const { getGenerators, parseEnvValue } = prismaInternals;
 
@@ -116,7 +117,7 @@ export default defineGenerator<PrismaSchema, Options, void>({
     title: "Prisma",
     description:
       "A generator that uses `@prisma/internals` to run Prisma schema generators (including Prisma Client).",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["prisma", "dmmf"],
     links: [
       {

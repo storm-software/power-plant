@@ -28,6 +28,7 @@ import type { Config } from "@terrazzo/parser";
 import { build, defineConfig, parse } from "@terrazzo/parser";
 import type { Buffer } from "node:buffer";
 import { pathToFileURL } from "node:url";
+import packageJson from "../package.json";
 
 export type Options = Config & InputOptions;
 
@@ -54,7 +55,7 @@ export default defineGenerator<Tokens, Options, void>({
     title: "Terrazzo",
     description:
       "A generator that uses Terrazzo to generate platform code from Design Tokens Community Group (DTCG) tokens.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["dtcg", "terrazzo"],
     links: [
       {

@@ -18,12 +18,13 @@
 
 import type { GeneratedDocument } from "@power-plant/core";
 import { defineOutput } from "@power-plant/core";
+import packageJson from "../package.json";
 
 export default defineOutput<any, any, Record<string, GeneratedDocument>>({
   meta: {
     name: "noop-output",
     description: "An output that just returns the generated documents.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["noop"]
   },
   output: async (

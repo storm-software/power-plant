@@ -27,6 +27,7 @@ const config: UserConfig = defineConfig({
   plugins: [tsdown(), babel()],
   resolve: {
     external: [
+      "@alloy-js/babel-preset",
       "@alloy-js/core",
       "@alloy-js/typescript",
       "@alloy-js/json",

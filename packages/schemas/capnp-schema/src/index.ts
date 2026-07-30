@@ -18,6 +18,7 @@
 
 import { defineSchema } from "@power-plant/core";
 import type * as z from "zod/mini";
+import packageJson from "../package.json";
 import { capnpSchema } from "./schema";
 
 export * from "./schema";
@@ -27,7 +28,7 @@ export default defineSchema<CapnpSchema>({
   meta: {
     name: "capnp-schema",
     title: "Cap'n Proto Schema",
-    version: "1.0",
+    version: packageJson.version,
     description:
       "A Cap'n Proto schema language document describing structs, fields, unions/groups, enums, interfaces, constants, and annotations.",
     tags: ["capnp", "capnproto"],

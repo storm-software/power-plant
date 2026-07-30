@@ -18,6 +18,7 @@
 
 import { defineInput } from "@power-plant/core";
 import type { GraphQLSchema } from "@power-plant/graphql-schema";
+import packageJson from "../package.json";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -28,7 +29,7 @@ export default defineInput<GraphQLSchema, Options>({
       "An input extension that reads the specification from a GraphQL schema document using loaders defined in GraphQL-Tools packages.",
     usage:
       "Reads the GraphQL schema from a file path, remote URL, or schema loader source configured via inputPath.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["graphql"],
     links: [
       {

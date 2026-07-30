@@ -19,6 +19,7 @@
 import { defineInput } from "@power-plant/core";
 import type { PrismaSchema } from "@power-plant/prisma-schema";
 import schema from "@power-plant/prisma-schema";
+import packageJson from "../package.json";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -39,7 +40,7 @@ export default defineInput<PrismaSchema, Options>({
       "An input extension that reads Prisma schema (`.prisma`) files and converts them into a Prisma DMMF document using `@prisma/internals`.",
     usage:
       "Reads one or more Prisma schema files (or globs) configured via inputPath and returns the DMMF document.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["prisma", "dmmf"],
     links: [
       {

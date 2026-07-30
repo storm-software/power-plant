@@ -19,6 +19,7 @@
 import { defineInput, useExecutionContext } from "@power-plant/core";
 import { toZodSchema } from "@power-plant/schema/zod";
 import { generateText, Output } from "ai";
+import packageJson from "../package.json";
 
 export type Options = Omit<Parameters<typeof generateText>[0], "output">;
 
@@ -29,7 +30,7 @@ export default defineInput<any, Options>({
       "An input extension that uses AI models to generate the input specification.",
     readFrom:
       "The response from AI model providers, such as OpenAI, Anthropic, and others.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["ai"],
     links: [
       {

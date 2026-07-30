@@ -36,6 +36,7 @@ import { existsSync } from "node:fs";
 import { mkdtemp, readdir, readFile, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { isAbsolute, join, relative, resolve } from "node:path";
+import packageJson from "../package.json";
 
 /**
  * Document schema accepted by the Content Collections generator.
@@ -301,7 +302,7 @@ export default defineGenerator<ContentCollectionsSchema, Options, void>({
     title: "Content Collections",
     description:
       "A generator that uses @content-collections/core to validate content files and generate type-safe data access hooks.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["content-collections", "markdown", "mdx"],
     links: [
       {

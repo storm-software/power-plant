@@ -19,6 +19,7 @@
 import type { CapnpSchema } from "@power-plant/capnp-schema";
 import schema from "@power-plant/capnp-schema";
 import { defineInput } from "@power-plant/core";
+import packageJson from "../package.json";
 import { input } from "./input";
 import type { Options } from "./types";
 
@@ -41,7 +42,7 @@ export default defineInput<CapnpSchema, Options>({
       "An input extension that reads Cap'n Proto schema (`.capnp`) files and converts them into a Cap'n Proto schema document using `@stryke/capnp` `capnpc`.",
     usage:
       "Reads one or more Cap'n Proto schema files (or globs) configured via inputPath and returns the compiled schema document.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["capnp", "capnproto", "capnpc"],
     links: [
       {

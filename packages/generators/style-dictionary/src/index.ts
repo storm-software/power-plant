@@ -23,6 +23,7 @@ import { isString } from "@stryke/type-checks/is-string";
 import { isAbsolute, resolve } from "node:path";
 import StyleDictionary from "style-dictionary";
 import type { Config } from "style-dictionary/types";
+import packageJson from "../package.json";
 
 export type Options = Omit<Config, "tokens">;
 
@@ -76,7 +77,7 @@ export default defineGenerator<Tokens | never, Options, void>({
     title: "Style Dictionary",
     description:
       "A generator that uses Style Dictionary to generate platform code from design tokens.",
-    version: "1.0",
+    version: packageJson.version,
     tags: ["dtcg", "style-dictionary"],
     links: [
       {

@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { defineSchema } from "@power-plant/core";
+import packageJson from "../package.json";
 import type { Tokens } from "./schema";
 import { tokensSchema } from "./schema";
 
@@ -26,7 +27,7 @@ export default defineSchema<Tokens>({
   meta: {
     name: "dtcg-schema",
     title: "Design Tokens Community Group (DTCG) Schema",
-    version: "1.0",
+    version: packageJson.version,
     description:
       "A Design Tokens Community Group (DTCG) specification document used to describe Design Tokens.",
     spec: "A Design Tokens Community Group (DTCG) specification document.",
