@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/hey-api",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "private": false,
   "description": "A Power Plant generator for using Hey API to generate code from an OpenAPI schema.",
   "keywords": [

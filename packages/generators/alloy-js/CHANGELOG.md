@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.51](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.51) (07/30/2026)
+
+### Miscellaneous
+
+- **alloy-js:** Added `prefix` property to file component ([58a77a5](https://github.com/storm-software/power-plant/commit/58a77a5))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.54**
+- Updated **noop-output** to **v0.0.33**
+- Updated **schema** to **v0.0.52**
+
 ## [0.0.50](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.50) (07/30/2026)
 
 ### Miscellaneous
