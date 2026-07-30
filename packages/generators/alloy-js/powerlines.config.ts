@@ -31,7 +31,8 @@ const config: UserConfig = defineConfig({
       "@alloy-js/core",
       "@alloy-js/typescript",
       "@alloy-js/json",
-      "@alloy-js/markdown"
+      "@alloy-js/markdown",
+      "@alloy-js/babel-preset"
     ]
   },
   babel: {
