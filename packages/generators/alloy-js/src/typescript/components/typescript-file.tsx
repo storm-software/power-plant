@@ -64,6 +64,7 @@ export type TypescriptFileProps = Omit<SourceFileProps, "filetype"> &
     builtinImports?: TypescriptFileImports;
     export?: boolean | string;
     tsx?: boolean;
+    prefix?: string;
   };
 
 /**
@@ -74,7 +75,7 @@ export type TypescriptFileProps = Omit<SourceFileProps, "filetype"> &
  */
 export function TypescriptFile(props: TypescriptFileProps) {
   const [
-    { children, path, imports, builtinImports, tsx, header, hashbang },
+    { children, path, imports, builtinImports, tsx, header, hashbang, prefix },
     rest
   ] = splitProps(props, [
     "children",
@@ -83,7 +84,8 @@ export function TypescriptFile(props: TypescriptFileProps) {
     "builtinImports",
     "tsx",
     "header",
-    "hashbang"
+    "hashbang",
+    "prefix"
   ]);
 
   const directoryContext = useContext(SourceDirectoryContext)!;
@@ -124,6 +126,7 @@ export function TypescriptFile(props: TypescriptFileProps) {
                   imports={imports}
                   builtinImports={builtinImports}
                   scope={scope}
+                  prefix={prefix}
                 />
               </TypescriptFileHeader>
             )
@@ -220,7 +223,7 @@ export interface TypescriptFileHeaderImportsProps extends SourceFileHeaderProps 
 }
 
 /**
- * Renders the header for a Powerlines Typescript source file.
+ * Renders the header for a Power Plant Typescript source file.
  *
  * @param props - The properties for the source file header.
  * @returns The rendered source file header.
