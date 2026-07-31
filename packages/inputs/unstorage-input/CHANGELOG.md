@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Unstorage Input
 
+## [0.0.57](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.57) (07/31/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.58**
+- Updated **schema** to **v0.0.56**
+
 ## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.56) (07/31/2026)
 
 ### Updated Dependencies

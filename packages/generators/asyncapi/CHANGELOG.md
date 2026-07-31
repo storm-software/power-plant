@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Asyncapi
 
+## [0.0.54](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.54) (07/31/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.58**
+- Updated **schema** to **v0.0.56**
+
 ## [0.0.53](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.53) (07/31/2026)
 
 ### Updated Dependencies
