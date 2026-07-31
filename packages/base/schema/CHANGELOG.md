@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.54](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.54) (07/31/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace to use shared configuration with unbundled node modules ([ee88aae](https://github.com/storm-software/power-plant/commit/ee88aae))
+
 ## [0.0.49](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.49) (07/28/2026)
 
 ### Miscellaneous

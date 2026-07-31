@@ -2,6 +2,19 @@
 
 # Changelog for Power Plant - Capnp
 
+## [0.0.38](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.38) (07/31/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies ([e003aee](https://github.com/storm-software/power-plant/commit/e003aee))
+- **monorepo:** Update workspace's tsconfig references ([f47f3fe](https://github.com/storm-software/power-plant/commit/f47f3fe))
+- **monorepo:** Update workspace to use shared configuration with unbundled node modules ([ee88aae](https://github.com/storm-software/power-plant/commit/ee88aae))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.56**
+- Updated **schema** to **v0.0.54**
+
 ## [0.0.37](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.37) (07/30/2026)
 
 ### Updated Dependencies

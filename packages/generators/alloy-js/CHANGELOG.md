@@ -2,6 +2,20 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.53](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.53) (07/31/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies ([e003aee](https://github.com/storm-software/power-plant/commit/e003aee))
+- **monorepo:** Update workspace's tsconfig references ([f47f3fe](https://github.com/storm-software/power-plant/commit/f47f3fe))
+- **monorepo:** Update workspace to use shared configuration with unbundled node modules ([ee88aae](https://github.com/storm-software/power-plant/commit/ee88aae))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.56**
+- Updated **noop-output** to **v0.0.35**
+- Updated **schema** to **v0.0.54**
+
 ## [0.0.52](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.52) (07/30/2026)
 
 ### Miscellaneous
