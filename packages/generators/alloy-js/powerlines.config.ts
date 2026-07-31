@@ -47,6 +47,9 @@ const config: UserConfig = defineConfig({
       ]
     ]
   },
+  output: {
+    minify: false
+  },
   tsdown: {
     inputOptions: {
       transform: {

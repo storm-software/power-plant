@@ -4,7 +4,7 @@ inputs:
     url: github:storm-software/storm-ops
     flake: false
   nixpkgs:
-    url: github:nixos/nixpkgs/nixpkgs-unstable
+    url: github:cachix/devenv-nixpkgs/rolling
 
 imports:
   - storm-ops/devenv-modules/pnpm
