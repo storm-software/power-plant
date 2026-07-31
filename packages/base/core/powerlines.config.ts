@@ -16,20 +16,11 @@
 
  ------------------------------------------------------------------- */
 
+import { defineConfig } from "@power-plant/tools-config/powerlines.shared";
 import tsdown from "@powerlines/plugin-tsdown";
-import type { UserConfig } from "powerlines";
-import { defineConfig } from "powerlines/config";
 
-const config: UserConfig = defineConfig({
+const config = defineConfig({
   input: ["src/*.ts", "src/helpers/*.ts"],
-  platform: "node",
-  output: {
-    format: ["cjs", "esm"],
-    minify: false
-  },
-  resolve: {
-    skipNodeModulesBundle: true
-  },
   plugins: [tsdown()]
 });
 

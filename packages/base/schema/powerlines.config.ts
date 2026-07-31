@@ -17,10 +17,9 @@
  ------------------------------------------------------------------- */
 
 import tsdown from "@powerlines/plugin-tsdown";
-import type { UserConfig } from "powerlines";
 import { defineConfig } from "powerlines/config";
 
-const config: UserConfig = defineConfig({
+const config = defineConfig({
   input: [
     "src/index.ts",
     "src/codegen.ts",
@@ -29,7 +28,6 @@ const config: UserConfig = defineConfig({
     "src/deepkit.ts",
     "src/storage/index.ts"
   ],
-  platform: "node",
   output: {
     format: ["cjs", "esm"],
     minify: false

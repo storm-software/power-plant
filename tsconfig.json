@@ -4,6 +4,9 @@
   "extends": "./tsconfig.base.json",
   "references": [
     {
+      "path": "./tools/config/tsconfig.json"
+    },
+    {
       "path": "./packages/base/schema"
     },
     {

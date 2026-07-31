@@ -161,9 +161,6 @@
   "files": ["dist"],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
-    "@stryke/string-format": "catalog:",
-    "@stryke/type-checks": "catalog:",
-    "@stryke/types": "catalog:",
     "@stryke/convert": "catalog:",
     "@stryke/date": "catalog:",
     "@stryke/env": "catalog:",
@@ -172,13 +169,17 @@
     "@stryke/json": "catalog:",
     "@stryke/path": "catalog:",
     "@stryke/resolve": "catalog:",
+    "@stryke/string-format": "catalog:",
+    "@stryke/type-checks": "catalog:",
+    "@stryke/types": "catalog:",
     "@stryke/unique-id": "catalog:",
     "c12": "catalog:",
-    "jiti": "catalog:",
     "defu": "catalog:",
+    "jiti": "catalog:",
     "unstorage": "catalog:"
   },
   "devDependencies": {
+    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"

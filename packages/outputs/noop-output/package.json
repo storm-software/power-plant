@@ -3,7 +3,12 @@
   "version": "0.0.34",
   "private": false,
   "description": "A Power Plant output that just returns the generated documents.",
-  "keywords": ["noop", "power-plant-output", "power-plant", "storm-software"],
+  "keywords": [
+    "noop",
+    "power-plant-output",
+    "power-plant",
+    "storm-software"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -60,11 +65,14 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@power-plant/core": "workspace:*"
   },
   "devDependencies": {
+    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:"

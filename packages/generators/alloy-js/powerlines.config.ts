@@ -16,25 +16,14 @@
 
  ------------------------------------------------------------------- */
 
+import { defineConfig } from "@power-plant/tools-config/powerlines.shared";
 import babel from "@powerlines/plugin-babel";
 import tsdown from "@powerlines/plugin-tsdown";
 import { findFileExtension } from "@stryke/path/find";
-import type { UserConfig } from "powerlines";
-import { defineConfig } from "powerlines/config";
 
-const config: UserConfig = defineConfig({
+const config = defineConfig({
   input: ["src/**/*.{ts,tsx}"],
   plugins: [tsdown(), babel()],
-  resolve: {
-    external: [
-      "@alloy-js/babel-preset",
-      "@alloy-js/core",
-      "@alloy-js/typescript",
-      "@alloy-js/json",
-      "@alloy-js/markdown",
-      "@alloy-js/babel-preset"
-    ]
-  },
   babel: {
     skipConfigResolution: true,
     presets: [

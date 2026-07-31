@@ -1,27 +1,15 @@
 {
   "name": "tools-config",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/config/src",
   "projectType": "library",
-  "sourceRoot": "tools/config",
+  "tags": [],
   "targets": {
-    "clean": {
-      "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/dist"],
-      "options": {
-        "commands": ["rm -rf tools/config/dist"]
-      }
-    },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/dist"],
       "options": {
-        "commands": [
-          "mkdir -p tools/config/dist",
-          "cp tools/config/.gitpod.yml tools/config/gitguardian.yml tools/config/verdaccio.yml tools/config/zizmor.yml tools/config/tsdown.shared.ts tools/config/dist/"
-        ],
-        "parallel": false
+        "command": "echo 'Skipping build for tools-config'"
       }
     }
-  },
-  "tags": ["type:tools", "platform:node"]
+  }
 }
