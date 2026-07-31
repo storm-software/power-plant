@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.55](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.55) (07/31/2026)
+
+### Miscellaneous
+
+- **schema:** Added missing `@typescript/vfs` dependency ([7c88821](https://github.com/storm-software/power-plant/commit/7c88821))
+
 ## [0.0.54](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.54) (07/31/2026)
 
 ### Miscellaneous

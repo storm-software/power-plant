@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/schema",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "private": false,
   "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
@@ -194,7 +194,6 @@
   "inlinedDependencies": {
     "@deepkit/type-compiler": "1.0.19",
     "@marcj/ts-clone-node": "2.2.0",
-    "@typescript/vfs": "1.5.0",
     "braces": "3.0.3",
     "compatfactory": "2.0.9",
     "fill-range": "7.1.1",
