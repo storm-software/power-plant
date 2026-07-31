@@ -159,6 +159,7 @@
     "@stryke/unique-id": "catalog:",
     "@stryke/url": "catalog:",
     "@stryke/zod": "catalog:",
+    "@typescript/vfs": "catalog:",
     "@valibot/to-json-schema": "catalog:",
     "defu": "catalog:",
     "esbuild": "catalog:",
