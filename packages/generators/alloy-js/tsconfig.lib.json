@@ -7,9 +7,18 @@
     "outDir": "./out-tsc"
   },
   "references": [
-    { "path": "../../outputs/noop-output/tsconfig.lib.json" },
-    { "path": "../../base/schema/tsconfig.lib.json" },
-    { "path": "../../base/core/tsconfig.lib.json" }
+    {
+      "path": "../../outputs/noop-output/tsconfig.lib.json"
+    },
+    {
+      "path": "../../base/schema/tsconfig.lib.json"
+    },
+    {
+      "path": "../../base/core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../../tools/config"
+    }
   ],
   "include": [
     "src/**/*.ts",
