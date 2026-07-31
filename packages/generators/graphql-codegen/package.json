@@ -66,9 +66,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@graphql-codegen/core": "catalog:",
     "@graphql-codegen/plugin-helpers": "catalog:",
@@ -87,8 +85,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "inlinedDependencies": {
-    "graphql": "17.0.2"
   }
 }
