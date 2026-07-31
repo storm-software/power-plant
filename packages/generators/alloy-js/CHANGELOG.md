@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.52](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.52) (07/30/2026)
+
+### Miscellaneous
+
+- **alloy-js:** Update package to prevent minification ([4afb060](https://github.com/storm-software/power-plant/commit/4afb060))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.55**
+- Updated **noop-output** to **v0.0.34**
+- Updated **schema** to **v0.0.53**
+
 ## [0.0.51](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.51) (07/30/2026)
 
 ### Miscellaneous
