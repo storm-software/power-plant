@@ -169,7 +169,7 @@
     "fill-range": "catalog:",
     "is-number": "catalog:",
     "jiti": "catalog:",
-    "micromatch": "^4.0.8",
+    "micromatch": "catalog:",
     "picomatch": "catalog:",
     "to-regex-range": "catalog:",
     "typescript": "^6.0.3",
