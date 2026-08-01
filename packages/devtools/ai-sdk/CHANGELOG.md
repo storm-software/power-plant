@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.56) (08/01/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the `devDependencies` to exclude `@power-plant/tools-config` ([7fa9d60](https://github.com/storm-software/power-plant/commit/7fa9d60))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.60**
+
 ## [0.0.55](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.55) (08/01/2026)
 
 ### Updated Dependencies

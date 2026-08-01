@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Asyncapi
 
+## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.56) (08/01/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the `devDependencies` to exclude `@power-plant/tools-config` ([7fa9d60](https://github.com/storm-software/power-plant/commit/7fa9d60))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.60**
+- Updated **schema** to **v0.0.58**
+
 ## [0.0.55](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.55) (08/01/2026)
 
 ### Updated Dependencies

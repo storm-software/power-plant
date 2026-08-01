@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Openapi Typescript
 
+## [0.0.40](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.40) (08/01/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the `devDependencies` to exclude `@power-plant/tools-config` ([7fa9d60](https://github.com/storm-software/power-plant/commit/7fa9d60))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.60**
+- Updated **schema** to **v0.0.58**
+
 ## [0.0.39](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.39) (08/01/2026)
 
 ### Updated Dependencies

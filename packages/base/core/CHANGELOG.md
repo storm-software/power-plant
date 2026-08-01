@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.60](https://github.com/storm-software/power-plant/releases/tag/core%400.0.60) (08/01/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update the `devDependencies` to exclude `@power-plant/tools-config` ([7fa9d60](https://github.com/storm-software/power-plant/commit/7fa9d60))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.58**
+
 ## [0.0.59](https://github.com/storm-software/power-plant/releases/tag/core%400.0.59) (08/01/2026)
 
 ### Updated Dependencies
