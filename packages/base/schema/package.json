@@ -139,11 +139,14 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@deepkit/core": "catalog:",
     "@deepkit/type": "catalog:",
     "@deepkit/type-spec": "catalog:",
+    "@marcj/ts-clone-node": "catalog:",
     "@standard-schema/spec": "catalog:",
     "@stryke/convert": "catalog:",
     "@stryke/date": "catalog:",
@@ -161,9 +164,16 @@
     "@stryke/zod": "catalog:",
     "@typescript/vfs": "catalog:",
     "@valibot/to-json-schema": "catalog:",
+    "braces": "catalog:",
+    "compatfactory": "catalog:",
     "defu": "catalog:",
     "esbuild": "catalog:",
+    "fill-range": "catalog:",
+    "is-number": "catalog:",
     "jiti": "catalog:",
+    "micromatch": "^4.0.8",
+    "picomatch": "catalog:",
+    "to-regex-range": "catalog:",
     "typescript": "^6.0.3",
     "unstorage": "catalog:",
     "untyped": "catalog:"
@@ -192,14 +202,6 @@
     "access": "public"
   },
   "inlinedDependencies": {
-    "@deepkit/type-compiler": "1.0.19",
-    "@marcj/ts-clone-node": "2.2.0",
-    "braces": "3.0.3",
-    "compatfactory": "2.0.9",
-    "fill-range": "7.1.1",
-    "is-number": "7.0.0",
-    "micromatch": "4.0.8",
-    "picomatch": "2.3.2",
-    "to-regex-range": "5.0.1"
+    "@deepkit/type-compiler": "1.0.19"
   }
 }
