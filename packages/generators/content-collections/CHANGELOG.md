@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Content Collections
 
+## [0.0.39](https://github.com/storm-software/power-plant/releases/tag/content-collections%400.0.39) (08/01/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.61**
+- Updated **schema** to **v0.0.59**
+
 ## [0.0.38](https://github.com/storm-software/power-plant/releases/tag/content-collections%400.0.38) (08/01/2026)
 
 ### Miscellaneous
