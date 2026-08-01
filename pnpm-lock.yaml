@@ -584,7 +584,6 @@ overrides:
   '@power-plant/capnp': workspace:*
   '@power-plant/openapi-typescript': workspace:*
   '@power-plant/ai-sdk': workspace:*
-  '@power-plant/tools-config': workspace:*
   '@power-plant/tools-errors': workspace:*
   '@power-plant/tools-readme-templates': workspace:*
   '@power-plant/tools-scripts': workspace:*
@@ -788,9 +787,6 @@ importers:
         specifier: 'catalog:'
         version: 1.17.5
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -946,9 +942,6 @@ importers:
         specifier: 'catalog:'
         version: 6.1.7
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -986,9 +979,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1056,9 +1046,6 @@ importers:
       '@babel/preset-typescript':
         specifier: 'catalog:'
         version: 8.0.1(@babel/core@8.0.1)
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-babel':
         specifier: 'catalog:'
         version: 0.13.174(cbaa6c2641cbf954a9138e1b0ce6a517)
@@ -1099,9 +1086,6 @@ importers:
         specifier: 'catalog:'
         version: 0.12.26
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(82556481f9d7a0b463b8323bff2f0dab)
@@ -1136,9 +1120,6 @@ importers:
         specifier: 'catalog:'
         version: 0.6.31
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1167,9 +1148,6 @@ importers:
         specifier: 'catalog:'
         version: 0.6.31
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1210,9 +1188,6 @@ importers:
         specifier: 'catalog:'
         version: 0.12.26
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1250,9 +1225,6 @@ importers:
         specifier: 'catalog:'
         version: 4.7.9
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1287,9 +1259,6 @@ importers:
         specifier: 'catalog:'
         version: 0.12.26
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1315,9 +1284,6 @@ importers:
         specifier: 'catalog:'
         version: 7.13.0(typescript@6.0.3)
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1349,9 +1315,6 @@ importers:
         specifier: 'catalog:'
         version: 6.19.3(typescript@6.0.3)
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1383,9 +1346,6 @@ importers:
         specifier: 'catalog:'
         version: 5.5.0(tslib@2.8.1)
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1420,9 +1380,6 @@ importers:
         specifier: 'catalog:'
         version: 2.5.0
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1460,9 +1417,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1503,9 +1457,6 @@ importers:
         specifier: 'catalog:'
         version: 0.12.26
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1570,9 +1521,6 @@ importers:
         specifier: 'catalog:'
         version: 17.0.2
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1613,9 +1561,6 @@ importers:
         specifier: 'catalog:'
         version: 0.12.26
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1653,9 +1598,6 @@ importers:
         specifier: 'catalog:'
         version: 2.5.0
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1690,9 +1632,6 @@ importers:
         specifier: 'catalog:'
         version: 1.17.5
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1709,9 +1648,6 @@ importers:
         specifier: workspace:*
         version: link:../../base/core
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1746,9 +1682,6 @@ importers:
         specifier: 'catalog:'
         version: 1.17.5
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(db3ac8ce526da1750c986ab5ca818a5a)
@@ -1774,9 +1707,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1799,9 +1729,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1824,9 +1751,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1858,9 +1782,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1883,9 +1804,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -1908,9 +1826,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@power-plant/tools-config':
-        specifier: workspace:*
-        version: link:../../../tools/config
       '@powerlines/plugin-tsdown':
         specifier: 'catalog:'
         version: 0.1.578(62537ac584cdd76d43d57dacfb942d77)
@@ -14920,7 +14835,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9(supports-color@10.2.2))
       '@babel/helpers': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
@@ -15140,7 +15055,7 @@ snapshots:
       '@babel/traverse': 8.0.4
       '@babel/types': 8.0.4
 
-  '@babel/helper-module-transforms@7.29.7(@babel/core@7.12.9)':
+  '@babel/helper-module-transforms@7.29.7(@babel/core@7.12.9(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.12.9(supports-color@10.2.2)
       '@babel/helper-module-imports': 7.29.7
@@ -15833,7 +15748,7 @@ snapshots:
   '@babel/plugin-transform-modules-amd@7.29.7(@babel/core@7.12.9(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.12.9(supports-color@10.2.2)
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9(supports-color@10.2.2))
       '@babel/helper-plugin-utils': 7.29.7
     transitivePeerDependencies:
       - supports-color
@@ -15849,7 +15764,7 @@ snapshots:
   '@babel/plugin-transform-modules-commonjs@7.29.7(@babel/core@7.12.9(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.12.9(supports-color@10.2.2)
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9(supports-color@10.2.2))
       '@babel/helper-plugin-utils': 7.29.7
     transitivePeerDependencies:
       - supports-color
@@ -15871,7 +15786,7 @@ snapshots:
   '@babel/plugin-transform-modules-systemjs@7.29.7(@babel/core@7.12.9(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.12.9(supports-color@10.2.2)
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9(supports-color@10.2.2))
       '@babel/helper-plugin-utils': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
       '@babel/traverse': 7.29.7
@@ -15891,7 +15806,7 @@ snapshots:
   '@babel/plugin-transform-modules-umd@7.29.7(@babel/core@7.12.9(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.12.9(supports-color@10.2.2)
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.12.9(supports-color@10.2.2))
       '@babel/helper-plugin-utils': 7.29.7
     transitivePeerDependencies:
       - supports-color

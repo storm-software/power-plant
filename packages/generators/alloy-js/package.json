@@ -896,7 +896,6 @@
     "defu": "catalog:"
   },
   "devDependencies": {
-    "@power-plant/tools-config": "workspace:*",
     "@alloy-js/babel-preset": "catalog:",
     "@babel/core": "catalog:",
     "@babel/preset-typescript": "catalog:",

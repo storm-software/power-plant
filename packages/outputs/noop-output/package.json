@@ -65,7 +65,6 @@
     "@power-plant/core": "workspace:*"
   },
   "devDependencies": {
-    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:"

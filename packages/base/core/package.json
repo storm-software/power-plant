@@ -179,7 +179,6 @@
     "unstorage": "catalog:"
   },
   "devDependencies": {
-    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"
