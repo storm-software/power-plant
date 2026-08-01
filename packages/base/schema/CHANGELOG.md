@@ -2,6 +2,15 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.57](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.57) (08/01/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update `nixpkg` ref ([7a507c3](https://github.com/storm-software/power-plant/commit/7a507c3))
+- **monorepo:** Force update devenv modules ([94e93cf](https://github.com/storm-software/power-plant/commit/94e93cf))
+- **schema:** Resolve issue with inline dependencies ([1a01780](https://github.com/storm-software/power-plant/commit/1a01780))
+- **schema:** Added missing `@typescript/vfs` dependency ([7c88821](https://github.com/storm-software/power-plant/commit/7c88821))
+
 ## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.56) (07/31/2026)
 
 ### Miscellaneous
