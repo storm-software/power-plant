@@ -9,7 +9,7 @@ packages:
   - docs/*
 catalog:
   "@ai-sdk/provider": ^4.0.4
-  "@ai-sdk/provider-utils": ^5.0.17
+  "@ai-sdk/provider-utils": ^5.0.18
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -40,7 +40,6 @@ catalog:
   esbuild: ^0.28.1
   fill-range: ^7.1.1
   is-number: ^7.0.0
-  micromatch: ^0.0.0
   openapi-typescript: ^7.13.0
   "@ls-lint/ls-lint": ^2.3.1
   "@nx/devkit": 23.0.1
@@ -96,7 +95,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.46
+  ai: ^7.0.47
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
