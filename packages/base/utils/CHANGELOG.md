@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Utils
 
+## [0.0.51](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.51) (08/02/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.65**
+- Updated **schema** to **v0.0.63**
+
 ## [0.0.50](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.50) (08/02/2026)
 
 ### Updated Dependencies
