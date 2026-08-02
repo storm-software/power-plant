@@ -16,6 +16,7 @@
 
  ------------------------------------------------------------------- */
 
+import { correctPath } from "@stryke/path/correct-path";
 import { Buffer } from "node:buffer";
 import { Stats } from "node:fs";
 import { MessageChannel, receiveMessageOnPort } from "node:worker_threads";
@@ -40,16 +41,7 @@ export function toPathInput(path: string | Buffer | URL): string {
 }
 
 export function normalizeKey(path: string | Buffer | URL): string {
-  let value = toPathInput(path).replace(/\\/g, "/");
-  while (value.startsWith("./")) {
-    value = value.slice(2);
-  }
-  value = value.replace(/^\/+/, "");
-  value = value.replace(/\/+/g, "/");
-  if (value.length > 1 && value.endsWith("/")) {
-    value = value.slice(0, -1);
-  }
-  return value;
+  return correctPath(toPathInput(path).replace(/\\/g, "/"));
 }
 
 export function resolveKey(...segments: Array<string | Buffer | URL>): string {
