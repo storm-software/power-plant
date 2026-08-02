@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.62](https://github.com/storm-software/power-plant/releases/tag/core%400.0.62) (08/02/2026)
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.60**
+
 ## [0.0.61](https://github.com/storm-software/power-plant/releases/tag/core%400.0.61) (08/01/2026)
 
 ### Updated Dependencies
