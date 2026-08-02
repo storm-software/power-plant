@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.62](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.62) (08/02/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue normalizing storage path keys ([0b38f6c](https://github.com/storm-software/power-plant/commit/0b38f6c))
+
 ## [0.0.61](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.61) (08/02/2026)
 
 ### Miscellaneous
