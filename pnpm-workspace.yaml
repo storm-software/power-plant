@@ -54,11 +54,11 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.221
-  "@powerlines/plugin-babel": ^0.13.179
-  "@powerlines/plugin-tsdown": ^0.1.583
-  "@powerlines/tsconfig": ^0.4.228
-  "@powerlines/tsdoc": ^0.2.176
+  "@powerlines/nx": ^0.13.222
+  "@powerlines/plugin-babel": ^0.13.180
+  "@powerlines/plugin-tsdown": ^0.1.584
+  "@powerlines/tsconfig": ^0.4.229
+  "@powerlines/tsdoc": ^0.2.177
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
@@ -108,7 +108,7 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.0.1
   picomatch: ^4.0.5
-  powerlines: ^0.47.181
+  powerlines: ^0.47.183
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
