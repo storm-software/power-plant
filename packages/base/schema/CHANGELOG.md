@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.64](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.64) (08/02/2026)
+
+### Bug Fixes
+
+- **schema:** Update storage logic to properly fallback to the file system ([a4b978d](https://github.com/storm-software/power-plant/commit/a4b978d))
+
 ## [0.0.62](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.62) (08/02/2026)
 
 ### Bug Fixes
