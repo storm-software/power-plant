@@ -45,7 +45,12 @@ import type {
   WriteStreamOptions,
   WriteVResult
 } from "node:fs";
-import { constants as fsConstants, Stats } from "node:fs";
+import {
+  constants as fsConstants,
+  existsSync,
+  readFileSync,
+  Stats
+} from "node:fs";
 import type { FileHandle } from "node:fs/promises";
 import { Readable, Writable } from "node:stream";
 import type { Storage, StorageMeta } from "unstorage";
@@ -214,30 +219,38 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
     path: PathLike | FileHandle,
     options?: ReadFileOptions | BufferEncodingOption | null
   ): Promise<string | Buffer> {
-    const key = normalizeKey(path as PathLike);
-    const entry = await requireEntry(key, true);
-
-    if (entry.type !== "file") {
-      throw createFsError(
-        "EISDIR",
-        "read",
-        key,
-        "EISDIR: illegal operation on a directory, read"
-      );
-    }
-
     const encoding = getEncoding(options);
-    const raw = shouldReadRaw(options);
 
-    const value = raw
-      ? await storage.getItemRaw(key)
-      : await storage.getItem(key);
+    try {
+      const key = normalizeKey(path as PathLike);
+      const entry = await requireEntry(key, true);
 
-    if (value == null) {
-      throw createFsError("ENOENT", "open", key);
+      if (entry.type !== "file") {
+        throw createFsError(
+          "EISDIR",
+          "read",
+          key,
+          "EISDIR: illegal operation on a directory, read"
+        );
+      }
+
+      const raw = shouldReadRaw(options);
+
+      const value = raw
+        ? await storage.getItemRaw(key)
+        : await storage.getItem(key);
+
+      if (value == null) {
+        throw createFsError("ENOENT", "open", key);
+      }
+
+      return decodeStoredValue(value, encoding);
+    } catch (error) {
+      if (existsSync(key)) {
+        return readFileSync(key, encoding);
+      }
+      throw error;
     }
-
-    return decodeStoredValue(value, encoding);
   }
 
   async function writeStoredFile(
@@ -466,7 +479,7 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
         }
         const name = entries[index++]!;
         if ((options?.encoding as string | undefined) === "buffer") {
-          return Buffer.from(name) as unknown as Dirent<Buffer>;
+          return Buffer.from(name);
         }
         return toDirent(name);
       },
@@ -494,6 +507,7 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
     const end = options?.end;
 
     return Readable.from(
+      // eslint-disable-next-line func-names
       (async function* () {
         let content = toBuffer(await readStoredFile(key));
         if (start > 0) {
