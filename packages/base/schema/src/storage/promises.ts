@@ -45,13 +45,9 @@ import type {
   WriteStreamOptions,
   WriteVResult
 } from "node:fs";
-import {
-  constants as fsConstants,
-  existsSync,
-  readFileSync,
-  Stats
-} from "node:fs";
+import { constants as fsConstants, existsSync, Stats } from "node:fs";
 import type { FileHandle } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { Readable, Writable } from "node:stream";
 import type { Storage, StorageMeta } from "unstorage";
 import type { EntryInfo } from "./helpers";
@@ -220,11 +216,10 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
     options?: ReadFileOptions | BufferEncodingOption | null
   ): Promise<string | Buffer> {
     const encoding = getEncoding(options);
+    const key = normalizeKey(path as PathLike);
 
     try {
-      const key = normalizeKey(path as PathLike);
       const entry = await requireEntry(key, true);
-
       if (entry.type !== "file") {
         throw createFsError(
           "EISDIR",
@@ -234,12 +229,9 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
         );
       }
 
-      const raw = shouldReadRaw(options);
-
-      const value = raw
+      const value = shouldReadRaw(options)
         ? await storage.getItemRaw(key)
         : await storage.getItem(key);
-
       if (value == null) {
         throw createFsError("ENOENT", "open", key);
       }
@@ -247,7 +239,7 @@ export function createStoragePromises(storage: Storage): StorageFileSystemCore {
       return decodeStoredValue(value, encoding);
     } catch (error) {
       if (existsSync(key)) {
-        return readFileSync(key, encoding);
+        return readFile(key, encoding);
       }
       throw error;
     }
