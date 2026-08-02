@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.65](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.65) (08/02/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue reading file from file system ([c770e66](https://github.com/storm-software/power-plant/commit/c770e66))
+
 ## [0.0.64](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.64) (08/02/2026)
 
 ### Bug Fixes

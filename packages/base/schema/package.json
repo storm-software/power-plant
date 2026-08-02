@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/schema",
-  "version": "0.0.64",
+  "version": "0.0.65",
   "private": false,
   "description": "A Power Plant utility package to help managing schemas.",
   "keywords": [
