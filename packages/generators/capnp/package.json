@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/capnp",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "private": false,
   "description": "A Power Plant generator that compiles Cap'n Proto schemas into source code via capnpc.",
   "keywords": [

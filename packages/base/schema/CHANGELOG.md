@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.61](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.61) (08/02/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace's devenv modules ([bbb9400](https://github.com/storm-software/power-plant/commit/bbb9400))
+- **monorepo:** Resolve issue with invalid dependency version\ ([10fe23f](https://github.com/storm-software/power-plant/commit/10fe23f))
+
 ## [0.0.59](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.59) (08/01/2026)
 
 ### Miscellaneous
