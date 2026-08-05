@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.66](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.66) (08/05/2026)
+
+### Miscellaneous
+
+- **schema:** Update package to export `createDeepkitPlugin` function ([dc21131](https://github.com/storm-software/power-plant/commit/dc21131))
+
 ## [0.0.65](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.65) (08/02/2026)
 
 ### Bug Fixes
