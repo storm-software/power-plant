@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Handlebars
 
+## [0.0.66](https://github.com/storm-software/power-plant/releases/tag/handlebars%400.0.66) (08/05/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.70**
+- Updated **schema** to **v0.0.68**
+
 ## [0.0.65](https://github.com/storm-software/power-plant/releases/tag/handlebars%400.0.65) (08/05/2026)
 
 ### Updated Dependencies
