@@ -5,10 +5,10 @@
     "outDir": "./out-tsc"
   },
   "references": [
+    { "path": "../../../tools/config" },
     { "path": "../../base/schema/tsconfig.lib.json" },
     { "path": "../../schemas/prisma-schema/tsconfig.lib.json" },
-    { "path": "../../base/core/tsconfig.lib.json" },
-    { "path": "../../../tools/config" }
+    { "path": "../../base/core/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

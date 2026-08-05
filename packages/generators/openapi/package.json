@@ -1,0 +1,267 @@
+{
+  "name": "@power-plant/openapi",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A Power Plant generator that uses alloy-js to generate files from an OpenAPI schema.",
+  "keywords": [
+    "openapi",
+    "power-plant-generator",
+    "power-plant",
+    "alloy-js",
+    "storm-software"
+  ],
+  "homepage": "https://stormsoftware.com",
+  "bugs": {
+    "url": "https://stormsoftware.com/support",
+    "email": "support@stormsoftware.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/storm-software/power-plant.git",
+    "directory": "packages/generators/openapi"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/storm-software"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Storm Software",
+    "email": "contact@stormsoftware.com",
+    "url": "https://stormsoftware.com"
+  },
+  "maintainers": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Storm Software",
+      "email": "contact@stormsoftware.com",
+      "url": "https://stormsoftware.com"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    "./components": {
+      "require": {
+        "types": "./dist/components/index.d.cts",
+        "default": "./dist/components/index.cjs"
+      },
+      "import": {
+        "types": "./dist/components/index.d.mts",
+        "default": "./dist/components/index.mjs"
+      },
+      "default": {
+        "types": "./dist/components/index.d.mts",
+        "default": "./dist/components/index.mjs"
+      }
+    },
+    "./components/Model": {
+      "require": {
+        "types": "./dist/components/Model.d.cts",
+        "default": "./dist/components/Model.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Model.d.mts",
+        "default": "./dist/components/Model.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Model.d.mts",
+        "default": "./dist/components/Model.mjs"
+      }
+    },
+    "./components/Models": {
+      "require": {
+        "types": "./dist/components/Models.d.cts",
+        "default": "./dist/components/Models.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Models.d.mts",
+        "default": "./dist/components/Models.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Models.d.mts",
+        "default": "./dist/components/Models.mjs"
+      }
+    },
+    "./components/Operation": {
+      "require": {
+        "types": "./dist/components/Operation.d.cts",
+        "default": "./dist/components/Operation.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Operation.d.mts",
+        "default": "./dist/components/Operation.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Operation.d.mts",
+        "default": "./dist/components/Operation.mjs"
+      }
+    },
+    "./components/Operations": {
+      "require": {
+        "types": "./dist/components/Operations.d.cts",
+        "default": "./dist/components/Operations.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Operations.d.mts",
+        "default": "./dist/components/Operations.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Operations.d.mts",
+        "default": "./dist/components/Operations.mjs"
+      }
+    },
+    "./components/Path": {
+      "require": {
+        "types": "./dist/components/Path.d.cts",
+        "default": "./dist/components/Path.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Path.d.mts",
+        "default": "./dist/components/Path.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Path.d.mts",
+        "default": "./dist/components/Path.mjs"
+      }
+    },
+    "./components/Paths": {
+      "require": {
+        "types": "./dist/components/Paths.d.cts",
+        "default": "./dist/components/Paths.cjs"
+      },
+      "import": {
+        "types": "./dist/components/Paths.d.mts",
+        "default": "./dist/components/Paths.mjs"
+      },
+      "default": {
+        "types": "./dist/components/Paths.d.mts",
+        "default": "./dist/components/Paths.mjs"
+      }
+    },
+    "./contexts": {
+      "require": {
+        "types": "./dist/contexts/index.d.cts",
+        "default": "./dist/contexts/index.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/index.d.mts",
+        "default": "./dist/contexts/index.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/index.d.mts",
+        "default": "./dist/contexts/index.mjs"
+      }
+    },
+    "./contexts/info": {
+      "require": {
+        "types": "./dist/contexts/info.d.cts",
+        "default": "./dist/contexts/info.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/info.d.mts",
+        "default": "./dist/contexts/info.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/info.d.mts",
+        "default": "./dist/contexts/info.mjs"
+      }
+    },
+    "./contexts/model": {
+      "require": {
+        "types": "./dist/contexts/model.d.cts",
+        "default": "./dist/contexts/model.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/model.d.mts",
+        "default": "./dist/contexts/model.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/model.d.mts",
+        "default": "./dist/contexts/model.mjs"
+      }
+    },
+    "./contexts/operation": {
+      "require": {
+        "types": "./dist/contexts/operation.d.cts",
+        "default": "./dist/contexts/operation.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/operation.d.mts",
+        "default": "./dist/contexts/operation.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/operation.d.mts",
+        "default": "./dist/contexts/operation.mjs"
+      }
+    },
+    "./contexts/path": {
+      "require": {
+        "types": "./dist/contexts/path.d.cts",
+        "default": "./dist/contexts/path.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/path.d.mts",
+        "default": "./dist/contexts/path.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/path.d.mts",
+        "default": "./dist/contexts/path.mjs"
+      }
+    },
+    "./contexts/security": {
+      "require": {
+        "types": "./dist/contexts/security.d.cts",
+        "default": "./dist/contexts/security.cjs"
+      },
+      "import": {
+        "types": "./dist/contexts/security.d.mts",
+        "default": "./dist/contexts/security.mjs"
+      },
+      "default": {
+        "types": "./dist/contexts/security.d.mts",
+        "default": "./dist/contexts/security.mjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      },
+      "default": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "typings": "dist/index.d.mts",
+  "files": ["dist"],
+  "dependencies": {
+    "@power-plant/core": "workspace:*",
+    "@power-plant/openapi-schema": "workspace:*",
+    "@power-plant/schema": "workspace:*",
+    "@power-plant/alloy-js": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@powerlines/plugin-tsdown": "catalog:",
+    "@types/node": "catalog:",
+    "powerlines": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

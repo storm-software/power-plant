@@ -8,8 +8,8 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@ai-sdk/provider": ^4.0.4
-  "@ai-sdk/provider-utils": ^5.0.18
+  "@ai-sdk/provider": ^4.0.5
+  "@ai-sdk/provider-utils": ^5.0.20
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -54,28 +54,28 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.224
-  "@powerlines/plugin-babel": ^0.13.182
-  "@powerlines/plugin-tsdown": ^0.1.586
-  "@powerlines/tsconfig": ^0.4.231
-  "@powerlines/tsdoc": ^0.2.179
+  "@powerlines/nx": ^0.13.226
+  "@powerlines/plugin-babel": ^0.13.184
+  "@powerlines/plugin-tsdown": ^0.1.588
+  "@powerlines/tsconfig": ^0.4.233
+  "@powerlines/tsdoc": ^0.2.181
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.48
-  "@storm-software/config-tools": ^1.190.111
-  "@storm-software/cspell": ^0.46.179
-  "@storm-software/eslint": ^0.170.145
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.74
-  "@storm-software/git-tools": ^2.131.119
-  "@storm-software/linting-tools": ^1.134.41
-  "@storm-software/markdownlint": ^0.30.267
-  "@storm-software/pnpm-tools": ^0.7.122
-  "@storm-software/prettier": ^0.59.164
-  "@storm-software/tsconfig": ^0.48.178
-  "@storm-software/untyped": ^0.24.253
-  "@storm-software/workspace-tools": ^1.296.91
+  "@storm-software/config": ^1.138.49
+  "@storm-software/config-tools": ^1.190.112
+  "@storm-software/cspell": ^0.46.180
+  "@storm-software/eslint": ^0.170.146
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.75
+  "@storm-software/git-tools": ^2.131.120
+  "@storm-software/linting-tools": ^1.134.42
+  "@storm-software/markdownlint": ^0.30.268
+  "@storm-software/pnpm-tools": ^0.7.123
+  "@storm-software/prettier": ^0.59.165
+  "@storm-software/tsconfig": ^0.48.179
+  "@storm-software/untyped": ^0.24.254
+  "@storm-software/workspace-tools": ^1.296.92
   "@stryke/convert": ^0.7.33
   "@stryke/capnp": ^0.12.129
   "@stryke/date": ^0.0.14
@@ -96,7 +96,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.49
+  ai: ^7.0.51
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
@@ -108,12 +108,11 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.0.1
   picomatch: ^4.0.5
-  powerlines: ^0.47.185
+  powerlines: ^0.47.187
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
   to-regex-range: ^5.0.1
-  ts-node: ^10.9.2
   tsdown: ^0.22.14
   tslib: ^2.8.1
   unstorage: ^1.17.5
@@ -154,20 +153,19 @@ overrides:
   "@power-plant/prisma": workspace:*
   "@power-plant/capnp": workspace:*
   "@power-plant/openapi-typescript": workspace:*
+  "@power-plant/openapi": workspace:*
   "@power-plant/ai-sdk": workspace:*
   "@power-plant/tools-errors": workspace:*
   "@power-plant/tools-readme-templates": workspace:*
   "@power-plant/tools-scripts": workspace:*
   "@power-plant/tools-cspell": workspace:*
-  cookie: ">=0.7.0"
-  debug: ">=4.4.0"
   follow-redirects: ">=1.15.9"
   nth-check: ">=2.1.1"
   path-to-regexp: ">=0.1.12"
   shell-quote: ">=1.8.2"
   simple-git: ">=3.27.0"
-shamefullyHoist: true
 engineStrict: true
+shamefullyHoist: true
 fetchTimeout: 450000
 dedupeDirectDeps: true
 dedupePeerDependents: true
@@ -199,9 +197,5 @@ allowBuilds:
   nx: true
   protobufjs: true
   unrs-resolver: true
-supportedArchitectures:
-  cpu:
-    - current
-    - wasm32
 patchedDependencies:
   "@deepkit/type-compiler@1.0.19": patches/@deepkit__type-compiler@1.0.19.patch

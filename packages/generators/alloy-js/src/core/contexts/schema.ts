@@ -23,23 +23,23 @@ import type { JsonSchemaLike } from "@power-plant/schema";
 /**
  * The schema context used in template rendering.
  */
-export const SchemaContext: ComponentContext<JsonSchemaLike> =
-  createContext<JsonSchemaLike>();
+export const SchemaContext: ComponentContext<any> =
+  createContext<any>();
 
 /**
  * Hook to access the schema context.
  *
  * @returns A reactive version of the current schema.
  */
-export function useSchema(): JsonSchemaLike {
-  const context = useContext<JsonSchemaLike>(SchemaContext)!;
+export function useSchema<TSchema extends JsonSchemaLike = JsonSchemaLike>(): TSchema {
+  const context = useContext<TSchema>(SchemaContext)!;
   if (!context) {
     throw new Error(
       "Schema is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 
-  return context;
+  return context as TSchema;
 }
 
 /**
@@ -47,30 +47,30 @@ export function useSchema(): JsonSchemaLike {
  *
  * @returns The schema context or undefined if not set.
  */
-export function useSchemaSafe(): JsonSchemaLike | undefined {
-  return useContext(SchemaContext);
+export function useSchemaSafe<TSchema extends JsonSchemaLike = JsonSchemaLike>(): TSchema | undefined {
+  return useContext(SchemaContext) as TSchema | undefined;
 }
 
 /**
  * The schema property context used in template rendering.
  */
-export const SchemaPropertyContext: ComponentContext<JsonSchemaLike> =
-  createNamedContext<JsonSchemaLike>("SchemaProperty");
+export const SchemaPropertyContext: ComponentContext<any> =
+  createNamedContext<any>("SchemaProperty");
 
 /**
  * Hook to access the Schema Property context.
  *
  * @returns A reactive version of the current schema property.
  */
-export function useSchemaProperty() {
-  const context = useContext<JsonSchemaLike>(SchemaPropertyContext)!;
+export function useSchemaProperty<TSchemaProperty extends JsonSchemaLike = JsonSchemaLike>(): TSchemaProperty {
+  const context = useContext<TSchemaProperty>(SchemaPropertyContext)!;
   if (!context) {
     throw new Error(
       "Schema property is not available in the rendering context. Please make sure the Alloy components are being provided to an invocation of the `render` function added to plugins by `@power-plant/alloy-js`."
     );
   }
 
-  return context;
+  return context as TSchemaProperty;
 }
 
 /**
@@ -78,6 +78,6 @@ export function useSchemaProperty() {
  *
  * @returns The schema property context or undefined if not set.
  */
-export function useSchemaPropertySafe(): JsonSchemaLike | undefined {
-  return useContext(SchemaPropertyContext);
+export function useSchemaPropertySafe<TSchemaProperty extends JsonSchemaLike = JsonSchemaLike>(): TSchemaProperty | undefined {
+  return useContext(SchemaPropertyContext) as TSchemaProperty | undefined;
 }

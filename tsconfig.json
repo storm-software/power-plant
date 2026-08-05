@@ -64,6 +64,9 @@
       "path": "./packages/generators/openapi-typescript"
     },
     {
+      "path": "./packages/generators/openapi"
+    },
+    {
       "path": "./packages/outputs/unstorage-output"
     },
     {
