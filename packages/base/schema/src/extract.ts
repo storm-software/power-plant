@@ -815,7 +815,18 @@ async function readSourceFile(
   }
 }
 
-function createDeepkitPlugin(
+/**
+ * Creates an [esbuild](https://esbuild.github.io) plugin that uses the Deepkit Type reflection to transpile TypeScript code into JSON Schema.
+ *
+ * @see https://deepkit.io/en/documentation/runtime-types/reflection
+ * @see https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
+ * @see https://github.com/esbuild/esbuild
+ * @see https://github.com/esbuild/esbuild/blob/main/docs/plugins.md
+ *
+ * @param options - The options for the plugin.
+ * @returns The esbuild plugin.
+ */
+export function createDeepkitPlugin(
   options: BaseExtractOptions & { fs?: FileSystemInterface }
 ): Plugin {
   return {

@@ -54,49 +54,49 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.222
-  "@powerlines/plugin-babel": ^0.13.180
-  "@powerlines/plugin-tsdown": ^0.1.584
-  "@powerlines/tsconfig": ^0.4.229
-  "@powerlines/tsdoc": ^0.2.177
+  "@powerlines/nx": ^0.13.224
+  "@powerlines/plugin-babel": ^0.13.182
+  "@powerlines/plugin-tsdown": ^0.1.586
+  "@powerlines/tsconfig": ^0.4.231
+  "@powerlines/tsdoc": ^0.2.179
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.47
-  "@storm-software/config-tools": ^1.190.110
-  "@storm-software/cspell": ^0.46.178
-  "@storm-software/eslint": ^0.170.144
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.73
-  "@storm-software/git-tools": ^2.131.118
-  "@storm-software/linting-tools": ^1.134.40
-  "@storm-software/markdownlint": ^0.30.266
-  "@storm-software/pnpm-tools": ^0.7.121
-  "@storm-software/prettier": ^0.59.163
-  "@storm-software/tsconfig": ^0.48.177
-  "@storm-software/untyped": ^0.24.252
-  "@storm-software/workspace-tools": ^1.296.90
-  "@stryke/convert": ^0.7.30
-  "@stryke/capnp": ^0.12.126
-  "@stryke/date": ^0.0.11
-  "@stryke/env": ^0.20.117
-  "@stryke/fs": ^0.33.100
-  "@stryke/hash": ^0.13.53
-  "@stryke/helpers": ^0.10.39
-  "@stryke/json": ^0.15.23
-  "@stryke/path": ^0.29.26
-  "@stryke/resolve": ^0.0.15
-  "@stryke/string-format": ^0.17.41
-  "@stryke/type-checks": ^0.6.32
-  "@stryke/types": ^0.12.27
-  "@stryke/unique-id": ^0.3.111
-  "@stryke/url": ^0.4.50
-  "@stryke/zod": ^0.3.45
+  "@storm-software/config": ^1.138.48
+  "@storm-software/config-tools": ^1.190.111
+  "@storm-software/cspell": ^0.46.179
+  "@storm-software/eslint": ^0.170.145
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.74
+  "@storm-software/git-tools": ^2.131.119
+  "@storm-software/linting-tools": ^1.134.41
+  "@storm-software/markdownlint": ^0.30.267
+  "@storm-software/pnpm-tools": ^0.7.122
+  "@storm-software/prettier": ^0.59.164
+  "@storm-software/tsconfig": ^0.48.178
+  "@storm-software/untyped": ^0.24.253
+  "@storm-software/workspace-tools": ^1.296.91
+  "@stryke/convert": ^0.7.32
+  "@stryke/capnp": ^0.12.128
+  "@stryke/date": ^0.0.13
+  "@stryke/env": ^0.20.119
+  "@stryke/fs": ^0.33.102
+  "@stryke/hash": ^0.13.55
+  "@stryke/helpers": ^0.10.41
+  "@stryke/json": ^0.15.25
+  "@stryke/path": ^0.29.28
+  "@stryke/resolve": ^0.0.17
+  "@stryke/string-format": ^0.17.43
+  "@stryke/type-checks": ^0.6.34
+  "@stryke/types": ^0.12.29
+  "@stryke/unique-id": ^0.3.113
+  "@stryke/url": ^0.4.52
+  "@stryke/zod": ^0.3.47
   "@terrazzo/parser": ^2.5.0
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.47
+  ai: ^7.0.48
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
@@ -108,7 +108,7 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.0.1
   picomatch: ^4.0.5
-  powerlines: ^0.47.183
+  powerlines: ^0.47.185
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
