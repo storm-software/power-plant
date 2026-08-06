@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.50](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.50) (08/05/2026)
+
+### Features
+
+- **openapi:** Added OpenAPI generator to allow Alloy Framework templates ([fb906a3](https://github.com/storm-software/power-plant/commit/fb906a3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.71**
+
 ## [0.0.49](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.49) (08/05/2026)
 
 ### Updated Dependencies

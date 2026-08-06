@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.57](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.57) (08/05/2026)
+
+### Features
+
+- **openapi:** Added OpenAPI generator to allow Alloy Framework templates ([fb906a3](https://github.com/storm-software/power-plant/commit/fb906a3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.71**
+- Updated **schema** to **v0.0.69**
+- Updated **terrazzo-input** to **v0.0.57**
+
 ## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.56) (08/05/2026)
 
 ### Updated Dependencies

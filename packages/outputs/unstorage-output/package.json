@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/unstorage-output",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "private": false,
   "description": "A Power Plant output for writing generated code to an Unstorage driver.",
   "keywords": [

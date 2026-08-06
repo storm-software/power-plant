@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.68](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.68) (08/05/2026)
+
+### Features
+
+- **openapi:** Added OpenAPI generator to allow Alloy Framework templates ([fb906a3](https://github.com/storm-software/power-plant/commit/fb906a3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.71**
+- Updated **noop-output** to **v0.0.50**
+- Updated **schema** to **v0.0.69**
+
 ## [0.0.67](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.67) (08/05/2026)
 
 ### Updated Dependencies

@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Hey API
 
+## [0.0.67](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.67) (08/05/2026)
+
+### Features
+
+- **openapi:** Added OpenAPI generator to allow Alloy Framework templates ([fb906a3](https://github.com/storm-software/power-plant/commit/fb906a3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.71**
+- Updated **schema** to **v0.0.69**
+
 ## [0.0.66](https://github.com/storm-software/power-plant/releases/tag/hey-api%400.0.66) (08/05/2026)
 
 ### Updated Dependencies

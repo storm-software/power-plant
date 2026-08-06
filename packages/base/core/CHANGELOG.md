@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/core%400.0.71) (08/05/2026)
+
+### Features
+
+- **openapi:** Added OpenAPI generator to allow Alloy Framework templates ([fb906a3](https://github.com/storm-software/power-plant/commit/fb906a3))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.69**
+
 ## [0.0.70](https://github.com/storm-software/power-plant/releases/tag/core%400.0.70) (08/05/2026)
 
 ### Updated Dependencies
