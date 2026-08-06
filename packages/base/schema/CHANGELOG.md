@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.74](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.74) (08/06/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with parsing logic in `codegen` module ([fcfedd3](https://github.com/storm-software/power-plant/commit/fcfedd3))
+
 ## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.73) (08/06/2026)
 
 ### Bug Fixes

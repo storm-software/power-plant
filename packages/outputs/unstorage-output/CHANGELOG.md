@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Unstorage Output
 
+## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.72) (08/06/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.76**
+- Updated **schema** to **v0.0.74**
+
 ## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.71) (08/06/2026)
 
 ### Bug Fixes
