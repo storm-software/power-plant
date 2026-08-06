@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.60](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.60) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+- Updated **schema** to **v0.0.72**
+- Updated **terrazzo-input** to **v0.0.60**
+
 ## [0.0.59](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.59) (08/06/2026)
 
 ### Updated Dependencies

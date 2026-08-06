@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Capnp
 
+## [0.0.56](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.56) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+- Updated **schema** to **v0.0.72**
+
 ## [0.0.55](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.55) (08/06/2026)
 
 ### Updated Dependencies

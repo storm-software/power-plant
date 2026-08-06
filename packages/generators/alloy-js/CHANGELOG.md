@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.71) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+- Updated **noop-output** to **v0.0.53**
+- Updated **schema** to **v0.0.72**
+
 ## [0.0.70](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.70) (08/06/2026)
 
 ### Updated Dependencies

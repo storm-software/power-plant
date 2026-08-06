@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.72) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
 ## [0.0.66](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.66) (08/05/2026)
 
 ### Miscellaneous

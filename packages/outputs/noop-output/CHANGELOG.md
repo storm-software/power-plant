@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.53](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.53) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+
 ## [0.0.52](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.52) (08/06/2026)
 
 ### Updated Dependencies

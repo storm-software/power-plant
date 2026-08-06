@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Input
 
+## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.73) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+- Updated **schema** to **v0.0.72**
+
 ## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/unstorage-input%400.0.72) (08/06/2026)
 
 ### Updated Dependencies

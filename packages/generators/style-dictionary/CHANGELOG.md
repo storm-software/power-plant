@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Style Dictionary
 
+## [0.0.59](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.59) (08/06/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update Nx packages versions ([0f65cf0](https://github.com/storm-software/power-plant/commit/0f65cf0))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.74**
+- Updated **schema** to **v0.0.72**
+
 ## [0.0.58](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.58) (08/06/2026)
 
 ### Updated Dependencies
