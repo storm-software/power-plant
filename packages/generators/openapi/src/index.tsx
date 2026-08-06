@@ -16,14 +16,16 @@
 
  ------------------------------------------------------------------- */
 
+import type { Options } from "@power-plant/alloy-js";
+import { render } from "@power-plant/alloy-js/render";
 import type { GeneratorFunctionResult, OutputConfig } from "@power-plant/core";
 import { defineGenerator, execute } from "@power-plant/core";
+import noop from "@power-plant/noop-output";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import schema from "@power-plant/openapi-schema";
-import { type Options } from "@power-plant/alloy-js";
-import { render } from "@power-plant/alloy-js/render";
 import packageJson from "../package.json";
-import noop from "@power-plant/noop-output";
+
+export type * from "./types";
 
 /**
  * The OpenAPI TypeScript generator.
@@ -44,7 +46,7 @@ export default defineGenerator<OpenAPISchema, Options, void>({
     links: [
       {
         href: "https://swagger.io/specification/",
-        description: "OpenAPI Specification",
+        description: "OpenAPI Specification"
       },
       {
         href: "https://alloy-js.dev",
@@ -59,18 +61,17 @@ export default defineGenerator<OpenAPISchema, Options, void>({
   ): Promise<GeneratorFunctionResult<OpenAPISchema, Options>> => {
     const { template, ...rest } = options;
 
-
-return execute<OpenAPISchema, Options, any>(
-  {
-    output: noop as OutputConfig<OpenAPISchema, Options, any>,
-    ...rest,
-    generator: async (): Promise<
-      GeneratorFunctionResult<OpenAPISchema, Options>
-    > => {
-      return render<OpenAPISchema, Options, any>(template);
-    }
-  },
-  options
-);
+    return execute<OpenAPISchema, Options, any>(
+      {
+        output: noop as OutputConfig<OpenAPISchema, Options, any>,
+        ...rest,
+        generator: async (): Promise<
+          GeneratorFunctionResult<OpenAPISchema, Options>
+        > => {
+          return render<OpenAPISchema, Options, any>(template);
+        }
+      },
+      options
+    );
   }
 });

@@ -25,7 +25,7 @@ const config = defineConfig({
     format: ["cjs", "esm"]
   },
   resolve: {
-    external: ["@power-plant/alloy-js", "@alloy-js/core"],
+    external: ["@power-plant/alloy-js", "@alloy-js/core"]
   },
   plugins: [tsdown()]
 });

@@ -17,8 +17,8 @@
  ------------------------------------------------------------------- */
 
 import {
-  useSchemaSafe,
-  useSchema
+  useSchema,
+  useSchemaSafe
 } from "@power-plant/alloy-js/core/contexts/schema";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import type { SecuritySchema } from "../types";
@@ -36,7 +36,7 @@ export function getSecurity(schema: OpenAPISchema): SecuritySchema {
  * @returns A reactive version of the current security schema.
  */
 export function useSecurity(): SecuritySchema {
-  return getSecurity(useSchema<OpenAPISchema>() as OpenAPISchema);
+  return getSecurity(useSchema<OpenAPISchema>());
 }
 
 /**

@@ -19,8 +19,8 @@
 import type { ComponentContext } from "@alloy-js/core";
 import { createContext, useContext } from "@alloy-js/core";
 import {
-  useSchemaSafe,
-  useSchema
+  useSchema,
+  useSchemaSafe
 } from "@power-plant/alloy-js/core/contexts/schema";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import type { ModelSchema } from "../types";

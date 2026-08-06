@@ -16,14 +16,9 @@
 
  ------------------------------------------------------------------- */
 
-import type { ComponentContext } from "@alloy-js/core";
-import { createContext, useContext } from "@alloy-js/core";
-import {
-  useSchemaSafe,
-  useSchema
-} from "@power-plant/alloy-js/core/contexts/schema";
+import { useSchemaSafe } from "@power-plant/alloy-js/core/contexts/schema";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
-import type { InfoSchema, ModelSchema } from "../types";
+import type { InfoSchema } from "../types";
 
 /**
  * Flatten `schema.components.schemas` into model entries.
@@ -38,7 +33,7 @@ export function getInfo(schema: OpenAPISchema): InfoSchema {
  * @returns A reactive version of the current info schema.
  */
 export function useInfo(): InfoSchema {
-  return getInfo(useSchema<OpenAPISchema>() as OpenAPISchema);
+  return getInfo(useSchema<OpenAPISchema>());
 }
 
 /**
