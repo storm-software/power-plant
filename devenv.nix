@@ -12,8 +12,4 @@
   packages = with pkgs; [
     capnproto
   ];
-
-  env = {
-    CAPNP_HOME = "${pkgs.capnproto}/share/capnproto";
-  };
 }
