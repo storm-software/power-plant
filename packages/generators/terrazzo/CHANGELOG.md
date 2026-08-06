@@ -2,6 +2,14 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.65](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.65) (08/06/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.79**
+- Updated **schema** to **v0.0.77**
+- Updated **terrazzo-input** to **v0.0.65**
+
 ## [0.0.64](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.64) (08/06/2026)
 
 ### Updated Dependencies
