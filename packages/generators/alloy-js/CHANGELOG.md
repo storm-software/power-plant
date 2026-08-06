@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Alloy Js
 
+## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.72) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.75**
+- Updated **noop-output** to **v0.0.54**
+- Updated **schema** to **v0.0.73**
+
 ## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/alloy-js%400.0.71) (08/06/2026)
 
 ### Miscellaneous

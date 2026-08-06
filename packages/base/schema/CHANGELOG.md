@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.73) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
 ## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.72) (08/06/2026)
 
 ### Miscellaneous

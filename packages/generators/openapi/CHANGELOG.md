@@ -2,6 +2,19 @@
 
 # Changelog for Power Plant - Openapi
 
+## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.6) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
+### Updated Dependencies
+
+- Updated **alloy-js** to **v0.0.72**
+- Updated **core** to **v0.0.75**
+- Updated **noop-output** to **v0.0.54**
+- Updated **schema** to **v0.0.73**
+
 ## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.5) (08/06/2026)
 
 ### Miscellaneous

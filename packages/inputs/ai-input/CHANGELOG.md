@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - AI Input
 
+## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.71) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.75**
+- Updated **schema** to **v0.0.73**
+
 ## [0.0.70](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.70) (08/06/2026)
 
 ### Miscellaneous

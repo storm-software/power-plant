@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.54](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.54) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.75**
+
 ## [0.0.53](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.53) (08/06/2026)
 
 ### Miscellaneous

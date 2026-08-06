@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Openapi Typescript
 
+## [0.0.55](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.55) (08/06/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with invalid `package.json` dependency versions ([76f78aa](https://github.com/storm-software/power-plant/commit/76f78aa))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.75**
+- Updated **schema** to **v0.0.73**
+
 ## [0.0.54](https://github.com/storm-software/power-plant/releases/tag/openapi-typescript%400.0.54) (08/06/2026)
 
 ### Miscellaneous
