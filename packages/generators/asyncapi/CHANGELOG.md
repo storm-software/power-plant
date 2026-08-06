@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Asyncapi
 
+## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.73) (08/06/2026)
+
+### Miscellaneous
+
+- **schema:** Update dependencies and improve typing on `codegen` ([0e5fa62](https://github.com/storm-software/power-plant/commit/0e5fa62))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.77**
+- Updated **schema** to **v0.0.75**
+
 ## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/asyncapi%400.0.72) (08/06/2026)
 
 ### Updated Dependencies

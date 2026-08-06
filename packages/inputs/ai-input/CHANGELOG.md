@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - AI Input
 
+## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.73) (08/06/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.77**
+- Updated **schema** to **v0.0.75**
+
 ## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.72) (08/06/2026)
 
 ### Updated Dependencies

@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.75](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.75) (08/06/2026)
+
+### Miscellaneous
+
+- **schema:** Update dependencies and improve typing on `codegen` ([0e5fa62](https://github.com/storm-software/power-plant/commit/0e5fa62))
+
 ## [0.0.74](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.74) (08/06/2026)
 
 ### Bug Fixes
