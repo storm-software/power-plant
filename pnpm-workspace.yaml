@@ -43,13 +43,13 @@ catalog:
   micromatch: ^4.0.8
   openapi-typescript: ^7.13.0
   "@ls-lint/ls-lint": ^2.3.1
-  "@nx/devkit": 23.0.1
-  "@nx/eslint-plugin": 23.0.1
-  "@nx/js": 23.0.1
-  "@nx/plugin": 23.0.1
-  "@nx/vite": 23.0.1
-  "@nx/vitest": 23.0.1
-  "@nx/workspace": 23.0.1
+  "@nx/devkit": 23.1.1
+  "@nx/eslint-plugin": 23.1.1
+  "@nx/js": 23.1.1
+  "@nx/plugin": 23.1.1
+  "@nx/vite": 23.1.1
+  "@nx/vitest": 23.1.1
+  "@nx/workspace": 23.1.1
   "@deepkit/core": ^1.0.19
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
@@ -106,7 +106,7 @@ catalog:
   jiti: ^2.7.0
   lefthook: ^1.13.6
   log4brains: ^1.1.0
-  nx: 23.0.1
+  nx: 23.1.1
   picomatch: ^4.0.5
   powerlines: ^0.47.187
   prettier: ^3.9.6

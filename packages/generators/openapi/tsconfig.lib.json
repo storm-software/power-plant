@@ -4,7 +4,8 @@
     "tsBuildInfoFile": "out-tsc/tsconfig.tsbuildinfo",
     "jsx": "preserve",
     "jsxImportSource": "@alloy-js/core",
-    "outDir": "./out-tsc"
+    "outDir": "./out-tsc",
+    "rootDir": "."
   },
   "references": [
     { "path": "../../outputs/noop-output/tsconfig.lib.json" },

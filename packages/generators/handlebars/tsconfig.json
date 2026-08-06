@@ -8,5 +8,8 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "files": []
+  "files": [],
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
 }

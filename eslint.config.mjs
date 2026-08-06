@@ -23,6 +23,10 @@ Error.stackTraceLimit = Number.POSITIVE_INFINITY;
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig({
   name: "power-plant",
+  nx: {
+    depsCheck: false,
+    enforceModuleBoundaries: false
+  },
   tsdoc: {
     configFile: "@powerlines/tsdoc/recommended.json"
   }
