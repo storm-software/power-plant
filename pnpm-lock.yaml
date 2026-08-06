@@ -227,7 +227,7 @@ catalogs:
       specifier: ^0.24.0
       version: 0.24.0
     '@asyncapi/generator':
-      specifier: ^3.3.0
+      specifier: 3.3.0
       version: 3.3.0
     '@asyncapi/generator-hooks':
       specifier: ^0.1.0

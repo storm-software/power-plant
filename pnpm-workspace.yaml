@@ -15,7 +15,7 @@ catalog:
   "@alloy-js/json": ^0.24.0
   "@alloy-js/markdown": ^0.24.0
   "@alloy-js/typescript": ^0.24.0
-  "@asyncapi/generator": ^3.3.0
+  "@asyncapi/generator": 3.3.0
   "@asyncapi/generator-hooks": ^0.1.0
   "@asyncapi/parser": ^3.6.2
   "@asyncapi/specs": ^6.11.1
@@ -184,7 +184,7 @@ minimumReleaseAgeExclude:
   - powerlines
   - "@nx/devkit@23.1.1"
   - tsx@4.23.7
-  - '@asyncapi/parser@3.6.2'
+  - "@asyncapi/parser@3.6.2"
 allowBuilds:
   "@deepkit/type-compiler": false
   "@hyperjump/json-pointer": true
