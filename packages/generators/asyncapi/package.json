@@ -68,6 +68,7 @@
   "files": ["dist"],
   "dependencies": {
     "@asyncapi/generator": "catalog:",
+    "@asyncapi/generator-hooks": "catalog:",
     "@asyncapi/parser": "catalog:",
     "@power-plant/asyncapi-schema": "workspace:*",
     "@power-plant/core": "workspace:*",

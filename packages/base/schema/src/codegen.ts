@@ -843,10 +843,10 @@ ${generateStatements(definition, "value", "path", "result", "errors").join("\n")
  * @param value - The input value to parse.
  * @returns The parsed value conforming to the schema or an array of validation errors.
  */
-export function parseSafe(value: unknown) {
+export function parseSafe(value: unknown): ${stringifyType(schema)} | { path: string; failure: string }[] {
   const errors: { path: string; failure: string }[] = [];
 
-  let result;
+  let result!: ${stringifyType(schema)};
   ${generateStatements(schema, "value", '"$"', "result", "errors").join("\n")}
 
   if (errors.length > 0) {
@@ -864,9 +864,9 @@ export function parseSafe(value: unknown) {
  *
  * @param value - The input value to parse.
  * @returns The parsed value conforming to the schema.
- * @throws {Error} When the input value cannot be parsed into a valid result according to the schema.
+ * @throws When the input value cannot be parsed into a valid result according to the schema.
  */
-export function parse(value: unknown) {
+export function parse(value: unknown): ${stringifyType(schema)} {
   const result = parseSafe(value);
   if (Array.isArray(result) && result.length > 0 && result.every(error => "path" in error && typeof error.path === "string" && error.path && "failure" in error && typeof error.failure === "string" && error.failure)) {
     throw new Error(\`The following validation errors occurred while parsing the input value: \\n\${Object.entries(result.reduce((acc, error) => ((acc[error.path] ??= []).push(error.failure), acc), {})).map(([path, failures]) => \`\${path.replace(/^\\$\\./, "") ? \`\${path.replace(/^\\$\\./, "")}: \\n\` : ""}\${failures.map(failure => \` - \${failure}\`).join("\\n")}\`).join("\\n")}\`);
