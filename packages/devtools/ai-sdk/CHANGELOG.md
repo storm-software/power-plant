@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.76](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.76) (08/07/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.80**
+
 ## [0.0.75](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.75) (08/06/2026)
 
 ### Updated Dependencies
