@@ -49,6 +49,7 @@ import {
   isZod3Type
 } from "@stryke/zod";
 import { toJsonSchema } from "@valibot/to-json-schema";
+import defu from "defu";
 import type { Plugin } from "esbuild";
 import { build } from "esbuild";
 import { createJiti } from "jiti";
@@ -91,7 +92,6 @@ import type {
   UntypedSchema,
   ValibotSchema
 } from "./types";
-import defu from "defu";
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
 
@@ -923,29 +923,35 @@ export async function extractTSType(
       `Generating JSON schema for bundled "${filePath}" using the type "${exportName}"`
     );
 
-    const result = await build(defu({
-      platform: "node",
-      format: "esm",
-      logLevel: "silent",
-      entryPoints: [filePath],
-      write: false,
-      sourcemap: false,
-      splitting: false,
-      keepNames: true
-    }, options, {
-      treeShaking: true,
-      bundle: true,
-      metafile: false,
-      minify: true,
-      legalComments: "none" as const,
-      target: "es2022",
-      absWorkingDir: cwd,
-      plugins: [
-        createDeepkitPlugin(
-          options as BaseExtractOptions & { fs?: FileSystemInterface }
-        )
-      ]
-    }));
+    const result = await build(
+      defu(
+        {
+          platform: "node",
+          format: "esm",
+          logLevel: "silent",
+          entryPoints: [filePath],
+          write: false,
+          sourcemap: false,
+          splitting: false,
+          keepNames: true
+        },
+        options,
+        {
+          treeShaking: true,
+          bundle: true,
+          metafile: false,
+          minify: true,
+          legalComments: "none" as const,
+          target: "es2022",
+          absWorkingDir: cwd,
+          plugins: [
+            createDeepkitPlugin(
+              options as BaseExtractOptions & { fs?: FileSystemInterface }
+            )
+          ]
+        }
+      )
+    );
 
     if (result.errors.length > 0) {
       throw new Error(result.errors.map(error => error.text).join(", "));
