@@ -91,6 +91,7 @@ import type {
   UntypedSchema,
   ValibotSchema
 } from "./types";
+import defu from "defu";
 
 const SCHEMA_BUNDLE_BASE_URI = "https://power-plant.invalid/";
 
@@ -922,7 +923,7 @@ export async function extractTSType(
       `Generating JSON schema for bundled "${filePath}" using the type "${exportName}"`
     );
 
-    const result = await build({
+    const result = await build(defu({
       platform: "node",
       format: "esm",
       logLevel: "silent",
@@ -930,12 +931,13 @@ export async function extractTSType(
       write: false,
       sourcemap: false,
       splitting: false,
+      keepNames: true
+    }, options, {
       treeShaking: true,
       bundle: true,
-      keepNames: true,
       metafile: false,
       minify: true,
-      legalComments: "none",
+      legalComments: "none" as const,
       target: "es2022",
       absWorkingDir: cwd,
       plugins: [
@@ -943,7 +945,7 @@ export async function extractTSType(
           options as BaseExtractOptions & { fs?: FileSystemInterface }
         )
       ]
-    });
+    }));
 
     if (result.errors.length > 0) {
       throw new Error(result.errors.map(error => error.text).join(", "));
