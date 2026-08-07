@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.79) (08/07/2026)
+
+### Miscellaneous
+
+- **schema:** Update `build` call to merge default and user-provided options ([95be3dd](https://github.com/storm-software/power-plant/commit/95be3dd))
+
 ## [0.0.75](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.75) (08/06/2026)
 
 ### Miscellaneous
