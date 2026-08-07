@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.81](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.81) (08/07/2026)
+
+### Bug Fixes
+
+- **schema:** Update Powerlines packages to resolve bundling issue ([f958fb3](https://github.com/storm-software/power-plant/commit/f958fb3))
+
 ## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.79) (08/07/2026)
 
 ### Miscellaneous
