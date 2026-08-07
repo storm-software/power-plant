@@ -9,7 +9,7 @@ packages:
   - docs/*
 catalog:
   "@ai-sdk/provider": ^4.0.5
-  "@ai-sdk/provider-utils": ^5.0.21
+  "@ai-sdk/provider-utils": ^5.0.22
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -55,28 +55,28 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.227
-  "@powerlines/plugin-babel": ^0.13.185
-  "@powerlines/plugin-tsdown": ^0.1.589
-  "@powerlines/tsconfig": ^0.4.234
-  "@powerlines/tsdoc": ^0.2.182
+  "@powerlines/nx": ^0.13.229
+  "@powerlines/plugin-babel": ^0.13.187
+  "@powerlines/plugin-tsdown": ^0.1.591
+  "@powerlines/tsconfig": ^0.4.236
+  "@powerlines/tsdoc": ^0.2.184
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.51
-  "@storm-software/config-tools": ^1.190.114
-  "@storm-software/cspell": ^0.46.182
-  "@storm-software/eslint": ^0.170.148
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.77
-  "@storm-software/git-tools": ^2.131.122
-  "@storm-software/linting-tools": ^1.134.44
-  "@storm-software/markdownlint": ^0.30.270
-  "@storm-software/pnpm-tools": ^0.7.125
-  "@storm-software/prettier": ^0.59.167
-  "@storm-software/tsconfig": ^0.48.181
-  "@storm-software/untyped": ^0.24.256
-  "@storm-software/workspace-tools": ^1.296.94
+  "@storm-software/config": ^1.138.52
+  "@storm-software/config-tools": ^1.190.115
+  "@storm-software/cspell": ^0.46.183
+  "@storm-software/eslint": ^0.170.149
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.78
+  "@storm-software/git-tools": ^2.131.123
+  "@storm-software/linting-tools": ^1.134.45
+  "@storm-software/markdownlint": ^0.30.271
+  "@storm-software/pnpm-tools": ^0.7.126
+  "@storm-software/prettier": ^0.59.168
+  "@storm-software/tsconfig": ^0.48.182
+  "@storm-software/untyped": ^0.24.257
+  "@storm-software/workspace-tools": ^1.296.95
   "@stryke/convert": ^0.7.33
   "@stryke/capnp": ^0.12.129
   "@stryke/date": ^0.0.14
@@ -97,7 +97,7 @@ catalog:
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.52
+  ai: ^7.0.54
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
@@ -109,7 +109,7 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.1.1
   picomatch: ^4.0.5
-  powerlines: ^0.47.188
+  powerlines: ^0.47.190
   prettier: ^3.9.6
   rimraf: ^6.1.3
   style-dictionary: ^5.5.0
@@ -125,7 +125,7 @@ catalog:
   zod: ^4.4.3
   zx: ^8.8.5
   "@typescript/vfs": ^1.6.4
-  "@storm-software/eslint-plugin-pnpm": ^0.0.77
+  "@storm-software/eslint-plugin-pnpm": ^0.0.78
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
@@ -183,7 +183,7 @@ minimumReleaseAgeExclude:
   - "@powerlines/*"
   - powerlines
   - "@nx/devkit@23.1.1"
-  - tsx@4.23.7
+  - tsx@4.23.7 || 4.23.9
   - "@asyncapi/parser@3.6.2"
 allowBuilds:
   "@deepkit/type-compiler": false
