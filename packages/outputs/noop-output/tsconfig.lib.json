@@ -6,8 +6,9 @@
     "rootDir": "."
   },
   "references": [
-    { "path": "../../../tools/config" },
-    { "path": "../../base/core/tsconfig.lib.json" }
+    {
+      "path": "../../base/core/tsconfig.lib.json"
+    }
   ],
   "include": [
     "src/**/*.ts",

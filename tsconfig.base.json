@@ -3,6 +3,7 @@
   "extends": "@storm-software/tsconfig/recommended.json",
   "display": "Power Plant - TypeScript Monorepo",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "incremental": true,
     "composite": true,
     "module": "esnext",

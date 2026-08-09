@@ -97,8 +97,5 @@
       "path": "./packages/generators/content-collections"
     }
   ],
-  "files": [],
-  "compilerOptions": {
-    "ignoreDeprecations": "6.0"
-  }
+  "files": []
 }

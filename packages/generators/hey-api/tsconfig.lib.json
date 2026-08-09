@@ -6,10 +6,15 @@
     "rootDir": "."
   },
   "references": [
-    { "path": "../../../tools/config" },
-    { "path": "../../base/schema/tsconfig.lib.json" },
-    { "path": "../../schemas/openapi-schema/tsconfig.lib.json" },
-    { "path": "../../base/core/tsconfig.lib.json" }
+    {
+      "path": "../../base/schema/tsconfig.lib.json"
+    },
+    {
+      "path": "../../schemas/openapi-schema/tsconfig.lib.json"
+    },
+    {
+      "path": "../../base/core/tsconfig.lib.json"
+    }
   ],
   "include": [
     "src/**/*.ts",
