@@ -17,13 +17,13 @@ jobs:
     environment: production
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3.7.0
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: GitGuardian scan
-        uses: GitGuardian/ggshield/actions/secret@aaada885532b9451e5774d063d968e74a238ff44 # v1.52.2
+        uses: GitGuardian/ggshield/actions/secret@faa02e4bc7218c28e0ccfdb8bf33309ed72dbb99 # v1.53.0
         with:
           args:
             "--exclude pnpm-lock.yaml --exclude tools/config/verdaccio.yml --exclude
