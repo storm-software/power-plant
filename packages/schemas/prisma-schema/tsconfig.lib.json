@@ -2,8 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "tsBuildInfoFile": "out-tsc/tsconfig.tsbuildinfo",
-    "outDir": "./out-tsc",
-    "rootDir": "."
+    "rootDir": ".",
+    "outDir": "./out-tsc"
   },
   "references": [
     { "path": "../../base/schema/tsconfig.lib.json" },
