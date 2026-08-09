@@ -8,16 +8,16 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@ai-sdk/provider": ^4.0.6
-  "@ai-sdk/provider-utils": ^5.0.23
+  "@ai-sdk/provider": ^4.0.7
+  "@ai-sdk/provider-utils": ^5.0.25
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
   "@alloy-js/markdown": ^0.24.0
   "@alloy-js/typescript": ^0.24.0
-  "@asyncapi/generator": 3.3.0
-  "@asyncapi/generator-hooks": ^0.1.0
-  "@asyncapi/parser": ^3.6.2
+  "@asyncapi/generator": 3.4.0
+  "@asyncapi/generator-hooks": ^0.1.1
+  "@asyncapi/parser": ^3.6.3
   "@asyncapi/specs": ^6.11.1
   "@babel/core": ^8.0.1
   "@babel/preset-typescript": ^8.0.1
@@ -38,7 +38,7 @@ catalog:
   "@marcj/ts-clone-node": ^2.2.0
   braces: ^3.0.3
   compatfactory: ^4.0.4
-  esbuild: ^0.28.1
+  esbuild: ^0.28.2
   fill-range: ^7.1.1
   is-number: ^7.0.0
   micromatch: ^4.0.8
@@ -55,53 +55,53 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.231
-  "@powerlines/plugin-babel": ^0.13.189
-  "@powerlines/plugin-tsdown": ^0.1.593
-  "@powerlines/tsconfig": ^0.4.238
-  "@powerlines/tsdoc": ^0.2.186
+  "@powerlines/nx": ^0.13.235
+  "@powerlines/plugin-babel": ^0.13.193
+  "@powerlines/plugin-tsdown": ^0.1.597
+  "@powerlines/tsconfig": ^0.4.242
+  "@powerlines/tsdoc": ^0.2.190
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.52
-  "@storm-software/config-tools": ^1.190.115
-  "@storm-software/cspell": ^0.46.183
-  "@storm-software/eslint": ^0.170.149
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.78
-  "@storm-software/git-tools": ^2.131.123
-  "@storm-software/linting-tools": ^1.134.45
-  "@storm-software/markdownlint": ^0.30.271
-  "@storm-software/pnpm-tools": ^0.7.126
-  "@storm-software/prettier": ^0.59.168
-  "@storm-software/tsconfig": ^0.48.182
-  "@storm-software/untyped": ^0.24.257
-  "@storm-software/workspace-tools": ^1.296.95
-  "@stryke/convert": ^0.7.33
-  "@stryke/capnp": ^0.12.129
-  "@stryke/date": ^0.0.14
-  "@stryke/env": ^0.20.120
-  "@stryke/fs": ^0.33.103
-  "@stryke/hash": ^0.13.56
-  "@stryke/helpers": ^0.10.42
-  "@stryke/json": ^0.15.26
-  "@stryke/path": ^0.29.29
-  "@stryke/resolve": ^0.0.18
-  "@stryke/string-format": ^0.17.44
-  "@stryke/type-checks": ^0.6.35
-  "@stryke/types": ^0.12.30
-  "@stryke/unique-id": ^0.3.114
-  "@stryke/url": ^0.4.53
-  "@stryke/zod": ^0.3.48
+  "@storm-software/config": ^1.138.67
+  "@storm-software/config-tools": ^1.190.131
+  "@storm-software/cspell": ^0.46.198
+  "@storm-software/eslint": ^0.170.166
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.94
+  "@storm-software/git-tools": ^2.131.139
+  "@storm-software/linting-tools": ^1.134.61
+  "@storm-software/markdownlint": ^0.30.286
+  "@storm-software/pnpm-tools": ^0.7.145
+  "@storm-software/prettier": ^0.59.184
+  "@storm-software/tsconfig": ^0.48.197
+  "@storm-software/untyped": ^0.24.273
+  "@storm-software/workspace-tools": ^1.297.0
+  "@stryke/convert": ^0.7.38
+  "@stryke/capnp": ^0.12.136
+  "@stryke/date": ^0.0.19
+  "@stryke/env": ^0.20.126
+  "@stryke/fs": ^0.33.109
+  "@stryke/hash": ^0.13.62
+  "@stryke/helpers": ^0.10.47
+  "@stryke/json": ^0.15.31
+  "@stryke/path": ^0.29.34
+  "@stryke/resolve": ^0.0.24
+  "@stryke/string-format": ^0.17.49
+  "@stryke/type-checks": ^0.6.40
+  "@stryke/types": ^0.12.35
+  "@stryke/unique-id": ^0.3.120
+  "@stryke/url": ^0.4.59
+  "@stryke/zod": ^0.3.53
   "@terrazzo/parser": ^2.5.0
   "@types/node": ^25.9.5
-  "@typescript/native-preview": 7.0.0-dev.20251218.3
+  "@typescript/native-preview": 7.0.0-dev.20260707.2
   "@valibot/to-json-schema": ^1.7.1
-  ai: ^7.0.55
+  ai: ^7.0.58
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
-  eslint: ^10.8.0
+  eslint: ^10.8.1
   graphql: ^17.0.2
   handlebars: ^4.7.9
   jiti: ^2.7.0
@@ -109,23 +109,23 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.1.1
   picomatch: ^4.0.5
-  powerlines: ^0.47.192
+  powerlines: ^0.47.196
   prettier: ^3.9.6
   rimraf: ^6.1.3
-  style-dictionary: ^5.5.0
+  style-dictionary: ^5.5.1
   to-regex-range: ^5.0.1
   tsdown: ^0.22.14
   tslib: ^2.8.1
   unstorage: ^1.17.5
   untyped: ^1.5.2
   valibot: ^1.4.2
-  verdaccio: 6.0.5
-  vite: ^8.2.0
+  verdaccio: 6.9.2
+  vite: ^8.2.1
   vitest: ~4.1.10
   zod: ^4.4.3
   zx: ^8.8.5
   "@typescript/vfs": ^1.6.4
-  "@storm-software/eslint-plugin-pnpm": ^0.0.78
+  "@storm-software/eslint-plugin-pnpm": ^0.0.94
 overrides:
   "@power-plant/schema": workspace:*
   "@power-plant/core": workspace:*
@@ -161,11 +161,11 @@ overrides:
   "@power-plant/tools-readme-templates": workspace:*
   "@power-plant/tools-scripts": workspace:*
   "@power-plant/tools-cspell": workspace:*
-  follow-redirects: ">=1.15.9"
+  follow-redirects: ">=1.16.0"
   nth-check: ">=2.1.1"
-  path-to-regexp: ">=0.1.12"
-  shell-quote: ">=1.8.2"
-  simple-git: ">=3.27.0"
+  path-to-regexp: ">=0.2.5"
+  shell-quote: ">=1.10.0"
+  simple-git: ">=3.36.0"
 engineStrict: true
 shamefullyHoist: true
 fetchTimeout: 450000
