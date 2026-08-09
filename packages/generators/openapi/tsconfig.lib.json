@@ -8,21 +8,11 @@
     "rootDir": "."
   },
   "references": [
-    {
-      "path": "../../outputs/noop-output/tsconfig.lib.json"
-    },
-    {
-      "path": "../alloy-js/tsconfig.lib.json"
-    },
-    {
-      "path": "../../base/schema/tsconfig.lib.json"
-    },
-    {
-      "path": "../../schemas/openapi-schema/tsconfig.lib.json"
-    },
-    {
-      "path": "../../base/core/tsconfig.lib.json"
-    }
+    { "path": "../../outputs/noop-output/tsconfig.lib.json" },
+    { "path": "../alloy-js/tsconfig.lib.json" },
+    { "path": "../../base/schema/tsconfig.lib.json" },
+    { "path": "../../schemas/openapi-schema/tsconfig.lib.json" },
+    { "path": "../../base/core/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

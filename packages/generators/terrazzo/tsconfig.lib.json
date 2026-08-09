@@ -6,18 +6,10 @@
     "rootDir": "."
   },
   "references": [
-    {
-      "path": "../../inputs/terrazzo-input/tsconfig.lib.json"
-    },
-    {
-      "path": "../../base/schema/tsconfig.lib.json"
-    },
-    {
-      "path": "../../schemas/dtcg-schema/tsconfig.lib.json"
-    },
-    {
-      "path": "../../base/core/tsconfig.lib.json"
-    }
+    { "path": "../../inputs/terrazzo-input/tsconfig.lib.json" },
+    { "path": "../../base/schema/tsconfig.lib.json" },
+    { "path": "../../schemas/dtcg-schema/tsconfig.lib.json" },
+    { "path": "../../base/core/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

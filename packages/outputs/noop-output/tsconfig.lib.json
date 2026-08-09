@@ -5,11 +5,7 @@
     "outDir": "./out-tsc",
     "rootDir": "."
   },
-  "references": [
-    {
-      "path": "../../base/core/tsconfig.lib.json"
-    }
-  ],
+  "references": [{ "path": "../../base/core/tsconfig.lib.json" }],
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",

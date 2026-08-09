@@ -121,11 +121,11 @@
   ],
   "prettier.requireConfig": true,
   "prettier.bracketSameLine": true,
-  "prettier.configPath": "./node_modules/@storm-software/prettier/recommended.json",
+  "prettier.configPath": "./node_modules/@storm-software/prettier/recommended.mjs",
   "prettier.ignorePath": "./node_modules/@storm-software/prettier/.prettierignore",
   "prettier.enableDebugLogs": false,
   "prettier.enable": true,
-  "markdownlint.configFile": "./node_modules/@storm-software/markdownlint/config/recommended.markdownlint-cli2.jsonc",
+  "markdownlint.configFile": "~/repos/power-plant/node_modules/@storm-software/markdownlint/config/recommended.markdownlint-cli2.jsonc",
   "eslint.debug": true,
   "eslint.useRealpaths": true,
   "eslint.codeAction.disableRuleComment": {

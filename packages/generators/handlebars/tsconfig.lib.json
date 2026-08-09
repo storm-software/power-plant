@@ -8,12 +8,8 @@
     "rootDir": "."
   },
   "references": [
-    {
-      "path": "../../base/schema/tsconfig.lib.json"
-    },
-    {
-      "path": "../../base/core/tsconfig.lib.json"
-    }
+    { "path": "../../base/schema/tsconfig.lib.json" },
+    { "path": "../../base/core/tsconfig.lib.json" }
   ],
   "include": [
     "src/**/*.ts",

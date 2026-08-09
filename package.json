@@ -53,7 +53,7 @@
     "update-storm": "pnpm exec zx tools/scripts/src/update-storm.mjs",
     "view-config": "pnpm exec storm-config"
   },
-  "prettier": "@storm-software/prettier/recommended.json",
+  "prettier": "@storm-software/prettier/recommended",
   "devDependencies": {
     "@ls-lint/ls-lint": "catalog:",
     "@nx/devkit": "catalog:",
