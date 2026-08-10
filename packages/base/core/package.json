@@ -3,10 +3,7 @@
   "version": "0.0.83",
   "private": false,
   "description": "☢️ Generate anything from a specification",
-  "keywords": [
-    "power-plant",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "storm-software"],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -161,9 +158,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
     "@stryke/convert": "catalog:",

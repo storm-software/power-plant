@@ -3,10 +3,7 @@
   "version": "0.0.69",
   "private": false,
   "description": "Various utilities that help in the development of Power Plant extensions",
-  "keywords": [
-    "power-plant",
-    "storm-software"
-  ],
+  "keywords": ["power-plant", "storm-software"],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -82,9 +79,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@power-plant/schema": "workspace:*",
     "@power-plant/core": "workspace:*",
