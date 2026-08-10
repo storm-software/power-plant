@@ -72,56 +72,21 @@ jobs:
           storm-bot-github-token: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        id: setSHAs
-        uses: nrwl/nx-set-shas@3e9ad7370203c1e93d109be57f3b72eb0eb511b1 # v4.4.0
-        with:
-          main-branch-name: main
-          workflow-id: release.yml
-          set-environment-variables-for-job: true
-          error-on-no-successful-workflow: false
-
-      # On a fresh runner store, devenv evaluation intermittently fails with
-      # "path '... is not valid" (upstream: https://github.com/cachix/devenv/issues/3064).
-      # Warm up with retries so the publish step stays single-shot.
-      - name: Warm up devenv shell (retry store-path flake)
-        run: |
-          for i in 1 2 3; do
-            out=$(devenv --profile production --no-tui shell -- true 2>&1) && {
-              printf '%s\n' "$out"
-              exit 0
-            }
-            echo "attempt $i failed"
-            printf '%s\n' "$out" | tail -40
-            bad=$(printf '%s\n' "$out" \
-              | grep -oE "/nix/store/[a-z0-9]{32}-[^']*' is not valid" \
-              | sed "s/' is not valid//" | head -1)
-            if [ -n "$bad" ]; then
-              echo "removing invalid store path: $bad"
-              sudo rm -rf "$bad" || true
-            else
-              # Non-flake failure: surface and stop
-              exit 1
-            fi
-            sleep 2
-          done
-          echo "devenv shell warm-up failed after 3 attempts"
-          exit 1
-
       - name: Release repository updates
-        run: devenv --profile production --no-tui shell release ${{ steps.setSHAs.outputs.base }} ${{ steps.setSHAs.outputs.head }}
-        env:
-          NX_BASE: ${{ steps.setSHAs.outputs.base }}
-          NX_HEAD: ${{ steps.setSHAs.outputs.head }}
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ github.token }}
-          STORM_BOT_GITHUB_TOKEN: ${{ secrets.STORM_BOT_GITHUB_TOKEN }}
-          STORM_WORKSPACE_ROOT: ${{ github.workspace }}
-          STORM_REPOSITORY: ${{ github.repositoryUrl }}
-          NPM_TOKEN: ${{ secrets.STORM_BOT_NPM_TOKEN }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.STORM_BOT_CLOUDFLARE_TOKEN }}
-          TAG: ${{ inputs.tag }}
+        uses: storm-software/action-release@main
+        with:
+          tag: ${{ inputs.tag }}
+          env: |
+            {
+              "GITHUB_ACTOR": "${{ github.actor }}",
+              "GITHUB_REPOSITORY": "${{ github.repository }}",
+              "GITHUB_TOKEN": "${{ github.token }}",
+              "STORM_BOT_GITHUB_TOKEN": "${{ secrets.STORM_BOT_GITHUB_TOKEN }}",
+              "STORM_WORKSPACE_ROOT": "${{ github.workspace }}",
+              "STORM_REPOSITORY": "${{ github.repositoryUrl }}",
+              "NPM_TOKEN": "${{ secrets.STORM_BOT_NPM_TOKEN }}",
+              "CLOUDFLARE_API_TOKEN": "${{ secrets.STORM_BOT_CLOUDFLARE_TOKEN }}"
+            }
 
   success:
     needs:
