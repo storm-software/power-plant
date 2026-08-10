@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Prisma Input
 
+## [0.0.67](https://github.com/storm-software/power-plant/releases/tag/prisma-input%400.0.67) (08/10/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with invalid options normalization ([1c63aba](https://github.com/storm-software/power-plant/commit/1c63aba))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.86**
+- Updated **schema** to **v0.0.84**
+
 ## [0.0.66](https://github.com/storm-software/power-plant/releases/tag/prisma-input%400.0.66) (08/10/2026)
 
 ### Updated Dependencies

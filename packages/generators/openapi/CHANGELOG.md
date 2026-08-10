@@ -2,6 +2,19 @@
 
 # Changelog for Power Plant - Openapi
 
+## [0.0.17](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.17) (08/10/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with invalid options normalization ([1c63aba](https://github.com/storm-software/power-plant/commit/1c63aba))
+
+### Updated Dependencies
+
+- Updated **alloy-js** to **v0.0.83**
+- Updated **core** to **v0.0.86**
+- Updated **noop-output** to **v0.0.65**
+- Updated **schema** to **v0.0.84**
+
 ## [0.0.16](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.16) (08/10/2026)
 
 ### Updated Dependencies

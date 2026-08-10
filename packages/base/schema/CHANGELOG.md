@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.84](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.84) (08/10/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with invalid options normalization ([1c63aba](https://github.com/storm-software/power-plant/commit/1c63aba))
+
 ## [0.0.83](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.83) (08/10/2026)
 
 ### Bug Fixes
