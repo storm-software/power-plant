@@ -34,7 +34,7 @@ import {
 import { joinPaths } from "@stryke/path/join";
 import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
-import type { InferLoadOptions } from "@stryke/resolve/types";
+import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
 import { isBoolean, isObject, isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
@@ -907,22 +907,56 @@ export async function extractTSType(
   }
 
   const exportName = fileReference.export ?? "default";
-  const resolvedPath = await resolveSafe(fileReference.file, {
-    fs: options.fs
+  // Prefer project cwd / tsconfig dir over process.cwd(). Nx runs from the
+  // workspace root, while package specs like `@scope/pkg/export` often only
+  // resolve from the project `node_modules` (pnpm isolation).
+  const cwd =
+    options.cwd ||
+    (options.tsconfig ? findFilePath(options.tsconfig) : undefined) ||
+    process.cwd();
+  const resolvePaths = [cwd].filter(Boolean);
+
+  // Resolve with real disk first — storage/VFS adapters often cannot see
+  // node_modules package exports. Fall back to options.fs for virtual files.
+  let resolvedPath = await resolveSafe(fileReference.file, {
+    paths: resolvePaths
+  });
+  resolvedPath ??= await resolveSafe(fileReference.file, {
+    fs: options.fs,
+    paths: resolvePaths
   });
   const filePath = resolvedPath || fileReference.file;
-  const cwd = options.cwd || process.cwd();
 
-  // Extract-only keys must not reach esbuild.build() — unknown options like
-  // `cwd` fail hard on esbuild 0.28+ ("Invalid option in build() call").
-  const esbuildOverrides = omit(options, [
+  // Extract-only / build-context keys must not reach esbuild.build().
+  const esbuildOverrides = omit(options as Record<string, unknown>, [
     "cwd",
     "fs",
     "logger",
     "storage",
     "tsconfig",
     "reflection",
-    "exclude"
+    "exclude",
+    "packages",
+    "external",
+    "outdir",
+    "outfile",
+    "entryPoints",
+    "entryNames",
+    "write",
+    "bundle",
+    "splitting",
+    "metafile",
+    "minify",
+    "legalComments",
+    "plugins",
+    "absWorkingDir",
+    "alias",
+    "inject",
+    "define",
+    "mainFields",
+    "conditions",
+    "resolveExtensions",
+    "nodePaths"
   ]);
 
   try {
@@ -940,12 +974,15 @@ export async function extractTSType(
           write: false,
           sourcemap: false,
           splitting: false,
-          keepNames: true
+          keepNames: true,
+          // Always bundle the entry — callers often pass packages:"external"
+          // from a larger Powerlines build context.
+          packages: "bundle" as const,
+          bundle: true
         },
         esbuildOverrides,
         {
           treeShaking: true,
-          bundle: true,
           metafile: false,
           minify: true,
           legalComments: "none" as const,
@@ -1083,8 +1120,6 @@ export async function extractSchemaWithSource<TSpec = any>(
   }
 
   const unwrapped = unwrapSchemaConfig(input);
-  // Use Object.keys — `@stryke/type-checks` `isEmptyObject` currently treats
-  // every truthy object as empty (`Boolean(value) || keys.length === 0`).
   if (
     isObject(unwrapped) &&
     !Array.isArray(unwrapped) &&
@@ -1112,7 +1147,7 @@ export async function extractSchemaWithSource<TSpec = any>(
   const hash = extractHash(variant, unwrapped);
 
   if (variant === "file-reference") {
-    const fileReference = extractFileReference(unwrapped);
+    const fileReference = extractFileReference(unwrapped as FileReferenceInput);
     if (!fileReference) {
       throw new Error(
         `Failed to extract a valid file reference from the provided input "${JSON.stringify(
@@ -1146,8 +1181,8 @@ export async function extractSchemaWithSource<TSpec = any>(
       cwd: options.cwd ?? undefined
     } as InferLoadOptions<FileReferenceInput>;
 
-    let resolved = await loadSafe<SchemaConfig>(unwrapped, loadOptions);
-    resolved ??= await extractTSType(unwrapped, {
+    let resolved = await loadSafe<SchemaConfig>(unwrapped as LoadReference, loadOptions);
+    resolved ??= await extractTSType(unwrapped as FileReferenceInput, {
       ...options,
       fs
     });

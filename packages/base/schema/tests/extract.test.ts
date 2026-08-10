@@ -186,8 +186,14 @@ describe("schema/src/extract.ts", () => {
           error: vi.fn()
         },
         reflection: "default",
-        exclude: ["**/node_modules/**"]
-      });
+        exclude: ["**/node_modules/**"],
+        // Powerlines resolveOptions often sets packages:"external" — must not
+        // apply when the schema module itself is the entry point.
+        packages: "external",
+        external: ["*"],
+        alias: { "@shell-shock/core": "/nonexistent" },
+        inject: ["./inject-shim.js"]
+      } as any);
 
       expect(schema).toMatchObject({
         type: "object",
@@ -195,6 +201,28 @@ describe("schema/src/extract.ts", () => {
           id: expect.objectContaining({ type: "string" })
         }
       });
+    });
+
+    it("resolves package entry points using options.cwd / tsconfig dir", async () => {
+      // Simulate Nx running from a parent dir while the package lives under cwd.
+      const previousCwd = process.cwd();
+      process.chdir(packageRoot);
+
+      try {
+        const schema = await extractTSType(`${tsTypeFixtures}/simple.ts#User`, {
+          cwd: packageRoot,
+          tsconfig: `${packageRoot}/tsconfig.json`
+        });
+
+        expect(schema).toMatchObject({
+          type: "object",
+          properties: {
+            id: expect.objectContaining({ type: "string" })
+          }
+        });
+      } finally {
+        process.chdir(previousCwd);
+      }
     });
   });
 

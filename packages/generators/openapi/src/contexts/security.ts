@@ -36,7 +36,7 @@ export function getSecurity(schema: OpenAPISchema): SecuritySchema {
  * @returns A reactive version of the current security schema.
  */
 export function useSecurity(): SecuritySchema {
-  return getSecurity(useSchema<OpenAPISchema>());
+  return getSecurity(useSchema() as OpenAPISchema);
 }
 
 /**
@@ -45,7 +45,7 @@ export function useSecurity(): SecuritySchema {
  * @returns The security schema or undefined if not set / not found.
  */
 export function useSecuritySafe(): SecuritySchema | undefined {
-  const schema = useSchemaSafe<OpenAPISchema>();
+  const schema = useSchemaSafe() as OpenAPISchema | undefined;
   if (!schema) {
     return undefined;
   }

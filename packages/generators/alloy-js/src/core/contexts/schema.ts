@@ -31,7 +31,7 @@ export const SchemaContext: ComponentContext<any> =
  *
  * @returns A reactive version of the current schema.
  */
-export function useSchema<TSchema extends JsonSchemaLike = JsonSchemaLike>(): TSchema {
+export function useSchema<TSchema = JsonSchemaLike>(): TSchema {
   const context = useContext<TSchema>(SchemaContext)!;
   if (!context) {
     throw new Error(
@@ -47,7 +47,7 @@ export function useSchema<TSchema extends JsonSchemaLike = JsonSchemaLike>(): TS
  *
  * @returns The schema context or undefined if not set.
  */
-export function useSchemaSafe<TSchema extends JsonSchemaLike = JsonSchemaLike>(): TSchema | undefined {
+export function useSchemaSafe<TSchema = JsonSchemaLike>(): TSchema | undefined {
   return useContext(SchemaContext) as TSchema | undefined;
 }
 
@@ -62,7 +62,7 @@ export const SchemaPropertyContext: ComponentContext<any> =
  *
  * @returns A reactive version of the current schema property.
  */
-export function useSchemaProperty<TSchemaProperty extends JsonSchemaLike = JsonSchemaLike>(): TSchemaProperty {
+export function useSchemaProperty<TSchemaProperty = JsonSchemaLike>(): TSchemaProperty {
   const context = useContext<TSchemaProperty>(SchemaPropertyContext)!;
   if (!context) {
     throw new Error(
@@ -78,6 +78,6 @@ export function useSchemaProperty<TSchemaProperty extends JsonSchemaLike = JsonS
  *
  * @returns The schema property context or undefined if not set.
  */
-export function useSchemaPropertySafe<TSchemaProperty extends JsonSchemaLike = JsonSchemaLike>(): TSchemaProperty | undefined {
+export function useSchemaPropertySafe<TSchemaProperty = JsonSchemaLike>(): TSchemaProperty | undefined {
   return useContext(SchemaPropertyContext) as TSchemaProperty | undefined;
 }

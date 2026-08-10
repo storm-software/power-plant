@@ -16,7 +16,10 @@
 
  ------------------------------------------------------------------- */
 
-import { useSchemaSafe } from "@power-plant/alloy-js/core/contexts/schema";
+import {
+  useSchema,
+  useSchemaSafe
+} from "@power-plant/alloy-js/core/contexts/schema";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import type { InfoSchema } from "../types";
 
@@ -33,7 +36,7 @@ export function getInfo(schema: OpenAPISchema): InfoSchema {
  * @returns A reactive version of the current info schema.
  */
 export function useInfo(): InfoSchema {
-  return getInfo(useSchema<OpenAPISchema>());
+  return getInfo(useSchema() as OpenAPISchema);
 }
 
 /**
@@ -42,7 +45,7 @@ export function useInfo(): InfoSchema {
  * @returns The model schema or undefined if not set / not found.
  */
 export function useInfoSafe(): InfoSchema | undefined {
-  const schema = useSchemaSafe<OpenAPISchema>();
+  const schema = useSchemaSafe() as OpenAPISchema | undefined;
   if (!schema) {
     return undefined;
   }

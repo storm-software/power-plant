@@ -250,7 +250,9 @@
   "typings": "dist/index.d.mts",
   "files": ["dist"],
   "dependencies": {
+    "@alloy-js/core": "catalog:",
     "@power-plant/core": "workspace:*",
+    "@power-plant/noop-output": "workspace:*",
     "@power-plant/openapi-schema": "workspace:*",
     "@power-plant/schema": "workspace:*",
     "@power-plant/alloy-js": "workspace:*",

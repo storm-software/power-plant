@@ -16,7 +16,8 @@
 
  ------------------------------------------------------------------- */
 
-import type { Children, For, ForProps } from "@alloy-js/core";
+import type { Children, ForProps } from "@alloy-js/core";
+import { For } from "@alloy-js/core";
 import { useSchema } from "@power-plant/alloy-js/core/contexts/schema";
 import type { OpenAPISchema } from "@power-plant/openapi-schema";
 import type { OpenAPIOperation } from "../contexts/operation";
