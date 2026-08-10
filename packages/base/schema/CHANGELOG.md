@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.85](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.85) (08/10/2026)
+
+### Bug Fixes
+
+- **schema:** Resolve issue with timeouts when bundling ([e99480c](https://github.com/storm-software/power-plant/commit/e99480c))
+
 ## [0.0.84](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.84) (08/10/2026)
 
 ### Bug Fixes

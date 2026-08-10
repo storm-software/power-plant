@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/openapi-typescript",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "private": false,
   "description": "A Power Plant generator that uses openapi-typescript to generate TypeScript types from an OpenAPI schema.",
   "keywords": [
