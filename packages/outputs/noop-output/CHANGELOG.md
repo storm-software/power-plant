@@ -2,6 +2,23 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.63](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.63) (08/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Force devenv modules to update ([1c69a39](https://github.com/storm-software/power-plant/commit/1c69a39))
+- **monorepo:** Added Orca ADE setup configuration ([8394420](https://github.com/storm-software/power-plant/commit/8394420))
+- **monorepo:** Added Orca ADE setup configuration ([e8d562a](https://github.com/storm-software/power-plant/commit/e8d562a))
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue with inconsistent `typescript` version ([e279be0](https://github.com/storm-software/power-plant/commit/e279be0))
+- **monorepo:** Resovle workspace typescript compilation issue ([e3c86cd](https://github.com/storm-software/power-plant/commit/e3c86cd))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.84**
+
 ## [0.0.62](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.62) (08/07/2026)
 
 ### Updated Dependencies

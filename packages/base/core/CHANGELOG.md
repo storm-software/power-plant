@@ -2,6 +2,24 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.84](https://github.com/storm-software/power-plant/releases/tag/core%400.0.84) (08/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Force devenv modules to update ([1c69a39](https://github.com/storm-software/power-plant/commit/1c69a39))
+- **monorepo:** Update workspace packages' dependencies ([eef2b9f](https://github.com/storm-software/power-plant/commit/eef2b9f))
+- **monorepo:** Added Orca ADE setup configuration ([8394420](https://github.com/storm-software/power-plant/commit/8394420))
+- **monorepo:** Added Orca ADE setup configuration ([e8d562a](https://github.com/storm-software/power-plant/commit/e8d562a))
+
+### Bug Fixes
+
+- **monorepo:** Resolve issue with inconsistent `typescript` version ([e279be0](https://github.com/storm-software/power-plant/commit/e279be0))
+- **monorepo:** Resovle workspace typescript compilation issue ([e3c86cd](https://github.com/storm-software/power-plant/commit/e3c86cd))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.82**
+
 ## [0.0.83](https://github.com/storm-software/power-plant/releases/tag/core%400.0.83) (08/07/2026)
 
 ### Updated Dependencies
