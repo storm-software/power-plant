@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.83](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.83) (08/10/2026)
+
+### Bug Fixes
+
+- **schema:** Fix issue resolving paths and providing options to `esbuild` ([d8505cc](https://github.com/storm-software/power-plant/commit/d8505cc))
+
 ## [0.0.81](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.81) (08/07/2026)
 
 ### Bug Fixes
