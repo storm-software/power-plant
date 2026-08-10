@@ -123,7 +123,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@power-plant/core": "workspace:*",
     "@power-plant/dtcg-schema": "workspace:*",
@@ -135,6 +137,7 @@
     "@terrazzo/parser": "catalog:"
   },
   "devDependencies": {
+    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:"

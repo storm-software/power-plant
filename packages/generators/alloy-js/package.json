@@ -877,7 +877,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@alloy-js/core": "catalog:",
     "@alloy-js/json": "catalog:",
@@ -896,6 +898,7 @@
     "defu": "catalog:"
   },
   "devDependencies": {
+    "@power-plant/tools-config": "workspace:*",
     "@alloy-js/babel-preset": "catalog:",
     "@babel/core": "catalog:",
     "@babel/preset-typescript": "catalog:",

@@ -79,7 +79,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "typings": "dist/index.d.mts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@graphql-tools/load": "catalog:",
     "@graphql-tools/utils": "catalog:",
@@ -89,6 +91,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
     "powerlines": "catalog:"

@@ -6,10 +6,7 @@
   "targets": {
     "nx-release-publish": {
       "executor": "@storm-software/workspace-tools:npm-publish",
-      "dependsOn": [
-        "build",
-        "^nx-release-publish"
-      ]
+      "dependsOn": ["build", "^nx-release-publish"]
     }
   }
 }
