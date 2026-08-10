@@ -174,5 +174,63 @@ describe("schema/src/extract.ts", () => {
         )
       );
     });
+
+    it("ignores extract-only options that are invalid for esbuild.build", async () => {
+      const schema = await extractTSType(`${tsTypeFixtures}/simple.ts#User`, {
+        ...extractTsOptions,
+        // These must not be forwarded to esbuild.build() (cwd especially).
+        logger: {
+          debug: vi.fn(),
+          info: vi.fn(),
+          warn: vi.fn(),
+          error: vi.fn()
+        },
+        reflection: "default",
+        exclude: ["**/node_modules/**"]
+      });
+
+      expect(schema).toMatchObject({
+        type: "object",
+        properties: {
+          id: expect.objectContaining({ type: "string" })
+        }
+      });
+    });
+  });
+
+  describe("extractSchemaWithSource empty object", () => {
+    it("treats literal {} as an any JSON schema", async () => {
+      const extracted = await extractSchemaWithSource({});
+
+      expect(extracted.variant).toBe("json-schema");
+      expect(extracted.schema).toEqual({
+        type: [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null",
+          "array",
+          "object"
+        ]
+      });
+    });
+
+    it("does not treat file-reference objects as empty", async () => {
+      const extracted = await extractSchemaWithSource(
+        {
+          file: `${tsTypeFixtures}/simple.ts`,
+          export: "User"
+        },
+        extractTsOptions
+      );
+
+      expect(extracted.schema).toMatchObject({
+        type: "object",
+        properties: {
+          id: expect.objectContaining({ type: "string" })
+        }
+      });
+    });
   });
 });

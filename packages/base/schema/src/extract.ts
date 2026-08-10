@@ -36,12 +36,7 @@ import { VALID_OBJECT_SOURCE_EXTENSIONS } from "@stryke/resolve/constants";
 import { loadSafe } from "@stryke/resolve/load";
 import type { InferLoadOptions } from "@stryke/resolve/types";
 import { list } from "@stryke/string-format/list";
-import {
-  isBoolean,
-  isEmptyObject,
-  isObject,
-  isSetString
-} from "@stryke/type-checks";
+import { isBoolean, isObject, isSetString } from "@stryke/type-checks";
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type { FileReferenceInput, FileSystemInterface } from "@stryke/types";
 import {
@@ -918,6 +913,18 @@ export async function extractTSType(
   const filePath = resolvedPath || fileReference.file;
   const cwd = options.cwd || process.cwd();
 
+  // Extract-only keys must not reach esbuild.build() — unknown options like
+  // `cwd` fail hard on esbuild 0.28+ ("Invalid option in build() call").
+  const esbuildOverrides = omit(options, [
+    "cwd",
+    "fs",
+    "logger",
+    "storage",
+    "tsconfig",
+    "reflection",
+    "exclude"
+  ]);
+
   try {
     options.logger?.debug?.(
       `Generating JSON schema for bundled "${filePath}" using the type "${exportName}"`
@@ -935,7 +942,7 @@ export async function extractTSType(
           splitting: false,
           keepNames: true
         },
-        options,
+        esbuildOverrides,
         {
           treeShaking: true,
           bundle: true,
@@ -1076,7 +1083,13 @@ export async function extractSchemaWithSource<TSpec = any>(
   }
 
   const unwrapped = unwrapSchemaConfig(input);
-  if (isObject(unwrapped) && isEmptyObject(unwrapped)) {
+  // Use Object.keys — `@stryke/type-checks` `isEmptyObject` currently treats
+  // every truthy object as empty (`Boolean(value) || keys.length === 0`).
+  if (
+    isObject(unwrapped) &&
+    !Array.isArray(unwrapped) &&
+    Object.keys(unwrapped).length === 0
+  ) {
     const schema = {
       type: [...JSON_SCHEMA_TYPES]
     };
