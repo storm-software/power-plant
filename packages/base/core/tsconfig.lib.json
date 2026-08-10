@@ -5,7 +5,10 @@
     "rootDir": ".",
     "outDir": "./out-tsc"
   },
-  "references": [{ "path": "../schema/tsconfig.lib.json" }],
+  "references": [
+    { "path": "../schema/tsconfig.lib.json" },
+    { "path": "../../../tools/config" }
+  ],
   "include": [
     "src/**/*.ts",
     "src/**/*.js",

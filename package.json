@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "description": "☢️ Generate anything from a specification",
-  "keywords": ["power-plant", "storm-software", "monorepo"],
+  "keywords": [
+    "power-plant",
+    "storm-software",
+    "monorepo"
+  ],
   "homepage": "https://stormsoftware.com",
   "bugs": {
     "url": "https://stormsoftware.com/support",
@@ -87,7 +91,7 @@
     "prettier": "catalog:",
     "rimraf": "catalog:",
     "tslib": "catalog:",
-    "typescript": "catalog:",
+    "typescript": "^6.0.3",
     "verdaccio": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
