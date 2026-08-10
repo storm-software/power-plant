@@ -927,7 +927,6 @@ export async function extractTSType(
   });
   const filePath = resolvedPath || fileReference.file;
 
-  // Extract-only / build-context keys must not reach esbuild.build().
   const esbuildOverrides = omit(options as Record<string, unknown>, [
     "cwd",
     "fs",
@@ -935,28 +934,7 @@ export async function extractTSType(
     "storage",
     "tsconfig",
     "reflection",
-    "exclude",
-    "packages",
-    "external",
-    "outdir",
-    "outfile",
-    "entryPoints",
-    "entryNames",
-    "write",
-    "bundle",
-    "splitting",
-    "metafile",
-    "minify",
-    "legalComments",
-    "plugins",
-    "absWorkingDir",
-    "alias",
-    "inject",
-    "define",
-    "mainFields",
-    "conditions",
-    "resolveExtensions",
-    "nodePaths"
+    "exclude"
   ]);
 
   try {
@@ -974,15 +952,12 @@ export async function extractTSType(
           write: false,
           sourcemap: false,
           splitting: false,
-          keepNames: true,
-          // Always bundle the entry — callers often pass packages:"external"
-          // from a larger Powerlines build context.
-          packages: "bundle" as const,
-          bundle: true
+          keepNames: true
         },
         esbuildOverrides,
         {
           treeShaking: true,
+          bundle: true,
           metafile: false,
           minify: true,
           legalComments: "none" as const,
@@ -1181,7 +1156,10 @@ export async function extractSchemaWithSource<TSpec = any>(
       cwd: options.cwd ?? undefined
     } as InferLoadOptions<FileReferenceInput>;
 
-    let resolved = await loadSafe<SchemaConfig>(unwrapped as LoadReference, loadOptions);
+    let resolved = await loadSafe<SchemaConfig>(
+      unwrapped as LoadReference,
+      loadOptions
+    );
     resolved ??= await extractTSType(unwrapped as FileReferenceInput, {
       ...options,
       fs
