@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.87](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.87) (08/11/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies ([3feebbe5](https://github.com/storm-software/power-plant/commit/3feebbe5))
+
 ## [0.0.85](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.85) (08/10/2026)
 
 ### Bug Fixes
