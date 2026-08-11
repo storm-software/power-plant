@@ -2,6 +2,15 @@
 
 # Changelog for Power Plant - Openapi
 
+## [0.0.19](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.19) (08/11/2026)
+
+### Updated Dependencies
+
+- Updated **alloy-js** to **v0.0.85**
+- Updated **core** to **v0.0.88**
+- Updated **noop-output** to **v0.0.67**
+- Updated **schema** to **v0.0.86**
+
 ## [0.0.18](https://github.com/storm-software/power-plant/releases/tag/openapi%400.0.18) (08/10/2026)
 
 ### Updated Dependencies
