@@ -49,6 +49,7 @@ import type { Plugin } from "esbuild";
 import { build } from "esbuild";
 import { createJiti } from "jiti";
 import { readFile } from "node:fs/promises";
+import { isAbsolute, resolve } from "node:path";
 import ts, { DiagnosticCategory } from "typescript";
 import type * as z3 from "zod/v3";
 import { JSON_SCHEMA_TYPES } from "./constants";
@@ -983,8 +984,11 @@ export async function extractTSType(
       );
     }
 
+    const evaluationFilePath = isAbsolute(filePath)
+      ? filePath
+      : resolve(cwd, filePath);
     const evaluated = (await createJiti(cwd).evalModule(bundled, {
-      filename: filePath,
+      filename: evaluationFilePath,
       ext: findFileDotExtensionSafe(filePath) || ".ts"
     })) as Record<string, unknown>;
 
