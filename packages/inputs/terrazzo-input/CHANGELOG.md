@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Terrazzo Input
 
+## [0.0.76](https://github.com/storm-software/power-plant/releases/tag/terrazzo-input%400.0.76) (08/12/2026)
+
+### Bug Fixes
+
+- **monorepo:** Update workspace packages' to use latest Powerlines export changes ([a916f8fb](https://github.com/storm-software/power-plant/commit/a916f8fb))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.90**
+- Updated **schema** to **v0.0.88**
+
 ## [0.0.75](https://github.com/storm-software/power-plant/releases/tag/terrazzo-input%400.0.75) (08/11/2026)
 
 ### Updated Dependencies

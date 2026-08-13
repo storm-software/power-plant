@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Capnp Input
 
+## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/capnp-input%400.0.72) (08/12/2026)
+
+### Bug Fixes
+
+- **monorepo:** Update workspace packages' to use latest Powerlines export changes ([a916f8fb](https://github.com/storm-software/power-plant/commit/a916f8fb))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.90**
+- Updated **schema** to **v0.0.88**
+
 ## [0.0.71](https://github.com/storm-software/power-plant/releases/tag/capnp-input%400.0.71) (08/11/2026)
 
 ### Updated Dependencies

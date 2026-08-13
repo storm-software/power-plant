@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.88](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.88) (08/12/2026)
+
+### Bug Fixes
+
+- **monorepo:** Update workspace packages' to use latest Powerlines export changes ([a916f8fb](https://github.com/storm-software/power-plant/commit/a916f8fb))
+
 ## [0.0.87](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.87) (08/11/2026)
 
 ### Miscellaneous

@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.90](https://github.com/storm-software/power-plant/releases/tag/core%400.0.90) (08/12/2026)
+
+### Bug Fixes
+
+- **monorepo:** Update workspace packages' to use latest Powerlines export changes ([a916f8fb](https://github.com/storm-software/power-plant/commit/a916f8fb))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.88**
+
 ## [0.0.89](https://github.com/storm-software/power-plant/releases/tag/core%400.0.89) (08/11/2026)
 
 ### Updated Dependencies

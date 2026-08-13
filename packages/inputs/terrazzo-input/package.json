@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/terrazzo-input",
-  "version": "0.0.75",
+  "version": "0.0.76",
   "private": false,
   "description": "A Power Plant input for reading the source specification from a Design Tokens Community Group (DTCG) schema document and parsing it into a Design Tokens format using Terrazzo.",
   "keywords": [
