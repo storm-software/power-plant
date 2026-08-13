@@ -17,7 +17,7 @@
  ------------------------------------------------------------------- */
 
 import { defineConfig } from "@power-plant/tools-config/powerlines.shared";
-import tsdown from "@powerlines/plugin-tsdown";
+import { plugin as tsdown } from "@powerlines/plugin-tsdown";
 
 const config = defineConfig({
   input: ["src/index.ts", "src/pipe.ts", "src/combine.ts"],

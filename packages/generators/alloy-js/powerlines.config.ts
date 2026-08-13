@@ -17,8 +17,8 @@
  ------------------------------------------------------------------- */
 
 import { defineConfig } from "@power-plant/tools-config/powerlines.shared";
-import babel from "@powerlines/plugin-babel";
-import tsdown from "@powerlines/plugin-tsdown";
+import { plugin as babel } from "@powerlines/plugin-babel";
+import { plugin as tsdown } from "@powerlines/plugin-tsdown";
 import { findFileExtension } from "@stryke/path/find";
 
 const config = defineConfig({
