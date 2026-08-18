@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/prisma",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "private": false,
   "description": "A Power Plant generator that runs Prisma generators via @prisma/internals.",
   "keywords": [

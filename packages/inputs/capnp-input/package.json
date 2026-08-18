@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/capnp-input",
-  "version": "0.0.72",
+  "version": "0.0.73",
   "private": false,
   "description": "A Power Plant input for reading Cap'n Proto schema files via the capnpc compiler.",
   "keywords": [

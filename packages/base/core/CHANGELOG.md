@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.91](https://github.com/storm-software/power-plant/releases/tag/core%400.0.91) (08/18/2026)
+
+### Miscellaneous
+
+- **core:** Add logic to avoid crashes when getting error reading local store ([8b856387](https://github.com/storm-software/power-plant/commit/8b856387))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.89**
+
 ## [0.0.90](https://github.com/storm-software/power-plant/releases/tag/core%400.0.90) (08/12/2026)
 
 ### Bug Fixes

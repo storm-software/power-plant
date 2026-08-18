@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Capnp Input
 
+## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/capnp-input%400.0.73) (08/18/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.91**
+- Updated **schema** to **v0.0.89**
+
 ## [0.0.72](https://github.com/storm-software/power-plant/releases/tag/capnp-input%400.0.72) (08/12/2026)
 
 ### Bug Fixes
