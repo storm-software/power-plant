@@ -26,6 +26,8 @@ import defu from "defu";
 import os from "node:os";
 import { createStorage } from "unstorage";
 import fsLite from "unstorage/drivers/fs-lite";
+import memory from "unstorage/drivers/memory";
+import type { Unstable_ExecutionContext } from "../types/__internal";
 import type { UserConfig } from "../types/config";
 import type { LocalStore, SessionContext } from "../types/context";
 import type { GeneratedDocument } from "../types/generator";
@@ -33,7 +35,6 @@ import type { Input } from "../types/input";
 import type { Output } from "../types/output";
 import type { SchemaOf } from "../types/schema";
 import type { Logger, Settings } from "../types/settings";
-import type { Unstable_ExecutionContext } from "../types/__internal";
 
 const logger: Logger = {
   // eslint-disable-next-line no-console
@@ -65,31 +66,59 @@ export async function createSessionContext(
   const now = new Date();
 
   const storage = createStorage({
-    driver: fsLite({
-      base: cwd
-    })
+    driver: userConfig.settings?.skipStorage
+      ? memory()
+      : fsLite({
+          base: cwd
+        })
   });
 
-  const store = JSON.parse(
-    (await readFileIfExisting(joinPaths(paths.data, ".local-store.json"))) ||
-      "{}"
-  ) as LocalStore;
+  let store: LocalStore = {};
+
+  if (!userConfig.settings?.skipStorage) {
+    try {
+      store = JSON.parse(
+        (await readFileIfExisting(
+          joinPaths(paths.data, ".local-store.json")
+        )) || "{}"
+      ) as LocalStore;
+    } catch (error) {
+      logger.error(
+        `Failed to read local store file (${joinPaths(
+          paths.data,
+          ".local-store.json"
+        )}): ${error instanceof Error ? error.message : "Unknown error"}`
+      );
+    }
+  }
 
   const device = store.device || os.hostname() || uuid();
   const user = store.user || os.userInfo().username || uuid();
 
-  if (!isSetString(store.device) || !isSetString(store.user)) {
-    await writeFile(
-      joinPaths(paths.data, ".local-store.json"),
-      JSON.stringify(
-        {
-          device,
-          user
-        },
-        null,
-        2
-      )
-    );
+  if (
+    !userConfig.settings?.skipStorage &&
+    (!isSetString(store.device) || !isSetString(store.user))
+  ) {
+    try {
+      await writeFile(
+        joinPaths(paths.data, ".local-store.json"),
+        JSON.stringify(
+          {
+            device,
+            user
+          },
+          null,
+          2
+        )
+      );
+    } catch (error) {
+      logger.error(
+        `Failed to write local store file (${joinPaths(
+          paths.data,
+          ".local-store.json"
+        )}): ${error instanceof Error ? error.message : "Unknown error"}`
+      );
+    }
   }
 
   return defu(
