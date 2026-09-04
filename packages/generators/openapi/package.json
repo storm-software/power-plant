@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/openapi",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "private": false,
   "description": "A Power Plant generator that uses alloy-js to generate files from an OpenAPI schema.",
   "keywords": [
