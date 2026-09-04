@@ -8,8 +8,8 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@ai-sdk/provider": ^4.0.7
-  "@ai-sdk/provider-utils": ^5.0.27
+  "@ai-sdk/provider": ^4.0.10
+  "@ai-sdk/provider-utils": ^5.0.36
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -23,7 +23,7 @@ catalog:
   "@babel/preset-typescript": ^8.0.1
   "@content-collections/core": ^0.15.2
   "@graphql-codegen/core": ^6.2.0
-  "@graphql-codegen/plugin-helpers": ^7.1.0
+  "@graphql-codegen/plugin-helpers": ^7.3.0
   "@graphql-tools/apollo-engine-loader": ^8.0.35
   "@graphql-tools/code-file-loader": ^8.1.37
   "@graphql-tools/git-loader": ^8.0.41
@@ -64,56 +64,56 @@ catalog:
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.69
-  "@storm-software/config-tools": ^1.190.133
-  "@storm-software/cspell": ^0.46.200
-  "@storm-software/eslint": ^0.170.168
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.96
-  "@storm-software/git-tools": ^2.131.141
-  "@storm-software/linting-tools": ^1.134.63
-  "@storm-software/markdownlint": ^0.30.288
-  "@storm-software/pnpm-tools": ^0.7.147
-  "@storm-software/prettier": ^0.59.186
-  "@storm-software/tsconfig": ^0.48.199
-  "@storm-software/untyped": ^0.24.275
-  "@storm-software/workspace-tools": ^1.297.2
-  "@stryke/convert": ^0.7.41
-  "@stryke/capnp": ^0.12.139
-  "@stryke/date": ^0.0.22
-  "@stryke/env": ^0.20.129
-  "@stryke/fs": ^0.33.112
-  "@stryke/hash": ^0.13.65
-  "@stryke/helpers": ^0.10.50
-  "@stryke/json": ^0.15.34
-  "@stryke/path": ^0.29.37
-  "@stryke/resolve": ^0.0.27
-  "@stryke/string-format": ^0.17.52
-  "@stryke/type-checks": ^0.6.43
-  "@stryke/types": ^0.12.38
-  "@stryke/unique-id": ^0.3.123
-  "@stryke/url": ^0.4.62
-  "@stryke/zod": ^0.3.56
+  "@storm-software/config": ^1.138.70
+  "@storm-software/config-tools": ^1.190.134
+  "@storm-software/cspell": ^0.46.201
+  "@storm-software/eslint": ^0.170.169
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.97
+  "@storm-software/git-tools": ^2.131.142
+  "@storm-software/linting-tools": ^1.134.64
+  "@storm-software/markdownlint": ^0.30.289
+  "@storm-software/pnpm-tools": ^0.7.148
+  "@storm-software/prettier": ^0.59.187
+  "@storm-software/tsconfig": ^0.48.200
+  "@storm-software/untyped": ^0.24.276
+  "@storm-software/workspace-tools": ^1.297.3
+  "@stryke/convert": ^0.7.45
+  "@stryke/capnp": ^0.12.143
+  "@stryke/date": ^0.0.26
+  "@stryke/env": ^0.20.133
+  "@stryke/fs": ^0.33.116
+  "@stryke/hash": ^0.13.69
+  "@stryke/helpers": ^0.10.54
+  "@stryke/json": ^0.15.38
+  "@stryke/path": ^0.29.41
+  "@stryke/resolve": ^0.0.31
+  "@stryke/string-format": ^0.17.56
+  "@stryke/type-checks": ^0.6.47
+  "@stryke/types": ^0.12.42
+  "@stryke/unique-id": ^0.3.127
+  "@stryke/url": ^0.4.66
+  "@stryke/zod": ^0.3.60
   "@terrazzo/parser": ^2.7.1
   "@types/node": ^25.9.5
   "@typescript/native-preview": 7.0.0-dev.20251218.3
   "@valibot/to-json-schema": ^1.7.1
   typescript: ^6.0.3
-  ai: ^7.0.66
+  ai: ^7.0.91
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
-  eslint: ^10.8.1
+  eslint: ^10.9.1
   graphql: ^17.0.2
   handlebars: ^4.7.9
   jiti: ^2.7.0
   lefthook: ^1.13.6
   log4brains: ^1.1.0
   nx: 23.1.1
-  picomatch: ^4.0.5
+  picomatch: ^4.0.7
   powerlines: ^0.47.211
   prettier: ^3.9.6
   rimraf: ^6.1.3
-  style-dictionary: ^5.5.1
+  style-dictionary: ^5.5.2
   to-regex-range: ^5.0.1
   tsdown: ^0.22.14
   tslib: ^2.8.1
@@ -121,13 +121,13 @@ catalog:
   untyped: ^1.5.2
   valibot: ^1.4.2
   verdaccio: 6.0.5
-  vite: ^8.2.1
-  vitest: ~4.1.10
-  zod: ^4.4.3
+  vite: ^8.2.2
+  vitest: ~4.1.11
+  zod: ^4.5.4
   zx: ^8.8.5
   "@typescript/vfs": ^1.6.4
-  "@storm-software/eslint-plugin-pnpm": ^0.0.96
-  "@storm-software/tsdoc": ^0.13.285
+  "@storm-software/eslint-plugin-pnpm": ^0.0.97
+  "@storm-software/tsdoc": ^0.13.286
 overrides:
   typescript: "catalog:"
   "@power-plant/schema": workspace:*
@@ -213,6 +213,7 @@ minimumReleaseAgeExclude:
   - "@esbuild/win32-x64@0.28.2"
   - esbuild@0.28.2
   - smol-toml@1.8.0
+  - pkg-types@2.3.2
 allowBuilds:
   "@deepkit/type-compiler": false
   "@hyperjump/json-pointer": true
