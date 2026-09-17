@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.79) (09/17/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies and devenv modules ([9ffa167f](https://github.com/storm-software/power-plant/commit/9ffa167f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.93**
+- Updated **schema** to **v0.0.91**
+- Updated **terrazzo-input** to **v0.0.79**
+
 ## [0.0.78](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.78) (09/04/2026)
 
 ### Updated Dependencies

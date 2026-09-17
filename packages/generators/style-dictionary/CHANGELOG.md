@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Style Dictionary
 
+## [0.0.78](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.78) (09/17/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies and devenv modules ([9ffa167f](https://github.com/storm-software/power-plant/commit/9ffa167f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.93**
+- Updated **schema** to **v0.0.91**
+
 ## [0.0.77](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.77) (09/04/2026)
 
 ### Updated Dependencies

@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Unstorage Output
 
+## [0.0.89](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.89) (09/17/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies and devenv modules ([9ffa167f](https://github.com/storm-software/power-plant/commit/9ffa167f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.93**
+- Updated **schema** to **v0.0.91**
+
 ## [0.0.88](https://github.com/storm-software/power-plant/releases/tag/unstorage-output%400.0.88) (09/04/2026)
 
 ### Updated Dependencies

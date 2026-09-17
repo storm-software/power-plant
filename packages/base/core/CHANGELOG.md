@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.93](https://github.com/storm-software/power-plant/releases/tag/core%400.0.93) (09/17/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace packages' dependencies and devenv modules ([9ffa167f](https://github.com/storm-software/power-plant/commit/9ffa167f))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.91**
+
 ## [0.0.92](https://github.com/storm-software/power-plant/releases/tag/core%400.0.92) (09/04/2026)
 
 ### Updated Dependencies
