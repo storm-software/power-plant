@@ -5,9 +5,9 @@
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://public.storm-cdn.com/power-plant/media/banner-1280x640-dark.gif">
-  <source media="(prefers-color-scheme: light)" srcset="https://public.storm-cdn.com/power-plant/media/banner-1280x640-light.gif">
-<img src="https://public.storm-cdn.com/power-plant/media/banner-1280x640-dark.gif" width="100%" alt="Power Plant" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://public.storm-cdn.com/power-plant/media/banner-1280x427-dark.gif">
+  <source media="(prefers-color-scheme: light)" srcset="https://public.storm-cdn.com/power-plant/media/banner-1280x427-light.gif">
+<img src="https://public.storm-cdn.com/power-plant/media/banner-1280x427-dark.gif" width="100%" alt="Power Plant" />
 </picture>
 </div>
 <br />
@@ -33,7 +33,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <h3 align="center">💻 Visit <a href="https://stormsoftware.com" target="_blank">stormsoftware.com</a> to stay up to date with this developer</h3><br />
 
-[![Version](https://img.shields.io/badge/version-0.0.20-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
+[![Version](https://img.shields.io/badge/version-0.0.89-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
 
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->

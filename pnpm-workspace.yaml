@@ -8,8 +8,8 @@ packages:
   - packages/devtools/*
   - docs/*
 catalog:
-  "@ai-sdk/provider": ^4.0.10
-  "@ai-sdk/provider-utils": ^5.0.36
+  "@ai-sdk/provider": ^4.0.15
+  "@ai-sdk/provider-utils": ^5.0.41
   "@alloy-js/babel-preset": ^0.3.0
   "@alloy-js/core": ^0.24.1
   "@alloy-js/json": ^0.24.0
@@ -19,19 +19,19 @@ catalog:
   "@asyncapi/generator-hooks": ^0.1.1
   "@asyncapi/parser": ^3.6.3
   "@asyncapi/specs": ^6.11.1
-  "@babel/core": ^8.0.1
+  "@babel/core": ^8.0.5
   "@babel/preset-typescript": ^8.0.1
   "@content-collections/core": ^0.15.2
   "@graphql-codegen/core": ^6.2.0
   "@graphql-codegen/plugin-helpers": ^7.3.0
-  "@graphql-tools/apollo-engine-loader": ^8.0.35
-  "@graphql-tools/code-file-loader": ^8.1.37
-  "@graphql-tools/git-loader": ^8.0.41
-  "@graphql-tools/github-loader": ^9.1.7
-  "@graphql-tools/graphql-file-loader": ^8.1.19
-  "@graphql-tools/json-file-loader": ^8.0.33
-  "@graphql-tools/load": ^8.1.16
-  "@graphql-tools/url-loader": ^9.1.7
+  "@graphql-tools/apollo-engine-loader": ^8.0.36
+  "@graphql-tools/code-file-loader": ^8.1.39
+  "@graphql-tools/git-loader": ^8.0.42
+  "@graphql-tools/github-loader": ^9.1.8
+  "@graphql-tools/graphql-file-loader": ^8.1.20
+  "@graphql-tools/json-file-loader": ^8.0.34
+  "@graphql-tools/load": ^8.1.17
+  "@graphql-tools/url-loader": ^9.1.9
   "@graphql-tools/utils": ^11.2.2
   "@graphql-typed-document-node/core": ^3.2.0
   "@hey-api/openapi-ts": ^0.99.0
@@ -55,28 +55,28 @@ catalog:
   "@deepkit/type": ^1.0.19
   "@deepkit/type-spec": ^1.0.19
   "@deepkit/type-compiler": 1.0.19
-  "@powerlines/nx": ^0.13.251
-  "@powerlines/plugin-babel": ^0.13.208
-  "@powerlines/plugin-tsdown": ^0.1.612
-  "@powerlines/tsconfig": ^0.4.255
-  "@powerlines/tsdoc": ^0.2.203
+  "@powerlines/nx": ^0.13.252
+  "@powerlines/plugin-babel": ^0.13.209
+  "@powerlines/plugin-tsdown": ^0.1.613
+  "@powerlines/tsconfig": ^0.4.256
+  "@powerlines/tsdoc": ^0.2.204
   "@prisma/client-generator-registry": ^6.19.3
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.70
-  "@storm-software/config-tools": ^1.190.134
-  "@storm-software/cspell": ^0.46.201
-  "@storm-software/eslint": ^0.170.169
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.97
-  "@storm-software/git-tools": ^2.131.142
-  "@storm-software/linting-tools": ^1.134.64
-  "@storm-software/markdownlint": ^0.30.289
-  "@storm-software/pnpm-tools": ^0.7.148
-  "@storm-software/prettier": ^0.59.187
-  "@storm-software/tsconfig": ^0.48.200
-  "@storm-software/untyped": ^0.24.276
-  "@storm-software/workspace-tools": ^1.297.3
+  "@storm-software/config": ^1.138.76
+  "@storm-software/config-tools": ^1.190.140
+  "@storm-software/cspell": ^0.46.207
+  "@storm-software/eslint": ^0.170.175
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.103
+  "@storm-software/git-tools": ^2.131.148
+  "@storm-software/linting-tools": ^1.134.70
+  "@storm-software/markdownlint": ^0.30.295
+  "@storm-software/pnpm-tools": ^0.7.154
+  "@storm-software/prettier": ^0.59.193
+  "@storm-software/tsconfig": ^0.48.206
+  "@storm-software/untyped": ^0.24.282
+  "@storm-software/workspace-tools": ^1.297.9
   "@stryke/convert": ^0.7.45
   "@stryke/capnp": ^0.12.143
   "@stryke/date": ^0.0.26
@@ -94,15 +94,15 @@ catalog:
   "@stryke/url": ^0.4.66
   "@stryke/zod": ^0.3.60
   "@terrazzo/parser": ^2.7.1
-  "@types/node": ^25.9.5
+  "@types/node": ^25.9.7
   "@typescript/native-preview": 7.0.0-dev.20251218.3
-  "@valibot/to-json-schema": ^1.7.1
+  "@valibot/to-json-schema": ^1.8.0
   typescript: ^6.0.3
-  ai: ^7.0.91
+  ai: ^7.0.102
   c12: ^3.3.4
   copyfiles: ^2.4.1
   defu: ^6.1.7
-  eslint: ^10.9.1
+  eslint: ^10.10.0
   graphql: ^17.0.2
   handlebars: ^4.7.9
   jiti: ^2.7.0
@@ -110,24 +110,24 @@ catalog:
   log4brains: ^1.1.0
   nx: 23.1.1
   picomatch: ^4.0.7
-  powerlines: ^0.47.211
-  prettier: ^3.9.6
+  powerlines: ^0.47.212
+  prettier: ^3.9.7
   rimraf: ^6.1.3
-  style-dictionary: ^5.5.2
+  style-dictionary: ^5.5.3
   to-regex-range: ^5.0.1
   tsdown: ^0.22.14
   tslib: ^2.8.1
   unstorage: ^1.17.5
   untyped: ^1.5.2
-  valibot: ^1.4.2
+  valibot: ^1.5.0
   verdaccio: 6.0.5
-  vite: ^8.2.2
+  vite: ^8.3.0
   vitest: ~4.1.11
-  zod: ^4.5.4
+  zod: ^4.6.5
   zx: ^8.8.5
   "@typescript/vfs": ^1.6.4
-  "@storm-software/eslint-plugin-pnpm": ^0.0.97
-  "@storm-software/tsdoc": ^0.13.286
+  "@storm-software/eslint-plugin-pnpm": ^0.0.103
+  "@storm-software/tsdoc": ^0.13.292
 overrides:
   typescript: "catalog:"
   "@power-plant/schema": workspace:*
@@ -214,6 +214,9 @@ minimumReleaseAgeExclude:
   - esbuild@0.28.2
   - smol-toml@1.8.0
   - pkg-types@2.3.2
+  - prettier@3.9.7
+  - '@microsoft/tsdoc-config@0.18.2'
+  - '@microsoft/tsdoc@0.17.0'
 allowBuilds:
   "@deepkit/type-compiler": false
   "@hyperjump/json-pointer": true
