@@ -906,7 +906,7 @@
     "powerlines": "catalog:"
   },
   "peerDependencies": {
-    "@alloy-js/babel-preset": ">=0.3.0"
+    "@alloy-js/babel-preset": ">=0.4.0"
   },
   "peerDependenciesMeta": {
     "@alloy-js/babel-preset": {
