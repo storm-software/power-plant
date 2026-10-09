@@ -256,7 +256,7 @@ describe("pipe", () => {
               }
             }),
             {
-              formatter: (_spec, _options, documents) => ({
+              format: (_spec, _options, documents) => ({
                 ...documents,
                 "extra.ts": { path: "extra.ts" }
               })

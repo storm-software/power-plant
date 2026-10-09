@@ -1,0 +1,12 @@
+{
+  "name": "prettier-formatter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/formatters/prettier-formatter/src",
+  "targets": {
+    "nx-release-publish": {
+      "executor": "@storm-software/workspace-tools:npm-publish",
+      "dependsOn": ["build", "^nx-release-publish"]
+    }
+  }
+}

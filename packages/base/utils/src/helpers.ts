@@ -240,8 +240,8 @@ export function resolveFormatterFunctions<TSpec, TOptions extends object>(
       return format as FormatterFunction<TSpec, TOptions>;
     }
 
-    if (isFormatterConfigObject(format) && isFunction(format.formatter)) {
-      return format.formatter as FormatterFunction<TSpec, TOptions>;
+    if (isFormatterConfigObject(format) && isFunction(format.format)) {
+      return format.format as FormatterFunction<TSpec, TOptions>;
     }
 
     throw new TypeError(

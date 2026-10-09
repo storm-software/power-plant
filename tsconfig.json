@@ -95,6 +95,9 @@
     },
     {
       "path": "./packages/generators/content-collections"
+    },
+    {
+      "path": "./packages/formatters/prettier-formatter"
     }
   ],
   "files": []
