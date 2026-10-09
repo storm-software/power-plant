@@ -2,6 +2,22 @@
 
 # Changelog for Power Plant - Utils
 
+## [0.0.80](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.80) (10/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace's README.md files ([40288453](https://github.com/storm-software/power-plant/commit/40288453))
+
+### Features
+
+- **prettier-formatter:** Added the Prettier formatter package ([249e253a](https://github.com/storm-software/power-plant/commit/249e253a))
+- **core:** Added `formatters` to generation processing ([33986fc3](https://github.com/storm-software/power-plant/commit/33986fc3))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.94**
+- Updated **schema** to **v0.0.92**
+
 ## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/utils%400.0.79) (09/17/2026)
 
 ### Miscellaneous

@@ -2,6 +2,18 @@
 
 # Changelog for Power Plant - Terrazzo
 
+## [0.0.80](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.80) (10/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace's README.md files ([40288453](https://github.com/storm-software/power-plant/commit/40288453))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.94**
+- Updated **schema** to **v0.0.92**
+- Updated **terrazzo-input** to **v0.0.80**
+
 ## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/terrazzo%400.0.79) (09/17/2026)
 
 ### Miscellaneous

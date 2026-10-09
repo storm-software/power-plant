@@ -2,6 +2,20 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.94](https://github.com/storm-software/power-plant/releases/tag/core%400.0.94) (10/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace's README.md files ([40288453](https://github.com/storm-software/power-plant/commit/40288453))
+
+### Features
+
+- **core:** Added `formatters` to generation processing ([33986fc3](https://github.com/storm-software/power-plant/commit/33986fc3))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.92**
+
 ## [0.0.93](https://github.com/storm-software/power-plant/releases/tag/core%400.0.93) (09/17/2026)
 
 ### Miscellaneous

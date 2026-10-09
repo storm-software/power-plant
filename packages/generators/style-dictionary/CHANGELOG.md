@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Style Dictionary
 
+## [0.0.79](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.79) (10/09/2026)
+
+### Miscellaneous
+
+- **monorepo:** Update workspace's README.md files ([40288453](https://github.com/storm-software/power-plant/commit/40288453))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.94**
+- Updated **schema** to **v0.0.92**
+
 ## [0.0.78](https://github.com/storm-software/power-plant/releases/tag/style-dictionary%400.0.78) (09/17/2026)
 
 ### Miscellaneous
