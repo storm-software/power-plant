@@ -238,4 +238,43 @@ describe("pipe", () => {
     expect(sideEffects).toEqual(["a", "b"]);
     expect(result).toBe("b");
   });
+
+  it("applies each child's formatters to its own documents before merging", async () => {
+    const result = await pipe({
+      generator: [
+        {
+          input: { name: "User" },
+          generator: async (spec: { name: string }) => ({
+            "user.ts": { path: "user.ts", chunks: [{ content: spec.name }] }
+          }),
+          format: [
+            (spec, _options, documents) => ({
+              ...documents,
+              "user.ts": {
+                ...documents["user.ts"]!,
+                chunks: [{ content: `${spec.name}!` }]
+              }
+            }),
+            {
+              formatter: (_spec, _options, documents) => ({
+                ...documents,
+                "extra.ts": { path: "extra.ts" }
+              })
+            }
+          ]
+        },
+        {
+          input: { module: "user" },
+          generator: async () => ({ "user.py": { path: "user.py" } }),
+          output: (_spec, _options, documents) => documents
+        }
+      ]
+    });
+
+    expect(result).toEqual({
+      "user.ts": { path: "user.ts", chunks: [{ content: "User!" }] },
+      "extra.ts": { path: "extra.ts" },
+      "user.py": { path: "user.py" }
+    });
+  });
 });

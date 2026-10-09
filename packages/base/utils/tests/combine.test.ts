@@ -256,4 +256,33 @@ describe("combine", () => {
     expect(generator).toHaveBeenCalledWith(undefined, expect.any(Object));
     expect(result).toEqual({ missingInput: "ran" });
   });
+
+  it("applies each child's formatters to its own documents before merging", async () => {
+    const result = await combine({
+      generator: {
+        typescript: {
+          input: { name: "User" },
+          generator: async (spec: { name: string }) => ({
+            "user.ts": { path: "user.ts", chunks: [{ content: spec.name }] }
+          }),
+          format: (spec, _options, documents) => ({
+            "user.ts": {
+              ...documents["user.ts"]!,
+              chunks: [{ content: `${spec.name}!` }]
+            }
+          }),
+          output: (_spec, _options, documents) => documents
+        },
+        python: {
+          input: { module: "user" },
+          generator: async () => ({ "user.py": { path: "user.py" } })
+        }
+      }
+    });
+
+    expect(result.typescript).toEqual({
+      "user.ts": { path: "user.ts", chunks: [{ content: "User!" }] },
+      "user.py": { path: "user.py" }
+    });
+  });
 });

@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 import type {
+  FormatterFunction,
   GeneratorFunction,
   InferInputConfig,
   InferOutputConfig,
@@ -28,6 +29,7 @@ import type {
   SchemaConfigObject
 } from "@power-plant/core";
 import {
+  isFormatterConfigObject,
   isGeneratorConfigObject,
   isInputConfigObject,
   isOutputConfigObject,
@@ -217,4 +219,33 @@ export function resolveGeneratorFunction<TSpec, TOptions extends object>(
   }
 
   return config.generator;
+}
+
+export function resolveFormatterFunctions<TSpec, TOptions extends object>(
+  config: AnyGeneratorConfig,
+  utility: CompositeUtility,
+  identifier: string | number
+): FormatterFunction<TSpec, TOptions>[] {
+  if (!isGeneratorConfigObject(config) || config.format === undefined) {
+    return [];
+  }
+
+  const label = formatChildLabel(utility, identifier);
+  const formats = Array.isArray(config.format)
+    ? config.format
+    : [config.format];
+
+  return formats.map(format => {
+    if (isFunction(format)) {
+      return format as FormatterFunction<TSpec, TOptions>;
+    }
+
+    if (isFormatterConfigObject(format) && isFunction(format.formatter)) {
+      return format.formatter as FormatterFunction<TSpec, TOptions>;
+    }
+
+    throw new TypeError(
+      `${label} uses a load-reference formatter, which is not supported inside ${utility}(). Provide a concrete formatter function.`
+    );
+  });
 }

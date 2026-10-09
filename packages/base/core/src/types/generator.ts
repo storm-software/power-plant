@@ -20,6 +20,7 @@ import type { BaseExtractOptions, SchemaConfig } from "@power-plant/schema";
 import type { InferLoadOptions, LoadReference } from "@stryke/resolve/types";
 import type { DeepPartial, MaybePromise } from "@stryke/types/base";
 import type { UserConfig } from "./config";
+import type { Formatter, FormatterConfig } from "./formatter";
 import type { Input, InputConfig } from "./input";
 import type { MetaConfig } from "./meta";
 import type { Output, OutputConfig } from "./output";
@@ -98,6 +99,12 @@ export interface GeneratorConfigObject<
   output?: OutputConfig<TSpec, TOptions, TReturns>;
 
   /**
+   * The formatter config(s) applied, in order, to the generated documents before they are passed to the output.
+   */
+  format?:
+    FormatterConfig<TSpec, TOptions> | FormatterConfig<TSpec, TOptions>[];
+
+  /**
    * The generate implementation, either as a callable function or a file reference.
    */
   generator: GeneratorFunction<TSpec, TOptions> | LoadReference;
@@ -134,6 +141,11 @@ export interface Generator<TSpec, TOptions extends object, TReturns = void> {
    * The output of the generator, which can be used to specify where the generator sends its output data. This can be defined as a function that takes the specification and returns a value, or it can be a static value.
    */
   output: Output<TSpec, TOptions, TReturns>;
+
+  /**
+   * The formatters applied, in order, to the generated documents before they are passed to the output.
+   */
+  formatters: Formatter<TSpec, TOptions>[];
 
   /**
    * The generator function that executes the generator logic, taking in options and producing output based on the input and output definitions.

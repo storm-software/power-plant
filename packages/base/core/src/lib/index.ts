@@ -17,6 +17,7 @@
  ------------------------------------------------------------------- */
 
 export * from "./context";
+export * from "./formatter";
 export * from "./generator";
 export * from "./input";
 export * from "./output";

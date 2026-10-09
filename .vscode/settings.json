@@ -249,5 +249,6 @@
     "scminput": false
   },
   "chat.permissions.default": "autopilot",
-  "nixEnvSelector.suggestion": false
+  "nixEnvSelector.suggestion": false,
+  "python-envs.defaultEnvManager": "ms-python.python:system"
 }

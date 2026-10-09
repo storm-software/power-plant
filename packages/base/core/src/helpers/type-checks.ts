@@ -18,6 +18,7 @@
 
 import { isSetObject } from "@stryke/type-checks/is-set-object";
 import type {
+  FormatterConfigObject,
   GeneratorConfigObject,
   InputConfigObject,
   OutputConfigObject,
@@ -67,6 +68,22 @@ export function isOutputConfigObject<
 >(config: unknown): config is OutputConfigObject<TSpec, TOptions, TReturns> {
   return (
     isSetObject(config) && "output" in config && config.output !== undefined
+  );
+}
+
+/**
+ * Checks if the provided configuration is a {@link FormatterConfigObject}.
+ *
+ * @param config - The configuration to check.
+ * @returns True if the configuration is a {@link FormatterConfigObject}, false otherwise.
+ */
+export function isFormatterConfigObject<TSpec, TOptions extends object>(
+  config: unknown
+): config is FormatterConfigObject<TSpec, TOptions> {
+  return (
+    isSetObject(config) &&
+    "formatter" in config &&
+    config.formatter !== undefined
   );
 }
 

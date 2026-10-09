@@ -18,11 +18,13 @@
 
 import type { SchemaEnvelopeOf, SchemaSourceConfig } from "@power-plant/schema";
 import {
+  isFormatterConfigObject,
   isGeneratorConfigObject,
   isInputConfigObject,
   isOutputConfigObject,
   isSchemaConfigObject
 } from "./helpers/type-checks";
+import type { FormatterConfig, FormatterConfigObject } from "./types/formatter";
 import type { GeneratorConfigObject } from "./types/generator";
 import type { InputConfig, InputConfigObject } from "./types/input";
 import type { OutputConfig, OutputConfigObject } from "./types/output";
@@ -105,6 +107,46 @@ export function defineOutput<TSpec, TOptions extends object, TReturns = void>(
   }
 
   return { output };
+}
+
+/**
+ * Defines a formatter configuration object. If the provided format is already a formatter configuration object, it will be returned as-is. Otherwise, it will be wrapped in an object with a `format` property.
+ *
+ * @example
+ * ```ts
+ * import { defineFormatter } from "@power-plant/core";
+ *
+ * // Define a formatter from a formatter function
+ * export default defineFormatter((spec, options, documents) => {
+ *   // Your formatting logic here
+ *   return documents;
+ * });
+ *
+ * // Define a formatter from an existing formatter configuration object
+ * export default defineFormatter({
+ *  meta: {
+ *     name: "My Formatter",
+ *     version: "1.0.0",
+ *     description: "A formatter that does something.",
+ *   },
+ *   format: (spec, options, documents) => {
+ *     // Your formatting logic here
+ *     return documents;
+ *   },
+ * });
+ * ```
+ *
+ * @param format - The formatter configuration to define. This can be either a formatter configuration object or a formatter function.
+ * @returns A formatter configuration object that contains the provided formatter. If the input was already a formatter configuration object, it will be returned unchanged.
+ */
+export function defineFormatter<TSpec, TOptions extends object>(
+  format: FormatterConfig<TSpec, TOptions>
+): FormatterConfigObject<TSpec, TOptions> {
+  if (isFormatterConfigObject<TSpec, TOptions>(format)) {
+    return format;
+  }
+
+  return { format };
 }
 
 /**

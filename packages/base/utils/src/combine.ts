@@ -31,6 +31,7 @@ import type { SchemaSourceConfig } from "@power-plant/schema";
 import {
   resolveChildInput,
   resolveChildOutput,
+  resolveFormatterFunctions,
   resolveGeneratorFunction,
   resolveInputValue,
   resolveOutputFunction,
@@ -162,7 +163,14 @@ function buildCombinedGenerator<
         CombinedOptions<TGenerators>
       >(generators[key]!, "combine", key);
 
-      const childDocuments = await generatorFn(spec[key], options);
+      let childDocuments = await generatorFn(spec[key], options);
+      for (const formatterFn of resolveFormatterFunctions<
+        CombinedSpec<TGenerators>[typeof key],
+        CombinedOptions<TGenerators>
+      >(generators[key]!, "combine", key)) {
+        childDocuments = await formatterFn(spec[key], options, childDocuments);
+      }
+
       Object.assign(documents, childDocuments);
     }
 
@@ -179,7 +187,7 @@ function toExecutableConfig<
   CombinedOptions<TGenerators>,
   CombinedReturns<TGenerators>
 > {
-  const { generator: generators, meta, schema, input, output } = config;
+  const { generator: generators, meta, schema, input, output, format } = config;
 
   const childInputs = {} as {
     [K in keyof CombinedSpec<TGenerators>]:
@@ -230,6 +238,7 @@ function toExecutableConfig<
         CombinedOptions<TGenerators>,
         CombinedReturns<TGenerators>
       >(childOutputs),
+    format,
     generator: buildCombinedGenerator(generators)
   };
 }
@@ -241,7 +250,9 @@ function toExecutableConfig<
  * `config.generator` is a string-keyed map of child generator configs.
  * Spec / schema / input / output shapes are joined by those same keys
  * (e.g. `{ typescript: TsSpec; python: PySpec }`). Child generators run in
- * key order; documents are merged; returns are keyed the same way.
+ * key order; each child's `format` formatters run on its own documents, which
+ * are then merged (the combined `format` runs last); returns are keyed the
+ * same way.
  *
  * @example
  * ```ts

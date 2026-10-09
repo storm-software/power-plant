@@ -18,6 +18,7 @@
 
 import type { SchemaConfig } from "@power-plant/schema";
 import { mapStorageToFileSystem } from "@power-plant/schema/storage";
+import { toArray } from "@stryke/convert/to-array";
 import { load } from "@stryke/resolve/load";
 import { isFunction } from "@stryke/type-checks/is-function";
 import type { UserConfig } from "vite";
@@ -32,6 +33,7 @@ import type {
   SessionContext
 } from "../types";
 import { createExecutionContext } from "./context";
+import { createFormatter } from "./formatter";
 import { createInput } from "./input";
 import { createOutput } from "./output";
 import {
@@ -101,7 +103,7 @@ export async function createGenerator<
     outputConfig = "@power-plant/unstorage-output";
   }
 
-  const [input, output] = await Promise.all([
+  const [input, output, ...formatters] = await Promise.all([
     createInput<TSpec, TOptions>(schema, inputConfig, {
       storage: sessionContext.storage,
       ...options
@@ -109,7 +111,13 @@ export async function createGenerator<
     createOutput<TSpec, TOptions, TReturns>(schema, outputConfig, {
       storage: sessionContext.storage,
       ...options
-    })
+    }),
+    ...toArray(configObject.format ?? []).map(async formatterConfig =>
+      createFormatter<TSpec, TOptions>(formatterConfig, {
+        storage: sessionContext.storage,
+        ...options
+      })
+    )
   ]);
 
   assertGeneratorConfigSchemasDoNotContradict(schema, input, output);
@@ -145,7 +153,11 @@ export async function createGenerator<
         );
       }
 
-      const documents = await generatorFn(spec, options);
+      let documents = await generatorFn(spec, options);
+      for (const formatter of formatters) {
+        documents = await formatter.format(spec, options, documents);
+      }
+
       const returns = await output.output(spec, options, documents);
 
       return {
@@ -162,6 +174,7 @@ export async function createGenerator<
     schema,
     input,
     output,
+    formatters,
     generator
   };
 }

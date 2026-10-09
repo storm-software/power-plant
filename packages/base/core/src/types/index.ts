@@ -20,6 +20,7 @@ export * from "./base";
 export * from "./config";
 export * from "./context";
 export * from "./execution";
+export * from "./formatter";
 export * from "./generator";
 export * from "./input";
 export * from "./meta";

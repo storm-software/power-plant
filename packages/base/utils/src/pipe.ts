@@ -30,6 +30,7 @@ import { createExecute } from "@power-plant/core";
 import {
   resolveChildInput,
   resolveChildOutput,
+  resolveFormatterFunctions,
   resolveGeneratorFunction,
   resolveInputValue,
   resolveOutputFunction,
@@ -155,10 +156,17 @@ function buildPipeGenerator<TGenerators extends AnyGeneratorConfig[]>(
         PipeOptions<TGenerators>
       >(generators[index]!, "pipe", index);
 
-      const childDocuments = await generatorFn(
-        (spec as unknown[])[index] as PipeSpec<TGenerators>[number],
-        options
-      );
+      const childSpec = (spec as unknown[])[
+        index
+      ] as PipeSpec<TGenerators>[number];
+      let childDocuments = await generatorFn(childSpec, options);
+      for (const formatterFn of resolveFormatterFunctions<
+        PipeSpec<TGenerators>[number],
+        PipeOptions<TGenerators>
+      >(generators[index]!, "pipe", index)) {
+        childDocuments = await formatterFn(childSpec, options, childDocuments);
+      }
+
       Object.assign(documents, childDocuments);
     }
 
@@ -173,7 +181,7 @@ function toExecutableConfig<TGenerators extends AnyGeneratorConfig[]>(
   PipeOptions<TGenerators>,
   PipeReturns<TGenerators>
 > {
-  const { generator, meta, schema, input, output } = config;
+  const { generator, meta, schema, input, output, format } = config;
   const generators = generator as TGenerators;
 
   const childInputs = generators.map(child => resolveChildInput(child)) as {
@@ -204,6 +212,7 @@ function toExecutableConfig<TGenerators extends AnyGeneratorConfig[]>(
         PipeOptions<TGenerators>,
         PipeReturns<TGenerators>
       >(childOutputs),
+    format,
     generator: buildPipeGenerator(generators)
   };
 }
@@ -214,7 +223,8 @@ function toExecutableConfig<TGenerators extends AnyGeneratorConfig[]>(
  * @remarks
  * `config.generator` is an ordered array of child generator configs.
  * Spec / schema / input shapes are a tuple aligned with that array.
- * Child generators run in array order; documents are merged; every child
+ * Child generators run in array order; each child's `format` formatters run
+ * on its own documents, which are then merged (the pipe's `format` runs last); every child
  * output runs (own spec slice) and returns come from the last generator only.
  *
  * @example
