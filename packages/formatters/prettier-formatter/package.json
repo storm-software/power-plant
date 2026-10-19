@@ -1,6 +1,6 @@
 {
   "name": "@power-plant/prettier-formatter",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "description": "A Power Plant formatter that uses Prettier to format the generated documents.",
   "keywords": [

@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Prettier Formatter
 
+## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/prettier-formatter%400.0.5) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Ensure `prettier-plugin-organize-imports` is bundled in the package ([3e081d80](https://github.com/storm-software/power-plant/commit/3e081d80))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.97**
+
 ## [0.0.4](https://github.com/storm-software/power-plant/releases/tag/prettier-formatter%400.0.4) (10/19/2026)
 
 ### Bug Fixes
