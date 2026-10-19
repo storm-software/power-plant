@@ -81,9 +81,7 @@ export function isFormatterConfigObject<TSpec, TOptions extends object>(
   config: unknown
 ): config is FormatterConfigObject<TSpec, TOptions> {
   return (
-    isSetObject(config) &&
-    "formatter" in config &&
-    config.formatter !== undefined
+    isSetObject(config) && "format" in config && config.format !== undefined
   );
 }
 

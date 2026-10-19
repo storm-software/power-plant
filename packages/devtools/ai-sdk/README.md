@@ -33,7 +33,7 @@ The Power Plant monorepo is a collection of packages that are designed to work t
 
 <h3 align="center">💻 Visit <a href="https://stormsoftware.com" target="_blank">stormsoftware.com</a> to stay up to date with this developer</h3><br />
 
-[![Version](https://img.shields.io/badge/version-0.0.89-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
+[![Version](https://img.shields.io/badge/version-0.0.90-1fb2a6.svg?style=for-the-badge&color=1fb2a6)](https://docs.stormsoftware.com/projects/power-plant)&nbsp;[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&logo=commitlint&color=1fb2a6)](http://commitizen.github.io/cz-cli/)&nbsp;![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=1fb2a6)&nbsp;![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/storm-software/power-plant/release.yml?style=for-the-badge&logo=github-actions&color=1fb2a6)
 
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -66,14 +66,14 @@ An AI SDK tool that allows AI models to leverage **Power Plant** generators to e
 Using [pnpm](http://pnpm.io):
 
 ```bash
-pnpm add -D @power-plant/core
+pnpm add -D @power-plant/ai-sdk
 ```
 
 <details>
   <summary>Using npm</summary>
 
 ```bash
-npm install -D @power-plant/core
+npm install -D @power-plant/ai-sdk
 ```
 
 </details>
@@ -82,18 +82,18 @@ npm install -D @power-plant/core
   <summary>Using yarn</summary>
 
 ```bash
-yarn add -D @power-plant/core
+yarn add -D @power-plant/ai-sdk
 ```
 
 </details>
 
 ## Building
 
-Run `nx build core` to build the library.
+Run `nx build ai-sdk` to build the library.
 
 ## Running unit tests
 
-Run `nx test core` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test ai-sdk` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 <!-- START footer -->
 <!-- prettier-ignore-start -->
