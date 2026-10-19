@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.91](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.91) (10/19/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with deprecated `format` function name ([898a9fc7](https://github.com/storm-software/power-plant/commit/898a9fc7))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.95**
+
 ## [0.0.90](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.90) (10/09/2026)
 
 ### Miscellaneous

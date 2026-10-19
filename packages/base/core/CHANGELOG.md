@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.95](https://github.com/storm-software/power-plant/releases/tag/core%400.0.95) (10/19/2026)
+
+### Bug Fixes
+
+- **core:** Resolve issue with deprecated `format` function name ([898a9fc7](https://github.com/storm-software/power-plant/commit/898a9fc7))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.93**
+
 ## [0.0.94](https://github.com/storm-software/power-plant/releases/tag/core%400.0.94) (10/09/2026)
 
 ### Miscellaneous

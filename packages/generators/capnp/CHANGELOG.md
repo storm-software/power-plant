@@ -2,6 +2,13 @@
 
 # Changelog for Power Plant - Capnp
 
+## [0.0.77](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.77) (10/19/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.95**
+- Updated **schema** to **v0.0.93**
+
 ## [0.0.76](https://github.com/storm-software/power-plant/releases/tag/capnp%400.0.76) (10/09/2026)
 
 ### Updated Dependencies
