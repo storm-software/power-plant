@@ -71,16 +71,22 @@
     "@storm-software/prettier": "catalog:",
     "@stryke/path": "catalog:",
     "defu": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:"
+    "prettier": "catalog:"
   },
   "devDependencies": {
     "@power-plant/tools-config": "workspace:*",
     "@powerlines/plugin-tsdown": "catalog:",
     "@types/node": "catalog:",
-    "powerlines": "catalog:"
+    "powerlines": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:"
+  },
+  "peerDependencies": {
+    "typescript": ">=2.9"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "inlinedDependencies": {
+    "prettier-plugin-organize-imports": "4.3.0"
   }
 }

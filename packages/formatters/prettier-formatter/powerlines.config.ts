@@ -24,6 +24,10 @@ const config = defineConfig({
   output: {
     format: ["cjs", "esm"]
   },
+  resolve: {
+    external: ["prettier", "typescript", "vue-tsc", "@vue/language-core"],
+    noExternal: ["prettier-plugin-organize-imports"]
+  },
   plugins: [tsdown()]
 });
 
