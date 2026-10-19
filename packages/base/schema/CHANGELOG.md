@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Schema
 
+## [0.0.94](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.94) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
 ## [0.0.92](https://github.com/storm-software/power-plant/releases/tag/schema%400.0.92) (10/09/2026)
 
 ### Miscellaneous

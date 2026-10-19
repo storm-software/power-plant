@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Noop Output
 
+## [0.0.75](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.75) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.96**
+
 ## [0.0.74](https://github.com/storm-software/power-plant/releases/tag/noop-output%400.0.74) (10/19/2026)
 
 ### Updated Dependencies

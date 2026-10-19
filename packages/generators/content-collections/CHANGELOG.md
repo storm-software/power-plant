@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Content Collections
 
+## [0.0.74](https://github.com/storm-software/power-plant/releases/tag/content-collections%400.0.74) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.96**
+- Updated **schema** to **v0.0.94**
+
 ## [0.0.73](https://github.com/storm-software/power-plant/releases/tag/content-collections%400.0.73) (10/19/2026)
 
 ### Updated Dependencies

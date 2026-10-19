@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - Terrazzo Input
 
+## [0.0.82](https://github.com/storm-software/power-plant/releases/tag/terrazzo-input%400.0.82) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.96**
+- Updated **schema** to **v0.0.94**
+
 ## [0.0.81](https://github.com/storm-software/power-plant/releases/tag/terrazzo-input%400.0.81) (10/19/2026)
 
 ### Updated Dependencies

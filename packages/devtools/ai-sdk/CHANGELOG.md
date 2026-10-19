@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - AI SDK
 
+## [0.0.92](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.92) (10/19/2026)
+
+### Bug Fixes
+
+- **monorepo:** Format workspace packages ([ca067884](https://github.com/storm-software/power-plant/commit/ca067884))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.96**
+
 ## [0.0.91](https://github.com/storm-software/power-plant/releases/tag/ai-sdk%400.0.91) (10/19/2026)
 
 ### Bug Fixes

@@ -2,6 +2,16 @@
 
 # Changelog for Power Plant - Core
 
+## [0.0.96](https://github.com/storm-software/power-plant/releases/tag/core%400.0.96) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
+### Updated Dependencies
+
+- Updated **schema** to **v0.0.94**
+
 ## [0.0.95](https://github.com/storm-software/power-plant/releases/tag/core%400.0.95) (10/19/2026)
 
 ### Bug Fixes

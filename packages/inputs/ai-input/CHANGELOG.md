@@ -2,6 +2,17 @@
 
 # Changelog for Power Plant - AI Input
 
+## [0.0.92](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.92) (10/19/2026)
+
+### Bug Fixes
+
+- **prettier-formatter:** Resolve issue in prettier formatter ([7410a16f](https://github.com/storm-software/power-plant/commit/7410a16f))
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.96**
+- Updated **schema** to **v0.0.94**
+
 ## [0.0.91](https://github.com/storm-software/power-plant/releases/tag/ai-input%400.0.91) (10/19/2026)
 
 ### Updated Dependencies
