@@ -53,10 +53,7 @@ export default defineFormatter<any, Options>({
     const entries = await Promise.all(
       Object.entries(documents).map(async ([key, document]) => {
         if (document.chunks && document.chunks.length > 0) {
-          const path = appendPath(
-            document.path,
-            context?.cwd ?? process.cwd()
-          );
+          const path = appendPath(document.path, context?.cwd ?? process.cwd());
 
           // Skip files Prettier has no parser for (e.g. `.txt`)
           const { inferredParser } = await getFileInfo(path);
@@ -64,7 +61,7 @@ export default defineFormatter<any, Options>({
             return [key, document] as const;
           }
 
-          let resolvedConfig = options?.prettier as Config | undefined;
+          let resolvedConfig = options?.prettier;
           if (!resolvedConfig) {
             try {
               resolvedConfig = (await resolveConfig(path)) ?? undefined;
