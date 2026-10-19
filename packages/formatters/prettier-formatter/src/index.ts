@@ -21,7 +21,8 @@ import { defineFormatter, useContext } from "@power-plant/core";
 import { appendPath, findFileExtension } from "@stryke/path";
 import defu from "defu";
 import type { Config } from "prettier";
-import { format, resolveConfig } from "prettier";
+import { format, getFileInfo, resolveConfig } from "prettier";
+import organizeImports from "prettier-plugin-organize-imports";
 import packageJson from "../package.json";
 
 export interface Options {
@@ -57,6 +58,12 @@ export default defineFormatter<any, Options>({
             context?.cwd ?? process.cwd()
           );
 
+          // Skip files Prettier has no parser for (e.g. `.txt`)
+          const { inferredParser } = await getFileInfo(path);
+          if (!inferredParser) {
+            return [key, document] as const;
+          }
+
           let resolvedConfig = options?.prettier as Config | undefined;
           if (!resolvedConfig) {
             try {
@@ -79,7 +86,7 @@ export default defineFormatter<any, Options>({
                 },
                 findFileExtension(path) === "ts" ||
                   findFileExtension(path) === "tsx"
-                  ? { plugins: ["prettier-plugin-organize-imports"] }
+                  ? { plugins: [organizeImports] }
                   : {}
               )
             );
