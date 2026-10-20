@@ -2,6 +2,12 @@
 
 # Changelog for Power Plant - Prettier Formatter
 
+## [0.0.6](https://github.com/storm-software/power-plant/releases/tag/prettier-formatter%400.0.6) (10/20/2026)
+
+### Updated Dependencies
+
+- Updated **core** to **v0.0.98**
+
 ## [0.0.5](https://github.com/storm-software/power-plant/releases/tag/prettier-formatter%400.0.5) (10/19/2026)
 
 ### Bug Fixes
