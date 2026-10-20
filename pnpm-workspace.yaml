@@ -65,19 +65,19 @@ catalog:
   "@prisma/engines": ^6.19.3
   "@prisma/internals": ^6.19.3
   "@standard-schema/spec": ^1.1.0
-  "@storm-software/config": ^1.138.86
-  "@storm-software/config-tools": ^1.190.150
-  "@storm-software/cspell": ^0.46.217
-  "@storm-software/eslint": ^0.170.185
-  "@storm-software/eslint-plugin-tsdoc": ^0.0.113
-  "@storm-software/git-tools": ^2.132.7
-  "@storm-software/linting-tools": ^1.134.80
-  "@storm-software/markdownlint": ^0.30.305
-  "@storm-software/pnpm-tools": ^0.7.164
-  "@storm-software/prettier": ^0.59.203
-  "@storm-software/tsconfig": ^0.48.216
-  "@storm-software/untyped": ^0.24.292
-  "@storm-software/workspace-tools": ^1.297.19
+  "@storm-software/config": ^1.138.87
+  "@storm-software/config-tools": ^1.190.151
+  "@storm-software/cspell": ^0.46.218
+  "@storm-software/eslint": ^0.170.186
+  "@storm-software/eslint-plugin-tsdoc": ^0.0.114
+  "@storm-software/git-tools": ^2.132.8
+  "@storm-software/linting-tools": ^1.134.81
+  "@storm-software/markdownlint": ^0.30.306
+  "@storm-software/pnpm-tools": ^0.7.165
+  "@storm-software/prettier": ^0.59.204
+  "@storm-software/tsconfig": ^0.48.217
+  "@storm-software/untyped": ^0.24.293
+  "@storm-software/workspace-tools": ^1.297.21
   "@stryke/convert": ^0.7.47
   "@stryke/capnp": ^0.12.145
   "@stryke/date": ^0.0.28
@@ -127,8 +127,8 @@ catalog:
   zod: ^4.6.7
   zx: ^8.8.5
   "@typescript/vfs": ^1.6.5
-  "@storm-software/eslint-plugin-pnpm": ^0.0.113
-  "@storm-software/tsdoc": ^0.13.302
+  "@storm-software/eslint-plugin-pnpm": ^0.0.114
+  "@storm-software/tsdoc": ^0.13.303
   prettier-plugin-organize-imports: ^4.3.0
 overrides:
   typescript: "catalog:"
