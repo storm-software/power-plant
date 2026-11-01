@@ -219,6 +219,8 @@ minimumReleaseAgeExclude:
   - prettier@3.9.7
   - "@microsoft/tsdoc-config@0.18.2"
   - "@microsoft/tsdoc@0.17.0"
+  # Renovate security update: pnpm@11.11.0 || 11.28.10
+  - pnpm@11.11.0 || 11.28.10
 allowBuilds:
   "@deepkit/type-compiler": false
   "@hyperjump/json-pointer": true
